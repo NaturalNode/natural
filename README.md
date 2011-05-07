@@ -21,7 +21,7 @@ Bayes Naive Classifier
     classifier.train([{classification: 'buy', text: "i am long qqqq"},
                   {classification: 'buy', text: "buy the q's"},
                   {classification: 'sell', text: "short gold"},
-                  {classification: 'sell', text: "sell gold"},
+                  {classification: 'sell', text: "sell gold"}
     ]);
 
     // sell
