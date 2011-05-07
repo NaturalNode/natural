@@ -19,7 +19,7 @@ Bayes Naive Classifier
                   {classification: 'buy', text: "buy the q's"},
                   {classification: 'sell', text: "short gold"},
                   {classification: 'sell', text: "sell gold"},
-]);
+    ]);
 
     // sell
     console.log(classifier.classify('i am short silver'));
