@@ -6,9 +6,9 @@ General natural language facilities for nodejs
 Porter Stemmer
 --------------
 
-require('natural/porter_stemmer').attach();
+    require('natural/porter_stemmer').attach();
 
-console.log("i am waking up to the sounds of chainsaws".tokenizeAndStem());
+    console.log("i am waking up to the sounds of chainsaws".tokenizeAndStem());
 
 Bayes Naive Classifier
 ----------------------
