@@ -60,6 +60,24 @@ describe('porter_stemmer', function() {
 
 	it('should perform step 4', function() {
 		expect(stemmer.step4('revival')).toBe('reviv');
+		expect(stemmer.step4('allowance')).toBe('allow');
+		expect(stemmer.step4('inference')).toBe('infer');
+		expect(stemmer.step4('airliner')).toBe('airlin');
+		expect(stemmer.step4('gyroscopic')).toBe('gyroscop');
+		expect(stemmer.step4('adjustable')).toBe('adjust');
+		expect(stemmer.step4('defensible')).toBe('defens');
+		expect(stemmer.step4('irritant')).toBe('irrit');
+		expect(stemmer.step4('replacement')).toBe('replac');
+		expect(stemmer.step4('adjustment')).toBe('adjust');
+		expect(stemmer.step4('dependent')).toBe('depend');
+		expect(stemmer.step4('adoption')).toBe('adopt');
+		expect(stemmer.step4('homologou')).toBe('homolog');
+		expect(stemmer.step4('communism')).toBe('commun');
+		expect(stemmer.step4('activate')).toBe('activ');
+		expect(stemmer.step4('angulariti')).toBe('angular');
+		expect(stemmer.step4('homologous')).toBe('homolog');
+		expect(stemmer.step4('effective')).toBe('effect');
+		expect(stemmer.step4('bowdlerize')).toBe('bowdler');
 	});
 
 	it('should perform step 5a', function() {
