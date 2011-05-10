@@ -26,4 +26,4 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 clean:
-		@rm -f **/*~ *~
+		@rm -f **/*~ *~ **/\#* \#*

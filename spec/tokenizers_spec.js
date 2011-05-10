@@ -27,27 +27,26 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE.
 */
 
-function trim(array) {
-    if(array[array.length - 1] == '')
-        array.pop();
+var tokenizer = require('lib/tokenizers');
+tokenizer.attach();
 
-    if(array[0] == '')
-        array.shift();
-        
-    return array;
-}
-
-// break a string up into an array of tokens by anything non-word
-function tokenize(text) {
-    return trim(text.split(/\W+/));
-}
-
-// expose the tokenize function
-exports.tokenize = tokenize;
-
-// expose an attach function that will patch String with a tokenize method
-exports.attach = function() {
-    String.prototype.tokenize = function() {
-        return tokenize(this);
-    }
-}
+describe('tokenizer', function() {
+  it('should tokenize strings', function() {
+	  expect(tokenizer.tokenize('these are things')).toEqual(['these', 'are', 'things']);
+  });
+  it('should tokenize strings via instance method', function() {
+	  expect('these are things'.tokenize()).toEqual(['these', 'are', 'things']);
+  });
+  it('should swollow punctuation', function() {
+	  expect('these are things, no'.tokenize()).toEqual(['these', 'are', 'things', 'no']);
+  });
+  it('should swollow final punctuation', function() {
+	  expect('these are things, no?'.tokenize()).toEqual(['these', 'are', 'things', 'no']);
+  });
+  it('should swollow initial punctuation', function() {
+	  expect('.these are things, no'.tokenize()).toEqual(['these', 'are', 'things', 'no']);
+  });
+  it('should swollow duplicate punctuation', function() {
+	  expect('i shal... pause'.tokenize()).toEqual(['i', 'shal', 'pause']);
+  });  
+});
