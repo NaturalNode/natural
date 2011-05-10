@@ -1,5 +1,6 @@
 
 stemmer = require('lib/porter_stemmer');
+stemmer.attach();
 
 describe('porter_stemmer', function() {
 	it('should perform step 1a', function() {
@@ -89,5 +90,18 @@ describe('porter_stemmer', function() {
 	it('should perform step5b', function() {
 		expect(stemmer.step5b('controll')).toBe('control');
 		expect(stemmer.step5b('roll')).toBe('roll');
+	});
+
+	it('should perform complete stemming', function() {
+		expect(stemmer.stem('scoring')).toBe('score');
+		expect(stemmer.stem('scored')).toBe('score');
+		expect(stemmer.stem('scores')).toBe('score');
+		expect(stemmer.stem('score')).toBe('score');
+	});
+
+	it('should tokenize and stem', function() {
+		var result = 'scoring stinks'.tokenizeAndStem();
+		expect(result[0]).toBe('score');
+		expect(result[1]).toBe('stink');
 	});
 });
