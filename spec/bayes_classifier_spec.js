@@ -20,7 +20,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var classifier = require('lib/bayes_classifier');
+var natural = new require('lib/natural'), 
+    classifier = new natural.BayesClassifier();
 
 classifier.train([{classification: 'buy', text: "i am long qqqq"},
               {classification: 'buy', text: "buy the q's"},

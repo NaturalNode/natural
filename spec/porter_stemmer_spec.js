@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-stemmer = require('lib/porter_stemmer');
+stemmer = require('lib/natural/porter_stemmer');
 stemmer.attach();
 
 describe('porter_stemmer', function() {

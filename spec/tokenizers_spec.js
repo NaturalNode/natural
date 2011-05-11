@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var tokenizer = require('lib/tokenizers');
+var tokenizer = require('lib/natural/tokenizer');
 tokenizer.attach();
 
 describe('tokenizer', function() {

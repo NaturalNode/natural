@@ -1,10 +1,10 @@
 {
   "name": "natural",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "engines": {
     "node": ">=0.2.6"
   },
   "author": "Chris Umbel <chris@chrisumbel.com>",
   "keywords": ["natural", "language", "porter", "stemmer", "bayes", "classifier"],
-  "directories": { "lib" : "./lib" }
+  "main": "./lib/natural/index.js"
 }

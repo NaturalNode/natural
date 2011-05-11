@@ -4,10 +4,11 @@ natural
 General natural language facilities for nodejs
 
 Porter Stemmer
---------------
-
+--------------    
+    var natural = require('natural');
     // attach() patches stem() and tokenizeAndStem() to String
-    require('natural/porter_stemmer').attach();
+    // as a shortcut to PorterStemmer.stem(token) and .tokenizeAndStem(token)
+    natural.PorterStemmer.attach();
 
     console.log("i am waking up to the sounds of chainsaws".tokenizeAndStem());
 
@@ -16,7 +17,8 @@ Porter Stemmer
 Bayes Naive Classifier
 ----------------------
 
-    classifier = require('natural/bayes_classifier');
+    var natural = require('natural'), 
+    	classifier = new natural.BayesClassifier();
 
     classifier.train([{classification: 'buy', text: "i am long qqqq"},
                   {classification: 'buy', text: "buy the q's"},
