@@ -29,13 +29,9 @@ describe('lancaster_stemmer', function() {
         expect('marks'.stem()).toBe('mark');
     });
     
-    it('should stem and append', function() {
+    it('should stem and append and recurse', function() {
         expect('classified'.stem()).toBe('class');
     });
-    
-    it('should nest rules', function() {
-        expect('measurably'.stem()).toBe('meas');
-    });    
     
     it('should apply intact rules only to intact string', function() {
         expect('maximum'.stem()).toBe('maxim');
