@@ -20,8 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-stemmer = require('lib/natural/porter_stemmer');
-stemmer.attach();
+var stemmer = require('lib/natural/porter_stemmer');
 
 describe('porter_stemmer', function() {
 	it('should perform step 1a', function() {
@@ -120,7 +119,8 @@ describe('porter_stemmer', function() {
 		expect(stemmer.stem('score')).toBe('score');
 	});
 
-	it('should tokenize and stem', function() {
+	it('should tokenize and stem attached', function() {
+		stemmer.attach();
 		expect('scoring stinks'.tokenizeAndStem()).toEqual(['score', 'stink']);
 	});
 });
