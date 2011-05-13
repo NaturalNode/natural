@@ -28,6 +28,10 @@ describe('lancaster_stemmer', function() {
     it('should stem', function() {
         expect('marks'.stem()).toBe('mark');
     });
+
+    it('should only pop the size specified by the rule', function() {
+        expect('triplicate'.stem()).toBe('triply');
+    });
     
     it('should stem and append and recurse', function() {
         expect('classified'.stem()).toBe('class');
