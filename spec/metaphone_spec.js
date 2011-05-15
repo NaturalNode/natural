@@ -190,4 +190,16 @@ describe('metaphone', function() {
             expect(metaphone.dropY('allying')).toBe('allying');
         });
     });
+    
+    describe('step 18', function() {
+        it('should transform Z to S', function() {
+            expect(metaphone.transformZ('blaze')).toBe('blase');
+        });
+    });
+
+    describe('step 19', function() {
+        it('should drop all vowels except initial', function() {
+            expect(metaphone.dropVowels('ablaze')).toBe('ablz');
+        });
+    });
 });
