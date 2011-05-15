@@ -113,5 +113,30 @@ describe('metaphone', function() {
     // step 11
     it('should transform Q to K', function() {
         expect(metaphone.transformQ('quack')).toBe('kuack');        
-    });    
+    });
+    
+    // step 12
+    it('should transform S to X if followed by H, IO, or IA', function() {
+        expect(metaphone.transformS('shack')).toBe('xhack');
+        expect(metaphone.transformS('sialagogues')).toBe('xialagogues');
+        expect(metaphone.transformS('asia')).toBe('axia');        
+    });
+    
+    it('should not transform S to X if not followed by H, IO, or IA', function() {
+        expect(metaphone.transformS('substance')).toBe('substance');        
+    });
+    
+    // step 13
+    it('should transform T to X if followed by IA or IO', function() {
+        expect(metaphone.transformT('dementia')).toBe('demenxia');
+        expect(metaphone.transformT('abbreviation')).toBe('abbreviaxion');        
+    });
+    
+    it('should transform TH to 0', function() {
+        expect(metaphone.transformT('that')).toBe('0at');        
+    });
+
+    it('should drop T if followed by CH', function() {
+        expect(metaphone.dropT('backstitch')).toBe('backstich');        
+    });
 });
