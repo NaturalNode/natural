@@ -169,5 +169,25 @@ describe('metaphone', function() {
             expect(metaphone.dropW('warsaw')).toBe('warsa');
         });
     });
+
+    describe('step 16', function() {
+        it('should transform X to S if at beginning', function() {
+            expect(metaphone.transformX('xenophile')).toBe('senophile');
+        });
+        
+        it('should transform X to KS if not at beginning', function() {
+            expect(metaphone.transformX('admixed')).toBe('admiksed');
+        });
+    });
     
+    describe('step 17', function() {
+        it('should drop Y of not followed by a vowell', function() {
+            expect(metaphone.dropY('analyzer')).toBe('analzer');
+            expect(metaphone.dropY('specify')).toBe('specif');            
+        });
+
+        it('should not drop Y of followed by a vowell', function() {
+            expect(metaphone.dropY('allying')).toBe('allying');
+        });
+    });
 });
