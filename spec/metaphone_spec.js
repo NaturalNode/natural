@@ -85,5 +85,33 @@ describe('metaphone', function() {
     
     it('should reduce GG to G before turning to K', function() {
         expect(metaphone.transformG('aggrade')).toBe('akrade');        
+    });
+    
+    // step 8 
+    it('should drop H if after vowell and not before vowell', function() {
+        expect(metaphone.dropH('alriht')).toBe('alrit');        
+    });
+
+    it('should not drop H if after vowell', function() {
+        expect(metaphone.dropH('that')).toBe('that');        
+    });
+
+    it('should not drop H if not before vowell', function() {
+        expect(metaphone.dropH('chump')).toBe('chump');        
+    });
+    
+    // step 9     
+    it('should transform CK to K', function() {
+        expect(metaphone.transformCK('check')).toBe('chek');        
+    });
+    
+    // step 10
+    it('should transform PH to F', function() {
+        expect(metaphone.transformPH('phone')).toBe('fone');        
+    });
+    
+    // step 11
+    it('should transform Q to K', function() {
+        expect(metaphone.transformQ('quack')).toBe('kuack');        
     });    
 });
