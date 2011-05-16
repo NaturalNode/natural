@@ -4,6 +4,9 @@ natural
 General natural language facilities for nodejs. Stemming, classification and
 phonetics are currently supported.
 
+At the moment most algorithms are english specific but long term some diversity
+is in order.
+
 Stemmers
 --------
 
@@ -33,6 +36,8 @@ Bayes Naive Classifier
     var natural = require('natural'), 
     	classifier = new natural.BayesClassifier();
 
+    // you can train the classifier on sample text. it will use reasonable
+    // defaults to tokenize and stem the text.
     classifier.train([{classification: 'buy', text: "i am long qqqq"},
                   {classification: 'buy', text: "buy the q's"},
                   {classification: 'sell', text: "short gold"},
@@ -45,6 +50,23 @@ Bayes Naive Classifier
     // buy
     console.log(classifier.classify('i am long copper'));
 
+    classifier = new natural.BayesClassifier();
+
+    // the classifier can also be trained on and classify arrays of tokens,
+    // or any mixture. arrays let you use entirely custom data with your
+    // own tokenization/stemming if any at all.
+    classifier.train([{classification: 'hockey', text: ['puck', 'shoot']},
+                  {classification: 'hockey', text: 'goalies stop pucks.'},
+                  {classification: 'stocks', text: ['stop', 'loss']},
+                  {classification: 'stocks', text: 'creat a stop order'}
+                  ]);
+
+    console.log(classifier.classify('stop out at $100'));
+    console.log(classifier.classify('stop the puck, fool!'));
+    
+    console.log(classifier.classify(['stop', 'out']));
+    console.log(classifier.classify(['stop', 'puck', 'fool']));    
+
 Metaphone Phonetics
 -------------------
 
@@ -56,13 +78,19 @@ Metaphone Phonetics
     // test the two words to see if they sound alike
     if(metaphone.compare(wordA, wordB))
         console.log('they sound alike!');
+        
+    // the raw phonetics are obtained with process()
+    console.log(metaphone.process());
 
-    // attaching will patch string with a soundsLike method                         
+    // attaching will patch string with useful methods
     metaphone.attach();
 
     // soundsLike is essentially a shortcut to Metaphone.compare
     if(wordA.soundsLike(wordB))
-        console.log('they sound alike!');    
+        console.log('they sound alike!');
+        
+    // the raw phonetics are obtained with phonetics()
+        console.log('phonetics'.phonetics());   
 
 Copyright
 ---------

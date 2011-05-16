@@ -23,15 +23,20 @@ THE SOFTWARE.
 var natural = new require('lib/natural'), 
     classifier = new natural.BayesClassifier();
 
-classifier.train([{classification: 'buy', text: "i am long qqqq"},
-              {classification: 'buy', text: "buy the q's"},
-              {classification: 'sell', text: "short gold"},
-              {classification: 'sell', text: "sell gold"}
-]);
-
 describe('bayes classifier', function() {
-    it('should classify', function() {
+    classifier.train([{classification: 'buy', text: ['long', 'qqqq']},
+                  {classification: 'buy', text: "buy the q's"},
+                  {classification: 'sell', text: "short gold"},
+                  {classification: 'sell', text: ['sell', 'gold']}
+    ]);
+
+    it('should classify strings', function() {
         expect(classifier.classify('i am short silver')).toBe('sell');
         expect(classifier.classify('i am long silver')).toBe('buy');        
+    });
+        
+    it('should classify arrays', function() {
+        expect(classifier.classify(['short', 'silver'])).toBe('sell');
+        expect(classifier.classify(['long', 'silver'])).toBe('buy');        
     });    
 });

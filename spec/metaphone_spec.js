@@ -83,6 +83,7 @@ describe('metaphone', function() {
     
     it('should drop G before H if not at the end or before vowell', function() {
         expect(metaphone.dropG('alight')).toBe('aliht');
+        expect(metaphone.dropG('fright')).toBe('friht');        
     });
     
     it('should drop G if followed by N or NED at the end', function() {
@@ -201,6 +202,8 @@ describe('metaphone', function() {
         expect(metaphone.process('capital')).toBe('kptl');
         expect(metaphone.process('penguin')).toBe('pnkn');
         expect(metaphone.process('garbonzo')).toBe('krbns');
+        expect(metaphone.process('lightning')).toBe('ltnnk');
+        expect(metaphone.process('light')).toBe('lt');        
     });
 
     it('should compare strings', function() {
@@ -211,5 +214,9 @@ describe('metaphone', function() {
     it('should compare strings with string patch', function() {
         expect('phonetics'.soundsLike('fonetix')).toBeTruthy();
         expect('phonetics'.soundsLike('garbonzo')).toBeFalsy();        
+    });
+    
+    it('should return string phonetics with string patch', function() {
+        expect('phonetics'.phonetics()).toBe('fntks');
     });
 });
