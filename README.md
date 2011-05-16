@@ -7,6 +7,17 @@ phonetics are currently supported.
 At the moment most algorithms are english specific but long term some diversity
 is in order.
 
+Installation
+------------
+
+If you're just looking to consume natural without your own node application
+please install the NPM
+
+    npm install natural
+    
+If you're interested in contributing or hacking natural then this repo is the
+place to start.
+
 Stemmers
 --------
 
