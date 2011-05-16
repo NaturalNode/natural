@@ -1,7 +1,8 @@
 natural
 =======
 
-General natural language facilities for nodejs
+General natural language facilities for nodejs. Stemming, classification and
+phonetics are currently supported.
 
 Stemmers
 --------
@@ -43,6 +44,25 @@ Bayes Naive Classifier
 
     // buy
     console.log(classifier.classify('i am long copper'));
+
+Metaphone Phonetics
+-------------------
+
+    var natural = require('natural'), metaphone = natural.Metaphone;
+
+    var wordA = 'phonetics';
+    var wordB = 'fonetix';
+
+    // test the two words to see if they sound alike
+    if(metaphone.compare(wordA, wordB))
+        console.log('they sound alike!');
+
+    // attaching will patch string with a soundsLike method                         
+    metaphone.attach();
+
+    // soundsLike is essentially a shortcut to Metaphone.compare
+    if(wordA.soundsLike(wordB))
+        console.log('they sound alike!');    
 
 Copyright
 ---------

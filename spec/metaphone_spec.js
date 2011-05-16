@@ -23,6 +23,8 @@ THE SOFTWARE.
 var metaphone = require('lib/natural/metaphone');
 
 describe('metaphone', function() {
+    metaphone.attach();
+    
     it('should drop duplicate adjacent letters, except C', function() {
         expect(metaphone.dedup('dropping')).toBe('droping');
     });
@@ -194,5 +196,15 @@ describe('metaphone', function() {
         expect(metaphone.process('astronomical')).toBe('astrnmkl');
         expect(metaphone.process('buzzard')).toBe('bsrt');
         expect(metaphone.process('wonderer')).toBe('wntrr');        
+    });
+
+    it('should compare strings', function() {
+        expect(metaphone.compare('phonetics', 'fonetix')).toBeTruthy();
+        expect(metaphone.compare('phonetics', 'garbonzo')).toBeFalsy();
+    });
+    
+    it('should compare strings with string patch', function() {
+        expect('phonetics'.soundsLike('fonetix')).toBeTruthy();
+        expect('phonetics'.soundsLike('garbonzo')).toBeFalsy();        
     });
 });
