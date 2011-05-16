@@ -195,7 +195,9 @@ describe('metaphone', function() {
         expect(metaphone.process('transition')).toBe('trnsxn');
         expect(metaphone.process('astronomical')).toBe('astrnmkl');
         expect(metaphone.process('buzzard')).toBe('bsrt');
-        expect(metaphone.process('wonderer')).toBe('wntrr');        
+        expect(metaphone.process('wonderer')).toBe('wntrr');
+        expect(metaphone.process('district')).toBe('tstrkt');
+        expect(metaphone.process('hockey')).toBe('hk');
     });
 
     it('should compare strings', function() {
