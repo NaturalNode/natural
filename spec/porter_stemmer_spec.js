@@ -117,10 +117,15 @@ describe('porter_stemmer', function() {
 		expect(stemmer.stem('scored')).toBe('score');
 		expect(stemmer.stem('scores')).toBe('score');
 		expect(stemmer.stem('score')).toBe('score');
+		expect(stemmer.stem('SCORING')).toBe('score');
+		expect(stemmer.stem('SCORED')).toBe('score');
+		expect(stemmer.stem('SCORES')).toBe('score');
+		expect(stemmer.stem('SCORE')).toBe('score');
 	});
 
 	it('should tokenize and stem attached', function() {
 		stemmer.attach();
 		expect('scoring stinks'.tokenizeAndStem()).toEqual(['score', 'stink']);
+		expect('SCORING STINKS'.tokenizeAndStem()).toEqual(['score', 'stink']);
 	});
 });
