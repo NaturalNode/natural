@@ -80,7 +80,7 @@ Metaphone Phonetics
         console.log('they sound alike!');
         
     // the raw phonetics are obtained with process()
-    console.log(metaphone.process());
+    console.log(metaphone.process('phonetics'));
 
     // attaching will patch string with useful methods
     metaphone.attach();
