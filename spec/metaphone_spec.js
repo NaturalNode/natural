@@ -209,14 +209,19 @@ describe('metaphone', function() {
     it('should compare strings', function() {
         expect(metaphone.compare('phonetics', 'fonetix')).toBeTruthy();
         expect(metaphone.compare('phonetics', 'garbonzo')).toBeFalsy();
+        expect(metaphone.compare('PHONETICS', 'fonetix')).toBeTruthy();
+        expect(metaphone.compare('PHONETICS', 'garbonzo')).toBeFalsy();
     });
     
     it('should compare strings with string patch', function() {
         expect('phonetics'.soundsLike('fonetix')).toBeTruthy();
-        expect('phonetics'.soundsLike('garbonzo')).toBeFalsy();        
+        expect('phonetics'.soundsLike('garbonzo')).toBeFalsy();
+        expect('PHONETICS'.soundsLike('fonetix')).toBeTruthy();
+        expect('PHONETICS'.soundsLike('garbonzo')).toBeFalsy();        
     });
     
     it('should return string phonetics with string patch', function() {
         expect('phonetics'.phonetics()).toBe('fntks');
+        expect('PHONETICS'.phonetics()).toBe('fntks');        
     });
 });

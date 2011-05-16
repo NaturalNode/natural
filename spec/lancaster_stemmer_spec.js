@@ -27,18 +27,23 @@ describe('lancaster_stemmer', function() {
 
     it('should stem', function() {
         expect('marks'.stem()).toBe('mark');
+        expect('MARKs'.stem()).toBe('mark');        
     });
 
     it('should only pop the size specified by the rule', function() {
         expect('triplicate'.stem()).toBe('triply');
+        expect('triPlicAte'.stem()).toBe('triply');        
     });
     
     it('should stem and append and recurse', function() {
         expect('classified'.stem()).toBe('class');
+        expect('ClaSsiFied'.stem()).toBe('class');        
     });
     
     it('should apply intact rules only to intact string', function() {
         expect('maximum'.stem()).toBe('maxim');
         expect('presumably'.stem()).toBe('presum');
+        expect('MAXIMUM'.stem()).toBe('maxim');
+        expect('PRESUMABLY'.stem()).toBe('presum');        
     });
 });
