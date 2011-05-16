@@ -53,8 +53,8 @@ Bayes Naive Classifier
     classifier = new natural.BayesClassifier();
 
     // the classifier can also be trained on and classify arrays of tokens,
-    // or any mixture. arrays let you use entirely custom data with your
-    // own tokenization/stemming if any at all.
+    // strings, or any mixture. arrays let you use entirely custom data with 
+    // your own tokenization/stemming if any at all.
     classifier.train([{classification: 'hockey', text: ['puck', 'shoot']},
                   {classification: 'hockey', text: 'goalies stop pucks.'},
                   {classification: 'stocks', text: ['stop', 'loss']},
