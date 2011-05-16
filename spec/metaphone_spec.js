@@ -198,6 +198,9 @@ describe('metaphone', function() {
         expect(metaphone.process('wonderer')).toBe('wntrr');
         expect(metaphone.process('district')).toBe('tstrkt');
         expect(metaphone.process('hockey')).toBe('hk');
+        expect(metaphone.process('capital')).toBe('kptl');
+        expect(metaphone.process('penguin')).toBe('pnkn');
+        expect(metaphone.process('garbonzo')).toBe('krbns');
     });
 
     it('should compare strings', function() {
