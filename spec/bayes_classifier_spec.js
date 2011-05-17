@@ -20,23 +20,53 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var natural = new require('lib/natural'), 
-    classifier = new natural.BayesClassifier();
+var natural = new require('lib/natural');
 
 describe('bayes classifier', function() {
-    classifier.train([{classification: 'buy', text: ['long', 'qqqq']},
-                  {classification: 'buy', text: "buy the q's"},
-                  {classification: 'sell', text: "short gold"},
-                  {classification: 'sell', text: ['sell', 'gold']}
-    ]);
-
-    it('should classify strings', function() {
-        expect(classifier.classify('i am short silver')).toBe('sell');
-        expect(classifier.classify('i am long silver')).toBe('buy');        
-    });
+    describe('classifier', function() {
+        var classifier = new natural.BayesClassifier();
         
-    it('should classify arrays', function() {
-        expect(classifier.classify(['short', 'silver'])).toBe('sell');
-        expect(classifier.classify(['long', 'silver'])).toBe('buy');        
-    });    
+        classifier.train([{classification: 'buy', text: ['long', 'qqqq']},
+                      {classification: 'buy', text: "buy the q's"},
+                      {classification: 'sell', text: "short gold"},
+                      {classification: 'sell', text: ['sell', 'gold']}
+        ]);
+    
+        it('should classify strings', function() {
+            expect(classifier.classify('i am short silver')).toBe('sell');
+            expect(classifier.classify('i am long silver')).toBe('buy');        
+        });
+            
+        it('should classify arrays', function() {
+            expect(classifier.classify(['short', 'silver'])).toBe('sell');
+            expect(classifier.classify(['long', 'silver'])).toBe('buy');        
+        });
+    });
+    
+    describe('persistence', function() {
+        it('should save a classifier', function() {
+            var classifier = new natural.BayesClassifier();
+            
+            classifier.train([{classification: 'buy', text: ['long', 'qqqq']},
+                          {classification: 'buy', text: "buy the q's"},
+                          {classification: 'sell', text: "short gold"},
+                          {classification: 'sell', text: ['sell', 'gold']}
+            ]);
+            
+            classifier.save('classifier.json', function(classifier, err) {
+                    var fs = require('fs');
+                    expect(fs.statSync('classifier.json')).toBeDefined();
+                    asyncSpecDone();
+                });
+            asyncSpecWait();
+        });
+        
+        it('should load a saved classifier', function() {
+            natural.BayesClassifier.load('classifier.json', function(err, classifier) {
+                expect(classifier.classify('sell SUNW')).toBe('sell'); 
+                asyncSpecDone();
+            });
+            asyncSpecWait();
+        });
+    });
 });
