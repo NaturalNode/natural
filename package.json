@@ -1,6 +1,6 @@
 {
   "name": "natural",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "engines": {
     "node": ">=0.2.6"
   },

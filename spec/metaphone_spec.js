@@ -22,9 +22,7 @@ THE SOFTWARE.
 
 var metaphone = require('lib/natural/metaphone');
 
-describe('metaphone', function() {
-    metaphone.attach();
-    
+describe('metaphone', function() {    
     it('should drop duplicate adjacent letters, except C', function() {
         expect(metaphone.dedup('dropping')).toBe('droping');
     });
@@ -214,6 +212,7 @@ describe('metaphone', function() {
     });
     
     it('should compare strings with string patch', function() {
+        metaphone.attach();
         expect('phonetics'.soundsLike('fonetix')).toBeTruthy();
         expect('phonetics'.soundsLike('garbonzo')).toBeFalsy();
         expect('PHONETICS'.soundsLike('fonetix')).toBeTruthy();
@@ -221,6 +220,7 @@ describe('metaphone', function() {
     });
     
     it('should return string phonetics with string patch', function() {
+        metaphone.attach();
         expect('phonetics'.phonetics()).toBe('fntks');
         expect('PHONETICS'.phonetics()).toBe('fntks');        
     });

@@ -1,10 +1,13 @@
 natural
 =======
 
-General natural language facilities for nodejs. Stemming, classification and
-phonetics are currently supported.
+"Natural" is a general natural language facility for nodejs. Stemming,
+classification and phonetics are currently supported.
 
-At the moment most algorithms are english specific but long term some diversity
+It's still in the VERY (and I mean VERY) early stages, and I'm very interested
+in bug reports, contributions and the like.
+
+At the moment most algorithms are English-specific but long-term some diversity
 is in order.
 
 Installation
@@ -15,9 +18,9 @@ please install the NPM
 
     npm install natural
     
-If you're interested in contributing or hacking natural then this repo is the
-place to start.
-
+If you're interested in contributing to natural or just hacking it then by all
+means fork away!
+    
 Stemmers
 --------
 
@@ -78,10 +81,14 @@ Bayes Naive Classifier
     console.log(classifier.classify(['stop', 'out']));
     console.log(classifier.classify(['stop', 'puck', 'fool']));    
 
-Metaphone Phonetics
--------------------
+Phonetics
+---------
 
-    var natural = require('natural'), metaphone = natural.Metaphone;
+Phonetic matching (sounds-like) matching can be done with either the SoundEx or
+Metaphone algorithms
+
+    var natural = require('natural'),
+        metaphone = natural.Metaphone, soundEx = natural.SoundEx;
 
     var wordA = 'phonetics';
     var wordB = 'fonetix';
@@ -101,7 +108,21 @@ Metaphone Phonetics
         console.log('they sound alike!');
         
     // the raw phonetics are obtained with phonetics()
-        console.log('phonetics'.phonetics());   
+    console.log('phonetics'.phonetics());   
+
+    // same operations apply with SoundEx
+    if(soundEx.compare(wordA, wordB))
+        console.log('they sound alike!');
+
+    console.log(soundEx.process('phonetics'));
+
+    // same String patches apply with soundex
+    soundEx.attach();
+
+    if(wordA.soundsLike(wordB))
+        console.log('they sound alike!');
+        
+    console.log('phonetics'.phonetics());   
 
 Copyright
 ---------
