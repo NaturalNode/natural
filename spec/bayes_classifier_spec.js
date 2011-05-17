@@ -64,7 +64,7 @@ describe('bayes classifier', function() {
         it('should load a saved classifier', function() {
             natural.BayesClassifier.load('classifier.json', function(err, classifier) {
                 expect(classifier.classify('long SUNW')).toBe('buy');
-                expect(classifier.classify('short SUNW')).toBe('sell');                 
+                expect(classifier.classify('short SUNW')).toBe('sell');
                 asyncSpecDone();
             });
             asyncSpecWait();

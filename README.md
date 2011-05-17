@@ -43,7 +43,6 @@ algorithms.
     console.log("i am waking up to the sounds of chainsaws".tokenizeAndStem());
     console.log("chainsaws".stem());
 
-
 Bayes Naive Classifier
 ----------------------
 
@@ -79,7 +78,28 @@ Bayes Naive Classifier
     console.log(classifier.classify('stop the puck, fool!'));
     
     console.log(classifier.classify(['stop', 'out']));
-    console.log(classifier.classify(['stop', 'puck', 'fool']));    
+    console.log(classifier.classify(['stop', 'puck', 'fool']));
+
+A classifier can also be persisted and recalled so you can reuse a training.
+
+    var classifier = new natural.BayesClassifier();
+    
+    classifier.train([{classification: 'buy', text: ['long', 'qqqq']},
+                  {classification: 'buy', text: "buy the q's"},
+                  {classification: 'sell', text: "short gold"},
+                  {classification: 'sell', text: ['sell', 'gold']}
+    ]);
+        
+    // example of persisting 
+    classifier.save('classifier.json', function(classifier, err) {
+        // the classifier is saved to the classifier.json file!
+    });
+    
+    // example of recalling from the classifier.json saved above
+    natural.BayesClassifier.load('classifier.json', function(err, classifier) {
+        console.log(classifier.classify('long SUNW'));
+        console.log(classifier.classify('short SUNW'));
+    });
 
 Phonetics
 ---------
@@ -122,7 +142,7 @@ Metaphone algorithms
     if(wordA.soundsLike(wordB))
         console.log('they sound alike!');
         
-    console.log('phonetics'.phonetics());   
+    console.log('phonetics'.phonetics());
 
 Copyright
 ---------
