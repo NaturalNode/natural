@@ -20,27 +20,33 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var stemmer = require('lib/natural/lancaster_stemmer');
-
 describe('lancaster_stemmer', function() {
-    stemmer.attach();
+    var stemmer = require('lib/natural/lancaster_stemmer');
 
     it('should stem', function() {
+	stemmer.attach();
+
         expect('marks'.stem()).toBe('mark');
         expect('MARKs'.stem()).toBe('mark');        
     });
 
     it('should only pop the size specified by the rule', function() {
+	stemmer.attach();
+
         expect('triplicate'.stem()).toBe('triply');
         expect('triPlicAte'.stem()).toBe('triply');        
     });
     
     it('should stem and append and recurse', function() {
+	stemmer.attach();
+
         expect('classified'.stem()).toBe('class');
         expect('ClaSsiFied'.stem()).toBe('class');        
     });
     
     it('should apply intact rules only to intact string', function() {
+	stemmer.attach();
+
         expect('maximum'.stem()).toBe('maxim');
         expect('presumably'.stem()).toBe('presum');
         expect('MAXIMUM'.stem()).toBe('maxim');
