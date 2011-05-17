@@ -41,6 +41,21 @@ describe('bayes classifier', function() {
             expect(classifier.classify(['short', 'silver'])).toBe('sell');
             expect(classifier.classify(['long', 'silver'])).toBe('buy');        
         });
+        
+        it('should perform successive training', function() {
+            var classifier = new natural.BayesClassifier();
+            
+            classifier.train([{classification: 'buy', text: ['long', 'qqqq']},
+                          {classification: 'buy', text: "buy the q's"}
+            ]);
+
+            classifier.train([{classification: 'sell', text: "short gold"},
+                          {classification: 'sell', text: ['sell', 'gold']}
+            ]);
+
+            expect(classifier.classify('i am short silver')).toBe('sell');
+            expect(classifier.classify('i am long silver')).toBe('buy');        
+        });        
     });
     
     describe('persistence', function() {
