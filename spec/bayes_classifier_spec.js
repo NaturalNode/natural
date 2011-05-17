@@ -54,8 +54,8 @@ describe('bayes classifier', function() {
             ]);
             
             classifier.save('classifier.json', function(classifier, err) {
-                    var fs = require('fs');
-                    expect(fs.statSync('classifier.json')).toBeDefined();
+                    var fs = require('fs');                    
+                    expect(fs.statSync('classifier.json')).toBeDefined();                    
                     asyncSpecDone();
                 });
             asyncSpecWait();
@@ -63,7 +63,8 @@ describe('bayes classifier', function() {
         
         it('should load a saved classifier', function() {
             natural.BayesClassifier.load('classifier.json', function(err, classifier) {
-                expect(classifier.classify('sell SUNW')).toBe('sell'); 
+                expect(classifier.classify('long SUNW')).toBe('buy');
+                expect(classifier.classify('short SUNW')).toBe('sell');                 
                 asyncSpecDone();
             });
             asyncSpecWait();
