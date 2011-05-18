@@ -190,18 +190,18 @@ describe('metaphone', function() {
     });
     
     it('should do all', function() {
-        expect(metaphone.process('ablaze')).toBe('abls');
-        expect(metaphone.process('transition')).toBe('trnsxn');
-        expect(metaphone.process('astronomical')).toBe('astrnmkl');
-        expect(metaphone.process('buzzard')).toBe('bsrt');
-        expect(metaphone.process('wonderer')).toBe('wntrr');
-        expect(metaphone.process('district')).toBe('tstrkt');
-        expect(metaphone.process('hockey')).toBe('hk');
-        expect(metaphone.process('capital')).toBe('kptl');
-        expect(metaphone.process('penguin')).toBe('pnkn');
-        expect(metaphone.process('garbonzo')).toBe('krbns');
-        expect(metaphone.process('lightning')).toBe('ltnnk');
-        expect(metaphone.process('light')).toBe('lt');        
+        expect(metaphone.process('ablaze')).toBe('ABLS');
+        expect(metaphone.process('transition')).toBe('TRNSXN');
+        expect(metaphone.process('astronomical')).toBe('ASTRNMKL');
+        expect(metaphone.process('buzzard')).toBe('BSRT');
+        expect(metaphone.process('wonderer')).toBe('WNTRR');
+        expect(metaphone.process('district')).toBe('TSTRKT');
+        expect(metaphone.process('hockey')).toBe('HK');
+        expect(metaphone.process('capital')).toBe('KPTL');
+        expect(metaphone.process('penguin')).toBe('PNKN');
+        expect(metaphone.process('garbonzo')).toBe('KRBNS');
+        expect(metaphone.process('lightning')).toBe('LTNNK');
+        expect(metaphone.process('light')).toBe('LT');
     });
 
     it('should compare strings', function() {
@@ -221,7 +221,7 @@ describe('metaphone', function() {
     
     it('should return string phonetics with string patch', function() {
         metaphone.attach();
-        expect('phonetics'.phonetics()).toBe('fntks');
-        expect('PHONETICS'.phonetics()).toBe('fntks');        
+        expect('phonetics'.phonetics()).toBe('FNTKS');
+        expect('PHONETICS'.phonetics()).toBe('FNTKS');        
     });
 });

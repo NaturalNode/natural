@@ -85,7 +85,7 @@ describe('soundex', function() {
     });
     
     it('should not code the first character', function() {
-        expect(soundex.process('render').charAt(0)).toBe('r');
+        expect(soundex.process('render').charAt(0)).toBe('R');
     });
 
     it('should max out at four characters long', function() {
@@ -93,26 +93,26 @@ describe('soundex', function() {
     });
     
     it('should pad right with zeros', function() {
-        expect(soundex.process('super')).toBe('s160');
-        expect(soundex.process('butt')).toBe('b300');
-        expect(soundex.process('a')).toBe('a000');        
+        expect(soundex.process('super')).toBe('S160');
+        expect(soundex.process('butt')).toBe('B300');
+        expect(soundex.process('a')).toBe('A000');        
     });
     
     it('should pad right with zeros', function() {
-        expect(soundex.process('but')).toBe('b300');
+        expect(soundex.process('but')).toBe('B300');
     });
     
     it('should perform soundex', function() {
-        expect(soundex.process('BLACKBERRY')).toBe('b421');
-        expect(soundex.process('blackberry')).toBe('b421');
-        expect(soundex.process('calculate')).toBe('c424');
-        expect(soundex.process('CALCULATE')).toBe('c424');
-        expect(soundex.process('fox')).toBe('f200');
-        expect(soundex.process('FOX')).toBe('f200');
-        expect(soundex.process('jump')).toBe('j510');
-        expect(soundex.process('JUMP')).toBe('j510');
-        expect(soundex.process('phonetics')).toBe('p532');
-        expect(soundex.process('PHONETICS')).toBe('p532');
+        expect(soundex.process('BLACKBERRY')).toBe('B421');
+        expect(soundex.process('blackberry')).toBe('B421');
+        expect(soundex.process('calculate')).toBe('C424');
+        expect(soundex.process('CALCULATE')).toBe('C424');
+        expect(soundex.process('fox')).toBe('F200');
+        expect(soundex.process('FOX')).toBe('F200');
+        expect(soundex.process('jump')).toBe('J510');
+        expect(soundex.process('JUMP')).toBe('J510');
+        expect(soundex.process('phonetics')).toBe('P532');
+        expect(soundex.process('PHONETICS')).toBe('P532');
 
     });
     
@@ -133,7 +133,7 @@ describe('soundex', function() {
     
     it('should return string phonetics with string patch', function() {
         soundex.attach();
-        expect('phonetics'.phonetics()).toBe('p532');
-        expect('PHONETICS'.phonetics()).toBe('p532');        
+        expect('phonetics'.phonetics()).toBe('P532');
+        expect('PHONETICS'.phonetics()).toBe('P532');        
     });    
 });
