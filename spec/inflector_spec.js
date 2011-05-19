@@ -55,6 +55,10 @@ describe('inflector', function() {
             expect(inflector.pluralize('trout')).toBe('trout');
         });
         
+        it('should convert singulars ending s to ses', function() {
+            expect(inflector.pluralize('status')).toBe('statuses');            
+        });
+        
         it('should match irregulars', function() {
             expect(inflector.pluralize('person')).toBe('people');
             expect(inflector.pluralize('child')).toBe('children');        
