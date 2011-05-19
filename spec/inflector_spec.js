@@ -43,6 +43,7 @@ describe('inflector', function() {
         
         it('should regulars to ES', function() {
             expect(inflector.singularize('churches')).toBe('church');
+            expect(inflector.singularize('messes')).toBe('mess');            
         });        
     });
 
@@ -70,6 +71,7 @@ describe('inflector', function() {
         
         it('should regulars to ES', function() {
             expect(inflector.pluralize('church')).toBe('churches');
+            expect(inflector.pluralize('mess')).toBe('messes');            
         });
     });
 });
