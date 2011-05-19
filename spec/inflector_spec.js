@@ -25,7 +25,7 @@ var inflector = require('lib/natural/inflector');
 describe('inflector', function() {
     describe('singularization', function() {
         it('should drop an S by default', function() {
-            expect(inflector.singularize('xxxs')).toBe('xxx');
+            expect(inflector.singularize('zzz')).toBe('zzz');
         });
         
         it('should handle ambiguous form', function() {
@@ -39,12 +39,16 @@ describe('inflector', function() {
         it('should match irregulars', function() {
             expect(inflector.singularize('people')).toBe('person');
             expect(inflector.singularize('children')).toBe('child');        
+        });
+        
+        it('should regulars to ES', function() {
+            expect(inflector.singularize('churches')).toBe('church');
         });        
     });
 
     describe('pluralization', function() {
         it('should append an S by default', function() {
-            expect(inflector.pluralize('xxx')).toBe('xxxs');
+            expect(inflector.pluralize('zzz')).toBe('zzzs');
         });
         
         it('should handle ambiguous form', function() {
@@ -62,6 +66,10 @@ describe('inflector', function() {
         it('should match irregulars', function() {
             expect(inflector.pluralize('person')).toBe('people');
             expect(inflector.pluralize('child')).toBe('children');        
+        });
+        
+        it('should regulars to ES', function() {
+            expect(inflector.pluralize('church')).toBe('churches');
         });
     });
 });
