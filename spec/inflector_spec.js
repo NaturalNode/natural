@@ -32,6 +32,11 @@ describe('inflector', function() {
         expect(inflector.pluralize('fish')).toBe('fish');
         expect(inflector.pluralize('series')).toBe('series');
         expect(inflector.pluralize('sheep')).toBe('sheep');
-        expect(inflector.pluralize('trout')).toBe('trout');        
-    })
+        expect(inflector.pluralize('trout')).toBe('trout');
+    });
+    
+    it('should match irregulars', function() {
+        expect(inflector.pluralize('person')).toBe('people');
+        expect(inflector.pluralize('child')).toBe('children');        
+    });
 });
