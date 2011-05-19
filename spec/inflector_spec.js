@@ -23,20 +23,41 @@ THE SOFTWARE.
 var inflector = require('lib/natural/inflector');
 
 describe('inflector', function() {
-    it('should append an S by default', function() {
-        expect(inflector.pluralize('xxx')).toBe('xxxs');
+    describe('singularization', function() {
+        it('should drop an S by default', function() {
+            expect(inflector.singularize('xxxs')).toBe('xxx');
+        });
+        
+        it('should handle ambiguous form', function() {
+            expect(inflector.singularize('deer')).toBe('deer');
+            expect(inflector.singularize('fish')).toBe('fish');
+            expect(inflector.singularize('series')).toBe('series');
+            expect(inflector.singularize('sheep')).toBe('sheep');
+            expect(inflector.singularize('trout')).toBe('trout');
+        });
+        
+        it('should match irregulars', function() {
+            expect(inflector.singularize('people')).toBe('person');
+            expect(inflector.singularize('children')).toBe('child');        
+        });        
     });
-    
-    it('should handle ambiguous form', function() {
-        expect(inflector.pluralize('deer')).toBe('deer');
-        expect(inflector.pluralize('fish')).toBe('fish');
-        expect(inflector.pluralize('series')).toBe('series');
-        expect(inflector.pluralize('sheep')).toBe('sheep');
-        expect(inflector.pluralize('trout')).toBe('trout');
-    });
-    
-    it('should match irregulars', function() {
-        expect(inflector.pluralize('person')).toBe('people');
-        expect(inflector.pluralize('child')).toBe('children');        
+
+    describe('pluralization', function() {
+        it('should append an S by default', function() {
+            expect(inflector.pluralize('xxx')).toBe('xxxs');
+        });
+        
+        it('should handle ambiguous form', function() {
+            expect(inflector.pluralize('deer')).toBe('deer');
+            expect(inflector.pluralize('fish')).toBe('fish');
+            expect(inflector.pluralize('series')).toBe('series');
+            expect(inflector.pluralize('sheep')).toBe('sheep');
+            expect(inflector.pluralize('trout')).toBe('trout');
+        });
+        
+        it('should match irregulars', function() {
+            expect(inflector.pluralize('person')).toBe('people');
+            expect(inflector.pluralize('child')).toBe('children');        
+        });
     });
 });
