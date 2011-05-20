@@ -68,7 +68,7 @@ describe('bayes classifier', function() {
                           {classification: 'sell', text: ['sell', 'gold']}
             ]);
             
-            classifier.save('classifier.json', function(classifier, err) {
+            classifier.save('classifier.json', function(err, classifier) {
                     var fs = require('fs');                    
                     expect(fs.statSync('classifier.json')).toBeDefined();                    
                     asyncSpecDone();
