@@ -25,7 +25,8 @@ var inflector = require('lib/natural/inflector');
 describe('inflector', function() {
     describe('singularization', function() {
         it('should drop an S by default', function() {
-            expect(inflector.singularize('zzz')).toBe('zzz');
+            expect(inflector.singularize('rrrs')).toBe('rrr');
+            expect(inflector.singularize('hackers')).toBe('hacker');            
         });
         
         it('should handle ambiguous form', function() {
@@ -41,15 +42,23 @@ describe('inflector', function() {
             expect(inflector.singularize('children')).toBe('child');        
         });
         
+        it('should handle IX cases', function() {
+            expect(inflector.singularize('matrices')).toBe('matrix');
+            expect(inflector.singularize('indices')).toBe('index');
+        });            
+        
         it('should regulars to ES', function() {
             expect(inflector.singularize('churches')).toBe('church');
-            expect(inflector.singularize('messes')).toBe('mess');            
-        });        
+            expect(inflector.singularize('messes')).toBe('mess');
+            expect(inflector.singularize('quizes')).toBe('quiz');
+            expect(inflector.singularize('shoes')).toBe('shoe');
+        });
     });
 
     describe('pluralization', function() {
         it('should append an S by default', function() {
-            expect(inflector.pluralize('zzz')).toBe('zzzs');
+            expect(inflector.pluralize('rrr')).toBe('rrrs');
+            expect(inflector.pluralize('hacker')).toBe('hackers');
         });
         
         it('should handle ambiguous form', function() {
@@ -69,9 +78,16 @@ describe('inflector', function() {
             expect(inflector.pluralize('child')).toBe('children');        
         });
         
+        it('should handle IX cases', function() {
+            expect(inflector.pluralize('matrix')).toBe('matrices');
+            expect(inflector.pluralize('index')).toBe('indices');
+        });        
+        
         it('should regulars to ES', function() {
             expect(inflector.pluralize('church')).toBe('churches');
-            expect(inflector.pluralize('mess')).toBe('messes');            
+            expect(inflector.pluralize('mess')).toBe('messes');
+            expect(inflector.pluralize('quiz')).toBe('quizes');
+            expect(inflector.pluralize('shoe')).toBe('shoes');
         });
     });
 });
