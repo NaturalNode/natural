@@ -107,4 +107,10 @@ describe('inflector', function() {
             expect(inflector.pluralize('parenthesis')).toBe('parentheses');            
         });
     });
+    
+    describe('should pluralize and singularize string from patch', function() {
+        inflector.attach();
+        expect('synopsis'.pluralize()).toBe('synopses');
+        expect('synopses'.singularize()).toBe('synopsis');        
+    });
 });
