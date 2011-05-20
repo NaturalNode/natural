@@ -67,6 +67,10 @@ describe('inflector', function() {
         it('should handle special OES cases', function() {
             expect(inflector.singularize('tomatoes')).toBe('tomato');
         });
+
+        it('should handle I cases', function() {
+            expect(inflector.singularize('octopi')).toBe('octopus');
+        });
     });
 
     describe('pluralization', function() {
@@ -113,6 +117,10 @@ describe('inflector', function() {
         
         it('should handle special OES cases', function() {
             expect(inflector.pluralize('tomato')).toBe('tomatoes');
+        });
+
+        it('should handle I cases', function() {
+            expect(inflector.pluralize('octopus')).toBe('octopi');
         });
     });
     
