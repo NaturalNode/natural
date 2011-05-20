@@ -45,10 +45,14 @@ describe('inflector', function() {
         it('should handle IX cases', function() {
             expect(inflector.singularize('matrices')).toBe('matrix');
             expect(inflector.singularize('indices')).toBe('index');
-        });            
+            // our pluralizer won''t cause this form of appendix (appendicies)
+            // but we should handle it
+            expect(inflector.singularize('appendices')).toBe('appendix');
+        });
         
         it('should regulars to ES', function() {
             expect(inflector.singularize('churches')).toBe('church');
+            expect(inflector.singularize('appendixes')).toBe('appendix');            
             expect(inflector.singularize('messes')).toBe('mess');
             expect(inflector.singularize('quizes')).toBe('quiz');
             expect(inflector.singularize('shoes')).toBe('shoe');
@@ -85,6 +89,7 @@ describe('inflector', function() {
         
         it('should regulars to ES', function() {
             expect(inflector.pluralize('church')).toBe('churches');
+            expect(inflector.pluralize('appendix')).toBe('appendixes');
             expect(inflector.pluralize('mess')).toBe('messes');
             expect(inflector.pluralize('quiz')).toBe('quizes');
             expect(inflector.pluralize('shoe')).toBe('shoes');
