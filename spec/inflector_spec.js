@@ -40,7 +40,7 @@ describe('inflector', function() {
         
         it('should match irregulars', function() {
             expect(inflector.singularize('people')).toBe('person');
-            expect(inflector.singularize('children')).toBe('child');        
+            expect(inflector.singularize('children')).toBe('child');
         });
         
         it('should handle IX cases', function() {
@@ -112,5 +112,7 @@ describe('inflector', function() {
         inflector.attach();
         expect('synopsis'.pluralize()).toBe('synopses');
         expect('synopses'.singularize()).toBe('synopsis');        
+        expect('mess'.pluralize()).toBe('messes');
+        expect('messes'.singularize()).toBe('mess');
     });
 });
