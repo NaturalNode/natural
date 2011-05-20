@@ -26,7 +26,8 @@ describe('inflector', function() {
     describe('singularization', function() {
         it('should drop an S by default', function() {
             expect(inflector.singularize('rrrs')).toBe('rrr');
-            expect(inflector.singularize('hackers')).toBe('hacker');            
+            expect(inflector.singularize('hackers')).toBe('hacker');
+            expect(inflector.singularize('movies')).toBe('movie');
         });
         
         it('should handle ambiguous form', function() {
@@ -48,7 +49,7 @@ describe('inflector', function() {
             // our pluralizer won''t cause this form of appendix (appendicies)
             // but we should handle it
             expect(inflector.singularize('appendices')).toBe('appendix');
-        });
+        });        
         
         it('should regulars to ES', function() {
             expect(inflector.singularize('churches')).toBe('church');
@@ -57,12 +58,18 @@ describe('inflector', function() {
             expect(inflector.singularize('quizes')).toBe('quiz');
             expect(inflector.singularize('shoes')).toBe('shoe');
         });
+        
+        it('should handle SIS cases', function() {
+            expect(inflector.singularize('synopses')).toBe('synopsis');
+            expect(inflector.singularize('parentheses')).toBe('parenthesis');            
+        });        
     });
 
     describe('pluralization', function() {
         it('should append an S by default', function() {
             expect(inflector.pluralize('rrr')).toBe('rrrs');
             expect(inflector.pluralize('hacker')).toBe('hackers');
+            expect(inflector.pluralize('movie')).toBe('movies');
         });
         
         it('should handle ambiguous form', function() {
@@ -93,6 +100,11 @@ describe('inflector', function() {
             expect(inflector.pluralize('mess')).toBe('messes');
             expect(inflector.pluralize('quiz')).toBe('quizes');
             expect(inflector.pluralize('shoe')).toBe('shoes');
+        });
+        
+        it('should handle SIS cases', function() {
+            expect(inflector.pluralize('synopsis')).toBe('synopses');
+            expect(inflector.pluralize('parenthesis')).toBe('parentheses');            
         });
     });
 });
