@@ -100,7 +100,7 @@ A classifier can also be persisted and recalled so you can reuse a training.
         
 persist to a file on disk named "classifier.json"
 
-    classifier.save('classifier.json', function(classifier, err) {
+    classifier.save('classifier.json', function(err, classifier) {
         // the classifier is saved to the classifier.json file!
     });
     
