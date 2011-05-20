@@ -63,6 +63,10 @@ describe('inflector', function() {
             expect(inflector.singularize('synopses')).toBe('synopsis');
             expect(inflector.singularize('parentheses')).toBe('parenthesis');            
         });        
+
+        it('should handle special OES cases', function() {
+            expect(inflector.singularize('tomatoes')).toBe('tomatoe');
+        });
     });
 
     describe('pluralization', function() {
@@ -105,6 +109,10 @@ describe('inflector', function() {
         it('should handle SIS cases', function() {
             expect(inflector.pluralize('synopsis')).toBe('synopses');
             expect(inflector.pluralize('parenthesis')).toBe('parentheses');            
+        });
+        
+        it('should handle special OES cases', function() {
+            expect(inflector.pluralize('tomatoe')).toBe('tomatoes');
         });
     });
     
