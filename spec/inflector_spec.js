@@ -65,7 +65,7 @@ describe('inflector', function() {
         });        
 
         it('should handle special OES cases', function() {
-            expect(inflector.singularize('tomatoes')).toBe('tomatoe');
+            expect(inflector.singularize('tomatoes')).toBe('tomato');
         });
     });
 
@@ -112,7 +112,7 @@ describe('inflector', function() {
         });
         
         it('should handle special OES cases', function() {
-            expect(inflector.pluralize('tomatoe')).toBe('tomatoes');
+            expect(inflector.pluralize('tomato')).toBe('tomatoes');
         });
     });
     
