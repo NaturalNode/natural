@@ -77,6 +77,10 @@ describe('inflector', function() {
         it('should handle I cases', function() {
             expect(inflector.singularize('octopi')).toBe('octopus');
         });
+        
+        it('should handle IVES cases', function() {
+            expect(inflector.singularize('knives')).toBe('knife');
+        });        
     });
 
     describe('pluralization', function() {
@@ -129,6 +133,10 @@ describe('inflector', function() {
         it('should handle I cases', function() {
             expect(inflector.pluralize('octopus')).toBe('octopi');
         });
+        
+        it('should handle IVES cases', function() {
+            expect(inflector.pluralize('knife')).toBe('knives');
+        });
     });
     
     describe('should pluralize and singularize string from patch', function() {
@@ -143,8 +151,8 @@ describe('inflector', function() {
         describe('should pluralize and singularize custom forms', function() {
             var myInflector = new NounInflector();
             myInflector.attach();
-            myInflector.addPlural(/(code|ware)/, '$1z');
-            myInflector.addSingular(/(code|ware)z/, '$1');
+            myInflector.addPlural(/(code|ware)/i, '$1z');
+            myInflector.addSingular(/(code|ware)z/i, '$1');
             expect('code'.pluralizeNoun()).toBe('codez');
             expect('ware'.pluralizeNoun()).toBe('warez');
             expect('codez'.singularizeNoun()).toBe('code');
@@ -154,8 +162,8 @@ describe('inflector', function() {
         describe('should not break regular forms', function() {
             var myInflector = new NounInflector();
             myInflector.attach();
-            myInflector.addPlural(/(code|ware)/, '$1z');
-            myInflector.addSingular(/(code|ware)z/, '$1');
+            myInflector.addPlural(/(code|ware)/i, '$1z');
+            myInflector.addSingular(/(code|ware)z/i, '$1');
             expect('bus'.pluralizeNoun()).toBe('buses');
             expect('buses'.singularizeNoun()).toBe('bus');            
         });
