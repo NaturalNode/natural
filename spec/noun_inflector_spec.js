@@ -80,6 +80,7 @@ describe('inflector', function() {
         });
         
         it('should handle IVES cases', function() {
+            expect(inflector.singularize('lives')).toBe('life');
             expect(inflector.singularize('knives')).toBe('knife');
         });        
     });
@@ -138,6 +139,7 @@ describe('inflector', function() {
         
         it('should handle IVES cases', function() {
             expect(inflector.pluralize('knife')).toBe('knives');
+            expect(inflector.pluralize('life')).toBe('lives');            
         });
     });
     
