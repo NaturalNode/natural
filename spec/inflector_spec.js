@@ -138,4 +138,13 @@ describe('inflector', function() {
         expect('mess'.pluralize()).toBe('messes');
         expect('messes'.singularize()).toBe('mess');
     });
+    
+    describe('should pluralize and singularize custom forms', function() {
+        var myInflector = new Inflector();
+        myInflector.attach();
+        myInflector.addPlural(/(code|ware)/, '$1z');
+        myInflector.addSingular(/(code|ware)z/, '$1');
+        expect('code'.pluralize()).toBe('codez');
+        expect('codez'.singularize()).toBe('code');        
+    });
 });
