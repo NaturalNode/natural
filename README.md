@@ -160,6 +160,43 @@ the same String patches apply with soundex
         console.log('they sound alike!');
         
     console.log('phonetics'.phonetics());
+    
+Inflectors
+----------
+
+Nouns can be pluralized, singularized and counted with inflectors
+
+    var natural = require('natural'),
+    nounInflector = new natural.NounInflector;
+    
+to pluralize a word (outputs "radii")
+
+    console.log(nounInflector.pluralize('radius'));
+
+to singularize a word (outputs "beer")
+
+    console.log(nounInflector.singularize('beers'));
+
+like many of the other features String can be patchedto perform the operations
+directly. the "Noun" suffix to the methods is necessary as verbs will be
+supported in the future.
+
+    nounInflector.attach();
+    console.log('radius'.pluralizeNoun());
+    console.log('beers'.singularizeNoun());   
+
+counters can also be produced from integers with CountInflector
+    
+    countInflector = natural.CountInflector;
+
+outputs "1st"
+
+    console.log(countInflector.nth(1));
+
+outputs "111th"
+
+    console.log(countInflector.nth(111));
+
 
 Copyright
 ---------
