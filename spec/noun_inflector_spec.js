@@ -47,6 +47,7 @@ describe('inflector', function() {
         it('should match irregulars', function() {
             expect(inflector.singularize('people')).toBe('person');
             expect(inflector.singularize('children')).toBe('child');
+            expect(inflector.singularize('oxen')).toBe('ox');
         });
         
         it('should handle IX cases', function() {
@@ -107,7 +108,9 @@ describe('inflector', function() {
         
         it('should match irregulars', function() {
             expect(inflector.pluralize('person')).toBe('people');
-            expect(inflector.pluralize('child')).toBe('children');        
+            expect(inflector.pluralize('child')).toBe('children');
+            expect(inflector.pluralize('ox')).toBe('oxen');
+            expect(inflector.pluralize('OX')).toBe('oxen');
         });
         
         it('should handle IX cases', function() {
