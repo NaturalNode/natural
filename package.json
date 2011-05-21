@@ -1,11 +1,12 @@
 {
   "name": "natural",
+  "description": "General natural language (stemming, classification, inflection, phonetics) facilities for node.",
   "version": "0.0.14",
   "engines": {
     "node": ">=0.2.6"
   },
   "author": "Chris Umbel <chris@chrisumbel.com>",
   "keywords": ["natural", "language", "porter", "lancaster", "stemmer", "bayes",
-    "classifier", "phonetic", "metaphone"],
+    "classifier", "phonetic", "metaphone", "inflector"],
   "main": "./lib/natural/index.js"
 }

@@ -76,6 +76,7 @@ describe('inflector', function() {
 
         it('should handle I cases', function() {
             expect(inflector.singularize('octopi')).toBe('octopus');
+            expect(inflector.singularize('radii')).toBe('radius');            
         });
         
         it('should handle IVES cases', function() {
@@ -131,6 +132,7 @@ describe('inflector', function() {
         });
 
         it('should handle I cases', function() {
+            expect(inflector.pluralize('radius')).toBe('radii');
             expect(inflector.pluralize('octopus')).toBe('octopi');
         });
         
