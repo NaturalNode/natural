@@ -164,7 +164,7 @@ the same String patches apply with soundex
 Inflectors
 ----------
 
-Nouns can be pluralized, singularized and counted with inflectors
+Nouns can be pluralized/singularized and numbers counted with inflectors
 
     var natural = require('natural'),
     nounInflector = new natural.NounInflector;
@@ -177,7 +177,7 @@ to singularize a word (outputs "beer")
 
     console.log(nounInflector.singularize('beers'));
 
-like many of the other features String can be patchedto perform the operations
+like many of the other features String can be patched to perform the operations
 directly. the "Noun" suffix to the methods is necessary as verbs will be
 supported in the future.
 
