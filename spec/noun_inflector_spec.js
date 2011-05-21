@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var Inflector = (require('lib/natural/inflector')),
+var Inflector = (require('lib/natural/noun_inflector')),
     inflector = new Inflector();
 
 describe('inflector', function() {
@@ -133,10 +133,10 @@ describe('inflector', function() {
     
     describe('should pluralize and singularize string from patch', function() {
         inflector.attach();
-        expect('synopsis'.pluralize()).toBe('synopses');
-        expect('synopses'.singularize()).toBe('synopsis');        
-        expect('mess'.pluralize()).toBe('messes');
-        expect('messes'.singularize()).toBe('mess');
+        expect('synopsis'.pluralizeNoun()).toBe('synopses');
+        expect('synopses'.singularizeNoun()).toBe('synopsis');        
+        expect('mess'.pluralizeNoun()).toBe('messes');
+        expect('messes'.singularizeNoun()).toBe('mess');
     });
 
     describe('custom inflections', function() {
@@ -145,10 +145,10 @@ describe('inflector', function() {
             myInflector.attach();
             myInflector.addPlural(/(code|ware)/, '$1z');
             myInflector.addSingular(/(code|ware)z/, '$1');
-            expect('code'.pluralize()).toBe('codez');
-            expect('ware'.pluralize()).toBe('warez');
-            expect('codez'.singularize()).toBe('code');
-            expect('warez'.singularize()).toBe('ware');
+            expect('code'.pluralizeNoun()).toBe('codez');
+            expect('ware'.pluralizeNoun()).toBe('warez');
+            expect('codez'.singularizeNoun()).toBe('code');
+            expect('warez'.singularizeNoun()).toBe('ware');
         });
         
         describe('should not break regular forms', function() {
@@ -156,8 +156,8 @@ describe('inflector', function() {
             myInflector.attach();
             myInflector.addPlural(/(code|ware)/, '$1z');
             myInflector.addSingular(/(code|ware)z/, '$1');
-            expect('bus'.pluralize()).toBe('buses');
-            expect('buses'.singularize()).toBe('bus');            
+            expect('bus'.pluralizeNoun()).toBe('buses');
+            expect('buses'.singularizeNoun()).toBe('bus');            
         });
     });
 });
