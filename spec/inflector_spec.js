@@ -20,7 +20,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var inflector = require('lib/natural/inflector');
+var Inflector = (require('lib/natural/inflector')),
+    inflector = new Inflector();
 
 describe('inflector', function() {
     describe('singularization', function() {
