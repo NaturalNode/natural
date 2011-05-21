@@ -38,6 +38,11 @@ describe('inflector', function() {
             expect(inflector.singularize('trout')).toBe('trout');
         });
         
+        it('should convert plurals ending SES to S', function() {
+            expect(inflector.singularize('statuses')).toBe('status');
+            expect(inflector.singularize('buses')).toBe('bus');
+        });        
+        
         it('should match irregulars', function() {
             expect(inflector.singularize('people')).toBe('person');
             expect(inflector.singularize('children')).toBe('child');
@@ -89,7 +94,8 @@ describe('inflector', function() {
         });
         
         it('should convert singulars ending s to ses', function() {
-            expect(inflector.pluralize('status')).toBe('statuses');            
+            expect(inflector.pluralize('status')).toBe('statuses');
+            expect(inflector.pluralize('bus')).toBe('buses');
         });
         
         it('should match irregulars', function() {
