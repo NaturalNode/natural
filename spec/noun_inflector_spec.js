@@ -20,8 +20,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var Inflector = (require('lib/natural/noun_inflector')),
-    inflector = new Inflector();
+var NounInflector = (require('lib/natural/noun_inflector')),
+    inflector = new NounInflector();
 
 describe('inflector', function() {
     describe('singularization', function() {
@@ -141,7 +141,7 @@ describe('inflector', function() {
 
     describe('custom inflections', function() {
         describe('should pluralize and singularize custom forms', function() {
-            var myInflector = new Inflector();
+            var myInflector = new NounInflector();
             myInflector.attach();
             myInflector.addPlural(/(code|ware)/, '$1z');
             myInflector.addSingular(/(code|ware)z/, '$1');
@@ -152,7 +152,7 @@ describe('inflector', function() {
         });
         
         describe('should not break regular forms', function() {
-            var myInflector = new Inflector();
+            var myInflector = new NounInflector();
             myInflector.attach();
             myInflector.addPlural(/(code|ware)/, '$1z');
             myInflector.addSingular(/(code|ware)z/, '$1');
