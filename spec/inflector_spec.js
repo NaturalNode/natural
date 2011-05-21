@@ -146,7 +146,18 @@ describe('inflector', function() {
             myInflector.addPlural(/(code|ware)/, '$1z');
             myInflector.addSingular(/(code|ware)z/, '$1');
             expect('code'.pluralize()).toBe('codez');
-            expect('codez'.singularize()).toBe('code');        
-        });    
+            expect('ware'.pluralize()).toBe('warez');
+            expect('codez'.singularize()).toBe('code');
+            expect('warez'.singularize()).toBe('ware');
+        });
+        
+        describe('should not break regular forms', function() {
+            var myInflector = new Inflector();
+            myInflector.attach();
+            myInflector.addPlural(/(code|ware)/, '$1z');
+            myInflector.addSingular(/(code|ware)z/, '$1');
+            expect('bus'.pluralize()).toBe('buses');
+            expect('buses'.singularize()).toBe('bus');            
+        });
     });
 });
