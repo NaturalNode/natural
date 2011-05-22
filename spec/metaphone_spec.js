@@ -224,4 +224,11 @@ describe('metaphone', function() {
         expect('phonetics'.phonetics()).toBe('FNTKS');
         expect('PHONETICS'.phonetics()).toBe('FNTKS');        
     });
+    
+    it('should tokenize and return string phonetics with string patch', function() {
+        metaphone.attach();
+        expect('phonetics'.tokenizeAndPhoneticize()).toEqual(['FNTKS']);
+        expect('phonetics garbonzo'.tokenizeAndPhoneticize()).toEqual(['FNTKS', 'KRBNS']);
+        expect('phonetics garbonzo lightning'.tokenizeAndPhoneticize()).toEqual(['FNTKS', 'KRBNS', 'LTNNK']);
+    });     
 });

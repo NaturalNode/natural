@@ -135,5 +135,12 @@ describe('soundex', function() {
         soundex.attach();
         expect('phonetics'.phonetics()).toBe('P532');
         expect('PHONETICS'.phonetics()).toBe('P532');        
+    });
+    
+    it('should tokenize and return string phonetics with string patch', function() {
+        soundex.attach();
+        expect('phonetics'.tokenizeAndPhoneticize()).toEqual(['P532']);
+        expect('phonetics jump'.tokenizeAndPhoneticize()).toEqual(['P532', 'J510']);
+        expect('phonetics jump calculate'.tokenizeAndPhoneticize()).toEqual(['P532', 'J510', 'C424']);        
     });    
 });
