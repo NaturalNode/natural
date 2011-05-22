@@ -145,6 +145,10 @@ the raw phonetics are obtained with phonetics()
 
     console.log('phonetics'.phonetics());   
 
+full text strings can be tokenized into arrays of phonetics similar to stemmers
+
+    console.log('phonetics rock'.tokenizeAndPhoneticize());
+
 same module operations apply with SoundEx
 
     if(soundEx.compare(wordA, wordB))
@@ -160,6 +164,7 @@ the same String patches apply with soundex
         console.log('they sound alike!');
         
     console.log('phonetics'.phonetics());
+    
     
 Inflectors
 ----------
