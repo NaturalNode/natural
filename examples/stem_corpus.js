@@ -4,4 +4,5 @@ var natural = require('natural'),
     
 stemmer.attach();
     
-console.log('stemming is doing the shortening of words.'.tokenizeAndStem());
+console.log('i stemmed words.'.tokenizeAndStem());
+console.log('i stemmed words.'.tokenizeAndStem(true));
