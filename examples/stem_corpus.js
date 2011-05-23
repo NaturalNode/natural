@@ -1,6 +1,6 @@
 
 var natural = require('natural'),
-    stemmer = natural.LancasterStemmer;
+    stemmer = natural.PorterStemmer;
     
 stemmer.attach();
     
