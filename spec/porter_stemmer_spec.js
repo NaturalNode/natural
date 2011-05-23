@@ -121,6 +121,7 @@ describe('porter_stemmer', function() {
 		expect(stemmer.stem('SCORED')).toBe('score');
 		expect(stemmer.stem('SCORES')).toBe('score');
 		expect(stemmer.stem('SCORE')).toBe('score');
+		expect(stemmer.stem('nationals')).toBe('nation');
 	});
 
 	it('should tokenize and stem attached', function() {
