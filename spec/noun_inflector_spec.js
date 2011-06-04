@@ -89,6 +89,11 @@ describe('inflector', function() {
             expect(inflector.singularize('lives')).toBe('life');
             expect(inflector.singularize('knives')).toBe('knife');
         });
+
+	it('should handle irregular cases', function() {
+	    expect(inflector.singularize('men')).toBe('man');
+	    expect(inflector.singularize('women')).toBe('woman');
+	});
     });
 
     describe('pluralization', function() {
@@ -153,6 +158,11 @@ describe('inflector', function() {
             expect(inflector.pluralize('knife')).toBe('knives');
             expect(inflector.pluralize('life')).toBe('lives');            
         });
+
+	it('should handle irregular cases', function() {
+	    expect(inflector.pluralize('man')).toBe('men');
+	    expect(inflector.pluralize('woman')).toBe('women');
+	});
     });
     
     describe('should pluralize and singularize string from patch', function() {
