@@ -60,10 +60,11 @@ describe('inflector', function() {
         
         it('should regulars to ES', function() {
             expect(inflector.singularize('churches')).toBe('church');
-            expect(inflector.singularize('appendixes')).toBe('appendix');            
+            expect(inflector.singularize('appendixes')).toBe('appendix');
             expect(inflector.singularize('messes')).toBe('mess');
             expect(inflector.singularize('quizes')).toBe('quiz');
             expect(inflector.singularize('shoes')).toBe('shoe');
+            expect(inflector.singularize('funguses')).toBe('fungus');
         });
         
         it('should handle SIS cases', function() {
@@ -77,13 +78,17 @@ describe('inflector', function() {
 
         it('should handle I cases', function() {
             expect(inflector.singularize('octopi')).toBe('octopus');
-            expect(inflector.singularize('radii')).toBe('radius');            
+            expect(inflector.singularize('stimuli')).toBe('stimulus');
+            expect(inflector.singularize('radii')).toBe('radius');
+            expect(inflector.singularize('nuclei')).toBe('nucleus');
+            expect(inflector.singularize('fungi')).toBe('fungus');
+            expect(inflector.singularize('cacti')).toBe('cactus');
         });
         
         it('should handle IVES cases', function() {
             expect(inflector.singularize('lives')).toBe('life');
             expect(inflector.singularize('knives')).toBe('knife');
-        });        
+        });
     });
 
     describe('pluralization', function() {
@@ -138,6 +143,10 @@ describe('inflector', function() {
         it('should handle I cases', function() {
             expect(inflector.pluralize('radius')).toBe('radii');
             expect(inflector.pluralize('octopus')).toBe('octopi');
+            expect(inflector.pluralize('stimulus')).toBe('stimuli');
+            expect(inflector.pluralize('nucleus')).toBe('nuclei');
+            expect(inflector.pluralize('fungus')).toBe('fungi');
+            expect(inflector.pluralize('cactus')).toBe('cacti');
         });
         
         it('should handle IVES cases', function() {
