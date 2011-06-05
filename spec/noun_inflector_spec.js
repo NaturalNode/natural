@@ -29,6 +29,7 @@ describe('inflector', function() {
             expect(inflector.singularize('rrrs')).toBe('rrr');
             expect(inflector.singularize('hackers')).toBe('hacker');
             expect(inflector.singularize('movies')).toBe('movie');
+            expect(inflector.singularize('talismans')).toBe('talisman');            
         });
         
         it('should handle ambiguous form', function() {
@@ -90,9 +91,14 @@ describe('inflector', function() {
             expect(inflector.singularize('knives')).toBe('knife');
         });
 
-	it('should handle irregular cases', function() {
+	it('should handle MAN->MAN cases', function() {
 	    expect(inflector.singularize('men')).toBe('man');
 	    expect(inflector.singularize('women')).toBe('woman');
+	    expect(inflector.singularize('workmen')).toBe('workman');
+	    expect(inflector.singularize('riflemen')).toBe('rifleman');            
+        });
+
+	it('should handle irregular cases', function() {
 	    expect(inflector.singularize('feet')).toBe('foot');
 	    expect(inflector.singularize('geese')).toBe('goose');
 	    expect(inflector.singularize('teeth')).toBe('tooth');
@@ -162,12 +168,18 @@ describe('inflector', function() {
             expect(inflector.pluralize('life')).toBe('lives');            
         });
 
-	it('should handle irregular cases', function() {
+	it('should handle MAN->MEN cases', function() {
 	    expect(inflector.pluralize('man')).toBe('men');
 	    expect(inflector.pluralize('woman')).toBe('women');
+            expect(inflector.pluralize('workman')).toBe('workmen');
+            expect(inflector.pluralize('rifleman')).toBe('riflemen');            
+        });
+
+	it('should handle irregular cases', function() {
 	    expect(inflector.pluralize('foot')).toBe('feet');
 	    expect(inflector.pluralize('goose')).toBe('geese');
 	    expect(inflector.pluralize('tooth')).toBe('teeth');
+            expect(inflector.pluralize('talisman')).toBe('talismans');
 	});
     });
     
