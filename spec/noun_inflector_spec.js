@@ -107,6 +107,19 @@ describe('inflector', function() {
 	    expect(inflector.singularize('geese')).toBe('goose');
 	    expect(inflector.singularize('teeth')).toBe('tooth');
 	});
+        
+	it('should handle AE cases', function() {
+	    expect(inflector.singularize('antennae')).toBe('antenna');
+	    expect(inflector.singularize('formulae')).toBe('formula');
+	    expect(inflector.singularize('nebulae')).toBe('nebula');
+	    expect(inflector.singularize('vertebrae')).toBe('vertebra');
+	    expect(inflector.singularize('vitae')).toBe('vita');
+        });
+        
+	it('should allow AE cases to be S', function() {
+	    expect(inflector.singularize('antennas')).toBe('antenna');
+	    expect(inflector.singularize('formulas')).toBe('formula');
+        });        
     });
 
     describe('pluralization', function() {
@@ -189,6 +202,14 @@ describe('inflector', function() {
             expect(inflector.pluralize('human')).toBe('humans');
             expect(inflector.pluralize('prehuman')).toBe('prehumans');            
 	});
+        
+	it('should handle AE cases', function() {
+	    expect(inflector.pluralize('antenna')).toBe('antennae');
+	    expect(inflector.pluralize('formula')).toBe('formulae');
+	    expect(inflector.pluralize('nebula')).toBe('nebulae');
+	    expect(inflector.pluralize('vertebra')).toBe('vertebrae');
+	    expect(inflector.pluralize('vita')).toBe('vitae');
+        });        
     });
     
     describe('should pluralize and singularize string from patch', function() {
