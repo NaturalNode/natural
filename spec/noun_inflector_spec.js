@@ -29,7 +29,11 @@ describe('inflector', function() {
             expect(inflector.singularize('rrrs')).toBe('rrr');
             expect(inflector.singularize('hackers')).toBe('hacker');
             expect(inflector.singularize('movies')).toBe('movie');
-            expect(inflector.singularize('talismans')).toBe('talisman');            
+            
+            // MAN cases that don't pluralize to MEN            
+            expect(inflector.singularize('talismans')).toBe('talisman');
+            expect(inflector.singularize('humans')).toBe('human');
+            expect(inflector.singularize('prehumans')).toBe('prehuman');            
         });
         
         it('should handle ambiguous form', function() {
@@ -179,7 +183,11 @@ describe('inflector', function() {
 	    expect(inflector.pluralize('foot')).toBe('feet');
 	    expect(inflector.pluralize('goose')).toBe('geese');
 	    expect(inflector.pluralize('tooth')).toBe('teeth');
+            
+            // MAN cases that don't pluralize to MEN
             expect(inflector.pluralize('talisman')).toBe('talismans');
+            expect(inflector.pluralize('human')).toBe('humans');
+            expect(inflector.pluralize('prehuman')).toBe('prehumans');            
 	});
     });
     
