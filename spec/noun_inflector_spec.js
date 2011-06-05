@@ -93,6 +93,9 @@ describe('inflector', function() {
 	it('should handle irregular cases', function() {
 	    expect(inflector.singularize('men')).toBe('man');
 	    expect(inflector.singularize('women')).toBe('woman');
+	    expect(inflector.singularize('feet')).toBe('foot');
+	    expect(inflector.singularize('geese')).toBe('goose');
+	    expect(inflector.singularize('teeth')).toBe('tooth');
 	});
     });
 
@@ -162,6 +165,9 @@ describe('inflector', function() {
 	it('should handle irregular cases', function() {
 	    expect(inflector.pluralize('man')).toBe('men');
 	    expect(inflector.pluralize('woman')).toBe('women');
+	    expect(inflector.pluralize('foot')).toBe('feet');
+	    expect(inflector.pluralize('goose')).toBe('geese');
+	    expect(inflector.pluralize('tooth')).toBe('teeth');
 	});
     });
     
