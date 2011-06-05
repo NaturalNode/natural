@@ -10,6 +10,8 @@ VERY) interested in bug reports, contributions and the like.
 At the moment most algorithms are English-specific but long-term some diversity
 is in order.
 
+Aside from this README the only current documentation is [here on my blog](http://www.chrisumbel.com/article/node_js_natural_language_porter_stemmer_lancaster_bayes_naive_metaphone_soundex).
+
 Installation
 ------------
 
