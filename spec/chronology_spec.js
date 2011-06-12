@@ -57,4 +57,26 @@ describe('chronology', function() {
         expect(result.getSeconds()).toBe(0);
         expect(result.getMilliseconds()).toBe(0);        
     });
+    
+    it('should handle half-passed', function() {
+        var result = chronology.parse('half passed noon');
+        expect(result.getHours()).toBe(12);
+        expect(result.getMinutes()).toBe(30);
+    });
+    
+    it('should handle quarter-passed', function() {
+        var result = chronology.parse('quarter passed noon');
+        expect(result.getHours()).toBe(12);
+        expect(result.getMinutes()).toBe(15);
+    });
+    
+    it('should handle quarter-to', function() {
+        var result = chronology.parse('quarter till noon');        
+        expect(result.getHours()).toBe(11);
+        expect(result.getMinutes()).toBe(45);
+        
+        result = chronology.parse('quarter to noon');
+        expect(result.getHours()).toBe(11);
+        expect(result.getMinutes()).toBe(45);
+    });    
 });
