@@ -20,5 +20,41 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+var now = new Date(2000, 0, 1, 0, 0, 0, 0),
+    natural = require('lib/natural'),
+    chronology = new natural.Chronology(now);
+
 describe('chronology', function() {
+    it('should parse "today" as today\'s date', function() {
+        var result = chronology.parse('today');
+    
+        expect(result.getFullYear()).toBe(2000);
+        expect(result.getMonth()).toBe(0);
+        expect(result.getDate()).toBe(1);
+        expect(result.getHours()).toBe(0);
+        expect(result.getMinutes()).toBe(0);
+        expect(result.getSeconds()).toBe(0);
+        expect(result.getMilliseconds()).toBe(0);        
+    });
+    
+    it('should parse "noon" as 12:00', function() {
+        var result = chronology.parse('noon');
+    
+        expect(result.getHours()).toBe(12);
+        expect(result.getMinutes()).toBe(0);
+        expect(result.getSeconds()).toBe(0);
+        expect(result.getMilliseconds()).toBe(0);        
+    });
+    
+    it('should handle multiple tokens', function() {
+        var result = chronology.parse('today at noon');
+        
+        expect(result.getFullYear()).toBe(2000);
+        expect(result.getMonth()).toBe(0);
+        expect(result.getDate()).toBe(1);
+        expect(result.getHours()).toBe(12);
+        expect(result.getMinutes()).toBe(0);
+        expect(result.getSeconds()).toBe(0);
+        expect(result.getMilliseconds()).toBe(0);        
+    });
 });
