@@ -20,46 +20,33 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+var tokenizer = require('lib/natural/aggressive_tokenizer');
+
 describe('aggressive_tokenizer', function() {
   it('should tokenize strings', function() {
-    var tokenizer = require('lib/natural/aggressive_tokenizer');
-    tokenizer.attach();
-
     expect(tokenizer.tokenize('these are things')).toEqual(['these', 'are', 'things']);
   });
 
-  it('should tokenize strings via instance method', function() {
+  it('should tokenize strings via attached string method', function() {
     var tokenizer = require('lib/natural/aggressive_tokenizer');
     tokenizer.attach();
     
-    expect('these are things'.tokenize()).toEqual(['these', 'are', 'things']);
+    expect(tokenizer.tokenize('these are things')).toEqual(['these', 'are', 'things']);
   });
 
   it('should swollow punctuation', function() {
-    var tokenizer = require('lib/natural/aggressive_tokenizer');
-    tokenizer.attach();
-
-    expect('these are things, no'.tokenize()).toEqual(['these', 'are', 'things', 'no']);
+    expect(tokenizer.tokenize('these are things, no')).toEqual(['these', 'are', 'things', 'no']);
   });
 
   it('should swollow final punctuation', function() {
-    var tokenizer = require('lib/natural/aggressive_tokenizer');
-    tokenizer.attach();
-
-    expect('these are things, no?'.tokenize()).toEqual(['these', 'are', 'things', 'no']);
+    expect(tokenizer.tokenize('these are things, no?')).toEqual(['these', 'are', 'things', 'no']);
   });
 
   it('should swollow initial punctuation', function() {
-    var tokenizer = require('lib/natural/aggressive_tokenizer');
-    tokenizer.attach();
-
-    expect('.these are things, no'.tokenize()).toEqual(['these', 'are', 'things', 'no']);
+    expect(tokenizer.tokenize('.these are things, no')).toEqual(['these', 'are', 'things', 'no']);
   });
 
   it('should swollow duplicate punctuation', function() {
-    var tokenizer = require('lib/natural/aggressive_tokenizer');
-    tokenizer.attach();
-
-    expect('i shal... pause'.tokenize()).toEqual(['i', 'shal', 'pause']);
+    expect(tokenizer.tokenize('i shal... pause')).toEqual(['i', 'shal', 'pause']);
   });  
 });
