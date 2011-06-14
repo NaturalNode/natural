@@ -78,5 +78,13 @@ describe('chronology', function() {
         result = chronology.parse('quarter to noon');
         expect(result.getHours()).toBe(11);
         expect(result.getMinutes()).toBe(45);
+    });
+    
+    it('should handle hour number-words', function() {
+        var result = chronology.parse('two');        
+        expect(result.getHours()).toBe(2);
+        
+        result = chronology.parse('twenty-two');
+        expect(result.getHours()).toBe(22);
     });    
 });
