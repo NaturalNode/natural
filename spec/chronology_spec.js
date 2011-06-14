@@ -80,11 +80,15 @@ describe('chronology', function() {
         expect(result.getMinutes()).toBe(45);
     });
     
-    it('should handle hour number-words', function() {
-        var result = chronology.parse('two');        
+    it('should map number-words to minutes with hints like passed', function() {
+        var result = chronology.parse('twenty passed two');
         expect(result.getHours()).toBe(2);
-        
-        result = chronology.parse('twenty-two');
-        expect(result.getHours()).toBe(22);
-    });    
+        expect(result.getMinutes()).toBe(20);
+    });
+    
+    it('should map number-words to minutes with hints like till', function() {
+        var result = chronology.parse('twenty till two');
+        expect(result.getHours()).toBe(1);
+        expect(result.getMinutes()).toBe(40);
+    });
 });
