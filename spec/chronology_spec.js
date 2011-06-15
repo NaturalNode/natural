@@ -25,70 +25,7 @@ var now = new Date(2000, 0, 1, 0, 0, 0, 0),
     chronology = new natural.Chronology(now);
 
 describe('chronology', function() {
-    it('should parse "today" as today\'s date', function() {
-        var result = chronology.parse('today');
-    
-        expect(result.getFullYear()).toBe(2000);
-        expect(result.getMonth()).toBe(0);
-        expect(result.getDate()).toBe(1);
-        expect(result.getHours()).toBe(0);
-        expect(result.getMinutes()).toBe(0);
-        expect(result.getSeconds()).toBe(0);
-        expect(result.getMilliseconds()).toBe(0);        
-    });
-    
-    it('should parse "noon" as 12:00', function() {
-        var result = chronology.parse('noon');
-    
-        expect(result.getHours()).toBe(12);
-        expect(result.getMinutes()).toBe(0);
-        expect(result.getSeconds()).toBe(0);
-        expect(result.getMilliseconds()).toBe(0);        
-    });
-    
-    it('should handle multiple tokens', function() {
-        var result = chronology.parse('today at noon');
-        
-        expect(result.getFullYear()).toBe(2000);
-        expect(result.getMonth()).toBe(0);
-        expect(result.getDate()).toBe(1);
-        expect(result.getHours()).toBe(12);
-        expect(result.getMinutes()).toBe(0);
-        expect(result.getSeconds()).toBe(0);
-        expect(result.getMilliseconds()).toBe(0);        
-    });
-    
-    it('should handle half-passed', function() {
-        var result = chronology.parse('half passed noon');
-        expect(result.getHours()).toBe(12);
-        expect(result.getMinutes()).toBe(30);
-    });
-    
-    it('should handle quarter-passed', function() {
-        var result = chronology.parse('quarter passed noon');
-        expect(result.getHours()).toBe(12);
-        expect(result.getMinutes()).toBe(15);
-    });
-    
-    it('should handle quarter-to', function() {
-        var result = chronology.parse('quarter till noon');        
-        expect(result.getHours()).toBe(11);
-        expect(result.getMinutes()).toBe(45);
-        
-        result = chronology.parse('quarter to noon');
-        expect(result.getHours()).toBe(11);
-        expect(result.getMinutes()).toBe(45);
-    });
-    
-    it('should map number-words to minutes with hints like passed', function() {
-        var result = chronology.parse('twenty passed two');
-        expect(result.getHours()).toBe(2);
-        expect(result.getMinutes()).toBe(20);
-    });
-    
-    it('should map number-words to minutes with hints like till', function() {
-        var result = chronology.parse('twenty till two');
-        expect(result.getHours()).toBe(1);
-        expect(result.getMinutes()).toBe(40);
+    it('should preNormalize terms', function() {
+        expect(natural.Chronology.preNormalize('today')).toBe('this day');
     });
 });
