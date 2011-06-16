@@ -33,13 +33,17 @@ describe('chronology', function() {
     
     it('should numerize direct numbers', function() {
         expect(numerizer.numerize('one')).toBe('1');
-        expect(numerizer.numerize('seven')).toBe('7');            
+        expect(numerizer.numerize('seven')).toBe('7');
         expect(numerizer.numerize('eleven')).toBe('11');
         expect(numerizer.numerize('seven eleven')).toBe('7 11');
     });
     
     it('should numerize ordinals', function() {
         expect(numerizer.numerize('third')).toBe('3');
-        expect(numerizer.numerize('ninth')).toBe('9');        
-    });    
+        expect(numerizer.numerize('ninth')).toBe('9');
+    });
+    
+    it('should numerize tens prefixes alone', function() {
+        expect(numerizer.numerize('blah blah thirty blah blah thirty blah blah')).toBe('blah blah 30 blah blah 30 blah blah');
+    });
 });
