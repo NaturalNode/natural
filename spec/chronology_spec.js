@@ -30,7 +30,11 @@ describe('chronology', function() {
         expect(natural.Chronology.preNormalize('today')).toBe('this day');
     });
     
-    it('should numerize', function() {
+    it('should numerize direct numbers', function() {
         expect(numerizer.numerize('eleven')).toBe('11');
     });
+    
+    it('should numerize ordinals', function() {
+        expect(numerizer.numerize('third')).toBe('3');
+    });    
 });
