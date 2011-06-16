@@ -28,13 +28,18 @@ var now = new Date(2000, 0, 1, 0, 0, 0, 0),
 describe('chronology', function() {
     it('should preNormalize terms', function() {
         expect(natural.Chronology.preNormalize('today')).toBe('this day');
+        expect(natural.Chronology.preNormalize('yesterday')).toBe('last day');        
     });
     
     it('should numerize direct numbers', function() {
+        expect(numerizer.numerize('one')).toBe('1');
+        expect(numerizer.numerize('seven')).toBe('7');            
         expect(numerizer.numerize('eleven')).toBe('11');
+        expect(numerizer.numerize('seven eleven')).toBe('7 11');
     });
     
     it('should numerize ordinals', function() {
         expect(numerizer.numerize('third')).toBe('3');
+        expect(numerizer.numerize('ninth')).toBe('9');        
     });    
 });
