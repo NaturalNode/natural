@@ -36,6 +36,13 @@ describe('bayes classifier', function() {
             expect(classifier.classify('i am short silver')).toBe('sell');
             expect(classifier.classify('i am long silver')).toBe('buy');        
         });
+    
+        it('should provide a method to retrieve both classname and probability', function() {
+            expect(classifier.getClassification('i am short silver').className).toBe('sell');
+            expect(classifier.getClassification('i am long silver').className).toBe('buy');        
+            expect(classifier.getClassification('i am short silver').value).toBe(0.25);
+            expect(classifier.getClassification('i am long silver').value).toBe(0.25);
+        });
             
         it('should classify arrays', function() {
             expect(classifier.classify(['short', 'silver'])).toBe('sell');

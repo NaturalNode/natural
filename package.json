@@ -1,7 +1,7 @@
 {
   "name": "natural",
   "description": "General natural language (stemming, classification, inflection, phonetics) facilities for node.",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "engines": {
     "node": ">=0.2.6"
   },
