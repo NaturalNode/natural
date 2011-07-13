@@ -95,6 +95,13 @@ describe('inflector', function() {
             expect(inflector.singularize('knives')).toBe('knife');
         });
 
+        it('should handle Y cases', function() {
+            expect(inflector.singularize('parties')).toBe('party');
+            expect(inflector.singularize('flies')).toBe('fly');
+            expect(inflector.singularize('victories')).toBe('victory');
+            expect(inflector.singularize('monstrosities')).toBe('monstrosity');
+        });
+
 	it('should handle MAN->MAN cases', function() {
 	    expect(inflector.singularize('men')).toBe('man');
 	    expect(inflector.singularize('women')).toBe('woman');
@@ -183,6 +190,13 @@ describe('inflector', function() {
         it('should handle IVES cases', function() {
             expect(inflector.pluralize('knife')).toBe('knives');
             expect(inflector.pluralize('life')).toBe('lives');            
+        });
+
+        it('should handle Y cases', function() {
+            expect(inflector.pluralize('party')).toBe('parties');
+            expect(inflector.pluralize('fly')).toBe('flies');
+            expect(inflector.pluralize('victory')).toBe('victories');
+            expect(inflector.pluralize('monstrosity')).toBe('monstrosities');
         });
 
 	it('should handle MAN->MEN cases', function() {
