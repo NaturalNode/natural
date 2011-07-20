@@ -123,7 +123,9 @@ A classifier can also be serialized and deserialized as such
         {classification: 'sell', text: ['sell', 'gold']}
     ]);
 
+    // serialize
     var raw = JSON.stringify(classifier);
+    // deserialize
     var restoredClassifier = natural.BayesClassifier.restore(raw);
     console.log(restoredClassifier.classify('i am short silver'));
     console.log(restoredClassifier.classify('i am long silver'));
