@@ -113,6 +113,21 @@ and to recall from the classifier.json saved above:
         console.log(classifier.classify('short SUNW'));
     });
 
+A classifier can also be serialized and deserialized as such
+
+    var classifier = new natural.BayesClassifier();
+
+    classifier.train([{classification: 'buy', text: ['long', 'qqqq']},
+        {classification: 'buy', text: "buy the q's"},
+        {classification: 'sell', text: "short gold"},
+        {classification: 'sell', text: ['sell', 'gold']}
+    ]);
+
+    var raw = JSON.stringify(classifier);
+    var restoredClassifier = natural.BayesClassifier.restore(raw);
+    console.log(restoredClassifier.classify('i am short silver'));
+    console.log(restoredClassifier.classify('i am long silver'));
+
 Phonetics
 ---------
 
