@@ -91,5 +91,35 @@ describe('bayes classifier', function() {
             });
             asyncSpecWait();
         });
+
+        it('should deserialize a classifier', function() {
+          var classifier = new natural.BayesClassifier();
+
+          classifier.train([{classification: 'buy', text: ['long', 'qqqq']},
+	    {classification: 'buy', text: "buy the q's"},
+ 	    {classification: 'sell', text: "short gold"},
+	    {classification: 'sell', text: ['sell', 'gold']}
+	  ]);
+         
+	  var raw = JSON.stringify(classifier);
+	  var restoredClassifier = natural.BayesClassifier.restore(raw);
+	  expect(restoredClassifier.classify('i am short silver')).toBe('sell');
+	  expect(restoredClassifier.classify('i am long silver')).toBe('buy');	  
+        });
+
+        it('should rebuild a classifier', function() {
+          var classifier = new natural.BayesClassifier();
+
+          classifier.train([{classification: 'buy', text: ['long', 'qqqq']},
+	    {classification: 'buy', text: "buy the q's"},
+ 	    {classification: 'sell', text: "short gold"},
+	    {classification: 'sell', text: ['sell', 'gold']}
+	  ]);
+         
+	  var raw = JSON.stringify(classifier);
+	  var restoredClassifier = natural.BayesClassifier.restore(JSON.parse(raw));
+	  expect(restoredClassifier.classify('i am short silver')).toBe('sell');
+	  expect(restoredClassifier.classify('i am long silver')).toBe('buy');	  
+        });
     });
 });
