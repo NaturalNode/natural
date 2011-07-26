@@ -1,29 +1,4 @@
 
-/**
- * Module dependencies.
- */
-
-var uubench = require('uubench')
-  , natural = require('./')
-  , metaphone = natural.Metaphone.process
-  , fs = require('fs');
-
-var suite = new uubench.Suite({
-  start: function(){
-    console.log();
-  },
-
-  result: function(name, stats){
-    var persec = 1000 / stats.elapsed
-      , ops = stats.iterations * persec;
-    console.log('  \033[90m%s : \033[36m%s \033[90mops/s\033[0m', name, ops | 0);
-  },
-  
-  done: function(){
-    console.log();
-  }
-});
-
 // single word
 
 suite.bench('metaphone() word', function(next){
@@ -50,5 +25,3 @@ suite.bench('metaphone() medium', function(next){
   }
   next();
 });
-
-suite.run();
