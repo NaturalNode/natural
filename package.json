@@ -5,6 +5,9 @@
   "engines": {
     "node": ">=0.2.6"
   },
+  "devDependencies": {
+    "uubench": "0.0.x"
+  },
   "author": "Chris Umbel <chris@chrisumbel.com>",
   "keywords": ["natural", "language", "porter", "lancaster", "stemmer", "bayes",
     "classifier", "phonetic", "metaphone", "inflector"],
