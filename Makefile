@@ -25,4 +25,4 @@ clean:
 	@rm -f **/*~ *~ **/\#* \#*
 
 test:
-	NODE_PATH=. jasmine-node spec/
+	@NODE_PATH=. jasmine-node spec/
