@@ -23,3 +23,6 @@ benchmark:
 
 clean:
 	@rm -f **/*~ *~ **/\#* \#*
+
+test:
+	NODE_PATH=. jasmine-node spec/
