@@ -3,3 +3,4 @@
 *.kpf
 classifier.json
 node_modules
+.*
