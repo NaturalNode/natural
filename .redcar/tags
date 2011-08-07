@@ -1,4 +1,4 @@
-1312741569
+1312740854
 BayesClassifier	/Users/kilnaar/src/natural/lib/natural/bayes_classifier.js	function BayesClassifier(stemmer)
 CountInflector	/Users/kilnaar/src/natural/lib/natural/count_inflector.js	function CountInflector()
 FormSet	/Users/kilnaar/src/natural/lib/natural/noun_inflector.js	function FormSet()
