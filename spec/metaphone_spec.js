@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var metaphone = require('lib/natural/metaphone');
+var metaphone = require('lib/natural/phonetics/metaphone');
 
 describe('metaphone', function() {    
     it('should drop duplicate adjacent letters, except C', function() {

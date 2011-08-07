@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var NounInflector = (require('lib/natural/noun_inflector')),
+var NounInflector = (require('lib/natural/inflectors/noun_inflector')),
     inflector = new NounInflector();
 
 describe('inflector', function() {
