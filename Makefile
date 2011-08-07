@@ -22,7 +22,8 @@ benchmark:
 	@node benchmarks
 
 clean:
-	@rm -f **/*~ *~ **/\#* \#*
+	@find ./ -name *~ | xargs rm -f
+	@find ./ -name \#* | xargs rm -f
 
 test:
 	@NODE_PATH=. jasmine-node spec/
