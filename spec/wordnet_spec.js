@@ -85,4 +85,31 @@ describe('wordnet', function() {
 
     asyncSpecWait();
   });
+
+  it('should handle a miss in the middle', function() {
+    fileSearcher.findLine('./spec/test_data/search_file', 'B_NON_EXISTANT', function(line) {
+      expect(line).toBe('MISS');
+      asyncSpecDone();
+    });
+
+    asyncSpecWait();
+  });
+
+  it('should handle a miss at the start', function() {
+    fileSearcher.findLine('./spec/test_data/search_file', '0_NON_EXISTANT', function(line) {
+      expect(line).toBe('MISS');
+      asyncSpecDone();
+    });
+
+    asyncSpecWait();
+  });
+
+  it('should handle a miss at the end', function() {
+    fileSearcher.findLine('./spec/test_data/search_file', 'Z_NON_EXISTANT', function(line) {
+      expect(line).toBe('MISS');
+      asyncSpecDone();
+    });
+
+    asyncSpecWait();
+  });
 });
