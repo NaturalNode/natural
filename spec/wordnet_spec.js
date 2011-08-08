@@ -24,8 +24,8 @@ var fileSearcher = require('lib/natural/wordnet/file_searcher');
 
 describe('wordnet', function() {
   it('should find a line at the start of a file', function() {
-    fileSearcher.findLine('./spec/test_data/search_file', 'A', function(line) {
-      expect(line).toBe('A 1');
+    fileSearcher.find('./spec/test_data/search_file', 'A', function(value) {
+      expect(value.line).toBe('A 1');
       asyncSpecDone();
     });
 
@@ -33,8 +33,8 @@ describe('wordnet', function() {
   });
 
   it('should find a line near the beginning in a file', function() {
-    fileSearcher.findLine('./spec/test_data/search_file', 'B', function(line) {
-      expect(line).toBe('B 2');
+    fileSearcher.find('./spec/test_data/search_file', 'B', function(value) {
+      expect(value.line).toBe('B 2');
       asyncSpecDone();
     });
 
@@ -42,8 +42,8 @@ describe('wordnet', function() {
   });
 
   it('should find a line somewhere in a file 1', function() {
-    fileSearcher.findLine('./spec/test_data/search_file', 'D', function(line) {
-      expect(line).toBe('D 4');
+    fileSearcher.find('./spec/test_data/search_file', 'D', function(value) {
+      expect(value.line).toBe('D 4');
       asyncSpecDone();
     });
 
@@ -51,8 +51,8 @@ describe('wordnet', function() {
   });
 
   it('should find a line near the end of a file 2', function() {
-    fileSearcher.findLine('./spec/test_data/search_file', 'I', function(line) {
-      expect(line).toBe('I 9');
+    fileSearcher.find('./spec/test_data/search_file', 'I', function(value) {
+      expect(value.line).toBe('I 9');
       asyncSpecDone();
     });
 
@@ -60,8 +60,8 @@ describe('wordnet', function() {
   });
 
   it('should find a line near the end of a file', function() {
-    fileSearcher.findLine('./spec/test_data/search_file', 'K', function(line) {
-      expect(line).toBe('K 11');
+    fileSearcher.find('./spec/test_data/search_file', 'K', function(value) {
+      expect(value.line).toBe('K 11');
       asyncSpecDone();
     });
 
@@ -69,8 +69,8 @@ describe('wordnet', function() {
   });
 
   it('should find a line near the end of a file', function() {
-    fileSearcher.findLine('./spec/test_data/search_file', 'I', function(line) {
-      expect(line).toBe('I 9');
+    fileSearcher.find('./spec/test_data/search_file', 'I', function(value) {
+      expect(value.line).toBe('I 9');
       asyncSpecDone();
     });
 
@@ -78,8 +78,8 @@ describe('wordnet', function() {
   });
 
   it('should find a line at the end of a file', function() {
-    fileSearcher.findLine('./spec/test_data/search_file', 'M', function(line) {
-      expect(line).toBe('M 13');
+    fileSearcher.find('./spec/test_data/search_file', 'M', function(value) {
+      expect(value.line).toBe('M 13');
       asyncSpecDone();
     });
 
@@ -87,8 +87,8 @@ describe('wordnet', function() {
   });
 
   it('should handle a miss in the middle', function() {
-    fileSearcher.findLine('./spec/test_data/search_file', 'B_NON_EXISTANT', function(line) {
-      expect(line).toBe('MISS');
+    fileSearcher.find('./spec/test_data/search_file', 'B_NON_EXISTANT', function(value) {
+      expect(value).toEqual({status: 'miss'});
       asyncSpecDone();
     });
 
@@ -96,8 +96,8 @@ describe('wordnet', function() {
   });
 
   it('should handle a miss at the start', function() {
-    fileSearcher.findLine('./spec/test_data/search_file', '0_NON_EXISTANT', function(line) {
-      expect(line).toBe('MISS');
+    fileSearcher.find('./spec/test_data/search_file', '0_NON_EXISTANT', function(value) {
+      expect(value).toEqual({status: 'miss'});
       asyncSpecDone();
     });
 
@@ -105,8 +105,8 @@ describe('wordnet', function() {
   });
 
   it('should handle a miss at the end', function() {
-    fileSearcher.findLine('./spec/test_data/search_file', 'Z_NON_EXISTANT', function(line) {
-      expect(line).toBe('MISS');
+    fileSearcher.find('./spec/test_data/search_file', 'Z_NON_EXISTANT', function(value) {
+      expect(value).toEqual({status: 'miss'});
       asyncSpecDone();
     });
 
