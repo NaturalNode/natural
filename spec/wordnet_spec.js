@@ -70,7 +70,6 @@ describe('wordnet', function() {
 
   it('should find a line near the end of a file', function() {
     fileSearcher.findLine('./spec/test_data/search_file', 'I', function(line) {
-      console.log('found '+ line);
       expect(line).toBe('I 9');
       asyncSpecDone();
     });
