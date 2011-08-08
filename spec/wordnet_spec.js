@@ -26,6 +26,7 @@ describe('wordnet', function() {
   describe('file_searcher', function() {
     it('should find a line at the start of a file', function() {
       fileSearcher.find('./spec/test_data/search_file', 'A', function(value) {
+        expect(value.key).toBe('A');
         expect(value.line).toBe('A 1');
         asyncSpecDone();
       });
@@ -35,6 +36,7 @@ describe('wordnet', function() {
     
     it('should find a line near the beginning in a file', function() {
       fileSearcher.find('./spec/test_data/search_file', 'B', function(value) {
+        expect(value.key).toBe('B');
         expect(value.line).toBe('B 2');
         asyncSpecDone();
       });
@@ -44,16 +46,8 @@ describe('wordnet', function() {
     
     it('should find a line somewhere in a file 1', function() {
       fileSearcher.find('./spec/test_data/search_file', 'D', function(value) {
+        expect(value.key).toBe('D');
         expect(value.line).toBe('D 4');
-        asyncSpecDone();
-      });
-      
-      asyncSpecWait();
-    });
-    
-    it('should find a line near the end of a file 2', function() {
-      fileSearcher.find('./spec/test_data/search_file', 'I', function(value) {
-        expect(value.line).toBe('I 9');
         asyncSpecDone();
       });
       
@@ -62,6 +56,7 @@ describe('wordnet', function() {
     
     it('should find a line near the end of a file', function() {
       fileSearcher.find('./spec/test_data/search_file', 'K', function(value) {
+        expect(value.key).toBe('K');
         expect(value.line).toBe('K 11');
         asyncSpecDone();
       });
@@ -71,6 +66,7 @@ describe('wordnet', function() {
     
     it('should find a line near the end of a file', function() {
       fileSearcher.find('./spec/test_data/search_file', 'I', function(value) {
+        expect(value.key).toBe('I');
         expect(value.line).toBe('I 9');
         asyncSpecDone();
       });
@@ -80,6 +76,7 @@ describe('wordnet', function() {
     
     it('should find a line at the end of a file', function() {
       fileSearcher.find('./spec/test_data/search_file', 'M', function(value) {
+        expect(value.key).toBe('M');
         expect(value.line).toBe('M 13');
         asyncSpecDone();
       });
