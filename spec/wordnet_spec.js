@@ -21,6 +21,7 @@ THE SOFTWARE.
 */
 
 var fileSearcher = require('lib/natural/wordnet/file_searcher');
+var IndexFile = require('lib/natural/wordnet/index_file');
 
 describe('wordnet', function() {
   describe('file_searcher', function() {
@@ -109,6 +110,13 @@ describe('wordnet', function() {
       });
       
       asyncSpecWait();
+    });
+  });
+  
+  describe('index_file', function() {
+    it('should build a valid url', function() {
+      var indexFile = new IndexFile('http://wordnet.naturalnode.com/', 'noun');
+      expect(indexFile.url).toBe('http://wordnet.naturalnode.com/index.noun');
     });
   });
 });
