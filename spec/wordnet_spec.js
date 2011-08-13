@@ -20,8 +20,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var fileSearcher = require('lib/natural/wordnet/file_searcher');
-var IndexFile = require('lib/natural/wordnet/index_file');
+var fileSearcher = require('lib/natural/wordnet/file_searcher'),
+  IndexFile = require('lib/natural/wordnet/index_file'),
+  DataFile = require('lib/natural/wordnet/data_file');
 
 describe('wordnet', function() {
   describe('file_searcher', function() {
@@ -121,6 +122,7 @@ describe('wordnet', function() {
     
     it('should miss a record', function() {
       var indexFile = new IndexFile('./spec/test_data/wordnet/', 'http://wordnet.naturalnode.com/', 'noun');
+      
       indexFile.lookup('aac', function(result) {
         expect(result).toBeNull();
         asyncSpecDone();
@@ -131,8 +133,24 @@ describe('wordnet', function() {
     
     it('should find a record', function() {
       var indexFile = new IndexFile('./spec/test_data/wordnet/', 'http://wordnet.naturalnode.com/', 'noun');
-      indexFile.lookup('oceanfront', function(result) {
-        expect(result.name).toBe('oceanfront');
+  
+      indexFile.lookup('pass', function(result) {
+        expect(result.lemma).toBe('pass');
+        expect(result.pos).toBe('n');
+        expect(result.ptr_symbol.length == 5);        
+        expect(result.synset_offset.length == 16);
+        asyncSpecDone();
+      });
+      
+      asyncSpecWait();
+    });
+  });
+  
+  describe('data_file', function() {
+    it('', function() {
+      var dataFile = new DataFile('./spec/test_data/wordnet/', 'http://wordnet.naturalnode.com/', 'noun');
+      
+      dataFile.get(1740, function(data) {
         asyncSpecDone();
       });
       
