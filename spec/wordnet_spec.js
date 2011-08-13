@@ -115,8 +115,18 @@ describe('wordnet', function() {
   
   describe('index_file', function() {
     it('should build a valid url', function() {
-      var indexFile = new IndexFile('http://wordnet.naturalnode.com/', 'noun');
+      var indexFile = new IndexFile('./spec/test_data/wordnet', 'http://wordnet.naturalnode.com/', 'noun');
       expect(indexFile.url).toBe('http://wordnet.naturalnode.com/index.noun');
     });
+    
+    it('should find a record', function() {
+      var indexFile = new IndexFile('./spec/test_data/wordnet/', 'http://wordnet.naturalnode.com/', 'noun');
+      indexFile.lookup('oceanfront', function(result) {
+        expect(result.name).toBe('oceanfront');
+        asyncSpecDone();
+      });
+      
+      asyncSpecWait();
+    });    
   });
 });

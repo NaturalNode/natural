@@ -24,6 +24,6 @@ benchmark:
 clean:
 	@find ./ -name *~ | xargs rm -f
 	@find ./ -name \#* | xargs rm -f
-
+	@rm ./spec/test_data/wordnet/*
 test:
 	@NODE_PATH=. jasmine-node spec/
