@@ -119,6 +119,16 @@ describe('wordnet', function() {
       expect(indexFile.url).toBe('http://wordnet.naturalnode.com/index.noun');
     });
     
+    it('should miss a record', function() {
+      var indexFile = new IndexFile('./spec/test_data/wordnet/', 'http://wordnet.naturalnode.com/', 'noun');
+      indexFile.lookup('aac', function(result) {
+        expect(result).toBeNull();
+        asyncSpecDone();
+      });
+      
+      asyncSpecWait();
+    });    
+    
     it('should find a record', function() {
       var indexFile = new IndexFile('./spec/test_data/wordnet/', 'http://wordnet.naturalnode.com/', 'noun');
       indexFile.lookup('oceanfront', function(result) {
