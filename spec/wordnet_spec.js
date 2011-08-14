@@ -22,7 +22,8 @@ THE SOFTWARE.
 
 var fileSearcher = require('lib/natural/wordnet/file_searcher'),
   IndexFile = require('lib/natural/wordnet/index_file'),
-  DataFile = require('lib/natural/wordnet/data_file');
+  DataFile = require('lib/natural/wordnet/data_file'),
+  Wordnet = require('lib/natural/wordnet/wordnet');
 
 describe('wordnet', function() {
   describe('file_searcher', function() {
@@ -147,7 +148,7 @@ describe('wordnet', function() {
   });
   
   describe('data_file', function() {
-    it('', function() {
+    it('should find a record', function() {
       var dataFile = new DataFile('./spec/test_data/wordnet/', 'http://wordnet.naturalnode.com/', 'noun');
       
       dataFile.get(1740, function(data) {
@@ -157,7 +158,18 @@ describe('wordnet', function() {
       });
       
       asyncSpecWait();
-    });    
+    });
   });
   
+  it('should look up a word', function() {
+    var wordnet = new Wordnet('./spec/test_data/wordnet/', 'http://wordnet.naturalnode.com/');
+    
+    wordnet.lookup('entity', function(records) {
+      expect(records.length).toBe(1);
+      expect(records[0].word).toBe('entity');      
+      asyncSpecDone();
+    });
+    
+    asyncSpecWait();
+  });
 });
