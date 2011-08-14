@@ -151,11 +151,13 @@ describe('wordnet', function() {
       var dataFile = new DataFile('./spec/test_data/wordnet/', 'http://wordnet.naturalnode.com/', 'noun');
       
       dataFile.get(1740, function(data) {
-        console.log(data);
+        expect(data.word).toBe('entity');
+        expect(data.ptrs.length).toBe(3);
         asyncSpecDone();
       });
       
       asyncSpecWait();
     });    
   });
+  
 });
