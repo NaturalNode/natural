@@ -137,8 +137,8 @@ describe('wordnet', function() {
       indexFile.lookup('pass', function(result) {
         expect(result.lemma).toBe('pass');
         expect(result.pos).toBe('n');
-        expect(result.ptr_symbol.length == 5);        
-        expect(result.synset_offset.length == 16);
+        expect(result.ptrSymbol.length == 5);        
+        expect(result.synsetOffset.length == 16);
         asyncSpecDone();
       });
       
@@ -151,6 +151,7 @@ describe('wordnet', function() {
       var dataFile = new DataFile('./spec/test_data/wordnet/', 'http://wordnet.naturalnode.com/', 'noun');
       
       dataFile.get(1740, function(data) {
+        console.log(data);
         asyncSpecDone();
       });
       
