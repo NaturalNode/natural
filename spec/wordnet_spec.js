@@ -20,8 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var fileSearcher = require('lib/natural/wordnet/file_searcher'),
-  IndexFile = require('lib/natural/wordnet/index_file'),
+var IndexFile = require('lib/natural/wordnet/index_file'),
   DataFile = require('lib/natural/wordnet/data_file'),
   Wordnet = require('lib/natural/wordnet/wordnet');
 
@@ -29,9 +28,9 @@ describe('wordnet', function() {
   describe('index_file', function() {
     it('should build a valid url', function() {
       var indexFile = new IndexFile('./spec/test_data/wordnet', 'http://wordnet.naturalnode.com/', 'noun');      
-      expect(indexFile.url).toBe('http://wordnet.naturalnode.com/index.noun');
+      expect(indexFile.url.href).toBe('http://wordnet.naturalnode.com/index.noun.gz');
     });
-    
+
     it('should miss a record', function() {
       var indexFile = new IndexFile('./spec/test_data/wordnet', 'http://wordnet.naturalnode.com/', 'noun');
       indexFile.lookup('aac', function(result) {
@@ -80,5 +79,5 @@ describe('wordnet', function() {
     });
     
     asyncSpecWait();
-  });
+  });  
 });

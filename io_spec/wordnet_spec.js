@@ -1,4 +1,4 @@
-/*  
+/*
 Copyright (c) 2011, Chris Umbel
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,3 +20,22 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+var Wordnet = require('lib/natural/wordnet/wordnet');
+jasmine.asyncSpecWait.timeout = 30 * 1000;
+
+describe('wordnet', function() {
+  it('should download files then', function() {
+    var wordnet = new Wordnet('./spec/test_data/wordnet/download/', 'http://wordnet.naturalnode.com/');
+    
+    wordnet.lookup('entity', function(records) {
+      expect(records.length).toBe(1);
+      expect(records[0].word).toBe('entity');
+      require('path').exists('./spec/test_data/wordnet/download/index.noun', function(exists) {
+        expect(exists).toBeTruthy();
+        asyncSpecDone();
+      });
+    });
+    
+    asyncSpecWait();
+  });  
+});  

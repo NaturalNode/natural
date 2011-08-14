@@ -21,9 +21,15 @@
 benchmark:
 	@node benchmarks
 
-clean:
+test_clean: 
+	@ls ./spec/test_data/wordnet/download/* | xargs rm -f
+
+clean: test_clean  
 	@find ./ -name *~ | xargs rm -f
 	@find ./ -name \#* | xargs rm -f
-	@rm ./spec/test_data/wordnet/*
+
 test:
 	@NODE_PATH=. jasmine-node spec/
+
+test_io: test_clean
+	@NODE_PATH=. jasmine-node io_spec/
