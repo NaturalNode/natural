@@ -230,6 +230,9 @@ the WordNet constructor is the local directory that will store the WordNet
 database files. If the database files are not present in the specified directories
 natural will download them for you.
 
+Keep in mind the WordNet integration is to be considered experimental at this point
+and not production ready.
+
     var wordnet = new natural.WordNet('.');
 
     wordnet.lookup('node', function(results) {
