@@ -33,3 +33,6 @@ test:
 
 test_io: test_clean
 	@NODE_PATH=. jasmine-node io_spec/
+
+test_io_unclean:
+	@NODE_PATH=. jasmine-node io_spec/

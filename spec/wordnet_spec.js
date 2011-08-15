@@ -80,4 +80,15 @@ describe('wordnet', function() {
     
     asyncSpecWait();
   });  
+  
+  it('should get a word', function() {
+    var wordnet = new Wordnet('./spec/test_data/wordnet/', 'http://wordnet.naturalnode.com/');
+    
+    wordnet.get(1740, 'n', function(record) {
+      expect(record.word).toBe('entity');      
+      asyncSpecDone();
+    });
+    
+    asyncSpecWait();
+  });   
 });
