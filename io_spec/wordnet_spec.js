@@ -20,13 +20,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var Wordnet = require('lib/natural/wordnet/wordnet');
+var WordNet = require('lib/natural/wordnet/wordnet');
 jasmine.asyncSpecWait.timeout = 30 * 1000;
 
-describe('wordnet', function() {
-  /*
+describe('wordnet', function() {  
   it('should download files', function() {
-    var wordnet = new Wordnet('./spec/test_data/wordnet/download/', 'http://wordnet.naturalnode.com/');
+    var wordnet = new WordNet('./spec/test_data/wordnet/download/', 'http://wordnet.naturalnode.com/');
     
     wordnet.lookup('entity', function(records) {
       expect(records.length).toBe(1);
@@ -42,7 +41,7 @@ describe('wordnet', function() {
   });
   
   it('should lookup synonyms', function() {
-    var wordnet = new Wordnet('./spec/test_data/wordnet/download/', 'http://wordnet.naturalnode.com/');
+    var wordnet = new WordNet('./spec/test_data/wordnet/download/', 'http://wordnet.naturalnode.com/');
     
     wordnet.lookupSynonyms('entity', function(records) {
       expect(records.length).toBe(3);
@@ -57,7 +56,7 @@ describe('wordnet', function() {
   });
 
   it('should lookup synonyms give a synset offset and a pos', function() {
-    var wordnet = new Wordnet('./spec/test_data/wordnet/download/', 'http://wordnet.naturalnode.com/');
+    var wordnet = new WordNet('./spec/test_data/wordnet/download/', 'http://wordnet.naturalnode.com/');
     
     wordnet.getSynonyms(1740, 'n', function(records) {
       expect(records.length).toBe(3);      
@@ -66,12 +65,11 @@ describe('wordnet', function() {
     
     asyncSpecWait();
   });
-  */
+
   it('should add records but once', function() {
-    var wordnet = new Wordnet('./spec/test_data/wordnet/download/', 'http://wordnet.naturalnode.com/');
+    var wordnet = new WordNet('./spec/test_data/wordnet/download/', 'http://wordnet.naturalnode.com/');
     
     wordnet.lookup('node', function(records) {
-      console.log(records);
       expect(records.length).toBe(8);
       expect(records[0].lemma).toBe('node');
       

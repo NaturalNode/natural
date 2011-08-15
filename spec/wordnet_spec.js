@@ -22,7 +22,7 @@ THE SOFTWARE.
 
 var IndexFile = require('lib/natural/wordnet/index_file'),
   DataFile = require('lib/natural/wordnet/data_file'),
-  Wordnet = require('lib/natural/wordnet/wordnet');
+  WordNet = require('lib/natural/wordnet/wordnet');
 
 describe('wordnet', function() {
   describe('index_file', function() {
@@ -70,7 +70,7 @@ describe('wordnet', function() {
   });
   
   it('should look up a word', function() {
-    var wordnet = new Wordnet('./spec/test_data/wordnet/', 'http://wordnet.naturalnode.com/');
+    var wordnet = new WordNet('./spec/test_data/wordnet/', 'http://wordnet.naturalnode.com/');
     
     wordnet.lookup('entity', function(records) {
       expect(records.length).toBe(1);
@@ -82,7 +82,7 @@ describe('wordnet', function() {
   });  
   
   it('should handle a miss', function() {
-    var wordnet = new Wordnet('./spec/test_data/wordnet/', 'http://wordnet.naturalnode.com/');
+    var wordnet = new WordNet('./spec/test_data/wordnet/', 'http://wordnet.naturalnode.com/');
     
     wordnet.lookup('argombiszki', function(records) {
       expect(records.length).toBe(0);
@@ -94,7 +94,7 @@ describe('wordnet', function() {
   
   
   it('should get a word', function() {
-    var wordnet = new Wordnet('./spec/test_data/wordnet/', 'http://wordnet.naturalnode.com/');
+    var wordnet = new WordNet('./spec/test_data/wordnet/', 'http://wordnet.naturalnode.com/');
     
     wordnet.get(1740, 'n', function(record) {
       expect(record.lemma).toBe('entity');      
