@@ -1,13 +1,15 @@
 {
   "name": "natural",
   "description": "General natural language (stemming, classification, inflection, phonetics) facilities for node.",
-  "version": "0.0.31",
+  "version": "0.0.32",
   "engines": {
     "node": ">=0.2.6"
   },
-  "devDependencies": {
-    "uubench": "0.0.x",
+  "dependencies": {
     "compress": "0.1.9"
+  },
+  "devDependencies": {
+    "uubench": "0.0.x"
   },
   "author": "Chris Umbel <chris@chrisumbel.com>",
   "keywords": ["natural", "language", "porter", "lancaster", "stemmer", "bayes",
