@@ -29,7 +29,7 @@ describe('wordnet', function() {
     
     wordnet.lookup('entity', function(records) {
       expect(records.length).toBe(1);
-      expect(records[0].word).toBe('entity');
+      expect(records[0].lemma).toBe('entity');
       
       require('path').exists('./spec/test_data/wordnet/download/index.noun', function(exists) {
         expect(exists).toBeTruthy();

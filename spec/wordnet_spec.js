@@ -60,7 +60,7 @@ describe('wordnet', function() {
       var dataFile = new DataFile('./spec/test_data/wordnet/', 'http://wordnet.naturalnode.com/', 'noun');
       
       dataFile.get(1740, function(data) {
-        expect(data.word).toBe('entity');
+        expect(data.lemma).toBe('entity');
         expect(data.ptrs.length).toBe(3);
         asyncSpecDone();
       });
@@ -74,7 +74,7 @@ describe('wordnet', function() {
     
     wordnet.lookup('entity', function(records) {
       expect(records.length).toBe(1);
-      expect(records[0].word).toBe('entity');      
+      expect(records[0].lemma).toBe('entity');      
       asyncSpecDone();
     });
     
@@ -85,7 +85,7 @@ describe('wordnet', function() {
     var wordnet = new Wordnet('./spec/test_data/wordnet/', 'http://wordnet.naturalnode.com/');
     
     wordnet.get(1740, 'n', function(record) {
-      expect(record.word).toBe('entity');      
+      expect(record.lemma).toBe('entity');      
       asyncSpecDone();
     });
     
