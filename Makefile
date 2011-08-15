@@ -18,11 +18,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+SHELL := /bin/bash
+
 benchmark:
 	@node benchmarks
 
 test_clean: 
-	@ls ./spec/test_data/wordnet/download/* | xargs rm -f
+	@ls -1 ./io_spec/test_data/wordnet/download/{index,data}* | xargs rm -f
 
 clean: test_clean  
 	@find ./ -name *~ | xargs rm -f
