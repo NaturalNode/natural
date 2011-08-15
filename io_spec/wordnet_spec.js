@@ -24,6 +24,7 @@ var Wordnet = require('lib/natural/wordnet/wordnet');
 jasmine.asyncSpecWait.timeout = 30 * 1000;
 
 describe('wordnet', function() {
+  /*
   it('should download files', function() {
     var wordnet = new Wordnet('./spec/test_data/wordnet/download/', 'http://wordnet.naturalnode.com/');
     
@@ -65,4 +66,18 @@ describe('wordnet', function() {
     
     asyncSpecWait();
   });
+  */
+  it('should add records but once', function() {
+    var wordnet = new Wordnet('./spec/test_data/wordnet/download/', 'http://wordnet.naturalnode.com/');
+    
+    wordnet.lookup('node', function(records) {
+      console.log(records);
+      expect(records.length).toBe(8);
+      expect(records[0].lemma).toBe('node');
+      
+      asyncSpecDone();        
+    });
+    
+    asyncSpecWait();
+  });  
 });  

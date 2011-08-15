@@ -81,6 +81,18 @@ describe('wordnet', function() {
     asyncSpecWait();
   });  
   
+  it('should handle a miss', function() {
+    var wordnet = new Wordnet('./spec/test_data/wordnet/', 'http://wordnet.naturalnode.com/');
+    
+    wordnet.lookup('argombiszki', function(records) {
+      expect(records.length).toBe(0);
+      asyncSpecDone();
+    });
+    
+    asyncSpecWait();
+  });  
+  
+  
   it('should get a word', function() {
     var wordnet = new Wordnet('./spec/test_data/wordnet/', 'http://wordnet.naturalnode.com/');
     
