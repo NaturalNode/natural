@@ -1,0 +1,141 @@
+  1 This software and database is being provided to you, the LICENSEE, by  
+  2 Princeton University under the following license.  By obtaining, using  
+  3 and/or copying this software and database, you agree that you have  
+  4 read, understood, and will comply with these terms and conditions.:  
+  5   
+  6 Permission to use, copy, modify and distribute this software and  
+  7 database and its documentation for any purpose and without fee or  
+  8 royalty is hereby granted, provided that you agree to comply with  
+  9 the following copyright notice and statements, including the disclaimer,  
+  10 and that the same appear on ALL copies of the software, database and  
+  11 documentation, including modifications that you make for internal  
+  12 use or for distribution.  
+  13   
+  14 WordNet 3.0 Copyright 2006 by Princeton University.  All rights reserved.  
+  15   
+  16 THIS SOFTWARE AND DATABASE IS PROVIDED "AS IS" AND PRINCETON  
+  17 UNIVERSITY MAKES NO REPRESENTATIONS OR WARRANTIES, EXPRESS OR  
+  18 IMPLIED.  BY WAY OF EXAMPLE, BUT NOT LIMITATION, PRINCETON  
+  19 UNIVERSITY MAKES NO REPRESENTATIONS OR WARRANTIES OF MERCHANT-  
+  20 ABILITY OR FITNESS FOR ANY PARTICULAR PURPOSE OR THAT THE USE  
+  21 OF THE LICENSED SOFTWARE, DATABASE OR DOCUMENTATION WILL NOT  
+  22 INFRINGE ANY THIRD PARTY PATENTS, COPYRIGHTS, TRADEMARKS OR  
+  23 OTHER RIGHTS.  
+  24   
+  25 The name of Princeton University or Princeton may not be used in  
+  26 advertising or publicity pertaining to distribution of the software  
+  27 and/or database.  Title to copyright in this software, database and  
+  28 any associated documentation shall at all times remain with  
+abandoned_person n 1 2 @ ~ 1 0 09753930  
+abandoned_ship n 1 1 @ 1 0 02666501  
+abandonment n 3 3 @ ~ + 3 2 00204439 00055315 00091013  
+abarticulation n 1 1 @ 1 0 14294271  
+abasement n 2 3 @ ~ + 2 1 14440623 00273449  
+abashment n 1 2 @ + 1 0 07508092  
+entity n 1 1 ~ 1 1 00001740
+mountaineering n 1 4 @ ~ + - 1 0 00325785  
+mountainside n 1 2 @ #p 1 1 09361517  
+mountebank n 1 2 @ ~ 1 0 10334782  
+mounter n 2 2 @ + 2 0 10335123 10334957  
+nantucket n 1 1 @ 1 0 09098592  
+nanus n 1 2 @ ~ 1 0 10040344  
+naomi n 1 1 @ 1 0 11199943  
+nap n 5 3 @ ~ + 5 0 15273626 04947087 03936045 00858377 00493742  
+oceanfront n 1 1 @ 1 0 09376786  
+oceania n 1 3 @ #p %p 1 0 08835875  
+oceanic n 1 2 @ ~ 1 0 06937985  
+oceanic_abyss n 1 2 @ ~ 1 0 09461315  
+oceanic_bird n 1 2 @ ~ 1 0 02057731  
+oceanic_bonito n 1 2 @ #m 1 0 02629230  
+oceanic_whitetip_shark n 1 2 @ #m 1 0 01490112  
+oceanica n 1 3 @ #p %p 1 0 08835875  
+oceanid n 1 2 @ ; 1 0 09550899  
+oceanites n 1 3 @ #m %m 1 0 02061425  
+oceanites_oceanicus n 1 2 @ #m 1 0 02061560  
+oceanographer n 1 3 @ ~ + 1 0 10370122  
+pasiphae n 1 2 @ ; 1 0 09568643  
+paso_doble n 2 1 @ 2 1 00536872 07056265  
+paspalum n 1 2 @ #m 1 0 12128071  
+paspalum_dilatatum n 1 2 @ #m 1 0 12128071  
+paspalum_distichum n 1 2 @ #m 1 0 12128490  
+paspalum_notatum n 1 2 @ #m 1 0 12128306  
+pasque_flower n 1 3 @ ~ #m 1 0 11737534  
+pasqueflower n 1 3 @ ~ #m 1 0 11737534  
+pasquinade n 1 1 @ 1 0 06780309  
+pass n 16 5 @ ~ #p + ; 16 7 00127286 15139552 00560529 09386842 06691083 06690408 00304592 13936939 07418822 07341860 07176499 06690226 06519369 00787061 00105820 00065575  
+pass-through n 1 1 @ 1 0 03897130  
+technical_analyst n 1 1 @ 1 0 09910840  
+technical_foul n 1 2 @ ; 1 0 00771356  
+technical_knockout n 1 1 @ 1 0 00134246  
+technical_school n 1 2 @ ~ 1 1 08285246  
+technical_sergeant n 1 1 @ 1 0 10696101  
+technicality n 1 2 @ + 1 0 05820462  
+technician n 2 3 @ ~ + 2 1 10696251 10696508  
+technicolor n 1 1 @ 1 0 05667086  
+technique n 2 3 @ ~ + 2 2 05665146 05643190  
+techno n 1 1 @ 1 0 07058064  
+technobabble n 1 1 @ 1 0 07088319  
+technocracy n 1 1 @ 1 0 08363106  
+technocrat n 2 2 @ #m 2 0 10696755 10696672  
+technological_revolution n 1 1 @ 1 1 15260277  
+technologist n 1 3 @ ~ + 1 0 09615807  
+technology n 2 4 @ ~ + - 2 2 00949619 06125041  
+technology_administration n 1 3 @ #p %p 1 0 08130712  
+technophile n 1 2 ! @ 1 0 10696888  
+technophilia n 1 1 @ 1 0 07555775  
+technophobe n 1 2 ! @ 1 0 10697013  
+whistle-blower n 1 1 @ 1 0 10777400  
+whistle-stop_tour n 1 2 @ #p 1 0 00749232  
+whistle_blower n 1 1 @ 1 0 10777400  
+whistle_buoy n 1 1 @ 1 0 07266665  
+whistle_stop n 1 1 @ 1 0 04579795  
+whistleblower n 1 1 @ 1 0 10777400  
+zip_fastener n 1 2 @ #p 1 0 04238321  
+zip_gun n 1 1 @ 1 0 04615149  
+ziphiidae n 1 3 @ #m %m 1 0 02067941  
+zipper n 1 3 @ #p + 1 0 04238321  
+zippo n 1 2 @ ~ 1 0 13740168  
+zirbanit n 1 2 @ ; 1 0 09521648  
+zircon n 1 3 @ ~ %s 1 0 15109127  
+zirconia n 1 1 @ 1 0 15109391  
+zirconium n 1 2 @ #s 1 0 14662281  
+zirconium_dioxide n 1 1 @ 1 0 15109391  
+zirconium_oxide n 1 1 @ 1 0 15109391  
+zirconium_silicate n 1 3 @ ~ %s 1 0 15109127  
+zit n 1 2 @ ~ 1 0 14334306  
+zither n 1 2 @ ~ 1 0 04615226  
+zithern n 1 2 @ ~ 1 0 04615226  
+zithromax n 1 1 @ 1 0 02765656  
+ziti n 1 1 @ 1 0 07700255  
+zizania n 1 3 @ #m %m 1 0 12145802  
+zizania_aquatica n 1 3 @ #m %p 1 0 12145919  
+ziziphus n 1 3 @ #m %m 1 0 13143097  
+ziziphus_jujuba n 1 3 @ #m %p 1 0 13143285  
+ziziphus_lotus n 1 2 @ #m 1 0 13143483  
+zizz n 2 2 @ ; 2 0 07479799 00858742  
+zloty n 1 2 @ %p 1 1 13710777  
+zn n 1 2 @ ~ 1 0 14661977  
+zoanthropy n 1 1 @ 1 0 14379017  
+zoarces n 1 3 @ #m %m 1 0 02617402  
+zoarces_viviparus n 1 2 @ #m 1 0 02617537  
+zoarcidae n 1 3 @ #m %m 1 0 02617029  
+zocor n 1 2 @ ; 1 0 04221994  
+zodiac n 2 5 @ #p %p + ; 2 0 08685188 04615456  
+zodiacal_light n 1 1 @ 1 1 11527556  
+zoisia n 1 3 @ #m %m 1 0 12146100  
+zola n 1 1 @ 1 0 11407591  
+zollinger-ellison_syndrome n 1 1 @ 1 0 14471054  
+zoloft n 1 2 @ ; 1 0 04174853  
+zomba n 1 2 @ #p 1 0 08963244  
+zombi n 5 3 @ %s ; 5 0 10805932 10805783 10805638 09825519 07919165  
+zombi_spirit n 1 2 @ ; 1 0 10805932  
+zoning n 1 2 @ #m 1 1 00928751  
+zoning_board n 1 1 @ 1 0 08413529  
+zoning_commission n 1 1 @ 1 0 08413681  
+zonotrichia n 1 3 @ #m %m 1 0 01535310  
+zonotrichia_albicollis n 1 2 @ #m 1 0 01535469  
+zonotrichia_leucophrys n 1 2 @ #m 1 0 01535690  
+zonula n 1 1 @ 1 0 05611221  
+zonule n 1 1 @ 1 0 05611221  
+zoo n 1 1 @ 1 1 03745146  
+

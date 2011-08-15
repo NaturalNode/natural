@@ -4,3 +4,4 @@
 classifier.json
 node_modules
 .*
+spec/test_data/wordnet/download/*
