@@ -60,11 +60,30 @@ describe('wordnet', function() {
     
     wordnet.getSynonyms(1740, 'n', function(records) {
       expect(records.length).toBe(3);      
+      expect(records[0].synsetOffset).toBe(4424418);
+      expect(records[1].synsetOffset).toBe(2137);
+      expect(records[2].synsetOffset).toBe(1930);
       asyncSpecDone();
     });
     
     asyncSpecWait();
   });
+  
+  it('should lookup synonyms via a provided synset object', function() {
+    var wordnet = new WordNet('./io_spec/test_data/wordnet/download/', 'http://wordnet.naturalnode.com/');
+    
+    wordnet.lookup('entity', function(results) {
+      wordnet.getSynonyms(results[0], function(records) {
+        expect(records.length).toBe(3);
+        expect(records[0].synsetOffset).toBe(4424418);
+        expect(records[1].synsetOffset).toBe(2137);
+        expect(records[2].synsetOffset).toBe(1930);
+        asyncSpecDone();
+      });
+    });
+    
+    asyncSpecWait();
+  });  
 
   it('should add records but once', function() {
     var wordnet = new WordNet('./io_spec/test_data/wordnet/download/', 'http://wordnet.naturalnode.com/');
@@ -78,4 +97,4 @@ describe('wordnet', function() {
     
     asyncSpecWait();
   });  
-});  
+});
