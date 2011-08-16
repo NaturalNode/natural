@@ -233,15 +233,30 @@ natural will download them for you.
 Keep in mind the WordNet integration is to be considered experimental at this point
 and not production ready.
 
+Here's an exmple of looking up definitions for the word, "node".
+
     var wordnet = new natural.WordNet('.');
 
     wordnet.lookup('node', function(results) {
         results.forEach(function(result) {
             console.log('------------------------------------');
+            console.log(result.synsetOffset);
+            console.log(result.pos);
             console.log(result.lemma);
             console.log(result.pos);
             console.log(result.gloss);
         });
+    });
+    
+Given a synset offset and part of speech a definition can be looked up directly.
+
+    var wordnet = new natural.WordNet('.');
+
+    wordnet.get(4424418, 'n', function(result) {
+        console.log('------------------------------------');
+        console.log(result.lemma);
+        console.log(result.pos);
+        console.log(result.gloss);
     });
 
 You can also lookup synonyms for all meanings of a word.
@@ -251,6 +266,8 @@ You can also lookup synonyms for all meanings of a word.
     wordnet.lookupSynonyms('device', function(results) {
         results.forEach(function(result) {
             console.log('------------------------------------');
+            console.log(result.synsetOffset);
+            console.log(result.pos);            
             console.log(result.lemma);
             console.log(result.pos);
             console.log(result.gloss);
@@ -265,6 +282,8 @@ It's also possible to lookup synonyms for a single meaning.
         wordnet.getSynonyms(results[0], function(results) {
             results.forEach(function(result) {
                 console.log('------------------------------------');
+                console.log(result.synsetOffset);
+                console.log(result.pos);                
                 console.log(result.lemma);
                 console.log(result.pos);
                 console.log(result.gloss);
@@ -276,14 +295,12 @@ Note that getSynonyms supports query by offset and part of speech.
 
     var wordnet = new natural.WordNet('.');
 
-    wordnet.lookup('entity', function(results) {
-        wordnet.getSynonyms(results[0].synsetOffset, results[0].pos, function(results) {
-            results.forEach(function(result) {
-                console.log('------------------------------------');
-                console.log(result.lemma);
-                console.log(result.pos);
-                console.log(result.gloss);
-            });
+    wordnet.getSynonyms(4424418, 'n', function(results) {
+        results.forEach(function(result) {
+            console.log('------------------------------------');
+            console.log(result.lemma);
+            console.log(result.pos);
+            console.log(result.gloss);
         });
     });
 
