@@ -262,6 +262,21 @@ It's also possible to lookup synonyms for a single meaning.
     var wordnet = new natural.WordNet('.');
 
     wordnet.lookup('entity', function(results) {
+        wordnet.getSynonyms(results[0], function(results) {
+            results.forEach(function(result) {
+                console.log('------------------------------------');
+                console.log(result.lemma);
+                console.log(result.pos);
+                console.log(result.gloss);
+            });
+        });
+    });
+
+Note that getSynonyms supports query by offset and part of speech.
+
+    var wordnet = new natural.WordNet('.');
+
+    wordnet.lookup('entity', function(results) {
         wordnet.getSynonyms(results[0].synsetOffset, results[0].pos, function(results) {
             results.forEach(function(result) {
                 console.log('------------------------------------');
@@ -271,6 +286,7 @@ It's also possible to lookup synonyms for a single meaning.
             });
         });
     });
+
 
 Princeton University "About WordNet." WordNet. Princeton University. 2010. <http://wordnet.princeton.edu>
 
