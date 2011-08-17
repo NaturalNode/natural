@@ -30,6 +30,15 @@ describe('lancaster_stemmer', function() {
         expect('MARKs'.stem()).toBe('mark');        
     });
 
+    it('should stop running rules where appropriate', function() {
+	stemmer.attach();
+
+        expect('living'.stem()).toBe('liv');
+        expect('thing'.stem()).toBe('thing');
+        expect('ear'.stem()).toBe('ear');
+        expect('string'.stem()).toBe('string');
+    });
+
     it('should only pop the size specified by the rule', function() {
 	stemmer.attach();
 
