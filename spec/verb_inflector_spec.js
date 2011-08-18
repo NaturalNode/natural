@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var VerbInflector = (require('lib/natural/inflectors/verb_inflector')),
+var VerbInflector = require('lib/natural/inflectors/verb_inflector'),
     inflector = new VerbInflector ();
 
 describe('inflector', function() {
