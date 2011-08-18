@@ -25,9 +25,15 @@ var VerbInflector = (require('lib/natural/inflectors/verb_inflector')),
 
 describe('inflector', function() {
     describe('singularization', function() {
-        it('should singularize regular forms', function() {
+        it('should singularize regular ES forms', function() {
             expect(inflector.singularize('catch')).toBe('catches');
             expect(inflector.singularize('do')).toBe('does');
+            expect(inflector.singularize('go')).toBe('goes');
+        });
+
+        it('should singularize regular S forms', function() {
+            expect(inflector.singularize('claim')).toBe('claims');
+            expect(inflector.singularize('drink')).toBe('drinks');            
         });
         
         it('should singularize irregular forms', function() {
@@ -37,9 +43,15 @@ describe('inflector', function() {
     });
     
     describe('pluralization', function() {
-        it('should pluralize regular forms', function() {
+        it('should pluralize regular ES forms', function() {
             expect(inflector.pluralize('catches')).toBe('catch');
-            expect(inflector.pluralize('does')).toBe('do');            
+            expect(inflector.pluralize('does')).toBe('do');
+            expect(inflector.pluralize('goes')).toBe('go');            
+        });
+
+        it('should pluralize regular S forms', function() {
+            expect(inflector.pluralize('drinks')).toBe('drink');
+            expect(inflector.pluralize('claims')).toBe('claim');            
         });
         
         it('should pluralize irregular forms', function() {
