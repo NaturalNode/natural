@@ -33,13 +33,18 @@ describe('inflector', function() {
 
         it('should singularize regular S forms', function() {
             expect(inflector.singularize('claim')).toBe('claims');
-            expect(inflector.singularize('drink')).toBe('drinks');            
+            expect(inflector.singularize('drink')).toBe('drinks');
+            expect(inflector.singularize('become')).toBe('becomes');
         });
         
         it('should singularize irregular forms', function() {
             expect(inflector.singularize('are')).toBe('is');
             expect(inflector.singularize('were')).toBe('was');            
-        });        
+        });
+        
+        it('should handle ambiguous forms', function() {
+            expect(inflector.singularize('will')).toBe('will');
+        });                
     });
     
     describe('pluralization', function() {
@@ -47,6 +52,10 @@ describe('inflector', function() {
             expect(inflector.pluralize('catches')).toBe('catch');
             expect(inflector.pluralize('does')).toBe('do');
             expect(inflector.pluralize('goes')).toBe('go');            
+        });
+
+        it('should pluralize regular S forms that done drop e', function() {
+            expect(inflector.pluralize('becomes')).toBe('become');
         });
 
         it('should pluralize regular S forms', function() {
@@ -57,6 +66,10 @@ describe('inflector', function() {
         it('should pluralize irregular forms', function() {
             expect(inflector.pluralize('was')).toBe('were');                        
             expect(inflector.pluralize('is')).toBe('are');
+        });
+        
+        it('should handle ambiguous forms', function() {
+            expect(inflector.pluralize('will')).toBe('will');                        
         });        
     });
 });
