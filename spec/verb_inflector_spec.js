@@ -31,7 +31,7 @@ describe('inflector', function() {
             expect(inflector.singularize('go')).toBe('goes');
         });
 
-        it('should ignore KED forms', function() {
+        it('should ignore ED forms', function() {
             expect(inflector.singularize('choked')).toBe('choked');
             expect(inflector.singularize('poked')).toBe('poked');            
         });
@@ -41,10 +41,10 @@ describe('inflector', function() {
             expect(inflector.singularize('drink')).toBe('drinks');
             expect(inflector.singularize('become')).toBe('becomes');
         });
-        
+
         it('should singularize irregular forms', function() {
             expect(inflector.singularize('are')).toBe('is');
-            expect(inflector.singularize('were')).toBe('was');            
+            expect(inflector.singularize('were')).toBe('was');
         });
         
         it('should handle ambiguous forms', function() {
@@ -59,7 +59,7 @@ describe('inflector', function() {
             expect(inflector.pluralize('goes')).toBe('go');            
         });
         
-        it('should ignore KED forms', function() {
+        it('should ignore ED forms', function() {
             expect(inflector.pluralize('choked')).toBe('choked');
             expect(inflector.pluralize('poked')).toBe('poked');            
         });        
