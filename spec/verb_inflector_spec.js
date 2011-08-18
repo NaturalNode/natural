@@ -20,20 +20,21 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-
 var VerbInflector = (require('lib/natural/inflectors/verb_inflector')),
     inflector = new VerbInflector ();
 
 describe('inflector', function() {
     describe('singularization', function() {
         it('should singularize regular forms', function() {
-            expect(inflector.singularize('catches')).toBe('catch');        
+            expect(inflector.singularize('catch')).toBe('catches');
+            expect(inflector.singularize('do')).toBe('does');            
         });
     });
     
     describe('pluralization', function() {
         it('should pluralize regular forms', function() {
-            expect(inflector.pluralize('catch')).toBe('catches');        
+            expect(inflector.pluralize('patches')).toBe('patch');
+            expect(inflector.pluralize('does')).toBe('do');            
         });
-    });    
+    });
 });
