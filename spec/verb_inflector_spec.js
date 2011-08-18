@@ -27,14 +27,17 @@ describe('inflector', function() {
     describe('singularization', function() {
         it('should singularize regular forms', function() {
             expect(inflector.singularize('catch')).toBe('catches');
-            expect(inflector.singularize('do')).toBe('does');            
+            expect(inflector.singularize('do')).toBe('does');
+            expect(inflector.singularize('are')).toBe('is');
+            expect(inflector.singularize('were')).toBe('was');            
         });
     });
     
     describe('pluralization', function() {
         it('should pluralize regular forms', function() {
             expect(inflector.pluralize('patches')).toBe('patch');
-            expect(inflector.pluralize('does')).toBe('do');            
+            expect(inflector.pluralize('does')).toBe('do');
+            expect(inflector.pluralize('was')).toBe('were');                        
         });
     });
 });
