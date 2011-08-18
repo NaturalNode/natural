@@ -28,16 +28,23 @@ describe('inflector', function() {
         it('should singularize regular forms', function() {
             expect(inflector.singularize('catch')).toBe('catches');
             expect(inflector.singularize('do')).toBe('does');
+        });
+        
+        it('should singularize irregular forms', function() {
             expect(inflector.singularize('are')).toBe('is');
             expect(inflector.singularize('were')).toBe('was');            
-        });
+        });        
     });
     
     describe('pluralization', function() {
         it('should pluralize regular forms', function() {
-            expect(inflector.pluralize('patches')).toBe('patch');
-            expect(inflector.pluralize('does')).toBe('do');
-            expect(inflector.pluralize('was')).toBe('were');                        
+            expect(inflector.pluralize('catches')).toBe('catch');
+            expect(inflector.pluralize('does')).toBe('do');            
         });
+        
+        it('should pluralize irregular forms', function() {
+            expect(inflector.pluralize('was')).toBe('were');                        
+            expect(inflector.pluralize('is')).toBe('are');
+        });        
     });
 });
