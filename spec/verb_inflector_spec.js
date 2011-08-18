@@ -31,6 +31,11 @@ describe('inflector', function() {
             expect(inflector.singularize('go')).toBe('goes');
         });
 
+        it('should ignore KED forms', function() {
+            expect(inflector.singularize('choked')).toBe('choked');
+            expect(inflector.singularize('poked')).toBe('poked');            
+        });
+
         it('should singularize regular S forms', function() {
             expect(inflector.singularize('claim')).toBe('claims');
             expect(inflector.singularize('drink')).toBe('drinks');
@@ -53,6 +58,11 @@ describe('inflector', function() {
             expect(inflector.pluralize('does')).toBe('do');
             expect(inflector.pluralize('goes')).toBe('go');            
         });
+        
+        it('should ignore KED forms', function() {
+            expect(inflector.pluralize('choked')).toBe('choked');
+            expect(inflector.pluralize('poked')).toBe('poked');            
+        });        
 
         it('should pluralize regular S forms that done drop e', function() {
             expect(inflector.pluralize('becomes')).toBe('become');
