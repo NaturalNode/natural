@@ -109,7 +109,7 @@ describe('present verb inflector', function() {
     
     describe('should pluralize and singularize string from patch', function() {
         inflector.attach();
-        expect('becomes'.pluralizeVerb()).toBe('become');
-        expect('become'.singularizeVerb()).toBe('becomes');
-    });    
+        expect('becomes'.pluralizePresentVerb()).toBe('become');
+        expect('become'.singularizePresentVerb()).toBe('becomes');
+    });
 });
