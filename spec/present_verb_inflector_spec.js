@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var VerbInflector = require('lib/natural/inflectors/verb_inflector'),
+var VerbInflector = require('lib/natural/inflectors/present_verb_inflector'),
     inflector = new VerbInflector ();
 
 describe('inflector', function() {
@@ -29,11 +29,6 @@ describe('inflector', function() {
             expect(inflector.singularize('catch')).toBe('catches');
             expect(inflector.singularize('do')).toBe('does');
             expect(inflector.singularize('go')).toBe('goes');
-        });
-
-        it('should ignore ED forms', function() {
-            expect(inflector.singularize('choked')).toBe('choked');
-            expect(inflector.singularize('poked')).toBe('poked');            
         });
 
         it('should handle [CS]HES forms', function () {
@@ -81,11 +76,6 @@ describe('inflector', function() {
             expect(inflector.pluralize('aches')).toBe('ach');            
         });        
         
-        it('should ignore ED forms', function() {
-            expect(inflector.pluralize('choked')).toBe('choked');
-            expect(inflector.pluralize('poked')).toBe('poked');            
-        });
-
         it('should handle XES forms', function() {
             expect(inflector.pluralize('annexes')).toBe('annex');
         });
