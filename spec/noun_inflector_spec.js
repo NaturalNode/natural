@@ -23,7 +23,7 @@ THE SOFTWARE.
 var NounInflector = require('lib/natural/inflectors/noun_inflector'),
     inflector = new NounInflector();
 
-describe('inflector', function() {
+describe('noun inflector', function() {
     describe('singularization', function() {
         it('should drop an S by default', function() {
             expect(inflector.singularize('rrrs')).toBe('rrr');

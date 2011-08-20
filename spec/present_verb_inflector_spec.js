@@ -23,7 +23,7 @@ THE SOFTWARE.
 var VerbInflector = require('lib/natural/inflectors/present_verb_inflector'),
     inflector = new VerbInflector ();
 
-describe('inflector', function() {
+describe('present verb inflector', function() {
     describe('singularization', function() {
         it('should singularize regular ES forms', function() {
             expect(inflector.singularize('catch')).toBe('catches');
@@ -106,4 +106,10 @@ describe('inflector', function() {
             expect(inflector.pluralize('will')).toBe('will');                        
         });        
     });
+    
+    describe('should pluralize and singularize string from patch', function() {
+        inflector.attach();
+        expect('becomes'.pluralizeVerb()).toBe('become');
+        expect('become'.singularizeVerb()).toBe('becomes');
+    });    
 });
