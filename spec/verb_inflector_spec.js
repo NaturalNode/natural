@@ -36,6 +36,19 @@ describe('inflector', function() {
             expect(inflector.singularize('poked')).toBe('poked');            
         });
 
+        it('should handle [CS]HES forms', function () {
+            expect(inflector.singularize('cash')).toBe('cashes');
+            expect(inflector.singularize('ach')).toBe('aches');
+        });
+
+        it('should ignore XES forms', function() {
+            expect(inflector.singularize('annex')).toBe('annexes');
+        });
+
+        it('should handle SSES forms', function() {
+            expect(inflector.singularize('access')).toBe('accesses');
+        });
+
         it('should ignore ZZES forms', function() {
             expect(inflector.singularize('buzz')).toBe('buzzes');
         });
@@ -60,15 +73,28 @@ describe('inflector', function() {
         it('should pluralize regular ES forms', function() {
             expect(inflector.pluralize('catches')).toBe('catch');
             expect(inflector.pluralize('does')).toBe('do');
-            expect(inflector.pluralize('goes')).toBe('go');            
+            expect(inflector.pluralize('goes')).toBe('go');
         });
+        
+        it('should handle [CS]HES forms', function () {
+            expect(inflector.pluralize('cashes')).toBe('cash');
+            expect(inflector.pluralize('aches')).toBe('ach');            
+        });        
         
         it('should ignore ED forms', function() {
             expect(inflector.pluralize('choked')).toBe('choked');
             expect(inflector.pluralize('poked')).toBe('poked');            
-        });        
+        });
 
-        it('should ignore ZZES forms', function() {
+        it('should handle XES forms', function() {
+            expect(inflector.pluralize('annexes')).toBe('annex');
+        });
+
+        it('should handle SSES forms', function() {
+            expect(inflector.pluralize('accesses')).toBe('access');
+        });
+
+        it('should handle ZZES forms', function() {
             expect(inflector.pluralize('buzzes')).toBe('buzz');
         });
 
