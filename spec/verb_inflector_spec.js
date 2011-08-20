@@ -36,6 +36,10 @@ describe('inflector', function() {
             expect(inflector.singularize('poked')).toBe('poked');            
         });
 
+        it('should ignore ZZES forms', function() {
+            expect(inflector.singularize('buzz')).toBe('buzzes');
+        });
+
         it('should singularize regular S forms', function() {
             expect(inflector.singularize('claim')).toBe('claims');
             expect(inflector.singularize('drink')).toBe('drinks');
@@ -63,6 +67,10 @@ describe('inflector', function() {
             expect(inflector.pluralize('choked')).toBe('choked');
             expect(inflector.pluralize('poked')).toBe('poked');            
         });        
+
+        it('should ignore ZZES forms', function() {
+            expect(inflector.pluralize('buzzes')).toBe('buzz');
+        });
 
         it('should pluralize regular S forms that done drop e', function() {
             expect(inflector.pluralize('becomes')).toBe('become');
