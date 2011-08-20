@@ -2,10 +2,10 @@ natural
 =======
 
 "Natural" is a general natural language facility for nodejs. Stemming,
-classification, phonetics and some inflection are currently supported.
+classification, phonetics, WordNet, and some inflection are currently supported.
 
-It's still in the VERY (and I mean VERY) early stages, and I'm VERY (yes, again,
-VERY) interested in bug reports, contributions and the like.
+It's still in the early stages, and am very interested in bug reports,
+contributions and the like.
 
 At the moment most algorithms are English-specific but long-term some diversity
 is in order.
@@ -188,10 +188,12 @@ the same String patches apply with soundex
 Inflectors
 ----------
 
-Nouns can be pluralized/singularized and numbers counted with inflectors
+### Nouns
+
+Nouns can be pluralized/singularized with a NounInflector 
 
     var natural = require('natural'),
-    nounInflector = new natural.NounInflector;
+    nounInflector = new natural.NounInflector();
     
 to pluralize a word (outputs "radii")
 
@@ -201,17 +203,19 @@ to singularize a word (outputs "beer")
 
     console.log(nounInflector.singularize('beers'));
 
-like many of the other features String can be patched to perform the operations
-directly. the "Noun" suffix to the methods is necessary as verbs will be
+Like many of the other features String can be patched to perform the operations
+directly. The "Noun" suffix to the methods is necessary as verbs will be
 supported in the future.
 
     nounInflector.attach();
     console.log('radius'.pluralizeNoun());
     console.log('beers'.singularizeNoun());   
 
-counters can also be produced from integers with CountInflector
-    
-    countInflector = natural.CountInflector;
+### Numbers
+
+Numbers can be counted with a CountInflector
+
+    var countInflector = natural.CountInflector;
 
 outputs "1st"
 
@@ -220,6 +224,30 @@ outputs "1st"
 outputs "111th"
 
     console.log(countInflector.nth(111));
+
+### Present Tense Verbs
+
+Present Tense Verbs can be pluralized/singularized with a PresentVerbInflector.
+This feature is still experimental as of 0.0.42 so use with caution and please
+provide feedback.
+
+    var verbInflector = new natural.PresentVerbInflector();
+
+outputs "becomes"
+
+    console.log(verbInflector.singularize('become'));
+
+outputs "become"
+
+    console.log(verbInflector.pluralize('becomes'));
+
+Like many other natural modules attach() can be used to patch strings with
+handy methods.
+
+    verbInflector.attach();
+    console.log('walk'.singularizePresentVerb());
+    console.log('walks'.pluralizePresentVerb());
+
 
 WordNet
 -------
@@ -231,7 +259,7 @@ database files. If the database files are not present in the specified directori
 natural will download them for you.
 
 Keep in mind the WordNet integration is to be considered experimental at this point
-and not production ready.
+and not production ready. The API is also subject to change.
 
 Here's an exmple of looking up definitions for the word, "node".
 
