@@ -104,7 +104,7 @@ describe('present verb inflector', function() {
         
         it('should handle ambiguous forms', function() {
             expect(inflector.pluralize('will')).toBe('will');                        
-        });        
+        });
     });
     
     describe('should pluralize and singularize string from patch', function() {
