@@ -34,20 +34,20 @@ describe('tfidf', function() {
     describe('get idf', function() {
         it('should return return the default value for non eixstant words', function() {
             var tfiObj = new Tfidf(TEST_CORPUS, null, DEFAULT_IDF_UNITTEST, function(myTfidf) {
-                expect(myTfidf.get_idf("THE")).toBe(DEFAULT_IDF_UNITTEST);
-                expect(myTfidf.get_idf("nonexistant")).toBe(DEFAULT_IDF_UNITTEST);                
+                expect(myTfidf.getIdf("THE")).toBe(DEFAULT_IDF_UNITTEST);
+                expect(myTfidf.getIdf("nonexistant")).toBe(DEFAULT_IDF_UNITTEST);                
             });
         });
         
         it('should handle greaters', function() {
             var tfiObj = new Tfidf(TEST_CORPUS, null, DEFAULT_IDF_UNITTEST, function(myTfidf) {
-                expect(myTfidf.get_idf("a")).toBeGreaterThan(myTfidf.get_idf("the"));
+                expect(myTfidf.getIdf("a")).toBeGreaterThan(myTfidf.getIdf("the"));
             });
         });
         
         it('should handle almost equal', function() {
             var tfiObj = new Tfidf(TEST_CORPUS, null, DEFAULT_IDF_UNITTEST, function(myTfidf) {
-                expect(myTfidf.get_idf("girl")).toBe(myTfidf.get_idf("moon"));
+                expect(myTfidf.getIdf("girl")).toBe(myTfidf.getIdf("moon"));
             });
         });            
     });
@@ -55,13 +55,13 @@ describe('tfidf', function() {
     describe('keywords', function() {
         it('should retrieve keywords when there is only one keyword', function() {
             var tfiObj = new Tfidf(TEST_CORPUS, TEST_STOPWORDS, DEFAULT_IDF_UNITTEST, function(myTfidf) {
-                expect(myTfidf.get_doc_keywords("the spoon and the fork")[0][0]).toBe("the");
+                expect(myTfidf.getDocKeywords("the spoon and the fork")[0][0]).toBe("the");
             });
         });
         
         it('should retrieve multiple keywords', function() {
             var tfiObj = new Tfidf(TEST_CORPUS, TEST_STOPWORDS, DEFAULT_IDF_UNITTEST, function(myTfidf) {
-                var keywords = myTfidf.get_doc_keywords("the girl said hello over the phone");
+                var keywords = myTfidf.getDocKeywords("the girl said hello over the phone");
                 expect(keywords[0][0]).toBe("girl");
                 expect(keywords[1][0]).toBe("phone");
                 expect(keywords[2][0]).toBe("said");
@@ -72,16 +72,16 @@ describe('tfidf', function() {
     
     describe('add corpus', function() {
         var tfiObj = new Tfidf(TEST_CORPUS, null, DEFAULT_IDF_UNITTEST, function(myTfidf) {
-            expect(getExectedIdf(myTfidf.get_num_docs(), 1)).toBeTruthy();
-            expect(myTfidf.get_idf("water")).toBe(DEFAULT_IDF_UNITTEST);
-            expect(getExectedIdf(myTfidf.get_num_docs(), 1)).toBe(myTfidf.get_idf("moon"));
-            expect(getExectedIdf(myTfidf.get_num_docs(), 5)).toBe(myTfidf.get_idf("said"));
+            expect(getExectedIdf(myTfidf.getNumDocs(), 1)).toBeTruthy();
+            expect(myTfidf.getIdf("water")).toBe(DEFAULT_IDF_UNITTEST);
+            expect(getExectedIdf(myTfidf.getNumDocs(), 1)).toBe(myTfidf.getIdf("moon"));
+            expect(getExectedIdf(myTfidf.getNumDocs(), 5)).toBe(myTfidf.getIdf("said"));
             
-            myTfidf.add_input_document("water, moon");
+            myTfidf.addInputDocument("water, moon");
             
-            expect(getExectedIdf(myTfidf.get_num_docs(), 1)).toBe(myTfidf.get_idf("water"));
-            expect(getExectedIdf(myTfidf.get_num_docs(), 2)).toBe(myTfidf.get_idf("moon"));            
-            expect(getExectedIdf(myTfidf.get_num_docs(), 5)).toBe(myTfidf.get_idf("said"));            
+            expect(getExectedIdf(myTfidf.getNumDocs(), 1)).toBe(myTfidf.getIdf("water"));
+            expect(getExectedIdf(myTfidf.getNumDocs(), 2)).toBe(myTfidf.getIdf("moon"));            
+            expect(getExectedIdf(myTfidf.getNumDocs(), 5)).toBe(myTfidf.getIdf("said"));            
         });
     });
 });
