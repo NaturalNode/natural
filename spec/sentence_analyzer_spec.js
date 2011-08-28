@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2011, Chris Umbel
+Copyright (c) 2011, Rob Ellis, Chris Umbel
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,18 +20,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-exports.SoundEx = require('./phonetics/soundex');
-exports.Metaphone = require('./phonetics/metaphone');
-exports.PorterStemmer = require('./stemmers/porter_stemmer');
-exports.LancasterStemmer = require('./stemmers/lancaster_stemmer');
-exports.AggressiveTokenizer = require('./tokenizers/aggressive_tokenizer');
-exports.RegexpTokenizer = require('./tokenizers/regexp_tokenizer').RegexpTokenizer;
-exports.WordTokenizer = require('./tokenizers/regexp_tokenizer').WordTokenizer;
-exports.BayesClassifier = require('./classifiers/bayes_classifier');
-exports.NounInflector = require('./inflectors/noun_inflector');
-exports.PresentVerbInflector = require('./inflectors/present_verb_inflector');
-exports.CountInflector = require('./inflectors/count_inflector');
-exports.WordNet = require('./wordnet/wordnet');
-exports.Tfidf = require('./tfidf/tfidf');
-exports.SentenceAnalyzer = require('./analyzers/sentence_analyzer');
-exports.stopwords = require('./util/stopwords').words;
+descibe('sentence analyzer', function() {
+    it('should load', function() {
+    
+    });
+});
