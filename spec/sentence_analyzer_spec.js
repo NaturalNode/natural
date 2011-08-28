@@ -20,8 +20,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+var SentenceAnalyzer = require('lib/natural/analyzers/sentence_analyzer');
+
 describe('sentence analyzer', function() {
     it('should load', function() {
-        
+        var analyzer = new SentenceAnalyzer();
     });
 });
