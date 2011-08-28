@@ -20,8 +20,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-descibe('sentence analyzer', function() {
+describe('sentence analyzer', function() {
     it('should load', function() {
-    
+        
     });
 });
