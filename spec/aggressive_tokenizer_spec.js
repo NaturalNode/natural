@@ -20,7 +20,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var tokenizer = require('lib/natural/tokenizers/aggressive_tokenizer');
+var Tokenizer = require('lib/natural/tokenizers/aggressive_tokenizer')
+  tokenizer = new Tokenizer();
 
 describe('aggressive_tokenizer', function() {
   it('should tokenize strings', function() {
@@ -28,7 +29,11 @@ describe('aggressive_tokenizer', function() {
   });
 
   it('should tokenize strings via attached string method', function() {
-    var tokenizer = new require('lib/natural/tokenizers/aggressive_tokenizer');
+    tokenizer.attach();
+    expect('these are things'.tokenize()).toEqual(['these', 'are', 'things']);
+  });
+
+  it('should tokenize strings via attached string method', function() {
     tokenizer.attach();
     expect('these are things'.tokenize()).toEqual(['these', 'are', 'things']);
   });
