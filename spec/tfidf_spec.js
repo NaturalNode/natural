@@ -20,16 +20,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-exports.SoundEx = require('./phonetics/soundex');
-exports.Metaphone = require('./phonetics/metaphone');
-exports.PorterStemmer = require('./stemmers/porter_stemmer');
-exports.LancasterStemmer = require('./stemmers/lancaster_stemmer');
-exports.Tokenizer = require('./tokenizers/aggressive_tokenizer');
-exports.Tokenizer = require('./tokenizers/whitespace_tokenizer');
-exports.BayesClassifier = require('./classifiers/bayes_classifier');
-exports.NounInflector = require('./inflectors/noun_inflector');
-exports.PresentVerbInflector = require('./inflectors/present_verb_inflector');
-exports.CountInflector = require('./inflectors/count_inflector');
-exports.WordNet = require('./wordnet/wordnet');
-exports.Tfidf = require('./tfidf/tfidf');
-exports.stopwords = require('./util/stopwords').words;
+var Tfidf = require('lib/natural/tfidf/tfidf').TfIdf;
+
+var DEFAULT_IDF_UNITTEST = 1.5;
+var TEST_CORPUS = 'spec/test_data/tfdif_testcorpus.txt';
+
+describe('tfidf', function() {
+    describe('non existant words', function() {
+        it('should return return the default value', function() {
+            var tfiObj = new Tfidf(TEST_CORPUS, null, DEFAULT_IDF_UNITTEST, function(myTfidf) {
+                expect(myTfidf.get_idf("THE")).toBe(DEFAULT_IDF_UNITTEST);
+                expect(myTfidf.get_idf("nonexistant")).toBe(DEFAULT_IDF_UNITTEST);                
+            });
+        });
+    });
+});

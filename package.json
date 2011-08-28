@@ -6,7 +6,8 @@
     "node": ">=0.2.6"
   },
   "dependencies": {
-    "compress": "0.1.9"
+    "compress": "0.1.9",
+    "underscore": "*"
   },
   "devDependencies": {
     "uubench": "0.0.x"

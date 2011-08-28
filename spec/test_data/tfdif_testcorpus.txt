@@ -1,0 +1,7 @@
+50
+the:23
+a:17
+girl:1
+moon:1
+said:5
+phone:2
