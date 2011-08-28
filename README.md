@@ -338,7 +338,7 @@ Princeton University "About WordNet." WordNet. Princeton University. 2010. <http
 License
 -------
 
-Copyright (c) 2011, Chris Umbel
+Copyright (c) 2011, Chris Umbel, Rob Ellis
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
