@@ -32,9 +32,23 @@ describe('bayes classifier', function() {
                       {classification: 'sell', text: ['sell', 'gold']}
         ]);
     
+        it('should classify with mixed training data', function() {
+            var natural = require('natural'),
+            classifier = new natural.BayesClassifier();
+            
+            classifier.train([{classification: 'computing', text: ['fix', 'box']},
+                              {classification: 'computing', text: 'write some code.'},
+                              {classification: 'literature', text: ['writ', 'script']},
+                              {classification: 'literature', text: 'read my book'}
+                             ]);
+            
+            expect(classifier.classify('there is a bug in my code.')).toBe('computing');
+            expect(classifier.classify('write a book.')).toBe('literature');
+        });
+    
         it('should classify strings', function() {
             expect(classifier.classify('i am short silver')).toBe('sell');
-            expect(classifier.classify('i am long silver')).toBe('buy');        
+            expect(classifier.classify('i am long silver')).toBe('buy');
         });
     
         it('should provide a method to retrieve both classname and probability', function() {
