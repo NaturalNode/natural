@@ -24,6 +24,6 @@ var SentenceAnalyzer = require('lib/natural/analyzers/sentence_analyzer');
 
 describe('sentence analyzer', function() {
     it('should load', function() {
-        var analyzer = new SentenceAnalyzer();
+        var analyzer = new SentenceAnalyzer(null, function() { });
     });
 });
