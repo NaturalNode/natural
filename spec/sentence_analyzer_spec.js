@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2011, Chris Umbel
+Copyright (c) 2011, Rob Ellis, Chris Umbel
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,12 +20,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var Tokenizer = require('./tokenizer');
-var WhitespaceTokenizer = new Tokenizer();
-module.exports = WhitespaceTokenizer;
+var SentenceAnalyzer = require('lib/natural/analyzers/sentence_analyzer');
 
-// expose the tokenize function
-WhitespaceTokenizer.tokenize = function(text) {
-    // break a string up into an array of tokens by anything non-word
-    return this.trim(text.split(/[\s|\.|\,|\!]+/));
-};
+describe('sentence analyzer', function() {
+    it('should load', function() {
+        var analyzer = new SentenceAnalyzer(null, function() { });
+    });
+});

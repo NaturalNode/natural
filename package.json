@@ -1,12 +1,13 @@
 {
   "name": "natural",
   "description": "General natural language (stemming, classification, inflection, phonetics) facilities for node.",
-  "version": "0.0.44",
+  "version": "0.0.45",
   "engines": {
     "node": ">=0.2.6"
   },
   "dependencies": {
-    "compress": "0.1.9"
+    "compress": "0.1.9",
+    "underscore": "*"
   },
   "devDependencies": {
     "uubench": "0.0.x"
