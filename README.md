@@ -9,6 +9,9 @@ supported.
 It's still in the early stages, and am very interested in bug reports,
 contributions and the like.
 
+Note that many algorithms from Rob Ellis's [node-nltools](https://github.com/NaturalNode/node-nltools) are
+being merged in to this project and will be maintained here going forward.
+
 At the moment most algorithms are English-specific but long-term some diversity
 is in order.
 
