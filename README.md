@@ -1,8 +1,9 @@
 natural
 =======
 
-"Natural" is a general natural language facility for nodejs. Stemming,
-classification, phonetics, WordNet, and some inflection are currently supported.
+"Natural" is a general natural language facility for nodejs. Tokenizing,
+stemming, classification, phonetics, WordNet, and some inflection are currently
+supported.
 
 It's still in the early stages, and am very interested in bug reports,
 contributions and the like.
