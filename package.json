@@ -1,7 +1,7 @@
 {
   "name": "natural",
-  "description": "General natural language (stemming, classification, inflection, phonetics, tfidf, WordNet) facilities for node.",
-  "version": "0.0.47",
+  "description": "General natural language (tokenizing, stemming, classification, inflection, phonetics, tfidf, WordNet) facilities for node.",
+  "version": "0.0.48",
   "engines": {
     "node": ">=0.2.6"
   },

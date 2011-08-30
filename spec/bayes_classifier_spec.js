@@ -38,7 +38,7 @@ describe('bayes classifier', function() {
             
             classifier.train([{classification: 'computing', text: ['fix', 'box']},
                               {classification: 'computing', text: 'write some code.'},
-                              {classification: 'literature', text: ['writ', 'script']},
+                              {classification: 'literature', text: ['write', 'script']},
                               {classification: 'literature', text: 'read my book'}
                              ]);
             

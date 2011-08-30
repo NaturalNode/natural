@@ -23,6 +23,27 @@ please install the NPM
 If you're interested in contributing to natural or just hacking it then by all
 means fork away!
     
+Tokenizers
+----------
+
+Word, Regexp and Treebank tokenizers are provided for breaking text up into
+arrays of tokens.
+
+    var natural = require('natural'),
+      tokenizer = new natural.WordTokenizer();
+    console.log(tokenizer.tokenize("your dog has flees."));
+    // [ 'your', 'dog', 'has', 'flees' ]
+    
+The other tokenizers follow a similar pattern    
+
+    tokenizer = new natural.TreebankWordTokenizer();
+    console.log(tokenizer.tokenize("my dog hasn't any flees."));
+    // [ 'my', 'dog', 'has', 'n\'t', 'any', 'flees', '.' ]
+    
+    tokenizer = new natural.RegexpTokenizer({pattern: /\-/});
+    console.log(tokenizer.tokenize("flee-dog"));
+    // [ 'flee', 'dog' ]
+    
 Stemmers
 --------
 
