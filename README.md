@@ -275,6 +275,38 @@ handy methods.
     console.log('walks'.pluralizePresentVerb());
 
 
+N-Grams
+
+n-grams can be obtained for either arrays or strings (which will be tokenized
+for you)
+
+    var NGrams = natural.NGrams;
+    
+bigrams    
+    
+    console.log(NGrams.bigrams('some words here'));
+    console.log(NGrams.bigrams(['some',  'words',  'here']));
+    
+both of which output [ [ 'some', 'words' ], [ 'words', 'here' ] ]    
+    
+trigrams    
+    
+    console.log(NGrams.trigrams('some other words here'));
+    console.log(NGrams.trigrams(['some',  'other', 'words',  'here']));
+
+both of which output [ [ 'some', 'other', 'words' ],
+  [ 'other', 'words', 'here' ] ]
+
+and arbitrary n-grams
+
+    console.log(NGrams.ngrams('some other words here for you', 4));
+    console.log(NGrams.ngrams(['some', 'other', 'words', 'here', 'for',
+        'you'], 4));
+
+which outputs [ [ 'some', 'other', 'words', 'here' ],
+  [ 'other', 'words', 'here', 'for' ],
+  [ 'words', 'here', 'for', 'you' ] ]
+
 WordNet
 -------
 
