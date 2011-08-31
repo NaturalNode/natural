@@ -276,6 +276,7 @@ handy methods.
 
 
 N-Grams
+-------
 
 n-grams can be obtained for either arrays or strings (which will be tokenized
 for you)
