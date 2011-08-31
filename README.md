@@ -283,14 +283,14 @@ for you)
 
     var NGrams = natural.NGrams;
     
-bigrams    
+### bigrams    
     
     console.log(NGrams.bigrams('some words here'));
     console.log(NGrams.bigrams(['some',  'words',  'here']));
     
 both of which output [ [ 'some', 'words' ], [ 'words', 'here' ] ]    
     
-trigrams    
+### trigrams    
     
     console.log(NGrams.trigrams('some other words here'));
     console.log(NGrams.trigrams(['some',  'other', 'words',  'here']));
@@ -298,7 +298,7 @@ trigrams
 both of which output [ [ 'some', 'other', 'words' ],
   [ 'other', 'words', 'here' ] ]
 
-and arbitrary n-grams
+### arbitrary n-grams
 
     console.log(NGrams.ngrams('some other words here for you', 4));
     console.log(NGrams.ngrams(['some', 'other', 'words', 'here', 'for',
