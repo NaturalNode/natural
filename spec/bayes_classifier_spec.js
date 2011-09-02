@@ -33,8 +33,7 @@ describe('bayes classifier', function() {
         ]);
     
         it('should classify with mixed training data', function() {
-            var natural = require('natural'),
-            classifier = new natural.BayesClassifier();
+            var classifier = new natural.BayesClassifier();
             
             classifier.train([{classification: 'computing', text: ['fix', 'box']},
                               {classification: 'computing', text: 'write some code.'},
