@@ -20,97 +20,43 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var Tfidf = require('lib/natural/tfidf/tfidf').TfIdf;
-
-var DEFAULT_IDF_UNITTEST = 1.5;
-var TEST_CORPUS = 'spec/test_data/tfdif_testcorpus.txt';
-var TEST_STOPWORDS = 'spec/test_data/tfdif_testcorpus.txt';
-var TEST_CORPUS_STRING = '50\nthe:23\na:17\ngirl:1\nmoon:1\nsaid:5\nphone:2';
-var getExectedIdf = function(num_docs_total, num_docs_term){
-   return Math.log(parseFloat(1 + num_docs_total) / (1 + num_docs_term))
-}
-
+var TfIdf = require('lib/natural/tfidf/tfidf');
+var tfidf;
+        
 describe('tfidf', function() {
-    describe('get idf', function() {
-        it('should return return the default value for non eixstant words', function() {
-            var tfObj = new Tfidf(DEFAULT_IDF_UNITTEST);
-            
-            tfObj.measureFile(TEST_CORPUS, null, function() {
-                expect(tfObj.getIdf("THE")).toBe(DEFAULT_IDF_UNITTEST);
-                expect(tfObj.getIdf("nonexistant")).toBe(DEFAULT_IDF_UNITTEST);                
-            });
-        });
-
-        it('should return return the default value for non eixstant words by string', function() {
-            var tfObj = new Tfidf(DEFAULT_IDF_UNITTEST);
-            
-            tfObj.measure(TEST_CORPUS_STRING, null, function() {
-                expect(tfObj.getIdf("THE")).toBe(DEFAULT_IDF_UNITTEST);
-                expect(tfObj.getIdf("nonexistant")).toBe(DEFAULT_IDF_UNITTEST);                
-            });
-        });
-        
-        it('should handle greaters', function() {
-            var tfObj = new Tfidf(DEFAULT_IDF_UNITTEST);
-            
-            tfObj.measureFile(TEST_CORPUS, null, function() {
-                expect(tfObj.getIdf("a")).toBeGreaterThan(tfObj.getIdf("the"));
-            });
-        });
-
-        it('should handle greaters by string', function() {
-            var tfObj = new Tfidf(DEFAULT_IDF_UNITTEST);
-            
-            tfObj.measure(TEST_CORPUS_STRING, null, function() {
-                expect(tfObj.getIdf("a")).toBeGreaterThan(tfObj.getIdf("the"));
-            });
-        });
-        
-        it('should handle almost equal', function() {
-            var tfObj = new Tfidf(DEFAULT_IDF_UNITTEST);
-            
-            tfObj.measureFile(TEST_CORPUS, null, function() {
-                expect(tfObj.getIdf("girl")).toBe(tfObj.getIdf("moon"));
-            });
-        });            
-    });
-    
-    describe('keywords', function() {
-        it('should retrieve keywords when there is only one keyword', function() {
-            var tfObj = new Tfidf(DEFAULT_IDF_UNITTEST);
-            
-            tfObj.measureFile(TEST_CORPUS, TEST_STOPWORDS, function() {
-                expect(tfObj.getDocKeywords("the spoon and the fork")[0][0]).toBe("the");
-            });
-        });
-        
-        it('should retrieve multiple keywords', function() {
-            var tfObj = new Tfidf(DEFAULT_IDF_UNITTEST);
-            
-            tfObj.measureFile(TEST_CORPUS, TEST_STOPWORDS, function() {
-                var keywords = tfObj.getDocKeywords("the girl said hello over the phone");
-                expect(keywords[0][0]).toBe("girl");
-                expect(keywords[1][0]).toBe("phone");
-                expect(keywords[2][0]).toBe("said");
-                expect(keywords[3][0]).toBe("the");                
-            });
+    describe('stateless operations', function() {
+        it('should tf', function() {
+            expect(TfIdf.tf('document', 'document of a document')).toBe(2);
         });        
     });
     
-    describe('add corpus', function() {
-        var tfObj = new Tfidf(DEFAULT_IDF_UNITTEST);
-            
-        tfObj.measureFile(TEST_CORPUS, null, function() {
-            expect(getExectedIdf(tfObj.getNumDocs(), 1)).toBeTruthy();
-            expect(tfObj.getIdf("water")).toBe(DEFAULT_IDF_UNITTEST);
-            expect(getExectedIdf(tfObj.getNumDocs(), 1)).toBe(tfObj.getIdf("moon"));
-            expect(getExectedIdf(tfObj.getNumDocs(), 5)).toBe(tfObj.getIdf("said"));
-            
-            tfObj.addInputDocument("water, moon");
-            
-            expect(getExectedIdf(tfObj.getNumDocs(), 1)).toBe(tfObj.getIdf("water"));
-            expect(getExectedIdf(tfObj.getNumDocs(), 2)).toBe(tfObj.getIdf("moon"));            
-            expect(getExectedIdf(tfObj.getNumDocs(), 5)).toBe(tfObj.getIdf("said"));            
+    describe('stateful operations', function() {
+        beforeEach(function() {
+            tfidf = new TfIdf();
+        	tfidf.addDocument('document one');
+        	tfidf.addDocument('document two');
         });
+        
+    	it('should add documents', function() {
+            expect(tfidf.documents.length).toBe(2);
+            expect(tfidf.documents[0]).toEqual(['document', 'one']);
+            expect(tfidf.documents[1]).toEqual(['document', 'two']);        
+    	});
+            
+        it('should idf', function() {
+            expect(tfidf.idf('document')).toBe(0.8472978603872037);
+            expect(tfidf.idf('dumb')).toBe(1.0986122886681098);
+        });   
+        
+        it('should tfidf a single doc', function() {
+            expect(tfidf.tfidf('document', 0)).toBe(0.8472978603872037);
+            expect(tfidf.tfidf('one', 0)).toBe(0.9162907318741551);
+            expect(tfidf.tfidf('two', 0)).toBe(0);            
+        });
+        
+        it('should tfidfs docs', function() {
+            expect(tfidf.tfidfs('two')).toEqual([0, 0.9162907318741551]);
+            expect(tfidf.tfidfs('document')).toEqual([0.8472978603872037, 0.8472978603872037]);
+        });        
     });
 });
