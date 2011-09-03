@@ -36,7 +36,7 @@ describe('tfidf', function() {
         beforeEach(function() {
             tfidf = new TfIdf();
         	tfidf.addDocument('document one');
-        	tfidf.addDocument('document two');
+        	tfidf.addDocument('document Two');
         });
 
     	it('should add documents', function() {
@@ -51,7 +51,7 @@ describe('tfidf', function() {
         });   
 
         it('should tfidf a single doc', function() {
-            expect(tfidf.tfidf('document', 0)).toBe(0.8472978603872037);
+            expect(tfidf.tfidf('Document', 0)).toBe(0.8472978603872037);
             expect(tfidf.tfidf('one', 0)).toBe(0.9162907318741551);
             expect(tfidf.tfidf('two', 0)).toBe(0);            
         });
@@ -60,7 +60,12 @@ describe('tfidf', function() {
             expect(tfidf.tfidfs('two')).toEqual([0, 0.9162907318741551]);
             expect(tfidf.tfidfs('document')).toEqual([0.8472978603872037, 0.8472978603872037]);
         });
-        
+
+        it('should tfidf a single doc on multiple terms', function() {
+            expect(tfidf.tfidf('document One', 0)).toBe(0.8472978603872037 + 0.9162907318741551);
+            expect(tfidf.tfidf('document two', 0)).toBe(0.8472978603872037);
+        });
+
         it('should tfidfs docs', function() {
             tfidf.tfidfs('two', function(i, tfidf) {
                 if(i == 0)
