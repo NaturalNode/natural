@@ -311,11 +311,11 @@ which outputs [ [ 'some', 'other', 'words', 'here' ],
 TfIdf
 -----
 
-TfIdf is implemented to determine how important a word or words is to a document.
-The following example will add four documents to the corpus and determine the
-importance of the word "node" to each document, with the last document being
-the winner.
-    
+TfIdf is implemented to determine how important a word (or words) is to a 
+document relative to a corpus. The following example will add four documents to 
+a corpus and determine the weight of the word "node" and then the weight of the 
+word "ruby" in each document.
+
     var natural = require('natural'),
         TfIdf = natural.TfIdf,
         tfidf = new TfIdf();
