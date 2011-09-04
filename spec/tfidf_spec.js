@@ -32,6 +32,21 @@ describe('tfidf', function() {
         });
     });
 
+    describe('keys', function() {
+        it('should store and recall keys', function() {
+            tfidf = new TfIdf();
+            tfidf.addDocument('document one', 'un');
+        	tfidf.addDocument('document Two', 'deux');
+            
+            tfidf.tfidfs('two', function(i, tfidf, key) {
+                if(i == 0)
+                    expect(key).toBe('un');
+                else
+                    expect(key).toBe('deux');
+            });
+        });    
+    });
+
     describe('stateful operations', function() {
         beforeEach(function() {
             tfidf = new TfIdf();
@@ -64,6 +79,10 @@ describe('tfidf', function() {
         it('should tfidf a single doc on multiple terms', function() {
             expect(tfidf.tfidf('document One', 0)).toBe(0.8472978603872037 + 0.9162907318741551);
             expect(tfidf.tfidf('document two', 0)).toBe(0.8472978603872037);
+        });
+
+        it('should store and extract keys', function() {
+            
         });
 
         it('should tfidfs docs', function() {
