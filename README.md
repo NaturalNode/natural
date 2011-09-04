@@ -354,6 +354,12 @@ the term "node" in the first and second documents.
     console.log(tfidf.tfidf('node', 0));
     console.log(tfidf.tfidf('node', 1));
 
+A TfIdf instance can also load documents from files on disk.
+
+    var tfidf = new TfIdf();
+    tfidf.addFileSync('data_files/one.txt');
+    tfidf.addFileSync('data_files/two.txt');
+
 Multiple terms can be measured as well with their weights being added into 
 a single measure value. The following example determines that the last document
 is the most relevent to the words "node" and "ruby".
@@ -404,13 +410,6 @@ A TfIdf instance can also be serialized and deserialzed for save and recall.
 
     // assuming you pulled "s" back out of storage. 
     var tfidf = new TfIdf(JSON.parse(s));
-
-A TfIdf instance can also load data from files on disk.
-
-    var tfidf = new TfIdf();
-    tfidf.addFileSync('data_files/one.txt');
-    tfidf.addFileSync('data_files/two.txt');
-
 
 WordNet
 -------
