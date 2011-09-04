@@ -308,6 +308,74 @@ which outputs [ [ 'some', 'other', 'words', 'here' ],
   [ 'other', 'words', 'here', 'for' ],
   [ 'words', 'here', 'for', 'you' ] ]
 
+TfIdf
+-----
+
+TfIdf is implemented to determine how important a word or words is to a document.
+The following example will add four documents to the corpus and determine the
+importance of the word "node" to each document, with the last document being
+the winner.
+    
+    var natural = require('natural'),
+        TfIdf = natural.TfIdf,
+        tfidf = new TfIdf();
+    
+    tfidf.addDocument('this document is about node.');
+    tfidf.addDocument('this document is about ruby.');
+    tfidf.addDocument('this document is about ruby and node.');
+    tfidf.addDocument('this document is about node. it has node examples');
+    
+    tfidf.tfidfs('node', function(i, measure) {
+        console.log('document #' + i + ' is ' + measure);
+    });
+
+which outputs
+    
+    document #0 is 1.4469189829363254
+    document #1 is 0
+    document #2 is 1.4469189829363254
+    document #3 is 2.8938379658726507
+
+Multiple terms can be measured as well with their weights being added into 
+a single measure value. The following example determines that the last document
+is the most relevent to the words "node" and "ruby".
+
+    var natural = require('natural'),
+        TfIdf = natural.TfIdf,
+        tfidf = new TfIdf();
+    
+    tfidf.addDocument('this document is about node.');
+    tfidf.addDocument('this document is about ruby.');
+    tfidf.addDocument('this document is about ruby and node.');
+    
+    tfidf.tfidfs('node ruby', function(i, measure) {
+        console.log('document #' + i + ' is ' + measure);
+    });
+
+which outputs
+
+    document #0 is 1.2039728043259361
+    document #1 is 1.2039728043259361
+    document #2 is 2.4079456086518722
+
+The examples above all use strings in which case natural will tokenize the input.
+If you wish to perform your own tokenization or other kinds of processing you 
+can do so and then pass in the resultant arrays. That will cause natural to 
+bypass its own preprocessing.
+
+    var natural = require('natural'),
+        TfIdf = natural.TfIdf,
+        tfidf = new TfIdf();
+    
+    tfidf.addDocument(['document', 'about', 'node']);
+    tfidf.addDocument(['document', 'about', 'ruby']);
+    tfidf.addDocument(['document', 'about', 'ruby', 'node']);
+    tfidf.addDocument(['document', 'about', 'node', 'node', 'examples']);
+    
+    tfidf.tfidfs(['node', 'ruby'], function(i, measure) {
+        console.log('document #' + i + ' is ' + measure);
+    });
+
 WordNet
 -------
 
