@@ -325,16 +325,34 @@ the winner.
     tfidf.addDocument('this document is about ruby and node.');
     tfidf.addDocument('this document is about node. it has node examples');
     
+    console.log('node --------------------------------');
     tfidf.tfidfs('node', function(i, measure) {
+        console.log('document #' + i + ' is ' + measure);
+    });
+
+    console.log('ruby --------------------------------');
+    tfidf.tfidfs('ruby', function(i, measure) {
         console.log('document #' + i + ' is ' + measure);
     });
 
 which outputs
     
+    node --------------------------------
     document #0 is 1.4469189829363254
     document #1 is 0
     document #2 is 1.4469189829363254
     document #3 is 2.8938379658726507
+    ruby --------------------------------
+    document #0 is 0
+    document #1 is 1.466337068793427
+    document #2 is 1.466337068793427
+    document #3 is 0
+
+Of course you can measure a single document. The following example measures 
+the term "node" in the first and second documents.
+    
+    console.log(tfidf.tfidf('node', 0));
+    console.log(tfidf.tfidf('node', 1));
 
 Multiple terms can be measured as well with their weights being added into 
 a single measure value. The following example determines that the last document
