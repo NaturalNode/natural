@@ -3,8 +3,8 @@ natural
 =======
 
 "Natural" is a general natural language facility for nodejs. Tokenizing,
-stemming, classification, phonetics, WordNet, and some inflection are currently
-supported.
+stemming, classification, phonetics, tf-idf, WordNet, and some inflection are 
+currently supported.
 
 It's still in the early stages, and am very interested in bug reports,
 contributions and the like.
@@ -375,6 +375,24 @@ bypass its own preprocessing.
     tfidf.tfidfs(['node', 'ruby'], function(i, measure) {
         console.log('document #' + i + ' is ' + measure);
     });
+
+A TfIdf instance can also be serialized and deserialzed for save and recall.
+
+    var tfidf = new TfIdf();
+    tfidf.addDocument('document one', 'un');
+    tfidf.addDocument('document Two', 'deux');
+    var s = JSON.stringify(tfidf);
+    // save "s" to disk, database or otherwise
+
+    // assuming you pulled "s" back out of storage. 
+    var tfidf = new TfIdf(JSON.parse(s));
+
+A TfIdf instance can also load data from files on disk.
+
+    var tfidf = new TfIdf();
+    tfidf.addFileSync('data_files/one.txt');
+    tfidf.addFileSync('data_files/two.txt');
+
 
 WordNet
 -------
