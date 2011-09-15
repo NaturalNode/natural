@@ -308,10 +308,10 @@ which outputs [ [ 'some', 'other', 'words', 'here' ],
   [ 'other', 'words', 'here', 'for' ],
   [ 'words', 'here', 'for', 'you' ] ]
 
-TfIdf
+tf-idf
 -----
 
-TfIdf is implemented to determine how important a word (or words) is to a 
+Term Frequency–Inverse Document Frequency (tf-idf) is implemented to determine how important a word (or words) is to a 
 document relative to a corpus. The following example will add four documents to 
 a corpus and determine the weight of the word "node" and then the weight of the 
 word "ruby" in each document.
