@@ -50,8 +50,8 @@ describe('tfidf', function() {
     describe('stateful operations', function() {
         beforeEach(function() {
             tfidf = new TfIdf();
-        	tfidf.addDocument('document one');
-        	tfidf.addDocument('document Two');
+            tfidf.addDocument('document one');
+            tfidf.addDocument('document Two');
         });
 
     	it('should add documents', function() {
@@ -79,10 +79,6 @@ describe('tfidf', function() {
         it('should tfidf a single doc on multiple terms', function() {
             expect(tfidf.tfidf('document One', 0)).toBe(0.8472978603872037 + 0.9162907318741551);
             expect(tfidf.tfidf('document two', 0)).toBe(0.8472978603872037);
-        });
-
-        it('should store and extract keys', function() {
-            
         });
 
         it('should tfidfs docs', function() {
