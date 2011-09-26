@@ -400,6 +400,13 @@ bypass its own preprocessing.
         console.log('document #' + i + ' is ' + measure);
     });
 
+It's possible to retrieve a list of all terms in a document sorted by their 
+importance.
+
+    tfidf.listTerms(0 /*document index*/).forEach(function(item) {
+        console.log(item.term + ': ' + item.tfidf);
+    });
+
 A TfIdf instance can also be serialized and deserialzed for save and recall.
 
     var tfidf = new TfIdf();

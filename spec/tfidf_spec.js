@@ -89,5 +89,10 @@ describe('tfidf', function() {
                     expect(tfidf).toBe(0.9162907318741551);
             });
         });
+
+	it('should list important terms', function() {
+            var terms = tfidf.listTerms(0);
+            expect(terms[0].tfidf).toBeGreaterThan(terms[1].tfidf);
+	});
     });
 });
