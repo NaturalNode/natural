@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var natural = new require('lib/natural');
+var natural = require('lib/natural');
 
 describe('bayes classifier', function() {
     describe('classifier', function() {
