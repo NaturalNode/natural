@@ -440,6 +440,7 @@ Here's an exmple of looking up definitions for the word, "node".
             console.log(result.synsetOffset);
             console.log(result.pos);
             console.log(result.lemma);
+            console.log(result.synonyms);
             console.log(result.pos);
             console.log(result.gloss);
         });
@@ -454,53 +455,8 @@ Given a synset offset and part of speech a definition can be looked up directly.
         console.log(result.lemma);
         console.log(result.pos);
         console.log(result.gloss);
+        console.log(result.synonyms);        
     });
-
-You can also lookup synonyms for all meanings of a word.
-
-    var wordnet = new natural.WordNet('.');
-
-    wordnet.lookupSynonyms('device', function(results) {
-        results.forEach(function(result) {
-            console.log('------------------------------------');
-            console.log(result.synsetOffset);
-            console.log(result.pos);            
-            console.log(result.lemma);
-            console.log(result.pos);
-            console.log(result.gloss);
-        });
-    });
-
-It's also possible to lookup synonyms for a single meaning.
-
-    var wordnet = new natural.WordNet('.');
-
-    wordnet.lookup('entity', function(results) {
-        wordnet.getSynonyms(results[0], function(results) {
-            results.forEach(function(result) {
-                console.log('------------------------------------');
-                console.log(result.synsetOffset);
-                console.log(result.pos);                
-                console.log(result.lemma);
-                console.log(result.pos);
-                console.log(result.gloss);
-            });
-        });
-    });
-
-Note that getSynonyms supports query by offset and part of speech.
-
-    var wordnet = new natural.WordNet('.');
-
-    wordnet.getSynonyms(4424418, 'n', function(results) {
-        results.forEach(function(result) {
-            console.log('------------------------------------');
-            console.log(result.lemma);
-            console.log(result.pos);
-            console.log(result.gloss);
-        });
-    });
-
 
 Princeton University "About WordNet." WordNet. Princeton University. 2010. <http://wordnet.princeton.edu>
 
