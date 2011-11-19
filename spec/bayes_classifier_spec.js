@@ -90,7 +90,8 @@ describe('bayes classifier', function() {
                     var fs = require('fs');                    
                     expect(fs.statSync('classifier.json')).toBeDefined();                    
                     asyncSpecDone();
-                });
+            });
+            
             asyncSpecWait();
         });
         
