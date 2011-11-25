@@ -6,6 +6,7 @@
     "node": ">=0.2.6"
   },
   "dependencies": {
+    "sylvester": ">= 0.0.4",
     "underscore": "*"
   },
   "devDependencies": {
