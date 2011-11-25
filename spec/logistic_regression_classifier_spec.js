@@ -91,9 +91,9 @@ describe('logistic regression', function() {
                           {classification: 'sell', text: ['sell', 'gold']}
             ]);
             
-            classifier.save('classifier.json', function(err, classifier) {
+            classifier.save('lr_classifier.json', function(err, classifier) {
                     var fs = require('fs');                    
-                    expect(fs.statSync('classifier.json')).toBeDefined();                    
+                    expect(fs.statSync('lr_classifier.json')).toBeDefined();                    
                     asyncSpecDone();
             });
             
@@ -101,7 +101,7 @@ describe('logistic regression', function() {
         });
         
         it('should load a saved classifier', function() {
-            natural.LogisticRegressionClassifier.load('classifier.json', function(err, classifier) {
+            natural.LogisticRegressionClassifier.load('lr_classifier.json', function(err, classifier) {
                 expect(classifier.classify('long SUNW')).toBe('buy');
                 expect(classifier.classify('short SUNW')).toBe('sell');
                 asyncSpecDone();

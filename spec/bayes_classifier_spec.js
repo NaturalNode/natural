@@ -94,16 +94,25 @@ describe('bayes classifier', function() {
             
             asyncSpecWait();
         });
-        
+
         it('should load a saved classifier', function() {
-            natural.BayesClassifier.load('classifier.json', function(err, classifier) {
-                expect(classifier.classify('long SUNW')).toBe('buy');
-                expect(classifier.classify('short SUNW')).toBe('sell');
-                asyncSpecDone();
+            var classifier = new natural.BayesClassifier();
+            
+            classifier.train([{classification: 'buy', text: ['long', 'qqqq']},
+                          {classification: 'buy', text: "buy the q's"},
+                          {classification: 'sell', text: "short gold"},
+                          {classification: 'sell', text: ['sell', 'gold']}
+            ]);
+            
+            classifier.save('classifier.json', function(err, classifier) {
+                    natural.BayesClassifier.load('classifier.json', function(err, recalledClassifier) {
+                        expect(recalledClassifier.classify('long SUNW')).toBe('buy');
+                        expect(recalledClassifier.classify('short SUNW')).toBe('sell');
+                        asyncSpecDone();
+                    });
             });
-            asyncSpecWait();
         });
-        
+
         it('should deserialize a classifier', function() {
           var classifier = new natural.BayesClassifier();
 
