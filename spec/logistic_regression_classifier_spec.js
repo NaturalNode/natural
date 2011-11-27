@@ -25,18 +25,33 @@ var natural = new require('lib/natural'),
 
 describe('logistic regression', function() {
     it('should classify with individually trained documents', function() {
-        var logistic = new LogisticRegressionClassifier();
+        var classifier = new LogisticRegressionClassifier();
         
-        logistic.addDocument(['have', 'computer'], 'IT');
-        logistic.addDocument(['have', 'phone'], 'IT');
-        logistic.addDocument(['computer', 'suck'], 'IT');
-        logistic.addDocument(['field', 'goal'], 'sports');
-        logistic.addDocument(['score', 'goal'], 'sports');
-        logistic.addDocument(['great', 'speed'], 'sports');
+        classifier.addDocument(['have', 'computer'], 'IT');
+        classifier.addDocument(['have', 'phone'], 'IT');
+        classifier.addDocument(['computer', 'suck'], 'IT');
+        classifier.addDocument(['field', 'goal'], 'sports');
+        classifier.addDocument(['score', 'goal'], 'sports');
+        classifier.addDocument(['great', 'speed'], 'sports');
         
-        logistic.train();
+        classifier.train();
         
-        expect(logistic.classify(['hate', 'computer'])).toBe('IT');
-        expect(logistic.classify(['score', 'please'])).toBe('sports');
+        expect(classifier.classify(['hate', 'computer'])).toBe('IT');
+        expect(classifier.classify(['score', 'please'])).toBe('sports');
+    });
+
+    it('should classify with arrays', function() {
+        var classifier = new natural.LogisticRegressionClassifier();
+        classifier.addDocument('i fixed the box', 'computing');
+        classifier.addDocument('i write code', 'computing');
+        classifier.addDocument('nasty script code', 'computing');
+        classifier.addDocument('write a book', 'literature');
+        classifier.addDocument('read a book', 'literature');
+        classifier.addDocument('study the books', 'literature');
+
+        classifier.train();
+
+        expect(classifier.classify('a bug in the code')).toBe('computing');
+        expect(classifier.classify('read all the books')).toBe('literature');
     });
 });

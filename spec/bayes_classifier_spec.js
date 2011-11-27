@@ -24,7 +24,7 @@ var natural = require('lib/natural');
 
 describe('bayes classifier', function() {
     describe('classifier', function() {
-        it('should classify with mixed training data', function() {
+        it('should classify with arrays', function() {
             var classifier = new natural.BayesClassifier();
             classifier.addDocument(['fix', 'box'], 'computing');
             classifier.addDocument(['write', 'code'], 'computing');
@@ -37,6 +37,21 @@ describe('bayes classifier', function() {
             
             expect(classifier.classify(['bug', 'code'])).toBe('computing');
             expect(classifier.classify(['read', 'thing'])).toBe('literature');
+        });
+
+        it('should classify with arrays', function() {
+            var classifier = new natural.BayesClassifier();
+            classifier.addDocument('i fixed the box', 'computing');
+            classifier.addDocument('i write code', 'computing');
+            classifier.addDocument('nasty script code', 'computing');
+            classifier.addDocument('write a book', 'literature');
+            classifier.addDocument('read a book', 'literature');
+            classifier.addDocument('study the books', 'literature');
+
+            classifier.train();
+            
+            expect(classifier.classify('a bug in the code')).toBe('computing');
+            expect(classifier.classify('read all the books')).toBe('literature');
         });
     });
 });
