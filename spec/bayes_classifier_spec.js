@@ -24,108 +24,19 @@ var natural = require('lib/natural');
 
 describe('bayes classifier', function() {
     describe('classifier', function() {
-        var classifier = new natural.BayesClassifier();
-        
-        classifier.train([{classification: 'buy', text: ['long', 'qqqq']},
-                      {classification: 'buy', text: "buy the q's"},
-                      {classification: 'sell', text: "short gold"},
-                      {classification: 'sell', text: ['sell', 'gold']}
-        ]);
-    
         it('should classify with mixed training data', function() {
             var classifier = new natural.BayesClassifier();
-            
-            classifier.train([{classification: 'computing', text: ['fix', 'box']},
-                              {classification: 'computing', text: 'write some code.'},
-                              {classification: 'literature', text: ['write', 'script']},
-                              {classification: 'literature', text: 'read my book'}
-                             ]);
-            
-            expect(classifier.classify('there is a bug in my code.')).toBe('computing');
-            expect(classifier.classify('write a book.')).toBe('literature');
-        });
-    
-        it('should classify strings', function() {
-            expect(classifier.classify('i am short silver')).toBe('sell');
-            expect(classifier.classify('i am long silver')).toBe('buy');
-        });
-    
-        it('should provide a method to retrieve both classname and probability', function() {
-            expect(classifier.getClassification('i am short silver').className).toBe('sell');
-            expect(classifier.getClassification('i am long silver').className).toBe('buy');        
-        });
-            
-        it('should classify arrays', function() {
-            expect(classifier.classify(['short', 'silver'])).toBe('sell');
-            expect(classifier.classify(['long', 'silver'])).toBe('buy');        
-        });
-        
-        it('should perform successive training', function() {
-            var classifier = new natural.BayesClassifier();
-            
-            classifier.train([{classification: 'buy', text: ['long', 'qqqq']},
-                          {classification: 'buy', text: "buy the q's"}
-            ]);
+            classifier.addDocument(['fix', 'box'], 'computing');
+            classifier.addDocument(['write', 'code'], 'computing');
+            classifier.addDocument(['script', 'code'], 'computing');
+            classifier.addDocument(['write', 'book'], 'literature');
+            classifier.addDocument(['read', 'book'], 'literature');
+            classifier.addDocument(['study', 'book'], 'literature');
 
-            classifier.train([{classification: 'sell', text: "short gold"},
-                          {classification: 'sell', text: ['sell', 'gold']}
-            ]);
-
-            expect(classifier.classify('i am short silver')).toBe('sell');
-            expect(classifier.classify('i am long silver')).toBe('buy');        
-        });        
-    });
-    
-    describe('persistence', function() {
-        it('should save a classifier', function() {
-            var classifier = new natural.BayesClassifier();
+            classifier.train();
             
-            classifier.train([{classification: 'buy', text: ['long', 'qqqq']},
-                          {classification: 'buy', text: "buy the q's"},
-                          {classification: 'sell', text: "short gold"},
-                          {classification: 'sell', text: ['sell', 'gold']}
-            ]);
-            
-            classifier.save('classifier.json', function(err, classifier) {
-                    var fs = require('fs');                    
-                    expect(fs.statSync('classifier.json')).toBeDefined();                    
-                    asyncSpecDone();
-            });
-            
-            asyncSpecWait();
-        });
-
-        it('should load a saved classifier', function() {
-            var classifier = new natural.BayesClassifier();
-            
-            classifier.train([{classification: 'buy', text: ['long', 'qqqq']},
-                          {classification: 'buy', text: "buy the q's"},
-                          {classification: 'sell', text: "short gold"},
-                          {classification: 'sell', text: ['sell', 'gold']}
-            ]);
-            
-            classifier.save('classifier.json', function(err, classifier) {
-                    natural.BayesClassifier.load('classifier.json', function(err, recalledClassifier) {
-                        expect(recalledClassifier.classify('long SUNW')).toBe('buy');
-                        expect(recalledClassifier.classify('short SUNW')).toBe('sell');
-                        asyncSpecDone();
-                    });
-            });
-        });
-
-        it('should deserialize a classifier', function() {
-          var classifier = new natural.BayesClassifier();
-
-          classifier.train([{classification: 'buy', text: ['long', 'qqqq']},
-	    {classification: 'buy', text: "buy the q's"},
- 	    {classification: 'sell', text: "short gold"},
-	    {classification: 'sell', text: ['sell', 'gold']}
-	  ]);
-         
-	  var raw = JSON.stringify(classifier);
-	  var restoredClassifier = natural.BayesClassifier.restore(raw);
-	  expect(restoredClassifier.classify('i am short silver')).toBe('sell');
-	  expect(restoredClassifier.classify('i am long silver')).toBe('buy');
+            expect(classifier.classify(['bug', 'code'])).toBe('computing');
+            expect(classifier.classify(['read', 'thing'])).toBe('literature');
         });
     });
 });

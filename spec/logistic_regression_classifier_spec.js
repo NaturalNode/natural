@@ -27,101 +27,16 @@ describe('logistic regression', function() {
     it('should classify with individually trained documents', function() {
         var logistic = new LogisticRegressionClassifier();
         
-        logistic.addDocument('i have a computer', 'IT');
-        logistic.addDocument('this is a phone', 'IT');
-        logistic.addDocument('computers suck', 'IT');
-        logistic.addDocument('buy this stock', 'finance');
-        logistic.addDocument('sell gold', 'finance');
-        logistic.addDocument('short silver', 'finance');
-        logistic.addDocument('he kicked a field goal', 'sports');
-        logistic.addDocument('that team lost', 'sports');
-        logistic.addDocument('great footwork, great speed', 'sports');
+        logistic.addDocument(['have', 'computer'], 'IT');
+        logistic.addDocument(['have', 'phone'], 'IT');
+        logistic.addDocument(['computer', 'suck'], 'IT');
+        logistic.addDocument(['field', 'goal'], 'sports');
+        logistic.addDocument(['score', 'goal'], 'sports');
+        logistic.addDocument(['great', 'speed'], 'sports');
         
         logistic.train();
         
-        expect(logistic.classify('i hate this computer')).toBe('IT');
-        expect(logistic.classify('i love gold')).toBe('finance');
-        expect(logistic.classify('i kicked things')).toBe('sports');
+        expect(logistic.classify(['hate', 'computer'])).toBe('IT');
+        expect(logistic.classify(['score', 'please'])).toBe('sports');
     });
-    
-    it('should classify with some examples added in groups', function() {
-        var logistic = new LogisticRegressionClassifier();
-        
-        logistic.addDocument('buy this stock', 'finance');
-        logistic.addDocument('sell gold', 'finance');
-        logistic.addDocument('short silver', 'finance');
-        logistic.addDocument('he kicked a field goal', 'sports');
-        logistic.addDocument('that team lost', 'sports');
-        logistic.addDocument('great footwork, great speed', 'sports');
-        
-        logistic.train([{classification: 'IT', text: 'i have a computer'},
-            {classification: 'IT', text: 'this is a phone'},
-            {classification: 'IT', text: 'computers suck'}]);
-        
-        expect(logistic.classify('i hate this computer')).toBe('IT');
-        expect(logistic.classify('i love gold')).toBe('finance');
-        expect(logistic.classify('i kicked things')).toBe('sports');
-    });
-    
-    it('should classify with examples added in groups', function() {
-        var logistic = new LogisticRegressionClassifier();
-        
-        logistic.train([{classification: 'IT', text: 'i have a computer'},
-            {classification: 'IT', text: 'this is a phone'},
-            {classification: 'IT', text: 'computers suck'},
-            {classification: 'finance', text: 'buy this stock'},
-            {classification: 'finance', text: 'sell gold'},
-            {classification: 'finance', text: 'short silver'},
-            {classification: 'sports', text: 'he kicked a field goal'},
-            {classification: 'sports', text: 'that team lost'},
-            {classification: 'sports', text: 'great footwork, great speed'}]);
-        
-        expect(logistic.classify('i hate this computer')).toBe('IT');
-        expect(logistic.classify('i love gold')).toBe('finance');
-        expect(logistic.classify('i kicked things')).toBe('sports');
-    });
-    
-    describe('persistence', function() {
-        it('should save a classifier', function() {
-            var classifier = new natural.LogisticRegressionClassifier();
-            
-            classifier.train([{classification: 'buy', text: ['long', 'qqqq']},
-                          {classification: 'buy', text: "buy the q's"},
-                          {classification: 'sell', text: "short gold"},
-                          {classification: 'sell', text: ['sell', 'gold']}
-            ]);
-            
-            classifier.save('lr_classifier.json', function(err, classifier) {
-                    var fs = require('fs');                    
-                    expect(fs.statSync('lr_classifier.json')).toBeDefined();                    
-                    asyncSpecDone();
-            });
-            
-            asyncSpecWait();
-        });
-        
-        it('should load a saved classifier', function() {
-            natural.LogisticRegressionClassifier.load('lr_classifier.json', function(err, classifier) {
-                expect(classifier.classify('long SUNW')).toBe('buy');
-                expect(classifier.classify('short SUNW')).toBe('sell');
-                asyncSpecDone();
-            });
-            asyncSpecWait();
-        });
-        
-        it('should deserialize a classifier', function() {
-          var classifier = new natural.LogisticRegressionClassifier();
-
-          classifier.train([{classification: 'buy', text: ['long', 'qqqq']},
-	    {classification: 'buy', text: "buy the q's"},
- 	    {classification: 'sell', text: "short gold"},
-	    {classification: 'sell', text: ['sell', 'gold']}
-	  ]);
-         
-	  var raw = JSON.stringify(classifier);
-	  var restoredClassifier = natural.LogisticRegressionClassifier.restore(raw);
-	  expect(restoredClassifier.classify('i am short silver')).toBe('sell');
-	  expect(restoredClassifier.classify('i am long silver')).toBe('buy');
-        });
-    });    
 });
