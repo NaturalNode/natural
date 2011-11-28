@@ -23,12 +23,13 @@ THE SOFTWARE.
 var natural = require('natural'),
     classifier = new natural.BayesClassifier();
 
-classifier.train([
-		  {classification: 'software', text: ['unit', 'test']},
-		  {classification: 'software', text: ['bug', 'program']},
-		  {classification: 'hardware', text: ['drive', 'capacity']},
-		  {classification: 'hardware', text: ['power', 'supply']}
-		  ]);
+
+classifier.addDocument('my unit-tests failed.', 'software');
+classifier.addDocument('tried the program, but it was buggy.', 'software');
+classifier.addDocument('the drive has a 2TB capacity.', 'hardware');
+classifier.addDocument('i need a new power supply.', 'hardware');
+
+classifier.train();
 
 classifier.save('classifier.json', function(err, classifier) {
 	// the classifier is saved to the classifier.json file!
