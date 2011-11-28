@@ -1,7 +1,7 @@
 *~
 \#*
 *.kpf
-classifier.json
+*classifier.json
 node_modules
 .*
 io_spec/test_data/wordnet/download/*

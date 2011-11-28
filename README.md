@@ -75,20 +75,25 @@ the same thing can be done with a lancaster stemmer
     console.log("i am waking up to the sounds of chainsaws".tokenizeAndStem());
     console.log("chainsaws".stem());
 
-Naive Bayes Classifier
+Classifiers
 ----------------------
+
+Two classifiers are currently supported, Naive Bayes and logistic regression.
+The following examples use the BayesClassifier class, but the 
+LogisticRegressionClassifier class could be substituted instead.
 
     var natural = require('natural'), 
     	classifier = new natural.BayesClassifier();
 
 you can train the classifier on sample text. it will use reasonable defaults to
 tokenize and stem the text.
+   
+    classifier.addDocument('i am long qqqq', 'buy');
+    classifier.addDocument('buy the q's', 'buy');
+    classifier.addDocument('short gold', 'sell');
+    classifier.addDocument('sell gold', 'sell');
 
-    classifier.train([{classification: 'buy', text: "i am long qqqq"},
-                  {classification: 'buy', text: "buy the q's"},
-                  {classification: 'sell', text: "short gold"},
-                  {classification: 'sell', text: "sell gold"}
-    ]);
+    classifier.train();
 
 outputs "sell"
 
@@ -104,29 +109,9 @@ the classifier can also be trained on and classify arrays of tokens, strings, or
 any mixture. arrays let you use entirely custom data with  your own
 tokenization/stemming if any at all.
 
-    classifier.train([{classification: 'hockey', text: ['puck', 'shoot']},
-                  {classification: 'hockey', text: 'goalies stop pucks.'},
-                  {classification: 'stocks', text: ['stop', 'loss']},
-                  {classification: 'stocks', text: 'creat a stop order'}
-                  ]);
+    classifier.addDocument(['sell', 'gold'], 'sell');
 
-    console.log(classifier.classify('stop out at $100'));
-    console.log(classifier.classify('stop the puck, fool!'));
-    
-    console.log(classifier.classify(['stop', 'out']));
-    console.log(classifier.classify(['stop', 'puck', 'fool']));
-
-A classifier can also be persisted and recalled so you can reuse a training.
-
-    var classifier = new natural.BayesClassifier();
-    
-    classifier.train([{classification: 'buy', text: ['long', 'qqqq']},
-                  {classification: 'buy', text: "buy the q's"},
-                  {classification: 'sell', text: "short gold"},
-                  {classification: 'sell', text: ['sell', 'gold']}
-    ]);
-        
-persist to a file on disk named "classifier.json"
+A classifier can also be persisted and recalled so you can reuse a training
 
     classifier.save('classifier.json', function(err, classifier) {
         // the classifier is saved to the classifier.json file!
@@ -134,7 +119,7 @@ persist to a file on disk named "classifier.json"
     
 and to recall from the classifier.json saved above:
 
-    natural.BayesClassifier.load('classifier.json', function(err, classifier) {
+    natural.BayesClassifier.load('classifier.json', null, function(err, classifier) {
         console.log(classifier.classify('long SUNW'));
         console.log(classifier.classify('short SUNW'));
     });
@@ -142,19 +127,14 @@ and to recall from the classifier.json saved above:
 A classifier can also be serialized and deserialized as such
 
     var classifier = new natural.BayesClassifier();
-
-    classifier.train([{classification: 'buy', text: ['long', 'qqqq']},
-        {classification: 'buy', text: "buy the q's"},
-        {classification: 'sell', text: "short gold"},
-        {classification: 'sell', text: ['sell', 'gold']}
-    ]);
+    classifier.addDocument(['sell', 'gold'], 'sell');
+    classifier.addDocument(['buy', 'silver'], 'buy');
 
     // serialize
     var raw = JSON.stringify(classifier);
     // deserialize
     var restoredClassifier = natural.BayesClassifier.restore(raw);
-    console.log(restoredClassifier.classify('i am short silver'));
-    console.log(restoredClassifier.classify('i am long silver'));
+    console.log(restoredClassifier.classify('i should sell that'));
 
 Phonetics
 ---------

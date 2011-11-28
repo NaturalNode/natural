@@ -29,6 +29,7 @@ test_clean:
 clean: test_clean  
 	@find ./ -name *~ | xargs rm -f
 	@find ./ -name \#* | xargs rm -f
+	@rm *classifier.json
 
 test:
 	@NODE_PATH=. jasmine-node spec/
