@@ -39,6 +39,21 @@ describe('bayes classifier', function() {
             expect(classifier.classify(['read', 'thing'])).toBe('literature');
         });
 
+        it('should provide all classification scores', function() {
+            var classifier = new natural.BayesClassifier();
+            classifier.addDocument(['fix', 'box'], 'computing');
+            classifier.addDocument(['write', 'code'], 'computing');
+            classifier.addDocument(['script', 'code'], 'computing');
+            classifier.addDocument(['write', 'book'], 'literature');
+            classifier.addDocument(['read', 'book'], 'literature');
+            classifier.addDocument(['study', 'book'], 'literature');
+
+            classifier.train();
+            
+	    expect(classifier.getClassifications('i write code')[0].label).toBe('computing');
+	    expect(classifier.getClassifications('i write code')[1].label).toBe('literature');
+        });
+
         it('should classify with arrays', function() {
             var classifier = new natural.BayesClassifier();
             classifier.addDocument('i fixed the box', 'computing');
