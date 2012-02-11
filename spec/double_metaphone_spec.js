@@ -15,7 +15,15 @@ describe('double metaphone', function() {
     	
 		encodings = doubleMetaphone.process('astromech');
     	expect(encodings[0]).toMatch('^A.*');
-    	expect(encodings[1]).toMatch('^A.*');    	    	
+    	expect(encodings[1]).toMatch('^A.*');
+
+		encodings = doubleMetaphone.process('être');
+    	expect(encodings[0]).toMatch('^A.*');
+    	expect(encodings[1]).toMatch('^A.*');    
+
+		encodings = doubleMetaphone.process('éte');
+    	expect(encodings[0]).toMatch('^A.*');
+    	expect(encodings[1]).toMatch('^A.*');
     });
 
     it('should encode case Ç (French) to S', function() {
