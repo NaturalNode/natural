@@ -1,10 +1,10 @@
 {
   "name": "natural",
   "description": "General natural language (tokenizing, stemming, classification, inflection, phonetics, tfidf, WordNet) facilities for node.",
-  "version": "0.0.64",
+  "version": "0.0.66",
   "homepage": "https://github.com/NaturalNode/natural",
   "engines": {
-    "node": ">=0.2.6"
+    "node": ">=0.4.9"
   },
   "dependencies": {
     "sylvester": ">= 0.0.12",
