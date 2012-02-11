@@ -17,4 +17,10 @@ describe('double metaphone', function() {
     	expect(encodings[0]).toMatch('^A.*');
     	expect(encodings[1]).toMatch('^A.*');    	    	
     });
+
+    it('should encode case Ç (French) to S', function() {
+    	var encodings = doubleMetaphone.process('leçon');
+    	expect(encodings[0]).toContain('S');
+    	expect(encodings[1]).toContain('S');
+    });
 });
