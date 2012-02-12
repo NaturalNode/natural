@@ -206,7 +206,21 @@ describe('double metaphone', function() {
 	    	var encodings = doubleMetaphone.process('quarry');
 	    	expect(encodings[0]).toContain('K');
 	    	expect(encodings[1]).toContain('K');    	
-	    });    	
+	    });
+    });
+
+    describe('R', function() {
+    	it('should encode R', function() {
+	    	var encodings = doubleMetaphone.process('raspberry');
+	    	expect(encodings[0]).toMatch('^R.*');
+	    	expect(encodings[1]).toMatch('^R.*');
+    	});
+
+    	it('should ignore trailing french Rs', function() {
+	    	var encodings = doubleMetaphone.process('papier');
+	    	expect(encodings[0]).toMatch('.*[^R]$');
+	    	expect(encodings[1]).toMatch('.*R$');    		
+    	});
     });
 
 	describe('V', function() {
