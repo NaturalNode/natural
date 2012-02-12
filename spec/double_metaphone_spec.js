@@ -40,11 +40,29 @@ describe('double metaphone', function() {
     	expect(encodings[1]).toNotMatch('FF');
     });
 
+    it('should keep initial Hs', function() {
+    	var encodings = doubleMetaphone.process('hardly');
+    	expect(encodings[0]).toMatch('^H.*');
+    	expect(encodings[1]).toMatch('^H.*');
+    });
+
+    it('should keep Hs between vowels', function() {
+    	var encodings = doubleMetaphone.process('ahoi');
+    	expect(encodings[0]).toMatch('H');
+    	expect(encodings[1]).toMatch('H');
+    });
+
+    it('should drop Hs in words if not surrounded by vowels or starting', function() {
+    	var encodings = doubleMetaphone.process('charlie');
+    	expect(encodings[0]).toNotMatch('H');
+    	expect(encodings[1]).toNotMatch('H');
+    });
+
     describe('helpers', function() {
     	it('should detect vowels', function() {
     		expect(doubleMetaphone.isVowel('a')).toBeTruthy();
     		expect(doubleMetaphone.isVowel('e')).toBeTruthy();
     		expect(doubleMetaphone.isVowel('b')).toBeFalsy();    		
     	});
-    });
+    });    
 });
