@@ -26,6 +26,22 @@ describe('double metaphone', function() {
     	expect(encodings[1]).toMatch('^A.*');
     });
 
+    it('should encode B to P', function() {
+    	var encodings = doubleMetaphone.process('berry');
+    	expect(encodings[0]).toMatch('^P.*');
+    	expect(encodings[1]).toMatch('^P.*');    	
+    });
+
+    it('should encode BB to P', function() {
+    	var encodings = doubleMetaphone.process('tabby');
+    	expect(encodings[0]).toContain('P');
+    	expect(encodings[0]).toNotContain('PP');
+    	expect(encodings[0]).toNotContain('PB');    	
+    	expect(encodings[1]).toContain('P');
+    	expect(encodings[1]).toNotContain('PP');
+    	expect(encodings[1]).toNotContain('PB');
+    });
+
     it('should encode case Ç (French) to S', function() {
     	var encodings = doubleMetaphone.process('leçon');
     	expect(encodings[0]).toContain('S');
