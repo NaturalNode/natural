@@ -32,12 +32,18 @@ describe('double metaphone', function() {
     	expect(encodings[1]).toContain('S');
     });
 
+    it('should encode F', function() {
+    	var encodings = doubleMetaphone.process('far');
+    	expect(encodings[0]).toContain('F');
+    	expect(encodings[1]).toContain('F');    	
+    });
+
     it('should encode FF to F', function() {
     	var encodings = doubleMetaphone.process('effect');
-    	expect(encodings[0]).toMatch('F');
-    	expect(encodings[0]).toNotMatch('FF');
-    	expect(encodings[1]).toMatch('F');
-    	expect(encodings[1]).toNotMatch('FF');
+    	expect(encodings[0]).toContain('F');
+    	expect(encodings[0]).toNotContain('FF');
+    	expect(encodings[1]).toContain('F');
+    	expect(encodings[1]).toNotContain('FF');
     });
 
     it('should keep initial Hs', function() {
@@ -48,14 +54,14 @@ describe('double metaphone', function() {
 
     it('should keep Hs between vowels', function() {
     	var encodings = doubleMetaphone.process('ahoi');
-    	expect(encodings[0]).toMatch('H');
-    	expect(encodings[1]).toMatch('H');
+    	expect(encodings[0]).toContain('H');
+    	expect(encodings[1]).toContain('H');
     });
 
     it('should drop Hs in words if not surrounded by vowels or starting', function() {
     	var encodings = doubleMetaphone.process('charlie');
-    	expect(encodings[0]).toNotMatch('H');
-    	expect(encodings[1]).toNotMatch('H');
+    	expect(encodings[0]).toNotContain('H');
+    	expect(encodings[1]).toNotContain('H');
     });
 
     describe('helpers', function() {
