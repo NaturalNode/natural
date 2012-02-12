@@ -112,6 +112,26 @@ describe('double metaphone', function() {
 	    });    	
     });
 
+    describe('L', function() {
+    	it('should encode L', function() {
+	    	var encodings = doubleMetaphone.process('last');
+	    	expect(encodings[0]).toMatch('^L.*');
+	    	expect(encodings[1]).toMatch('^L.*');	    	
+    	});
+
+    	it('should encode L to LL', function() {
+	    	var encodings = doubleMetaphone.process('functionally');
+	    	expect(encodings[0]).toContain('L');
+	    	expect(encodings[0]).toNotContain('LL');
+    	});
+
+    	it('should encode ignore spainish-style LL entirely in secondary', function() {
+	    	var encodings = doubleMetaphone.process('cabrillo');
+	    	expect(encodings[0]).toContain('L');
+	    	expect(encodings[1]).toNotContain('LL');
+    	});    	
+    });
+
     describe('M', function() {
     	it('should encode M', function() {
 	    	var encodings = doubleMetaphone.process('meter');
