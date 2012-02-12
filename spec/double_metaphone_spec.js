@@ -91,6 +91,22 @@ describe('double metaphone', function() {
     	expect(encodings[1]).toContain('K');    	
     });
 
+    it('should encode V to F', function() {
+    	var encodings = doubleMetaphone.process('very');
+    	expect(encodings[0]).toContain('F');
+    	expect(encodings[1]).toContain('F');    	
+    });
+
+    it('should encode VV to F', function() {
+    	var encodings = doubleMetaphone.process('savvy');
+    	expect(encodings[0]).toContain('F');
+    	expect(encodings[0]).toNotContain('FF');
+    	expect(encodings[0]).toNotContain('FV');    	
+    	expect(encodings[1]).toContain('F');
+    	expect(encodings[1]).toNotContain('FF');
+    	expect(encodings[1]).toNotContain('FV');
+    });
+
     describe('helpers', function() {
     	it('should detect vowels', function() {
     		expect(doubleMetaphone.isVowel('a')).toBeTruthy();
