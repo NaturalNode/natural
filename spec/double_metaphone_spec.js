@@ -85,6 +85,12 @@ describe('double metaphone', function() {
     	expect(encodings[1]).toContain('N');    	
     });
 
+    it('should encode Q to K', function() {
+    	var encodings = doubleMetaphone.process('quarry');
+    	expect(encodings[0]).toContain('K');
+    	expect(encodings[1]).toContain('K');    	
+    });
+
     describe('helpers', function() {
     	it('should detect vowels', function() {
     		expect(doubleMetaphone.isVowel('a')).toBeTruthy();
