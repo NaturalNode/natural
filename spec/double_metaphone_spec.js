@@ -31,4 +31,12 @@ describe('double metaphone', function() {
     	expect(encodings[0]).toContain('S');
     	expect(encodings[1]).toContain('S');
     });
+
+    it('should encode FF to F', function() {
+    	var encodings = doubleMetaphone.process('effect');
+    	expect(encodings[0]).toMatch('F');
+    	expect(encodings[0]).toNotMatch('FF');
+    	expect(encodings[1]).toMatch('F');
+    	expect(encodings[1]).toNotMatch('FF');
+    });
 });
