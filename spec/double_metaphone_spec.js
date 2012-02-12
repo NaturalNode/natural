@@ -227,12 +227,21 @@ describe('double metaphone', function() {
 	    });		
 	});
 
-
-    describe('helpers', function() {
+    describe('general', function() {
     	it('should detect vowels', function() {
     		expect(doubleMetaphone.isVowel('a')).toBeTruthy();
     		expect(doubleMetaphone.isVowel('e')).toBeTruthy();
     		expect(doubleMetaphone.isVowel('b')).toBeFalsy();    		
+    	});
+
+    	it('should detect Slavo-Germanic text', function() {
+    		doubleMetaphone.process('horowitz', function(spy) {
+    			expect(spy.slavoGermanic).toBeTruthy();
+    		});
+
+    		doubleMetaphone.process('gumball', function(spy) {
+    			expect(spy.slavoGermanic).toBeFalsy();
+    		});    		
     	});
     });    
 });
