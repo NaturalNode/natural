@@ -39,4 +39,12 @@ describe('double metaphone', function() {
     	expect(encodings[1]).toMatch('F');
     	expect(encodings[1]).toNotMatch('FF');
     });
+
+    describe('helpers', function() {
+    	it('should detect vowels', function() {
+    		expect(doubleMetaphone.isVowel('a')).toBeTruthy();
+    		expect(doubleMetaphone.isVowel('e')).toBeTruthy();
+    		expect(doubleMetaphone.isVowel('b')).toBeFalsy();    		
+    	});
+    });
 });
