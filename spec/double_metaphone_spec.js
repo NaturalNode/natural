@@ -64,6 +64,21 @@ describe('double metaphone', function() {
     	expect(encodings[1]).toNotContain('H');
     });
 
+    it('should encode Ns', function() {
+    	var encodings = doubleMetaphone.process('natural');
+    	expect(encodings[0]).toContain('N');
+    	expect(encodings[1]).toContain('N');
+    });
+
+    it('should encode NN to N', function() {
+    	var encodings = doubleMetaphone.process('fanny');
+    	expect(encodings[0]).toContain('N');
+    	expect(encodings[1]).toContain('N');
+
+    	expect(encodings[0]).toNotContain('NN');
+    	expect(encodings[1]).toNotContain('NN');
+    });
+
     describe('helpers', function() {
     	it('should detect vowels', function() {
     		expect(doubleMetaphone.isVowel('a')).toBeTruthy();
