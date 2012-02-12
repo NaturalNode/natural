@@ -112,6 +112,20 @@ describe('double metaphone', function() {
 	    });    	
     });
 
+    describe('M', function() {
+    	it('should encode M', function() {
+	    	var encodings = doubleMetaphone.process('meter');
+	    	expect(encodings[0]).toMatch('^M.*');
+	    	expect(encodings[1]).toNotContain('^M.*');    		
+    	});
+
+    	it('should skip B after M', function() {
+	    	var encodings = doubleMetaphone.process('thumb');
+	    	expect(encodings[0]).toMatch('^.*M$');
+	    	expect(encodings[1]).toNotContain('^.*M$');    		
+    	});
+    });
+
     describe('N', function() {
 	    it('should encode Ns', function() {
 	    	var encodings = doubleMetaphone.process('natural');
