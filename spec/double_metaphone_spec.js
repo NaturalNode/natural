@@ -98,7 +98,37 @@ describe('double metaphone', function() {
     it('should treat a spainish Ñ as a N', function() {
     	var encodings = doubleMetaphone.process('jalapeño');
     	expect(encodings[0]).toContain('N');
-    	expect(encodings[1]).toContain('N');    	
+    	expect(encodings[1]).toContain('N');
+    });
+
+    it('should encode PH to F', function() {
+    	var encodings = doubleMetaphone.process('phone');
+    	expect(encodings[0]).toMatch('^F.*');
+    	expect(encodings[1]).toMatch('^F.*');
+    });
+
+    it('should encode P', function() {
+    	var encodings = doubleMetaphone.process('party');
+    	expect(encodings[0]).toContain('P');
+    	expect(encodings[1]).toContain('P');    	
+    });
+
+    it('should encode PP to P', function() {
+    	var encodings = doubleMetaphone.process('sappy');
+    	expect(encodings[0]).toContain('P');
+    	expect(encodings[0]).toNotContain('PP');
+    	expect(encodings[1]).toContain('P');    	
+    	expect(encodings[1]).toNotContain('PP');    	
+    });
+
+    it('should skip P before B i.e. raspberry', function() {
+    	var encodings = doubleMetaphone.process('raspberry');
+    	expect(encodings[0]).toContain('P');
+    	expect(encodings[0]).toNotContain('PP');
+    	expect(encodings[0]).toNotContain('PB');    	
+    	expect(encodings[1]).toContain('P');
+    	expect(encodings[1]).toNotContain('PP');
+    	expect(encodings[1]).toNotContain('PB');    	    	
     });
 
     it('should encode Q to K', function() {
