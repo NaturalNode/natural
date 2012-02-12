@@ -79,6 +79,12 @@ describe('double metaphone', function() {
     	expect(encodings[1]).toNotContain('NN');
     });
 
+    it('should treat a spainish Ñ as a N', function() {
+    	var encodings = doubleMetaphone.process('jalapeño');
+    	expect(encodings[0]).toContain('N');
+    	expect(encodings[1]).toContain('N');    	
+    });
+
     describe('helpers', function() {
     	it('should detect vowels', function() {
     		expect(doubleMetaphone.isVowel('a')).toBeTruthy();
