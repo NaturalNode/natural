@@ -249,7 +249,7 @@ describe('double metaphone', function() {
 	    	expect(encodings[1]).toMatch(/^R.*/);
     	});
 
-    	it('should ignore trailing french Rs', function() {
+    	it('should ignore trailing French Rs', function() {
 	    	var encodings = doubleMetaphone.process('papier');
 	    	expect(encodings[0]).toMatch(/.*[^R]$/);
 	    	expect(encodings[1]).toMatch(/.*R$/);    		
@@ -274,6 +274,26 @@ describe('double metaphone', function() {
 	    });
 	});
 
+	describe('X', function() {
+		it('should encode X as S at start', function() {
+	    	var encodings = doubleMetaphone.process('xenophobia');
+	    	expect(encodings[0]).toMatch(/^S.*/);
+	    	expect(encodings[1]).toMatch(/^S.*/);
+		});
+
+		it('should encode X as KS at end for non-French words', function() {
+	    	var encodings = doubleMetaphone.process('box');
+	    	expect(encodings[0]).toMatch(/.*KS$/);
+	    	expect(encodings[1]).toMatch(/.*KS$/);
+		});
+
+		it('should skip X end for French words', function() {
+	    	var encodings = doubleMetaphone.process('lemieux');
+	    	expect(encodings[0]).toNotMatch(/.*KS$/);
+	    	expect(encodings[1]).toNotMatch(/.*KS$/);
+		});
+	});
+
 	describe('Z', function() {
 		it('should encode Z to S', function() {
 	    	var encodings = doubleMetaphone.process('zookeeper');
@@ -281,7 +301,7 @@ describe('double metaphone', function() {
 	    	expect(encodings[1]).toMatch(/^S.*$/);
 		});
 
-		it('should encode chinese ZH to J', function() {
+		it('should encode Chinese ZH to J', function() {
 	    	var encodings = doubleMetaphone.process('zheng');
 	    	expect(encodings[0]).toMatch(/^J.*$/);
 	    	expect(encodings[1]).toMatch(/^J.*$/);
