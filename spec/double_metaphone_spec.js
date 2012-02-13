@@ -274,6 +274,38 @@ describe('double metaphone', function() {
 	    });
 	});
 
+	describe('W', function() {
+		it('should encode WR to R', function() {
+	    	var encodings = doubleMetaphone.process('wrong');
+	    	expect(encodings[0]).toMatch('^R.*$');
+	    	expect(encodings[1]).toMatch('^R.*$');	    	
+		});
+
+		it('should encode WH to A at the start of a word', function() {
+	    	var encodings = doubleMetaphone.process('wheat');
+	    	expect(encodings[0]).toMatch('^A.*$');
+	    	expect(encodings[1]).toMatch('^A.*$');
+		});
+
+		it('should encode WH to A,F if followed by a vowel at start', function() {
+	    	var encodings = doubleMetaphone.process('wolfgang');
+	    	expect(encodings[0]).toMatch('^A.*$');
+	    	expect(encodings[1]).toMatch('^F.*$');
+		});
+
+		it('should encode OWSKY alternately to F(V)', function() {
+	    	var encodings = doubleMetaphone.process('lebowski');
+	    	expect(encodings[0]).toNotContain('F');
+	    	expect(encodings[1]).toContain('F');
+		});
+
+		it('should encode WICZ', function() {
+	    	var encodings = doubleMetaphone.process('Lowicz');
+	    	expect(encodings[0]).toMatch('.*TS$');
+	    	expect(encodings[1]).toMatch('.*FX$');
+		});		
+	});
+
 	describe('X', function() {
 		it('should encode X as S at start', function() {
 	    	var encodings = doubleMetaphone.process('xenophobia');
