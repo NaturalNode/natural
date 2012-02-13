@@ -33,16 +33,16 @@ describe('double metaphone', function() {
     describe('vowels', function() {
 	    it('should consider initial vowels to be A', function() {
 	    	var encodings = doubleMetaphone.process('England');
-	    	expect(encodings[0]).toMatch('^A.*');
-	    	expect(encodings[1]).toMatch('^A.*');
+	    	expect(encodings[0]).toMatch(/^A.*/);
+	    	expect(encodings[1]).toMatch(/^A.*/);
 	    	
 			encodings = doubleMetaphone.process('astromech');
-	    	expect(encodings[0]).toMatch('^A.*');
-	    	expect(encodings[1]).toMatch('^A.*');
+	    	expect(encodings[0]).toMatch(/^A.*/);
+	    	expect(encodings[1]).toMatch(/^A.*/);
 
 			encodings = doubleMetaphone.process('être');
-	    	expect(encodings[0]).toMatch('^A.*');
-	    	expect(encodings[1]).toMatch('^A.*');    
+	    	expect(encodings[0]).toMatch(/^A.*/);
+	    	expect(encodings[1]).toMatch(/^A.*/);    
 
 			encodings = doubleMetaphone.process('éte');
 	    	expect(encodings[0]).toMatch(/^A.*/);
@@ -53,8 +53,8 @@ describe('double metaphone', function() {
     describe('B', function() {
 	    it('should encode B to P', function() {
 	    	var encodings = doubleMetaphone.process('berry');
-	    	expect(encodings[0]).toMatch('^P.*');
-	    	expect(encodings[1]).toMatch('^P.*');    	
+	    	expect(encodings[0]).toMatch(/^P.*/);
+	    	expect(encodings[1]).toMatch(/^P.*/);    	
 	    });
 
 	    it('should encode BB to P', function() {
@@ -79,8 +79,8 @@ describe('double metaphone', function() {
     describe('D', function() {
     	it('should encode D to T', function() {
 	    	var encodings = doubleMetaphone.process('double');
-	    	expect(encodings[0]).toMatch('^T.*');
-	    	expect(encodings[1]).toMatch('^T.*');
+	    	expect(encodings[0]).toMatch(/^T.*/);
+	    	expect(encodings[1]).toMatch(/^T.*/);
     	});
 
     	it('should encode DD to T', function() {
@@ -128,8 +128,8 @@ describe('double metaphone', function() {
     describe('H', function() {
 	    it('should keep initial Hs', function() {
 	    	var encodings = doubleMetaphone.process('hardly');
-	    	expect(encodings[0]).toMatch('^H.*');
-	    	expect(encodings[1]).toMatch('^H.*');
+	    	expect(encodings[0]).toMatch(/^H.*/);
+	    	expect(encodings[1]).toMatch(/^H.*/);
 	    });
 
 	    it('should keep Hs between vowels', function() {
@@ -148,8 +148,8 @@ describe('double metaphone', function() {
     describe('L', function() {
     	it('should encode L', function() {
 	    	var encodings = doubleMetaphone.process('last');
-	    	expect(encodings[0]).toMatch('^L.*');
-	    	expect(encodings[1]).toMatch('^L.*');	    	
+	    	expect(encodings[0]).toMatch(/^L.*/);
+	    	expect(encodings[1]).toMatch(/^L.*/);	    	
     	});
 
     	it('should encode L to LL', function() {
@@ -168,14 +168,14 @@ describe('double metaphone', function() {
     describe('M', function() {
     	it('should encode M', function() {
 	    	var encodings = doubleMetaphone.process('meter');
-	    	expect(encodings[0]).toMatch('^M.*');
-	    	expect(encodings[1]).toNotContain('^M.*');    		
+	    	expect(encodings[0]).toMatch(/^M.*/);
+	    	expect(encodings[1]).toNotContain(/^M.*/);    		
     	});
 
     	it('should skip B after M', function() {
 	    	var encodings = doubleMetaphone.process('thumb');
-	    	expect(encodings[0]).toMatch('^.*M$');
-	    	expect(encodings[1]).toNotContain('^.*M$');    		
+	    	expect(encodings[0]).toMatch(/^.*M$/);
+	    	expect(encodings[1]).toNotContain(/^.*M$/);    		
     	});
     });
 
@@ -205,8 +205,8 @@ describe('double metaphone', function() {
     describe('P', function() {
 	    it('should encode PH to F', function() {
 	    	var encodings = doubleMetaphone.process('phone');
-	    	expect(encodings[0]).toMatch('^F.*');
-	    	expect(encodings[1]).toMatch('^F.*');
+	    	expect(encodings[0]).toMatch(/^F.*/);
+	    	expect(encodings[1]).toMatch(/^F.*/);
 	    });
 
 	    it('should encode P', function() {
@@ -245,14 +245,14 @@ describe('double metaphone', function() {
     describe('R', function() {
     	it('should encode R', function() {
 	    	var encodings = doubleMetaphone.process('raspberry');
-	    	expect(encodings[0]).toMatch('^R.*');
-	    	expect(encodings[1]).toMatch('^R.*');
+	    	expect(encodings[0]).toMatch(/^R.*/);
+	    	expect(encodings[1]).toMatch(/^R.*/);
     	});
 
     	it('should ignore trailing french Rs', function() {
 	    	var encodings = doubleMetaphone.process('papier');
-	    	expect(encodings[0]).toMatch('.*[^R]$');
-	    	expect(encodings[1]).toMatch('.*R$');    		
+	    	expect(encodings[0]).toMatch(/.*[^R]$/);
+	    	expect(encodings[1]).toMatch(/.*R$/);    		
     	});
     });
 
