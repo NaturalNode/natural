@@ -271,7 +271,27 @@ describe('double metaphone', function() {
 	    	expect(encodings[1]).toContain('F');
 	    	expect(encodings[1]).toNotContain('FF');
 	    	expect(encodings[1]).toNotContain('FV');
-	    });		
+	    });
+	});
+
+	describe('Z', function() {
+		it('should encode Z to S', function() {
+	    	var encodings = doubleMetaphone.process('zookeeper');
+	    	expect(encodings[0]).toMatch(/^S.*$/);
+	    	expect(encodings[1]).toMatch(/^S.*$/);
+		});
+
+		it('should encode chinese ZH to J', function() {
+	    	var encodings = doubleMetaphone.process('zheng');
+	    	expect(encodings[0]).toMatch(/^J.*$/);
+	    	expect(encodings[1]).toMatch(/^J.*$/);
+		});
+
+		it('should encode ZZA to S, TS', function() {
+	    	var encodings = doubleMetaphone.process('pizza');
+	    	expect(encodings[0]).toContain('S');
+	    	expect(encodings[1]).toContain('TS');
+		});
 	});
 
     describe('general', function() {
