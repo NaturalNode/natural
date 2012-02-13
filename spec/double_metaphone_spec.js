@@ -45,8 +45,8 @@ describe('double metaphone', function() {
 	    	expect(encodings[1]).toMatch('^A.*');    
 
 			encodings = doubleMetaphone.process('éte');
-	    	expect(encodings[0]).toMatch('^A.*');
-	    	expect(encodings[1]).toMatch('^A.*');
+	    	expect(encodings[0]).toMatch(/^A.*/);
+	    	expect(encodings[1]).toMatch(/^A.*/);
 	    });    	
     });
 
@@ -73,7 +73,40 @@ describe('double metaphone', function() {
 	    	var encodings = doubleMetaphone.process('leçon');
 	    	expect(encodings[0]).toContain('S');
 	    	expect(encodings[1]).toContain('S');
-	    });    	
+	    });
+    });
+
+    describe('D', function() {
+    	it('should encode D to T', function() {
+	    	var encodings = doubleMetaphone.process('double');
+	    	expect(encodings[0]).toMatch('^T.*');
+	    	expect(encodings[1]).toMatch('^T.*');
+    	});
+
+    	it('should encode DD to T', function() {
+	    	var encodings = doubleMetaphone.process('fiddle');
+	    	expect(encodings[0]).toContain('T');
+	    	expect(encodings[0]).toNotContain('TT');
+	    	expect(encodings[0]).toNotContain('D');
+
+	    	expect(encodings[1]).toContain('T');
+	    	expect(encodings[1]).toNotContain('TT');
+	    	expect(encodings[1]).toNotContain('D');
+    	});
+
+    	it('should encode DG to J', function() {
+	    	var encodings = doubleMetaphone.process('ledge');
+	    	expect(encodings[0]).toContain('J');
+	    	expect(encodings[0]).toNotContain('T');
+	    	expect(encodings[1]).toContain('J');
+	    	expect(encodings[1]).toNotContain('T');	    	
+    	});
+
+    	it('should encode DT to T', function() {
+	    	var encodings = doubleMetaphone.process('bundt');
+	    	expect(encodings[0]).toMatch(/.*[^D]T$/);
+	    	expect(encodings[1]).toMatch(/.*[^D]T$/);
+    	});
     });
 
     describe('F', function() {
