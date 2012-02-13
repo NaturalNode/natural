@@ -252,7 +252,14 @@ describe('double metaphone', function() {
     	it('should ignore trailing French Rs', function() {
 	    	var encodings = doubleMetaphone.process('papier');
 	    	expect(encodings[0]).toMatch(/.*[^R]$/);
-	    	expect(encodings[1]).toMatch(/.*R$/);    		
+	    	expect(encodings[1]).toMatch(/.*R$/);
+    	});
+    });
+
+    describe('T', function() {
+    	it('should encode T', function() {
+	    	var encodings = doubleMetaphone.process('nation');
+	    	expect(encodings[0]).toMatch(/.*XN$/);
     	});
     });
 
