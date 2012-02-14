@@ -257,9 +257,42 @@ describe('double metaphone', function() {
     });
 
     describe('T', function() {
-    	it('should encode T', function() {
+    	it('should encode TION to XN', function() {
 	    	var encodings = doubleMetaphone.process('nation');
 	    	expect(encodings[0]).toMatch(/.*XN$/);
+	    	expect(encodings[1]).toMatch(/.*XN$/);	    	
+    	});
+
+    	it('should encode CH sounds to X', function() {
+	    	var encodings = doubleMetaphone.process('thatch');
+	    	expect(encodings[0]).toMatch(/.*X$/);
+	    	expect(encodings[1]).toMatch(/.*X$/);
+    	});
+
+    	it('should encode hard TH to T', function() {
+	    	var encodings = doubleMetaphone.process('thomas');
+	    	expect(encodings[0]).toMatch(/^T.*/);
+	    	expect(encodings[1]).toMatch(/^T.*/);
+    	});
+
+    	it('should encode soft TH to 0,T', function() {
+	    	var encodings = doubleMetaphone.process('this');
+	    	expect(encodings[0]).toMatch(/^0.*/);
+	    	expect(encodings[1]).toMatch(/^T.*/);
+    	});
+
+    	it('should encode TT to T', function() {
+	    	var encodings = doubleMetaphone.process('matta');
+	    	expect(encodings[0]).toMatch(/[^T]T/);
+	    	expect(encodings[1]).toMatch(/[^T]T/);	    	
+    	}); 
+
+    	it('should encode TD to T', function() {
+	    	var encodings = doubleMetaphone.process('countdown');
+	    	expect(encodings[0]).toContain('T');
+	    	expect(encodings[0]).toNotContain('D');
+	    	expect(encodings[1]).toContain('T');
+	    	expect(encodings[1]).toNotContain('D');
     	});
     });
 
