@@ -145,6 +145,38 @@ describe('double metaphone', function() {
 	    });    	
     });
 
+    describe('J', function() {
+    	it('should encode spainish Js to Hs in the middle of words', function() {
+	    	var encodings = doubleMetaphone.process('bajador');
+	    	expect(encodings[0]).toMatch(/^.J/);
+	    	expect(encodings[1]).toMatch(/^.H/);
+    	});
+
+    	it('should encode J to J,A', function() {
+	    	var encodings = doubleMetaphone.process('jumble');
+	    	expect(encodings[0]).toMatch(/^J/);
+	    	expect(encodings[1]).toMatch(/^A/);
+    	});
+
+    	it('should encode J to J," " at the end of words', function() {
+	    	var encodings = doubleMetaphone.process('hadj');
+	    	expect(encodings[0]).toMatch(/J$/);
+	    	expect(encodings[1]).toMatch(/\s$/);
+    	});
+
+    	it('should encode JJ to J', function() {
+	    	var encodings = doubleMetaphone.process('hajj');
+	    	expect(encodings[0]).toMatch(/J$/);
+	    	expect(encodings[1]).toMatch(/J$/);
+	    });
+
+	    it('should encode J to H in saint names (cities)', function() {
+	    	var encodings = doubleMetaphone.process('san juan');
+	    	expect(encodings[0]).toContain('H');
+	    	expect(encodings[1]).toContain('H');
+	    });
+    });
+
     describe('L', function() {
     	it('should encode L', function() {
 	    	var encodings = doubleMetaphone.process('last');
@@ -156,6 +188,8 @@ describe('double metaphone', function() {
 	    	var encodings = doubleMetaphone.process('functionally');
 	    	expect(encodings[0]).toContain('L');
 	    	expect(encodings[0]).toNotContain('LL');
+	    	expect(encodings[1]).toContain('L');
+	    	expect(encodings[1]).toNotContain('LL');
     	});
 
     	it('should encode ignore spainish-style LL entirely in secondary', function() {
