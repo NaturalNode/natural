@@ -125,11 +125,87 @@ describe('double metaphone', function() {
 	    });    	
     });
 
+    describe('G', function() {
+    	it('should encode G to F following U and 4 after certain cons', function() {
+    		var encodings = doubleMetaphone.process('tough');
+	    	expect(encodings[0]).toMatch('F$');
+	    	expect(encodings[1]).toMatch('F$');
+    	});
+
+    	it('should encode G to K', function() {
+    		var encodings = doubleMetaphone.process('gift');
+	    	expect(encodings[0]).toMatch('^K');
+	    	expect(encodings[1]).toMatch('^K');
+    	});
+
+    	it('should ignore G a few letters after D, H, B', function() {
+    		var encodings = doubleMetaphone.process('fig');
+	    	expect(encodings[0]).toMatch('K$');
+	    	expect(encodings[1]).toMatch('K$');
+    	});
+
+    	it('should ignore G a few letters after D, H, B', function() {
+    		var encodings = doubleMetaphone.process('hugh');
+	    	expect(encodings[0]).toBe('H');
+	    	expect(encodings[1]).toBe('H');
+    	});
+
+    	it('should encode G to J when staring a word whose 3rd legger is I', function() {
+    		var encodings = doubleMetaphone.process('ghislaine');
+	    	expect(encodings[0]).toMatch(/^J/);
+	    	expect(encodings[1]).toMatch(/^J/);
+    	});
+
+    	it('should encode G to K when staring words whose 3rd letter is not I', function() {
+	    	var encodings = doubleMetaphone.process('consign');
+	    	expect(encodings[0]).toMatch(/N$/);
+	    	expect(encodings[1]).toMatch(/KN$/);
+    	});
+
+    	it('should encode GH to K if not succeeding a cons', function() {
+	    	var encodings = doubleMetaphone.process('Afghani');
+	    	expect(encodings[0]).toContain('K');
+	    	expect(encodings[1]).toContain('K');
+    	});
+
+    	it('should encode GN to N/KN generally', function() {
+	    	var encodings = doubleMetaphone.process('consign');
+	    	expect(encodings[0]).toMatch(/N$/);
+	    	expect(encodings[1]).toMatch(/KN$/);
+    	});
+
+    	it('should encode G to KN/N for the second letter following vowels', function() {
+	    	var encodings = doubleMetaphone.process('agnosia');
+	    	expect(encodings[0]).toMatch(/^.KN/);
+	    	expect(encodings[1]).toMatch(/^.N/);
+    	});
+        	
+    	it('should encode G to K,J when starting some words', function() {
+	    	var encodings = doubleMetaphone.process('germany');
+	    	expect(encodings[0]).toMatch(/^K/);
+	    	expect(encodings[1]).toMatch(/^J/);
+    	});
+
+    	it('should encode GL to KL, L', function() {
+	    	var encodings = doubleMetaphone.process('taglianetti');
+	    	expect(encodings[0]).toMatch(/KL/);
+	    	expect(encodings[1]).toMatch(/[^K]L/);    		
+    	});
+
+    	it('should encode GG to K', function() {
+	    	var encodings = doubleMetaphone.process('daggers');
+	    	expect(encodings[0]).toContain('K');
+	    	expect(encodings[0]).toNotContain('KK');
+	    	expect(encodings[1]).toContain('K');
+	    	expect(encodings[1]).toNotContain('KK');
+    	});
+    });
+
     describe('H', function() {
 	    it('should keep initial Hs', function() {
 	    	var encodings = doubleMetaphone.process('hardly');
-	    	expect(encodings[0]).toMatch(/^H.*/);
-	    	expect(encodings[1]).toMatch(/^H.*/);
+	    	expect(encodings[0]).toMatch(/^H/);
+	    	expect(encodings[1]).toMatch(/^H/);
 	    });
 
 	    it('should keep Hs between vowels', function() {
