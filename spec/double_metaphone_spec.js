@@ -366,6 +366,62 @@ describe('double metaphone', function() {
     	});
     });
 
+    describe('S', function() {
+    	it('should skip S between I and L', function() {
+	    	var encodings = doubleMetaphone.process('isle');
+	    	expect(encodings[0]).toMatch(/^AL/);
+	    	expect(encodings[1]).toMatch(/^AL/);
+    	});
+
+    	it("should encode sugar's S to X", function() {
+	    	var encodings = doubleMetaphone.process('sugar');
+	    	expect(encodings[0]).toMatch(/^X/);
+	    	expect(encodings[1]).toMatch(/^S/);
+    	});
+
+    	it("should encode general SH to X", function() {
+	    	var encodings = doubleMetaphone.process('share');
+	    	expect(encodings[0]).toMatch(/^X/);
+	    	expect(encodings[1]).toMatch(/^X/);
+    	});
+
+    	it('should encode certain germanic SHs to S', function() {
+	    	var encodings = doubleMetaphone.process('Sholmer');
+	    	expect(encodings[0]).toMatch(/^S/);
+	    	expect(encodings[1]).toMatch(/^S/);
+    	});
+
+    	it('should encode SION to S,X generally', function() {
+	    	var encodings = doubleMetaphone.process('tension');
+	    	expect(encodings[0]).toContain('S');
+	    	expect(encodings[1]).toContain('X');
+    	});
+
+    	it('should encode SCHool to SK', function() {
+	    	var encodings = doubleMetaphone.process('school');
+	    	expect(encodings[0]).toMatch(/^SK/);
+	    	expect(encodings[1]).toMatch(/^SK/);
+    	});
+
+    	it('should encode SCHER to X,SK', function() {
+	    	var encodings = doubleMetaphone.process('scherzando');
+	    	expect(encodings[0]).toMatch(/^X/);
+	    	expect(encodings[1]).toMatch(/^SK/);
+    	});
+
+    	it('should encode SCHL to X,S', function() {
+	    	var encodings = doubleMetaphone.process('schlump');
+	    	expect(encodings[0]).toMatch(/^X/);
+	    	expect(encodings[1]).toMatch(/^S/);
+    	});
+
+    	it('should encode SC to SK generally', function() {
+	    	var encodings = doubleMetaphone.process('scumbag');
+	    	expect(encodings[0]).toMatch(/^SK/);
+	    	expect(encodings[1]).toMatch(/^SK/);
+    	});
+    });
+
     describe('T', function() {
     	it('should encode TION to XN', function() {
 	    	var encodings = doubleMetaphone.process('nation');
