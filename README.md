@@ -139,8 +139,8 @@ A classifier can also be serialized and deserialized as such
 Phonetics
 ---------
 
-Phonetic matching (sounds-like) matching can be done with either the SoundEx or
-Metaphone algorithms
+Phonetic matching (sounds-like) matching can be done withthe SoundEx,
+Metaphone or DoubleMetaphone algorithms
 
     var natural = require('natural'),
         metaphone = natural.Metaphone, soundEx = natural.SoundEx;
@@ -169,6 +169,15 @@ soundsLike is essentially a shortcut to Metaphone.compare
 the raw phonetics are obtained with phonetics()
 
     console.log('phonetics'.phonetics());   
+
+DoubleMetaphone deals with two encodings returned in an array
+
+    var natural = require('natural'),
+    var dm = natural.DoubleMetaphone;
+    
+    var encodings = dm.process('Matrix');
+    console.log(encodings[0]);
+    console.log(encodings[1]);
 
 full text strings can be tokenized into arrays of phonetics similar to stemmers
 

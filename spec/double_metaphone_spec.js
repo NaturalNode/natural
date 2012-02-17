@@ -701,7 +701,12 @@ describe('double metaphone', function() {
 
 			encodings = doubleMetaphone.process('intervention');
 	    	expect(encodings[0]).toMatch(/ANTRFNXN/);
-	    	expect(encodings[1]).toMatch(/ANTRFNXN/);	    		
+	    	expect(encodings[1]).toMatch(/ANTRFNXN/);		    	    		
+    	});
+
+    	it('should compare', function() {
+    		expect(doubleMetaphone.compare('love', 'hate')).toBeFalsy();
+    		expect(doubleMetaphone.compare('love', 'luv')).toBeTruthy();
     	});
     });
 });
