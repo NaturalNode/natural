@@ -685,5 +685,23 @@ describe('double metaphone', function() {
     			expect(spy.slavoGermanic).toBeFalsy();
     		});    		
     	});
-    });    
+
+    	it('should encode general words', function() {
+	    	var encodings = doubleMetaphone.process('complete');
+	    	expect(encodings[0]).toMatch(/KMPLT/);
+	    	expect(encodings[1]).toMatch(/KMPLT/);    		
+
+			encodings = doubleMetaphone.process('Matrix');
+	    	expect(encodings[0]).toMatch(/MTRKS/);
+	    	expect(encodings[1]).toMatch(/MTRKS/);
+	    	
+			encodings = doubleMetaphone.process('appropriate');
+	    	expect(encodings[0]).toMatch(/APRPRT/);
+	    	expect(encodings[1]).toMatch(/APRPRT/);
+
+			encodings = doubleMetaphone.process('intervention');
+	    	expect(encodings[0]).toMatch(/ANTRFNXN/);
+	    	expect(encodings[1]).toMatch(/ANTRFNXN/);	    		
+    	});
+    });
 });
