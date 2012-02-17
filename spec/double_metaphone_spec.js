@@ -65,10 +65,127 @@ describe('double metaphone', function() {
 	    	expect(encodings[1]).toContain('P');
 	    	expect(encodings[1]).toNotContain('PP');
 	    	expect(encodings[1]).toNotContain('PB');
-	    });    	
+	    });
     });
 
     describe('C', function() {
+    	it("should encode MACHER's C to K", function() {
+	    	var encodings = doubleMetaphone.process('stomacher');
+	    	expect(encodings[0]).toContain('K');
+	    	expect(encodings[1]).toContain('K');
+    	});
+
+    	it("should encode CEASAR's C to S", function() {
+	    	var encodings = doubleMetaphone.process('ceasar');
+	    	expect(encodings[0]).toMatch(/^S/);
+	    	expect(encodings[1]).toMatch(/S/);    		
+    	});
+
+
+	    it("should encode chianti's C to K", function() {
+	    	var encodings = doubleMetaphone.process('chianti');
+	    	expect(encodings[0]).toMatch(/^K/);
+	    	expect(encodings[1]).toMatch(/^K/);
+	    });
+
+	    it('should encode CHAE to K,X', function() {
+	    	var encodings = doubleMetaphone.process('archaeology');
+	    	expect(encodings[0]).toContain('K');
+	    	expect(encodings[1]).toContain('X');
+	    });
+
+	    it('should encode CHarac to K', function() {
+	    	var encodings = doubleMetaphone.process('character');
+	    	expect(encodings[0]).toMatch(/^K/);
+	    	expect(encodings[1]).toMatch(/^K/);
+	    });
+
+	    it('should encode C after von to K', function() {
+	    	var encodings = doubleMetaphone.process('von Chor');
+	    	expect(encodings[0]).toMatch(/^..K/);
+	    	expect(encodings[1]).toMatch(/^..K/);
+	    });	    
+
+	    it('should encode some CH to K', function() {
+	    	var encodings = doubleMetaphone.process('orchestrational');
+	    	expect(encodings[0]).toMatch(/^..K/);
+	    	expect(encodings[1]).toMatch(/^..K/);
+	    });
+
+	    it('should encode CH before some cons as K', function() {
+	    	var encodings = doubleMetaphone.process('chthonic');
+	    	expect(encodings[0]).toMatch(/^K/);
+	    	expect(encodings[1]).toMatch(/^K/);	    	
+	    });
+
+	    it('should encode Irish mC to K', function() {
+	    	var encodings = doubleMetaphone.process('McHenry');
+	    	expect(encodings[0]).toMatch(/^.K/);
+	    	expect(encodings[1]).toMatch(/^.K/);	    	
+	    });
+
+	    it('should encode CH to X,K generally', function() {
+	    	var encodings = doubleMetaphone.process('achievement');
+	    	expect(encodings[0]).toMatch(/^.X/);
+	    	expect(encodings[1]).toMatch(/^.K/);	    	
+	    });
+
+	    it('shoud encode Polish WICZ to S,X', function() {
+	    	var encodings = doubleMetaphone.process('markiewicz');
+	    	expect(encodings[0]).toMatch(/S$/);
+	    	expect(encodings[1]).toMatch(/X$/);	    	
+	    });
+
+	    it('should encode CIA to X', function() {
+	    	var encodings = doubleMetaphone.process('indicia');
+	    	expect(encodings[0]).toMatch(/X$/);
+	    	expect(encodings[1]).toMatch(/X$/);	    	
+	    });
+
+	    it('should encode Italian CCI to X', function() {
+	    	var encodings = doubleMetaphone.process('bacci');
+	    	expect(encodings[0]).toContain('X');
+	    	expect(encodings[1]).toContain('X');	    	
+	    });
+
+	    it('should encode some CCes to K', function() {
+	    	var encodings = doubleMetaphone.process('success');
+	    	expect(encodings[0]).toMatch(/^SKS/);
+	    	expect(encodings[1]).toMatch(/^SKS/);
+	    });
+
+	    it('should encode some CC to K', function() {
+	    	var encodings = doubleMetaphone.process('yucca');
+	    	expect(encodings[0]).toMatch(/K$/);
+	    	expect(encodings[1]).toMatch(/K$/);
+	    });	    
+
+	    it('should encode CQ to K', function() {
+	    	var encodings = doubleMetaphone.process('racquetball');
+	    	expect(encodings[0]).toMatch(/^.K/);
+	    	expect(encodings[1]).toMatch(/^.K/);
+	    });
+
+	    it('should encode CIO to S,X', function() {
+	    	var encodings = doubleMetaphone.process('sociopath');
+	    	expect(encodings[0]).toMatch(/^.S/);
+	    	expect(encodings[1]).toMatch(/^.X/);	    	
+	    });
+
+	    it('should encode CI to S', function() {
+	    	var encodings = doubleMetaphone.process('city');
+	    	expect(encodings[0]).toMatch(/^S/);
+	    	expect(encodings[1]).toMatch(/^S/);	    	
+	    });
+
+	    it('should encode Scotch maC to K', function() {
+	    	var encodings = doubleMetaphone.process('Mac Ghille dhuibh');
+	    	expect(encodings[0]).toMatch(/^MK/);
+	    	expect(encodings[1]).toMatch(/^MK/);	    	
+	    });	    
+    });
+
+    describe('Ç', function() {
 	    it('should encode case Ç (French) to S', function() {
 	    	var encodings = doubleMetaphone.process('leçon');
 	    	expect(encodings[0]).toContain('S');
