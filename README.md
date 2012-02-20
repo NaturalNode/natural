@@ -170,7 +170,8 @@ the raw phonetics are obtained with phonetics()
 
     console.log('phonetics'.phonetics());   
 
-DoubleMetaphone deals with two encodings returned in an array
+DoubleMetaphone deals with two encodings returned in an array. This
+feature is experimental and subject to change.
 
     var natural = require('natural'),
     var dm = natural.DoubleMetaphone;

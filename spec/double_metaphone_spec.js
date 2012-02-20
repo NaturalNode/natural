@@ -700,12 +700,33 @@ describe('double metaphone', function() {
 	    	expect(encodings[1]).toMatch(/APRPRT/);
 
 			encodings = doubleMetaphone.process('intervention');
-	    	expect(encodings[0]).toMatch(/ANTRFNXN/);
-	    	expect(encodings[1]).toMatch(/ANTRFNXN/);		    	    		
 
-			encodings = doubleMetaphone.process('français');
-			console.log(encodings);
+	    	expect(encodings[0]).toBe('ANTRFNXN');
+	    	expect(encodings[1]).toBe('ANTRFNXN');		    	    		
 
+			encodings = doubleMetaphone.process('Français');
+	    	expect(encodings[0]).toBe('FRNS');
+	    	expect(encodings[1]).toBe('FRNSS');
+    	});
+
+    	it('should truncate codes if specified', function() {
+			var encodings = doubleMetaphone.process('Matrix', 4);
+	    	expect(encodings[0]).toBe('MTRK');
+	    	expect(encodings[1]).toBe('MTRK');
+	    	
+			encodings = doubleMetaphone.process('Français', 4);
+	    	expect(encodings[0]).toBe('FRNS');
+	    	expect(encodings[1]).toBe('FRNS');
+    	});
+
+    	it('should not truncate code is shorter than specification', function() {
+			var encodings = doubleMetaphone.process('Matrix', 32);
+	    	expect(encodings[0]).toBe('MTRKS');
+	    	expect(encodings[1]).toBe('MTRKS');
+	    	
+			encodings = doubleMetaphone.process('Français', 5);
+	    	expect(encodings[0]).toBe('FRNS');
+	    	expect(encodings[1]).toBe('FRNSS');
     	});
 
     	it('should compare', function() {
