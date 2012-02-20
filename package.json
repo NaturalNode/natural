@@ -17,7 +17,7 @@
   "author": "Chris Umbel <chris@chrisumbel.com>",
   "keywords": ["natural", "language", "porter", "lancaster", "stemmer", "bayes",
     "classifier", "phonetic", "metaphone", "inflector", "wordnet", "tf-idf", 
-    "logistic", "regression"],
+    "logistic", "regression", "doublemetaphone", "double"],
   "main": "./lib/natural/index.js",
   "maintainers": [{
       "name": "Chris Umbel",
