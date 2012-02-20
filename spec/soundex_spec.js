@@ -87,10 +87,6 @@ describe('soundex', function() {
     it('should not code the first character', function() {
         expect(soundex.process('render').charAt(0)).toBe('R');
     });
-
-    it('should max out at four characters long', function() {
-        expect(soundex.process('supercalifragilisticexpialidocious').length).toBe(4);
-    });
     
     it('should pad right with zeros', function() {
         expect(soundex.process('super')).toBe('S160');
@@ -142,5 +138,17 @@ describe('soundex', function() {
         expect('phonetics'.tokenizeAndPhoneticize()).toEqual(['P532']);
         expect('phonetics jump'.tokenizeAndPhoneticize()).toEqual(['P532', 'J510']);
         expect('phonetics jump calculate'.tokenizeAndPhoneticize()).toEqual(['P532', 'J510', 'C424']);        
+    });      
+
+    it('should max out at four characters long by default', function() {
+        expect(soundex.process('supercalifragilisticexpialidocious').length).toBe(4);
     });    
+
+    it('should truncate to specified length if maxLength passed', function() {
+        expect(soundex.process('supercalifragilisticexpialidocious', 8).length).toBe(8);
+    });    
+
+    it('should handle a maxLength beyond code length', function() {
+        expect(soundex.process('JUMP', 8)).toBe('J510');
+    });
 });
