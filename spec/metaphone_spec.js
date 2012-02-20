@@ -231,4 +231,12 @@ describe('metaphone', function() {
         expect('phonetics garbonzo'.tokenizeAndPhoneticize()).toEqual(['FNTKS', 'KRBNS']);
         expect('phonetics garbonzo lightning'.tokenizeAndPhoneticize()).toEqual(['FNTKS', 'KRBNS', 'LTNNK']);
     });     
+
+    it('should truncate to length specified if code exceeds', function() {
+        expect(metaphone.process('phonetics', 4)).toBe('FNTK');        
+    });
+
+    it('should not truncate to length specified if code does not exceed', function() {
+        expect(metaphone.process('phonetics', 8)).toBe('FNTKS');
+    });    
 });
