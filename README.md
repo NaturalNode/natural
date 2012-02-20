@@ -157,6 +157,10 @@ the raw phonetics are obtained with process()
 
     console.log(metaphone.process('phonetics'));
 
+a maximum code length can be supplied
+
+    console.log(metaphone.process('phonetics', 3));    
+
 attaching will patch String with useful methods
 
     metaphone.attach();
@@ -188,8 +192,6 @@ same module operations apply with SoundEx
 
     if(soundEx.compare(wordA, wordB))
         console.log('they sound alike!');
-
-    console.log(soundEx.process('phonetics'));
 
 the same String patches apply with soundex
 

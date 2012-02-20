@@ -1,7 +1,7 @@
 {
   "name": "natural",
   "description": "General natural language (tokenizing, stemming, classification, inflection, phonetics, tfidf, WordNet) facilities for node.",
-  "version": "0.0.68",
+  "version": "0.0.69",
   "homepage": "https://github.com/NaturalNode/natural",
   "engines": {
     "node": ">=0.4.9"
@@ -17,11 +17,7 @@
   "author": "Chris Umbel <chris@chrisumbel.com>",
   "keywords": ["natural", "language", "porter", "lancaster", "stemmer", "bayes",
     "classifier", "phonetic", "metaphone", "inflector", "wordnet", "tf-idf", 
-<<<<<<< HEAD
-    "logistic", "regression", "doublemetaphone"],
-=======
     "logistic", "regression", "doublemetaphone", "double"],
->>>>>>> d6ec04b5db5a52da9d3b9fd47b7d3e851cb9f769
   "main": "./lib/natural/index.js",
   "maintainers": [{
       "name": "Chris Umbel",
