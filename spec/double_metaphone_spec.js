@@ -700,8 +700,12 @@ describe('double metaphone', function() {
 	    	expect(encodings[1]).toMatch(/APRPRT/);
 
 			encodings = doubleMetaphone.process('intervention');
-	    	expect(encodings[0]).toMatch(/ANTRFNXN/);
-	    	expect(encodings[1]).toMatch(/ANTRFNXN/);		    	    		
+	    	expect(encodings[0]).toBe('ANTRFNXN');
+	    	expect(encodings[1]).toBe('ANTRFNXN');		    	    		
+
+			encodings = doubleMetaphone.process('Français');
+	    	expect(encodings[0]).toBe('FRNS');
+	    	expect(encodings[1]).toBe('FRNSS');		    	    		
     	});
 
     	it('should compare', function() {
