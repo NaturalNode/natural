@@ -161,6 +161,16 @@ a maximum code length can be supplied
 
     console.log(metaphone.process('phonetics', 3));    
 
+DoubleMetaphone deals with two encodings returned in an array. This
+feature is experimental and subject to change.
+
+    var natural = require('natural'),
+    var dm = natural.DoubleMetaphone;
+    
+    var encodings = dm.process('Matrix');
+    console.log(encodings[0]);
+    console.log(encodings[1]);
+
 attaching will patch String with useful methods
 
     metaphone.attach();
@@ -173,16 +183,6 @@ soundsLike is essentially a shortcut to Metaphone.compare
 the raw phonetics are obtained with phonetics()
 
     console.log('phonetics'.phonetics());   
-
-DoubleMetaphone deals with two encodings returned in an array. This
-feature is experimental and subject to change.
-
-    var natural = require('natural'),
-    var dm = natural.DoubleMetaphone;
-    
-    var encodings = dm.process('Matrix');
-    console.log(encodings[0]);
-    console.log(encodings[1]);
 
 full text strings can be tokenized into arrays of phonetics similar to stemmers
 
