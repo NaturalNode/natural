@@ -165,7 +165,7 @@ DoubleMetaphone deals with two encodings returned in an array. This
 feature is experimental and subject to change.
 
     var natural = require('natural'),
-    var dm = natural.DoubleMetaphone;
+      dm = natural.DoubleMetaphone;
     
     var encodings = dm.process('Matrix');
     console.log(encodings[0]);
