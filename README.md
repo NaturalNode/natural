@@ -103,7 +103,17 @@ outputs "buy"
 
     console.log(classifier.classify('i am long copper'));
 
-    classifier = new natural.BayesClassifier();
+you have access to the set of matched classes and the associated value from the classifier. 
+
+outputs:
+
+    [ { label: 'sell', value: 0.39999999999999997 },
+      { label: 'buy', value: 0.19999999999999998 } ]     
+
+from this:
+
+    console.log(classifier.getClassifications('i am long copper'));
+
 
 the classifier can also be trained on and classify arrays of tokens, strings, or
 any mixture. arrays let you use entirely custom data with  your own
