@@ -423,49 +423,47 @@ A TfIdf instance can also be serialized and deserialzed for save and recall.
 WordNet
 -------
 
-One of the newest and most experimental features is WordNet integration. Here's an
-example of using natural to look up definitions of the word node. The parameter in
-the WordNet constructor is the local directory that will store the WordNet 
-database files. If the database files are not present in the specified directories
-natural will download them for you.
+Natural provides a partial wrapper over the WordNet database. To use it, 
+you'll need to download the sqlite version of the database from 
+http://sourceforge.net/projects/wnsql/files/ and put it somewhere on your system. 
+Then, pass in the path to the database when calling the WordNet constructor. 
 
 Keep in mind the WordNet integration is to be considered experimental at this point
 and not production ready. The API is also subject to change.
 
 Here's an exmple of looking up definitions for the word, "node".
 
-    var wordnet = new natural.WordNet('.');
+    var wordnet = new natural.WordNet('./wordnet30.sqlite');
 
-    wordnet.lookup('node', function(results) {
-        results.forEach(function(result) {
+    wordnet.getWord('node', function(word) {
+        console.log(word.lemma);
+        word.senses.forEach(function(sense) {
             console.log('------------------------------------');
-            console.log(result.synsetOffset);
-            console.log(result.pos);
-            console.log(result.lemma);
-            console.log(result.synonyms);
-            console.log(result.pos);
-            console.log(result.gloss);
+            console.log(sense.definition);
+            console.log(sense.pos);
+            sense.getSynonyms(function(synonymns) {
+                synonymns.foreach(function(synonymn) {
+                    console.log("- " + synonymn.lemma);
+                });
+            });
         });
     });
     
-Given a synset offset and part of speech a definition can be looked up directly.
+You can also search for multiple words, using '%' as a wildcard. 
 
-    var wordnet = new natural.WordNet('.');
-
-    wordnet.get(4424418, 'n', function(result) {
-        console.log('------------------------------------');
-        console.log(result.lemma);
-        console.log(result.pos);
-        console.log(result.gloss);
-        console.log(result.synonyms);        
+    wordnet.findWords("nod%", function(words) {
+        words.foreach(function(word) {
+            console.log(word.lemma);
+        });
     });
+
 
 Princeton University "About WordNet." WordNet. Princeton University. 2010. <http://wordnet.princeton.edu>
 
 License
 -------
 
-Copyright (c) 2011, Chris Umbel, Rob Ellis
+Copyright (c) 2011, Chris Umbel, Rob Ellis, Russell Mull
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

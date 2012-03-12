@@ -23,10 +23,7 @@ SHELL := /bin/bash
 benchmark:
 	@node benchmarks
 
-test_clean: 
-	@ls -1 ./io_spec/test_data/wordnet/download/{index,data}* | xargs rm -f
-
-clean: test_clean  
+clean: 
 	@find ./ -name *~ | xargs rm -f
 	@find ./ -name \#* | xargs rm -f
 	@rm *classifier.json
@@ -34,7 +31,7 @@ clean: test_clean
 test:
 	@NODE_PATH=. jasmine-node spec/
 
-test_io: test_clean
+test_io: 
 	@NODE_PATH=. jasmine-node io_spec/
 
 test_io_unclean:
