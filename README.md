@@ -1,4 +1,3 @@
-
 natural
 =======
 
@@ -442,7 +441,7 @@ Here's an exmple of looking up definitions for the word, "node".
             console.log(sense.definition);
             console.log(sense.pos);
             sense.getSynonyms(function(synonymns) {
-                synonymns.foreach(function(synonymn) {
+                synonymns.forEach(function(synonymn) {
                     console.log("- " + synonymn.lemma);
                 });
             });
@@ -452,7 +451,7 @@ Here's an exmple of looking up definitions for the word, "node".
 You can also search for multiple words, using '%' as a wildcard. 
 
     wordnet.findWords("nod%", function(words) {
-        words.foreach(function(word) {
+        words.forEach(function(word) {
             console.log(word.lemma);
         });
     });
