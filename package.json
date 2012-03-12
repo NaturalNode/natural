@@ -9,7 +9,8 @@
   "dependencies": {
     "sylvester": ">= 0.0.12",
     "apparatus": ">= 0.0.4",
-    "underscore": "*"
+    "underscore": "*",
+    "sqlite3": "2.1.x"
   },
   "devDependencies": {
     "uubench": "0.0.x"
