@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2011, Chris Umbel
+Copyright (c) 2011, Chris Umbel and Russell Mull
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,87 +20,85 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var IndexFile = require('lib/natural/wordnet/index_file'),
-  DataFile = require('lib/natural/wordnet/data_file'),
-  WordNet = require('lib/natural/wordnet/wordnet');
+var WordNet = require('lib/natural/wordnet/wordnet');
+var sqlite3 = require('sqlite3');
+var _ = require('underscore');
+var fs = require('fs');
 
 describe('wordnet', function() {
-  describe('index_file', function() {
-    it('should build a valid url', function() {
-      var indexFile = new IndexFile('./spec/test_data/wordnet', 'http://wordnet.naturalnode.com/', 'noun');      
-      expect(indexFile.url.href).toBe('http://wordnet.naturalnode.com/index.noun.gz');
+  var testDataFile = __dirname + '/test_data/wordnet_mini.sql';
+  var testData = fs.readFileSync(testDataFile, 'utf8');
+
+  var db = new sqlite3.Database(':memory:');
+  db.exec(testData);
+
+  var wordnet = new WordNet(db);
+
+  it('should get a single word', function() {
+    wordnet.getWord('unique', function(word) {
+      expect(word.id).toBe(138336);
+      expect(word.lemma).toBe('unique');
+
+      asyncSpecDone();
     });
 
-    it('should miss a record', function() {
-      var indexFile = new IndexFile('./spec/test_data/wordnet', 'http://wordnet.naturalnode.com/', 'noun');
-      indexFile.lookup('aac', function(result) {
-        expect(result).toBeNull();
+    asyncSpecWait();
+  });
+
+  it('should find multiple words', function() {
+    wordnet.findWords('unique%', function(words) {
+      expect(words.length).toBe(3);
+      expect(_.pluck(words, 'lemma')).toEqual(['unique', 'uniquely', 'uniqueness']);
+    });
+  });
+
+  it('should find a word by id', function() {
+    wordnet.getWordById(138336, function(word) {
+      expect(word.id).toBe(138336);
+      expect(word.lemma).toBe('unique');
+
+      asyncSpecDone();
+    });
+
+    asyncSpecWait();
+  });
+
+  it('should handle a miss for single word retrieval', function() {
+    wordnet.getWord('argombiszki', function(word) {
+      expect(word).toBeNull();
+      asyncSpecDone();
+    });
+
+    asyncSpecWait();
+  });
+
+  it('should handle a miss for multiple word retrieval', function() {
+    wordnet.findWords('argombiszki%', function(words) {
+      expect(words.length).toBe(0);
+      asyncSpecDone();
+    });
+
+    asyncSpecWait();
+  });
+
+  describe('word', function() {
+    var word = null;
+    wordnet.getWord('good', function(w) { word = w; });
+
+    waitsFor(function() { return word != null; }, 1000);
+
+    it('should have senses', function() {
+      expect(word.senses.length).toBe(27);
+      expect(word.senses[0].pos).toBe('n');
+      expect(word.senses[0].definition).toBe('articles of commerce');
+    });
+
+    it('should be able to tell you its synonyms for its senses', function() {
+      word.senses[0].getSynonyms(function(synonyms) {
+        expect(_.pluck(synonyms, 'lemma')).toEqual(['commodity', 'good', 'trade good']);
         asyncSpecDone();
       });
-      
-      asyncSpecWait();
-    });    
-    
-    it('should find a record', function() {
-      var indexFile = new IndexFile('./spec/test_data/wordnet', 'http://wordnet.naturalnode.com/', 'noun');      
-      indexFile.lookup('pass', function(result) {
-        expect(result.lemma).toBe('pass');
-        expect(result.pos).toBe('n');
-        expect(result.ptrSymbol.length == 5);        
-        expect(result.synsetOffset.length == 16);
-        asyncSpecDone();
-      });
-      
       asyncSpecWait();
     });
   });
-  
-  describe('data_file', function() {
-    it('should find a record', function() {
-      var dataFile = new DataFile('./spec/test_data/wordnet/', 'http://wordnet.naturalnode.com/', 'noun');
-      
-      dataFile.get(1740, function(data) {
-        expect(data.lemma).toBe('entity');
-        expect(data.ptrs.length).toBe(3);
-        asyncSpecDone();
-      });
-      
-      asyncSpecWait();
-    });
-  });
-  
-  it('should look up a word', function() {
-    var wordnet = new WordNet('./spec/test_data/wordnet/', 'http://wordnet.naturalnode.com/');
-    
-    wordnet.lookup('entity', function(records) {
-      expect(records.length).toBe(1);
-      expect(records[0].lemma).toBe('entity');      
-      asyncSpecDone();
-    });
-    
-    asyncSpecWait();
-  });  
-  
-  it('should handle a miss', function() {
-    var wordnet = new WordNet('./spec/test_data/wordnet/', 'http://wordnet.naturalnode.com/');
-    
-    wordnet.lookup('argombiszki', function(records) {
-      expect(records.length).toBe(0);
-      asyncSpecDone();
-    });
-    
-    asyncSpecWait();
-  });  
-  
-  
-  it('should get a word', function() {
-    var wordnet = new WordNet('./spec/test_data/wordnet/', 'http://wordnet.naturalnode.com/');
-    
-    wordnet.get(1740, 'n', function(record) {
-      expect(record.lemma).toBe('entity');      
-      asyncSpecDone();
-    });
-    
-    asyncSpecWait();
-  });   
 });

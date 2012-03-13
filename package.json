@@ -1,15 +1,16 @@
 {
   "name": "natural",
   "description": "General natural language (tokenizing, stemming, classification, inflection, phonetics, tfidf, WordNet) facilities for node.",
-  "version": "0.0.69",
+  "version": "0.1.0",
   "homepage": "https://github.com/NaturalNode/natural",
   "engines": {
-    "node": ">=0.4.9"
+    "node": "0.6.x"
   },
   "dependencies": {
     "sylvester": ">= 0.0.12",
     "apparatus": ">= 0.0.4",
-    "underscore": "*"
+    "underscore": ">=1.3.1",
+    "sqlite3": ">=2.1.0"
   },
   "devDependencies": {
     "uubench": "0.0.x"
