@@ -100,24 +100,5 @@ describe('wordnet', function() {
       });
       asyncSpecWait();
     });
-
   });
-/*
-
-  it('should lookup synonyms', function() {
-    var wordnet = new WordNet('./io_spec/test_data/wordnet/download/', 'http://wordnet.naturalnode.com/');
-    
-    wordnet.lookupSynonyms('entity', function(records) {
-      expect(records.length).toBe(3);
-      
-      require('path').exists('./io_spec/test_data/wordnet/download/index.noun', function(exists) {
-        expect(exists).toBeTruthy();
-        asyncSpecDone();
-      });
-    });
-    
-    asyncSpecWait();
-  });
-
-*/
 });
