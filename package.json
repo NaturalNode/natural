@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "homepage": "https://github.com/NaturalNode/natural",
   "engines": {
-    "node": "0.6.x"
+    "node": "0.4.11"
   },
   "dependencies": {
     "sylvester": ">= 0.0.12",
