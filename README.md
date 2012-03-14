@@ -2,8 +2,8 @@ natural
 =======
 
 "Natural" is a general natural language facility for nodejs. Tokenizing,
-stemming, classification, phonetics, tf-idf, WordNet, and some inflection are 
-currently supported.
+stemming, classification, phonetics, tf-idf, WordNet, string similarity,
+and some inflection are currently supported.
 
 It's still in the early stages, and am very interested in bug reports,
 contributions and the like.
@@ -47,6 +47,16 @@ The other tokenizers follow a similar pattern
     tokenizer = new natural.RegexpTokenizer({pattern: /\-/});
     console.log(tokenizer.tokenize("flee-dog"));
     // [ 'flee', 'dog' ]
+
+String Similiarity
+---------------
+
+The similiarity between two strings can be accomplished with a Jaro–Winkler distance.
+
+  var jaroWinklerDistance = require('natural').JaroWinklerDistance;
+
+  console.log('apple', 'applet'); // outputs 0.9666666666666667
+  console.log(d('not', 'same')); // output NaN
     
 Stemmers
 --------
