@@ -424,7 +424,7 @@ WordNet
 
 Natural provides a partial wrapper over the WordNet database. To use it, 
 you'll need to download the sqlite version of the database from 
-http://sourceforge.net/projects/wnsql/files/ and put it somewhere on your system. 
+http://sourceforge.net/projects/wnsql/files/ or http://wordnet.naturalnode.com/wordnet30-sqlite-1.0.1.zip and put it somewhere on your system. 
 Then, pass in the path to the database when calling the WordNet constructor. 
 
 Keep in mind the WordNet integration is to be considered experimental at this point
