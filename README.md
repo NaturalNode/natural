@@ -53,10 +53,10 @@ String Similiarity
 
 The similiarity between two strings can be accomplished with a Jaro–Winkler distance.
 
-  var jaroWinklerDistance = require('natural').JaroWinklerDistance;
+    var jaroWinklerDistance = require('natural').JaroWinklerDistance;
 
-  console.log('apple', 'applet'); // outputs 0.9666666666666667
-  console.log(d('not', 'same')); // output NaN
+    console.log('apple', 'applet'); // outputs 0.9666666666666667
+    console.log(d('not', 'same')); // output NaN
     
 Stemmers
 --------
