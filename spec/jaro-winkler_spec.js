@@ -24,6 +24,19 @@ var jaroWinklerDistance = require('lib/natural/distance/jaro-winkler_distance')
 
 describe('jaro-winkler', function() {
     it('should evaluate string similarity', function() {
-	expect(jaroWinklerDistance('apple', 'applet')).toBe(0.9666666666666667); 
+	expect(jaroWinklerDistance('DIXON', 'DICKSONX')).toBe(0.8133333333333332);
+	expect(jaroWinklerDistance('DWAYNE', 'DUANE')).toBe(0.840);
     });	
+
+    it('should handle exact matches', function() {
+	expect(jaroWinklerDistance('RICK', 'RICK')).toBe(1);
+    });
+
+    it('should handle total mis-matches', function() {
+	expect(jaroWinklerDistance('NOT', 'SAME')).toBe(0);
+    });
+
+    it('should handle transpositions', function() {
+	expect(jaroWinklerDistance('MARTHA', 'MARHTA')).toBe(0.9611111111111111);
+    });
 });

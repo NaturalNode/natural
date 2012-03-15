@@ -21,7 +21,7 @@ THE SOFTWARE.
 */
 
 var natural = require('natural'),
-    phonetic = natural.Metaphone;
+    phonetic = natural.DoubleMetaphone;
 
 var sentence = 'phonetic modules contain algorithms';
 var stdin = process.openStdin();
@@ -33,6 +33,7 @@ words = sentence.tokenizeAndPhoneticize();
 
 function findMatch(input) {
     inputSounds = input.phonetics();
+    console.log(inputSounds);
     
     for(var i = 0; i < words.length; i++) {
 	wordSounds = words[i];
