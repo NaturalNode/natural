@@ -48,16 +48,20 @@ The other tokenizers follow a similar pattern
     console.log(tokenizer.tokenize("flee-dog"));
     // [ 'flee', 'dog' ]
 
-String Similiarity
----------------
+String Distance
+----------------------
+Natural provides an implementation of of the Jaro-Winkler string distance measure.
+This will return a number between 0 and 1 of how closely the strings match (0 = not at all, 1 = exact match)
 
-The similiarity between two strings can be accomplished with a Jaro–Winkler distance.
+    var natural = require('natural');
+    console.log(natural.JaroWinklerDistance("dixon","dicksonx"))
+    console.log(natural.JaroWinklerDistance('not', 'same')); 
 
-    var jaroWinklerDistance = require('natural').JaroWinklerDistance;
+Output:
 
-    console.log(jaroWinklerDistance('apple', 'applet')); // outputs 0.9666666666666667
-    console.log(jaroWinklerDistance('not', 'same')); // output NaN
-    
+    0.8133333333333333
+    NaN
+
 Stemmers
 --------
 
@@ -428,18 +432,6 @@ A TfIdf instance can also be serialized and deserialzed for save and recall.
 
     // assuming you pulled "s" back out of storage. 
     var tfidf = new TfIdf(JSON.parse(s));
-
-String Distance
-----------------------
-Natural provides an implementation of of the Jaro-Winkler string distance measure.
-This will return a number between 0 and 1 of how closely the strings match (0 = not at all, 1 = exact match)
-
-    var natural = require('natural');
-    console.log(natural.JaroWinklerDistance("dixon","dicksonx"))
-
-Output:
-
-    0.8133333333333333
 
 WordNet
 -------
