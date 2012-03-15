@@ -23,7 +23,7 @@ THE SOFTWARE.
 var jaroWinklerDistance = require('lib/natural/distance/jaro-winkler_distance')
 
 describe('jaro-winkler', function() {
-	it('should evaluate string similarity', function() {
-		expect(jaroWinklerDistance('apple', 'applet')).toBe(0.9666666666666667); 
-	});	
+    it('should evaluate string similarity', function() {
+	expect(jaroWinklerDistance('apple', 'applet')).toBe(0.9666666666666667); 
+    });	
 });

@@ -59,8 +59,8 @@ This will return a number between 0 and 1 of how closely the strings match (0 = 
 
 Output:
 
-    0.8133333333333333
-    NaN
+    0.7466666666666666
+    0
 
 Stemmers
 --------
