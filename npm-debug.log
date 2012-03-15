@@ -1,0 +1,181 @@
+info it worked if it ends with ok
+verbose cli [ 'C:\\Program Files (x86)\\nodejs\\\\node.exe',
+verbose cli   'C:\\Program Files (x86)\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+verbose cli   'install' ]
+info using npm@1.1.0-2
+info using node@v0.6.8
+verbose config file C:\Users\adamp\.npmrc
+verbose config file C:\Program Files (x86)\nodejs\etc\npmrc
+verbose config file C:\Program Files (x86)\nodejs\node_modules\npm\npmrc
+verbose mkdir done: C:\Users\adamp\AppData\Roaming\npm 755
+verbose mkdir done: C:\git\natural 755
+verbose caching C:\git\natural\package.json
+verbose loadDefaults natural@0.1.0
+verbose where, deps [ 'C:\\git\\natural',
+verbose where, deps   [ 'sylvester', 'apparatus', 'underscore', 'sqlite3', 'uubench' ] ]
+verbose from cache C:\git\natural\package.json
+info preinstall natural@0.1.0
+verbose caching C:\git\natural\node_modules\sylvester\package.json
+verbose loadDefaults sylvester@0.0.21
+verbose caching C:\git\natural\node_modules\apparatus\package.json
+verbose loadDefaults apparatus@0.0.6
+verbose caching C:\git\natural\node_modules\underscore\package.json
+verbose loadDefaults underscore@1.3.1
+verbose caching C:\git\natural\node_modules\uubench\package.json
+verbose loadDefaults uubench@0.0.1
+verbose from cache C:\git\natural\package.json
+verbose from cache C:\git\natural\node_modules\apparatus\package.json
+verbose from cache C:\git\natural\node_modules\sylvester\package.json
+verbose from cache C:\git\natural\node_modules\underscore\package.json
+verbose from cache C:\git\natural\node_modules\uubench\package.json
+verbose already installed in C:\git\natural skipping apparatus@>= 0.0.4
+verbose already installed in C:\git\natural skipping underscore@>=1.3.1
+verbose cache add [ 'sqlite3@>=2.1.0', null ]
+silly cache add: name, spec, args [ undefined, 'sqlite3@>=2.1.0', [ 'sqlite3@>=2.1.0', null ] ]
+verbose parsed url { pathname: 'sqlite3@', path: 'sqlite3@', href: 'sqlite3@' }
+silly cache add: name, spec, args [ 'sqlite3', '>=2.1.0', [ 'sqlite3', '>=2.1.0' ] ]
+verbose parsed url { pathname: '=2.1.0', path: '=2.1.0', href: '=2.1.0' }
+verbose addNamed [ 'sqlite3', '>=2.1.0' ]
+verbose addNamed [ null, '>=2.1.0' ]
+silly name, range, hasData [ 'sqlite3', '>=2.1.0', false ]
+verbose already installed in C:\git\natural skipping uubench@0.0.x
+verbose already installed in C:\git\natural skipping sylvester@>= 0.0.12
+verbose raw, before any munging sqlite3
+verbose url resolving [ 'https://registry.npmjs.org/', './sqlite3' ]
+verbose url resolved https://registry.npmjs.org/sqlite3
+verbose etag "25CHYBA1DL1R1ZMPFO4LKW8YB"
+http GET https://registry.npmjs.org/sqlite3
+http 304 https://registry.npmjs.org/sqlite3
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"25CHYBA1DL1R1ZMPFO4LKW8YB"',
+silly get cb     date: 'Wed, 14 Mar 2012 21:10:42 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag sqlite3 from cache
+verbose mkdir done: C:\Users\adamp\AppData\Roaming\npm-cache\sqlite3 755
+silly name, range, hasData 2 [ 'sqlite3', '>=2.1.0', true ]
+silly versions [ 'sqlite3',
+silly versions   [ '2.0.0',
+silly versions     '2.0.1',
+silly versions     '2.0.2',
+silly versions     '2.0.3',
+silly versions     '2.0.4',
+silly versions     '2.0.5',
+silly versions     '2.0.6',
+silly versions     '2.0.7',
+silly versions     '2.0.8',
+silly versions     '2.0.9',
+silly versions     '2.0.10',
+silly versions     '2.0.11',
+silly versions     '2.0.12',
+silly versions     '2.0.13',
+silly versions     '2.0.14',
+silly versions     '2.0.15',
+silly versions     '2.1.0',
+silly versions     '2.1.1' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.19-win32-ia32-6.1.7601',
+verbose bin dist   { shasum: '31cb74d383ac165cdf78a36b6e9bba3655d95d87',
+verbose bin dist     tarball: 'http://registry.npmjs.org/sqlite3/-/sqlite3-2.1.1.tgz' } ]
+verbose has wscript [ undefined,
+verbose has wscript   { file: 'C:\\Users\\adamp\\AppData\\Roaming\\npm-cache\\sqlite3\\2.1.1\\package\\package.json',
+verbose has wscript     contributors: false,
+verbose has wscript     serverjs: false,
+verbose has wscript     wscript: true } ]
+verbose caching C:\Users\adamp\AppData\Roaming\npm-cache\sqlite3\2.1.1\package\package.json
+verbose loadDefaults sqlite3@2.1.1
+silly resolved [ { name: 'sqlite3',
+silly resolved     description: 'Asynchronous, non-blocking SQLite3 bindings',
+silly resolved     version: '2.1.1',
+silly resolved     homepage: 'http://github.com/developmentseed/node-sqlite3',
+silly resolved     author: 
+silly resolved      { name: 'Development Seed',
+silly resolved        email: 'info@developmentseed.org',
+silly resolved        url: 'http://developmentseed.org/' },
+silly resolved     contributors: 
+silly resolved      [ { name: 'Konstantin Käfer', email: 'mail@kkaefer.com' },
+silly resolved        { name: 'Dane Springmeyer', email: 'dane@developmentseed.org' },
+silly resolved        { name: 'Will White', email: 'will@developmentseed.org' },
+silly resolved        { name: 'Orlando Vazquez', email: 'ovazquez@gmail.com' },
+silly resolved        { name: 'Artem Kustikov', email: 'kustikoff@gmail.com' },
+silly resolved        { name: 'Eric Fredricksen', email: 'efredricksen@gmail.com' },
+silly resolved        { name: 'John Wright', email: 'mrjjwright@gmail.com' },
+silly resolved        { name: 'Ryan Dahl', email: 'ry@tinyclouds.org' },
+silly resolved        { name: 'Tom MacWright', email: 'tom@developmentseed.org' },
+silly resolved        { name: 'Carter Thaxton', email: 'carter.thaxton@gmail.com' },
+silly resolved        { name: 'Audrius Kažukauskas', email: 'audrius@neutrino.lt' },
+silly resolved        { name: 'Johannes Schauer', email: 'josch@pyneo.org' } ],
+silly resolved     repository: 
+silly resolved      { type: 'git',
+silly resolved        url: 'git://github.com/developmentseed/node-sqlite3.git' },
+silly resolved     devDependencies: { step: '0.0.4' },
+silly resolved     engines: { node: '~0.6.0' },
+silly resolved     licenses: [ { type: 'BSD' } ],
+silly resolved     main: './lib/sqlite3',
+silly resolved     _id: 'sqlite3@2.1.1',
+silly resolved     scripts: { preinstall: 'node-waf clean || (exit 0); node-waf configure build' },
+silly resolved     dependencies: {},
+silly resolved     optionalDependencies: {},
+silly resolved     _engineSupported: true,
+silly resolved     _npmVersion: '1.1.0-2',
+silly resolved     _nodeVersion: 'v0.6.8',
+silly resolved     _defaultsLoaded: true } ]
+info into C:\git\natural sqlite3@2.1.1
+info installOne sqlite3@2.1.1
+info unbuild C:\git\natural\node_modules\sqlite3
+verbose from cache C:\Users\adamp\AppData\Roaming\npm-cache\sqlite3\2.1.1\package\package.json
+verbose mkdir (expected) error ENOENT, no such file or directory 'C:\git\natural\node_modules\___sqlite3.npm'
+verbose mkdir done: C:\git\natural\node_modules\___sqlite3.npm 755
+verbose unpack_ uid, gid [ undefined, undefined ]
+verbose unpackTarget C:\git\natural\node_modules\sqlite3
+silly gunzTarPerm modes [ '755', '644' ]
+silly afterUntar undefined
+verbose gunzed C:\git\natural\node_modules\___sqlite3.npm\package
+verbose rm'ed C:\git\natural\node_modules\sqlite3
+verbose renamed [ 'C:\\git\\natural\\node_modules\\___sqlite3.npm\\package',
+verbose renamed   'C:\\git\\natural\\node_modules\\sqlite3' ]
+verbose has wscript [ undefined,
+verbose has wscript   { file: 'C:\\git\\natural\\node_modules\\sqlite3\\package.json',
+verbose has wscript     contributors: false,
+verbose has wscript     serverjs: false,
+verbose has wscript     wscript: true } ]
+verbose caching C:\git\natural\node_modules\sqlite3\package.json
+verbose loadDefaults sqlite3@2.1.1
+info preinstall sqlite3@2.1.1
+verbose unsafe-perm in lifecycle true
+silly exec cmd "/c" "node-waf clean || (exit 0); node-waf configure build"
+silly spawning [ 'cmd',
+silly spawning   [ '/c', 'node-waf clean || (exit 0); node-waf configure build' ],
+silly spawning   'C:\\git\\natural\\node_modules\\sqlite3' ]
+info sqlite3@2.1.1 Failed to exec preinstall script
+ERR! error installing sqlite3@2.1.1
+info unbuild C:\git\natural\node_modules\sqlite3
+verbose from cache C:\git\natural\node_modules\sqlite3\package.json
+info preuninstall sqlite3@2.1.1
+info uninstall sqlite3@2.1.1
+verbose unbuild sqlite3@2.1.1 [ true,
+verbose unbuild sqlite3@2.1.1   'C:\\git\\natural\\node_modules',
+verbose unbuild sqlite3@2.1.1   'C:\\git\\natural\\node_modules' ]
+info postuninstall sqlite3@2.1.1
+verbose installOne cb sqlite3@2.1.1
+ERR! sqlite3@2.1.1 preinstall: `node-waf clean || (exit 0); node-waf configure build`
+ERR! `cmd "/c" "node-waf clean || (exit 0); node-waf configure build"` failed with 1
+ERR! 
+ERR! Failed at the sqlite3@2.1.1 preinstall script.
+ERR! This is most likely a problem with the sqlite3 package,
+ERR! not with npm itself.
+ERR! Tell the author that this fails on your system:
+ERR!     node-waf clean || (exit 0); node-waf configure build
+ERR! You can get their info via:
+ERR!     npm owner ls sqlite3
+ERR! There is likely additional logging output above.
+ERR! 
+ERR! System Windows_NT 6.1.7601
+ERR! command "C:\\Program Files (x86)\\nodejs\\\\node.exe" "C:\\Program Files (x86)\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install"
+ERR! cwd C:\git\natural
+ERR! node -v v0.6.8
+ERR! npm -v 1.1.0-2
+ERR! code ELIFECYCLE
+ERR! message sqlite3@2.1.1 preinstall: `node-waf clean || (exit 0); node-waf configure build`
+ERR! message `cmd "/c" "node-waf clean || (exit 0); node-waf configure build"` failed with 1
+ERR! errno {}
+verbose exit [ 1, true ]

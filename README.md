@@ -429,6 +429,18 @@ A TfIdf instance can also be serialized and deserialzed for save and recall.
     // assuming you pulled "s" back out of storage. 
     var tfidf = new TfIdf(JSON.parse(s));
 
+String Distance
+----------------------
+Natural provides an implementation of of the Jaro-Winkler string distance measure.
+This will return a number between 0 and 1 of how closely the strings match (0 = not at all, 1 = exact match)
+
+    var natural = require('natural');
+    console.log(natural.JaroWinklerDistance("dixon","dicksonx"))
+
+Output:
+
+    0.8133333333333333
+
 WordNet
 -------
 
