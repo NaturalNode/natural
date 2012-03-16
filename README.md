@@ -436,40 +436,42 @@ A TfIdf instance can also be serialized and deserialzed for save and recall.
 WordNet
 -------
 
-Natural provides a partial wrapper over the WordNet database. To use it, 
-you'll need to download the sqlite version of the database from 
-http://sourceforge.net/projects/wnsql/files/ or http://wordnet.naturalnode.com/wordnet30-sqlite-1.0.1.zip and put it somewhere on your system. 
-Then, pass in the path to the database when calling the WordNet constructor. 
+One of the newest and most experimental features is WordNet integration. Here's an
+example of using natural to look up definitions of the word node. The parameter in
+the WordNet constructor is the local directory that will store the WordNet
+database files. If the database files are not present in the specified directories
+natural will download them for you.
 
 Keep in mind the WordNet integration is to be considered experimental at this point
 and not production ready. The API is also subject to change.
 
 Here's an exmple of looking up definitions for the word, "node".
 
-    var wordnet = new natural.WordNet('./wordnet30.sqlite');
+    var wordnet = new natural.WordNet('.');
 
-    wordnet.getWord('node', function(word) {
-        console.log(word.lemma);
-        word.senses.forEach(function(sense) {
+    wordnet.lookup('node', function(results) {
+        results.forEach(function(result) {
             console.log('------------------------------------');
-            console.log(sense.definition);
-            console.log(sense.pos);
-            sense.getSynonyms(function(synonymns) {
-                synonymns.forEach(function(synonymn) {
-                    console.log("- " + synonymn.lemma);
-                });
-            });
-        });
-    });
-    
-You can also search for multiple words, using '%' as a wildcard. 
-
-    wordnet.findWords("nod%", function(words) {
-        words.forEach(function(word) {
-            console.log(word.lemma);
+            console.log(result.synsetOffset);
+            console.log(result.pos);
+            console.log(result.lemma);
+            console.log(result.synonyms);
+            console.log(result.pos);
+            console.log(result.gloss);
         });
     });
 
+Given a synset offset and part of speech a definition can be looked up directly.
+
+    var wordnet = new natural.WordNet('.');
+
+    wordnet.get(4424418, 'n', function(result) {
+        console.log('------------------------------------');
+        console.log(result.lemma);
+        console.log(result.pos);
+        console.log(result.gloss);
+        console.log(result.synonyms);
+    });
 
 Princeton University "About WordNet." WordNet. Princeton University. 2010. <http://wordnet.princeton.edu>
 
