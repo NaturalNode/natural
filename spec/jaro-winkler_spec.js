@@ -28,19 +28,19 @@ Number.prototype.approxEql = function(val) {
 
 describe('jaro-winkler', function() {
     it('should evaluate string similarity', function() {
-	   expect(jaroWinklerDistance('DIXON', 'DICKSONX').approxEql(0.81333)).toBeTruthy();
-	   expect(jaroWinklerDistance('DWAYNE', 'DUANE').approxEql(0.84)).toBeTruthy();
+        expect(jaroWinklerDistance('DIXON', 'DICKSONX').approxEql(0.81333)).toBeTruthy();
+        expect(jaroWinklerDistance('DWAYNE', 'DUANE').approxEql(0.84)).toBeTruthy();
     });	
 
     it('should handle exact matches', function() {
-	   expect(jaroWinklerDistance('RICK', 'RICK')).toBe(1);
+        expect(jaroWinklerDistance('RICK', 'RICK')).toBe(1);
     });
 
     it('should handle total mis-matches', function() {
-	   expect(jaroWinklerDistance('NOT', 'SAME')).toBe(0);
+        expect(jaroWinklerDistance('NOT', 'SAME')).toBe(0);
     });
 
     it('should handle transpositions', function() {
-	   expect(jaroWinklerDistance('MARTHA', 'MARHTA').approxEql(0.96111)).toBeTruthy();
+        expect(jaroWinklerDistance('MARTHA', 'MARHTA').approxEql(0.96111)).toBeTruthy();
     });
 });
