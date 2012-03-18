@@ -22,10 +22,14 @@ THE SOFTWARE.
 
 var jaroWinklerDistance = require('lib/natural/distance/jaro-winkler_distance')
 
+Number.prototype.approxEql = function(val) {
+    return Math.abs(this - val) < 1e-5;
+}
+
 describe('jaro-winkler', function() {
     it('should evaluate string similarity', function() {
-	   expect(jaroWinklerDistance('DIXON', 'DICKSONX')).toBe(0.8133333333333332);
-	   expect(jaroWinklerDistance('DWAYNE', 'DUANE')).toBe(0.8400000000000001);
+	   expect(jaroWinklerDistance('DIXON', 'DICKSONX').approxEql(0.81333)).toBeTruthy();
+	   expect(jaroWinklerDistance('DWAYNE', 'DUANE').approxEql(0.84)).toBeTruthy();
     });	
 
     it('should handle exact matches', function() {
@@ -37,6 +41,6 @@ describe('jaro-winkler', function() {
     });
 
     it('should handle transpositions', function() {
-	   expect(jaroWinklerDistance('MARTHA', 'MARHTA')).toBe(0.9611111111111111);
+	   expect(jaroWinklerDistance('MARTHA', 'MARHTA').approxEql(0.96111)).toBeTruthy();
     });
 });
