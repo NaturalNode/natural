@@ -62,6 +62,17 @@ Output:
     0.7466666666666666
     0
 
+Natural also offers support for Levenshtein distances.
+
+    var natural = require('natural');
+    console.log(natural.LevenshteinDistance("ones","onez"))
+    console.log(natural.LevenshteinDistance('one', 'one')); 
+
+Output:
+
+    2
+    0
+
 Stemmers
 --------
 
