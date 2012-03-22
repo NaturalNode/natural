@@ -1,6 +1,6 @@
 {
   "name": "natural",
-  "description": "General natural language (tokenizing, stemming, classification, inflection, phonetics, tfidf, WordNet, jaro-winkler) facilities for node.",
+  "description": "General natural language (tokenizing, stemming, classification, inflection, phonetics, tfidf, WordNet, jaro-winkler, Levenshtein distance) facilities for node.",
   "version": "0.1.4",
   "homepage": "https://github.com/NaturalNode/natural",
   "engines": {
@@ -17,7 +17,8 @@
   "author": "Chris Umbel <chris@chrisumbel.com>",
   "keywords": ["natural", "language", "porter", "lancaster", "stemmer", "bayes",
     "classifier", "phonetic", "metaphone", "inflector", "wordnet", "tf-idf", 
-    "logistic", "regression", "doublemetaphone", "double", "jaro-winkler"],
+    "logistic", "regression", "doublemetaphone", "double", "jaro-winkler", "levenshtein", 
+    "distance"],
   "main": "./lib/natural/index.js",
   "maintainers": [{
       "name": "Chris Umbel",
