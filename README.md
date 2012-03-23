@@ -73,6 +73,11 @@ Output:
     2
     0
 
+And Dice's co-efficient:
+
+    var natural = require('natural');
+    console.log(natural.DiceCoefficient('thing', 'things'));
+
 Stemmers
 --------
 
