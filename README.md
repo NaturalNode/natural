@@ -65,7 +65,7 @@ Output:
 Natural also offers support for Levenshtein distances.
 
     var natural = require('natural');
-    console.log(natural.LevenshteinDistance("ones","onez"))
+    console.log(natural.LevenshteinDistance("ones","onez"));
     console.log(natural.LevenshteinDistance('one', 'one')); 
 
 Output:
@@ -73,10 +73,28 @@ Output:
     2
     0
 
+he cost of the three edit operations are modifiable for Levenshtein
+
+    console.log(natural.LevenshteinDistance("ones","onez", {
+        insertion_cost: 1,
+        deletion_cost: 1,
+        substitution_cost: 1
+    }));
+
+Output:
+
+    1
+
 And Dice's co-efficient:
 
     var natural = require('natural');
-    console.log(natural.DiceCoefficient('thing', 'things'));
+    console.log(natural.DiceCoefficient('thing', 'thing'));
+    console.log(natural.DiceCoefficient('not', 'same'));
+
+Output
+
+    1
+    0
 
 Stemmers
 --------

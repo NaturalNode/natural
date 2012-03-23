@@ -27,6 +27,10 @@ describe('levenshtein_distance', function() {
 		expect(levenshteinDistance('doctor', 'doktor')).toBe(2);
 	});	
 
+	it('should allow altering replacement value', function() {
+		expect(levenshteinDistance('doctor', 'doktor', {substitution_cost: 1})).toBe(1);
+	});	
+
 	it('should insert 1', function() {
 		expect(levenshteinDistance('doctor', 'docto')).toBe(1);
 	});
