@@ -65,13 +65,25 @@ Output:
 Natural also offers support for Levenshtein distances.
 
     var natural = require('natural');
-    console.log(natural.LevenshteinDistance("ones","onez"))
+    console.log(natural.LevenshteinDistance("ones","onez"));
     console.log(natural.LevenshteinDistance('one', 'one')); 
 
 Output:
 
     2
     0
+
+The cost of the three edit operations are modifiable for Levenshtein
+
+    console.log(natural.LevenshteinDistance("ones","onez", {
+        insertion_cost: 1,
+        deletion_cost: 1,
+        substitution_cost: 1
+    }));
+
+Output:
+
+    1
 
 Stemmers
 --------
