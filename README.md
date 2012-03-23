@@ -73,7 +73,7 @@ Output:
     2
     0
 
-The cost of the three edit operations are modifiable for Levenshtein
+he cost of the three edit operations are modifiable for Levenshtein
 
     console.log(natural.LevenshteinDistance("ones","onez", {
         insertion_cost: 1,
@@ -84,6 +84,17 @@ The cost of the three edit operations are modifiable for Levenshtein
 Output:
 
     1
+
+And Dice's co-efficient:
+
+    var natural = require('natural');
+    console.log(natural.DiceCoefficient('thing', 'thing'));
+    console.log(natural.DiceCoefficient('not', 'same'));
+
+Output
+
+    1
+    0
 
 Stemmers
 --------
