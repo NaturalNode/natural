@@ -14,7 +14,7 @@ being merged in to this project and will be maintained here going forward.
 At the moment most algorithms are English-specific but long-term some diversity
 is in order.
 
-Aside from this README the only current documentation is [here on my blog](http://www.chrisumbel.com/article/node_js_natural_language_porter_stemmer_lancaster_bayes_naive_metaphone_soundex).
+Aside from this README the only documentation is [this DZone article](http://www.dzone.com/links/r/using_natural_a_nlp_module_for_nodejs.html) and [here on my blog](http://www.chrisumbel.com/article/node_js_natural_language_porter_stemmer_lancaster_bayes_naive_metaphone_soundex) which is a bit older.
 
 Installation
 ------------
