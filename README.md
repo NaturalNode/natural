@@ -73,7 +73,7 @@ Output:
     2
     0
 
-he cost of the three edit operations are modifiable for Levenshtein
+The cost of the three edit operations are modifiable for Levenshtein
 
     console.log(natural.LevenshteinDistance("ones","onez", {
         insertion_cost: 1,
