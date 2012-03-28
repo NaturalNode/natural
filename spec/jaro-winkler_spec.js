@@ -40,6 +40,10 @@ describe('jaro-winkler', function() {
         expect(jaroWinklerDistance('NOT', 'SAME')).toBe(0);
     });
 
+    it('should handle total mis-matches', function() {
+        expect(jaroWinklerDistance('aaa', 'abcd').approxEql(0.575)).toBeTruthy();
+    });
+
     it('should handle transpositions', function() {
         expect(jaroWinklerDistance('MARTHA', 'MARHTA').approxEql(0.96111)).toBeTruthy();
     });
