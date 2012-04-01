@@ -31,11 +31,11 @@ describe('levenshtein_distance', function() {
 		expect(levenshteinDistance('doctor', 'doktor', {substitution_cost: 1})).toBe(1);
 	});	
 
-	it('should insert 1', function() {
+	it('should delete 1', function() {
 		expect(levenshteinDistance('doctor', 'docto')).toBe(1);
 	});
 
-	it('should delete 1', function() {
+	it('should insert 1', function() {
 		expect(levenshteinDistance('flat', 'flats')).toBe(1);
 	});
 
@@ -46,5 +46,21 @@ describe('levenshtein_distance', function() {
 
 	it('should consider perfect matches 0', function() {
 		expect(levenshteinDistance('one', 'one')).toBe(0);
-	});	
+	});
+
+    it('different deletion cost should work', function() {
+		expect(levenshteinDistance('ones', 'one', {deletion_cost: 3})).toBe(3);
+	});
+
+    it('different insertion cost should work', function() {
+		expect(levenshteinDistance('one', 'ones', {deletion_cost: 3, insertion_cost: 5})).toBe(5);
+	});
+
+    it('delete all characters with -ve cost', function() {
+		expect(levenshteinDistance('delete', '', {deletion_cost: -1})).toBe(-6);
+	});
+
+    it('insert all characters', function() {
+		expect(levenshteinDistance('', 'insert')).toBe(6);
+	});
 });
