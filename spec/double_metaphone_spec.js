@@ -734,4 +734,10 @@ describe('double metaphone', function() {
     		expect(doubleMetaphone.compare('love', 'luv')).toBeTruthy();
     	});
     });
+
+  describe('issue #34', function() {
+		it('terminate words ending in H', function() {
+	    expect(doubleMetaphone.process('ptah')).toEqual(['PT', 'PT']);
+		});
+  });
 });
