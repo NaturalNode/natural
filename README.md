@@ -48,6 +48,10 @@ The other tokenizers follow a similar pattern
     console.log(tokenizer.tokenize("flee-dog"));
     // [ 'flee', 'dog' ]
 
+    tokenizer = new natural.WordPunctTokenizer();
+    console.log(tokenizer.tokenize("my dog hasn't any flees."));
+    // [ 'my',  'dog',  'hasn',  '\'',  't',  'any',  'flees',  '.' ]
+
 String Distance
 ----------------------
 Natural provides an implementation of of the Jaro-Winkler string distance measure.
