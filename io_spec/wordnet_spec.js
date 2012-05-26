@@ -55,17 +55,6 @@ describe('wordnet', function() {
     asyncSpecWait();
   });
 
-  it('should resize buffer for large returns', function() {
-    var wordnet = new WordNet('./io_spec/test_data/wordnet/download/', 'http://wordnet.naturalnode.com/');
-    
-    wordnet.lookupSynonyms('hot', function(records) {
-      expect(records.length).toBe(53);      
-      asyncSpecDone();
-    });
-    
-    asyncSpecWait();
-  });
-
   it('should lookup synonyms give a synset offset and a pos', function() {
     var wordnet = new WordNet('./io_spec/test_data/wordnet/download/', 'http://wordnet.naturalnode.com/');
     

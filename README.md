@@ -12,7 +12,7 @@ Note that many algorithms from Rob Ellis's [node-nltools](https://github.com/Nat
 being merged in to this project and will be maintained here going forward.
 
 At the moment most algorithms are English-specific but long-term some diversity
-is in order.
+is in order. Thanks to Polyakov Vladimir Russian stemming has been added!
 
 Aside from this README the only documentation is [this DZone article](http://www.dzone.com/links/r/using_natural_a_nlp_module_for_nodejs.html) and [here on my blog](http://www.chrisumbel.com/article/node_js_natural_language_porter_stemmer_lancaster_bayes_naive_metaphone_soundex) which is a bit older.
 
@@ -103,7 +103,7 @@ Output
 Stemmers
 --------
 
-Currently stemming is supported via the Porter and Lancaster (Paice/Husk)
+Currently stemming is supported via the Porter (English and Russian) and Lancaster (Paice/Husk)
 algorithms.
 
     var natural = require('natural');
@@ -112,6 +112,10 @@ this example uses a porter stemmer. "word" is returned.
 
     console.log(natural.PorterStemmer.stem("words")); // stem a single word
     
+and in Russian
+
+    console.log(natural.PorterStemmerRu.stem("падший"));
+
 attach() patches stem() and tokenizeAndStem() to String as a shortcut to
 PorterStemmer.stem(token). tokenizeAndStem() breaks text up into single words
 and returns an array of stemmed tokens.
