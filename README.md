@@ -23,10 +23,10 @@ If you're just looking to consume natural without your own node application
 please install the NPM
 
     npm install natural
-    
+
 If you're interested in contributing to natural or just hacking it then by all
 means fork away!
-    
+
 Tokenizers
 ----------
 
@@ -37,13 +37,13 @@ arrays of tokens.
       tokenizer = new natural.WordTokenizer();
     console.log(tokenizer.tokenize("your dog has flees."));
     // [ 'your', 'dog', 'has', 'flees' ]
-    
-The other tokenizers follow a similar pattern    
+
+The other tokenizers follow a similar pattern
 
     tokenizer = new natural.TreebankWordTokenizer();
     console.log(tokenizer.tokenize("my dog hasn't any flees."));
     // [ 'my', 'dog', 'has', 'n\'t', 'any', 'flees', '.' ]
-    
+
     tokenizer = new natural.RegexpTokenizer({pattern: /\-/});
     console.log(tokenizer.tokenize("flee-dog"));
     // [ 'flee', 'dog' ]
@@ -59,7 +59,7 @@ This will return a number between 0 and 1 of how closely the strings match (0 = 
 
     var natural = require('natural');
     console.log(natural.JaroWinklerDistance("dixon","dicksonx"))
-    console.log(natural.JaroWinklerDistance('not', 'same')); 
+    console.log(natural.JaroWinklerDistance('not', 'same'));
 
 Output:
 
@@ -70,7 +70,7 @@ Natural also offers support for Levenshtein distances.
 
     var natural = require('natural');
     console.log(natural.LevenshteinDistance("ones","onez"));
-    console.log(natural.LevenshteinDistance('one', 'one')); 
+    console.log(natural.LevenshteinDistance('one', 'one'));
 
 Output:
 
@@ -107,11 +107,11 @@ Currently stemming is supported via the Porter (English and Russian) and Lancast
 algorithms.
 
     var natural = require('natural');
-    
+
 this example uses a porter stemmer. "word" is returned.
 
     console.log(natural.PorterStemmer.stem("words")); // stem a single word
-    
+
 and in Russian
 
     console.log(natural.PorterStemmerRu.stem("падший"));
@@ -134,15 +134,15 @@ Classifiers
 ----------------------
 
 Two classifiers are currently supported, Naive Bayes and logistic regression.
-The following examples use the BayesClassifier class, but the 
+The following examples use the BayesClassifier class, but the
 LogisticRegressionClassifier class could be substituted instead.
 
-    var natural = require('natural'), 
-    	classifier = new natural.BayesClassifier();
+    var natural = require('natural'),
+      classifier = new natural.BayesClassifier();
 
 you can train the classifier on sample text. it will use reasonable defaults to
 tokenize and stem the text.
-   
+
     classifier.addDocument('i am long qqqq', 'buy');
     classifier.addDocument('buy the q's', 'buy');
     classifier.addDocument('short gold', 'sell');
@@ -158,12 +158,12 @@ outputs "buy"
 
     console.log(classifier.classify('i am long copper'));
 
-you have access to the set of matched classes and the associated value from the classifier. 
+you have access to the set of matched classes and the associated value from the classifier.
 
 outputs:
 
     [ { label: 'sell', value: 0.39999999999999997 },
-      { label: 'buy', value: 0.19999999999999998 } ]     
+      { label: 'buy', value: 0.19999999999999998 } ]
 
 from this:
 
@@ -181,7 +181,7 @@ A classifier can also be persisted and recalled so you can reuse a training
     classifier.save('classifier.json', function(err, classifier) {
         // the classifier is saved to the classifier.json file!
     });
-    
+
 and to recall from the classifier.json saved above:
 
     natural.BayesClassifier.load('classifier.json', null, function(err, classifier) {
@@ -217,21 +217,21 @@ test the two words to see if they sound alike
 
     if(metaphone.compare(wordA, wordB))
         console.log('they sound alike!');
-        
+
 the raw phonetics are obtained with process()
 
     console.log(metaphone.process('phonetics'));
 
 a maximum code length can be supplied
 
-    console.log(metaphone.process('phonetics', 3));    
+    console.log(metaphone.process('phonetics', 3));
 
 DoubleMetaphone deals with two encodings returned in an array. This
 feature is experimental and subject to change.
 
     var natural = require('natural'),
       dm = natural.DoubleMetaphone;
-    
+
     var encodings = dm.process('Matrix');
     console.log(encodings[0]);
     console.log(encodings[1]);
@@ -244,10 +244,10 @@ soundsLike is essentially a shortcut to Metaphone.compare
 
     if(wordA.soundsLike(wordB))
         console.log('they sound alike!');
-        
+
 the raw phonetics are obtained with phonetics()
 
-    console.log('phonetics'.phonetics());   
+    console.log('phonetics'.phonetics());
 
 full text strings can be tokenized into arrays of phonetics similar to stemmers
 
@@ -264,20 +264,20 @@ the same String patches apply with soundex
 
     if(wordA.soundsLike(wordB))
         console.log('they sound alike!');
-        
+
     console.log('phonetics'.phonetics());
-    
-    
+
+
 Inflectors
 ----------
 
 ### Nouns
 
-Nouns can be pluralized/singularized with a NounInflector 
+Nouns can be pluralized/singularized with a NounInflector
 
     var natural = require('natural'),
     nounInflector = new natural.NounInflector();
-    
+
 to pluralize a word (outputs "radii")
 
     console.log(nounInflector.pluralize('radius'));
@@ -292,7 +292,7 @@ supported in the future.
 
     nounInflector.attach();
     console.log('radius'.pluralizeNoun());
-    console.log('beers'.singularizeNoun());   
+    console.log('beers'.singularizeNoun());
 
 ### Numbers
 
@@ -339,16 +339,16 @@ n-grams can be obtained for either arrays or strings (which will be tokenized
 for you)
 
     var NGrams = natural.NGrams;
-    
-### bigrams    
-    
+
+### bigrams
+
     console.log(NGrams.bigrams('some words here'));
     console.log(NGrams.bigrams(['some',  'words',  'here']));
-    
-both of which output [ [ 'some', 'words' ], [ 'words', 'here' ] ]    
-    
-### trigrams    
-    
+
+both of which output [ [ 'some', 'words' ], [ 'words', 'here' ] ]
+
+### trigrams
+
     console.log(NGrams.trigrams('some other words here'));
     console.log(NGrams.trigrams(['some',  'other', 'words',  'here']));
 
@@ -368,20 +368,20 @@ which outputs [ [ 'some', 'other', 'words', 'here' ],
 tf-idf
 -----
 
-Term Frequency–Inverse Document Frequency (tf-idf) is implemented to determine how important a word (or words) is to a 
-document relative to a corpus. The following example will add four documents to 
-a corpus and determine the weight of the word "node" and then the weight of the 
+Term Frequency–Inverse Document Frequency (tf-idf) is implemented to determine how important a word (or words) is to a
+document relative to a corpus. The following example will add four documents to
+a corpus and determine the weight of the word "node" and then the weight of the
 word "ruby" in each document.
 
     var natural = require('natural'),
         TfIdf = natural.TfIdf,
         tfidf = new TfIdf();
-    
+
     tfidf.addDocument('this document is about node.');
     tfidf.addDocument('this document is about ruby.');
     tfidf.addDocument('this document is about ruby and node.');
     tfidf.addDocument('this document is about node. it has node examples');
-    
+
     console.log('node --------------------------------');
     tfidf.tfidfs('node', function(i, measure) {
         console.log('document #' + i + ' is ' + measure);
@@ -393,7 +393,7 @@ word "ruby" in each document.
     });
 
 which outputs
-    
+
     node --------------------------------
     document #0 is 1.4469189829363254
     document #1 is 0
@@ -405,9 +405,9 @@ which outputs
     document #2 is 1.466337068793427
     document #3 is 0
 
-Of course you can measure a single document. The following example measures 
+Of course you can measure a single document. The following example measures
 the term "node" in the first and second documents.
-    
+
     console.log(tfidf.tfidf('node', 0));
     console.log(tfidf.tfidf('node', 1));
 
@@ -417,18 +417,18 @@ A TfIdf instance can also load documents from files on disk.
     tfidf.addFileSync('data_files/one.txt');
     tfidf.addFileSync('data_files/two.txt');
 
-Multiple terms can be measured as well with their weights being added into 
+Multiple terms can be measured as well with their weights being added into
 a single measure value. The following example determines that the last document
 is the most relevent to the words "node" and "ruby".
 
     var natural = require('natural'),
         TfIdf = natural.TfIdf,
         tfidf = new TfIdf();
-    
+
     tfidf.addDocument('this document is about node.');
     tfidf.addDocument('this document is about ruby.');
     tfidf.addDocument('this document is about ruby and node.');
-    
+
     tfidf.tfidfs('node ruby', function(i, measure) {
         console.log('document #' + i + ' is ' + measure);
     });
@@ -440,24 +440,24 @@ which outputs
     document #2 is 2.4079456086518722
 
 The examples above all use strings in which case natural will tokenize the input.
-If you wish to perform your own tokenization or other kinds of processing you 
-can do so and then pass in the resultant arrays. That will cause natural to 
+If you wish to perform your own tokenization or other kinds of processing you
+can do so and then pass in the resultant arrays. That will cause natural to
 bypass its own preprocessing.
 
     var natural = require('natural'),
         TfIdf = natural.TfIdf,
         tfidf = new TfIdf();
-    
+
     tfidf.addDocument(['document', 'about', 'node']);
     tfidf.addDocument(['document', 'about', 'ruby']);
     tfidf.addDocument(['document', 'about', 'ruby', 'node']);
     tfidf.addDocument(['document', 'about', 'node', 'node', 'examples']);
-    
+
     tfidf.tfidfs(['node', 'ruby'], function(i, measure) {
         console.log('document #' + i + ' is ' + measure);
     });
 
-It's possible to retrieve a list of all terms in a document sorted by their 
+It's possible to retrieve a list of all terms in a document sorted by their
 importance.
 
     tfidf.listTerms(0 /*document index*/).forEach(function(item) {
@@ -472,24 +472,26 @@ A TfIdf instance can also be serialized and deserialzed for save and recall.
     var s = JSON.stringify(tfidf);
     // save "s" to disk, database or otherwise
 
-    // assuming you pulled "s" back out of storage. 
+    // assuming you pulled "s" back out of storage.
     var tfidf = new TfIdf(JSON.parse(s));
 
 WordNet
 -------
 
 One of the newest and most experimental features is WordNet integration. Here's an
-example of using natural to look up definitions of the word node. The parameter in
-the WordNet constructor is the local directory that will store the WordNet
-database files. If the database files are not present in the specified directories
-natural will download them for you.
+example of using natural to look up definitions of the word node. To use the WordNet module,
+first install the WordNet database files using the [WNdb module](https://github.com/moos/WNdb):
+
+    npm install WNdb
+
+(For node < v0.6, please use 'npm install WNdb@3.0.0')
 
 Keep in mind the WordNet integration is to be considered experimental at this point
 and not production ready. The API is also subject to change.
 
 Here's an exmple of looking up definitions for the word, "node".
 
-    var wordnet = new natural.WordNet('.');
+    var wordnet = new natural.WordNet();
 
     wordnet.lookup('node', function(results) {
         results.forEach(function(result) {
@@ -505,7 +507,7 @@ Here's an exmple of looking up definitions for the word, "node".
 
 Given a synset offset and part of speech a definition can be looked up directly.
 
-    var wordnet = new natural.WordNet('.');
+    var wordnet = new natural.WordNet();
 
     wordnet.get(4424418, 'n', function(result) {
         console.log('------------------------------------');
@@ -514,6 +516,12 @@ Given a synset offset and part of speech a definition can be looked up directly.
         console.log(result.gloss);
         console.log(result.synonyms);
     });
+
+If you have _manually_ downloaded the WordNet database files, you can pass the folder to the constructor:
+
+    var wordnet = new natural.WordNet('/my/wordnet/dict');
+
+As of v0.1.11, WordNet data files are no longer automatically downloaded.
 
 Princeton University "About WordNet." WordNet. Princeton University. 2010. <http://wordnet.princeton.edu>
 
@@ -543,7 +551,7 @@ THE SOFTWARE.
 WordNet License
 ---------------
 
-This license is available as the file LICENSE in any downloaded version of WordNet. 
+This license is available as the file LICENSE in any downloaded version of WordNet.
 WordNet 3.0 license: (Download)
 
 WordNet Release 3.0 This software and database is being provided to you, the LICENSEE, by Princeton University under the following license. By obtaining, using and/or copying this software and database, you agree that you have read, understood, and will comply with these terms and conditions.: Permission to use, copy, modify and distribute this software and database and its documentation for any purpose and without fee or royalty is hereby granted, provided that you agree to comply with the following copyright notice and statements, including the disclaimer, and that the same appear on ALL copies of the software, database and documentation, including modifications that you make for internal use or for distribution. WordNet 3.0 Copyright 2006 by Princeton University. All rights reserved. THIS SOFTWARE AND DATABASE IS PROVIDED "AS IS" AND PRINCETON UNIVERSITY MAKES NO REPRESENTATIONS OR WARRANTIES, EXPRESS OR IMPLIED. BY WAY OF EXAMPLE, BUT NOT LIMITATION, PRINCETON UNIVERSITY MAKES NO REPRESENTATIONS OR WARRANTIES OF MERCHANT- ABILITY OR FITNESS FOR ANY PARTICULAR PURPOSE OR THAT THE USE OF THE LICENSED SOFTWARE, DATABASE OR DOCUMENTATION WILL NOT INFRINGE ANY THIRD PARTY PATENTS, COPYRIGHTS, TRADEMARKS OR OTHER RIGHTS. The name of Princeton University or Princeton may not be used in advertising or publicity pertaining to distribution of the software and/or database. Title to copyright in this software, database and any associated documentation shall at all times remain with Princeton University and LICENSEE agrees to preserve same.
