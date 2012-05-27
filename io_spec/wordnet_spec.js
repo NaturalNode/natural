@@ -30,11 +30,7 @@ describe('wordnet', function() {
 
     wordnet.lookupSynonyms('entity', function(records) {
       expect(records.length).toBe(3);
-
-      require('path').exists('./io_spec/test_data/wordnet/download/index.noun', function(exists) {
-        expect(exists).toBeTruthy();
-        asyncSpecDone();
-      });
+      asyncSpecDone();
     });
 
     asyncSpecWait();
