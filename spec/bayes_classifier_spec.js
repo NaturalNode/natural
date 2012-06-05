@@ -54,7 +54,7 @@ describe('bayes classifier', function() {
 	    expect(classifier.getClassifications('i write code')[1].label).toBe('literature');
         });
 
-        it('should classify with arrays', function() {
+        it('should classify with strings', function() {
             var classifier = new natural.BayesClassifier();
             classifier.addDocument('i fixed the box', 'computing');
             classifier.addDocument('i write code', 'computing');
@@ -67,6 +67,44 @@ describe('bayes classifier', function() {
             
             expect(classifier.classify('a bug in the code')).toBe('computing');
             expect(classifier.classify('read all the books')).toBe('literature');
+        });
+
+        it('should classify and re-classify after document-removal', function() {
+            var classifier = new natural.BayesClassifier()
+              , arr
+              , item
+              , classifications = {};
+
+            // Add some good/bad docs and train
+            classifier.addDocument('foo bar baz', 'good');
+            classifier.addDocument('qux zooby', 'bad');
+            classifier.addDocument('asdf qwer', 'bad');
+            classifier.train();
+
+            expect(classifier.classify('foo')).toBe('good');
+            expect(classifier.classify('qux')).toBe('bad');
+
+            // Remove one of the bad docs, retrain
+            classifier.removeDocument('qux zooby', 'bad');
+            classifier.retrain();
+
+            // Simple `classify` will still return a single result, even if
+            // ratio for each side is equal -- have to compare actual values in
+            // the classifications, should be equal since qux is unclassified
+            arr = classifier.getClassifications('qux');
+            for (var i = 0, ii = arr.length; i < ii; i++) {
+              item = arr[i];
+              classifications[item.label] = item.value;
+            }
+            expect(classifications.good).toEqual(classifications.bad);
+
+            // Re-classify as good, retrain
+            classifier.addDocument('qux zooby', 'good');
+            classifier.retrain();
+
+            // Should now be good, original docs should be unaffected
+            expect(classifier.classify('foo')).toBe('good');
+            expect(classifier.classify('qux')).toBe('good');
         });
 
         it('should serialize and deserialize a working classifier', function() {
