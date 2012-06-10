@@ -153,9 +153,14 @@ describe('noun inflector', function() {
             expect(inflector.pluralize('person')).toBe('people');
             expect(inflector.pluralize('child')).toBe('children');
             expect(inflector.pluralize('ox')).toBe('oxen');
-            expect(inflector.pluralize('OX')).toBe('oxen');
         });
         
+        it('should maintain case of irregulars', function() {
+            expect(inflector.pluralize('OX')).toBe('OXEN');
+            expect(inflector.pluralize('Person')).toBe('People');
+            expect(inflector.pluralize('child')).toBe('children');
+        });
+
         it('should handle IX cases', function() {
             expect(inflector.pluralize('matrix')).toBe('matrices');
             expect(inflector.pluralize('index')).toBe('indices');
