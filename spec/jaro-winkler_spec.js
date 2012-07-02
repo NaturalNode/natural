@@ -26,25 +26,27 @@ Number.prototype.approxEql = function(val) {
     return Math.abs(this - val) < 1e-5;
 }
 
-describe('jaro-winkler', function() {
-    it('should evaluate string similarity', function() {
+describe('jaro-winkler', function () {
+    it('should evaluate string similarity', function () {
         expect(jaroWinklerDistance('DIXON', 'DICKSONX').approxEql(0.81333)).toBeTruthy();
         expect(jaroWinklerDistance('DWAYNE', 'DUANE').approxEql(0.84)).toBeTruthy();
-    });	
-
-    it('should handle exact matches', function() {
-        expect(jaroWinklerDistance('RICK', 'RICK')).toBe(1);
     });
 
-    it('should handle total mis-matches', function() {
+    it('should handle exact matches', function () {
+        expect(jaroWinklerDistance('RICK', 'RICK')).toBe(1);
+        expect(jaroWinklerDistance('abc', 'abc')).toBe(1);
+        expect(jaroWinklerDistance('abcd', 'abcd')).toBe(1);
+    });
+
+    it('should handle total mis-matches', function () {
         expect(jaroWinklerDistance('NOT', 'SAME')).toBe(0);
     });
 
-    it('should handle total mis-matches', function() {
+    it('should handle partial mis-matches', function () {
         expect(jaroWinklerDistance('aaa', 'abcd').approxEql(0.575)).toBeTruthy();
     });
 
-    it('should handle transpositions', function() {
+    it('should handle transpositions', function () {
         expect(jaroWinklerDistance('MARTHA', 'MARHTA').approxEql(0.96111)).toBeTruthy();
     });
 });
