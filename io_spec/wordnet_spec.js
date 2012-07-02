@@ -23,66 +23,36 @@ THE SOFTWARE.
 var WordNet = require('lib/natural/wordnet/wordnet');
 jasmine.asyncSpecWait.timeout = 30 * 1000;
 
-describe('wordnet', function() {  
-  it('should download files', function() {
-    var wordnet = new WordNet('./io_spec/test_data/wordnet/download/', 'http://wordnet.naturalnode.com/');
-    
-    wordnet.lookup('entity', function(records) {
-      expect(records.length).toBe(1);
-      expect(records[0].lemma).toBe('entity');
-      
-      require('path').exists('./io_spec/test_data/wordnet/download/index.noun', function(exists) {
-        expect(exists).toBeTruthy();
-        asyncSpecDone();
-      });
-    });
-    
-    asyncSpecWait();
-  });
-  
+describe('wordnet', function() {
+
   it('should lookup synonyms', function() {
-    var wordnet = new WordNet('./io_spec/test_data/wordnet/download/', 'http://wordnet.naturalnode.com/');
-    
+    var wordnet = new WordNet();
+
     wordnet.lookupSynonyms('entity', function(records) {
       expect(records.length).toBe(3);
-      
-      require('path').exists('./io_spec/test_data/wordnet/download/index.noun', function(exists) {
-        expect(exists).toBeTruthy();
-        asyncSpecDone();
-      });
-    });
-    
-    asyncSpecWait();
-  });
-
-  it('should resize buffer for large returns', function() {
-    var wordnet = new WordNet('./io_spec/test_data/wordnet/download/', 'http://wordnet.naturalnode.com/');
-    
-    wordnet.lookupSynonyms('hot', function(records) {
-      expect(records.length).toBe(53);      
       asyncSpecDone();
     });
-    
+
     asyncSpecWait();
   });
 
   it('should lookup synonyms give a synset offset and a pos', function() {
-    var wordnet = new WordNet('./io_spec/test_data/wordnet/download/', 'http://wordnet.naturalnode.com/');
-    
+    var wordnet = new WordNet();
+
     wordnet.getSynonyms(1740, 'n', function(records) {
-      expect(records.length).toBe(3);      
+      expect(records.length).toBe(3);
       expect(records[0].synsetOffset).toBe(4424418);
       expect(records[1].synsetOffset).toBe(2137);
       expect(records[2].synsetOffset).toBe(1930);
       asyncSpecDone();
     });
-    
+
     asyncSpecWait();
   });
-  
+
   it('should lookup synonyms via a provided synset object', function() {
-    var wordnet = new WordNet('./io_spec/test_data/wordnet/download/', 'http://wordnet.naturalnode.com/');
-    
+    var wordnet = new WordNet();
+
     wordnet.lookup('entity', function(results) {
       wordnet.getSynonyms(results[0], function(records) {
         expect(records.length).toBe(3);
@@ -92,20 +62,20 @@ describe('wordnet', function() {
         asyncSpecDone();
       });
     });
-    
+
     asyncSpecWait();
-  });  
+  });
 
   it('should add records but once', function() {
-    var wordnet = new WordNet('./io_spec/test_data/wordnet/download/', 'http://wordnet.naturalnode.com/');
-    
+    var wordnet = new WordNet();
+
     wordnet.lookup('node', function(records) {
       expect(records.length).toBe(8);
       expect(records[0].lemma).toBe('node');
-      
-      asyncSpecDone();        
+
+      asyncSpecDone();
     });
-    
+
     asyncSpecWait();
-  });  
+  });
 });
