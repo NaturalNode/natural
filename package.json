@@ -1,7 +1,7 @@
 {
   "name": "natural",
   "description": "General natural language (tokenizing, stemming, classification, inflection, phonetics, tfidf, WordNet, jaro-winkler, Levenshtein distance, Dice's Coefficient) facilities for node.",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "homepage": "https://github.com/NaturalNode/natural",
   "engines": {
     "node": ">=0.4.10"
