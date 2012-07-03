@@ -36,6 +36,7 @@ describe('jaro-winkler', function () {
         expect(jaroWinklerDistance('RICK', 'RICK')).toBe(1);
         expect(jaroWinklerDistance('abc', 'abc')).toBe(1);
         expect(jaroWinklerDistance('abcd', 'abcd')).toBe(1);
+        expect(jaroWinklerDistance('seddon', 'seddon')).toBe(1);
     });
 
     it('should handle total mis-matches', function () {
