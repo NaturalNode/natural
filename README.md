@@ -525,6 +525,17 @@ As of v0.1.11, WordNet data files are no longer automatically downloaded.
 
 Princeton University "About WordNet." WordNet. Princeton University. 2010. <http://wordnet.princeton.edu>
 
+Development
+-----------
+When developing please:
+
++ Write unit tests
++ Make sure your unit tests pass
+
+The current configuration of the unit tests requires the following environment variable to be set:
+
+    export NODE_PATH=.
+
 License
 -------
 
