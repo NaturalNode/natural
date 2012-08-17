@@ -1,44 +1,44 @@
 natural
 =======
 
-"Natural" is a general natural language facility for nodejs. Tokenizing,
+"Natural" is a general natural language facility for node.js. Tokenizing,
 stemming, classification, phonetics, tf-idf, WordNet, string similarity,
-and some inflection are currently supported.
+and some inflections are currently supported.
 
-It's still in the early stages, and am very interested in bug reports,
+It's still in the early stages, so we're very interested in bug reports,
 contributions and the like.
 
 Note that many algorithms from Rob Ellis's [node-nltools](https://github.com/NaturalNode/node-nltools) are
-being merged in to this project and will be maintained here going forward.
+being merged into this project and will be maintained from here onward.
 
-At the moment most algorithms are English-specific but long-term some diversity
-is in order. Thanks to Polyakov Vladimir Russian stemming has been added!
+At the moment, most of the algorithms are English-specific, but in the long-term, some diversity
+will be in order. Thanks to Polyakov Vladimir, Russian stemming has been added!
 
-Aside from this README the only documentation is [this DZone article](http://www.dzone.com/links/r/using_natural_a_nlp_module_for_nodejs.html) and [here on my blog](http://www.chrisumbel.com/article/node_js_natural_language_porter_stemmer_lancaster_bayes_naive_metaphone_soundex) which is a bit older.
+Aside from this README, the only documentation is [this DZone article](http://www.dzone.com/links/r/using_natural_a_nlp_module_for_nodejs.html) and [here on my blog](http://www.chrisumbel.com/article/node_js_natural_language_porter_stemmer_lancaster_bayes_naive_metaphone_soundex), which is a bit older.
 
 Installation
 ------------
 
-If you're just looking to consume natural without your own node application
-please install the NPM
+If you're just looking to use natural without your own node application,
+you can install via NPM like so:
 
     npm install natural
 
-If you're interested in contributing to natural or just hacking it then by all
+If you're interested in contributing to natural, or just hacking on it, then by all
 means fork away!
 
 Tokenizers
 ----------
 
-Word, Regexp and Treebank tokenizers are provided for breaking text up into
-arrays of tokens.
+Word, Regexp, and Treebank tokenizers are provided for breaking text up into
+arrays of tokens:
 
     var natural = require('natural'),
       tokenizer = new natural.WordTokenizer();
     console.log(tokenizer.tokenize("your dog has flees."));
     // [ 'your', 'dog', 'has', 'flees' ]
 
-The other tokenizers follow a similar pattern
+The other tokenizers follow a similar pattern:
 
     tokenizer = new natural.TreebankWordTokenizer();
     console.log(tokenizer.tokenize("my dog hasn't any flees."));
@@ -54,8 +54,8 @@ The other tokenizers follow a similar pattern
 
 String Distance
 ----------------------
-Natural provides an implementation of of the Jaro-Winkler string distance measure.
-This will return a number between 0 and 1 of how closely the strings match (0 = not at all, 1 = exact match)
+Natural provides an implementation of the Jaro-Winkler string distance measuring algorithm.
+This will return a number between 0 and 1 which tells how closely the strings match (0 = not at all, 1 = exact match):
 
     var natural = require('natural');
     console.log(natural.JaroWinklerDistance("dixon","dicksonx"))
@@ -66,7 +66,7 @@ Output:
     0.7466666666666666
     0
 
-Natural also offers support for Levenshtein distances.
+Natural also offers support for Levenshtein distances:
 
     var natural = require('natural');
     console.log(natural.LevenshteinDistance("ones","onez"));
@@ -77,7 +77,7 @@ Output:
     2
     0
 
-The cost of the three edit operations are modifiable for Levenshtein
+The cost of the three edit operations are modifiable for Levenshtein:
 
     console.log(natural.LevenshteinDistance("ones","onez", {
         insertion_cost: 1,
@@ -95,7 +95,7 @@ And Dice's co-efficient:
     console.log(natural.DiceCoefficient('thing', 'thing'));
     console.log(natural.DiceCoefficient('not', 'same'));
 
-Output
+Output:
 
     1
     0
@@ -103,28 +103,28 @@ Output
 Stemmers
 --------
 
-Currently stemming is supported via the Porter (English and Russian) and Lancaster (Paice/Husk)
+Currently, stemming is supported via the Porter (English and Russian) and Lancaster (Paice/Husk)
 algorithms.
 
     var natural = require('natural');
 
-this example uses a porter stemmer. "word" is returned.
+This example uses a Porter stemmer. "word" is returned.
 
     console.log(natural.PorterStemmer.stem("words")); // stem a single word
 
-and in Russian
+and in Russian:
 
     console.log(natural.PorterStemmerRu.stem("падший"));
 
-attach() patches stem() and tokenizeAndStem() to String as a shortcut to
-PorterStemmer.stem(token). tokenizeAndStem() breaks text up into single words
+`attach()` patches `stem()` and `tokenizeAndStem()` to String as a shortcut to
+`PorterStemmer.stem(token)`. `tokenizeAndStem()` breaks text up into single words
 and returns an array of stemmed tokens.
 
     natural.PorterStemmer.attach();
     console.log("i am waking up to the sounds of chainsaws".tokenizeAndStem());
     console.log("chainsaws".stem());
 
-the same thing can be done with a lancaster stemmer
+the same thing can be done with a Lancaster stemmer:
 
     natural.LancasterStemmer.attach();
     console.log("i am waking up to the sounds of chainsaws".tokenizeAndStem());
@@ -140,7 +140,7 @@ LogisticRegressionClassifier class could be substituted instead.
     var natural = require('natural'),
       classifier = new natural.BayesClassifier();
 
-you can train the classifier on sample text. it will use reasonable defaults to
+You can train the classifier on sample text. It will use reasonable defaults to
 tokenize and stem the text.
 
     classifier.addDocument('i am long qqqq', 'buy');
@@ -150,46 +150,46 @@ tokenize and stem the text.
 
     classifier.train();
 
-outputs "sell"
+Outputs "sell"
 
     console.log(classifier.classify('i am short silver'));
 
-outputs "buy"
+Outputs "buy"
 
     console.log(classifier.classify('i am long copper'));
 
-you have access to the set of matched classes and the associated value from the classifier.
+You have access to the set of matched classes and the associated value from the classifier.
 
-outputs:
+Outputs:
 
     [ { label: 'sell', value: 0.39999999999999997 },
       { label: 'buy', value: 0.19999999999999998 } ]
 
-from this:
+From this:
 
     console.log(classifier.getClassifications('i am long copper'));
 
 
-the classifier can also be trained on and classify arrays of tokens, strings, or
-any mixture. arrays let you use entirely custom data with  your own
-tokenization/stemming if any at all.
+The classifier can also be trained with and can classify arrays of tokens, strings, or
+any mixture of the two. Arrays let you use entirely custom data with your own
+tokenization/stemming, if you choose to implement it.
 
     classifier.addDocument(['sell', 'gold'], 'sell');
 
-A classifier can also be persisted and recalled so you can reuse a training
+A classifier can also be persisted and recalled later so that you can reuse it later.
 
     classifier.save('classifier.json', function(err, classifier) {
         // the classifier is saved to the classifier.json file!
     });
 
-and to recall from the classifier.json saved above:
+To recall from the classifier.json saved above:
 
     natural.BayesClassifier.load('classifier.json', null, function(err, classifier) {
         console.log(classifier.classify('long SUNW'));
         console.log(classifier.classify('short SUNW'));
     });
 
-A classifier can also be serialized and deserialized as such
+A classifier can also be serialized and deserialized like so:
 
     var classifier = new natural.BayesClassifier();
     classifier.addDocument(['sell', 'gold'], 'sell');
@@ -205,7 +205,7 @@ Phonetics
 ---------
 
 Phonetic matching (sounds-like) matching can be done withthe SoundEx,
-Metaphone or DoubleMetaphone algorithms
+Metaphone, or DoubleMetaphone algorithms:
 
     var natural = require('natural'),
         metaphone = natural.Metaphone, soundEx = natural.SoundEx;
@@ -213,21 +213,21 @@ Metaphone or DoubleMetaphone algorithms
     var wordA = 'phonetics';
     var wordB = 'fonetix';
 
-test the two words to see if they sound alike
+To test the two words to see if they sound alike:
 
     if(metaphone.compare(wordA, wordB))
         console.log('they sound alike!');
 
-the raw phonetics are obtained with process()
+The raw phonetics are obtained with `process()`:
 
     console.log(metaphone.process('phonetics'));
 
-a maximum code length can be supplied
+A maximum code length can be supplied:
 
     console.log(metaphone.process('phonetics', 3));
 
-DoubleMetaphone deals with two encodings returned in an array. This
-feature is experimental and subject to change.
+`DoubleMetaphone` deals with two encodings returned in an array. This
+feature is experimental and subject to change:
 
     var natural = require('natural'),
       dm = natural.DoubleMetaphone;
@@ -236,29 +236,29 @@ feature is experimental and subject to change.
     console.log(encodings[0]);
     console.log(encodings[1]);
 
-attaching will patch String with useful methods
+Attaching will patch String with useful methods:
 
     metaphone.attach();
 
-soundsLike is essentially a shortcut to Metaphone.compare
+`soundsLike` is essentially a shortcut to `Metaphone.compare`:
 
     if(wordA.soundsLike(wordB))
         console.log('they sound alike!');
 
-the raw phonetics are obtained with phonetics()
+The raw phonetics are obtained with `phonetics()`:
 
     console.log('phonetics'.phonetics());
 
-full text strings can be tokenized into arrays of phonetics similar to stemmers
+Full text strings can be tokenized into arrays of phonetics (much like how tokenization-to-arrays works for stemmers):
 
     console.log('phonetics rock'.tokenizeAndPhoneticize());
 
-same module operations apply with SoundEx
+Same module operations applied with `SoundEx`:
 
     if(soundEx.compare(wordA, wordB))
         console.log('they sound alike!');
 
-the same String patches apply with soundex
+The same String patches apply with `soundEx`:
 
     soundEx.attach();
 
@@ -273,21 +273,21 @@ Inflectors
 
 ### Nouns
 
-Nouns can be pluralized/singularized with a NounInflector
+Nouns can be pluralized/singularized with a `NounInflector`:
 
     var natural = require('natural'),
     nounInflector = new natural.NounInflector();
 
-to pluralize a word (outputs "radii")
+To pluralize a word (outputs "radii"):
 
     console.log(nounInflector.pluralize('radius'));
 
-to singularize a word (outputs "beer")
+To singularize a word (outputs "beer"):
 
     console.log(nounInflector.singularize('beers'));
 
-Like many of the other features String can be patched to perform the operations
-directly. The "Noun" suffix to the methods is necessary as verbs will be
+Like many of the other features, String can be patched to perform the operations
+directly. The "Noun" suffix on the methods is necessary, as verbs will be
 supported in the future.
 
     nounInflector.attach();
@@ -296,35 +296,35 @@ supported in the future.
 
 ### Numbers
 
-Numbers can be counted with a CountInflector
+Numbers can be counted with a CountInflector:
 
     var countInflector = natural.CountInflector;
 
-outputs "1st"
+Outputs "1st":
 
     console.log(countInflector.nth(1));
 
-outputs "111th"
+Outputs "111th":
 
     console.log(countInflector.nth(111));
 
 ### Present Tense Verbs
 
 Present Tense Verbs can be pluralized/singularized with a PresentVerbInflector.
-This feature is still experimental as of 0.0.42 so use with caution and please
+This feature is still experimental as of 0.0.42, so use with caution, and please
 provide feedback.
 
     var verbInflector = new natural.PresentVerbInflector();
 
-outputs "becomes"
+Outputs "becomes":
 
     console.log(verbInflector.singularize('become'));
 
-outputs "become"
+Outputs "become":
 
     console.log(verbInflector.pluralize('becomes'));
 
-Like many other natural modules attach() can be used to patch strings with
+Like many other natural modules, `attach()` can be used to patch strings with
 handy methods.
 
     verbInflector.attach();
@@ -336,7 +336,7 @@ N-Grams
 -------
 
 n-grams can be obtained for either arrays or strings (which will be tokenized
-for you)
+for you):
 
     var NGrams = natural.NGrams;
 
@@ -345,14 +345,14 @@ for you)
     console.log(NGrams.bigrams('some words here'));
     console.log(NGrams.bigrams(['some',  'words',  'here']));
 
-both of which output [ [ 'some', 'words' ], [ 'words', 'here' ] ]
+Both of the above output: [ [ 'some', 'words' ], [ 'words', 'here' ] ]
 
 ### trigrams
 
     console.log(NGrams.trigrams('some other words here'));
     console.log(NGrams.trigrams(['some',  'other', 'words',  'here']));
 
-both of which output [ [ 'some', 'other', 'words' ],
+Both of the above output: [ [ 'some', 'other', 'words' ],
   [ 'other', 'words', 'here' ] ]
 
 ### arbitrary n-grams
@@ -361,7 +361,7 @@ both of which output [ [ 'some', 'other', 'words' ],
     console.log(NGrams.ngrams(['some', 'other', 'words', 'here', 'for',
         'you'], 4));
 
-which outputs [ [ 'some', 'other', 'words', 'here' ],
+The above outputs: [ [ 'some', 'other', 'words', 'here' ],
   [ 'other', 'words', 'here', 'for' ],
   [ 'words', 'here', 'for', 'you' ] ]
 
@@ -370,7 +370,7 @@ tf-idf
 
 Term Frequency–Inverse Document Frequency (tf-idf) is implemented to determine how important a word (or words) is to a
 document relative to a corpus. The following example will add four documents to
-a corpus and determine the weight of the word "node" and then the weight of the
+a corpus and determine the weight of the word "node", then the weight of the
 word "ruby" in each document.
 
     var natural = require('natural'),
@@ -392,7 +392,7 @@ word "ruby" in each document.
         console.log('document #' + i + ' is ' + measure);
     });
 
-which outputs
+The above outputs:
 
     node --------------------------------
     document #0 is 1.4469189829363254
@@ -405,8 +405,9 @@ which outputs
     document #2 is 1.466337068793427
     document #3 is 0
 
-Of course you can measure a single document. The following example measures
-the term "node" in the first and second documents.
+This approach can also be applied to individual documents.
+
+The following example measures the term "node" in the first and second documents.
 
     console.log(tfidf.tfidf('node', 0));
     console.log(tfidf.tfidf('node', 1));
@@ -417,7 +418,7 @@ A TfIdf instance can also load documents from files on disk.
     tfidf.addFileSync('data_files/one.txt');
     tfidf.addFileSync('data_files/two.txt');
 
-Multiple terms can be measured as well with their weights being added into
+Multiple terms can be measured as well, with their weights being added into
 a single measure value. The following example determines that the last document
 is the most relevent to the words "node" and "ruby".
 
@@ -433,16 +434,16 @@ is the most relevent to the words "node" and "ruby".
         console.log('document #' + i + ' is ' + measure);
     });
 
-which outputs
+The above outputs:
 
     document #0 is 1.2039728043259361
     document #1 is 1.2039728043259361
     document #2 is 2.4079456086518722
 
-The examples above all use strings in which case natural will tokenize the input.
-If you wish to perform your own tokenization or other kinds of processing you
-can do so and then pass in the resultant arrays. That will cause natural to
-bypass its own preprocessing.
+The examples above all use strings, which case natural to automatically tokenize the input.
+If you wish to perform your own tokenization or other kinds of processing, you
+can do so, then pass in the resultant arrays later. This approach allows you to bypass natural's 
+default preprocessing.
 
     var natural = require('natural'),
         TfIdf = natural.TfIdf,
@@ -457,7 +458,7 @@ bypass its own preprocessing.
         console.log('document #' + i + ' is ' + measure);
     });
 
-It's possible to retrieve a list of all terms in a document sorted by their
+It's possible to retrieve a list of all terms in a document, sorted by their
 importance.
 
     tfidf.listTerms(0 /*document index*/).forEach(function(item) {
@@ -478,7 +479,7 @@ A TfIdf instance can also be serialized and deserialzed for save and recall.
 WordNet
 -------
 
-One of the newest and most experimental features is WordNet integration. Here's an
+One of the newest and most experimental features in natural is WordNet integration. Here's an
 example of using natural to look up definitions of the word node. To use the WordNet module,
 first install the WordNet database files using the [WNdb module](https://github.com/moos/WNdb):
 
@@ -486,8 +487,8 @@ first install the WordNet database files using the [WNdb module](https://github.
 
 (For node < v0.6, please use 'npm install WNdb@3.0.0')
 
-Keep in mind the WordNet integration is to be considered experimental at this point
-and not production ready. The API is also subject to change.
+Keep in mind that the WordNet integration is to be considered experimental at this point,
+and not production-ready. The API is also subject to change.
 
 Here's an exmple of looking up definitions for the word, "node".
 
@@ -505,7 +506,7 @@ Here's an exmple of looking up definitions for the word, "node".
         });
     });
 
-Given a synset offset and part of speech a definition can be looked up directly.
+Given a synset offset and a part of speech, a definition can be looked up directly.
 
     var wordnet = new natural.WordNet();
 
@@ -527,7 +528,7 @@ Princeton University "About WordNet." WordNet. Princeton University. 2010. <http
 
 Development
 -----------
-When developing please:
+When developing, please:
 
 + Write unit tests
 + Make sure your unit tests pass
