@@ -59,7 +59,7 @@ describe('normalize_ja', function() {
   });
 });
 
-var sample = 'ABC ＡＢＣ　123１２３.,-．，-あいうえおはばぱｶｷｸｹｺﾊﾊﾞﾊﾟカキクケコハバパ';
+var sample = 'ABC ＡＢＣ　123１２３.,-．，-ゔあいうえおはばぱｶｷｸｹｺﾊﾊﾞﾊﾟヴカキクケコハバパ';
 
 describe('converters', function() {
   it('should all be reversible', function() {
@@ -77,25 +77,25 @@ describe('converters', function() {
   describe('.fullwidthToHalfwidth', function() {
     describe('.alphabet', function() {
       it('should transform fullwidth roman characters and space to halfwidth', function() {
-        expect(converters.fullwidthToHalfwidth.alphabet(sample)).toEqual('ABC ABC 123１２３.,-．，-あいうえおはばぱｶｷｸｹｺﾊﾊﾞﾊﾟカキクケコハバパ');
+        expect(converters.fullwidthToHalfwidth.alphabet(sample)).toEqual('ABC ABC 123１２３.,-．，-ゔあいうえおはばぱｶｷｸｹｺﾊﾊﾞﾊﾟヴカキクケコハバパ');
       });
     });
 
     describe('.numbers', function() {
       it('should transform fullwidth numerical characters to halfwidth', function() {
-        expect(converters.fullwidthToHalfwidth.numbers(sample)).toEqual('ABC ＡＢＣ　123123.,-．，-あいうえおはばぱｶｷｸｹｺﾊﾊﾞﾊﾟカキクケコハバパ');
+        expect(converters.fullwidthToHalfwidth.numbers(sample)).toEqual('ABC ＡＢＣ　123123.,-．，-ゔあいうえおはばぱｶｷｸｹｺﾊﾊﾞﾊﾟヴカキクケコハバパ');
       });
     });
 
     describe('.punctuation', function() {
       it('should transform fullwidth punctuation signs to halfwidth', function() {
-        expect(converters.fullwidthToHalfwidth.punctuation(sample)).toEqual('ABC ＡＢＣ　123１２３.,-.,-あいうえおはばぱｶｷｸｹｺﾊﾊﾞﾊﾟカキクケコハバパ');
+        expect(converters.fullwidthToHalfwidth.punctuation(sample)).toEqual('ABC ＡＢＣ　123１２３.,-.,-ゔあいうえおはばぱｶｷｸｹｺﾊﾊﾞﾊﾟヴカキクケコハバパ');
       });
     });
 
     describe('.katakana', function() {
       it('should transform fullwidth katakana to halfwidth', function() {
-        expect(converters.fullwidthToHalfwidth.katakana(sample)).toEqual('ABC ＡＢＣ　123１２３.,-．，-あいうえおはばぱｶｷｸｹｺﾊﾊﾞﾊﾟｶｷｸｹｺﾊﾊﾞﾊﾟ');
+        expect(converters.fullwidthToHalfwidth.katakana(sample)).toEqual('ABC ＡＢＣ　123１２３.,-．，-ゔあいうえおはばぱｶｷｸｹｺﾊﾊﾞﾊﾟｳﾞｶｷｸｹｺﾊﾊﾞﾊﾟ');
       });
     });
   });
@@ -103,26 +103,38 @@ describe('converters', function() {
   describe('.halfwidthToFullwidth', function() {
     describe('.alphabet', function() {
       it('should transform halfwidth roman characters and space to fullwidth', function() {
-        expect(converters.halfwidthToFullwidth.alphabet(sample)).toEqual('ＡＢＣ　ＡＢＣ　123１２３.,-．，-あいうえおはばぱｶｷｸｹｺﾊﾊﾞﾊﾟカキクケコハバパ');
+        expect(converters.halfwidthToFullwidth.alphabet(sample)).toEqual('ＡＢＣ　ＡＢＣ　123１２３.,-．，-ゔあいうえおはばぱｶｷｸｹｺﾊﾊﾞﾊﾟヴカキクケコハバパ');
       });
     });
 
     describe('.numbers', function() {
       it('should transform halfwidth numerical characters to fullwidth', function() {
-        expect(converters.halfwidthToFullwidth.numbers(sample)).toEqual('ABC ＡＢＣ　１２３１２３.,-．，-あいうえおはばぱｶｷｸｹｺﾊﾊﾞﾊﾟカキクケコハバパ');
+        expect(converters.halfwidthToFullwidth.numbers(sample)).toEqual('ABC ＡＢＣ　１２３１２３.,-．，-ゔあいうえおはばぱｶｷｸｹｺﾊﾊﾞﾊﾟヴカキクケコハバパ');
       });
     });
 
     describe('.punctuation', function() {
       it('should transform halfwidth punctuation signs to fullwidth', function() {
-        expect(converters.halfwidthToFullwidth.punctuation(sample)).toEqual('ABC ＡＢＣ　123１２３．，─．，─あいうえおはばぱｶｷｸｹｺﾊﾊﾞﾊﾟカキクケコハバパ');
+        expect(converters.halfwidthToFullwidth.punctuation(sample)).toEqual('ABC ＡＢＣ　123１２３．，─．，─ゔあいうえおはばぱｶｷｸｹｺﾊﾊﾞﾊﾟヴカキクケコハバパ');
       });
     });
 
     describe('.katakana', function() {
       it('should transform halfwidth katakana to fullwidth', function() {
-        expect(converters.halfwidthToFullwidth.katakana(sample)).toEqual('ABC ＡＢＣ　123１２３.,-．，-あいうえおはばぱカキクケコハバパカキクケコハバパ');
+        expect(converters.halfwidthToFullwidth.katakana(sample)).toEqual('ABC ＡＢＣ　123１２３.,-．，-ゔあいうえおはばぱカキクケコハバパヴカキクケコハバパ');
       });
+    });
+  });
+
+  describe('.hiraganaToKatakana', function() {
+    it('should transform hiragana to katakana', function() {
+      expect(converters.hiraganaToKatakana(sample)).toEqual('ABC ＡＢＣ　123１２３.,-．，-ヴアイウエオハバパカキクケコハバパヴカキクケコハバパ');
+    });
+  });
+
+  describe('.katakanaToHiragana', function() {
+    it('should transform katakana to hiragana', function() {
+      expect(converters.katakanaToHiragana(sample)).toEqual('ABC ＡＢＣ　123１２３.,-．，-ゔあいうえおはばぱかきくけこはばぱゔかきくけこはばぱ');
     });
   });
 });
