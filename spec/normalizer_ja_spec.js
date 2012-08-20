@@ -5,6 +5,7 @@ describe('normalize_ja', function() {
   it('should fix badly formed hiragana', function() {
     expect(normalize_ja('う゛か゛き゛く゛は゜ひ゜ふ゜')).toEqual('ゔがぎぐぱぴぷ');
     expect(normalize_ja('うﾞかﾞきﾞくﾞはﾟひﾟふﾟ')).toEqual('ゔがぎぐぱぴぷ');
+    expect(normalize_ja('まっなか')).toEqual('まんなか');
   });
 
   it('should fix badly formed fullwidth katakana', function() {
