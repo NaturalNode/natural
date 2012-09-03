@@ -198,7 +198,7 @@ A classifier can also be serialized and deserialized like so:
     // serialize
     var raw = JSON.stringify(classifier);
     // deserialize
-    var restoredClassifier = natural.BayesClassifier.restore(raw);
+    var restoredClassifier = natural.BayesClassifier.restore(JSON.parse(raw));
     console.log(restoredClassifier.classify('i should sell that'));
 
 Phonetics
