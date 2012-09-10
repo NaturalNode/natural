@@ -59,4 +59,45 @@ describe('transliterate_ja', function() {
     expect(transliterate_ja('abc ABC 漢字 (.)')).toEqual('abc ABC 漢字 (.)');
     expect(transliterate_ja('ｱｲｳｴｵ ｶｷｸｹｺ')).toEqual('ｱｲｳｴｵ ｶｷｸｹｺ');
   });
+
+  it('should transliterate misc. words correctly', function() {
+    expect(transliterate_ja('アヴァンギャルド')).toEqual('avangyarudo'); // Avant-garde
+    expect(transliterate_ja('アクサン・スィルコンフレックス')).toEqual('akusan sirukonfurekkusu'); // Accent circonflexe
+    expect(transliterate_ja('アドレシッング')).toEqual('adoreshinngu'); // Addressing
+    expect(transliterate_ja('イェス')).toEqual('yesu'); // Yes
+    expect(transliterate_ja('インテリジェンス')).toEqual('interijensu'); // Intelligence
+    expect(transliterate_ja('インテルメッツォ')).toEqual('interumettso'); // Intermezzo
+    expect(transliterate_ja('グァテマラ')).toEqual('gwatemara'); // Guatemala
+    expect(transliterate_ja('クァルテット')).toEqual('kwarutetto'); // Quartet
+    expect(transliterate_ja('クィンテット')).toEqual('kwintetto'); // Quintet
+    expect(transliterate_ja('クォーター')).toEqual('kwōtā'); // Quarter
+    expect(transliterate_ja('サブウーファー')).toEqual('sabuūfā'); // Sub woofer
+    expect(transliterate_ja('ソフトウェア')).toEqual('sofutowea'); // Software
+    expect(transliterate_ja('ツィーター')).toEqual('tsītā'); // Tweeter
+    expect(transliterate_ja('デューティー')).toEqual('dyūtī'); // Duty
+    expect(transliterate_ja('ドキュメントィンドウ')).toEqual('dokyumentwindō'); // Document window
+    expect(transliterate_ja('ヌーヴェルヴァーグ')).toEqual('nūveruvāgu'); // Nouvelle vague
+    expect(transliterate_ja('ハイジャッンプ')).toEqual('haijanmpu'); // High jump
+    expect(transliterate_ja('バッファ')).toEqual('baffa'); // Buffer
+    expect(transliterate_ja('フーホェア')).toEqual('fūhwea'); // WhoWhere?
+    expect(transliterate_ja('フェイズィング')).toEqual('feizingu'); // Phasing
+    expect(transliterate_ja('フッロピー')).toEqual('furropī'); // Floppy (alternative transcription)
+    expect(transliterate_ja('ブュー')).toEqual('byū'); // View
+    expect(transliterate_ja('フューチャー')).toEqual('fyūchā'); // Future
+    expect(transliterate_ja('フロッピィ')).toEqual('furoppī'); // Floppy
+    expect(transliterate_ja('ボージョレー・ヌーヴォー')).toEqual('bōjorē nūvō'); // Beaujolais nouveau
+    expect(transliterate_ja('ボスニア・ヘルツェゴビナ')).toEqual('bosunia herutsegobina'); // Bosnia and Herzegovina
+    expect(transliterate_ja('マッハ')).toEqual('mahha'); // Mach
+    expect(transliterate_ja('レヴュー')).toEqual('revyū'); // Review
+    expect(transliterate_ja('レクリェーション')).toEqual('rekuryēshon'); // Recreation
+  });
+
+  it('should use fallback for small vowels on special case', function() {
+    // These words use rare combination of small vowels.
+    expect(transliterate_ja('アゲィンスト')).toEqual('ageinsuto'); // Against (alternative transcription)
+    expect(transliterate_ja('エッセィ')).toEqual('essei'); // Essay (alternative transcription)
+    expect(transliterate_ja('ゾゥアラジィ')).toEqual('zouarajī'); // Zoology (alternative transcription)
+    expect(transliterate_ja('ゾゥァラジカル')).toEqual('zouarajikaru'); // Zoological (alternative transcription)
+    expect(transliterate_ja('ボランテァ')).toEqual('borantea'); // Volunteer (alternative transcription)
+  });
 });
