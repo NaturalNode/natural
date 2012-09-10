@@ -57,6 +57,20 @@ describe('normalize_ja', function() {
     expect(normalize_ja('‾ _＿ -－ ‐ — ― 〜 ・ ･ ,， 、､ ;； :： !！ ?？ .． ‥ … 。｡ ＇＼ ‘ ’ "＂ “ ” (（ )） [［ ]］ {｛ }｝ 〈 〉 《 》 「｢ 」｣ 『 』 【 】 〔 〕 ‖ § ¶ @＠ +＋ ^＾ $＄ *＊ /／ ＼\\ &＆ #＃ %％ ‰ † ‡ ′ ″ 〃 ※'))
       .toEqual('‾ ＿＿ ─－ ‐ — ― 〜 ・ ・ ，， 、、 ；； ：： ！！ ？？ ．． ‥ … 。。 ＇＼ ‘ ’ ＂＂ “ ” （（ ）） ［［ ］］ ｛｛ ｝｝ 〈 〉 《 》 ｢｢ ｣｣ 『 』 【 】 〔 〕 ‖ § ¶ ＠＠ ＋＋ ＾＾ ＄＄ ＊＊ ／／ ＼＼ ＆＆ ＃＃ ％％ ‰ † ‡ ′ ″ 〃 ※');
   });
+
+  it('should replace repeat characters', function() {
+    expect(normalize_ja('時々刻々')).toEqual('時時刻刻');
+    expect(normalize_ja('甲斐々々しい')).toEqual('甲斐甲斐しい');
+  });
+
+  it('should replace composite symbols', function() {
+    expect(normalize_ja('㍼54年㋃㏪')).toEqual('昭和54年4月11日');
+    expect(normalize_ja('㍧~㍬')).toEqual('15点～20点');
+    expect(normalize_ja('カンパニー㍿')).toEqual('カンパニー株式会社');
+    expect(normalize_ja('100㌫')).toEqual('100パーセント');
+    expect(normalize_ja('70㌔')).toEqual('70キロ');
+    expect(normalize_ja('㍇')).toEqual('マンション');
+  });
 });
 
 var sample = 'ABC ＡＢＣ　123１２３.,-．，-ゔあいうえおはばぱｶｷｸｹｺﾊﾊﾞﾊﾟヴカキクケコハバパ';
