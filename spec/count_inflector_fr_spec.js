@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2011, Chris Umbel
+Copyright (c) 2012, Guillaume Marty
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,32 +20,25 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-/**
- * \@todo Use .bind() in Tokenizer.prototype.attach().
- */
+var CountInflector = (require('lib/natural/inflectors/fr/count_inflector'));
 
-var Tokenizer = function() {
-};
+describe('count_inflector', function() {
+  it('should handle 1er cases', function() {
+    expect(CountInflector.nth(1)).toBe('1er');
+  });
 
-Tokenizer.prototype.trim = function(array) {
-  if (array[array.length - 1] == '')
-    array.pop();
+  it('should handle the 2e cases', function() {
+    expect(CountInflector.nth(0)).toBe('0e');
+    expect(CountInflector.nth(2)).toBe('2e');
+    expect(CountInflector.nth(3)).toBe('3e');
+    expect(CountInflector.nth(5)).toBe('5e');
+    expect(CountInflector.nth(11)).toBe('11e');
+    expect(CountInflector.nth(100)).toBe('100e');
+    expect(CountInflector.nth(999)).toBe('999e');
+  });
 
-  if (array[0] == '')
-    array.shift();
-
-  return array;
-};
-
-// Expose an attach function that will patch String with new methods.
-Tokenizer.prototype.attach = function() {
-  var self = this;
-
-  String.prototype.tokenize = function() {
-    return self.tokenize(this);
-  }
-};
-
-Tokenizer.prototype.tokenize = function() {};
-
-module.exports = Tokenizer;
+  it('should handle roman numerals', function() {
+    expect(CountInflector.nth('I')).toBe('Ier');
+    expect(CountInflector.nth('XX')).toBe('XXe');
+  });
+});
