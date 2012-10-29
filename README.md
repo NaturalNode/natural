@@ -144,7 +144,7 @@ You can train the classifier on sample text. It will use reasonable defaults to
 tokenize and stem the text.
 
     classifier.addDocument('i am long qqqq', 'buy');
-    classifier.addDocument('buy the q's', 'buy');
+    classifier.addDocument('buy the q''s', 'buy');
     classifier.addDocument('short gold', 'sell');
     classifier.addDocument('sell gold', 'sell');
 
