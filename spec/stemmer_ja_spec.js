@@ -23,8 +23,8 @@ THE SOFTWARE.
 var StemmerJa = require('lib/natural/stemmers/stemmer_ja');
 var stemmer = new StemmerJa();
 
-var test = ['コピー', 'コーヒー', 'タクシー', 'パーティー', 'パーティ', 'センター'];
-var testResult = ['コピー', 'コーヒ', 'タクシ', 'パーティ', 'パーティ', 'センタ'];
+var test = ['コピー', 'コーヒー', 'タクシー', 'パーティー', 'パーティ', 'ヘルプ・センター'];
+var testResult = ['コピー', 'コーヒ', 'タクシ', 'パーティ', 'パーティ', 'ヘルプ・センタ'];
 var text = '明後日パーティーに行く予定がある。図書館で資料をコピーしました。';
 
 describe('StemmerJa', function() {
