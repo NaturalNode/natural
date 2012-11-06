@@ -20,8 +20,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var Tokenizer = require('lib/natural/tokenizers/aggressive_tokenizer')
-  tokenizer = new Tokenizer();
+var Tokenizer = require('lib/natural/tokenizers/aggressive_tokenizer'),
+    tokenizer = new Tokenizer();
 
 describe('aggressive_tokenizer', function() {
   it('should tokenize strings', function() {
