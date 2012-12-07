@@ -671,7 +671,7 @@ The current configuration of the unit tests requires the following environment v
 License
 -------
 
-Copyright (c) 2011, Chris Umbel, Rob Ellis, Russell Mull
+Copyright (c) 2011, 2012 Chris Umbel, Rob Ellis, Russell Mull
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
