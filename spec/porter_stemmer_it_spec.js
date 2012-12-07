@@ -21,7 +21,6 @@ THE SOFTWARE.
 */
 var stemmer = require('lib/natural/stemmers/porter_stemmer_it');
 var fs = require('fs');
-stemmer.attach();
 
 describe('porter_stemmer_it', function() {
 	it('should perform stem', function() {
@@ -36,6 +35,8 @@ describe('porter_stemmer_it', function() {
 		);
 	}),
 	it('should tokenize and stem attached', function() {
+		stemmer.attach();
+
 		expect('SOPRA la panca la capra CAMPA'.tokenizeAndStem()).toEqual([ 'sopr', 'panc', 'capr', 'camp' ]);
 		expect('SOTTO la panca la capra CREPA'.tokenizeAndStem()).toEqual([ 'sott', 'panc', 'capr', 'crep' ]);
 	});
