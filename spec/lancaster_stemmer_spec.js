@@ -21,7 +21,7 @@ THE SOFTWARE.
 */
 
 describe('lancaster_stemmer', function() {
-    var stemmer = require('lib/natural/stemmers/lancaster_stemmer');
+    var stemmer = require('../lib/natural/stemmers/lancaster_stemmer');
 
     it('should stem', function() {
 	stemmer.attach();

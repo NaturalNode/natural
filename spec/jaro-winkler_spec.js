@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var jaroWinklerDistance = require('lib/natural/distance/jaro-winkler_distance')
+var jaroWinklerDistance = require('../lib/natural/distance/jaro-winkler_distance')
 
 Number.prototype.approxEql = function(val) {
     return Math.abs(this - val) < 1e-5;

@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var TfIdf = require('lib/natural/tfidf/tfidf');
+var TfIdf = require('../lib/natural/tfidf/tfidf');
 var tfidf;
         
 describe('tfidf', function() {

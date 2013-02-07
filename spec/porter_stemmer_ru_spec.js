@@ -19,7 +19,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-var stemmer = require('lib/natural/stemmers/porter_stemmer_ru');
+var stemmer = require('../lib/natural/stemmers/porter_stemmer_ru');
 
 var test = [
 	'в', 'вавиловка', 'вагнера', 'вагон', 'вагона', 'вагоне', 'вагонов', 'вагоном', 'вагоны',

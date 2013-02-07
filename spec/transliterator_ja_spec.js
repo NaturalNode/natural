@@ -20,7 +20,7 @@
  THE SOFTWARE.
  */
 
-var transliterate_ja = require('lib/natural/transliterators/ja');
+var transliterate_ja = require('../lib/natural/transliterators/ja');
 
 describe('transliterate_ja', function() {
   it('should transliterate hiragana', function() {
