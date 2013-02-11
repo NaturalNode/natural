@@ -19,25 +19,26 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
+
 var stemmer = require('lib/natural/stemmers/porter_stemmer_it');
 var fs = require('fs');
 
 describe('porter_stemmer_it', function() {
-	it('should perform stem', function() {
-		fs.readFileSync('spec/test_data/snowball_it.txt').toString().split('\n').forEach(
-			function (line) { 
-				if (line) {
-					var fields = line.split(' -> ');
-					var stemmed = stemmer.stem(fields[0]);	
-					expect(stemmed).toEqual(fields[1]);
-				}
-			}
-		);
-	}),
-	it('should tokenize and stem attached', function() {
-		stemmer.attach();
+  it('should perform stem', function() {
+    fs.readFileSync('spec/test_data/snowball_it.txt').toString().replace(/\r/g, '\n').split('\n').forEach(
+      function(line) {
+        if (line) {
+          var fields = line.split(' -> ');
+          var stemmed = stemmer.stem(fields[0]);
+          expect(stemmed).toEqual(fields[1]);
+        }
+      }
+    );
+  });
+  it('should tokenize and stem attached', function() {
+    stemmer.attach();
 
-		expect('SOPRA la panca la capra CAMPA'.tokenizeAndStem()).toEqual([ 'sopr', 'panc', 'capr', 'camp' ]);
-		expect('SOTTO la panca la capra CREPA'.tokenizeAndStem()).toEqual([ 'sott', 'panc', 'capr', 'crep' ]);
-	});
+    expect('SOPRA la panca la capra CAMPA'.tokenizeAndStem()).toEqual([ 'sopr', 'panc', 'capr', 'camp' ]);
+    expect('SOTTO la panca la capra CREPA'.tokenizeAndStem()).toEqual([ 'sott', 'panc', 'capr', 'crep' ]);
+  });
 });

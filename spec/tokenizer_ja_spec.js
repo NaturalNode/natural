@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var Tokenizer = require('lib/natural/tokenizers/tokenizer_ja'),
+var Tokenizer = require('../lib/natural/tokenizers/tokenizer_ja'),
     tokenizer = new Tokenizer();
 
 var text = '計算機科学における字句解析 (じくかいせき、英: Lexical Analysis) とは、ソースコードを構成する文字の並びを、トークン (token) の並びに変換することをいう。\n' +
@@ -47,7 +47,7 @@ describe('TokenizerJa', function() {
   });
 
   it('should normalize input', function() {
-    var converters = require('lib/natural/normalizers/normalizer_ja').converters;
+    var converters = require('../lib/natural/normalizers/normalizer_ja').converters;
     var tokens = tokenizer.tokenize(
         converters.halfwidthToFullwidth.alphabet(
         converters.halfwidthToFullwidth.numbers(
