@@ -21,7 +21,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var doubleMetaphone = require('lib/natural/phonetics/double_metaphone');
+var doubleMetaphone = require('../lib/natural/phonetics/double_metaphone');
 
 describe('double metaphone', function() {
     it('should drop initial silent consonants', function() {

@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var Tokenizer = require('lib/natural/tokenizers/treebank_word_tokenizer'),
+var Tokenizer = require('../lib/natural/tokenizers/treebank_word_tokenizer'),
   tokenizer = new Tokenizer();
 
 describe('treebank', function() {

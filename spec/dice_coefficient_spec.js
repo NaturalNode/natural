@@ -1,4 +1,4 @@
-var dice = require('lib/natural/distance/dice_coefficient');
+var dice = require('../lib/natural/distance/dice_coefficient');
 
 describe('dice', function () {
 

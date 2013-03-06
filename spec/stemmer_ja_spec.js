@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var StemmerJa = require('lib/natural/stemmers/stemmer_ja');
+var StemmerJa = require('../lib/natural/stemmers/stemmer_ja');
 var stemmer = new StemmerJa();
 
 var test = ['コピー', 'コーヒー', 'タクシー', 'パーティー', 'パーティ', 'ヘルプ・センター'];

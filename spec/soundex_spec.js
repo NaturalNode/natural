@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var soundex = require('lib/natural/phonetics/soundex');
+var soundex = require('../lib/natural/phonetics/soundex');
 
 describe('soundex', function() {   
     describe('transformLipps', function() {

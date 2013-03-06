@@ -20,8 +20,8 @@
  THE SOFTWARE.
  */
 
-var normalize_ja = require('lib/natural/normalizers/normalizer_ja').normalize_ja;
-var converters = require('lib/natural/normalizers/normalizer_ja').converters;
+var normalize_ja = require('../lib/natural/normalizers/normalizer_ja').normalize_ja;
+var converters = require('../lib/natural/normalizers/normalizer_ja').converters;
 
 describe('normalize_ja', function() {
   it('should fix badly formed hiragana', function() {

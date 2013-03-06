@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var CountInflector = (require('lib/natural/inflectors/fr/count_inflector'));
+var CountInflector = (require('../lib/natural/inflectors/fr/count_inflector'));
 
 describe('count_inflector', function() {
   it('should handle 1er cases', function() {

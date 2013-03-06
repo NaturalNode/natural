@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var NGrams = require('lib/natural/ngrams/ngrams');
+var NGrams = require('../lib/natural/ngrams/ngrams');
 
 describe('ngrams', function() {
     it('should bigram a string via ngrams', function() {

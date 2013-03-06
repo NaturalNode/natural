@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var natural = new require('lib/natural'),
+var natural = new require('../lib/natural'),
     LogisticRegressionClassifier = natural.LogisticRegressionClassifier;
 
 describe('logistic regression', function() {

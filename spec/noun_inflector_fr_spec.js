@@ -20,7 +20,7 @@
  THE SOFTWARE.
  */
 
-var NounInflector = require('lib/natural/inflectors/fr/noun_inflector'),
+var NounInflector = require('../lib/natural/inflectors/fr/noun_inflector'),
     inflector = new NounInflector();
 
 describe('NounInflector', function() {
