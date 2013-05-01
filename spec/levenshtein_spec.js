@@ -24,7 +24,7 @@ var levenshteinDistance = require('../lib/natural/distance/levenshtein_distance'
 
 describe('levenshtein_distance', function() {
 	it('should replace 2', function() {
-		expect(levenshteinDistance('doctor', 'doktor')).toBe(2);
+		expect(levenshteinDistance('doctor', 'doktor')).toBe(1);
 	});	
 
 	it('should allow altering replacement value', function() {
@@ -40,8 +40,8 @@ describe('levenshtein_distance', function() {
 	});
 
 	it('should combine operations', function() {
-		expect(levenshteinDistance('flad', 'flaten')).toBe(4);
-		expect(levenshteinDistance('flaten', 'flad')).toBe(4);
+		expect(levenshteinDistance('flad', 'flaten')).toBe(3);
+		expect(levenshteinDistance('flaten', 'flad')).toBe(3);
 	});
 
 	it('should consider perfect matches 0', function() {
