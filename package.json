@@ -3,6 +3,10 @@
   "description": "General natural language (tokenizing, stemming (English, Russian, Spanish), classification, inflection, phonetics, tfidf, WordNet, jaro-winkler, Levenshtein distance, Dice's Coefficient) facilities for node.",
   "version": "0.1.21",
   "homepage": "https://github.com/NaturalNode/natural",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/NaturalNode/natural.git"
+  },
   "engines": {
     "node": ">=0.4.10"
   },
