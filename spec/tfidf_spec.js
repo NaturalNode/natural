@@ -60,36 +60,6 @@ describe('tfidf', function() {
             expect(tfidf.documents[1]).toEqual({ document : 1, two : 1 });        
     	});
 
-        it('should idf', function() {
-            expect(tfidf.idf('document')).toBe(0.8472978603872037);
-            expect(tfidf.idf('dumb')).toBe(1.0986122886681098);
-        });   
-
-        it('should tfidf a single doc', function() {
-            expect(tfidf.tfidf('Document', 0)).toBe(0.8472978603872037);
-            expect(tfidf.tfidf('one', 0)).toBe(0.9162907318741551);
-            expect(tfidf.tfidf('two', 0)).toBe(0);            
-        });
-
-        it('should tfidfs docs', function() {
-            expect(tfidf.tfidfs('two')).toEqual([0, 0.9162907318741551]);
-            expect(tfidf.tfidfs('document')).toEqual([0.8472978603872037, 0.8472978603872037]);
-        });
-
-        it('should tfidf a single doc on multiple terms', function() {
-            expect(tfidf.tfidf('document One', 0)).toBe(0.8472978603872037 + 0.9162907318741551);
-            expect(tfidf.tfidf('document two', 0)).toBe(0.8472978603872037);
-        });
-
-        it('should tfidfs docs', function() {
-            tfidf.tfidfs('two', function(i, tfidf) {
-                if(i == 0)
-                    expect(tfidf).toBe(0);
-                else if (i == 1)
-                    expect(tfidf).toBe(0.9162907318741551);
-            });
-        });
-
 	it('should list important terms', function() {
             var terms = tfidf.listTerms(0);
             expect(terms[0].tfidf).toBeGreaterThan(terms[1].tfidf);

@@ -85,7 +85,7 @@ console.log(natural.LevenshteinDistance('one', 'one'));
 Output:
 
 ```javascript
-2
+1
 0
 ```
 
