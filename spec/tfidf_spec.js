@@ -36,7 +36,7 @@ describe('tfidf', function() {
         it('should store and recall keys', function() {
             tfidf = new TfIdf();
             tfidf.addDocument('document one', 'un');
-        	tfidf.addDocument('document Two', 'deux');
+	        tfidf.addDocument('document Two', 'deux');
             
             tfidf.tfidfs('two', function(i, tfidf, key) {
                 if(i == 0)
@@ -54,15 +54,9 @@ describe('tfidf', function() {
             tfidf.addDocument('document Two');
         });
 
-    	it('should add documents', function() {
-            expect(tfidf.documents.length).toBe(2);
-            expect(tfidf.documents[0]).toEqual({ document : 1, one : 1 });
-            expect(tfidf.documents[1]).toEqual({ document : 1, two : 1 });        
-    	});
-
 	it('should list important terms', function() {
-            var terms = tfidf.listTerms(0);
-            expect(terms[0].tfidf).toBeGreaterThan(terms[1].tfidf);
+        var terms = tfidf.listTerms(0);
+        expect(terms[0].tfidf).toBeGreaterThan(terms[1].tfidf);
 	});
     });
 });
