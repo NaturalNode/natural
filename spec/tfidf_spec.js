@@ -59,4 +59,72 @@ describe('tfidf', function() {
         expect(terms[0].tfidf).toBeGreaterThan(terms[1].tfidf);
 	});
     });
+
+    describe("correct calculations", function(){
+
+        it("should compute idf correctly", function(){
+
+            tfidf = new TfIdf();
+            tfidf.addDocument('this document is about node.');
+            tfidf.addDocument('this document is about ruby.');
+            tfidf.addDocument('this document is about ruby and node.');
+            tfidf.addDocument('this document is about node. it has node examples');
+
+            expect(tfidf.idf("node")).toBe(Math.log( 4.0 / 3.0 ));
+        });
+
+        it("should compute tf correctly", function(){
+            expect(TfIdf.tf("node", {this:1, document:1, is:1, about:1, node:1})).toBe(1);
+            expect(TfIdf.tf("node", {this:1, document:1, is:1, about:1, ruby:1})).toBe(0);
+            expect(TfIdf.tf("node", {this:1, document:1, is:1, about:1, ruby:1, and:1, node:1})).toBe(1);
+            expect(TfIdf.tf("node", {this:1, document:1, is:1, about:1, node:2, it:1, has:1, examples:1})).toBe(2);
+        });
+
+        it("should compute tf-idf correctly", function(){
+
+            tfidf = new TfIdf();
+            tfidf.addDocument('this document is about node.');
+            tfidf.addDocument('this document is about ruby.');
+            tfidf.addDocument('this document is about ruby and node.');
+            tfidf.addDocument('this document is about node. it has node examples');
+
+            tfidf.tfidfs('node', function(i, measure) {
+                switch(i)
+                {
+                    case 0: 
+                        expect(measure).toBe(1 * Math.log( 4.0 / 3.0 ));
+                        break ;
+                    case 1:
+                        expect(measure).toBe(0);
+                        break ;
+                    case 2: 
+                        expect(measure).toBe(1 * Math.log( 4.0 / 3.0 ));
+                        break ;
+                    case 3:
+                        expect(measure).toBe(2 * Math.log( 4.0 / 3.0 ));
+                        break ;
+                }
+            });
+
+            tfidf.tfidfs('ruby', function(i, measure) {
+                switch(i)
+                {
+                    case 0: 
+                        expect(measure).toBe(0);
+                        break ;
+                    case 1:
+                        expect(measure).toBe(1 * Math.log( 4.0 / 2.0 ));
+                        break ;
+                    case 2: 
+                        expect(measure).toBe(1 * Math.log( 4.0 / 2.0 ));
+                        break ;
+                    case 3:
+                        expect(measure).toBe(0);
+                        break ;
+                }
+            });
+
+        });
+
+    });
 });
