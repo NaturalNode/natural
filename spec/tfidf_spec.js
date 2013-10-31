@@ -106,5 +106,33 @@ describe('tfidf', function() {
 
         });
 
+        // This test assures that tf-idf is computed correctly before and after a document is added
+        // Computes and tests a few tf-idfs, then adds a document and ensures that those terms tf-idf value
+        // is updated accordingly.
+        it("should update a terms tf-idf score after adding documents", function(){
+
+            tfidf = new TfIdf();
+
+            // Add 2 documents
+            tfidf.addDocument('this document is about node.');
+            tfidf.addDocument('this document is about ruby.');
+
+            // check the tf-idf for 'node'
+            expect(tfidf.tfidf(
+                'node', 
+                {this:1, document:1, is:1, about:1, node:1})
+            ).toBe( 1 * Math.log( 2.0 / 1.0 ) );
+
+            // Add 2 more documents
+            tfidf.addDocument('this document is about ruby and node.');
+            tfidf.addDocument('this document is about node. it has node examples');
+
+            // check that the tf-idf for 'node' has changed for the same document, and is correct.
+            expect(tfidf.tfidf(
+                'node', 
+                {this:1, document:1, is:1, about:1, node:1})
+            ).toBe( 1 * Math.log( 4.0 / 3.0 ) );
+        });
+
     });
 });
