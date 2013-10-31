@@ -80,48 +80,28 @@ describe('tfidf', function() {
             expect(TfIdf.tf("node", {this:1, document:1, is:1, about:1, node:2, it:1, has:1, examples:1})).toBe(2);
         });
 
+        // This is a test of the use case outlined in the readme.
         it("should compute tf-idf correctly", function(){
 
-            tfidf = new TfIdf();
-            tfidf.addDocument('this document is about node.');
-            tfidf.addDocument('this document is about ruby.');
-            tfidf.addDocument('this document is about ruby and node.');
-            tfidf.addDocument('this document is about node. it has node examples');
+            var correctCalculations = [
+                1 * Math.log( 4.0 / 3.0 ),
+                0,
+                2 * Math.log( 4.0 / 3.0 ),
+                1 * Math.log( 4.0 / 2.0 )
+            ];
 
-            tfidf.tfidfs('node', function(i, measure) {
-                switch(i)
-                {
-                    case 0: 
-                        expect(measure).toBe(1 * Math.log( 4.0 / 3.0 ));
-                        break ;
-                    case 1:
-                        expect(measure).toBe(0);
-                        break ;
-                    case 2: 
-                        expect(measure).toBe(1 * Math.log( 4.0 / 3.0 ));
-                        break ;
-                    case 3:
-                        expect(measure).toBe(2 * Math.log( 4.0 / 3.0 ));
-                        break ;
-                }
+            tfidf = new TfIdf();
+            tfidf.addDocument('this document is about node.', {node: 0, ruby:1});
+            tfidf.addDocument('this document is about ruby.', {node:1, ruby:3});
+            tfidf.addDocument('this document is about ruby and node.', {node:0, ruby:3});
+            tfidf.addDocument('this document is about node. it has node examples', {node:2, ruby:1});
+
+            tfidf.tfidfs('node', function(i, measure, k) {
+                expect(measure).toBe(correctCalculations[k.node])
             });
 
-            tfidf.tfidfs('ruby', function(i, measure) {
-                switch(i)
-                {
-                    case 0: 
-                        expect(measure).toBe(0);
-                        break ;
-                    case 1:
-                        expect(measure).toBe(1 * Math.log( 4.0 / 2.0 ));
-                        break ;
-                    case 2: 
-                        expect(measure).toBe(1 * Math.log( 4.0 / 2.0 ));
-                        break ;
-                    case 3:
-                        expect(measure).toBe(0);
-                        break ;
-                }
+            tfidf.tfidfs('ruby', function(i, measure, k) {
+                expect(measure).toBe(correctCalculations[k.ruby])
             });
 
         });
