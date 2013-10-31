@@ -114,24 +114,18 @@ describe('tfidf', function() {
             tfidf = new TfIdf();
 
             // Add 2 documents
-            tfidf.addDocument('this document is about node.');
-            tfidf.addDocument('this document is about ruby.');
+            tfidf.addDocument('this document is about node.', 0);
+            tfidf.addDocument('this document is about ruby.', 1);
 
             // check the tf-idf for 'node'
-            expect(tfidf.tfidf(
-                'node', 
-                {this:1, document:1, is:1, about:1, node:1})
-            ).toBe( 1 * Math.log( 2.0 / 1.0 ) );
+            expect( tfidf.tfidf("node", 0) ).toBe( 1 * Math.log( 2.0 / 1.0 ) );
 
             // Add 2 more documents
             tfidf.addDocument('this document is about ruby and node.');
             tfidf.addDocument('this document is about node. it has node examples');
 
-            // check that the tf-idf for 'node' has changed for the same document, and is correct.
-            expect(tfidf.tfidf(
-                'node', 
-                {this:1, document:1, is:1, about:1, node:1})
-            ).toBe( 1 * Math.log( 4.0 / 3.0 ) );
+            // Ensure that the tf-idf in the same document has changed to reflect the new idf.
+            expect( tfidf.tfidf("node", 0) ).toBe( 1 * Math.log( 4.0 / 3.0 ) );
         });
 
     });
