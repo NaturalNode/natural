@@ -80,51 +80,97 @@ describe('tfidf', function() {
             expect(TfIdf.tf("node", {this:1, document:1, is:1, about:1, node:2, it:1, has:1, examples:1})).toBe(2);
         });
 
+        // This is a test of the use case outlined in the readme.
         it("should compute tf-idf correctly", function(){
 
-            tfidf = new TfIdf();
-            tfidf.addDocument('this document is about node.');
-            tfidf.addDocument('this document is about ruby.');
-            tfidf.addDocument('this document is about ruby and node.');
-            tfidf.addDocument('this document is about node. it has node examples');
+            var correctCalculations = [
+                1 * Math.log( 4.0 / 3.0 ),
+                0,
+                2 * Math.log( 4.0 / 3.0 ),
+                1 * Math.log( 4.0 / 2.0 )
+            ];
 
-            tfidf.tfidfs('node', function(i, measure) {
-                switch(i)
-                {
-                    case 0: 
-                        expect(measure).toBe(1 * Math.log( 4.0 / 3.0 ));
-                        break ;
-                    case 1:
-                        expect(measure).toBe(0);
-                        break ;
-                    case 2: 
-                        expect(measure).toBe(1 * Math.log( 4.0 / 3.0 ));
-                        break ;
-                    case 3:
-                        expect(measure).toBe(2 * Math.log( 4.0 / 3.0 ));
-                        break ;
-                }
+            tfidf = new TfIdf();
+            tfidf.addDocument('this document is about node.', {node: 0, ruby:1});
+            tfidf.addDocument('this document is about ruby.', {node:1, ruby:3});
+            tfidf.addDocument('this document is about ruby and node.', {node:0, ruby:3});
+            tfidf.addDocument('this document is about node. it has node examples', {node:2, ruby:1});
+
+            tfidf.tfidfs('node', function(i, measure, k) {
+                expect(measure).toBe(correctCalculations[k.node])
             });
 
-            tfidf.tfidfs('ruby', function(i, measure) {
-                switch(i)
-                {
-                    case 0: 
-                        expect(measure).toBe(0);
-                        break ;
-                    case 1:
-                        expect(measure).toBe(1 * Math.log( 4.0 / 2.0 ));
-                        break ;
-                    case 2: 
-                        expect(measure).toBe(1 * Math.log( 4.0 / 2.0 ));
-                        break ;
-                    case 3:
-                        expect(measure).toBe(0);
-                        break ;
-                }
+            tfidf.tfidfs('ruby', function(i, measure, k) {
+                expect(measure).toBe(correctCalculations[k.ruby])
             });
 
         });
 
+        // This test assures that tf-idf is computed correctly before and after a document is added
+        // Computes and tests a few tf-idfs, then adds a document and ensures that those terms tf-idf value
+        // is updated accordingly.
+        it("should update a terms tf-idf score after adding documents", function(){
+
+            tfidf = new TfIdf();
+
+            // Add 2 documents
+            tfidf.addDocument('this document is about node.', 0);
+            tfidf.addDocument('this document is about ruby.', 1);
+
+            // check the tf-idf for 'node'
+            expect( tfidf.tfidf("node", 0) ).toBe( 1 * Math.log( 2.0 / 1.0 ) );
+
+            // Add 2 more documents
+            tfidf.addDocument('this document is about ruby and node.');
+            tfidf.addDocument('this document is about node. it has node examples');
+
+            // Ensure that the tf-idf in the same document has changed to reflect the new idf.
+            expect( tfidf.tfidf("node", 0) ).toBe( 1 * Math.log( 4.0 / 3.0 ) );
+        });
+
+        // Test tf-idf computation on files loaded using readFileSync
+        it("should load documents from files", function(){
+
+            tfidf = new TfIdf();
+
+            tfidf.addFileSync("spec/test_data/tfidf_document1.txt", null, {node: 0, ruby:1});
+            tfidf.addFileSync("spec/test_data/tfidf_document2.txt", null, {node:1, ruby:3});
+            tfidf.addFileSync("spec/test_data/tfidf_document3.txt", null, {node:0, ruby:3});
+            tfidf.addFileSync("spec/test_data/tfidf_document4.txt", null, {node:2, ruby:1});
+
+            var correctCalculations = [
+                1 * Math.log( 4.0 / 3.0 ),
+                0,
+                2 * Math.log( 4.0 / 3.0 ),
+                1 * Math.log( 4.0 / 2.0 )
+            ];
+
+            tfidf.tfidfs('node', function(i, measure, k) {
+                expect(measure).toBe(correctCalculations[k.node])
+            });
+
+            tfidf.tfidfs('ruby', function(i, measure, k) {
+                expect(measure).toBe(correctCalculations[k.ruby])
+            });
+        });
+
+        // Test idf caching when adding documents from addFileSync
+        if("should update a terms tf-idf score after adding documents from addFileSync", function(){
+            tfidf = new TfIdf();
+
+            // Add 2 documents
+            tfidf.addFileSync("spec/test_data/tfidf_document1.txt", 0);
+            tfidf.addFileSync("spec/test_data/tfidf_document2.txt", 1);
+
+            // check the tf-idf for 'node'
+            expect( tfidf.tfidf("node", 0) ).toBe( 1 * Math.log( 2.0 / 1.0 ) );
+
+            // Add 2 more documents
+            tfidf.addFileSync("spec/test_data/tfidf_document3.txt");
+            tfidf.addFileSync("spec/test_data/tfidf_document4.txt");
+
+            // Ensure that the tf-idf in the same document has changed to reflect the new idf.
+            expect( tfidf.tfidf("node", 0) ).toBe( 1 * Math.log( 4.0 / 3.0 ) );
+        });
     });
 });
