@@ -44,7 +44,17 @@ describe('normalizer', function() {
         it("should correctly normalize 'll as will", function(){
             expect(JSON.stringify(normalizer.normalize_tokens(["we'll"]))).toBe(JSON.stringify(["we", "will"]));
             expect(JSON.stringify(normalizer.normalize_tokens(["he'll"]))).toBe(JSON.stringify(["he", "will"]));
-            expect(JSON.stringify(normalizer.normalize_tokens(["I'll"]))).toBe(JSON.stringify(["i", "will"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["I'll"]))).toBe(JSON.stringify(["I", "will"]));
+        });
+
+        it("should correctly normalize 're as are", function(){
+            expect(JSON.stringify(normalizer.normalize_tokens(["we're"]))).toBe(JSON.stringify(["we", "are"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["how're"]))).toBe(JSON.stringify(["how", "are"]));
+        });
+
+        it("should correctly normalize 'd as would", function(){
+            expect(JSON.stringify(normalizer.normalize_tokens(["he'd"]))).toBe(JSON.stringify(["he", "would"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["I'd"]))).toBe(JSON.stringify(["I", "would"]));
         });
     });
 
@@ -58,6 +68,52 @@ describe('normalizer', function() {
 
         it("should convert couldn't've as could not have", function(){
             expect(JSON.stringify(normalizer.normalize_tokens(["couldn't've"]))).toBe(JSON.stringify(["could", "not", "have"]));
+        });
+
+        it("should convert how'd to how did", function(){
+            expect(JSON.stringify(normalizer.normalize_tokens(["how'd"]))).toBe(JSON.stringify(["how", "did"]));
+        });
+
+        it("should correctly normalize I'm as I am", function(){
+            expect(JSON.stringify(normalizer.normalize_tokens(["I'm"]))).toBe(JSON.stringify(["I", "am"]));
+        });
+    });
+
+    /**
+     * Test some basic properties of the normailization.
+     **/
+    describe("basic properties", function(){
+        it("should handle different cases on special case conversion", function(){
+            expect(JSON.stringify(normalizer.normalize_tokens(["I'm"]))).toBe(JSON.stringify(["I", "am"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["i'm"]))).toBe(JSON.stringify(["I", "am"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["can't"]))).toBe(JSON.stringify(["cannot"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["Can't"]))).toBe(JSON.stringify(["cannot"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["CaN'T"]))).toBe(JSON.stringify(["cannot"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["how'd"]))).toBe(JSON.stringify(["how", "did"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["how'D"]))).toBe(JSON.stringify(["how", "did"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["HOw'd"]))).toBe(JSON.stringify(["how", "did"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["COULDN't've"]))).toBe(JSON.stringify(["could", "not", "have"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["couldn'T've"]))).toBe(JSON.stringify(["could", "not", "have"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["couldn't'VE"]))).toBe(JSON.stringify(["could", "not", "have"]));
+        });
+    
+        // Note: In rule-based conversion, case will be preserved on the base word.
+        it("should handle different cases on rule-based conversion", function(){
+            expect(JSON.stringify(normalizer.normalize_tokens(["Hasn't"]))).toBe(JSON.stringify(["Has", "not"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["HAsn't"]))).toBe(JSON.stringify(["HAs", "not"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["hasn'T"]))).toBe(JSON.stringify(["has", "not"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["It's"]))).toBe(JSON.stringify(["It", "is"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["IT's"]))).toBe(JSON.stringify(["IT", "is"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["it'S"]))).toBe(JSON.stringify(["it", "is"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["We'll"]))).toBe(JSON.stringify(["We", "will"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["WE'll"]))).toBe(JSON.stringify(["WE", "will"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["we'Ll"]))).toBe(JSON.stringify(["we", "will"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["How're"]))).toBe(JSON.stringify(["How", "are"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["hOW're"]))).toBe(JSON.stringify(["hOW", "are"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["how'RE"]))).toBe(JSON.stringify(["how", "are"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["I'd"]))).toBe(JSON.stringify(["I", "would"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["i'd"]))).toBe(JSON.stringify(["i", "would"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["I'D"]))).toBe(JSON.stringify(["I", "would"]));
         });
     });
 });
