@@ -58,6 +58,8 @@ describe('noun inflector', function() {
         it('should handle IX cases', function() {
             expect(inflector.singularize('matrices')).toBe('matrix');
             expect(inflector.singularize('indices')).toBe('index');
+            expect(inflector.singularize('cortices')).toBe('cortex');
+
             // our pluralizer won''t cause this form of appendix (appendicies)
             // but we should handle it
             expect(inflector.singularize('appendices')).toBe('appendix');
@@ -113,6 +115,7 @@ describe('noun inflector', function() {
 	    expect(inflector.singularize('feet')).toBe('foot');
 	    expect(inflector.singularize('geese')).toBe('goose');
 	    expect(inflector.singularize('teeth')).toBe('tooth');
+        expect(inflector.singularize('ephemerides')).toBe('ephemeris');
 	});
         
 	it('should handle AE cases', function() {
@@ -164,6 +167,7 @@ describe('noun inflector', function() {
         it('should handle IX cases', function() {
             expect(inflector.pluralize('matrix')).toBe('matrices');
             expect(inflector.pluralize('index')).toBe('indices');
+            expect(inflector.pluralize('cortex')).toBe('cortices');
         });        
         
         it('should regulars to ES', function() {
@@ -181,6 +185,8 @@ describe('noun inflector', function() {
         
         it('should handle special OES cases', function() {
             expect(inflector.pluralize('tomato')).toBe('tomatoes');
+            expect(inflector.pluralize('buffalo')).toBe('buffaloes');
+            expect(inflector.pluralize('tornado')).toBe('tornadoes');
         });
 
         it('should handle I cases', function() {
@@ -215,7 +221,8 @@ describe('noun inflector', function() {
 	    expect(inflector.pluralize('foot')).toBe('feet');
 	    expect(inflector.pluralize('goose')).toBe('geese');
 	    expect(inflector.pluralize('tooth')).toBe('teeth');
-            
+        expect(inflector.pluralize('ephemeris')).toBe('ephemerides');
+
             // MAN cases that don't pluralize to MEN
             expect(inflector.pluralize('talisman')).toBe('talismans');
             expect(inflector.pluralize('human')).toBe('humans');
