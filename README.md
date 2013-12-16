@@ -268,7 +268,7 @@ console.log(restoredClassifier.classify('i should sell that'));
 Phonetics
 ---------
 
-Phonetic matching (sounds-like) matching can be done withthe SoundEx,
+Phonetic matching (sounds-like) can be done with the SoundEx,
 Metaphone, or DoubleMetaphone algorithms:
 
 ```javascript
@@ -623,7 +623,7 @@ first install the WordNet database files using the [WNdb module](https://github.
 Keep in mind that the WordNet integration is to be considered experimental at this point,
 and not production-ready. The API is also subject to change.
 
-Here's an exmple of looking up definitions for the word, "node".
+Here's an example of looking up definitions for the word, "node".
 
 ```javascript
 var wordnet = new natural.WordNet();
