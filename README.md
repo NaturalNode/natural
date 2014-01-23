@@ -39,7 +39,7 @@ means fork away!
 Tokenizers
 ----------
 
-Word, Regexp, and Treebank tokenizers are provided for breaking text up into
+Word, Regexp, and [Treebank tokenizers](http://www.cis.upenn.edu/~treebank/tokenization.html) are provided for breaking text up into
 arrays of tokens:
 
 ```javascript
@@ -67,7 +67,7 @@ console.log(tokenizer.tokenize("my dog hasn't any flees."));
 
 String Distance
 ----------------------
-Natural provides an implementation of the Jaro-Winkler string distance measuring algorithm.
+Natural provides an implementation of the [Jaro–Winkler](http://en.wikipedia.org/wiki/Jaro%E2%80%93Winkler_distance) string distance measuring algorithm.
 This will return a number between 0 and 1 which tells how closely the strings match (0 = not at all, 1 = exact match):
 
 ```javascript
@@ -132,8 +132,7 @@ Output:
 Stemmers
 --------
 
-Currently, stemming is supported via the Porter (English,Russian and Spanish) and Lancaster (Paice/Husk)
-algorithms.
+Currently stemming is supported via the [Porter](http://tartarus.org/martin/PorterStemmer/index.html) and [Lancaster](http://www.comp.lancs.ac.uk/computing/research/stemming/) (Paice/Husk) algorithms.
 
 ```javascript
 var natural = require('natural');
@@ -178,8 +177,8 @@ console.log("chainsaws".stem());
 Classifiers
 ----------------------
 
-Two classifiers are currently supported, Naive Bayes and logistic regression.
-The following examples use the BayesClassifier class, but the
+Two classifiers are currently supported, [Naive Bayes](http://en.wikipedia.org/wiki/Naive_Bayes_classifier) and [logistic regression](http://en.wikipedia.org/wiki/Logistic_regression).
+The following examples use the BayesClassifier class, but the 
 LogisticRegressionClassifier class could be substituted instead.
 
 ```javascript
@@ -268,8 +267,8 @@ console.log(restoredClassifier.classify('i should sell that'));
 Phonetics
 ---------
 
-Phonetic matching (sounds-like) matching can be done withthe SoundEx,
-Metaphone, or DoubleMetaphone algorithms:
+Phonetic matching (sounds-like) matching can be done with the [SoundEx](http://en.wikipedia.org/wiki/Soundex),
+[Metaphone](http://en.wikipedia.org/wiki/Metaphone) or [DoubleMetaphone](http://en.wikipedia.org/wiki/Metaphone#Double_Metaphone) algorithms
 
 ```javascript
 var natural = require('natural'),
@@ -483,9 +482,9 @@ The above outputs: `[ [ 'some', 'other', 'words', 'here' ],
 tf-idf
 -----
 
-Term Frequency–Inverse Document Frequency (tf-idf) is implemented to determine how important a word (or words) is to a
-document relative to a corpus. The following example will add four documents to
-a corpus and determine the weight of the word "node", then the weight of the
+[Term Frequency–Inverse Document Frequency (tf-idf)](http://en.wikipedia.org/wiki/Tf%E2%80%93idf) is implemented to determine how important a word (or words) is to a 
+document relative to a corpus. The following example will add four documents to 
+a corpus and determine the weight of the word "node" and then the weight of the 
 word "ruby" in each document.
 
 ```javascript
