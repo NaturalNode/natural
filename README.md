@@ -30,7 +30,7 @@ means fork away!
 Tokenizers
 ----------
 
-Word, Regexp and Treebank tokenizers are provided for breaking text up into
+Word, Regexp and [Treebank tokenizers](http://www.cis.upenn.edu/~treebank/tokenization.html) are provided for breaking text up into
 arrays of tokens.
 
     var natural = require('natural'),
@@ -51,7 +51,7 @@ The other tokenizers follow a similar pattern
 String Similiarity
 ---------------
 
-The similiarity between two strings can be accomplished with a Jaro–Winkler distance.
+The similiarity between two strings can be accomplished with a [Jaro–Winkler](http://en.wikipedia.org/wiki/Jaro%E2%80%93Winkler_distance) distance.
 
   var jaroWinklerDistance = require('natural').JaroWinklerDistance;
 
@@ -61,7 +61,7 @@ The similiarity between two strings can be accomplished with a Jaro–Winkler di
 Stemmers
 --------
 
-Currently stemming is supported via the Porter and Lancaster (Paice/Husk)
+Currently stemming is supported via the [Porter](http://tartarus.org/martin/PorterStemmer/index.html) and [Lancaster](http://www.comp.lancs.ac.uk/computing/research/stemming/) (Paice/Husk)
 algorithms.
 
     var natural = require('natural');
@@ -87,7 +87,7 @@ the same thing can be done with a lancaster stemmer
 Classifiers
 ----------------------
 
-Two classifiers are currently supported, Naive Bayes and logistic regression.
+Two classifiers are currently supported, [Naive Bayes](http://en.wikipedia.org/wiki/Naive_Bayes_classifier) and [logistic regression](http://en.wikipedia.org/wiki/Logistic_regression).
 The following examples use the BayesClassifier class, but the 
 LogisticRegressionClassifier class could be substituted instead.
 
@@ -158,8 +158,8 @@ A classifier can also be serialized and deserialized as such
 Phonetics
 ---------
 
-Phonetic matching (sounds-like) matching can be done withthe SoundEx,
-Metaphone or DoubleMetaphone algorithms
+Phonetic matching (sounds-like) matching can be done with the [SoundEx](http://en.wikipedia.org/wiki/Soundex),
+[Metaphone](http://en.wikipedia.org/wiki/Metaphone) or [DoubleMetaphone](http://en.wikipedia.org/wiki/Metaphone#Double_Metaphone) algorithms
 
     var natural = require('natural'),
         metaphone = natural.Metaphone, soundEx = natural.SoundEx;
@@ -322,7 +322,7 @@ which outputs [ [ 'some', 'other', 'words', 'here' ],
 tf-idf
 -----
 
-Term Frequency–Inverse Document Frequency (tf-idf) is implemented to determine how important a word (or words) is to a 
+[Term Frequency–Inverse Document Frequency (tf-idf)](http://en.wikipedia.org/wiki/Tf%E2%80%93idf) is implemented to determine how important a word (or words) is to a 
 document relative to a corpus. The following example will add four documents to 
 a corpus and determine the weight of the word "node" and then the weight of the 
 word "ruby" in each document.
