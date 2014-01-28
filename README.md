@@ -1,7 +1,7 @@
 natural
 =======
 
-[![Build Status](https://travis-ci.org/NaturalNode/natural.png?branch=travis-setup)](https://travis-ci.org/Joe8Bit/natural)
+[![Build Status](https://travis-ci.org/NaturalNode/natural.png?branch=travis-setup)](https://travis-ci.org/NaturalNode/natural)
 
 "Natural" is a general natural language facility for nodejs. Tokenizing,
 stemming, classification, phonetics, tf-idf, WordNet, string similarity,
