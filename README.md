@@ -233,7 +233,18 @@ tokenization/stemming, if you choose to implement it.
 classifier.addDocument(['sell', 'gold'], 'sell');
 ```
 
-A classifier can also be persisted and recalled later so that you can reuse it later.
+The training process can be monitored by subscribing to the event `trainedWithDocument` that's emitted by the classifier, this event's emitted each time a document is finished being trained against:
+
+    classifier.events.on('trainedWithDocument', function (obj) {
+       console.log(obj);
+       /* {
+       *   total: 23 // There are 23 total documents being trained against
+       *   index: 12 // The index/number of the document that's just been trained against
+       *   doc: {...} // The document that has just been indexed
+       */ }
+    });
+
+A classifier can also be persisted and recalled so you can reuse a training
 
 ```javascript
 classifier.save('classifier.json', function(err, classifier) {
