@@ -58,6 +58,11 @@ describe('present verb inflector', function() {
             expect(inflector.singularize('are')).toBe('is');
             expect(inflector.singularize('were')).toBe('was');
         });
+
+        it('should singularize ies forms', function() {
+            expect(inflector.singularize('fly')).toBe('flies');
+            expect(inflector.singularize('try')).toBe('tries');
+        });
         
         it('should handle ambiguous forms', function() {
             expect(inflector.singularize('will')).toBe('will');
@@ -100,6 +105,11 @@ describe('present verb inflector', function() {
         it('should pluralize irregular forms', function() {
             expect(inflector.pluralize('was')).toBe('were');                        
             expect(inflector.pluralize('is')).toBe('are');
+        });
+
+        it('should pluralize ies forms', function() {
+            expect(inflector.pluralize('flies')).toBe('fly');
+            expect(inflector.pluralize('tries')).toBe('try');
         });
         
         it('should handle ambiguous forms', function() {
