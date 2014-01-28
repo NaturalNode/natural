@@ -58,5 +58,34 @@ describe('classifier', function () {
             classifier.events.on('doneTraining', assertEventResults);
         });
 
+        it('should emit events only on an instance of Classifier', function () {
+            var classifier = new natural.BayesClassifier();
+            classifier.addDocument('i fixed the box', 'computing');
+            classifier.addDocument('i write code', 'computing');
+            classifier.addDocument('write a book', 'literature');
+            classifier.addDocument('study the books', 'literature');
+
+            var pushedEvents = [];
+
+            function eventRegister(obj) {
+                pushedEvents.push(obj);
+            };
+
+            function assertEventResults() {
+                teardown();
+                expect(pushedEvents.length).toBe(0);
+            }
+
+            function teardown() {
+                classifier.events.removeListener('trainedWithDocument', eventRegister);
+                classifier.events.removeListener('doneTraining', assertEventResults);
+            }
+
+            var classifier2 = new natural.BayesClassifier();
+            classifier2.events.on('trainedWithDocument', eventRegister);
+            classifier.events.on('doneTraining', assertEventResults);
+            classifier.train();
+        });
+
     });
 });
