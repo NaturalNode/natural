@@ -16,7 +16,7 @@
     "uubench": "0.0.x"
   },
   "scripts": {
-    "test": "export NODE_PATH=. && ./node_modules/jasmine-node/bin/jasmine-node spec/"
+    "test": "export NODE_PATH=. && make test"
   },
   "author": "Chris Umbel <chris@chrisumbel.com>",
   "keywords": ["natural", "language", "porter", "lancaster", "stemmer", "bayes",
