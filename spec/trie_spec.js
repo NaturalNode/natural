@@ -52,6 +52,33 @@ describe('trie', function() {
 		});
 	});
 
+	describe("getSize", function(){
+		
+		it("should return 1 for an empty trie", function(){
+			var trie = new Trie();
+			expect(trie.getSize()).toBe(1);
+		});
+
+		it("should return the correct size", function(){
+			var trie = new Trie();
+			trie.addString("a");
+			expect(trie.getSize()).toBe(2);
+
+			trie.addString("ab");
+			expect(trie.getSize()).toBe(3);
+		});
+
+		it("should count all branches", function(){
+			var trie = new Trie();
+			trie.addString("a");
+			expect(trie.getSize()).toBe(2);
+
+			trie.addString("ba");
+			expect(trie.getSize()).toBe(4);
+		});
+		
+	});
+
 	describe("searching", function(){
 
 		it("should not find words that haven't been added", function(){
@@ -125,6 +152,12 @@ describe('trie', function() {
 			var trie = new Trie(false);
 			trie.addString("test");
 			expect(trie.contains("TEST")).toBe(true);
+		});
+
+		it("should have case-insensitive contains when the strings are added with case", function(){
+			var trie = new Trie(false);
+			trie.addString("teSt");
+			expect(trie.contains("test")).toBe(true);
 		});
 
 		it("should have findMatchesOnPath in case-insensitive mode", function(){
