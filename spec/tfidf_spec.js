@@ -54,10 +54,32 @@ describe('tfidf', function() {
             tfidf.addDocument('document Two');
         });
 
-	it('should list important terms', function() {
-        var terms = tfidf.listTerms(0);
-        expect(terms[0].tfidf).toBeGreaterThan(terms[1].tfidf);
-	});
+    	it('should list important terms', function() {
+            var terms = tfidf.listTerms(0);
+            expect(terms[0].tfidf).toBeGreaterThan(terms[1].tfidf);
+    	});
+    });
+
+    describe("special cases", function(){
+
+        // In response to 
+        it("should handle reserved function names correctly in documents", function(){
+            var reservedWords = [
+                'toString',
+                'toLocaleString',
+                'valueOf',
+                'hasOwnProperty',
+                'isPrototypeOf',
+                'propertyIsEnumerable',
+                'constructor'
+            ];
+            tfidf = new TfIdf();
+            tfidf.addDocument(reservedWords.join(" "));
+            
+            for(var i in reservedWords) {
+                expect(tfidf.tfidf(reservedWords[i], 0)).toBe(0);
+            }
+        });
     });
 
     describe("correct calculations", function(){
