@@ -23,16 +23,16 @@ SHELL := /bin/bash
 benchmark:
 	@node benchmarks
 
-clean: 
+clean:
 	@find ./ -name *~ | xargs rm -f
 	@find ./ -name \#* | xargs rm -f
 	@rm *classifier.json
 
 test:
-	@NODE_PATH=. jasmine-node spec/
+	@NODE_PATH=. node_modules/jasmine-node/bin/jasmine-node spec/
 
-test_io: 
-	@NODE_PATH=. jasmine-node io_spec/
+test_io:
+	@NODE_PATH=. node_modules/jasmine-node/bin/jasmine-node io_spec/
 
 test_io_unclean:
-	@NODE_PATH=. jasmine-node io_spec/
+	@NODE_PATH=. node_modules/jasmine-node/bin/jasmine-node io_spec/
