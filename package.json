@@ -19,6 +19,9 @@
     "uubench": "0.0.x",
     "jasmine-node": "~1.13.1"
   },
+  "scripts": {
+      "test": "NODE_PATH=. node_modules/jasmine-node/bin/jasmine-node spec/"
+  },
   "author": "Chris Umbel <chris@chrisumbel.com>",
   "keywords": [
     "natural",
