@@ -1,7 +1,13 @@
 natural
 =======
 
+<<<<<<< HEAD
 "Natural" is a general natural language facility for node.js. Tokenizing,
+=======
+[![Build Status](https://travis-ci.org/NaturalNode/natural.png?branch=master)](https://travis-ci.org/NaturalNode/natural)
+
+"Natural" is a general natural language facility for nodejs. Tokenizing,
+>>>>>>> f6d6f4cc441808d0ea35678d45ae673344b4aba7
 stemming, classification, phonetics, tf-idf, WordNet, string similarity,
 and some inflections are currently supported.
 
