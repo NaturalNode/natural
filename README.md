@@ -1,8 +1,6 @@
 natural
 =======
 
-"Natural" is a general natural language facility for node.js. Tokenizing,
-=======
 [![Build Status](https://travis-ci.org/NaturalNode/natural.png?branch=master)](https://travis-ci.org/NaturalNode/natural)
 
 "Natural" is a general natural language facility for nodejs. Tokenizing,
