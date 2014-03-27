@@ -63,7 +63,7 @@ describe('normalizer', function() {
      **/
     describe("special cases", function(){
         it("should convert can't to cannot", function(){
-            expect(JSON.stringify(normalizer.normalize_tokens(["can't"]))).toBe(JSON.stringify(["cannot"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["can't"]))).toBe(JSON.stringify(["can","not"]));
         });
 
         it("should convert couldn't've as could not have", function(){
@@ -86,9 +86,9 @@ describe('normalizer', function() {
         it("should handle different cases on special case conversion", function(){
             expect(JSON.stringify(normalizer.normalize_tokens(["I'm"]))).toBe(JSON.stringify(["I", "am"]));
             expect(JSON.stringify(normalizer.normalize_tokens(["i'm"]))).toBe(JSON.stringify(["I", "am"]));
-            expect(JSON.stringify(normalizer.normalize_tokens(["can't"]))).toBe(JSON.stringify(["cannot"]));
-            expect(JSON.stringify(normalizer.normalize_tokens(["Can't"]))).toBe(JSON.stringify(["cannot"]));
-            expect(JSON.stringify(normalizer.normalize_tokens(["CaN'T"]))).toBe(JSON.stringify(["cannot"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["can't"]))).toBe(JSON.stringify(["can", "not"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["Can't"]))).toBe(JSON.stringify(["can", "not"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["CaN'T"]))).toBe(JSON.stringify(["can", "not"]));
             expect(JSON.stringify(normalizer.normalize_tokens(["how'd"]))).toBe(JSON.stringify(["how", "did"]));
             expect(JSON.stringify(normalizer.normalize_tokens(["how'D"]))).toBe(JSON.stringify(["how", "did"]));
             expect(JSON.stringify(normalizer.normalize_tokens(["HOw'd"]))).toBe(JSON.stringify(["how", "did"]));
