@@ -31,7 +31,6 @@ describe('normalizer', function() {
         it("should correctly normalize n't as not", function(){
             expect(JSON.stringify(normalizer.normalize_tokens(["hasn't"]))).toBe(JSON.stringify(["has", "not"]));
             expect(JSON.stringify(normalizer.normalize_tokens(["hadn't"]))).toBe(JSON.stringify(["had", "not"]));
-            expect(JSON.stringify(normalizer.normalize_tokens(["hasn't"]))).toBe(JSON.stringify(["has", "not"]));
             expect(JSON.stringify(normalizer.normalize_tokens(["haven't"]))).toBe(JSON.stringify(["have", "not"]));
         });
 
