@@ -31,7 +31,7 @@ describe('porter_stemmer', function() {
     expect(stemmer.prelude('quand')).toBe('qUand');
   });
 
-  it('should give rv region', function() {
+  it('should compute rv region', function() {
     expect(stemmer.rvRegion('parade')).toBe('ade');
     expect(stemmer.rvRegion('colet')).toBe('et');
     expect(stemmer.rvRegion('tapis')).toBe('is');
@@ -40,8 +40,12 @@ describe('porter_stemmer', function() {
     expect(stemmer.rvRegion('voler')).toBe('ler');
   });
 
-  it('should give r1 region', function() {
+  it('should compute r1 region', function() {
     expect(stemmer.r1Region('fameusement')).toBe('eusement');
+  });
+
+  it('should compute r2 region', function() {
+    expect(stemmer.r2Region('fameusement')).toBe('ement');
   });
 
 });
