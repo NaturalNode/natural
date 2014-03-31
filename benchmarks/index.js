@@ -6,11 +6,11 @@
 var uubench = require('uubench')
   , natural = require('../');
 
-fs = require('fs');
-metaphone = natural.Metaphone.process;
-soundex = natural.SoundEx.process;
+var fs = require('fs');
+var metaphone = natural.Metaphone.process;
+var soundex = natural.SoundEx.process;
 
-suite = new uubench.Suite({
+var suite = new uubench.Suite({
   start: function(){
     console.log();
   },
