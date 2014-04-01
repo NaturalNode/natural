@@ -66,4 +66,58 @@ describe('ngrams', function() {
                 ['are', 'some', 'words']]);
         });        
     });
+
+    // New Start/End Symbols Feature
+    it('should bigram a string with start and end symbols', function() {
+        expect(NGrams.ngrams('these are some words', 2, "[start]", "[end]")).toEqual([
+            ['[start]', 'these'], 
+            ['these', 'are'],
+            ['are', 'some' ], 
+            ['some', 'words'], 
+            ['words', '[end]']
+        ]);
+    });
+
+    it('should bigram a string with start symbols only', function() {
+        expect(NGrams.ngrams('these are some words', 2, "[start]")).toEqual([
+            ['[start]', 'these'], 
+            ['these', 'are'],
+            ['are', 'some' ], 
+            ['some', 'words']
+        ]);
+    });
+
+
+    it('should bigram a string with end symbols only', function() {
+        expect(NGrams.ngrams('these are some words', 2, null, "[end]")).toEqual([
+            ['these', 'are'],
+            ['are', 'some' ], 
+            ['some', 'words'],
+            ['words', '[end]']
+        ]);
+    });
+
+    it('should trigram a string with start and end symbols', function() {
+        expect(NGrams.ngrams('these are some words', 3, '[start]', '[end]')).toEqual([
+            ['[start]', '[start]', 'these'],
+            ['[start]', 'these', 'are'], 
+            ['these', 'are', 'some'],
+            ['are', 'some', 'words'], 
+            ['some', 'words', '[end]'],
+            ['words', '[end]', '[end]']
+        ]);
+    });
+
+    it('should 4-gram a string with start and end symbols', function() {
+        expect(NGrams.ngrams('these are some words', 4, '[start]', '[end]')).toEqual([
+            ['[start]', '[start]', '[start]', 'these'],
+            ['[start]', '[start]', 'these', 'are'],
+            ['[start]', 'these', 'are', 'some'],
+            ['these', 'are', 'some', 'words'], 
+            ['are', 'some', 'words', '[end]'],
+            ['some', 'words', '[end]', '[end]'],
+            ['words', '[end]', '[end]', '[end]']
+        ]);
+    });
+    
 });

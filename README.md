@@ -492,6 +492,27 @@ The above outputs: `[ [ 'some', 'other', 'words', 'here' ],
   [ 'other', 'words', 'here', 'for' ],
   [ 'words', 'here', 'for', 'you' ] ]`
 
+### padding
+
+n-grams can also be returned with left or right padding by passing a start and/or end symbol to the bigrams, trigrams or ngrams.
+
+```javascript
+console.log(NGrams.ngrams('some other words here for you', 4, '[start]', '[end]'));
+```
+
+The above will output: 
+```
+[ [ '[start]', '[start]', '[start]', 'some' ],
+  [ '[start]', '[start]', 'some', 'other' ],
+  [ '[start]', 'some', 'other', 'words' ],
+  [ 'some', 'other', 'words', 'here' ],
+  [ 'other', 'words', 'here', 'for' ],
+  [ 'words', 'here', 'for', 'you' ],
+  [ 'here', 'for', 'you', '[end]' ],
+  [ 'for', 'you', '[end]', '[end]' ],
+  [ 'you', '[end]', '[end]', '[end]' ] ]
+```
+
 tf-idf
 -----
 
