@@ -123,7 +123,24 @@ describe('trie', function() {
 			expect(results).not.toContain("cd");
 		});
 
-		it("should be able to execute the find_prefix search with a match", function(){
+		it("should be able to guess all full prefix matched words.", function(){
+			var trie = new Trie();
+			trie.addStrings(["a","ab","bc","cd","abc"]);
+			var results = trie.keysWithPrefix("a");
+			expect(results).toContain("a");
+			expect(results).toContain("ab");
+			expect(results).toContain("abc");
+			expect(results).not.toContain("bc");
+			expect(results).not.toContain("cd");
+			results = trie.keysWithPrefix("ab");
+			expect(results).toContain("ab");
+			expect(results).toContain("abc");
+			expect(results).not.toContain("a");
+			expect(results).not.toContain("bc");
+			expect(results).not.toContain("cd");
+		});
+
+	        it("should be able to execute the find_prefix search with a match", function(){
 			var trie = new Trie();
 			trie.addStrings(["their", "and", "they"]);
 			var results = trie.findPrefix("theyre");
