@@ -513,6 +513,21 @@ The above will output:
   [ 'you', '[end]', '[end]', '[end]' ] ]
 ```
 
+For only end symbols, pass `null` for the start symbol, for instance:
+```javascript
+console.log(NGrams.ngrams('some other words here for you', 4, null, '[end]'));
+```
+
+Will output: 
+```
+[ [ 'some', 'other', 'words', 'here' ],
+  [ 'other', 'words', 'here', 'for' ],
+  [ 'words', 'here', 'for', 'you' ],
+  [ 'here', 'for', 'you', '[end]' ],
+  [ 'for', 'you', '[end]', '[end]' ],
+  [ 'you', '[end]', '[end]', '[end]' ] ]
+```
+
 tf-idf
 -----
 
