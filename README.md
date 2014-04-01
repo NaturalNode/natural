@@ -713,6 +713,14 @@ trie.addString("est");
 console.log(trie.findMatchesOnPath("tester")); // ['tes', 'test'];
 ```
 
+### All Keys with Prefix
+
+This search will return all of the words in the Trie with the given prefix.
+
+```javascript
+console.log(true.keysWithPrefix("string")); // ["string1", "string2", "string3"]
+```
+
 ### Case-Sensitivity
 
 By default the trie is case-sensitive, you can use it in case-_in_sensitive mode by passing `false` 
