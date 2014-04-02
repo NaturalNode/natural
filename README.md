@@ -492,6 +492,42 @@ The above outputs: `[ [ 'some', 'other', 'words', 'here' ],
   [ 'other', 'words', 'here', 'for' ],
   [ 'words', 'here', 'for', 'you' ] ]`
 
+### padding
+
+n-grams can also be returned with left or right padding by passing a start and/or end symbol to the bigrams, trigrams or ngrams.
+
+```javascript
+console.log(NGrams.ngrams('some other words here for you', 4, '[start]', '[end]'));
+```
+
+The above will output: 
+```
+[ [ '[start]', '[start]', '[start]', 'some' ],
+  [ '[start]', '[start]', 'some', 'other' ],
+  [ '[start]', 'some', 'other', 'words' ],
+  [ 'some', 'other', 'words', 'here' ],
+  [ 'other', 'words', 'here', 'for' ],
+  [ 'words', 'here', 'for', 'you' ],
+  [ 'here', 'for', 'you', '[end]' ],
+  [ 'for', 'you', '[end]', '[end]' ],
+  [ 'you', '[end]', '[end]', '[end]' ] ]
+```
+
+For only end symbols, pass `null` for the start symbol, for instance:
+```javascript
+console.log(NGrams.ngrams('some other words here for you', 4, null, '[end]'));
+```
+
+Will output: 
+```
+[ [ 'some', 'other', 'words', 'here' ],
+  [ 'other', 'words', 'here', 'for' ],
+  [ 'words', 'here', 'for', 'you' ],
+  [ 'here', 'for', 'you', '[end]' ],
+  [ 'for', 'you', '[end]', '[end]' ],
+  [ 'you', '[end]', '[end]', '[end]' ] ]
+```
+
 tf-idf
 -----
 
@@ -675,6 +711,14 @@ This search will return all prefix matches along the search string path.
 trie.addString("tes");
 trie.addString("est");
 console.log(trie.findMatchesOnPath("tester")); // ['tes', 'test'];
+```
+
+### All Keys with Prefix
+
+This search will return all of the words in the Trie with the given prefix.
+
+```javascript
+console.log(true.keysWithPrefix("string")); // ["string1", "string2", "string3"]
 ```
 
 ### Case-Sensitivity
