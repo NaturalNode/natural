@@ -718,7 +718,7 @@ console.log(trie.findMatchesOnPath("tester")); // ['tes', 'test'];
 This search will return all of the words in the Trie with the given prefix.
 
 ```javascript
-console.log(true.keysWithPrefix("string")); // ["string1", "string2", "string3"]
+console.log(trie.keysWithPrefix("string")); // ["string1", "string2", "string3"]
 ```
 
 ### Case-Sensitivity
