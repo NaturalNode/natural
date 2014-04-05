@@ -47,4 +47,9 @@ describe('porter_stemmer', function() {
     expect(stemmer.regions('voler').rv).toBe('ler');
   });
 
+  it('should stem', function (){
+    expect(stemmer.stem('velofumiste')).toBe('velofum');
+    expect(stemmer.stem('velomateur')).toBe('velom');
+  });
+
 });
