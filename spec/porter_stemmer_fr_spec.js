@@ -31,21 +31,20 @@ describe('porter_stemmer', function() {
     expect(stemmer.prelude('quand')).toBe('qUand');
   });
 
-  it('should compute rv region', function() {
-    expect(stemmer.rvRegion('parade')).toBe('ade');
-    expect(stemmer.rvRegion('colet')).toBe('et');
-    expect(stemmer.rvRegion('tapis')).toBe('is');
-    expect(stemmer.rvRegion('aimer')).toBe('er');
-    expect(stemmer.rvRegion('adorer')).toBe('rer');
-    expect(stemmer.rvRegion('voler')).toBe('ler');
-  });
+  it('should compute regions', function() {
+    expect(stemmer.regions('fameusement').r1).toBe('eusement');
+    expect(stemmer.regions('fameusement').r2).toBe('ement');
 
-  it('should compute r1 region', function() {
-    expect(stemmer.r1Region('fameusement')).toBe('eusement');
-  });
+    expect(stemmer.regions('taii').r1).toBe('');
+    expect(stemmer.regions('taii').r2).toBe('');
 
-  it('should compute r2 region', function() {
-    expect(stemmer.r2Region('fameusement')).toBe('ement');
+    expect(stemmer.regions('parade').rv).toBe('ade');
+    expect(stemmer.regions('colet').rv).toBe('et');
+    expect(stemmer.regions('tapis').rv).toBe('is');
+
+    expect(stemmer.regions('aimer').rv).toBe('er');
+    expect(stemmer.regions('adorer').rv).toBe('rer');
+    expect(stemmer.regions('voler').rv).toBe('ler');
   });
 
 });
