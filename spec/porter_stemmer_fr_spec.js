@@ -53,7 +53,8 @@ describe('porter_stemmer', function() {
     //expect(stemmer.stem('velofumiste')).toBe('velofum');
     //expect(stemmer.stem('velomateur')).toBe('velom');
 
-    expect(stemmer.stem('indicatrice')).toBe('indiqU');
+    //expect(stemmer.stem('indicatrice')).toBe('indiqU');
+    expect(stemmer.stem('pourissement')).toBe('indiqU');
   });
 
 });
