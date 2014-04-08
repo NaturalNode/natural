@@ -72,9 +72,11 @@ describe('porter_stemmer', function() {
         if (stemmed === fields[1])
           ok.push(fields[0]);
         else
-          ko.push(fields[0])
+          ko.push({word: fields[0], expected: fields[1], actual: stemmed});
       }
     });
+
+    console.log(ko);
 
     console.log('ok:', ok.length, 'ko:', ko.length);
 
