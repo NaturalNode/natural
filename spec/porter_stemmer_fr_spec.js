@@ -21,10 +21,11 @@ THE SOFTWARE.
 */
 
 var stemmer = require('../lib/natural/stemmers/porter_stemmer_fr');
+var fs = require('fs');
 
 describe('porter_stemmer', function() {
 
-/*
+  /*
   it('should prelude', function() {
     expect(stemmer.prelude('JOUER')).toBe('joUer');
     expect(stemmer.prelude('ennuie')).toBe('ennuIe');
@@ -49,12 +50,25 @@ describe('porter_stemmer', function() {
   });
   */
 
-  it('should stem', function (){
+  it('should stem', function() {
     //expect(stemmer.stem('velofumiste')).toBe('velofum');
     //expect(stemmer.stem('velomateur')).toBe('velom');
 
     //expect(stemmer.stem('indicatrice')).toBe('indiqU');
-    expect(stemmer.stem('pourissement')).toBe('indiqU');
+    //expect(stemmer.stem('pourissement')).toBe('indiqU');
+  });
+
+  var fs = require('fs');
+
+  it('should perform stem', function() {
+    var ok = [];
+    var ko = [];
+
+    fs.readFileSync('spec/test_data/snowball_fr.txt').toString().replace(/(\s)+/g, ' ').split('\n').forEach(
+      function(line) {
+        console.log(line);
+      }
+    );
   });
 
 });
