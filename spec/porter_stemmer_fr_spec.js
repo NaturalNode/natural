@@ -64,11 +64,19 @@ describe('porter_stemmer', function() {
     var ok = [];
     var ko = [];
 
-    fs.readFileSync('spec/test_data/snowball_fr.txt').toString().replace(/(\s)+/g, ' ').split('\n').forEach(
-      function(line) {
-        console.log(line);
-      }
-    );
-  });
+    fs.readFileSync('spec/test_data/snowball_fr.txt').toString().split('\n').forEach(function(line) {
+      if (line) {
+        var fields = line.replace(/(\s)+/g, ' ').split(' ');
+        var stemmed = stemmer.stem(fields[0]);
 
+        if (stemmed === fields[1])
+          ok.push(fields[0]);
+        else
+          ko.push(fields[0])
+      }
+    });
+
+    console.log('ok:', ok.length, 'ko:', ko.length);
+
+  });
 });
