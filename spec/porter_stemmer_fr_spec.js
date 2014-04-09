@@ -31,25 +31,25 @@ describe('porter_stemmer', function() {
     expect(stemmer.prelude('ennuie')).toBe('ennuIe');
     expect(stemmer.prelude('yeux')).toBe('Yeux');
     expect(stemmer.prelude('quand')).toBe('qUand');
-  });
+  });*/
 
   it('should compute regions', function() {
-    expect(stemmer.regions('fameusement').r1).toBe('eusement');
-    expect(stemmer.regions('fameusement').r2).toBe('ement');
+    expect(stemmer.regions('fameusement').r1).toBe(3);
+    expect(stemmer.regions('fameusement').r2).toBe(6);
 
-    expect(stemmer.regions('taii').r1).toBe('');
-    expect(stemmer.regions('taii').r2).toBe('');
+    expect(stemmer.regions('taii').r1).toBe(4);
+    expect(stemmer.regions('taii').r2).toBe(4);
 
-    expect(stemmer.regions('parade').rv).toBe('ade');
-    expect(stemmer.regions('colet').rv).toBe('et');
-    expect(stemmer.regions('tapis').rv).toBe('is');
+    expect(stemmer.regions('parade').rv).toBe(3);
+    expect(stemmer.regions('colet').rv).toBe(3);
+    expect(stemmer.regions('tapis').rv).toBe(3);
 
-    expect(stemmer.regions('aimer').rv).toBe('er');
-    expect(stemmer.regions('adorer').rv).toBe('rer');
-    expect(stemmer.regions('voler').rv).toBe('ler');
+    expect(stemmer.regions('aimer').rv).toBe(3);
+    expect(stemmer.regions('adorer').rv).toBe(3);
+    expect(stemmer.regions('voler').rv).toBe(2);
   });
-  */
 
+/*
   it('should stem', function() {
     //expect(stemmer.stem('velofumiste')).toBe('velofum');
     //expect(stemmer.stem('velomateur')).toBe('velom');
@@ -57,6 +57,8 @@ describe('porter_stemmer', function() {
     //expect(stemmer.stem('indicatrice')).toBe('indiqU');
     //expect(stemmer.stem('pourissement')).toBe('indiqU');
   });
+
+*/
 
   var fs = require('fs');
 
@@ -76,9 +78,10 @@ describe('porter_stemmer', function() {
       }
     });
 
-    console.log(ko);
+    //console.log(ko);
 
     console.log('ok:', ok.length, 'ko:', ko.length);
 
   });
+
 });
