@@ -25,7 +25,7 @@ var fs = require('fs');
 
 describe('porter_stemmer', function() {
 
-  /*
+    /*
   it('should prelude', function() {
     expect(stemmer.prelude('JOUER')).toBe('joUer');
     expect(stemmer.prelude('ennuie')).toBe('ennuIe');
@@ -33,23 +33,23 @@ describe('porter_stemmer', function() {
     expect(stemmer.prelude('quand')).toBe('qUand');
   });*/
 
-  it('should compute regions', function() {
-    expect(stemmer.regions('fameusement').r1).toBe(3);
-    expect(stemmer.regions('fameusement').r2).toBe(6);
+    it('should compute regions', function() {
+      expect(stemmer.regions('fameusement').r1).toBe(3);
+      expect(stemmer.regions('fameusement').r2).toBe(6);
 
-    expect(stemmer.regions('taii').r1).toBe(4);
-    expect(stemmer.regions('taii').r2).toBe(4);
+      expect(stemmer.regions('taii').r1).toBe(4);
+      expect(stemmer.regions('taii').r2).toBe(4);
 
-    expect(stemmer.regions('parade').rv).toBe(3);
-    expect(stemmer.regions('colet').rv).toBe(3);
-    expect(stemmer.regions('tapis').rv).toBe(3);
+      expect(stemmer.regions('parade').rv).toBe(3);
+      expect(stemmer.regions('colet').rv).toBe(3);
+      expect(stemmer.regions('tapis').rv).toBe(3);
 
-    expect(stemmer.regions('aimer').rv).toBe(3);
-    expect(stemmer.regions('adorer').rv).toBe(3);
-    expect(stemmer.regions('voler').rv).toBe(2);
-  });
+      expect(stemmer.regions('aimer').rv).toBe(3);
+      expect(stemmer.regions('adorer').rv).toBe(3);
+      expect(stemmer.regions('voler').rv).toBe(2);
+    });
 
-/*
+    /*
   it('should stem', function() {
     //expect(stemmer.stem('velofumiste')).toBe('velofum');
     //expect(stemmer.stem('velomateur')).toBe('velom');
@@ -60,28 +60,39 @@ describe('porter_stemmer', function() {
 
 */
 
-  var fs = require('fs');
+    var fs = require('fs');
 
-  it('should perform stem', function() {
-    var ok = [];
-    var ko = [];
+    it('should perform stem', function() {
+        var ok = [];
+        var ko = [];
 
-    fs.readFileSync('spec/test_data/snowball_fr.txt').toString().split('\n').forEach(function(line) {
-      if (line) {
-        var fields = line.replace(/(\s)+/g, ' ').split(' ');
-        var stemmed = stemmer.stem(fields[0]);
+        fs.readFileSync('spec/test_data/snowball_fr.txt').toString().split('\n').forEach(function(line) {
+            if (line) {
+              var fields = line.replace(/(\s)+/g, ' ').split(' ');
+              var stemmed = stemmer.stem(fields[0]);
+              var regs = stemmer.regions(fields[0]);
+              var regionsTxt = {
+                r1: fields[0].substring(regs.r1),
+                r2: fields[0].substring(regs.r2),
+                rv: fields[0].substring(regs.rv)
+              }
 
-        if (stemmed === fields[1])
-          ok.push(fields[0]);
-        else
-          ko.push({word: fields[0], expected: fields[1], actual: stemmed});
-      }
+              if (stemmed === fields[1])
+                ok.push(fields[0]);
+              else
+                ko.push({
+                    word: fields[0],
+                    expected: fields[1],
+                    actual: stemmed,
+                    regions: regionsTxt
+                });
+          }
+        });
+
+      console.log(ko);
+
+      console.log('ok:', ok.length, 'ko:', ko.length);
+
     });
-
-    //console.log(ko);
-
-    console.log('ok:', ok.length, 'ko:', ko.length);
-
-  });
 
 });
