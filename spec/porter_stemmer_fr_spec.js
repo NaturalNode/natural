@@ -61,8 +61,7 @@ describe('porter_stemmer', function() {
 */
 
   it('should stem one word', function() {
-    expect(stemmer.stem('stratagème')).toBe('stratagem');
-    expect(stemmer.stem('zébrés')).toBe('zebr');
+    expect(stemmer.stem('volera')).toBe('vol');
   });
 
   var fs = require('fs');
@@ -92,7 +91,7 @@ describe('porter_stemmer', function() {
       }
     });
 
-    console.log(ko);
+    //console.log(ko);
     console.log('ok:', ok.length, 'ko:', ko.length);
   });
 
