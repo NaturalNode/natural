@@ -61,7 +61,8 @@ describe('porter_stemmer', function() {
 */
 
   it('should stem one word', function() {
-    expect(stemmer.stem('vindicatif')).toBe('vindiqu');
+    expect(stemmer.stem('stratagème')).toBe('stratagem');
+    expect(stemmer.stem('zébrés')).toBe('zebr');
   });
 
   var fs = require('fs');
