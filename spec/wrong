@@ -1,0 +1,8 @@
+{ word: 'vindicatif',
+    expected: 'vindiqu',
+    actual: 'vindic',
+    regions: { r1: 'dicatif', r2: 'atif', rv: 'ndicatif' } },
+  { word: 'vindicative',
+    expected: 'vindiqu',
+    actual: 'vindic',
+    regions: { r1: 'dicative', r2: 'ative', rv: 'ndicative' } },
