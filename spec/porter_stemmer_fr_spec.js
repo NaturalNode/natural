@@ -47,6 +47,7 @@ describe('porter_stemmer', function() {
     expect(stemmer.regions('aimer').rv).toBe(3);
     expect(stemmer.regions('adorer').rv).toBe(3);
     expect(stemmer.regions('voler').rv).toBe(2);
+    expect(stemmer.regions('tue').rv).toBe(2);
   });
 
   /*
