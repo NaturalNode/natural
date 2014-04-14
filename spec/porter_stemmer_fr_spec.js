@@ -64,6 +64,7 @@ describe('porter_stemmer', function() {
   it('should stem one word', function() {
     expect(stemmer.stem('volera')).toBe('vol');
     expect(stemmer.stem('volerait')).toBe('vol');
+    expect(stemmer.stem('subitement')).toBe('subit');
   });
 
   var fs = require('fs');
