@@ -1,4 +1,4 @@
- { word: 'vengeait',
-    expected: 'veng',
-    actual: 'venge',
-    regions: { r1: 'geait', r2: '', rv: 'ngeait' } },
+{ word: 'royaliste',
+    expected: 'royal',
+    actual: 'royalist',
+    regions: { r1: 'iste', r2: 'te', rv: 'yaliste' } },
