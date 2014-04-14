@@ -66,11 +66,12 @@ it('should ends in Arr', function(){
 });
 
   it('should stem one word', function() {
-    expect(stemmer.stem('volera')).toBe('vol');
-    expect(stemmer.stem('volerait')).toBe('vol');
-    expect(stemmer.stem('subitement')).toBe('subit');
-    expect(stemmer.stem('tempérament')).toBe('temper');
-    expect(stemmer.stem('voudriez')).toBe('voudr');
+    // expect(stemmer.stem('volera')).toBe('vol');
+    // expect(stemmer.stem('volerait')).toBe('vol');
+    // expect(stemmer.stem('subitement')).toBe('subit');
+    // expect(stemmer.stem('tempérament')).toBe('temper');
+    // expect(stemmer.stem('voudriez')).toBe('voudr');
+    expect(stemmer.stem('vengeait')).toBe('veng');
   });
 
   var fs = require('fs');
