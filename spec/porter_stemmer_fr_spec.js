@@ -61,11 +61,16 @@ describe('porter_stemmer', function() {
 
 */
 
+it('should ends in Arr', function(){
+  expect(stemmer.endsinArr('voudriez', ['ez','iez','z'])).toBe('iez');
+});
+
   it('should stem one word', function() {
     expect(stemmer.stem('volera')).toBe('vol');
     expect(stemmer.stem('volerait')).toBe('vol');
     expect(stemmer.stem('subitement')).toBe('subit');
     expect(stemmer.stem('tempérament')).toBe('temper');
+    expect(stemmer.stem('voudriez')).toBe('voudr');
   });
 
   var fs = require('fs');
