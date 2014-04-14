@@ -65,6 +65,7 @@ describe('porter_stemmer', function() {
     expect(stemmer.stem('volera')).toBe('vol');
     expect(stemmer.stem('volerait')).toBe('vol');
     expect(stemmer.stem('subitement')).toBe('subit');
+    expect(stemmer.stem('tempérament')).toBe('temper');
   });
 
   var fs = require('fs');

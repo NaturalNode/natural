@@ -1,4 +1,4 @@
-{ word: 'subitement',
-    expected: 'subit',
-    actual: 'sub',
-    regions: { r1: 'itement', r2: 'ement', rv: 'bitement' } },
+{ word: 'tempérament',
+    expected: 'temper',
+    actual: 'tempérament',
+    regions: { r1: 'pérament', r2: 'ament', rv: 'mpérament' } },
