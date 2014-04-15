@@ -1,4 +1,4 @@
-{ word: 'premièrement',
-    expected: 'premi',
-    actual: 'prei',
-    regions: { r1: 'ièrement', r2: 'ement', rv: 'mièrement' } },
+{ word: 'instruments',
+    expected: 'instrument',
+    actual: 'instru',
+    regions: { r1: 'struments', r2: 'ents', rv: 'ments' } },
