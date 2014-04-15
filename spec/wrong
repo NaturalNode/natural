@@ -1,4 +1,4 @@
-{ word: 'saisissement',
-    expected: 'sais',
-    actual: 'saisiss',
-    regions: { r1: 'issement', r2: 'sement', rv: 'isissement' } },
+{ word: 'transatlantique',
+    expected: 'transatlant',
+    actual: 'transatl',
+    regions: { r1: 'satlantique', r2: 'lantique', rv: 'nsatlantique' } },

@@ -66,13 +66,14 @@ it('should ends in Arr', function(){
 });
 
   it('should stem one word', function() {
-    // expect(stemmer.stem('volera')).toBe('vol');
-    // expect(stemmer.stem('volerait')).toBe('vol');
-    // expect(stemmer.stem('subitement')).toBe('subit');
-    // expect(stemmer.stem('tempérament')).toBe('temper');
-    // expect(stemmer.stem('voudriez')).toBe('voudr');
-    //expect(stemmer.stem('vengeait')).toBe('veng');
+    expect(stemmer.stem('volera')).toBe('vol');
+    expect(stemmer.stem('volerait')).toBe('vol');
+    expect(stemmer.stem('subitement')).toBe('subit');
+    expect(stemmer.stem('tempérament')).toBe('temper');
+    expect(stemmer.stem('voudriez')).toBe('voudr');
+    expect(stemmer.stem('vengeait')).toBe('veng');
     expect(stemmer.stem('saisissement')).toBe('sais');
+    expect(stemmer.stem('transatlantique')).toBe('transatlant');
   });
 
   var fs = require('fs');
