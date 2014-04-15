@@ -1,10 +1,15 @@
-{ word: 'significatives',
-    expected: 'signif',
-    actual: 'iqu',
-    regions: { r1: 'nificatives', r2: 'icatives', rv: 'gnificatives' } },
+{ word: 'publicité',
+    expected: 'publiqu',
+    actual: 'public',
+    regions: { r1: 'licité', r2: 'ité', rv: 'blicité' } },
+
 
 NOT corrected :
 
+{ word: 'royaliste',
+    expected: 'royal',
+    actual: 'royalist',
+    regions: { r1: 'iste', r2: 'te', rv: 'yaliste' } },
 { word: 'tuyaux',
     expected: 'tuyal',
     actual: 'tuyaux',

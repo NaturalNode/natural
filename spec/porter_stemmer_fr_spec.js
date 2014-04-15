@@ -78,6 +78,7 @@ it('should ends in Arr', function(){
     // expect(stemmer.stem('instruments')).toBe('instrument');
     // expect(stemmer.stem('trouverions')).toBe('trouv');
     expect(stemmer.stem('voyiez')).toBe('voi');
+    expect(stemmer.stem('publicité')).toBe('publiqu');
   });
 
   var fs = require('fs');
