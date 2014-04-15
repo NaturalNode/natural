@@ -1,4 +1,4 @@
-{ word: 'transatlantique',
-    expected: 'transatlant',
-    actual: 'transatl',
-    regions: { r1: 'satlantique', r2: 'lantique', rv: 'nsatlantique' } },
+{ word: 'souhaité',
+    expected: 'souhait',
+    actual: 'souh',
+    regions: { r1: 'aité', r2: 'é', rv: 'uhaité' } },
