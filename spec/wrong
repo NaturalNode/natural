@@ -1,4 +1,17 @@
-{ word: 'trouverions',
-    expected: 'trouv',
-    actual: 'trouver',
-    regions: { r1: 'erions', r2: 'ions', rv: 'uverions' } },
+{ word: 'voyiez',
+    expected: 'voi',
+    actual: 'voyi',
+    regions: { r1: '', r2: '', rv: 'yiez' } }
+
+
+
+NOT corrected :
+
+{ word: 'tuyaux',
+    expected: 'tuyal',
+    actual: 'tuyaux',
+    regions: { r1: '', r2: '', rv: 'yaux' } },
+{ word: 'voyageuse',
+    expected: 'voyag',
+    actual: 'voyageux',
+    regions: { r1: 'euse', r2: 'e', rv: 'yageuse' } },
