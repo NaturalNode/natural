@@ -76,6 +76,7 @@ it('should ends in Arr', function(){
     // expect(stemmer.stem('transatlantique')).toBe('transatlant');
     //expect(stemmer.stem('premièrement')).toBe('premi');
     expect(stemmer.stem('instruments')).toBe('instrument');
+    expect(stemmer.stem('trouverions')).toBe('trouv');
   });
 
   var fs = require('fs');

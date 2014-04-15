@@ -1,4 +1,4 @@
-{ word: 'instruments',
-    expected: 'instrument',
-    actual: 'instru',
-    regions: { r1: 'struments', r2: 'ents', rv: 'ments' } },
+{ word: 'trouverions',
+    expected: 'trouv',
+    actual: 'trouver',
+    regions: { r1: 'erions', r2: 'ions', rv: 'uverions' } },
