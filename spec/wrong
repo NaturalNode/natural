@@ -1,9 +1,7 @@
-{ word: 'voyiez',
-    expected: 'voi',
-    actual: 'voyi',
-    regions: { r1: '', r2: '', rv: 'yiez' } }
-
-
+{ word: 'significatives',
+    expected: 'signif',
+    actual: 'iqu',
+    regions: { r1: 'nificatives', r2: 'icatives', rv: 'gnificatives' } },
 
 NOT corrected :
 
