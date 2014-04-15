@@ -1,23 +1,8 @@
 { word: 'supplications',
     expected: 'suppliqu',
     actual: 'iqu',
-    regions: { r1: 'plications', r2: 'ations', rv: 'pplications' } },
-
-
-NOT corrected :
-{ word: 'pitoyable',
-    expected: 'pitoi',
-    actual: 'pitoyabl',
-    regions: { r1: 'oYable', r2: 'le', rv: 'toYable' } },
-{ word: 'royaliste',
-    expected: 'royal',
-    actual: 'royalist',
-    regions: { r1: 'iste', r2: 'te', rv: 'yaliste' } },
-{ word: 'tuyaux',
-    expected: 'tuyal',
-    actual: 'tuyaux',
-    regions: { r1: '', r2: '', rv: 'yaux' } },
-{ word: 'voyageuse',
-    expected: 'voyag',
-    actual: 'voyageux',
-    regions: { r1: 'euse', r2: 'e', rv: 'yageuse' } },
+    regions: { r1: 'plications', r2: 'ations', rv: 'pplications' }
+{ word: 'prédications',
+    expected: 'prédiqu',
+    actual: 'iqu',
+    regions: { r1: 'ications', r2: 'ations', rv: 'dications' } },
