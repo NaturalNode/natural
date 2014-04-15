@@ -1,11 +1,14 @@
-{ word: 'publicité',
-    expected: 'publiqu',
-    actual: 'public',
-    regions: { r1: 'licité', r2: 'ité', rv: 'blicité' } },
+{ word: 'supplications',
+    expected: 'suppliqu',
+    actual: 'iqu',
+    regions: { r1: 'plications', r2: 'ations', rv: 'pplications' } },
 
 
 NOT corrected :
-
+{ word: 'pitoyable',
+    expected: 'pitoi',
+    actual: 'pitoyabl',
+    regions: { r1: 'oYable', r2: 'le', rv: 'toYable' } },
 { word: 'royaliste',
     expected: 'royal',
     actual: 'royalist',
