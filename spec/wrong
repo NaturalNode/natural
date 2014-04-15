@@ -1,4 +1,4 @@
-{ word: 'successivement',
-    expected: 'success',
-    actual: 'successiv',
-    regions: { r1: 'cessivement', r2: 'sivement', rv: 'ccessivement' } },
+{ word: 'vérification',
+    expected: 'vérif',
+    actual: 'vérific',
+    regions: { r1: 'ification', r2: 'ication', rv: 'rification' } },
