@@ -1,4 +1,4 @@
-{ word: 'vérification',
-    expected: 'vérif',
-    actual: 'vérific',
-    regions: { r1: 'ification', r2: 'ication', rv: 'rification' } },
+{ word: 'saisissement',
+    expected: 'sais',
+    actual: 'saisiss',
+    regions: { r1: 'issement', r2: 'sement', rv: 'isissement' } },

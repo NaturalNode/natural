@@ -71,7 +71,8 @@ it('should ends in Arr', function(){
     // expect(stemmer.stem('subitement')).toBe('subit');
     // expect(stemmer.stem('tempérament')).toBe('temper');
     // expect(stemmer.stem('voudriez')).toBe('voudr');
-    expect(stemmer.stem('vengeait')).toBe('veng');
+    //expect(stemmer.stem('vengeait')).toBe('veng');
+    expect(stemmer.stem('saisissement')).toBe('sais');
   });
 
   var fs = require('fs');
