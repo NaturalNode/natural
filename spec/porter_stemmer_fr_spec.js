@@ -34,8 +34,6 @@ describe('porter_stemmer', function() {
   });*/
 
   it('should compute regions', function() {
-    expect(stemmer.regions('pitoyable').r2).toBe(5);
-
     // expect(stemmer.regions('fameusement').r1).toBe(3);
     // expect(stemmer.regions('fameusement').r2).toBe(6);
 
