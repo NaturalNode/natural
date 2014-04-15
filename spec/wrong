@@ -1,4 +1,4 @@
-{ word: 'royaliste',
-    expected: 'royal',
-    actual: 'royalist',
-    regions: { r1: 'iste', r2: 'te', rv: 'yaliste' } },
+{ word: 'successivement',
+    expected: 'success',
+    actual: 'successiv',
+    regions: { r1: 'cessivement', r2: 'sivement', rv: 'ccessivement' } },
