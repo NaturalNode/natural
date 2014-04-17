@@ -39,11 +39,9 @@ describe('porter_stemmer', function() {
     expect(stemmer.regions('taii').r1).toBe(4);
     expect(stemmer.regions('taii').r2).toBe(4);
 
-
     expect(stemmer.regions('parade').rv).toBe(3);
     expect(stemmer.regions('colet').rv).toBe(3);
     expect(stemmer.regions('tapis').rv).toBe(3);
-
     expect(stemmer.regions('aimer').rv).toBe(3);
     expect(stemmer.regions('adorer').rv).toBe(3);
     expect(stemmer.regions('voler').rv).toBe(2);
@@ -71,8 +69,7 @@ describe('porter_stemmer', function() {
     expect(stemmer.stem('pitoyable')).toBe('pitoi');
   });
 
-  var fs = require('fs');
-  it('should perform stem', function() {
+  it('should perform stemming on a lot of words', function() {
     var ok = [];
     var ko = [];
     fs.readFileSync('spec/test_data/snowball_fr.txt').toString().split('\n').forEach(function(line) {
@@ -80,7 +77,7 @@ describe('porter_stemmer', function() {
         var fields = line.replace(/(\s)+/g, ' ').split(' ');
         var stemmed = stemmer.stem(fields[0]);
         var regs = stemmer.regions(fields[0]);
-        var regionsTxt = {
+        var txtRegions = {
           r1: fields[0].substring(regs.r1),
           r2: fields[0].substring(regs.r2),
           rv: fields[0].substring(regs.rv)
@@ -93,13 +90,12 @@ describe('porter_stemmer', function() {
             word: fields[0],
             expected: fields[1],
             actual: stemmed,
-            regions: regionsTxt
+            regions: txtRegions
           });
       }
     });
 
-    console.log(ko);
-    console.log('ok:', ok.length, 'ko:', ko.length);
+    expect(ko.length).toBe(0);
   });
 
 });
