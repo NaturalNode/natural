@@ -1,9 +1,0 @@
- { word: 'évanouie',
-    expected: 'évanou',
-    actual: 'évanoui',
-    regions: { r1: 'anouie', r2: 'ouie', rv: 'nouie' } },
-
-  { word: 'réjouie',
-    expected: 'réjou',
-    actual: 'réjoui',
-    regions: { r1: 'ouie', r2: '', rv: 'jouie' } }
