@@ -1,8 +1,9 @@
-{ word: 'bruissement',
-    expected: 'bruissement',
-    actual: 'bruiss',
-    regions: { r1: 'sement', r2: 'ent', rv: 'issement' } },
-  { word: 'pieusement',
-    expected: 'pieus',
-    actual: 'pieusement',
-    regions: { r1: 'ement', r2: 'ent', rv: 'eusement' } },
+ { word: 'évanouie',
+    expected: 'évanou',
+    actual: 'évanoui',
+    regions: { r1: 'anouie', r2: 'ouie', rv: 'nouie' } },
+
+  { word: 'réjouie',
+    expected: 'réjou',
+    actual: 'réjoui',
+    regions: { r1: 'ouie', r2: '', rv: 'jouie' } }

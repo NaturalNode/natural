@@ -25,62 +25,50 @@ var fs = require('fs');
 
 describe('porter_stemmer', function() {
 
-  /*
   it('should prelude', function() {
     expect(stemmer.prelude('JOUER')).toBe('joUer');
     expect(stemmer.prelude('ennuie')).toBe('ennuIe');
     expect(stemmer.prelude('yeux')).toBe('Yeux');
     expect(stemmer.prelude('quand')).toBe('qUand');
-  });*/
+  });
 
   it('should compute regions', function() {
-    // expect(stemmer.regions('fameusement').r1).toBe(3);
-    // expect(stemmer.regions('fameusement').r2).toBe(6);
+    expect(stemmer.regions('fameusement').r1).toBe(3);
+    expect(stemmer.regions('fameusement').r2).toBe(6);
 
-    // expect(stemmer.regions('taii').r1).toBe(4);
-    // expect(stemmer.regions('taii').r2).toBe(4);
+    expect(stemmer.regions('taii').r1).toBe(4);
+    expect(stemmer.regions('taii').r2).toBe(4);
 
 
-    // expect(stemmer.regions('parade').rv).toBe(3);
-    // expect(stemmer.regions('colet').rv).toBe(3);
-    // expect(stemmer.regions('tapis').rv).toBe(3);
+    expect(stemmer.regions('parade').rv).toBe(3);
+    expect(stemmer.regions('colet').rv).toBe(3);
+    expect(stemmer.regions('tapis').rv).toBe(3);
 
-    // expect(stemmer.regions('aimer').rv).toBe(3);
-    // expect(stemmer.regions('adorer').rv).toBe(3);
-    // expect(stemmer.regions('voler').rv).toBe(2);
-    // expect(stemmer.regions('tue').rv).toBe(2);
+    expect(stemmer.regions('aimer').rv).toBe(3);
+    expect(stemmer.regions('adorer').rv).toBe(3);
+    expect(stemmer.regions('voler').rv).toBe(2);
+    expect(stemmer.regions('tue').rv).toBe(2);
   });
 
-  /*
-  it('should stem', function() {
-    //expect(stemmer.stem('velofumiste')).toBe('velofum');
-    //expect(stemmer.stem('velomateur')).toBe('velom');
-
-    //expect(stemmer.stem('indicatrice')).toBe('indiqU');
-    //expect(stemmer.stem('pourissement')).toBe('indiqU');
+  it('should compute longest suffix ends in Arr', function() {
+    expect(stemmer.endsinArr('voudriez', ['ez', 'iez', 'z'])).toBe('iez');
   });
 
-*/
-
-  it('should ends in Arr', function() {
-    //expect(stemmer.endsinArr('voudriez', ['ez', 'iez', 'z'])).toBe('iez');
-  });
-
-  it('should stem one word', function() {
-    // expect(stemmer.stem('volera')).toBe('vol');
-    // expect(stemmer.stem('volerait')).toBe('vol');
-    // expect(stemmer.stem('subitement')).toBe('subit');
-    // expect(stemmer.stem('tempérament')).toBe('temper');
-    // expect(stemmer.stem('voudriez')).toBe('voudr');
-    // expect(stemmer.stem('vengeait')).toBe('veng');
-    // expect(stemmer.stem('saisissement')).toBe('sais');
-    // expect(stemmer.stem('transatlantique')).toBe('transatlant');
-    //expect(stemmer.stem('premièrement')).toBe('premi');
-    // expect(stemmer.stem('instruments')).toBe('instrument');
-    // expect(stemmer.stem('trouverions')).toBe('trouv');
-    // expect(stemmer.stem('voyiez')).toBe('voi');
-    // expect(stemmer.stem('publicité')).toBe('publiqu');
-    //expect(stemmer.stem('pitoyable')).toBe('pitoi');
+  it('should stem some word', function() {
+    expect(stemmer.stem('volera')).toBe('vol');
+    expect(stemmer.stem('volerait')).toBe('vol');
+    expect(stemmer.stem('subitement')).toBe('subit');
+    expect(stemmer.stem('tempérament')).toBe('temper');
+    expect(stemmer.stem('voudriez')).toBe('voudr');
+    expect(stemmer.stem('vengeait')).toBe('veng');
+    expect(stemmer.stem('saisissement')).toBe('sais');
+    expect(stemmer.stem('transatlantique')).toBe('transatlant');
+    expect(stemmer.stem('premièrement')).toBe('premi');
+    expect(stemmer.stem('instruments')).toBe('instrument');
+    expect(stemmer.stem('trouverions')).toBe('trouv');
+    expect(stemmer.stem('voyiez')).toBe('voi');
+    expect(stemmer.stem('publicité')).toBe('publiqu');
+    expect(stemmer.stem('pitoyable')).toBe('pitoi');
   });
 
   var fs = require('fs');

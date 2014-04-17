@@ -2647,7 +2647,6 @@ brouilles                     brouill
 brouillon                     brouillon
 brouillons                    brouillon
 broussailles                  broussaill
-bruissement                   bruissement
 bruit                         bruit
 bruits                        bruit
 brûla                         brûl
