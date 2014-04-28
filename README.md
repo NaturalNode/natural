@@ -753,13 +753,6 @@ In the case of the searches which return strings, all strings returned will be i
 EdgeWeightedDigraph
 -------------------
 EdgeWeightedDigraph represents a digraph, you can add an edge, get the number vertexs, edges, get all edges and use toString to print the Digraph.
-For a digraph like:
-    5 ---> 1 --> 3
-    |             \
-    |              \
-    |               6
-    v               /
-    4<------------/
 
 initialize a digraph:
 
