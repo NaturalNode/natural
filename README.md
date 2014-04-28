@@ -528,6 +528,21 @@ Will output:
   [ 'you', '[end]', '[end]', '[end]' ] ]
 ```
 
+### NGramsZH
+
+For Chinese like languages, you can use NGramsZH to do a n-gram, and all apis are the same:
+
+```javascript
+var NGramsZH = natural.NGramsZH;
+console.log(NGrams.bigrams('中文测试'));
+console.log(NGrams.bigrams(['中',  '文',  '测', '试']));
+console.log(NGrams.trigrams('中文测试'));
+console.log(NGrams.trigrams(['中',  '文', '测',  '试']));
+console.log(NGrams.ngrams('一个中文测试', 4));
+console.log(NGrams.ngrams(['一', '个', '中', '文', '测',
+    '试'], 4));
+```
+
 tf-idf
 -----
 
@@ -734,6 +749,144 @@ ciTrie.addString("test");
 ciTrie.contains("TEsT"); // true
 ```
 In the case of the searches which return strings, all strings returned will be in lower case if you are in case-_in_sensitive mode.
+
+EdgeWeightedDigraph
+-------------------
+EdgeWeightedDigraph represents a digraph, you can add an edge, get the number vertexs, edges, get all edges and use toString to print the Digraph.
+
+initialize a digraph:
+
+```javascript
+var EdgeWeightedDigraph = natural.EdgeWeightedDigraph;
+var digraph = new EdgeWeightedDigraph();
+digraph.add(5,4,0.35);
+digraph.add(5,1,0.32);
+digraph.add(1,3,0.29);
+digraph.add(6,2,0.40);
+digraph.add(3,6,0.52);
+digraph.add(6,4,0.93);
+```
+the api used is: add(from, to, weight).
+
+get the number of vertexs:
+
+```javascript
+console.log(digraph.v());
+```
+you will get 5.
+
+get the number of edges:
+
+```javascript
+console.log(digraph.e());
+```
+you will get 5.
+
+
+
+ShortestPathTree
+----------------
+
+ShortestPathTree represents a data type for solving the single-source shortest paths problem in
+edge-weighted directed acyclic graphs (DAGs).
+The edge weights can be positive, negative, or zero. There are three APIs:
+getDistTo(vertex),
+hasPathTo(vertex),
+pathTo(vertex).
+
+```javascript
+var ShortestPathTree = natural.ShortestPathTree;
+var spt = new ShortestPathTree(digraph, 5);
+```
+digraph is an instance of EdgeWeightedDigraph, the second param is the start vertex of DAG.
+
+### getDistTo(vertex)
+
+Will return the dist to vertex.
+
+```javascript
+console.log(spt.getDistTo(4));
+```
+the output will be: 0.35
+
+### hasDistTo(vertex)
+
+```javascript
+console.log(spt.hasDistTo(4));
+console.log(spt.hasDistTo(5));
+```
+
+output will be:
+
+```javascript
+true
+false
+```
+
+### pathTo(vertex)
+this will retuan a shortest path:
+
+```javascript
+console.log(spt.pathTo(4));
+```
+
+output will be:
+
+```javascript
+[5, 4]
+```
+
+LongestPathTree
+----------------
+
+LongestPathTree represents a data type for solving the single-source shortest paths problem in
+edge-weighted directed acyclic graphs (DAGs).
+The edge weights can be positive, negative, or zero. There are three APIs same as ShortestPathTree:
+getDistTo(vertex),
+hasPathTo(vertex),
+pathTo(vertex).
+
+```javascript
+var ShortestPathTree = natural.ShortestPathTree;
+var spt = new ShortestPathTree(digraph, 5);
+```
+digraph is an instance of EdgeWeightedDigraph, the second param is the start vertex of DAG.
+
+### getDistTo(vertex)
+
+Will return the dist to vertex.
+
+```javascript
+console.log(spt.getDistTo(4));
+```
+the output will be: 2.06
+
+### hasDistTo(vertex)
+
+```javascript
+console.log(spt.hasDistTo(4));
+console.log(spt.hasDistTo(5));
+```
+
+output will be:
+
+```javascript
+true
+false
+```
+
+### pathTo(vertex)
+this will retuan a shortest path:
+
+```javascript
+console.log(spt.pathTo(4));
+```
+
+output will be:
+
+```javascript
+[5, 1, 3, 6, 4]
+```
 
 WordNet
 -------
