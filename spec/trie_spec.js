@@ -140,7 +140,7 @@ describe('trie', function() {
 			expect(results).not.toContain("cd");
 		});
 
-	        it("should be able to execute the find_prefix search with a match", function(){
+        it("should be able to execute the find_prefix search with a match", function(){
 			var trie = new Trie();
 			trie.addStrings(["their", "and", "they"]);
 			var results = trie.findPrefix("theyre");
@@ -148,7 +148,14 @@ describe('trie', function() {
 			expect(results[1]).toBe("re");
 		});
 
-		it("should be able to execute the find_prefix search without a match", function(){
+        it("should return empty array if no full prefix matches found.", function(){
+            var trie = new Trie();
+            trie.addStrings(["a","ab","bc","cd","abc"]);
+            var results = trie.keysWithPrefix("not-found");
+            expect(results.length).toEqual(0);
+        });
+
+        it("should be able to execute the find_prefix search without a match", function(){
 			var trie = new Trie();
 			trie.addStrings(["their", "and"]);
 			var results = trie.findPrefix("theyre");
