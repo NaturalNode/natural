@@ -730,7 +730,7 @@ console.log(trie.findMatchesOnPath("tester")); // ['tes', 'test'];
 
 ### All Keys with Prefix
 
-This search will return all of the words in the Trie with the given prefix.
+This search will return all of the words in the Trie with the given prefix, or [ ] if not found.
 
 ```javascript
 console.log(trie.keysWithPrefix("string")); // ["string1", "string2", "string3"]
