@@ -99,4 +99,21 @@ describe("shortest path tree", function() {
         expect(lpt.getDistTo(6)).toBe(1.13);
         expect(lpt.getDistTo(7)).toBe(0.28);
     });
+
+    /**
+     * Check the issue #150
+     **/
+     describe("lightest weight path", function(){
+        it("should find the lightest weight path", function(){
+            var digraph = new EdgeWeightedDigraph();
+
+            digraph.add(1,3,0.29);
+            digraph.add(1,6,0);
+            digraph.add(3,6,0);
+
+            var spt = new SPT(digraph, 1);
+            var path = spt.pathTo(6);
+            expect(path).toEqual([1,6]);
+        });
+     });
 });
