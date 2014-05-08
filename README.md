@@ -534,12 +534,12 @@ For Chinese like languages, you can use NGramsZH to do a n-gram, and all apis ar
 
 ```javascript
 var NGramsZH = natural.NGramsZH;
-console.log(NGrams.bigrams('中文测试'));
-console.log(NGrams.bigrams(['中',  '文',  '测', '试']));
-console.log(NGrams.trigrams('中文测试'));
-console.log(NGrams.trigrams(['中',  '文', '测',  '试']));
-console.log(NGrams.ngrams('一个中文测试', 4));
-console.log(NGrams.ngrams(['一', '个', '中', '文', '测',
+console.log(NGramsZH.bigrams('中文测试'));
+console.log(NGramsZH.bigrams(['中',  '文',  '测', '试']));
+console.log(NGramsZH.trigrams('中文测试'));
+console.log(NGramsZH.trigrams(['中',  '文', '测',  '试']));
+console.log(NGramsZH.ngrams('一个中文测试', 4));
+console.log(NGramsZH.ngrams(['一', '个', '中', '文', '测',
     '试'], 4));
 ```
 
@@ -730,7 +730,7 @@ console.log(trie.findMatchesOnPath("tester")); // ['tes', 'test'];
 
 ### All Keys with Prefix
 
-This search will return all of the words in the Trie with the given prefix.
+This search will return all of the words in the Trie with the given prefix, or [ ] if not found.
 
 ```javascript
 console.log(trie.keysWithPrefix("string")); // ["string1", "string2", "string3"]
