@@ -120,4 +120,11 @@ describe('ngrams', function() {
         ]);
     });
     
+    it('should use french tokenizer', function(){
+        var T = require('../lib/natural/tokenizers/aggressive_tokenizer_fr');
+        var t = new T();
+        NGrams.setTokenizer(t);
+        expect(NGrams.ngrams('Un Éléphant rouge', 2)).toEqual([['Un', 'Éléphant'],
+            ['Éléphant', 'rouge' ]]);
+    });
 });
