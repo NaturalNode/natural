@@ -157,5 +157,17 @@ describe('bayes classifier', function() {
 		  });
             });
 	});
+
+
+        it('should accept an optional smoothing parameter for the Bayesian estimates', function() {
+            var defaultClassifier = new natural.BayesClassifier();
+            var PorterStemmer = require('../lib/natural/stemmers/porter_stemmer');
+            var newClassifier1 = new natural.BayesClassifier(PorterStemmer);
+            var newClassifier2 = new natural.BayesClassifier(PorterStemmer, 0.1);
+
+            expect(defaultClassifier.classifier.smoothing).toBe(1.0);
+            expect(newClassifier1.classifier.smoothing).toBe(1.0);
+            expect(newClassifier2.classifier.smoothing).toBe(0.1);
+        });
     });
 });
