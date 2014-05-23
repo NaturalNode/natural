@@ -47,24 +47,24 @@ arrays of tokens:
 ```javascript
 var natural = require('natural'),
   tokenizer = new natural.WordTokenizer();
-console.log(tokenizer.tokenize("your dog has flees."));
-// [ 'your', 'dog', 'has', 'flees' ]
+console.log(tokenizer.tokenize("your dog has fleas."));
+// [ 'your', 'dog', 'has', 'fleas' ]
 ```
 
 The other tokenizers follow a similar pattern:
 
 ```javascript
 tokenizer = new natural.TreebankWordTokenizer();
-console.log(tokenizer.tokenize("my dog hasn't any flees."));
-// [ 'my', 'dog', 'has', 'n\'t', 'any', 'flees', '.' ]
+console.log(tokenizer.tokenize("my dog hasn't any fleas."));
+// [ 'my', 'dog', 'has', 'n\'t', 'any', 'fleas', '.' ]
 
 tokenizer = new natural.RegexpTokenizer({pattern: /\-/});
-console.log(tokenizer.tokenize("flee-dog"));
-// [ 'flee', 'dog' ]
+console.log(tokenizer.tokenize("flea-dog"));
+// [ 'flea', 'dog' ]
 
 tokenizer = new natural.WordPunctTokenizer();
-console.log(tokenizer.tokenize("my dog hasn't any flees."));
-// [ 'my',  'dog',  'hasn',  '\'',  't',  'any',  'flees',  '.' ]
+console.log(tokenizer.tokenize("my dog hasn't any fleas."));
+// [ 'my',  'dog',  'hasn',  '\'',  't',  'any',  'fleas',  '.' ]
 ```
 
 String Distance
