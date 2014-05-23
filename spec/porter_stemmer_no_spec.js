@@ -60,7 +60,26 @@ describe('porter_stemmer_no', function() {
     });
 
     it('should perform step 1c', function() {
-        expect(stemmer.step1c('hjerte')).toBe('hjert');
+        expect(stemmer.step1c('akkumulerte')).toBe('akkumuler');
+        expect(stemmer.step1c('akseptert')).toBe('aksepter');
+    });
+
+    it('should perform step 1 (a-c)', function() {
+        expect(stemmer.step1('andelar')).toBe('andel');
+        expect(stemmer.step1('andeleigar')).toBe('andeleig');
+        expect(stemmer.step1('andeleigarane')).toBe('andeleigar');
+        expect(stemmer.step1('andeleigarbok')).toBe('andeleigarbok');
+        expect(stemmer.step1('andelen')).toBe('andel');
+        expect(stemmer.step1('andelene')).toBe('andel');
+        expect(stemmer.step1('andeler')).toBe('andel');
+        expect(stemmer.step1('andelsbevis')).toBe('andelsbevis');
+        expect(stemmer.step1('andelsbok')).toBe('andelsbok');
+        expect(stemmer.step1('andelsboka')).toBe('andelsbok');
+        expect(stemmer.step1('andelsboligforening')).toBe('andelsboligforening');
+        expect(stemmer.step1('andelsboligforeninger')).toBe('andelsboligforening');
+        expect(stemmer.step1('andelsboligorganisation')).toBe('andelsboligorganisation');
+        expect(stemmer.step1('andelsboligorganisationer')).toBe('andelsboligorganisation');
+        expect(stemmer.step1('andelsbrev')).toBe('andelsbrev');
     });
 
     it('should perform step 2', function() {
@@ -101,28 +120,24 @@ describe('porter_stemmer_no', function() {
         });
 
         expect(ko.length).toBe(0);
-
-        if (ko.length > 0) {
-            console.log(ko);
-        }
     });
 
-    /*it('should perform complete stemming', function() {
-        expect(stemmer.stem('scoring')).toBe('score');
-        expect(stemmer.stem('scored')).toBe('score');
-        expect(stemmer.stem('scores')).toBe('score');
-        expect(stemmer.stem('score')).toBe('score');
-        expect(stemmer.stem('SCORING')).toBe('score');
-        expect(stemmer.stem('SCORED')).toBe('score');
-        expect(stemmer.stem('SCORES')).toBe('score');
-        expect(stemmer.stem('SCORE')).toBe('score');
-        expect(stemmer.stem('nationals')).toBe('nation');
-        expect(stemmer.stem('doing')).toBe('do');
-    });*/
+    it('should perform complete stemming', function() {
+        expect(stemmer.step1a('forenkla')).toBe('forenkl');
+        expect(stemmer.step1a('aase')).toBe('aas');
+        expect(stemmer.step1a('allerede')).toBe('aller');
+        expect(stemmer.step1a('aukande')).toBe('auk');
+        expect(stemmer.step1a('avbøtende')).toBe('avbøt');
+        expect(stemmer.step1b('hinder')).toBe('hinder');
+        expect(stemmer.step1b('erwerbs')).toBe('erwerb');
+        expect(stemmer.step3('boliglov')).toBe('bolig');
+        expect(stemmer.step3('samvirkelov')).toBe('samvirk');
+        expect(stemmer.step3('arveavgiftslov')).toBe('arveavgift');
+    });
 
-    /*it('should tokenize and stem attached', function() {
+    it('should tokenize and stem attached', function() {
         stemmer.attach();
-        expect('scoring stinks'.tokenizeAndStem()).toEqual(['score', 'stink']);
-        expect('SCORING STINKS'.tokenizeAndStem()).toEqual(['score', 'stink']);
-    });*/
+        expect('forebygger vedlikeholdsbehovene'.tokenizeAndStem()).toEqual(['forebygg', 'vedlikeholdsbehov']);
+        expect('FOREBYGGER VEDLIKEHOLDSBEHOVENE'.tokenizeAndStem()).toEqual(['forebygg', 'vedlikeholdsbehov']);
+    });
 });
