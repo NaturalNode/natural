@@ -18,15 +18,6 @@ will be in order. Thanks to Polyakov Vladimir, Russian stemming has been added!,
 
 Aside from this README, the only documentation is [this DZone article](http://www.dzone.com/links/r/using_natural_a_nlp_module_for_nodejs.html) and [here on my blog](http://www.chrisumbel.com/article/node_js_natural_language_porter_stemmer_lancaster_bayes_naive_metaphone_soundex), which is a bit older.
 
-Looking for Help Maintaining Natural!
--------------------------------------
-
-I'm having trouble devoting the time necessary to maintain natural. While I'm certainly not
-leaving the project I'd like someone to take over the day-to-day maintenance of dealing with
-issues, pull requests and driving the direction of the software moving forward. Please contact
-chris@chrisumbel.com if you're interested!
-
-
 Installation
 ------------
 
