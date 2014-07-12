@@ -224,6 +224,11 @@ describe('metaphone', function() {
         expect('phonetics'.phonetics()).toBe('FNTKS');
         expect('PHONETICS'.phonetics()).toBe('FNTKS');        
     });
+
+    it('should transform PH to F #169', function() {
+	    expect('pharaoh'.phonetics()).toBe('FR');        
+	    expect('tough'.phonetics()).toBe('TF');        
+    });
     
     it('should tokenize and return string phonetics with string patch', function() {
         metaphone.attach();
