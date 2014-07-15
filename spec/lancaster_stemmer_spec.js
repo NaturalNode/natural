@@ -62,11 +62,12 @@ describe('lancaster_stemmer', function() {
         expect('PRESUMABLY'.stem()).toBe('presum');        
     });
 
-    it('#171, exceed, anguish, affluxion', function() {
+    it('#171 and #174, exceed, anguish, affluxion, discept', function() {
     stemmer.attach();
 
         expect('exceed'.stem()).toBe('excess');
         expect('anguish'.stem()).toBe('anct');
         expect('affluxion'.stem()).toBe('affluct');
+        expect('discept'.stem()).toBe('disceiv');
     });
 });
