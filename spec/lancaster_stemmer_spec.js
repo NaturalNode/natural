@@ -54,11 +54,19 @@ describe('lancaster_stemmer', function() {
     });
     
     it('should apply intact rules only to intact string', function() {
-	stemmer.attach();
+    stemmer.attach();
 
         expect('maximum'.stem()).toBe('maxim');
         expect('presumably'.stem()).toBe('presum');
         expect('MAXIMUM'.stem()).toBe('maxim');
         expect('PRESUMABLY'.stem()).toBe('presum');        
+    });
+
+    it('#171, exceed, anguish, affluxion', function() {
+    stemmer.attach();
+
+        expect('exceed'.stem()).toBe('excess');
+        expect('anguish'.stem()).toBe('anct');
+        expect('affluxion'.stem()).toBe('affluct');
     });
 });
