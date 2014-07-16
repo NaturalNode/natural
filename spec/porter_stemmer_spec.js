@@ -125,6 +125,10 @@ describe('porter_stemmer', function() {
 		expect(stemmer.stem('doing')).toBe('do');
 	});
 
+	it('should perform stem animated to anim', function() {
+		expect(stemmer.stem('animated')).toBe('anim');
+	});
+
 	it('should tokenize and stem attached', function() {
 		stemmer.attach();
 		expect('scoring stinks'.tokenizeAndStem()).toEqual(['score', 'stink']);
