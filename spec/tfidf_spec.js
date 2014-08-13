@@ -128,6 +128,13 @@ describe('tfidf', function() {
 
         });
 
+        it("should not return NaN if a term is not present in any documents", function() {
+            tfidf = new TfIdf();
+            tfidf.addDocument('this document is about node.');
+
+            expect(tfidf.tfidf('ruby', 0)).toBe(0);
+        });
+
         // This test assures that tf-idf is computed correctly before and after a document is added
         // Computes and tests a few tf-idfs, then adds a document and ensures that those terms tf-idf value
         // is updated accordingly.
