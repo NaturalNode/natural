@@ -202,6 +202,41 @@ describe('tfidf', function() {
             expect( tfidf.tfidf("node", 0) ).toBe( 1 * Math.log( 4.0 / 3.0 ) );
         });
 
+        // Test idf.setTokenizer
+        it('should allow for specific types of Tokenizers', function(){
+            tfidf = new TfIdf();
+
+            tfidf.addDocument('this document isn\'t about node.', 0);
+            tfidf.addDocument('that doc is about node.', 1);
+            expect( tfidf.tfidf('n\'t', 0) ).toBe(0);
+            expect( tfidf.tfidf('isn', 0) ).toBe( 1 * Math.log( 2 / 1 ) );
+
+            tfidf = new TfIdf();
+
+            tfidf.addDocument('this document isn\'t about node.', 0);
+            tfidf.addDocument('this document isn\'t about node.', 1);
+            expect( tfidf.tfidf('isn', 0) ).toBe(0);
+
+            tfidf = new TfIdf();
+            var TreebankWordTokenizer = require('../lib/natural/tokenizers/treebank_word_tokenizer');
+            var tokenizer = new TreebankWordTokenizer();
+
+            tfidf.addDocument('this document isn\'t about node.', 0);
+            tfidf.setTokenizer(tokenizer);
+            tfidf.addDocument('this doc isn\'t about node.', 1);
+
+            expect( tfidf.tfidf('isn', 0) ).toBe( 1 * Math.log( 2 / 1 ) );
+            expect( tfidf.tfidf('n\'t', 1) ).toBe( 1 * Math.log( 2 / 1 ) );
+            expect( tfidf.tfidf('isn', 1) ).toBe(0);
+        });
+
+        it('should require a valid tokenizer when using setTokenizer', function(){
+            tfidf = new TfIdf();
+
+            expect( function() { tfidf.setTokenizer(1); } ).toThrow(new Error('Expected a valid Tokenizer'));
+            expect( function() { tfidf.setTokenizer({}); } ).toThrow(new Error('Expected a valid Tokenizer'));
+        });
+
         // Test encoding for addFileSync
         it('should use the specified encoding for addFileSync', function(){
 
