@@ -175,21 +175,21 @@ describe('tfidf', function() {
             ];
 
             tfidf.tfidfs('node', function(i, measure, k) {
-                expect(measure).toBe(correctCalculations[k.node])
+                expect(measure).toBe(correctCalculations[k.node]);
             });
 
             tfidf.tfidfs('ruby', function(i, measure, k) {
-                expect(measure).toBe(correctCalculations[k.ruby])
+                expect(measure).toBe(correctCalculations[k.ruby]);
             });
         });
 
         // Test idf caching when adding documents from addFileSync
-        if("should update a terms tf-idf score after adding documents from addFileSync", function(){
+        it("should update a terms tf-idf score after adding documents from addFileSync", function(){
             tfidf = new TfIdf();
 
             // Add 2 documents
-            tfidf.addFileSync("spec/test_data/tfidf_document1.txt", 0);
-            tfidf.addFileSync("spec/test_data/tfidf_document2.txt", 1);
+            tfidf.addFileSync("spec/test_data/tfidf_document1.txt", null, 0);
+            tfidf.addFileSync("spec/test_data/tfidf_document2.txt", null, 1);
 
             // check the tf-idf for 'node'
             expect( tfidf.tfidf("node", 0) ).toBe( 1 * Math.log( 2.0 / 1.0 ) );
