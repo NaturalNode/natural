@@ -201,5 +201,24 @@ describe('tfidf', function() {
             // Ensure that the tf-idf in the same document has changed to reflect the new idf.
             expect( tfidf.tfidf("node", 0) ).toBe( 1 * Math.log( 4.0 / 3.0 ) );
         });
+
+        // Test encoding for addFileSync
+        it('should use the specified encoding for addFileSync', function(){
+
+            tfidf = new TfIdf();
+
+            tfidf.addFileSync('spec/test_data/tfidf_document1.txt', 'base64');
+            tfidf.addFileSync('spec/test_data/tfidf_document1.txt', 'utf8');
+
+            expect( tfidf.tfidf('dghpcybkb2n1bwvudcbpcybhym91dcbub2rllg', 0) ).toBe( 1 * Math.log( 2.0 / 1.0 ) );
+        });
+
+        // Test encoding check for addFileSync
+        it('should require a valid encoding for addFileSync', function(){
+
+            tfidf = new TfIdf();
+
+            expect( function() { tfidf.addFileSync('spec/test_data/tfidf_document1.txt', 'foobar'); } ).toThrow(new Error('Invalid encoding: foobar'));
+        });
     });
 });
