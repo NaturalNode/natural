@@ -22,7 +22,7 @@ THE SOFTWARE.
 
 var TfIdf = require('../lib/natural/tfidf/tfidf');
 var tfidf;
-        
+
 describe('tfidf', function() {
     describe('stateless operations', function() {
         it('should tf', function() {
@@ -36,15 +36,15 @@ describe('tfidf', function() {
         it('should store and recall keys', function() {
             tfidf = new TfIdf();
             tfidf.addDocument('document one', 'un');
-	        tfidf.addDocument('document Two', 'deux');
-            
+            tfidf.addDocument('document Two', 'deux');
+
             tfidf.tfidfs('two', function(i, tfidf, key) {
                 if(i == 0)
                     expect(key).toBe('un');
                 else
                     expect(key).toBe('deux');
             });
-        });    
+        });
     });
 
     describe('stateful operations', function() {
@@ -54,15 +54,15 @@ describe('tfidf', function() {
             tfidf.addDocument('document Two');
         });
 
-    	it('should list important terms', function() {
+        it('should list important terms', function() {
             var terms = tfidf.listTerms(0);
             expect(terms[0].tfidf).toBeGreaterThan(terms[1].tfidf);
-    	});
+        });
     });
 
     describe("special cases", function(){
 
-        // In response to 
+        // In response to
         it("should handle reserved function names correctly in documents", function(){
             var reservedWords = [
                 'toString',
@@ -75,7 +75,7 @@ describe('tfidf', function() {
             ];
             tfidf = new TfIdf();
             tfidf.addDocument(reservedWords.join(" "));
-            
+
             for(var i in reservedWords) {
                 expect(tfidf.tfidf(reservedWords[i], 0)).toBe(0);
             }
@@ -119,11 +119,11 @@ describe('tfidf', function() {
             tfidf.addDocument('this document is about node. it has node examples', {node:2, ruby:1});
 
             tfidf.tfidfs('node', function(i, measure, k) {
-                expect(measure).toBe(correctCalculations[k.node])
+                expect(measure).toBe(correctCalculations[k.node]);
             });
 
             tfidf.tfidfs('ruby', function(i, measure, k) {
-                expect(measure).toBe(correctCalculations[k.ruby])
+                expect(measure).toBe(correctCalculations[k.ruby]);
             });
 
         });
