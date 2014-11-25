@@ -815,7 +815,7 @@ false
 ```
 
 ### pathTo(vertex)
-this will retuan a shortest path:
+this will return a shortest path:
 
 ```javascript
 console.log(spt.pathTo(4));

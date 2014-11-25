@@ -54,8 +54,14 @@ describe('normalize_ja', function() {
 
   it('should transform halfwidth punctuation signs to fullwidth', function() {
     // Taken from http://unicode.org/cldr/trac/browser/trunk/common/main/ja.xml
-    expect(normalize_ja('‾ _＿ -－ ‐ — ― 〜 ・ ･ ,， 、､ ;； :： !！ ?？ .． ‥ … 。｡ ＇＼ ‘ ’ "＂ “ ” (（ )） [［ ]］ {｛ }｝ 〈 〉 《 》 「｢ 」｣ 『 』 【 】 〔 〕 ‖ § ¶ @＠ +＋ ^＾ $＄ *＊ /／ ＼\\ &＆ #＃ %％ ‰ † ‡ ′ ″ 〃 ※'))
-      .toEqual('‾ ＿＿ ─－ ‐ — ― 〜 ・ ・ ，， 、、 ；； ：： ！！ ？？ ．． ‥ … 。。 ＇＼ ‘ ’ ＂＂ “ ” （（ ）） ［［ ］］ ｛｛ ｝｝ 〈 〉 《 》 「「 」」 『 』 【 】 〔 〕 ‖ § ¶ ＠＠ ＋＋ ＾＾ ＄＄ ＊＊ ／／ ＼＼ ＆＆ ＃＃ ％％ ‰ † ‡ ′ ″ 〃 ※');
+    expect(normalize_ja('〜 ・ ･ 、､ 。｡ 「｢ 」｣'))
+      .toEqual('〜 ・ ・ 、、 。。 「「 」」');
+  });
+
+  it('should transform fullwidth symbols to halfwidth', function() {
+    // Taken from http://unicode.org/cldr/trac/browser/trunk/common/main/ja.xml
+    expect(normalize_ja('‾ _＿ -－ ‐ — ― ,， ;； :： !！ ?？ .． ‥ … ＇＼ ‘ ’ "＂ “ ” (（ )） [［ ]］ {｛ }｝ 〈 〉 《 》 『 』 【 】 〔 〕 ‖ § ¶ @＠ +＋ ^＾ $＄ *＊ /／ ＼\\ &＆ #＃ %％ ‰ † ‡ ′ ″ 〃 ※'))
+      .toEqual('‾ __ -- ‐ — ― ,, ;; :: !! ?? .. ‥ … ＇\\ ‘ ’ "" “ ” (( )) [[ ]] {{ }} 〈 〉 《 》 『 』 【 】 〔 〕 ‖ § ¶ @@ ++ ^^ $$ ** // \\\\ && ## %% ‰ † ‡ ′ ″ 〃 ※');
   });
 
   it('should replace repeat characters', function() {
@@ -65,7 +71,7 @@ describe('normalize_ja', function() {
 
   it('should replace composite symbols', function() {
     expect(normalize_ja('㍼54年㋃㏪')).toEqual('昭和54年4月11日');
-    expect(normalize_ja('㍧~㍬')).toEqual('15点～20点');
+    expect(normalize_ja('㍧〜㍬')).toEqual('15点〜20点');
     expect(normalize_ja('カンパニー㍿')).toEqual('カンパニー株式会社');
     expect(normalize_ja('100㌫')).toEqual('100パーセント');
     expect(normalize_ja('70㌔')).toEqual('70キロ');
