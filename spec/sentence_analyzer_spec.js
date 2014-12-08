@@ -26,4 +26,87 @@ describe('sentence analyzer', function() {
     it('should load', function() {
         var analyzer = new SentenceAnalyzer(null, function() { });
     });
+
+    it('should determine PP and SP, given a POS', function () {
+        var sentenceTags = [
+            {token: 'The', pos: 'DT'},
+            {token: 'angry', pos: 'JJ'},
+            {token: 'bear', pos: 'NN'},
+            {token: 'chased', pos: 'VB'},
+            {token: 'the', pos: 'DT'},
+            {token: 'frightened', pos: 'JJ'},
+            {token: 'little', pos: 'JJ'},
+            {token: 'squirrel', pos: 'NN'}
+        ];
+        new SentenceAnalyzer({tags: sentenceTags}, function (analyzer) {
+            analyzer.part(function (part) {
+                var posTags = part.posObj.tags;
+                for (var tagNum = 0; tagNum < posTags.length; tagNum++) {
+                    if (posTags.token === 'angry') {
+                        expect(posTags[tagNum].spos).toEqual('SP');
+                    } else if (posTags.token === 'squirrel') {
+                        expect(posTags[tagNum].spos).toEqual('PP');
+                    }
+                }
+                expect(analyzer.subjectToString().trim()).toEqual('The angry bear');
+                expect(analyzer.predicateToString().trim()).toEqual('chased the frightened little squirrel');
+                expect(analyzer.toString().trim()).toEqual('The angry bear chased the frightened little squirrel');
+                expect(analyzer.implicitYou()).toEqual(false);
+            });
+        });
+    });
+
+    it('should determine PP and SP given a POS that begins with a verb', function () {
+        var sentenceTags = [
+            {token: 'Vote', pos: 'VB'},
+            {token: 'for', pos: 'IN'},
+            {token: 'me', pos: 'PRP'}
+        ];
+        new SentenceAnalyzer({tags: sentenceTags}, function (analyzer) {
+            analyzer.part(function (part) {
+                var posTags = part.posObj.tags;
+                for (var tagNum = 0; tagNum < posTags.length; tagNum++) {
+                    if (posTags.token === 'Vote') {
+                        expect(posTags[tagNum].spos).toEqual('PP');
+                    } else if (posTags.token === 'me') {
+                        expect(posTags[tagNum].spos).toEqual('PP');
+                    }
+                }
+                // Adds implicit you.
+                var lastTagNum = posTags.length - 1;
+                expect(posTags[lastTagNum].token).toEqual('You');
+                expect(posTags[lastTagNum].pos).toEqual('PRP');
+                expect(posTags[lastTagNum].added).toEqual(true);
+                expect(analyzer.implicitYou()).toEqual(true);
+            });
+        });
+    });
+
+    it('should look for EX before VB', function () {
+        var sentenceTags = [
+            {token: 'There', pos: 'EX'},
+            {token: 'is', pos: 'VB'},
+            {token: 'a', pos: 'DT'},
+            {token: 'house', pos: 'NN'},
+            {token: 'in', pos: 'IN'},
+            {token: 'the', pos: 'DT'},
+            {token: 'valley', pos: 'DT'}
+        ];
+        new SentenceAnalyzer({tags: sentenceTags}, function (analyzer) {
+            analyzer.part(function (part) {
+                var posTags = part.posObj.tags;
+                for (var tagNum = 0; tagNum < posTags.length; tagNum++) {
+                    if (posTags.token === 'There') {
+                        expect(posTags.spos.toEqual('SP'));
+                    } else if (posTags.token === 'is') {
+                        expect(postTags.spost.toEqual('PP'));
+                    }
+                }
+                expect(analyzer.subjectToString().trim()).toEqual('There is a house');
+                expect(analyzer.predicateToString().trim()).toEqual('');
+                expect(analyzer.toString().trim()).toEqual('There is a house in the valley');
+                expect(analyzer.implicitYou()).toEqual(false);
+            });
+        });
+    });
 });
