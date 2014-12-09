@@ -77,7 +77,7 @@ describe('tfidf', function() {
             tfidf.addDocument(reservedWords.join(" "));
 
             for(var i in reservedWords) {
-                expect(tfidf.tfidf(reservedWords[i], 0)).toBe(0);
+                expect(tfidf.tfidf(reservedWords[i], 0)).toBe(1*(1+Math.log(1/2)));
             }
         });
     });
@@ -92,7 +92,7 @@ describe('tfidf', function() {
             tfidf.addDocument('this document is about ruby and node.');
             tfidf.addDocument('this document is about node. it has node examples');
 
-            expect(tfidf.idf("node")).toBe(Math.log( 4.0 / 3.0 ));
+            expect(tfidf.idf("node")).toBe(1 + Math.log( 4.0 / 4.0 ));
         });
 
         it("should compute tf correctly", function(){
@@ -106,10 +106,10 @@ describe('tfidf', function() {
         it("should compute tf-idf correctly", function(){
 
             var correctCalculations = [
-                1 * Math.log( 4.0 / 3.0 ),
+                1 * (1 + Math.log( 4.0 / 4.0 )),
                 0,
-                2 * Math.log( 4.0 / 3.0 ),
-                1 * Math.log( 4.0 / 2.0 )
+                2 * (1 + Math.log( 4.0 / 4.0 )),
+                1 * (1 + Math.log( 4.0 / 3.0 ))
             ];
 
             tfidf = new TfIdf();
@@ -147,14 +147,14 @@ describe('tfidf', function() {
             tfidf.addDocument('this document is about ruby.', 1);
 
             // check the tf-idf for 'node'
-            expect( tfidf.tfidf("node", 0) ).toBe( 1 * Math.log( 2.0 / 1.0 ) );
+            expect( tfidf.tfidf("node", 0) ).toBe( 1 * ( 1 + Math.log( 2.0 / 2.0 ) ));
 
             // Add 2 more documents
             tfidf.addDocument('this document is about ruby and node.');
             tfidf.addDocument('this document is about node. it has node examples');
 
             // Ensure that the tf-idf in the same document has changed to reflect the new idf.
-            expect( tfidf.tfidf("node", 0) ).toBe( 1 * Math.log( 4.0 / 3.0 ) );
+            expect( tfidf.tfidf("node", 0) ).toBe( 1 * ( 1 + Math.log( 4.0 / 4.0 ) ));
         });
 
         // Test tf-idf computation on files loaded using readFileSync
@@ -168,10 +168,10 @@ describe('tfidf', function() {
             tfidf.addFileSync("spec/test_data/tfidf_document4.txt", null, {node:2, ruby:1});
 
             var correctCalculations = [
-                1 * Math.log( 4.0 / 3.0 ),
+                1 * (1 + Math.log( 4.0 / 4.0 )),
                 0,
-                2 * Math.log( 4.0 / 3.0 ),
-                1 * Math.log( 4.0 / 2.0 )
+                2 * (1 + Math.log( 4.0 / 4.0 )),
+                1 * (1 + Math.log( 4.0 / 3.0 ))
             ];
 
             tfidf.tfidfs('node', function(i, measure, k) {
@@ -192,14 +192,14 @@ describe('tfidf', function() {
             tfidf.addFileSync("spec/test_data/tfidf_document2.txt", null, 1);
 
             // check the tf-idf for 'node'
-            expect( tfidf.tfidf("node", 0) ).toBe( 1 * Math.log( 2.0 / 1.0 ) );
+            expect( tfidf.tfidf("node", 0) ).toBe( 1 * (1 + Math.log( 2.0 / 2.0 ) ));
 
             // Add 2 more documents
             tfidf.addFileSync("spec/test_data/tfidf_document3.txt");
             tfidf.addFileSync("spec/test_data/tfidf_document4.txt");
 
             // Ensure that the tf-idf in the same document has changed to reflect the new idf.
-            expect( tfidf.tfidf("node", 0) ).toBe( 1 * Math.log( 4.0 / 3.0 ) );
+            expect( tfidf.tfidf("node", 0) ).toBe( 1 * (1 + Math.log( 4.0 / 4.0 ) ));
         });
 
         // Test idf.setTokenizer
@@ -209,13 +209,14 @@ describe('tfidf', function() {
             tfidf.addDocument('this document isn\'t about node.', 0);
             tfidf.addDocument('that doc is about node.', 1);
             expect( tfidf.tfidf('n\'t', 0) ).toBe(0);
-            expect( tfidf.tfidf('isn', 0) ).toBe( 1 * Math.log( 2 / 1 ) );
+            expect( tfidf.tfidf('isn', 0) ).toBe( 1 * (1 + Math.log( 2 / 2 ) ));
 
             tfidf = new TfIdf();
 
             tfidf.addDocument('this document isn\'t about node.', 0);
             tfidf.addDocument('this document isn\'t about node.', 1);
-            expect( tfidf.tfidf('isn', 0) ).toBe(0);
+
+            expect( tfidf.tfidf('isn', 0) ).toBe(1 * (1 + Math.log (2/3)));
 
             tfidf = new TfIdf();
             var TreebankWordTokenizer = require('../lib/natural/tokenizers/treebank_word_tokenizer');
@@ -225,8 +226,8 @@ describe('tfidf', function() {
             tfidf.setTokenizer(tokenizer);
             tfidf.addDocument('this doc isn\'t about node.', 1);
 
-            expect( tfidf.tfidf('isn', 0) ).toBe( 1 * Math.log( 2 / 1 ) );
-            expect( tfidf.tfidf('n\'t', 1) ).toBe( 1 * Math.log( 2 / 1 ) );
+            expect( tfidf.tfidf('isn', 0) ).toBe( 1 * ( 1 + Math.log( 2 / 2 ) ));
+            expect( tfidf.tfidf('n\'t', 1) ).toBe( 1 * ( 1 + Math.log( 2 / 2 ) ));
             expect( tfidf.tfidf('isn', 1) ).toBe(0);
         });
 
@@ -245,7 +246,7 @@ describe('tfidf', function() {
             tfidf.addFileSync('spec/test_data/tfidf_document1.txt', 'base64');
             tfidf.addFileSync('spec/test_data/tfidf_document1.txt', 'utf8');
 
-            expect( tfidf.tfidf('dghpcybkb2n1bwvudcbpcybhym91dcbub2rllg', 0) ).toBe( 1 * Math.log( 2.0 / 1.0 ) );
+            expect( tfidf.tfidf('dghpcybkb2n1bwvudcbpcybhym91dcbub2rllg', 0) ).toBe( 1 * ( 1 + Math.log( 2.0 / 2.0 ) ));
         });
 
         // Test encoding check for addFileSync
