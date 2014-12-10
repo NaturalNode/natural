@@ -42,10 +42,11 @@ describe('sentence analyzer', function() {
             analyzer.part(function (part) {
                 var posTags = part.posObj.tags;
                 for (var tagNum = 0; tagNum < posTags.length; tagNum++) {
-                    if (posTags.token === 'angry') {
-                        expect(posTags[tagNum].spos).toEqual('SP');
-                    } else if (posTags.token === 'squirrel') {
-                        expect(posTags[tagNum].spos).toEqual('PP');
+                    var posTag = posTags[tagNum];
+                    if (posTag.token === 'angry') {
+                        expect(posTag.spos).toEqual('SP');
+                    } else if (posTag.token === 'squirrel') {
+                        expect(posTag.spos).toEqual('PP');
                     }
                 }
                 expect(analyzer.subjectToString().trim()).toEqual('The angry bear');
@@ -66,10 +67,11 @@ describe('sentence analyzer', function() {
             analyzer.part(function (part) {
                 var posTags = part.posObj.tags;
                 for (var tagNum = 0; tagNum < posTags.length; tagNum++) {
-                    if (posTags.token === 'Vote') {
-                        expect(posTags[tagNum].spos).toEqual('PP');
-                    } else if (posTags.token === 'me') {
-                        expect(posTags[tagNum].spos).toEqual('PP');
+                    var posTag = posTags[tagNum];
+                    if (posTag.token === 'Vote') {
+                        expect(posTag.spos).toEqual('PP');
+                    } else if (posTag.token === 'me') {
+                        expect(posTag.pp).toEqual(true);
                     }
                 }
                 // Adds implicit you.
@@ -96,16 +98,179 @@ describe('sentence analyzer', function() {
             analyzer.part(function (part) {
                 var posTags = part.posObj.tags;
                 for (var tagNum = 0; tagNum < posTags.length; tagNum++) {
-                    if (posTags.token === 'There') {
-                        expect(posTags.spos.toEqual('SP'));
-                    } else if (posTags.token === 'is') {
-                        expect(postTags.spost.toEqual('PP'));
+                    var posTag = posTags[tagNum];
+                    if (posTag.token === 'There') {
+                        expect(posTag.spos).toEqual('SP');
+                    } else if (posTag.token === 'is') {
+                        expect(posTag.spos).toEqual('SP');
                     }
                 }
                 expect(analyzer.subjectToString().trim()).toEqual('There is a house');
                 expect(analyzer.predicateToString().trim()).toEqual('');
                 expect(analyzer.toString().trim()).toEqual('There is a house in the valley');
                 expect(analyzer.implicitYou()).toEqual(false);
+            });
+        });
+    });
+
+    describe('#type', function () {
+
+        it('should determine a command without punctuation', function () {
+            var sentenceTags = [
+                {token: 'Vote', pos: 'VB'},
+                {token: 'for', pos: 'IN'},
+                {token: 'me', pos: 'PRP'}
+            ];
+            var punct = function () {
+                return [];
+            };
+            new SentenceAnalyzer({tags: sentenceTags, punct: punct}, function (analyzer) {
+                analyzer.part(function () {
+                    analyzer.type(function (type) {
+                        expect(analyzer.senType).toEqual('COMMAND');
+                    });
+                });
+            });
+        });
+
+        it('should determine an interrogative beginning with who', function () {
+            var sentenceTags = [
+                {token: 'Who', pos: 'WP'},
+                {token: 'voted', pos: 'VB'}
+            ];
+            var punct = function () {
+                return [];
+            };
+            new SentenceAnalyzer({tags: sentenceTags, punct: punct}, function (analyzer) {
+                analyzer.part(function () {
+                    analyzer.type(function (type) {
+                        expect(analyzer.senType).toEqual('INTERROGATIVE');
+                    });
+                });
+            });
+        });
+
+        it('should determine an interrogative ending with a personal pronoun', function () {
+            var sentenceTags = [
+                {token: 'Should', pos: 'MD'},
+                {token: 'we', pos: 'PRP'}
+            ];
+            var punct = function () {
+                return '';
+            };
+            new SentenceAnalyzer({tags: sentenceTags, punct: punct}, function (analyzer) {
+                analyzer.part(function () {
+                    analyzer.type(function (type) {
+                        expect(analyzer.senType).toEqual('INTERROGATIVE');
+                    });
+                });
+            });
+        });
+
+        it('should classify other sentences as unknown', function () {
+            var sentenceTags = [
+                {token: 'I', pos: 'PRP'},
+                {token: 'am', pos: 'VB'},
+                {token: 'unsure', pos: 'JJ'}
+            ];
+            var punct = function () {
+                return '';
+            };
+            new SentenceAnalyzer({tags: sentenceTags, punct: punct}, function (analyzer) {
+                analyzer.part(function () {
+                    analyzer.type(function (type) {
+                        expect(analyzer.senType).toEqual('UNKNOWN');
+                    });
+                });
+            });
+        });
+
+        it('should determine an interrogative ending with a question mark', function () {
+            var sentenceTags = [
+                {token: 'Do', pos: 'VB'},
+                {token: 'I', pos: 'PRP'},
+                {token: 'care', pos: 'VB'}
+            ];
+            var punct = function () {
+                return [{token: '?', pos: '.'}];
+            };
+            new SentenceAnalyzer({tags: sentenceTags, punct: punct}, function (analyzer) {
+                analyzer.part(function () {
+                    analyzer.type(function (type) {
+                        expect(analyzer.senType).toEqual('INTERROGATIVE');
+                    });
+                });
+            });
+        });
+
+        it('should determine a command ending in an exclamation point', function () {
+            var sentenceTags = [
+                {token: 'Vote', pos: 'VB'},
+                {token: 'for', pos: 'IN'},
+                {token: 'me', pos: 'PRP'}
+            ];
+            var punct = function () {
+                return [{token: '!', pos: '.'}];
+            };
+            new SentenceAnalyzer({tags: sentenceTags, punct: punct}, function (analyzer) {
+                analyzer.part(function () {
+                    analyzer.type(function (type) {
+                        expect(analyzer.senType).toEqual('COMMAND');
+                    });
+                });
+            });
+        });
+
+        it('should determine an exclamation ending in an exclamation point', function () {
+            var sentenceTags = [
+                {token: 'We', pos: 'PRP'},
+                {token: 'like', pos: 'VB'},
+                {token: 'sheep', pos: 'NN'}
+            ];
+            var punct = function () {
+                return [{token: '!', pos: '.'}];
+            };
+            new SentenceAnalyzer({tags: sentenceTags, punct: punct}, function (analyzer) {
+                analyzer.part(function () {
+                    analyzer.type(function (type) {
+                        expect(analyzer.senType).toEqual('EXCLAMATORY');
+                    });
+                });
+            });
+        });
+
+        it('should determine a command ending with .', function () {
+            var sentenceTags = [
+                {token: 'Vote', pos: 'VB'},
+                {token: 'for', pos: 'IN'},
+                {token: 'me', pos: 'PRP'}
+            ];
+            var punct = function () {
+                return [{token: '.', pos: '.'}];
+            };
+            new SentenceAnalyzer({tags: sentenceTags, punct: punct}, function (analyzer) {
+                analyzer.part(function () {
+                    analyzer.type(function (type) {
+                        expect(analyzer.senType).toEqual('COMMAND');
+                    });
+                });
+            });
+        });
+
+        it('should determine a declaration ending with a .', function () {
+            var sentenceTags = [
+                {token: 'We', pos: 'PRP'},
+                {token: 'like', pos: 'VB'},
+                {token: 'sheep', pos: 'NN'}
+            ];
+            var punct = function () {
+                return [{token: '.', pos: '.'}];
+            };
+            new SentenceAnalyzer({tags: sentenceTags, punct: punct}, function (analyzer) {
+                analyzer.part(function () {
+                    type = analyzer.type();
+                    expect(type).toEqual('DECLARATIVE');
+                });
             });
         });
     });
