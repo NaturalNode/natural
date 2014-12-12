@@ -21,8 +21,20 @@ THE SOFTWARE.
 */
 
 var natural = require('lib/natural');
+var baseClassifier = require('lib/natural/classifiers/classifier.js');
+var fs = require('fs');
 
 describe('classifier', function () {
+
+    describe('addDocument', function () {
+
+        it('should ignore an empty document', function () {
+            var classifier = new natural.BayesClassifier();
+            classifier.addDocument('', 'philosophy');
+            expect(classifier.docs.length).toBe(0);
+        });
+    });
+
     describe('events emitters', function () {
 
         it('should be emitted when a document is classified', function () {
@@ -87,5 +99,77 @@ describe('classifier', function () {
             classifier.train();
         });
 
+    });
+
+    describe('removeDocument', function () {
+
+        var classifier;
+        beforeEach(function () {
+            classifier = new natural.BayesClassifier();
+            classifier.addDocument('i fixed the box', 'computing');
+            classifier.addDocument('i write code', 'computing');
+            classifier.addDocument('write a book', 'literature');
+            classifier.addDocument('study the books', 'literature');
+        });
+
+        it('should do nothing if text is not a string', function () {
+            expect(classifier.docs.length).toBe(4);
+            classifier.removeDocument(['write a book'], 'literature');
+            classifier.removeDocument(['study the books'], 'literature');
+            expect(classifier.docs.length).toBe(4);
+        });
+
+        it('should do nothing if text is not a match', function () {
+            expect(classifier.docs.length).toBe(4);
+            classifier.removeDocument('something else', 'literature');
+            classifier.removeDocument('another thing', 'literature');
+            expect(classifier.docs.length).toBe(4);
+        });
+    });
+
+    describe('save', function () {
+
+        var tmpFilename = '/spec/test_data/deleteMe';
+        var nonExistentFilename = '/nonExistentDir/deleteMe';
+        var classifier;
+
+        beforeEach(function () {
+            classifier = new natural.BayesClassifier();
+            classifier.addDocument('I went to see the doctor of', 'philosophy');
+        });
+
+        afterEach(function () {
+            if (fs.existsSync(tmpFilename)) {
+                fs.unlinkSync(tmpFilename);
+                fs.unlinkSync(nonExistentFilename);
+            }
+        });
+
+        it('does nothing if called without a callback', function () {
+            classifier.save(tmpFilename);
+            expect(fs.existsSync(tmpFilename)).toBe(false);
+        });
+
+        it('fails if writing to a file fails', function () {
+            classifier.save(nonExistentFilename, function (err) {
+                expect(err).toBe.ok;
+                expect(fs.existsSync(tmpFilename)).toBe(false);
+            });
+        });
+    });
+
+    describe('load', function () {
+
+        it('does nothing if called without a callback', function () {
+            result = baseClassifier.load('/spec/test_data/tfidf_document1.txt');
+            expect(result).not.toBe.ok;
+        });
+
+        it('does nothing if called without a callback', function () {
+            result = baseClassifier.load('/nonexistentFilename', function (err, newClassifier){
+                expect(err).toBe.ok;
+                expect(newClassifier).not.toBe.ok;
+            });
+        });
     });
 });
