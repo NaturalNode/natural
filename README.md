@@ -597,7 +597,7 @@ tfidf.addFileSync('data_files/two.txt');
 
 Multiple terms can be measured as well, with their weights being added into
 a single measure value. The following example determines that the last document
-is the most relevent to the words "node" and "ruby".
+is the most relevant to the words "node" and "ruby".
 
 ```javascript
 var natural = require('natural'),
@@ -650,7 +650,7 @@ tfidf.listTerms(0 /*document index*/).forEach(function(item) {
 });
 ```
 
-A TfIdf instance can also be serialized and deserialzed for save and recall.
+A TfIdf instance can also be serialized and deserialized for save and recall.
 
 ```javascript
 var tfidf = new TfIdf();
@@ -667,8 +667,8 @@ Tries
 -----
 
 Tries are a very efficient data structure used for prefix-based searches. 
-Natural comes packaged with a basic Trie implementation wich can support match collection along a path,
-existance search and prefix search.
+Natural comes packaged with a basic Trie implementation which can support match collection along a path,
+existence search and prefix search.
 
 ### Building The Trie
 
@@ -743,7 +743,7 @@ In the case of the searches which return strings, all strings returned will be i
 
 EdgeWeightedDigraph
 -------------------
-EdgeWeightedDigraph represents a digraph, you can add an edge, get the number vertexs, edges, get all edges and use toString to print the Digraph.
+EdgeWeightedDigraph represents a digraph, you can add an edge, get the number vertexes, edges, get all edges and use toString to print the Digraph.
 
 initialize a digraph:
 
@@ -759,7 +759,7 @@ digraph.add(6,4,0.93);
 ```
 the api used is: add(from, to, weight).
 
-get the number of vertexs:
+get the number of vertexes:
 
 ```javascript
 console.log(digraph.v());
@@ -867,7 +867,7 @@ false
 ```
 
 ### pathTo(vertex)
-this will retuan a shortest path:
+this will return a shortest path:
 
 ```javascript
 console.log(spt.pathTo(4));
