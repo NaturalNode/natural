@@ -39,7 +39,47 @@ describe('tfidf', function() {
             tfidf.addDocument('document Two', 'deux');
 
             tfidf.tfidfs('two', function(i, tfidf, key) {
-                if(i == 0)
+                if(i === 0)
+                    expect(key).toBe('un');
+                else
+                    expect(key).toBe('deux');
+            });
+        });
+
+        it('should handle a deserialized object passed to the constructor', function () {
+            tfidf = new TfIdf({
+                documents: [
+                    {__key: 'un', document: 1, one: 1},
+                    {__key: 'deux', document: 1, two: 1}
+                ]
+            });
+            tfidf.tfidfs('two', function(i, tfidf, key) {
+                if(i === 0)
+                    expect(key).toBe('un');
+                else
+                    expect(key).toBe('deux');
+            });
+        });
+
+        it('should work when called without a callback', function () {
+            tfidf = new TfIdf({
+                documents: [
+                    {__key: 'un', document: 1, one: 1},
+                    {__key: 'deux', document: 1, two: 1}
+                ]
+            });
+            tfidfs = tfidf.tfidfs('two');
+            expect(tfidfs[1]).toBe(Math.log( 2.0 / 1.0 ));
+        });
+
+        it('should work with the restoreCache flag set to true', function() {
+            tfidf = new TfIdf();
+            tfidf.addDocument('document one', 'un');
+            expect(tfidf.idf("one")).toBe(Math.log( 1.0 / 1.0 ));
+            tfidf.addDocument('document Two', 'deux', true);
+
+            tfidf.tfidfs('two', function(i, tfidf, key) {
+                if(i === 0)
                     expect(key).toBe('un');
                 else
                     expect(key).toBe('deux');
@@ -80,6 +120,13 @@ describe('tfidf', function() {
                 expect(tfidf.tfidf(reservedWords[i], 0)).toBe(0);
             }
         });
+
+        it('should handle an array passed to tfidf()', function() {
+            tfidf = new TfIdf();
+            var terms = ['this', 'document', 'is', 'about', 'poetry'];
+            tfidf.addDocument(terms.join(" "));
+            expect(tfidf.tfidf(terms, 0)).toBe(0);
+        });
     });
 
     describe("correct calculations", function(){
@@ -93,6 +140,19 @@ describe('tfidf', function() {
             tfidf.addDocument('this document is about node. it has node examples');
 
             expect(tfidf.idf("node")).toBe(Math.log( 4.0 / 3.0 ));
+        });
+
+        it("should compute idf correctly with non-string documents", function(){
+
+            tfidf = new TfIdf();
+            tfidf.addDocument('this document is about node.');
+            tfidf.addDocument('this document is about ruby.');
+            tfidf.addDocument('this document is about ruby and node.');
+            tfidf.addDocument('this document is about node. it has node examples');
+            tfidf.addDocument({text: 'this document is about python'});
+            tfidf.addDocument(['this', 'document', 'is', 'about', 'node', 'and', 'JavaScript']);
+
+            expect(tfidf.idf("node")).toBe(Math.log( 6.0 / 4.0 ));
         });
 
         it("should compute tf correctly", function(){
@@ -181,6 +241,9 @@ describe('tfidf', function() {
             tfidf.tfidfs('ruby', function(i, measure, k) {
                 expect(measure).toBe(correctCalculations[k.ruby]);
             });
+
+            // addFileSync with restoreCache flag set to true.
+            tfidf.addFileSync("spec/test_data/tfidf_document4.txt", null, {node:2, ruby:1}, true);
         });
 
         // Test idf caching when adding documents from addFileSync
