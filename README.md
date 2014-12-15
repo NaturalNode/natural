@@ -952,7 +952,7 @@ It uses the trie datastructure for fast boolean lookup of a word
 spellcheck.isCorrect('cat'); // false
 ```
 
-It suggests corrections that are up to a maximum edit distance away from the input word. According to Norvig, a max distance of 1 will cover 80% to 95% of spelling mistakes. After a distance of 2, it becomes very slow.
+It suggests corrections (sorted by probability in descending order) that are up to a maximum edit distance away from the input word. According to Norvig, a max distance of 1 will cover 80% to 95% of spelling mistakes. After a distance of 2, it becomes very slow.
 
 ```javascript
 spellcheck.getCorrections('soemthing', 1); // ['something']
