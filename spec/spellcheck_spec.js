@@ -50,7 +50,6 @@ describe('spellcheck', function() {
             for(var i in transpositions) {
                 expect(edits.indexOf(transpositions[i])).toBeGreaterThan(-1);
             }
-
         });
         it('should compute replacements', function() {
             var replacements = ['zb', 'af']
@@ -62,20 +61,15 @@ describe('spellcheck', function() {
 
     describe('edits up to distance', function() {
         var spellcheck = new Spellcheck([]);
-
-        it('should compute some distance 2 edits', function() {
-            var edits = spellcheck.editsWithMaxDistance(['abc'], 2);
-            var expectedEdits = [
-                'a', // two deletions
-                'abxzc', // two insertions
-            ];
-            for(var i in expectedEdits) {
-                expect(edits.indexOf(expectedEdits[i])).toBeGreaterThan(-1);
-            }
+        
+        it('should correctly compute edits at distance', function() {
+            var edits = spellcheck.editsWithMaxDistance('abc', 2);
+            expect(edits[1].indexOf('abzc')).toBeGreaterThan(-1); // 1 insertion
+            expect(edits[2].indexOf('a')).toBeGreaterThan(-1); // 2 deletions 
         });
     });
 
-    describe('booleanSpellcheck', function() {
+    describe('boolean spellcheck', function() {
         var spellcheck = new Spellcheck(['cat']);
 
         it('should consider cat a word', function() {
@@ -85,5 +79,14 @@ describe('spellcheck', function() {
         it('should not consider dog a word', function() {
             expect(spellcheck.isCorrect('dog')).toBe(false);
         });
+    });
+
+    describe('special cases', function() {
+        var spellcheck = new Spellcheck(['cat']);
+
+        it('should return the input word as the most probable correction if it is already correct', function() {
+            expect(spellcheck.getCorrections('cat').indexOf('cat')).toBe(0);
+        });
+
     });
 });
