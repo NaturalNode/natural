@@ -114,5 +114,27 @@ describe('normalizer', function() {
             expect(JSON.stringify(normalizer.normalize_tokens(["i'd"]))).toBe(JSON.stringify(["i", "would"]));
             expect(JSON.stringify(normalizer.normalize_tokens(["I'D"]))).toBe(JSON.stringify(["I", "would"]));
         });
+
+        it("should convert a string to an array for normalization", function() {
+            expect(JSON.stringify(normalizer.normalize_tokens("I'D"))).toBe(JSON.stringify(["I", "would"]));
+        });
+
+        it("should simply tokenize a string that does not match a rule", function() {
+            expect(JSON.stringify(normalizer.normalize_tokens(["Has", "not"]))).toBe(JSON.stringify(["Has", "not"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["HAs", "not"]))).toBe(JSON.stringify(["HAs", "not"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["has", "noT"]))).toBe(JSON.stringify(["has", "noT"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["It", "is"]))).toBe(JSON.stringify(["It", "is"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["IT", "is"]))).toBe(JSON.stringify(["IT", "is"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["it", "iS"]))).toBe(JSON.stringify(["it", "iS"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["We", "will"]))).toBe(JSON.stringify(["We", "will"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["WE", "will"]))).toBe(JSON.stringify(["WE", "will"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["we", "wiLl"]))).toBe(JSON.stringify(["we", "wiLl"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["How", "are"]))).toBe(JSON.stringify(["How", "are"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["hOW", "are"]))).toBe(JSON.stringify(["hOW", "are"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["how", "aRE"]))).toBe(JSON.stringify(["how", "aRE"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["I", "would"]))).toBe(JSON.stringify(["I", "would"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["i", "would"]))).toBe(JSON.stringify(["i", "would"]));
+            expect(JSON.stringify(normalizer.normalize_tokens(["I", "woulD"]))).toBe(JSON.stringify(["I", "woulD"]));
+        });
     });
 });
