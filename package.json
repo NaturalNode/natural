@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "uubench": "0.0.x",
+    "sinon": "^1.12.2",
     "jasmine-node": "~1.13.1"
   },
   "scripts": {

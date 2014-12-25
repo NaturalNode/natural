@@ -165,7 +165,7 @@ describe('classifier', function () {
             expect(result).not.toBe.ok;
         });
 
-        it('does nothing if called without a callback', function () {
+        it('does nothing if called with a nonexistent filename', function () {
             result = baseClassifier.load('/nonexistentFilename', function (err, newClassifier){
                 expect(err).toBe.ok;
                 expect(newClassifier).not.toBe.ok;
