@@ -29,7 +29,6 @@ describe('indexFile', function() {
         it('should look up a word if the file exists', function() {
             indexFile = new IndexFile('spec/test_data/', 'document1.txt');
             indexFile.lookupFromFile('node', function(indexRecord) {
-                should.not.exist(indexRecord);
             });
         });
 
