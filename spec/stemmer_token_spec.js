@@ -42,14 +42,28 @@ describe('stemmer token', function () {
   });
 
   it('should allow vowels to be set', function () {
-    var vowels = 'aeiou',
-      token    = (new StemmerToken('')).usingVowels(vowels);
+    var vowels    = 'aeiou',
+      vowelsArray = vowels.split(''),
+      token       = new StemmerToken('');
 
+    token.usingVowels(vowels);
     expect(token.vowels).toBe(vowels);
+
+    token.usingVowels(vowelsArray);
+    expect(token.vowels).toBe(vowelsArray);
   });
 
   it('should check for vowels', function () {
-    var token = (new StemmerToken('test')).usingVowels('aeiou');
+    var vowels = 'aeiou',
+      token    = new StemmerToken('test');
+
+    token.usingVowels(vowels);
+
+    expect(token.hasVowelAtIndex(0)).toBe(false);
+    expect(token.hasVowelAtIndex(1)).toBe(true);
+    expect(token.hasVowelAtIndex(99)).toBe(false);
+
+    token.usingVowels(vowels.split(''));
 
     expect(token.hasVowelAtIndex(0)).toBe(false);
     expect(token.hasVowelAtIndex(1)).toBe(true);
