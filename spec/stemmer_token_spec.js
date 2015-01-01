@@ -31,6 +31,27 @@ describe('stemmer token', function () {
     expect(token.string).toBe(string);
   });
 
+  it('should hold the original token string', function () {
+    var string = 'test',
+      token    = new StemmerToken(string);
+
+    expect(token.original).toBe(string);
+  });
+
+  it('should replace all instances of a string', function () {
+    var string = 'tester',
+      token    = new StemmerToken(string);
+
+    token.replaceAll('e', 'a');
+    expect(token.string).toBe('tastar');
+
+    token.replaceAll('ar', 'er');
+    expect(token.string).toBe('taster');
+
+    token.replaceAll('r', '');
+    expect(token.string).toBe('taste');
+  });
+
   it('should compare strings', function () {
     var string        = 'test',
       token           = new StemmerToken(string),
@@ -116,6 +137,35 @@ describe('stemmer token', function () {
 
     token.markRegion('test', null, function () { return this.value; }, context);
     expect(token.regions.test).toBe(99);
+  });
+
+  it('should check for suffixes', function() {
+    var token = new StemmerToken('tester');
+
+    expect(token.hasSuffix('er')).toBe(true);
+    expect(token.hasSuffix('st')).toBe(false);
+  });
+
+  it('should check for suffixes within a region', function() {
+    var token = (new StemmerToken('tester')).markRegion('region', 2);
+
+    expect(token.hasSuffixInRegion('st', 'region')).toBe(false);
+    expect(token.hasSuffixInRegion('ster', 'region')).toBe(true);
+    expect(token.hasSuffixInRegion('ester', 'region')).toBe(false);
+  });
+
+  it('should replace the suffix within a region', function() {
+    var t1 = (new StemmerToken('tester')).markRegion('region', 4),
+      t2 = (new StemmerToken('tester')).markRegion('region', 0);
+
+    t1.replaceSuffixInRegion('ter', '<s>', 'region');
+    expect(t1.string).toBe('tester');
+
+    t1.replaceSuffixInRegion('er', '<s>', 'region');
+    expect(t1.string).toBe('test<s>');
+
+    t2.replaceSuffixInRegion('protester', '<s>', 'region');
+    expect(t2.string).toBe('tester');
   });
 
 });
