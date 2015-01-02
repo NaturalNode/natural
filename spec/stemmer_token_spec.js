@@ -92,7 +92,7 @@ describe('stemmer token', function () {
   });
 
   it('should find the next vowel', function () {
-    var token = (new StemmerToken('tester')).usingVowels('aeiou');
+    var token = new StemmerToken('tester').usingVowels('aeiou');
 
     expect(token.nextVowelIndex(0)).toBe(1);
     expect(token.nextVowelIndex(1)).toBe(1);
@@ -103,7 +103,7 @@ describe('stemmer token', function () {
   });
 
   it('should find the next consonant', function () {
-    var token = (new StemmerToken('testee')).usingVowels('aeiou');
+    var token = new StemmerToken('testee').usingVowels('aeiou');
 
     expect(token.nextConsonantIndex(0)).toBe(0);
     expect(token.nextConsonantIndex(1)).toBe(2);
@@ -147,7 +147,7 @@ describe('stemmer token', function () {
   });
 
   it('should check for suffixes within a region', function() {
-    var token = (new StemmerToken('tester')).markRegion('region', 2);
+    var token = new StemmerToken('tester').markRegion('region', 2);
 
     expect(token.hasSuffixInRegion('st', 'region')).toBe(false);
     expect(token.hasSuffixInRegion('ster', 'region')).toBe(true);
@@ -155,8 +155,8 @@ describe('stemmer token', function () {
   });
 
   it('should replace the suffix within a region', function() {
-    var t1 = (new StemmerToken('tester')).markRegion('region', 4),
-      t2 = (new StemmerToken('tester')).markRegion('region', 0);
+    var t1 = new StemmerToken('tester').markRegion('region', 4),
+      t2   = new StemmerToken('tester').markRegion('region', 0);
 
     t1.replaceSuffixInRegion('ter', '<s>', 'region');
     expect(t1.string).toBe('tester');

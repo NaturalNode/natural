@@ -31,15 +31,18 @@ describe('porter_stemmer_pt', function() {
 			'a', 'e', 'o'
 		];
 
-		for (var word in words) {
-			expect(PorterStemmer.stem(word)).toBe(undefined);
+		for (var i in words) {
+			expect(PorterStemmer.stem(words[i])).toBe(words[i]);
 		}
 	});
 
 	it('should perform stemming on a few special case words', function() {
 
 		var words = {
-			'a': undefined,
+			'abastecem'     : 'abastec',
+			'abastecer'     : 'abastec',
+			'abastecida'    : 'abastec',
+			'abastecimento' : 'abastec'
 		};
 
 		for (var word in words) {
