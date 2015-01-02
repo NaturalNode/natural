@@ -52,16 +52,6 @@ describe('stemmer token', function () {
     expect(token.string).toBe('taste');
   });
 
-  it('should compare strings', function () {
-    var string        = 'test',
-      token           = new StemmerToken(string),
-      equalToken      = new StemmerToken(string),
-      differentToken  = new StemmerToken('different');
-
-    expect(token.isEqual(equalToken)).toBe(true);
-    expect(token.isEqual(differentToken)).toBe(false);
-  });
-
   it('should allow vowels to be set', function () {
     var vowels    = 'aeiou',
       vowelsArray = vowels.split(''),
