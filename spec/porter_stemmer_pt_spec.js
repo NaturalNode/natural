@@ -25,50 +25,26 @@ var PorterStemmer = require('../lib/natural/stemmers/porter_stemmer_pt'),
 
 describe('porter_stemmer_pt', function() {
 
-	it('should not stem stopwords', function() {
+ 	it('should perform stemming on a lot of words', function() {
+ 		var errors = [];
 
-		var words = [
-			'a', 'e', 'o'
-		];
+ 		fs.readFileSync('spec/test_data/snowball_pt.txt').toString().split('\n').forEach(function(line) {
+ 			if (line) {
+ 				var fields = line.replace(/\s+/g, ' ').split(' '),
+ 					stemmed = PorterStemmer.stem(fields[0]);
 
-		for (var i in words) {
-			expect(PorterStemmer.stem(words[i])).toBe(words[i]);
-		}
-	});
+ 				if (stemmed !== fields[1]) {
+					console.log('Error:', fields[0], 'Expected:', fields[1], 'Got:', stemmed);
+ 					errors.push({
+ 						word:     fields[0],
+ 						expected: fields[1],
+ 						actual:   stemmed
+ 					});
+ 				}
+ 			}
+ 		});
 
-	it('should perform stemming on a few special case words', function() {
-
-		var words = {
-			'abastecem'     : 'abastec',
-			'abastecer'     : 'abastec',
-			'abastecida'    : 'abastec',
-			'abastecimento' : 'abastec'
-		};
-
-		for (var word in words) {
-			expect(PorterStemmer.stem(word)).toBe(words[word]);
-		}
-	});
-
-// 	it('should perform stemming on a lot of words', function() {
-// 		var errors = [];
-//
-// 		fs.readFileSync('spec/test_data/snowball_pt.txt').toString().split('\n').forEach(function(line) {
-// 			if (line) {
-// 				var fields = line.replace(/\s+/g, ' ').split(' '),
-// 					stemmed = PorterStemmer.stem(fields[0]);
-//
-// 				if (stemmed !== fields[1]) {
-// 					errors.push({
-// 						word:     fields[0],
-// 						expected: fields[1],
-// 						actual:   stemmed
-// 					});
-// 				}
-// 			}
-// 		});
-//
-// 		expect(errors.length).toBe(0);
-// 	});
+ 		expect(errors.length).toBe(0);
+ 	});
 
 });
