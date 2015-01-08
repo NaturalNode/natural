@@ -69,13 +69,13 @@ describe('tfidf', function() {
                 ]
             });
             tfidfs = tfidf.tfidfs('two');
-            expect(tfidfs[1]).toBe(Math.log( 2.0 / 1.0 ));
+            expect(tfidfs[1]).toBe(1 + Math.log( 2.0 / 2.0 ));
         });
 
         it('should work with the restoreCache flag set to true', function() {
             tfidf = new TfIdf();
             tfidf.addDocument('document one', 'un');
-            expect(tfidf.idf("one")).toBe(Math.log( 1.0 / 1.0 ));
+            expect(tfidf.idf("one")).toBe(1 + Math.log( 1.0 / 2.0 ));
             tfidf.addDocument('document Two', 'deux', true);
 
             tfidf.tfidfs('two', function(i, tfidf, key) {
@@ -125,7 +125,7 @@ describe('tfidf', function() {
             tfidf = new TfIdf();
             var terms = ['this', 'document', 'is', 'about', 'poetry'];
             tfidf.addDocument(terms.join(" "));
-            expect(tfidf.tfidf(terms, 0)).toBe(0);
+            expect(tfidf.tfidf(terms, 0)).toBe( 2 * (1 + Math.log( 1.0 / 2.0 )) );
         });
     });
 
@@ -152,7 +152,7 @@ describe('tfidf', function() {
             tfidf.addDocument({text: 'this document is about python'});
             tfidf.addDocument(['this', 'document', 'is', 'about', 'node', 'and', 'JavaScript']);
 
-            expect(tfidf.idf("node")).toBe(Math.log( 6.0 / 4.0 ));
+            expect(tfidf.idf("node")).toBe(1 + Math.log( 6.0 / 5.0 ));
         });
 
         it("should compute tf correctly", function(){
