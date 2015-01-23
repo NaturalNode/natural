@@ -184,7 +184,7 @@ tokenize and stem the text.
 
 ```javascript
 classifier.addDocument('i am long qqqq', 'buy');
-classifier.addDocument('buy the q''s', 'buy');
+classifier.addDocument('buy the q\'s', 'buy');
 classifier.addDocument('short gold', 'sell');
 classifier.addDocument('sell gold', 'sell');
 
@@ -208,8 +208,8 @@ You have access to the set of matched classes and the associated value from the 
 Outputs:
 
 ```javascript
-[ { label: 'sell', value: 0.39999999999999997 },
-  { label: 'buy', value: 0.19999999999999998 } ]
+[ { label: 'buy', value: 0.39999999999999997 },
+  { label: 'sell', value: 0.19999999999999998 } ]
 ```
 
 From this:
