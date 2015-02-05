@@ -57,6 +57,7 @@ describe('present verb inflector', function() {
         it('should singularize irregular forms', function() {
             expect(inflector.singularize('are')).toBe('is');
             expect(inflector.singularize('were')).toBe('was');
+            expect(inflector.singularize('have')).toBe('has');
         });
 
         it('should singularize ies forms', function() {
@@ -105,6 +106,8 @@ describe('present verb inflector', function() {
         it('should pluralize irregular forms', function() {
             expect(inflector.pluralize('was')).toBe('were');                        
             expect(inflector.pluralize('is')).toBe('are');
+            expect(inflector.pluralize('am')).toBe('are');
+            expect(inflector.pluralize('has')).toBe('have');
         });
 
         it('should pluralize ies forms', function() {
