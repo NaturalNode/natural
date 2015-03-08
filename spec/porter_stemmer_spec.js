@@ -129,6 +129,15 @@ describe('porter_stemmer', function() {
 		expect(stemmer.stem('animated')).toBe('anim');
 	});
 
+	it('issue 176 - attemptReplace ed|ing', function() {
+		expect(stemmer.stem('aedile')).toBe('aedil');
+		expect(stemmer.stem('adoptedly')).toBe('adoptedli');
+	});
+
+	it('issue 176', function() {
+		//expect(stemmer.stem('ace')).toBe('ac');
+	});
+
 	it('should tokenize and stem attached', function() {
 		stemmer.attach();
 		expect('scoring stinks'.tokenizeAndStem()).toEqual(['score', 'stink']);
