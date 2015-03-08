@@ -135,7 +135,7 @@ describe('porter_stemmer', function() {
 	});
 
 	it('issue 176', function() {
-		//expect(stemmer.stem('ace')).toBe('ac');
+		expect(stemmer.stem('ace')).toBe('ac');
 	});
 
 	it('should tokenize and stem attached', function() {
