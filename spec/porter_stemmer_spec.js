@@ -134,8 +134,16 @@ describe('porter_stemmer', function() {
 		expect(stemmer.stem('adoptedly')).toBe('adoptedli');
 	});
 
-	it('issue 176', function() {
+	it('issue 176 - minimum length for final e', function() {
 		expect(stemmer.stem('ace')).toBe('ac');
+	});
+
+	it('issue 176 - minimum length for final s', function() {
+		expect(stemmer.stem('yes')).toBe('ye');
+	});
+
+	it('issue 176 -- s/tion measure', function() {
+		expect(stemmer.stem('invasion')).toBe('invas');
 	});
 
 	it('should tokenize and stem attached', function() {
