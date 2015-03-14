@@ -23,6 +23,14 @@ THE SOFTWARE.
 var stemmer = require('../lib/natural/stemmers/porter_stemmer');
 
 describe('porter_stemmer', function() {
+	it('should categorizeGroups', function() {
+		expect(stemmer.categorizeGroups('syllog')).toBe('CVCVC');
+	});
+
+	it('should measure', function() {
+		expect(stemmer.measure('syllog')).toBe(2);
+	});
+
 	it('should perform step 1a', function() {
 		expect(stemmer.step1a('caresses')).toBe('caress');
 		expect(stemmer.step1a('ponies')).toBe('poni');
@@ -146,8 +154,9 @@ describe('porter_stemmer', function() {
 		expect(stemmer.stem('invasion')).toBe('invas');
 	});
 
-	it('issue 176 - vehement', function() {
+	it('issue 176 - vehement - step 4', function() {
 		expect(stemmer.stem('vehement')).toBe('vehement');
+		expect(stemmer.stem('syllogism')).toBe('syllog');
 	});
 
 	it('issue 176 - corruptiblity', function() {
