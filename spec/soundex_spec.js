@@ -127,7 +127,14 @@ describe('soundex', function() {
     it('issue 221 -- inital vowels that duplicate cons codes', function() {
         soundex.attach();
         expect('Lloyd'.phonetics()).toBe('L300');
-        expect('Pfister'.phonetics()).toBe('P236');        
+        expect('Pfister'.phonetics()).toBe('P236');
+
+        expect('manhattan'.phonetics()).toBe('M535');
+        expect('Lukasiewicz'.phonetics()).toBe('L222');        
+
+        expect('Gauss'.phonetics()).toBe('G200');        
+        expect('Tymczak'.phonetics()).toBe('T522');        
+        expect('Jackson'.phonetics()).toBe('J250');                                
     });    
     
     it('should tokenize and return string phonetics with string patch', function() {

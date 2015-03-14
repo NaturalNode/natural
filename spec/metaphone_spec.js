@@ -211,6 +211,11 @@ describe('metaphone', function() {
         expect(metaphone.compare('PHONETICS', 'garbonzo')).toBeFalsy();
     });
     
+    it('#173', function() {
+        //expect(metaphone.process('caesar')).toBe('KSR');   
+        //expect(metaphone.process('chemical')).toBe('KMKL');   
+    });
+
     it('should compare strings with string patch', function() {
         metaphone.attach();
         expect('phonetics'.soundsLike('fonetix')).toBeTruthy();
