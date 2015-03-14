@@ -146,9 +146,9 @@ describe('porter_stemmer', function() {
 		expect(stemmer.stem('invasion')).toBe('invas');
 	});
 
-	//it('issue 176 - vehement', function() {
-	//	expect(stemmer.stem('vehement')).toBe('vehement');
-	//});
+	it('issue 176 - vehement', function() {
+		expect(stemmer.stem('vehement')).toBe('vehement');
+	});
 
 	it('issue 176 - corruptiblity', function() {
 		expect(stemmer.stem('corruptibility')).toBe('corrupt');
