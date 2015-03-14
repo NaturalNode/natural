@@ -25,6 +25,7 @@ var stemmer = require('../lib/natural/stemmers/porter_stemmer');
 describe('porter_stemmer', function() {
 	it('should categorizeGroups', function() {
 		expect(stemmer.categorizeGroups('syllog')).toBe('CVCVC');
+		expect(stemmer.categorizeGroups('gypsy')).toBe('CVCV');		
 	});
 
 	it('should measure', function() {
@@ -158,6 +159,10 @@ describe('porter_stemmer', function() {
 		expect(stemmer.stem('vehement')).toBe('vehement');
 		expect(stemmer.stem('syllogism')).toBe('syllog');
 	});
+
+	it('issue 176 - vehement - step 4', function() {
+		expect(stemmer.stem('gypsy')).toBe('gypsi');
+	});	
 
 	it('issue 176 - corruptiblity', function() {
 		expect(stemmer.stem('corruptibility')).toBe('corrupt');
