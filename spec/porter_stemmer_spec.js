@@ -142,9 +142,17 @@ describe('porter_stemmer', function() {
 		expect(stemmer.stem('yes')).toBe('ye');
 	});
 
-	it('issue 176 -- s/tion measure', function() {
+	it('issue 176 - s/tion measure', function() {
 		expect(stemmer.stem('invasion')).toBe('invas');
 	});
+
+	//it('issue 176 - vehement', function() {
+	//	expect(stemmer.stem('vehement')).toBe('vehement');
+	//});
+
+	it('issue 176 - corruptiblity', function() {
+		expect(stemmer.stem('corruptibility')).toBe('corrupt');
+	});	
 
 	it('should tokenize and stem attached', function() {
 		stemmer.attach();
