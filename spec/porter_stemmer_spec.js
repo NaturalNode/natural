@@ -161,7 +161,11 @@ describe('porter_stemmer', function() {
 		expect(stemmer.stem('gypsy')).toBe('gypsi');
 	});
 
-	it('issue 176 - vehement - step 5a', function() {
+	it('issue 176 ', function() {
+		expect(stemmer.stem('terribly')).toBe('terribl');				
+	});	
+
+	it('issue 176 - step 5a', function() {
 		expect(stemmer.stem('type')).toBe('type');
 	});	
 
