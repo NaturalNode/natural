@@ -65,15 +65,6 @@ describe('soundex', function() {
         it('sound condense sequences', function() {
             expect(soundex.condense('11222556')).toBe('1256');
         });
-
-        it('sound condense sequences around H and W', function() {
-            expect(soundex.condense('113w355')).toBe('135');
-        });
-        
-        it('sound drop irrelevant H and W', function() {
-            expect(soundex.condense('phonetics')).toBe('ponetics');
-            expect(soundex.condense('towering')).toBe('toering');            
-        });
     });
     
     describe('padRight0', function() {
@@ -132,6 +123,12 @@ describe('soundex', function() {
         expect('phonetics'.phonetics()).toBe('P532');
         expect('PHONETICS'.phonetics()).toBe('P532');        
     });
+
+    it('issue 221 -- inital vowels that duplicate cons codes', function() {
+        soundex.attach();
+        expect('Lloyd'.phonetics()).toBe('L300');
+        expect('Pfister'.phonetics()).toBe('P236');        
+    });    
     
     it('should tokenize and return string phonetics with string patch', function() {
         soundex.attach();
