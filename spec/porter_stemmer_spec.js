@@ -158,10 +158,11 @@ describe('porter_stemmer', function() {
 	it('issue 176 - vehement - step 4', function() {
 		expect(stemmer.stem('vehement')).toBe('vehement');
 		expect(stemmer.stem('syllogism')).toBe('syllog');
+		expect(stemmer.stem('gypsy')).toBe('gypsi');
 	});
 
-	it('issue 176 - vehement - step 4', function() {
-		expect(stemmer.stem('gypsy')).toBe('gypsi');
+	it('issue 176 - vehement - step 5a', function() {
+		expect(stemmer.stem('type')).toBe('type');
 	});	
 
 	it('issue 176 - corruptiblity', function() {
