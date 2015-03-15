@@ -737,7 +737,13 @@ describe('double metaphone', function() {
 
   describe('issue #34', function() {
 		it('terminate words ending in H', function() {
-	    expect(doubleMetaphone.process('ptah')).toEqual(['PT', 'PT']);
+	    	expect(doubleMetaphone.process('ptah')).toEqual(['PT', 'PT']);
 		});
+  });
+
+  describe('issue #173', function() {
+  	it('handle initial cons correctly', function() {
+  		expect(doubleMetaphone.process('ceasar')).toEqual(['SSR', 'SSR']);
+  	});
   });
 });
