@@ -744,7 +744,9 @@ describe('double metaphone', function() {
   describe('issue #173', function() {
   	it('handle initial cons correctly', function() {
   		expect(doubleMetaphone.process('ceasar')).toEqual(['SSR', 'SSR']);
-  		expect(doubleMetaphone.process('ach')).toEqual(['AK', 'AK']);  		
+  		expect(doubleMetaphone.process('ach')).toEqual(['AK', 'AK']);  	
+  		expect(doubleMetaphone.process('chemical')).toEqual(['KMKL', 'KMKL']);
+  		expect(doubleMetaphone.process('choral')).toEqual(['KRL', 'KRL']);  		
   	});
   });
 });
