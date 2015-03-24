@@ -6,6 +6,11 @@ describe('dice', function () {
     expect(dice('john', 'john')).toBe(1);
   });
 
+  it('should match single character words', function () {
+    expect(dice('a', 'a')).toBe(1);
+    expect(dice('a', 'b')).toBe(0);
+  });
+
   it('should handle total mis-matches', function () {
     expect(dice('john', 'matt')).toBe(0);
   });
