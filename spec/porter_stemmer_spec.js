@@ -21,6 +21,7 @@ THE SOFTWARE.
 */
 
 var stemmer = require('../lib/natural/stemmers/porter_stemmer');
+var stopwords = require('../lib/natural/util/stopwords');
 
 describe('porter_stemmer', function() {
 	it('should categorizeGroups', function() {
@@ -178,5 +179,18 @@ describe('porter_stemmer', function() {
 		stemmer.attach();
 		expect('scoring stinks'.tokenizeAndStem()).toEqual(['score', 'stink']);
 		expect('SCORING STINKS'.tokenizeAndStem()).toEqual(['score', 'stink']);
+	});
+
+	it('should tokenize and stem ignoring stopwords', function() {
+		expect('My dog is very fun TO play with And another thing, he is A poodle.'.tokenizeAndStem()).toEqual(['dog', 'fun', 'plai', 'thing', 'poodl']);
+	});
+
+	it('should tokenize and stem ignoring all capital stopwords', function() {
+		var allCapitalStopwords = stopwords.words.join(' ').toUpperCase();
+		expect(allCapitalStopwords.tokenizeAndStem()).toEqual([]);
+	});
+
+	it('should tokenize and stem including stopwords', function() {
+		expect('My dog is very fun TO play with And another thing, he is A poodle.'.tokenizeAndStem(true)).toEqual(['my', 'dog', 'is', 'veri', 'fun', 'to', 'plai', 'with', 'and', 'anoth', 'thing', 'he', 'is', 'a', 'poodl']);
 	});
 });
