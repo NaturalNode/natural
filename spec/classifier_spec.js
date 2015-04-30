@@ -20,8 +20,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var natural = require('lib/natural');
-var baseClassifier = require('lib/natural/classifiers/classifier.js');
+var natural = require('../lib/natural');
+var baseClassifier = require('../lib/natural/classifiers/classifier.js');
 var fs = require('fs');
 
 describe('classifier', function () {
@@ -32,6 +32,20 @@ describe('classifier', function () {
             var classifier = new natural.BayesClassifier();
             classifier.addDocument('', 'philosophy');
             expect(classifier.docs.length).toBe(0);
+        });
+
+        it('should increment features', function () {
+            var classifier = new natural.BayesClassifier();
+            classifier.addDocument('foo', '');
+            classifier.addDocument('foo', '');
+            classifier.addDocument('bar', '');
+            classifier.addDocument('bar', '');
+            classifier.addDocument('bar', '');
+            classifier.addDocument('baz', '');
+            expect(classifier.docs.length).toBe(6);
+            expect(classifier.features['foo']).toBe(2);
+            expect(classifier.features['bar']).toBe(3);
+            expect(classifier.features['baz']).toBe(1);
         });
     });
 
