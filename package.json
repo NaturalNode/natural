@@ -22,6 +22,7 @@
   "scripts": {
     "test": "NODE_PATH=. node_modules/jasmine-node/bin/jasmine-node spec/"
   },
+  "license": "MIT",
   "author": "Chris Umbel <chris@chrisumbel.com>",
   "keywords": [
     "natural",
