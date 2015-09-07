@@ -234,7 +234,8 @@ The training process can be monitored by subscribing to the event `trainedWithDo
        *   total: 23 // There are 23 total documents being trained against
        *   index: 12 // The index/number of the document that's just been trained against
        *   doc: {...} // The document that has just been indexed
-       */ }
+       *  }
+       */ 
     });
 
 A classifier can also be persisted and recalled so you can reuse a training
