@@ -1008,7 +1008,9 @@ Transformation rules are specified as follows:
 ```
 OLD_CAT NEW_CAT PREDICATE PARAMETER
 ```
-This means that if the predicate is true that if the category of the current position is OLD_CAT, the category is replaced by NEW_CAT. The predicate may use the parameter in distinct ways: sometimes the parameter is used for specifying the outcome of the predicate:
+This means that if the category of the current position is OLD_CAT and the predicate is true, the category is replaced by NEW_CAT. The predicate 
+may use the parameter in different ways: sometimes the parameter is used for 
+specifying the outcome of the predicate:
 ```
 NN CD CURRENT-WORD-IS-NUMBER YES
 ```
