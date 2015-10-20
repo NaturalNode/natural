@@ -969,9 +969,9 @@ algorithm. Transformation rules are specified in external files.
 ```javascript
 var Tagger = require("./lib/natural").BrillPOSTagger;
 
-var base_folder = "/home/hugo/workspace/brill-pos-tagger";
-var rules_file = base_folder + "/data/tr_from_pos.txt";
-var lexicon_file = base_folder + "/data/lexicon.json";
+var base_folder = "some_path/lib/natural/brill_pos_tagger";
+var rules_file = base_folder + "/data/tr_from_posjs.txt";
+var lexicon_file = base_folder + "/data/lexicon_from_posjs.json";
 var default_category = 'N';
 
 var tagger = new Tagger(lexicon_file, rules_file, default_category, function(error) {
