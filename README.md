@@ -985,7 +985,7 @@ var tagger = new Tagger(lexicon_file, rules_file, default_category, function(err
 });
 ```
 
-# Lexicon
+### Lexicon
 The lexicon is either a JSON file that has the following structure:
 ```javascript
 {
@@ -1003,7 +1003,7 @@ word2 cat3
 Words may have multiple categories in the lexicon file. The tagger uses only 
 the first category specified.
 
-# Specifying transformation rules
+### Specifying transformation rules
 Transformation rules are specified as follows:
 ```
 OLD_CAT NEW_CAT PREDICATE PARAMETER
@@ -1019,7 +1019,7 @@ VBD NN PREV-TAG DT
 ```
 Here the category of the previous word must be <code>DT</code> for the rule to be applied.
 
-# Algorithm
+### Algorithm
 The tagger applies transformation rules that may change the category of words. The input sentence must be split into words which are assigned with categories. The tagged sentence is then processed from left to right. At each step all rules are applied once; rules are applied in the order in which they are specified. Algorithm:
 ```javascript
 function(sentence) {
@@ -1037,7 +1037,7 @@ function(sentence) {
 }
 ```
 
-# Adding a predicate
+### Adding a predicate
 Predicates are defined in module <code>lib/Predicate.js</code>. In that file 
 a function must be created that serves as predicate. A predicate accepts a 
 tagged sentence, the current position in the sentence that should be tagged, and
@@ -1056,7 +1056,7 @@ var predicates = {
 }
 ```
 
-# Acknowledgements/references
+### Acknowledgements/references
 * Part of speech tagger by Percy Wegmann, https://code.google.com/p/jspos/
 * Node.js version of jspos: https://github.com/neopunisher/pos-js
 * A simple rule-based part of speech tagger, Eric Brill, Published in: Proceeding ANLC '92 Proceedings of the third conference on Applied natural language processing, Pages 152-155. http://dl.acm.org/citation.cfm?id=974526
