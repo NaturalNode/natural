@@ -44,7 +44,8 @@
     "double",
     "jaro-winkler",
     "levenshtein",
-    "distance"
+    "distance",
+    "tagger"
   ],
   "main": "./lib/natural/index.js",
   "maintainers": [
