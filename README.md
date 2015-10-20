@@ -1014,7 +1014,8 @@ specifying the outcome of the predicate:
 ```
 NN CD CURRENT-WORD-IS-NUMBER YES
 ```
-This means that if the outcome of CURRENT-WORD-IS-NUMBER is YES, the category is replaced by <code>CD</code>
+This means that if the outcome of CURRENT-WORD-IS-NUMBER is YES, the category
+ is replaced by <code>CD</code>.
 The parameter can also be used to check the category of a word in the sentence:
 ```
 VBD NN PREV-TAG DT
