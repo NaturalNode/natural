@@ -965,7 +965,7 @@ POS Tagger
 This is a part-of-speech tagger based on Eric Brill's transformational 
 algorithm. Transformation rules are specified in external files.
 
-# Usage
+### Usage
 ```javascript
 var Tagger = require("./lib/natural").BrillPOSTagger;
 
