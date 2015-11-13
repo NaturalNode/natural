@@ -39,6 +39,23 @@ describe('bayes classifier', function() {
             expect(classifier.classify(['read', 'thing'])).toBe('literature');
         });
 
+        it('should classify with parallel training', function() {
+            var classifier = new natural.BayesClassifier();
+
+            classifier.addDocument(['fix', 'box'], 'computing');
+            classifier.addDocument(['write', 'code'], 'computing');
+            classifier.addDocument(['script', 'code'], 'computing');
+            classifier.addDocument(['write', 'book'], 'literature');
+            classifier.addDocument(['read', 'book'], 'literature');
+            classifier.addDocument(['study', 'book'], 'literature');
+
+            classifier.trainParallel(2, function(err) {
+              expect(classifier.classify(['bug', 'code'])).toBe('computing');
+              expect(classifier.classify(['read', 'thing'])).toBe('literature');
+              asyncSpecDone();
+            });
+        });
+
         it('should provide all classification scores', function() {
             var classifier = new natural.BayesClassifier();
             classifier.addDocument(['fix', 'box'], 'computing');
