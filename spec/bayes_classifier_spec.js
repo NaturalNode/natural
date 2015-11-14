@@ -55,6 +55,25 @@ describe('bayes classifier', function() {
               asyncSpecDone();
             });
         });
+        
+        it('should classify with parallel batched training', function() {
+            var classifier = new natural.BayesClassifier();
+
+            classifier.addDocument(['fix', 'box'], 'computing');
+            classifier.addDocument(['write', 'code'], 'computing');
+            classifier.addDocument(['script', 'code'], 'computing');
+            classifier.addDocument(['write', 'book'], 'literature');
+            classifier.addDocument(['read', 'book'], 'literature');
+            classifier.addDocument(['study', 'book'], 'literature');
+            
+            classifier.events.on('doneTraining', function() {
+                expect(classifier.classify(['bug', 'code'])).toBe('computing');
+                expect(classifier.classify(['read', 'thing'])).toBe('literature');
+                asyncSpecDone();
+            });
+
+            classifier.trainParallelBatches({numThreads: 2, batchSize: 2});
+        });
 
         it('should provide all classification scores', function() {
             var classifier = new natural.BayesClassifier();
