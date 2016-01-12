@@ -25,7 +25,7 @@ Aside from this README, the only documentation is [this DZone article](http://ww
 * [String Distance](#string-distance)
 * [Stemmers](#stemmers)
 * [Classifiers](#classifiers)
-* [Phonetics](#Phonetics)
+* [Phonetics](#phonetics)
 * [Inflectors](#inflectors)
 * [N-Grams](#n-grams)
 * [tf-idf](#tf-idf)
