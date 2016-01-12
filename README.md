@@ -36,7 +36,7 @@ Aside from this README, the only documentation is [this DZone article](http://ww
 * [WordNet](#wordnet)
 * [Spellcheck](#spellcheck)
 * [POS Tagger](#pos-tagger)
-* [Acknowledgements/references](#acknowledgements-references)
+* [Acknowledgements/references](#acknowledgements-and-references)
 * [Development](#development)
 * [License](#license)
 
@@ -1070,7 +1070,7 @@ var predicates = {
 }
 ```
 
-### Acknowledgements/references
+### Acknowledgements and References
 * Part of speech tagger by Percy Wegmann, https://code.google.com/p/jspos/
 * Node.js version of jspos: https://github.com/neopunisher/pos-js
 * A simple rule-based part of speech tagger, Eric Brill, Published in: Proceeding ANLC '92 Proceedings of the third conference on Applied natural language processing, Pages 152-155. http://dl.acm.org/citation.cfm?id=974526
