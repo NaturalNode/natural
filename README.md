@@ -21,9 +21,27 @@ Aside from this README, the only documentation is [this DZone article](http://ww
 ### TABLE OF CONTENTS
 
 * [Installation](#installation)
+* [Tokenizers](#tokenizers)
+* [String Distance](#string-distance)
+* [Stemmers](#stemmers)
+* [Classifiers](#classifiers)
+* [Phonetics](#Phonetics)
+* [Inflectors](#inflectors)
+* [N-Grams](#n-grams)
+# [tf-idf](#tf-idf)
+* [Tries](#tries)
+* [EdgeWeightedDigraph](#edgeweighteddigraph)
+* [ShortestPathTree](#shortestpathtree)
+* [LongestPathTree](#longestpathtree)
+* [WordNet](#wordnet)
+* [Spellcheck](#spellcheck)
+* [POS Tagger](#pos-tagger)
+* [Acknowledgements/references](#acknowledgements-references)
+* [Development](#development)
+* [License](#license)
 
- 
-### Installation
+
+## Installation
 
 If you're just looking to use natural without your own node application,
 you can install via NPM like so:
@@ -33,8 +51,7 @@ you can install via NPM like so:
 If you're interested in contributing to natural, or just hacking on it, then by all
 means fork away!
 
-Tokenizers
-----------
+## Tokenizers
 
 Word, Regexp, and [Treebank tokenizers](http://www.cis.upenn.edu/~treebank/tokenization.html) are provided for breaking text up into
 arrays of tokens:
@@ -62,8 +79,8 @@ console.log(tokenizer.tokenize("my dog hasn't any fleas."));
 // [ 'my',  'dog',  'hasn',  '\'',  't',  'any',  'fleas',  '.' ]
 ```
 
-String Distance
-----------------------
+## String Distance
+
 Natural provides an implementation of the [Jaro–Winkler](http://en.wikipedia.org/wiki/Jaro%E2%80%93Winkler_distance) string distance measuring algorithm.
 This will return a number between 0 and 1 which tells how closely the strings match (0 = not at all, 1 = exact match):
 
@@ -126,8 +143,7 @@ Output:
 0
 ```
 
-Stemmers
---------
+## Stemmers
 
 Currently stemming is supported via the [Porter](http://tartarus.org/martin/PorterStemmer/index.html) and [Lancaster](http://www.comp.lancs.ac.uk/computing/research/stemming/) (Paice/Husk) algorithms.
 
@@ -171,8 +187,7 @@ console.log("i am waking up to the sounds of chainsaws".tokenizeAndStem());
 console.log("chainsaws".stem());
 ```
 
-Classifiers
-----------------------
+## Classifiers
 
 Two classifiers are currently supported, [Naive Bayes](http://en.wikipedia.org/wiki/Naive_Bayes_classifier) and [logistic regression](http://en.wikipedia.org/wiki/Logistic_regression).
 The following examples use the BayesClassifier class, but the 
@@ -273,8 +288,7 @@ var restoredClassifier = natural.BayesClassifier.restore(JSON.parse(raw));
 console.log(restoredClassifier.classify('i should sell that'));
 ```
 
-Phonetics
----------
+## Phonetics
 
 Phonetic matching (sounds-like) matching can be done with the [SoundEx](http://en.wikipedia.org/wiki/Soundex),
 [Metaphone](http://en.wikipedia.org/wiki/Metaphone) or [DoubleMetaphone](http://en.wikipedia.org/wiki/Metaphone#Double_Metaphone) algorithms
@@ -361,8 +375,7 @@ if(wordA.soundsLike(wordB))
 console.log('phonetics'.phonetics());
 ```
 
-Inflectors
-----------
+## Inflectors
 
 ### Nouns
 
@@ -447,8 +460,7 @@ console.log('walks'.pluralizePresentVerb());
 ```
 
 
-N-Grams
--------
+## N-Grams
 
 n-grams can be obtained for either arrays or strings (which will be tokenized
 for you):
@@ -539,8 +551,7 @@ console.log(NGramsZH.ngrams(['一', '个', '中', '文', '测',
     '试'], 4));
 ```
 
-tf-idf
------
+## tf-idf
 
 [Term Frequency–Inverse Document Frequency (tf-idf)](http://en.wikipedia.org/wiki/Tf%E2%80%93idf) is implemented to determine how important a word (or words) is to a 
 document relative to a corpus. The following example will add four documents to 
@@ -668,8 +679,7 @@ var s = JSON.stringify(tfidf);
 var tfidf = new TfIdf(JSON.parse(s));
 ```
 
-Tries
------
+## Tries
 
 Tries are a very efficient data structure used for prefix-based searches. 
 Natural comes packaged with a basic Trie implementation which can support match collection along a path,
@@ -746,8 +756,8 @@ ciTrie.contains("TEsT"); // true
 ```
 In the case of the searches which return strings, all strings returned will be in lower case if you are in case-_in_sensitive mode.
 
-EdgeWeightedDigraph
--------------------
+## EdgeWeightedDigraph
+
 EdgeWeightedDigraph represents a digraph, you can add an edge, get the number vertexes, edges, get all edges and use toString to print the Digraph.
 
 initialize a digraph:
@@ -780,8 +790,7 @@ you will get 5.
 
 
 
-ShortestPathTree
-----------------
+## ShortestPathTree
 
 ShortestPathTree represents a data type for solving the single-source shortest paths problem in
 edge-weighted directed acyclic graphs (DAGs).
@@ -832,8 +841,7 @@ output will be:
 [5, 4]
 ```
 
-LongestPathTree
-----------------
+## LongestPathTree
 
 LongestPathTree represents a data type for solving the single-source shortest paths problem in
 edge-weighted directed acyclic graphs (DAGs).
@@ -884,8 +892,7 @@ output will be:
 [5, 1, 3, 6, 4]
 ```
 
-WordNet
--------
+## WordNet
 
 One of the newest and most experimental features in natural is WordNet integration. Here's an
 example of using natural to look up definitions of the word node. To use the WordNet module,
@@ -940,8 +947,8 @@ As of v0.1.11, WordNet data files are no longer automatically downloaded.
 
 Princeton University "About WordNet." WordNet. Princeton University. 2010. <http://wordnet.princeton.edu>
 
-Spellcheck
-------------
+## Spellcheck
+
 A probabilistic spellchecker based on http://norvig.com/spell-correct.html
 
 This is best constructed with an array of tokens from a corpus, but a simple list of words from a dictionary will work. 
@@ -964,8 +971,8 @@ spellcheck.getCorrections('soemthing', 1); // ['something']
 spellcheck.getCorrections('soemthing', 2); // ['something', 'soothing']
 ```
 
-POS Tagger
------------
+## POS Tagger
+
 This is a part-of-speech tagger based on Eric Brill's transformational 
 algorithm. Transformation rules are specified in external files.
 
@@ -1070,8 +1077,8 @@ var predicates = {
 
 
 
-Development
------------
+## Development
+
 When developing, please:
 
 + Write unit tests
@@ -1082,8 +1089,7 @@ The current configuration of the unit tests requires the following environment v
     export NODE_PATH=.
 
 
-License
--------
+## License
 
 Copyright (c) 2011, 2012 Chris Umbel, Rob Ellis, Russell Mull
 
