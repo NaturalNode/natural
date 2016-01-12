@@ -28,7 +28,7 @@ Aside from this README, the only documentation is [this DZone article](http://ww
 * [Phonetics](#Phonetics)
 * [Inflectors](#inflectors)
 * [N-Grams](#n-grams)
-# [tf-idf](#tf-idf)
+* [tf-idf](#tf-idf)
 * [Tries](#tries)
 * [EdgeWeightedDigraph](#edgeweighteddigraph)
 * [ShortestPathTree](#shortestpathtree)
