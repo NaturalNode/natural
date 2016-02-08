@@ -158,6 +158,13 @@ describe('bayes classifier', function() {
             });
 	});
 
+        it('should only execute the callback once when failing to load a classifier', function() {
+            natural.BayesClassifier.load('nonexistant_bayes_classifier.json', null, function(err, newClassifier){
+              expect(err.code).toBe('ENOENT');
+              expect(newClassifier).toBe(undefined);
+              asyncSpecDone();
+            });
+        });
 
         it('should accept an optional smoothing parameter for the Bayesian estimates', function() {
             var defaultClassifier = new natural.BayesClassifier();
