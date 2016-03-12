@@ -1,6 +1,7 @@
 natural
 =======
 
+[![NPM version](https://img.shields.io/npm/v/natural.svg)](https://www.npmjs.com/package/natural)
 [![Build Status](https://travis-ci.org/NaturalNode/natural.png?branch=master)](https://travis-ci.org/NaturalNode/natural)
 
 "Natural" is a general natural language facility for nodejs. Tokenizing,
@@ -896,16 +897,14 @@ output will be:
 
 One of the newest and most experimental features in natural is WordNet integration. Here's an
 example of using natural to look up definitions of the word node. To use the WordNet module,
-first install the WordNet database files using the [WNdb module](https://github.com/moos/WNdb):
+first install the WordNet database files using [wordnet-db](https://github.com/moos/wordnet-db):
 
-    npm install WNdb
-
-(For node < v0.6, please use 'npm install WNdb@3.0.0')
+    npm install wordnet-db
 
 Keep in mind that the WordNet integration is to be considered experimental at this point,
-and not production-ready. The API is also subject to change.
+and not production-ready. The API is also subject to change.  For an implementation with vastly increased performance, as well as a command-line interface, see [wordpos](https://github.com/moos/wordpos). 
 
-Here's an example of looking up definitions for the word, "node".
+Here's an example of looking up definitions for the word "node".
 
 ```javascript
 var wordnet = new natural.WordNet();
