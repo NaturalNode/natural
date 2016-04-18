@@ -104,6 +104,12 @@ describe('noun inflector', function() {
             expect(inflector.singularize('monstrosities')).toBe('monstrosity');
         });
 
+        it('should handle SS cases', function() {
+            expect(inflector.singularize('dresses')).toBe('dress');
+            expect(inflector.singularize('dress')).toBe('dress');
+            expect(inflector.singularize('messes')).toBe('mess');
+        });
+
 	it('should handle MAN->MAN cases', function() {
 	    expect(inflector.singularize('men')).toBe('man');
 	    expect(inflector.singularize('women')).toBe('woman');
@@ -208,6 +214,12 @@ describe('noun inflector', function() {
             expect(inflector.pluralize('fly')).toBe('flies');
             expect(inflector.pluralize('victory')).toBe('victories');
             expect(inflector.pluralize('monstrosity')).toBe('monstrosities');
+        });
+
+        it('should handle SS cases', function() {
+            expect(inflector.pluralize('dress')).toBe('dresses');
+            expect(inflector.pluralize('dresses')).toBe('dresses');
+            expect(inflector.pluralize('mess')).toBe('messes');
         });
 
 	it('should handle MAN->MEN cases', function() {
