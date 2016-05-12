@@ -977,11 +977,11 @@ algorithm. Transformation rules are specified in external files.
 
 ### Usage
 ```javascript
-var Tagger = require("./lib/natural").BrillPOSTagger;
+var Tagger = require("natural").BrillPOSTagger;
 
-var base_folder = "some_path/lib/natural/brill_pos_tagger";
-var rules_file = base_folder + "/data/tr_from_posjs.txt";
-var lexicon_file = base_folder + "/data/lexicon_from_posjs.json";
+var base_folder = "./node_modules/natural/lib/natural/brill_pos_tagger/data/English";
+var rules_file = base_folder + "/tr_from_posjs.txt";
+var lexicon_file = base_folder + "/lexicon_from_posjs.json";
 var default_category = 'N';
 
 var tagger = new Tagger(lexicon_file, rules_file, default_category, function(error) {
