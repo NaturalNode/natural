@@ -25,7 +25,7 @@ var removeDiacritics = require("../lib/natural/normalizers/remove_diacritics.js"
 describe('remove_diacritics', function() {
 
     it('should correctly remove diacritics', function () {
-        var original_phrase = 'piñon ça va über résumé';
-        expect(removeDiacritics(original_phrase)).toEqual('pinon ca va uber resume');
+        var original_phrase = 'piñon ça va über résumé œdipe';
+        expect(removeDiacritics(original_phrase)).toEqual('pinon ca va uber resume oedipe');
     });
 });
