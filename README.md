@@ -967,22 +967,19 @@ algorithm. Transformation rules are specified in external files.
 
 ### Usage
 ```javascript
-var Tagger = require("./lib/natural").BrillPOSTagger;
+var natural = require("./lib/natural");
 
 var base_folder = "some_path/lib/natural/brill_pos_tagger";
-var rules_file = base_folder + "/data/tr_from_posjs.txt";
-var lexicon_file = base_folder + "/data/lexicon_from_posjs.json";
-var default_category = 'N';
+var rulesFilename = base_folder + "/data/tr_from_posjs.txt";
+var lexiconFilename = base_folder + "/data/lexicon_from_posjs.json";
+var defaultCategory = 'N';
 
-var tagger = new Tagger(lexicon_file, rules_file, default_category, function(error) {
-  if (error) {
-    console.log(error);
-  }
-  else {
-    var sentence = ["I", "see", "the", "man", "with", "the", "telescope"];
-    console.log(JSON.stringify(tagger.tag(sentence)));
-  }
-});
+var lexicon = new natural.Lexicon(lexiconFilename, defaultCategory);
+var rules = new natural.Ruleset(rulesFilename);
+var tagger = new natural.BrillPOSTagger(lexicon, rules);
+
+var sentence = ["I", "see", "the", "man", "with", "the", "telescope"];
+console.log(JSON.stringify(tagger.tag(sentence)));
 ```
 
 ### Lexicon
