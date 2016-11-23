@@ -35,11 +35,13 @@ var du_ex_volkskrant_article = base_folder_test_data + '/Volkskrant-20150205-Kno
 
 
 describe('Brill\'s POS Tagger', function() {
-  var brill_pos_tagger;
-  it('should initialise correctly with tagging rules for English', function(done) {
-    brill_pos_tagger = new natural.BrillPOSTagger(en_lexicon_file, en_rules_file, 'NN', function(error) {
-      done();
-    });
+  var brill_pos_tagger = null;
+  var lexicon = null;
+  var ruleSet = null;
+  it('should initialise correctly with tagging rules for English', function() {
+    lexicon = new natural.Lexicon(en_lexicon_file, 'NN');
+    var ruleSet = new natural.RuleSet(en_rules_file);
+    brill_pos_tagger = new natural.BrillPOSTagger(lexicon, ruleSet);
   });
 
   var sentences;
@@ -68,10 +70,10 @@ describe('Brill\'s POS Tagger', function() {
     });
   });
   
-  it('should initialise correctly with tagging rules for Dutch', function(done) {
-    brill_pos_tagger = new natural.BrillPOSTagger(du_lexicon_file, du_rules_file, 'N', function(error) {
-      done();
-    });
+  it('should initialise correctly with tagging rules for Dutch', function() {
+    lexicon = new natural.Lexicon(du_lexicon_file, 'N');
+    var ruleSet = new natural.RuleSet(du_rules_file);
+    brill_pos_tagger = new natural.BrillPOSTagger(lexicon, ruleSet);
   });
   
   it('should correctly read a Volkskrant article about the ECB', function(done) {

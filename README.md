@@ -191,7 +191,7 @@ console.log("chainsaws".stem());
 ## Classifiers
 
 Two classifiers are currently supported, [Naive Bayes](http://en.wikipedia.org/wiki/Naive_Bayes_classifier) and [logistic regression](http://en.wikipedia.org/wiki/Logistic_regression).
-The following examples use the BayesClassifier class, but the 
+The following examples use the BayesClassifier class, but the
 LogisticRegressionClassifier class could be substituted instead.
 
 ```javascript
@@ -255,7 +255,7 @@ The training process can be monitored by subscribing to the event `trainedWithDo
        *   index: 12 // The index/number of the document that's just been trained against
        *   doc: {...} // The document that has just been indexed
        *  }
-       */ 
+       */
     });
 
 A classifier can also be persisted and recalled so you can reuse a training
@@ -509,7 +509,7 @@ n-grams can also be returned with left or right padding by passing a start and/o
 console.log(NGrams.ngrams('some other words here for you', 4, '[start]', '[end]'));
 ```
 
-The above will output: 
+The above will output:
 ```
 [ [ '[start]', '[start]', '[start]', 'some' ],
   [ '[start]', '[start]', 'some', 'other' ],
@@ -527,7 +527,7 @@ For only end symbols, pass `null` for the start symbol, for instance:
 console.log(NGrams.ngrams('some other words here for you', 4, null, '[end]'));
 ```
 
-Will output: 
+Will output:
 ```
 [ [ 'some', 'other', 'words', 'here' ],
   [ 'other', 'words', 'here', 'for' ],
@@ -554,9 +554,9 @@ console.log(NGramsZH.ngrams(['一', '个', '中', '文', '测',
 
 ## tf-idf
 
-[Term Frequency–Inverse Document Frequency (tf-idf)](http://en.wikipedia.org/wiki/Tf%E2%80%93idf) is implemented to determine how important a word (or words) is to a 
-document relative to a corpus. The following example will add four documents to 
-a corpus and determine the weight of the word "node" and then the weight of the 
+[Term Frequency–Inverse Document Frequency (tf-idf)](http://en.wikipedia.org/wiki/Tf%E2%80%93idf) is implemented to determine how important a word (or words) is to a
+document relative to a corpus. The following example will add four documents to
+a corpus and determine the weight of the word "node" and then the weight of the
 word "ruby" in each document.
 
 ```javascript
@@ -640,7 +640,7 @@ document #2 is 2.4079456086518722
 
 The examples above all use strings, which case natural to automatically tokenize the input.
 If you wish to perform your own tokenization or other kinds of processing, you
-can do so, then pass in the resultant arrays later. This approach allows you to bypass natural's 
+can do so, then pass in the resultant arrays later. This approach allows you to bypass natural's
 default preprocessing.
 
 ```javascript
@@ -682,7 +682,7 @@ var tfidf = new TfIdf(JSON.parse(s));
 
 ## Tries
 
-Tries are a very efficient data structure used for prefix-based searches. 
+Tries are a very efficient data structure used for prefix-based searches.
 Natural comes packaged with a basic Trie implementation which can support match collection along a path,
 existence search and prefix search.
 
@@ -745,7 +745,7 @@ console.log(trie.keysWithPrefix("string")); // ["string1", "string2", "string3"]
 
 ### Case-Sensitivity
 
-By default the trie is case-sensitive, you can use it in case-_in_sensitive mode by passing `false` 
+By default the trie is case-sensitive, you can use it in case-_in_sensitive mode by passing `false`
 to the Trie constructor.
 
 ```javascript
@@ -902,7 +902,7 @@ first install the WordNet database files using [wordnet-db](https://github.com/m
     npm install wordnet-db
 
 Keep in mind that the WordNet integration is to be considered experimental at this point,
-and not production-ready. The API is also subject to change.  For an implementation with vastly increased performance, as well as a command-line interface, see [wordpos](https://github.com/moos/wordpos). 
+and not production-ready. The API is also subject to change.  For an implementation with vastly increased performance, as well as a command-line interface, see [wordpos](https://github.com/moos/wordpos).
 
 Here's an example of looking up definitions for the word "node".
 
@@ -950,7 +950,7 @@ Princeton University "About WordNet." WordNet. Princeton University. 2010. <http
 
 A probabilistic spellchecker based on http://norvig.com/spell-correct.html
 
-This is best constructed with an array of tokens from a corpus, but a simple list of words from a dictionary will work. 
+This is best constructed with an array of tokens from a corpus, but a simple list of words from a dictionary will work.
 
 ```javascript
 var corpus = ['something', 'soothing'];
@@ -972,27 +972,24 @@ spellcheck.getCorrections('soemthing', 2); // ['something', 'soothing']
 
 ## POS Tagger
 
-This is a part-of-speech tagger based on Eric Brill's transformational 
+This is a part-of-speech tagger based on Eric Brill's transformational
 algorithm. Transformation rules are specified in external files.
 
 ### Usage
 ```javascript
-var Tagger = require("natural").BrillPOSTagger;
+var natural = require("./lib/natural");
 
-var base_folder = "./node_modules/natural/lib/natural/brill_pos_tagger/data/English";
-var rules_file = base_folder + "/tr_from_posjs.txt";
-var lexicon_file = base_folder + "/lexicon_from_posjs.json";
-var default_category = 'N';
+var base_folder = "some_path/lib/natural/brill_pos_tagger";
+var rulesFilename = base_folder + "/data/tr_from_posjs.txt";
+var lexiconFilename = base_folder + "/data/lexicon_from_posjs.json";
+var defaultCategory = 'N';
 
-var tagger = new Tagger(lexicon_file, rules_file, default_category, function(error) {
-  if (error) {
-    console.log(error);
-  }
-  else {
-    var sentence = ["I", "see", "the", "man", "with", "the", "telescope"];
-    console.log(JSON.stringify(tagger.tag(sentence)));
-  }
-});
+var lexicon = new natural.Lexicon(lexiconFilename, defaultCategory);
+var rules = new natural.Ruleset(rulesFilename);
+var tagger = new natural.BrillPOSTagger(lexicon, rules);
+
+var sentence = ["I", "see", "the", "man", "with", "the", "telescope"];
+console.log(JSON.stringify(tagger.tag(sentence)));
 ```
 
 ### Lexicon
@@ -1010,7 +1007,7 @@ word1 cat1 cat2
 word2 cat3
 ...
 ```
-Words may have multiple categories in the lexicon file. The tagger uses only 
+Words may have multiple categories in the lexicon file. The tagger uses only
 the first category specified.
 
 ### Specifying transformation rules
@@ -1018,13 +1015,13 @@ Transformation rules are specified as follows:
 ```
 OLD_CAT NEW_CAT PREDICATE PARAMETER
 ```
-This means that if the category of the current position is OLD_CAT and the predicate is true, the category is replaced by NEW_CAT. The predicate 
-may use the parameter in different ways: sometimes the parameter is used for 
+This means that if the category of the current position is OLD_CAT and the predicate is true, the category is replaced by NEW_CAT. The predicate
+may use the parameter in different ways: sometimes the parameter is used for
 specifying the outcome of the predicate:
 ```
 NN CD CURRENT-WORD-IS-NUMBER YES
 ```
-This means that if the outcome of predicate CURRENT-WORD-IS-NUMBER is YES, the 
+This means that if the outcome of predicate CURRENT-WORD-IS-NUMBER is YES, the
 category is replaced by <code>CD</code>.
 The parameter can also be used to check the category of a word in the sentence:
 ```
@@ -1051,8 +1048,8 @@ function(sentence) {
 ```
 
 ### Adding a predicate
-Predicates are defined in module <code>lib/Predicate.js</code>. In that file 
-a function must be created that serves as predicate. A predicate accepts a 
+Predicates are defined in module <code>lib/Predicate.js</code>. In that file
+a function must be created that serves as predicate. A predicate accepts a
 tagged sentence, the current position in the sentence that should be tagged, and
  the
  outcome(s) of the predicate. An example of a predicate that checks the category of the current word:
