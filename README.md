@@ -584,14 +584,14 @@ The above outputs:
 
 ```
 node --------------------------------
-document #0 is 1.4469189829363254
+document #0 is 1
 document #1 is 0
-document #2 is 1.4469189829363254
-document #3 is 2.8938379658726507
+document #2 is 1
+document #3 is 2
 ruby --------------------------------
 document #0 is 0
-document #1 is 1.466337068793427
-document #2 is 1.466337068793427
+document #1 is 1.2876820724517808
+document #2 is 1.2876820724517808
 document #3 is 0
 ```
 
@@ -633,9 +633,9 @@ tfidf.tfidfs('node ruby', function(i, measure) {
 The above outputs:
 
 ```
-document #0 is 1.2039728043259361
-document #1 is 1.2039728043259361
-document #2 is 2.4079456086518722
+document #0 is 1
+document #1 is 1
+document #2 is 2
 ```
 
 The examples above all use strings, which case natural to automatically tokenize the input.
