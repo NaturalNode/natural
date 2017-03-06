@@ -50,4 +50,9 @@ describe('jaro-winkler', function () {
     it('should handle transpositions', function () {
         expect(jaroWinklerDistance('MARTHA', 'MARHTA').approxEql(0.96111)).toBeTruthy();
     });
+
+    it('should handle transpositions regardless of string order', function() {
+        expect(jaroWinklerDistance('class', 'clams').approxEql(0.90666)).toBeTruthy();
+        expect(jaroWinklerDistance('clams', 'class').approxEql(0.90666)).toBeTruthy();
+    });
 });
