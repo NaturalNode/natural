@@ -954,7 +954,7 @@ This is best constructed with an array of tokens from a corpus, but a simple lis
 
 ```javascript
 var corpus = ['something', 'soothing'];
-var spellcheck = new Spellcheck(corpus);
+var spellcheck = new natural.Spellcheck(corpus);
 ```
 
 It uses the trie datastructure for fast boolean lookup of a word
