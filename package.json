@@ -13,7 +13,8 @@
   "dependencies": {
     "apparatus": ">= 0.0.9",
     "sylvester": ">= 0.0.12",
-    "underscore": ">=1.3.1"
+    "underscore": ">=1.3.1",
+    "webworker-threads": ">=0.6.2"
   },
   "devDependencies": {
     "uubench": "0.0.x",
