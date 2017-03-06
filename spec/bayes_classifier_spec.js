@@ -21,6 +21,8 @@ THE SOFTWARE.
 */
 
 var natural = require('../lib/natural');
+var sinon = require('sinon');
+var baseClassifier = require('lib/natural/classifiers/classifier.js');
 
 describe('bayes classifier', function() {
     describe('classifier', function() {
@@ -175,6 +177,29 @@ describe('bayes classifier', function() {
             expect(defaultClassifier.classifier.smoothing).toBe(1.0);
             expect(newClassifier1.classifier.smoothing).toBe(1.0);
             expect(newClassifier2.classifier.smoothing).toBe(0.1);
+        });
+    });
+
+    describe('load', function () {
+
+        var sandbox;
+
+        beforeEach(function () {
+            sandbox = sinon.sandbox.create();
+        });
+
+        afterEach(function () {
+            sandbox.restore();
+        });
+
+        it('should pass an error to the callback function', function () {
+            sandbox.stub(baseClassifier, 'load', function (filename, cb) {
+                cb(new Error('An error occurred'));
+            });
+            natural.BayesClassifier.load('/spec/test_data/tfidf_document1.txt', null, function (err, newClassifier) {
+                expect(err).toBe.ok;
+                expect(newClassifier).not.toBe.ok;
+            });
         });
     });
 });
