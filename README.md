@@ -289,6 +289,15 @@ var restoredClassifier = natural.BayesClassifier.restore(JSON.parse(raw));
 console.log(restoredClassifier.classify('i should sell that'));
 ```
 
+__Note:__ if using the classifier for languages other than English you may need
+to pass in the stemmer to use. In fact, you can do this for any stemmer including
+alternate English stemmers. The default is the `PorterStemmer`.
+
+```javascript
+const PorterStemmerRu = require('./node_modules/natural/lib/natural/stemmers/porter_stemmer_ru');
+var classifier = new natural.BayesClassifier(PorterStemmerRu);
+```
+
 ## Phonetics
 
 Phonetic matching (sounds-like) matching can be done with the [SoundEx](http://en.wikipedia.org/wiki/Soundex),
