@@ -53,6 +53,7 @@ describe('noun inflector', function() {
             expect(inflector.singularize('people')).toBe('person');
             expect(inflector.singularize('children')).toBe('child');
             expect(inflector.singularize('oxen')).toBe('ox');
+            expect(inflector.singularize('clothes')).toBe('cloth');
         });
         
         it('should handle IX cases', function() {
@@ -168,6 +169,7 @@ describe('noun inflector', function() {
             expect(inflector.pluralize('OX')).toBe('OXEN');
             expect(inflector.pluralize('Person')).toBe('People');
             expect(inflector.pluralize('child')).toBe('children');
+            expect(inflector.pluralize('cloth')).toBe('clothes');
         });
 
         it('should handle IX cases', function() {
