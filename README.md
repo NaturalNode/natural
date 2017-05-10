@@ -853,7 +853,7 @@ output will be:
 
 ## LongestPathTree
 
-LongestPathTree represents a data type for solving the single-source shortest paths problem in
+LongestPathTree represents a data type for solving the single-source longest paths problem in
 edge-weighted directed acyclic graphs (DAGs).
 The edge weights can be positive, negative, or zero. There are three APIs same as ShortestPathTree:
 getDistTo(vertex),
@@ -890,7 +890,7 @@ false
 ```
 
 ### pathTo(vertex)
-this will return a shortest path:
+this will return a longest path:
 
 ```javascript
 console.log(spt.pathTo(4));
