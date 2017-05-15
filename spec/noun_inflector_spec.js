@@ -53,6 +53,7 @@ describe('noun inflector', function() {
             expect(inflector.singularize('people')).toBe('person');
             expect(inflector.singularize('children')).toBe('child');
             expect(inflector.singularize('oxen')).toBe('ox');
+            expect(inflector.singularize('clothes')).toBe('cloth');
         });
         
         it('should handle IX cases', function() {
@@ -102,6 +103,12 @@ describe('noun inflector', function() {
             expect(inflector.singularize('flies')).toBe('fly');
             expect(inflector.singularize('victories')).toBe('victory');
             expect(inflector.singularize('monstrosities')).toBe('monstrosity');
+        });
+
+        it('should handle SS cases', function() {
+            expect(inflector.singularize('dresses')).toBe('dress');
+            expect(inflector.singularize('dress')).toBe('dress');
+            expect(inflector.singularize('messes')).toBe('mess');
         });
 
 	it('should handle MAN->MAN cases', function() {
@@ -162,6 +169,7 @@ describe('noun inflector', function() {
             expect(inflector.pluralize('OX')).toBe('OXEN');
             expect(inflector.pluralize('Person')).toBe('People');
             expect(inflector.pluralize('child')).toBe('children');
+            expect(inflector.pluralize('cloth')).toBe('clothes');
         });
 
         it('should handle IX cases', function() {
@@ -208,6 +216,12 @@ describe('noun inflector', function() {
             expect(inflector.pluralize('fly')).toBe('flies');
             expect(inflector.pluralize('victory')).toBe('victories');
             expect(inflector.pluralize('monstrosity')).toBe('monstrosities');
+        });
+
+        it('should handle SS cases', function() {
+            expect(inflector.pluralize('dress')).toBe('dresses');
+            expect(inflector.pluralize('dresses')).toBe('dresses');
+            expect(inflector.pluralize('mess')).toBe('messes');
         });
 
 	it('should handle MAN->MEN cases', function() {

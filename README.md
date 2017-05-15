@@ -1,6 +1,7 @@
 natural
 =======
 
+[![NPM version](https://img.shields.io/npm/v/natural.svg)](https://www.npmjs.com/package/natural)
 [![Build Status](https://travis-ci.org/NaturalNode/natural.png?branch=master)](https://travis-ci.org/NaturalNode/natural)
 
 "Natural" is a general natural language facility for nodejs. Tokenizing,
@@ -16,10 +17,32 @@ being merged into this project and will be maintained from here onward.
 At the moment, most of the algorithms are English-specific, but in the long-term, some diversity
 will be in order. Thanks to Polyakov Vladimir, Russian stemming has been added!, Thanks to David Przybilla, Spanish stemming has been added!.
 
-Aside from this README, the only documentation is [this DZone article](http://www.dzone.com/links/r/using_natural_a_nlp_module_for_nodejs.html) and [here on my blog](http://www.chrisumbel.com/article/node_js_natural_language_porter_stemmer_lancaster_bayes_naive_metaphone_soundex), which is a bit older.
+Aside from this README, the only documentation is [this DZone article](http://www.dzone.com/links/r/using_natural_a_nlp_module_for_nodejs.html), [this free course on Egghead.io](https://egghead.io/courses/natural-language-processing-in-javascript-with-natural), and [here on my blog](http://www.chrisumbel.com/article/node_js_natural_language_porter_stemmer_lancaster_bayes_naive_metaphone_soundex), which is a bit older.
 
-Installation
-------------
+### TABLE OF CONTENTS
+
+* [Installation](#installation)
+* [Tokenizers](#tokenizers)
+* [String Distance](#string-distance)
+* [Stemmers](#stemmers)
+* [Classifiers](#classifiers)
+* [Phonetics](#phonetics)
+* [Inflectors](#inflectors)
+* [N-Grams](#n-grams)
+* [tf-idf](#tf-idf)
+* [Tries](#tries)
+* [EdgeWeightedDigraph](#edgeweighteddigraph)
+* [ShortestPathTree](#shortestpathtree)
+* [LongestPathTree](#longestpathtree)
+* [WordNet](#wordnet)
+* [Spellcheck](#spellcheck)
+* [POS Tagger](#pos-tagger)
+* [Acknowledgements/references](#acknowledgements-and-references)
+* [Development](#development)
+* [License](#license)
+
+
+## Installation
 
 If you're just looking to use natural without your own node application,
 you can install via NPM like so:
@@ -29,8 +52,7 @@ you can install via NPM like so:
 If you're interested in contributing to natural, or just hacking on it, then by all
 means fork away!
 
-Tokenizers
-----------
+## Tokenizers
 
 Word, Regexp, and [Treebank tokenizers](http://www.cis.upenn.edu/~treebank/tokenization.html) are provided for breaking text up into
 arrays of tokens:
@@ -58,8 +80,8 @@ console.log(tokenizer.tokenize("my dog hasn't any fleas."));
 // [ 'my',  'dog',  'hasn',  '\'',  't',  'any',  'fleas',  '.' ]
 ```
 
-String Distance
-----------------------
+## String Distance
+
 Natural provides an implementation of the [Jaro–Winkler](http://en.wikipedia.org/wiki/Jaro%E2%80%93Winkler_distance) string distance measuring algorithm.
 This will return a number between 0 and 1 which tells how closely the strings match (0 = not at all, 1 = exact match):
 
@@ -122,8 +144,7 @@ Output:
 0
 ```
 
-Stemmers
---------
+## Stemmers
 
 Currently stemming is supported via the [Porter](http://tartarus.org/martin/PorterStemmer/index.html) and [Lancaster](http://www.comp.lancs.ac.uk/computing/research/stemming/) (Paice/Husk) algorithms.
 
@@ -167,11 +188,10 @@ console.log("i am waking up to the sounds of chainsaws".tokenizeAndStem());
 console.log("chainsaws".stem());
 ```
 
-Classifiers
-----------------------
+## Classifiers
 
 Two classifiers are currently supported, [Naive Bayes](http://en.wikipedia.org/wiki/Naive_Bayes_classifier) and [logistic regression](http://en.wikipedia.org/wiki/Logistic_regression).
-The following examples use the BayesClassifier class, but the 
+The following examples use the BayesClassifier class, but the
 LogisticRegressionClassifier class could be substituted instead.
 
 ```javascript
@@ -235,7 +255,7 @@ The training process can be monitored by subscribing to the event `trainedWithDo
        *   index: 12 // The index/number of the document that's just been trained against
        *   doc: {...} // The document that has just been indexed
        *  }
-       */ 
+       */
     });
 
 A classifier can also be persisted and recalled so you can reuse a training
@@ -269,8 +289,16 @@ var restoredClassifier = natural.BayesClassifier.restore(JSON.parse(raw));
 console.log(restoredClassifier.classify('i should sell that'));
 ```
 
-Phonetics
----------
+__Note:__ if using the classifier for languages other than English you may need
+to pass in the stemmer to use. In fact, you can do this for any stemmer including
+alternate English stemmers. The default is the `PorterStemmer`.
+
+```javascript
+const PorterStemmerRu = require('./node_modules/natural/lib/natural/stemmers/porter_stemmer_ru');
+var classifier = new natural.BayesClassifier(PorterStemmerRu);
+```
+
+## Phonetics
 
 Phonetic matching (sounds-like) matching can be done with the [SoundEx](http://en.wikipedia.org/wiki/Soundex),
 [Metaphone](http://en.wikipedia.org/wiki/Metaphone) or [DoubleMetaphone](http://en.wikipedia.org/wiki/Metaphone#Double_Metaphone) algorithms
@@ -357,8 +385,7 @@ if(wordA.soundsLike(wordB))
 console.log('phonetics'.phonetics());
 ```
 
-Inflectors
-----------
+## Inflectors
 
 ### Nouns
 
@@ -443,8 +470,7 @@ console.log('walks'.pluralizePresentVerb());
 ```
 
 
-N-Grams
--------
+## N-Grams
 
 n-grams can be obtained for either arrays or strings (which will be tokenized
 for you):
@@ -492,7 +518,7 @@ n-grams can also be returned with left or right padding by passing a start and/o
 console.log(NGrams.ngrams('some other words here for you', 4, '[start]', '[end]'));
 ```
 
-The above will output: 
+The above will output:
 ```
 [ [ '[start]', '[start]', '[start]', 'some' ],
   [ '[start]', '[start]', 'some', 'other' ],
@@ -510,7 +536,7 @@ For only end symbols, pass `null` for the start symbol, for instance:
 console.log(NGrams.ngrams('some other words here for you', 4, null, '[end]'));
 ```
 
-Will output: 
+Will output:
 ```
 [ [ 'some', 'other', 'words', 'here' ],
   [ 'other', 'words', 'here', 'for' ],
@@ -535,12 +561,11 @@ console.log(NGramsZH.ngrams(['一', '个', '中', '文', '测',
     '试'], 4));
 ```
 
-tf-idf
------
+## tf-idf
 
-[Term Frequency–Inverse Document Frequency (tf-idf)](http://en.wikipedia.org/wiki/Tf%E2%80%93idf) is implemented to determine how important a word (or words) is to a 
-document relative to a corpus. The following example will add four documents to 
-a corpus and determine the weight of the word "node" and then the weight of the 
+[Term Frequency–Inverse Document Frequency (tf-idf)](http://en.wikipedia.org/wiki/Tf%E2%80%93idf) is implemented to determine how important a word (or words) is to a
+document relative to a corpus. The following example will add four documents to
+a corpus and determine the weight of the word "node" and then the weight of the
 word "ruby" in each document.
 
 ```javascript
@@ -568,14 +593,14 @@ The above outputs:
 
 ```
 node --------------------------------
-document #0 is 1.4469189829363254
+document #0 is 1
 document #1 is 0
-document #2 is 1.4469189829363254
-document #3 is 2.8938379658726507
+document #2 is 1
+document #3 is 2
 ruby --------------------------------
 document #0 is 0
-document #1 is 1.466337068793427
-document #2 is 1.466337068793427
+document #1 is 1.2876820724517808
+document #2 is 1.2876820724517808
 document #3 is 0
 ```
 
@@ -617,14 +642,14 @@ tfidf.tfidfs('node ruby', function(i, measure) {
 The above outputs:
 
 ```
-document #0 is 1.2039728043259361
-document #1 is 1.2039728043259361
-document #2 is 2.4079456086518722
+document #0 is 1
+document #1 is 1
+document #2 is 2
 ```
 
 The examples above all use strings, which case natural to automatically tokenize the input.
 If you wish to perform your own tokenization or other kinds of processing, you
-can do so, then pass in the resultant arrays later. This approach allows you to bypass natural's 
+can do so, then pass in the resultant arrays later. This approach allows you to bypass natural's
 default preprocessing.
 
 ```javascript
@@ -664,10 +689,9 @@ var s = JSON.stringify(tfidf);
 var tfidf = new TfIdf(JSON.parse(s));
 ```
 
-Tries
------
+## Tries
 
-Tries are a very efficient data structure used for prefix-based searches. 
+Tries are a very efficient data structure used for prefix-based searches.
 Natural comes packaged with a basic Trie implementation which can support match collection along a path,
 existence search and prefix search.
 
@@ -730,7 +754,7 @@ console.log(trie.keysWithPrefix("string")); // ["string1", "string2", "string3"]
 
 ### Case-Sensitivity
 
-By default the trie is case-sensitive, you can use it in case-_in_sensitive mode by passing `false` 
+By default the trie is case-sensitive, you can use it in case-_in_sensitive mode by passing `false`
 to the Trie constructor.
 
 ```javascript
@@ -742,8 +766,8 @@ ciTrie.contains("TEsT"); // true
 ```
 In the case of the searches which return strings, all strings returned will be in lower case if you are in case-_in_sensitive mode.
 
-EdgeWeightedDigraph
--------------------
+## EdgeWeightedDigraph
+
 EdgeWeightedDigraph represents a digraph, you can add an edge, get the number vertexes, edges, get all edges and use toString to print the Digraph.
 
 initialize a digraph:
@@ -776,8 +800,7 @@ you will get 5.
 
 
 
-ShortestPathTree
-----------------
+## ShortestPathTree
 
 ShortestPathTree represents a data type for solving the single-source shortest paths problem in
 edge-weighted directed acyclic graphs (DAGs).
@@ -828,10 +851,9 @@ output will be:
 [5, 4]
 ```
 
-LongestPathTree
-----------------
+## LongestPathTree
 
-LongestPathTree represents a data type for solving the single-source shortest paths problem in
+LongestPathTree represents a data type for solving the single-source longest paths problem in
 edge-weighted directed acyclic graphs (DAGs).
 The edge weights can be positive, negative, or zero. There are three APIs same as ShortestPathTree:
 getDistTo(vertex),
@@ -868,7 +890,7 @@ false
 ```
 
 ### pathTo(vertex)
-this will return a shortest path:
+this will return a longest path:
 
 ```javascript
 console.log(spt.pathTo(4));
@@ -880,21 +902,18 @@ output will be:
 [5, 1, 3, 6, 4]
 ```
 
-WordNet
--------
+## WordNet
 
 One of the newest and most experimental features in natural is WordNet integration. Here's an
 example of using natural to look up definitions of the word node. To use the WordNet module,
-first install the WordNet database files using the [WNdb module](https://github.com/moos/WNdb):
+first install the WordNet database files using [wordnet-db](https://github.com/moos/wordnet-db):
 
-    npm install WNdb
-
-(For node < v0.6, please use 'npm install WNdb@3.0.0')
+    npm install wordnet-db
 
 Keep in mind that the WordNet integration is to be considered experimental at this point,
-and not production-ready. The API is also subject to change.
+and not production-ready. The API is also subject to change.  For an implementation with vastly increased performance, as well as a command-line interface, see [wordpos](https://github.com/moos/wordpos).
 
-Here's an example of looking up definitions for the word, "node".
+Here's an example of looking up definitions for the word "node".
 
 ```javascript
 var wordnet = new natural.WordNet();
@@ -936,15 +955,15 @@ As of v0.1.11, WordNet data files are no longer automatically downloaded.
 
 Princeton University "About WordNet." WordNet. Princeton University. 2010. <http://wordnet.princeton.edu>
 
-Spellcheck
-------------
+## Spellcheck
+
 A probabilistic spellchecker based on http://norvig.com/spell-correct.html
 
-This is best constructed with an array of tokens from a corpus, but a simple list of words from a dictionary will work. 
+This is best constructed with an array of tokens from a corpus, but a simple list of words from a dictionary will work.
 
 ```javascript
 var corpus = ['something', 'soothing'];
-var spellcheck = new Spellcheck(corpus);
+var spellcheck = new natural.Spellcheck(corpus);
 ```
 
 It uses the trie datastructure for fast boolean lookup of a word
@@ -960,26 +979,29 @@ spellcheck.getCorrections('soemthing', 1); // ['something']
 spellcheck.getCorrections('soemthing', 2); // ['something', 'soothing']
 ```
 
-POS Tagger
------------
-This is a part-of-speech tagger based on Eric Brill's transformational 
+## POS Tagger
+
+This is a part-of-speech tagger based on Eric Brill's transformational
 algorithm. Transformation rules are specified in external files.
 
 ### Usage
 ```javascript
-var natural = require("./lib/natural");
+var natural = require("natural");
+var path = require("path");
 
-var base_folder = "some_path/lib/natural/brill_pos_tagger";
-var rulesFilename = base_folder + "/data/tr_from_posjs.txt";
-var lexiconFilename = base_folder + "/data/lexicon_from_posjs.json";
+var base_folder = path.join(path.dirname(require.resolve("natural")), "brill_pos_tagger");
+var rulesFilename = base_folder + "/data/English/tr_from_posjs.txt";
+var lexiconFilename = base_folder + "/data/English/lexicon_from_posjs.json";
 var defaultCategory = 'N';
 
 var lexicon = new natural.Lexicon(lexiconFilename, defaultCategory);
-var rules = new natural.Ruleset(rulesFilename);
+var rules = new natural.RuleSet(rulesFilename);
 var tagger = new natural.BrillPOSTagger(lexicon, rules);
 
 var sentence = ["I", "see", "the", "man", "with", "the", "telescope"];
 console.log(JSON.stringify(tagger.tag(sentence)));
+// [["I","NN"],["see","VB"],["the","DT"],["man","NN"],["with","IN"],["the","DT"],["telescope","NN"]]
+
 ```
 
 ### Lexicon
@@ -997,7 +1019,7 @@ word1 cat1 cat2
 word2 cat3
 ...
 ```
-Words may have multiple categories in the lexicon file. The tagger uses only 
+Words may have multiple categories in the lexicon file. The tagger uses only
 the first category specified.
 
 ### Specifying transformation rules
@@ -1005,13 +1027,13 @@ Transformation rules are specified as follows:
 ```
 OLD_CAT NEW_CAT PREDICATE PARAMETER
 ```
-This means that if the category of the current position is OLD_CAT and the predicate is true, the category is replaced by NEW_CAT. The predicate 
-may use the parameter in different ways: sometimes the parameter is used for 
+This means that if the category of the current position is OLD_CAT and the predicate is true, the category is replaced by NEW_CAT. The predicate
+may use the parameter in different ways: sometimes the parameter is used for
 specifying the outcome of the predicate:
 ```
 NN CD CURRENT-WORD-IS-NUMBER YES
 ```
-This means that if the outcome of predicate CURRENT-WORD-IS-NUMBER is YES, the 
+This means that if the outcome of predicate CURRENT-WORD-IS-NUMBER is YES, the
 category is replaced by <code>CD</code>.
 The parameter can also be used to check the category of a word in the sentence:
 ```
@@ -1038,8 +1060,8 @@ function(sentence) {
 ```
 
 ### Adding a predicate
-Predicates are defined in module <code>lib/Predicate.js</code>. In that file 
-a function must be created that serves as predicate. A predicate accepts a 
+Predicates are defined in module <code>lib/Predicate.js</code>. In that file
+a function must be created that serves as predicate. A predicate accepts a
 tagged sentence, the current position in the sentence that should be tagged, and
  the
  outcome(s) of the predicate. An example of a predicate that checks the category of the current word:
@@ -1056,15 +1078,15 @@ var predicates = {
 }
 ```
 
-### Acknowledgements/references
+### Acknowledgements and References
 * Part of speech tagger by Percy Wegmann, https://code.google.com/p/jspos/
 * Node.js version of jspos: https://github.com/neopunisher/pos-js
 * A simple rule-based part of speech tagger, Eric Brill, Published in: Proceeding ANLC '92 Proceedings of the third conference on Applied natural language processing, Pages 152-155. http://dl.acm.org/citation.cfm?id=974526
 
 
 
-Development
------------
+## Development
+
 When developing, please:
 
 + Write unit tests
@@ -1075,8 +1097,7 @@ The current configuration of the unit tests requires the following environment v
     export NODE_PATH=.
 
 
-License
--------
+## License
 
 Copyright (c) 2011, 2012 Chris Umbel, Rob Ellis, Russell Mull
 

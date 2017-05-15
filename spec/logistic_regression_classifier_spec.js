@@ -119,4 +119,12 @@ describe('logistic regression', function() {
 	    });
 	});
     });
+
+    it('should only execute the callback once when failing to load a classifier', function() {
+        natural.LogisticRegressionClassifier.load('nonexistant_lr_classifier.json', null, function(err, newClassifier){
+          expect(err.code).toBe('ENOENT');
+          expect(newClassifier).toBe(undefined);
+          asyncSpecDone();
+        });
+    });
 });

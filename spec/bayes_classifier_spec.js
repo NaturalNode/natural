@@ -21,6 +21,8 @@ THE SOFTWARE.
 */
 
 var natural = require('../lib/natural');
+var sinon = require('sinon');
+var baseClassifier = require('lib/natural/classifiers/classifier.js');
 
 describe('bayes classifier', function() {
     describe('classifier', function() {
@@ -37,6 +39,42 @@ describe('bayes classifier', function() {
             
             expect(classifier.classify(['bug', 'code'])).toBe('computing');
             expect(classifier.classify(['read', 'thing'])).toBe('literature');
+        });
+
+        it('should classify with parallel training', function() {
+            var classifier = new natural.BayesClassifier();
+
+            classifier.addDocument(['fix', 'box'], 'computing');
+            classifier.addDocument(['write', 'code'], 'computing');
+            classifier.addDocument(['script', 'code'], 'computing');
+            classifier.addDocument(['write', 'book'], 'literature');
+            classifier.addDocument(['read', 'book'], 'literature');
+            classifier.addDocument(['study', 'book'], 'literature');
+
+            classifier.trainParallel(2, function(err) {
+              expect(classifier.classify(['bug', 'code'])).toBe('computing');
+              expect(classifier.classify(['read', 'thing'])).toBe('literature');
+              asyncSpecDone();
+            });
+        });
+        
+        it('should classify with parallel batched training', function() {
+            var classifier = new natural.BayesClassifier();
+
+            classifier.addDocument(['fix', 'box'], 'computing');
+            classifier.addDocument(['write', 'code'], 'computing');
+            classifier.addDocument(['script', 'code'], 'computing');
+            classifier.addDocument(['write', 'book'], 'literature');
+            classifier.addDocument(['read', 'book'], 'literature');
+            classifier.addDocument(['study', 'book'], 'literature');
+            
+            classifier.events.on('doneTraining', function() {
+                expect(classifier.classify(['bug', 'code'])).toBe('computing');
+                expect(classifier.classify(['read', 'thing'])).toBe('literature');
+                asyncSpecDone();
+            });
+
+            classifier.trainParallelBatches({numThreads: 2, batchSize: 2});
         });
 
         it('should provide all classification scores', function() {
@@ -158,6 +196,13 @@ describe('bayes classifier', function() {
             });
 	});
 
+        it('should only execute the callback once when failing to load a classifier', function() {
+            natural.BayesClassifier.load('nonexistant_bayes_classifier.json', null, function(err, newClassifier){
+              expect(err.code).toBe('ENOENT');
+              expect(newClassifier).toBe(undefined);
+              asyncSpecDone();
+            });
+        });
 
         it('should accept an optional smoothing parameter for the Bayesian estimates', function() {
             var defaultClassifier = new natural.BayesClassifier();
@@ -168,6 +213,29 @@ describe('bayes classifier', function() {
             expect(defaultClassifier.classifier.smoothing).toBe(1.0);
             expect(newClassifier1.classifier.smoothing).toBe(1.0);
             expect(newClassifier2.classifier.smoothing).toBe(0.1);
+        });
+    });
+
+    describe('load', function () {
+
+        var sandbox;
+
+        beforeEach(function () {
+            sandbox = sinon.sandbox.create();
+        });
+
+        afterEach(function () {
+            sandbox.restore();
+        });
+
+        it('should pass an error to the callback function', function () {
+            sandbox.stub(baseClassifier, 'load', function (filename, cb) {
+                cb(new Error('An error occurred'));
+            });
+            natural.BayesClassifier.load('/spec/test_data/tfidf_document1.txt', null, function (err, newClassifier) {
+                expect(err).toBe.ok;
+                expect(newClassifier).not.toBe.ok;
+            });
         });
     });
 });
