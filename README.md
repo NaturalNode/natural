@@ -1078,12 +1078,64 @@ var predicates = {
 }
 ```
 
+### Training
+The trainer allows to learn a new set of transformation rules from a corpus. It takes as input a tagged corpus and a set of rule templates. The algorithm generates so-called positive rules from the templates and incrementally extends and optimises the rule set.
+
+First, a corpus should be loaded. Currently, the format of Brown corpus is supported. Then a lexicon can be created from the corpus. The lexicon is needed for tagging the sentences before the learning algorithm is applied.
+```javascript
+var Corpus = require(Corpus);
+var text = fs.readFileSync(brownCorpusFile, 'utf8');
+var corpus = new Corpus(text, 1);
+var lexicon = corpus.buildLexicon();
+```
+The next step is to create a set of rule templates from which the learning algorithm can generate transformation rules. Rule templates are defined in <code>PredicateMapping.js</code>.
+```javascript
+var require('RuleTemplate');
+var templateNames = [
+  "NEXT-TAG",
+  "NEXT-WORD-IS-CAP",
+  "PREV-1-OR-2-OR-3-TAG",
+  "...",
+];
+var templates = templateNames.map(function(name) {
+  return new RuleTemplate(name);
+});
+```
+Using lexicon and rule templates we can now start the trainer as follows:
+```javascript
+var Tester = require('Brill_POS_Trainer');
+var trainer = new Trainer();
+var ruleSet = trainer.train(corpus, templates, lexicon);
+```
+The train method returns a set of transformation rules that can be used to create a POS tagger as usual. Also you can output the rule set in the right format for later usage.
+```javascript
+console.log(ruleSet.prettyPrint());
+```
+
+### Testing
+When learning a set of transformation rules from a corpus you probably want to know how well (or bad) it performs. When you split the corpus in a training and testing corpus, you can see how well the rule set performs on unseen data:
+```javascript
+var corpora  = corpus.splitInTrainAndTest(60);
+```
+Now you have two corpora: <code>corpora[0]</code> is the training corpus which amounts to 60% of the original corpus, and <code>corpora[1]</code> is the testing corpus.
+```javascript
+var Tester = require('Brill_POS_Tester');
+var Tagger = require('Brill_POS_Tagger');
+var tester = new Tester();
+var tagger = new Tagger(lexicon, ruleSet);
+var percentageRight = tester.test(corpora[1], tagger);
+```
+The test method returns an array of two percentages: first percentage is the ratio of right tags after tagging with the lexicon; second percentage is the ratio of right tags after applying the transformation rules.
+```javascript
+console.log("Test score lexicon " + percentageRight[0] + "%");
+console.log("Test score after applying rules " + percentageRight[1] + "%");
+```
+
 ### Acknowledgements and References
 * Part of speech tagger by Percy Wegmann, https://code.google.com/p/jspos/
 * Node.js version of jspos: https://github.com/neopunisher/pos-js
 * A simple rule-based part of speech tagger, Eric Brill, Published in: Proceeding ANLC '92 Proceedings of the third conference on Applied natural language processing, Pages 152-155. http://dl.acm.org/citation.cfm?id=974526
-
-
+* Exploring the Statistical Derivation of Transformational Rule Sequences for Part-of-Speech Tagging, Lance A. Ramshaw and Mitchell P. Marcus. http://acl-arc.comp.nus.edu.sg/archives/acl-arc-090501d4/data/pdf/anthology-PDF/W/W94/W94-0111.pdf
 
 ## Development
 
