@@ -22,35 +22,6 @@ var fs = require('fs');
 var base_folder_test_data = './spec/test_data/';
 var brownCorpusFile = base_folder_test_data + 'browntag_nolines_excerpt.txt';
 
-function splitInTrainAndTest(data, percentageTrain) {
-  var corpusTrain = [];
-  var corpusTest = [];
-
-  var originalCorpus = data.split('\n');
-  // Remove empty elements
-  originalCorpus = originalCorpus.filter(function(elt) {
-    return elt != ""
-  });
-
-  // Split the corpus
-  var p = percentageTrain / 100;
-  originalCorpus.forEach(function(line, i) {
-    if (line !== "") {
-      if (Math.random() < p) {
-        corpusTrain.push(line);
-      }
-      else {
-        corpusTest.push(line);
-      }
-    }
-    else {
-      originalCorpus.splice(i, 1)
-    }
-  });
-
-  return [originalCorpus, corpusTrain, corpusTest];
-}
-
 function selectRuleTemplates(templateNames) {
   var templates = [];
   templateNames.forEach(function(name) {
@@ -64,11 +35,9 @@ function selectRuleTemplates(templateNames) {
 
 describe('Brill\'s POS Trainer', function() {
   var data = null;
-  var corpusTexts = null;
-  var trainCorpus = null;
-  var testCorpus = null;
-  var nrLinesInTrainCorpus = null;
-  var nrLinesInTestCorpus = null;
+  var corpus = null;
+  var BROWN = 1;
+  var percentageTrain = 60;
   var trainLexicon = null;
   var templateNames = [
     "NEXT-TAG",
@@ -90,22 +59,19 @@ describe('Brill\'s POS Trainer', function() {
     expect(data).not.toBe("");
   });
 
-  it('should split the corpus in a training and testing corpus', function() {
-    corpusTexts = splitInTrainAndTest(data, 50);
-    nrLinesInTrainCorpus = corpusTexts[1].length;
-    nrLinesInTestCorpus = corpusTexts[2].length;
-    expect(nrLinesInTrainCorpus + nrLinesInTestCorpus).toEqual(corpusTexts[0].length);
+  it('should process the corpus', function() {
+    corpus = new natural.Corpus(data, BROWN);
+    expect(corpus.nrSentences()).toBeGreaterThan(0);
+    expect(corpus.nrWords()).toBeGreaterThan(0);
   });
 
-  it('should process the corpora', function () {
-    trainCorpus = new natural.Corpus(corpusTexts[1], 1);
-    testCorpus = new natural.Corpus(corpusTexts[2], 1);
-    expect(trainCorpus.nrSentences()).toEqual(nrLinesInTrainCorpus);
-    expect(testCorpus.nrSentences()).toEqual(nrLinesInTestCorpus);
+  it('should split the corpus in a training and testing corpus', function() {
+    corpora = corpus.splitInTrainAndTest(percentageTrain);
+    expect(corpora[0].nrSentences() + corpora[1].nrSentences()).toEqual(corpus.nrSentences());
   });
 
   it('should build a lexicon from the training corpus', function() {
-    trainLexicon = trainCorpus.buildLexicon();
+    trainLexicon = corpora[0].buildLexicon();
     // Set default category to noun (NN)
     // and default category for capitalised words to proper noun (NP)
     trainLexicon .setDefaultCategories("NN", "NP");
@@ -119,13 +85,14 @@ describe('Brill\'s POS Trainer', function() {
 
   it('should train on the training corpus to derive transformation rules', function() {
     trainer = new natural.BrillPOSTrainer();
-    ruleSet = trainer.train(trainCorpus, templates, trainLexicon);
+    ruleSet = trainer.train(corpora[0], templates, trainLexicon);
+    expect(ruleSet.nrRules()).toBeGreaterThan(0);
   });
 
   it('should test the derived transformation rules on the test corpus', function() {
     var tagger = new natural.BrillPOSTagger(trainLexicon, ruleSet);
     var tester = new natural.BrillPOSTester();
-    var percentageRight = tester.test(testCorpus, tagger);
+    var percentageRight = tester.test(corpora[1], tagger);
     expect(Math.abs(percentageRight[0] - percentageRight[1])).toBeLessThan(2);
   });
 
