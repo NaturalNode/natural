@@ -1063,11 +1063,14 @@ function(sentence) {
 Predicates are defined in module <code>lib/RuleTemplates.js</code>. In that file
 predicate names are mapped to metadata for generaring transformation rules. The following properties must be supplied:
 * Name of the predicate
-* A function that evaluates the predicate
-* A window <code>[i, j]</code> that defines the span of the predicate in the sentence relative to the current position
+* A function that evaluates the predicate (should return a boolean)
+* A window <code>[i, j]</code> that defines the span of the predicate in the 
+sentence relative to the current position
 * The number of parameter the predicate needs: 0, 1 or 2
-* If relevant, a function for parameter 1 that returns its possible values at the current position in the sentence (for training)
-* If relevant, a function for parameter 2 that returns its possible values at the current position in the sentence (for training)
+* If relevant, a function for parameter 1 that returns its possible values 
+at the current position in the sentence (for generating rules in training)
+* If relevant, a function for parameter 2 that returns its possible values 
+at the current position in the sentence (for training)
 
 A typical entry for a rule templates looks like this:
 ```javascript
@@ -1116,8 +1119,8 @@ token (word) and a tag.
 ### Training
 The trainer allows to learn a new set of transformation rules from a corpus. 
 It takes as input a tagged corpus and a set of rule templates. The algorithm 
-generates so-called positive rules from the templates and incrementally 
-extends and optimises the rule set.
+generates positive rules (rules that apply at some location in the corpus) 
+from the templates and iteratively extends and optimises the rule set.
 
 First, a corpus should be loaded. Currently, the format of Brown corpus is supported. Then a lexicon can be created from the corpus. The lexicon is needed for tagging the sentences before the learning algorithm is applied.
 ```javascript
@@ -1141,13 +1144,15 @@ var templates = templateNames.map(function(name) {
   return new natural.RuleTemplate(name);
 });
 ```
-Using lexicon and rule templates we can now start the trainer as follows:
+Using lexicon and rule templates we can now start the trainer as follows.
 ```javascript
 var natural require('natural');
 var Tester = require('natural.BrillPOSTrainer');
-var trainer = new Trainer();
+var trainer = new Trainer(/* optional threshold */);
 var ruleSet = trainer.train(corpus, templates, lexicon);
 ```
+A threshold value can be passed to constructor. Transformation rules with 
+a score below the threshold are removed after training.
 The train method returns a set of transformation rules that can be used to 
 create a POS tagger as usual. Also you can output the rule set in the right 
 format for later usage.
@@ -1160,12 +1165,12 @@ Now we can apply the lexicon and rule set to a test set.
 ```javascript
 var tester = new natural.BrillPOSTester();
 var tagger = new natural.BrillPOSTagger(lexicon, ruleSet);
-var percentageRight = tester.test(corpora[1], tagger);
+var scores = tester.test(corpora[1], tagger);
 ```
 The test method returns an array of two percentages: first percentage is the ratio of right tags after tagging with the lexicon; second percentage is the ratio of right tags after applying the transformation rules.
 ```javascript
-console.log("Test score lexicon " + percentageRight[0] + "%");
-console.log("Test score after applying rules " + percentageRight[1] + "%");
+console.log("Test score lexicon " + scores[0] + "%");
+console.log("Test score after applying rules " + scores[1] + "%");
 ```
 
 ### Acknowledgements and References

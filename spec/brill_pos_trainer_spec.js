@@ -39,6 +39,7 @@ describe('Brill\'s POS Trainer', function() {
   var BROWN = 1;
   var percentageTrain = 60;
   var trainLexicon = null;
+  // Templates consider only tags, no words
   var templateNames = [
     "NEXT-TAG",
     "PREV-TAG",
@@ -84,7 +85,7 @@ describe('Brill\'s POS Trainer', function() {
   });
 
   it('should train on the training corpus to derive transformation rules', function() {
-    trainer = new natural.BrillPOSTrainer();
+    trainer = new natural.BrillPOSTrainer(1);
     ruleSet = trainer.train(corpora[0], templates, trainLexicon);
     expect(ruleSet.nrRules()).toBeGreaterThan(0);
   });
@@ -92,8 +93,8 @@ describe('Brill\'s POS Trainer', function() {
   it('should test the derived transformation rules on the test corpus', function() {
     var tagger = new natural.BrillPOSTagger(trainLexicon, ruleSet);
     var tester = new natural.BrillPOSTester();
-    var percentageRight = tester.test(corpora[1], tagger);
-    expect(Math.abs(percentageRight[0] - percentageRight[1])).toBeLessThan(2);
+    var scores = tester.test(corpora[1], tagger);
+    expect(Math.abs(scores[0] - scores[1])).toBeLessThan(2);
   });
 
 });
