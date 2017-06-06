@@ -40,7 +40,7 @@ describe('Brill\'s POS Tagger', function() {
   var ruleSet = null;
   it('should initialise correctly with tagging rules for English', function() {
     lexicon = new natural.Lexicon(en_lexicon_file, 'NN');
-    var ruleSet = new natural.RuleSet(en_rules_file);
+    ruleSet = new natural.RuleSet(en_rules_file);
     brill_pos_tagger = new natural.BrillPOSTagger(lexicon, ruleSet);
   });
 

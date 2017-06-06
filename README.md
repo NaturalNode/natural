@@ -1060,30 +1060,125 @@ function(sentence) {
 ```
 
 ### Adding a predicate
-Predicates are defined in module <code>lib/Predicate.js</code>. In that file
-a function must be created that serves as predicate. A predicate accepts a
-tagged sentence, the current position in the sentence that should be tagged, and
- the
- outcome(s) of the predicate. An example of a predicate that checks the category of the current word:
+Predicates are defined in module <code>lib/RuleTemplates.js</code>. In that file
+predicate names are mapped to metadata for generaring transformation rules. The following properties must be supplied:
+* Name of the predicate
+* A function that evaluates the predicate (should return a boolean)
+* A window <code>[i, j]</code> that defines the span of the predicate in the 
+sentence relative to the current position
+* The number of parameter the predicate needs: 0, 1 or 2
+* If relevant, a function for parameter 1 that returns its possible values 
+at the current position in the sentence (for generating rules in training)
+* If relevant, a function for parameter 2 that returns its possible values 
+at the current position in the sentence (for training)
+
+A typical entry for a rule templates looks like this:
 ```javascript
-function current_word_is_tag(tagged_sentence, i, parameter) {
-  return(tagged_sentence[i][0] === parameter);
+"NEXT-TAG": {
+    // maps to the predicate function
+    "function": next_tag_is,
+    // Minimum required window before or after current position to be a relevant predicate
+    "window": [0, 1],
+    // The number of parameters the predicate takes
+    "nrParameters": 1,
+    // Function that returns relevant values for parameter 1
+    "parameter1Values": nextTagParameterValues
+  }
+```
+A predicate function accepts a tagged sentence, the current position in the 
+sentence that should be tagged, and the outcome(s) of the predicate. 
+An example of a predicate that checks the category of the current word:
+```javascript
+function next_tag_is(tagged_sentence, i, parameter) {
+  if (i < tagged_sentence.length - 1) {
+    return(tagged_sentence[i+1][1] === parameter);
+  }
+  else {
+    return(false);
+  }
 }
 ```
-Some predicates accept two parameters. Next step is to map a keyword to this predicate so that it can be used in the transformation rules. The mapping is also defined in <code>lib/Predicate.js</code>:
+
+A values function for a parameter returns an array all possible parameter 
+values given a location in a tagged sentence.
 ```javascript
-var predicates = {
-  "CURRENT-WORD-IS-TAG": current_word_is_tag,
-  "PREV-WORD-IS-CAP": prev_word_is_cap
+function nextTagParameterValues(sentence, i) {
+  if (i < sentence.length - 1) {
+    return [sentence[i + 1].tag];
+  }
+  else {
+    return [];
+  }
 }
+```
+Please note that these functions work with a different data type. Here, a 
+sentence is an array of tokens and tokens are maps that have at least a 
+token (word) and a tag. 
+
+
+### Training
+The trainer allows to learn a new set of transformation rules from a corpus. 
+It takes as input a tagged corpus and a set of rule templates. The algorithm 
+generates positive rules (rules that apply at some location in the corpus) 
+from the templates and iteratively extends and optimises the rule set.
+
+First, a corpus should be loaded. Currently, the format of Brown corpus is supported. Then a lexicon can be created from the corpus. The lexicon is needed for tagging the sentences before the learning algorithm is applied.
+```javascript
+var natural = require(natural);
+var text = fs.readFileSync(brownCorpusFile, 'utf8');
+var corpus = new natural.Corpus(text, 1);
+var lexicon = corpus.buildLexicon();
+```
+The next step is to create a set of rule templates from which the learning 
+algorithm can generate transformation rules. Rule templates are defined in 
+<code>PredicateMapping.js</code>.
+```javascript
+var natural require('natural');
+var templateNames = [
+  "NEXT-TAG",
+  "NEXT-WORD-IS-CAP",
+  "PREV-1-OR-2-OR-3-TAG",
+  "...",
+];
+var templates = templateNames.map(function(name) {
+  return new natural.RuleTemplate(name);
+});
+```
+Using lexicon and rule templates we can now start the trainer as follows.
+```javascript
+var natural require('natural');
+var Tester = require('natural.BrillPOSTrainer');
+var trainer = new Trainer(/* optional threshold */);
+var ruleSet = trainer.train(corpus, templates, lexicon);
+```
+A threshold value can be passed to constructor. Transformation rules with 
+a score below the threshold are removed after training.
+The train method returns a set of transformation rules that can be used to 
+create a POS tagger as usual. Also you can output the rule set in the right 
+format for later usage.
+```javascript
+console.log(ruleSet.prettyPrint());
+```
+
+### Testing
+Now we can apply the lexicon and rule set to a test set. 
+```javascript
+var tester = new natural.BrillPOSTester();
+var tagger = new natural.BrillPOSTagger(lexicon, ruleSet);
+var scores = tester.test(corpora[1], tagger);
+```
+The test method returns an array of two percentages: first percentage is the ratio of right tags after tagging with the lexicon; second percentage is the ratio of right tags after applying the transformation rules.
+```javascript
+console.log("Test score lexicon " + scores[0] + "%");
+console.log("Test score after applying rules " + scores[1] + "%");
 ```
 
 ### Acknowledgements and References
 * Part of speech tagger by Percy Wegmann, https://code.google.com/p/jspos/
 * Node.js version of jspos: https://github.com/neopunisher/pos-js
 * A simple rule-based part of speech tagger, Eric Brill, Published in: Proceeding ANLC '92 Proceedings of the third conference on Applied natural language processing, Pages 152-155. http://dl.acm.org/citation.cfm?id=974526
-
-
+* Exploring the Statistical Derivation of Transformational Rule Sequences for Part-of-Speech Tagging, Lance A. Ramshaw and Mitchell P. Marcus. http://acl-arc.comp.nus.edu.sg/archives/acl-arc-090501d4/data/pdf/anthology-PDF/W/W94/W94-0111.pdf
+* Brown Corpus, https://en.wikipedia.org/wiki/Brown_Corpus
 
 ## Development
 
