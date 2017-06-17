@@ -58,8 +58,8 @@ Word, Regexp, and [Treebank tokenizers](http://www.cis.upenn.edu/~treebank/token
 arrays of tokens:
 
 ```javascript
-var natural = require('natural'),
-  tokenizer = new natural.WordTokenizer();
+var natural = require('natural');
+var tokenizer = new natural.WordTokenizer();
 console.log(tokenizer.tokenize("your dog has fleas."));
 // [ 'your', 'dog', 'has', 'fleas' ]
 ```
@@ -569,9 +569,9 @@ a corpus and determine the weight of the word "node" and then the weight of the
 word "ruby" in each document.
 
 ```javascript
-var natural = require('natural'),
-    TfIdf = natural.TfIdf,
-    tfidf = new TfIdf();
+var natural = require('natural');
+var TfIdf = natural.TfIdf;
+var tfidf = new TfIdf();
 
 tfidf.addDocument('this document is about node.');
 tfidf.addDocument('this document is about ruby.');
@@ -626,9 +626,9 @@ a single measure value. The following example determines that the last document
 is the most relevant to the words "node" and "ruby".
 
 ```javascript
-var natural = require('natural'),
-    TfIdf = natural.TfIdf,
-    tfidf = new TfIdf();
+var natural = require('natural');
+var TfIdf = natural.TfIdf;
+var tfidf = new TfIdf();
 
 tfidf.addDocument('this document is about node.');
 tfidf.addDocument('this document is about ruby.');
@@ -653,9 +653,9 @@ can do so, then pass in the resultant arrays later. This approach allows you to 
 default preprocessing.
 
 ```javascript
-var natural = require('natural'),
-    TfIdf = natural.TfIdf,
-    tfidf = new TfIdf();
+var natural = require('natural');
+var TfIdf = natural.TfIdf;
+var tfidf = new TfIdf();
 
 tfidf.addDocument(['document', 'about', 'node']);
 tfidf.addDocument(['document', 'about', 'ruby']);
@@ -700,8 +700,8 @@ existence search and prefix search.
 You need to add words to build up the dictionary of the Trie, this is an example of basic Trie set up:
 
 ```javascript
-var natural = require('natural'),
-    Trie = natural.Trie;
+var natural = require('natural');
+var Trie = natural.Trie;
 
 var trie = new Trie();
 
