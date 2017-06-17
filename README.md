@@ -195,8 +195,8 @@ The following examples use the BayesClassifier class, but the
 LogisticRegressionClassifier class could be substituted instead.
 
 ```javascript
-var natural = require('natural'),
-  classifier = new natural.BayesClassifier();
+var natural = require('natural');
+var classifier = new natural.BayesClassifier();
 ```
 
 You can train the classifier on sample text. It will use reasonable defaults to
@@ -304,8 +304,9 @@ Phonetic matching (sounds-like) matching can be done with the [SoundEx](http://e
 [Metaphone](http://en.wikipedia.org/wiki/Metaphone) or [DoubleMetaphone](http://en.wikipedia.org/wiki/Metaphone#Double_Metaphone) algorithms
 
 ```javascript
-var natural = require('natural'),
-    metaphone = natural.Metaphone, soundEx = natural.SoundEx;
+var natural = require('natural');
+var metaphone = natural.Metaphone;
+var soundEx = natural.SoundEx;
 
 var wordA = 'phonetics';
 var wordB = 'fonetix';
@@ -334,8 +335,8 @@ console.log(metaphone.process('phonetics', 3));
 feature is experimental and subject to change:
 
 ```javascript
-var natural = require('natural'),
-  dm = natural.DoubleMetaphone;
+var natural = require('natural');
+var dm = natural.DoubleMetaphone;
 
 var encodings = dm.process('Matrix');
 console.log(encodings[0]);
@@ -392,8 +393,8 @@ console.log('phonetics'.phonetics());
 Nouns can be pluralized/singularized with a `NounInflector`:
 
 ```javascript
-var natural = require('natural'),
-nounInflector = new natural.NounInflector();
+var natural = require('natural');
+var nounInflector = new natural.NounInflector();
 ```
 
 To pluralize a word (outputs "radii"):
