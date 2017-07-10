@@ -24,6 +24,11 @@ var levenshteinDistance = require('../lib/natural/distance/levenshtein_distance'
 
 describe('levenshtein_distance', function() {
   describe('options.search = true', function() {
+    it('should find cheapest substring', function() {
+      expect(levenshteinDistance('kitten', 'sitting', {search: true}))
+        .toEqual({substring: 'sittin', distance: 2});
+    });
+
     it('should find 0 cost substring in target', function() {
       expect(levenshteinDistance('doctor', 'the doctor is in', {search: true}))
         .toEqual({substring: 'doctor', distance: 0});
