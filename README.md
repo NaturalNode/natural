@@ -24,6 +24,7 @@ Aside from this README, the only documentation is [this DZone article](http://ww
 * [Installation](#installation)
 * [Tokenizers](#tokenizers)
 * [String Distance](#string-distance)
+* [Approximate String Matching](#approximate-string-matching)
 * [Stemmers](#stemmers)
 * [Classifiers](#classifiers)
 * [Phonetics](#phonetics)
@@ -142,6 +143,23 @@ Output:
 ```javascript
 1
 0
+```
+
+## Approximate String Matching
+Currently matching is supported via the Levenshtein algorithm.
+
+```javascript
+var natural = require('natural');
+var source = 'The RainCoat BookStore';
+var target = 'All the best books are here at the Rain Coats Book Store';
+
+console.log(natural.LevenshteinDistance(source, target, {search: true}));
+```
+
+Output:
+
+```javascript
+{ substring: 'the Rain Coats Book Store', distance: 4 }
 ```
 
 ## Stemmers
