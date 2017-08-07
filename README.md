@@ -648,7 +648,7 @@ document #1 is 1
 document #2 is 2
 ```
 
-The examples above all use strings, which case natural to automatically tokenize the input.
+The examples above all use strings, which causes natural to automatically tokenize the input.
 If you wish to perform your own tokenization or other kinds of processing, you
 can do so, then pass in the resultant arrays later. This approach allows you to bypass natural's
 default preprocessing.
