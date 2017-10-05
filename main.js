@@ -1,6 +1,6 @@
 var natural = require('./lib/natural/');
-var Tokenizer = natural.StemmerId;
+var PorterStemmer = natural.PorterStemmerId;
 var lowercaseText = "ketika cinta bertasbih";
-var tokens = new Tokenizer().tokenizeAndStem(lowercaseText);
+var tokens = PorterStemmer.tokenizeAndStem(lowercaseText);
 console.log(tokens);
 //console.log(natural.PorterStemmer.tokenizeAndStem("fishing at lake")); // stem a single word
