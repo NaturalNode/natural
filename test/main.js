@@ -1,4 +1,4 @@
-var natural = require('./lib/natural/');
+var natural = require('../lib/natural/');
 var Stemmer = natural.StemmerId;
 
 // output   = Stemmer.tokenizeAndStem("siapakah memberdayakan pembangunan   ");
