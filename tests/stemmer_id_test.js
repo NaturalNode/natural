@@ -345,13 +345,17 @@ data.push(['malaikat-malaikat-Nya', 'malaikat'])
 data.push(['nikmat-Ku', 'nikmat'])
 data.push(['allah-lah', 'allah'])
 
+
+function mochaSyncTest(data, i){
+	it("Stemming " + data[i][0] + " to " + data[i][1] , function() {
+		var output   = Stemmer.tokenizeAndStem(data[i][0]);
+		output = output.join(" ");
+		console.log(output);
+		expect(output).to.equal(data[i][1]);
+	});
+}
 for(var i in data){
 	describe("tryStem-" + i, function() {
-	  it("Stemming " + data[i][0] + " to " + data[i][1] , function() {
-	    var output   = Stemmer.tokenizeAndStem(data[i][0]);
-	    output = output.join(" ");
-	    console.log(output);
-	    expect(output).to.equal(data[i][1]);
-	  });
+	  	mochaSyncTest(data, i);
 	});	
 }
