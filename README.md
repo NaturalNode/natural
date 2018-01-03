@@ -130,6 +130,28 @@ Output:
 1
 ```
 
+Full Damerau-Levenshtein matching can be used if you want to consider character transpositions as a valid edit operation.
+
+```javascript
+console.log(natural.LevenshteinDistance("az", "za", { damerau: true }));
+```
+
+Output:
+```javascript
+1
+```
+
+The transposition cost can be modified as well:
+
+```javascript
+console.log(natural.LevenshteinDistance("az", "za", { damerau: true, transposition_cost: 0 }))
+```
+
+Output:
+```javascript
+0
+```
+
 And Dice's co-efficient:
 
 ```javascript
@@ -161,6 +183,8 @@ Output:
 ```javascript
 { substring: 'the Rain Coats Book Store', distance: 4 }
 ```
+
+The following
 
 ## Stemmers
 
@@ -1083,12 +1107,12 @@ Predicates are defined in module <code>lib/RuleTemplates.js</code>. In that file
 predicate names are mapped to metadata for generaring transformation rules. The following properties must be supplied:
 * Name of the predicate
 * A function that evaluates the predicate (should return a boolean)
-* A window <code>[i, j]</code> that defines the span of the predicate in the 
+* A window <code>[i, j]</code> that defines the span of the predicate in the
 sentence relative to the current position
 * The number of parameter the predicate needs: 0, 1 or 2
-* If relevant, a function for parameter 1 that returns its possible values 
+* If relevant, a function for parameter 1 that returns its possible values
 at the current position in the sentence (for generating rules in training)
-* If relevant, a function for parameter 2 that returns its possible values 
+* If relevant, a function for parameter 2 that returns its possible values
 at the current position in the sentence (for training)
 
 A typical entry for a rule templates looks like this:
@@ -1104,8 +1128,8 @@ A typical entry for a rule templates looks like this:
     "parameter1Values": nextTagParameterValues
   }
 ```
-A predicate function accepts a tagged sentence, the current position in the 
-sentence that should be tagged, and the outcome(s) of the predicate. 
+A predicate function accepts a tagged sentence, the current position in the
+sentence that should be tagged, and the outcome(s) of the predicate.
 An example of a predicate that checks the category of the current word:
 ```javascript
 function next_tag_is(tagged_sentence, i, parameter) {
@@ -1118,7 +1142,7 @@ function next_tag_is(tagged_sentence, i, parameter) {
 }
 ```
 
-A values function for a parameter returns an array all possible parameter 
+A values function for a parameter returns an array all possible parameter
 values given a location in a tagged sentence.
 ```javascript
 function nextTagParameterValues(sentence, i) {
@@ -1130,15 +1154,15 @@ function nextTagParameterValues(sentence, i) {
   }
 }
 ```
-Please note that these functions work with a different data type. Here, a 
-sentence is an array of tokens and tokens are maps that have at least a 
-token (word) and a tag. 
+Please note that these functions work with a different data type. Here, a
+sentence is an array of tokens and tokens are maps that have at least a
+token (word) and a tag.
 
 
 ### Training
-The trainer allows to learn a new set of transformation rules from a corpus. 
-It takes as input a tagged corpus and a set of rule templates. The algorithm 
-generates positive rules (rules that apply at some location in the corpus) 
+The trainer allows to learn a new set of transformation rules from a corpus.
+It takes as input a tagged corpus and a set of rule templates. The algorithm
+generates positive rules (rules that apply at some location in the corpus)
 from the templates and iteratively extends and optimises the rule set.
 
 First, a corpus should be loaded. Currently, the format of Brown corpus is supported. Then a lexicon can be created from the corpus. The lexicon is needed for tagging the sentences before the learning algorithm is applied.
@@ -1148,8 +1172,8 @@ var text = fs.readFileSync(brownCorpusFile, 'utf8');
 var corpus = new natural.Corpus(text, 1);
 var lexicon = corpus.buildLexicon();
 ```
-The next step is to create a set of rule templates from which the learning 
-algorithm can generate transformation rules. Rule templates are defined in 
+The next step is to create a set of rule templates from which the learning
+algorithm can generate transformation rules. Rule templates are defined in
 <code>PredicateMapping.js</code>.
 ```javascript
 var natural require('natural');
@@ -1170,17 +1194,17 @@ var Tester = require('natural.BrillPOSTrainer');
 var trainer = new Trainer(/* optional threshold */);
 var ruleSet = trainer.train(corpus, templates, lexicon);
 ```
-A threshold value can be passed to constructor. Transformation rules with 
+A threshold value can be passed to constructor. Transformation rules with
 a score below the threshold are removed after training.
-The train method returns a set of transformation rules that can be used to 
-create a POS tagger as usual. Also you can output the rule set in the right 
+The train method returns a set of transformation rules that can be used to
+create a POS tagger as usual. Also you can output the rule set in the right
 format for later usage.
 ```javascript
 console.log(ruleSet.prettyPrint());
 ```
 
 ### Testing
-Now we can apply the lexicon and rule set to a test set. 
+Now we can apply the lexicon and rule set to a test set.
 ```javascript
 var tester = new natural.BrillPOSTester();
 var tagger = new natural.BrillPOSTagger(lexicon, ruleSet);
