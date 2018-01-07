@@ -122,7 +122,16 @@ describe('DamerauLevenshtein', function () {
     });
   });
 
-  describe('options.restricted = false', function () {
-
+  describe('options.restricted = true', function () {
+    var restricted = { restricted: true };
+    it('should calculate 0 for equal strings', function () {
+        expect(damerauLevenshtein('identity', 'identity', restricted)).toBe(0);
+    });
+    it('should calculate 1 for an adjacent transposition', function () {
+        expect(damerauLevenshtein('za', 'az', restricted)).toBe(1);
+    });
+    it('should not count transposition more than 1 char away', function () {
+        expect(damerauLevenshtein('CA', 'ABC', restricted)).toBe(3);
+    });
   });
 });
