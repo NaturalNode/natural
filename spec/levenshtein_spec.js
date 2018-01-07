@@ -99,28 +99,4 @@ describe('levenshtein_distance', function() {
       expect(levenshteinDistance('', 'insert')).toBe(6);
     });
   });
-
-  describe('options.damerau = true', function() {
-    var damerauOpts = {
-      damerau: true,
-      search: false,
-    };
-    it('should be 0 when given equal strings', function () {
-        expect(levenshteinDistance('test', 'test', damerauOpts)).toBe(0);
-    })
-    it('should calculate 1 for adjacent transposition', function () {
-      expect(levenshteinDistance('za', 'az', damerauOpts)).toBe(1);
-      expect(levenshteinDistance('Tomato', 'oTmato', damerauOpts)).toBe(1);
-    });
-    it('should handle custom transposition_cost', function () {
-      expect(levenshteinDistance('za', 'az', { damerau: true, search: false, transposition_cost: 0 })).toBe(0);
-    })
-    it('should calculate 2 when there are 2 transpositions', function () {
-      expect(levenshteinDistance('tomato', 'otmaot', damerauOpts)).toBe(2);
-    })
-    it('should calculate 2 for 1 transposition and 1 insertion', function () {
-      expect(levenshteinDistance('CA', 'ABC', damerauOpts)).toBe(2);
-      expect(levenshteinDistance('a cat', 'a abct', damerauOpts)).toBe(2);
-    });
-  });
 });
