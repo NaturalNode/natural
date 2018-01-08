@@ -133,7 +133,7 @@ Output:
 Full Damerau-Levenshtein matching can be used if you want to consider character transpositions as a valid edit operation.
 
 ```javascript
-console.log(natural.LevenshteinDistance("az", "za", { damerau: true }));
+console.log(natural.DamerauLevenshteinDistance("az", "za"));
 ```
 
 Output:
@@ -144,12 +144,29 @@ Output:
 The transposition cost can be modified as well:
 
 ```javascript
-console.log(natural.LevenshteinDistance("az", "za", { damerau: true, transposition_cost: 0 }))
+console.log(natural.DamerauLevenshteinDistance("az", "za", { transposition_cost: 0 }))
 ```
 
 Output:
 ```javascript
 0
+```
+
+A restricted form of Damerau-Levenshtein (Optimal String Alignment) is available.
+
+This form of matching is more space efficient than unrestricted Damerau-Levenshtein, by only considering a transposition if there are no characters between the transposed characters.
+
+Comparison:
+
+```javascript
+// Optimal String Alignment
+console.log(natural.DamerauLevenshteinDistance('ABC', 'ACB'), { restricted: true });
+1
+console.log(natural.DamerauLevenshteinDistance('CA', 'ABC', { restricted: true }));
+3
+// Unrestricted Damerau-Levenshtein
+console.log(natural.DamerauLevenshteinDistance('CA', 'ABC', { restricted: false }));
+1
 ```
 
 And Dice's co-efficient:
