@@ -20,7 +20,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var levenshteinDistance = require('../lib/natural/distance/levenshtein_distance')
+var levenshteinDistance =
+  require('../lib/natural/distance/levenshtein_distance').LevenshteinDistance;
 
 describe('levenshtein_distance', function() {
   describe('options.search = true', function() {

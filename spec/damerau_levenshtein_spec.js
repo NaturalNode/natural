@@ -20,85 +20,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var damerauLevenshtein = require('../lib/natural/distance/damerau_levenshtein_distance')
+var damerauLevenshtein = require('../lib/natural/distance/levenshtein_distance')
+  .DamerauLevenshteinDistance;
 
 describe('DamerauLevenshtein', function () {
-  describe('options.search = true', function () {
-    it('should find cheapest substring', function () {
-      expect(damerauLevenshtein('kitten', 'sitting', { search: true }))
-        .toEqual({ substring: 'sittin', distance: 2 });
-    });
-
-    it('should find 0 cost substring in target', function () {
-      expect(damerauLevenshtein('doctor', 'the doctor is in', { search: true }))
-        .toEqual({ substring: 'doctor', distance: 0 });
-    });
-
-    it('should find 1 cost substring in target', function () {
-      expect(damerauLevenshtein('doctor', 'the doktor is in', { search: true }))
-        .toEqual({ substring: 'doktor', distance: 1 });
-    });
-
-    it('should return empty substring when that is cleapest match', function () {
-      expect(damerauLevenshtein('doctor', '000000000000', { search: true }))
-        .toEqual({ substring: '', distance: 6 });
-    });
-
-    it('different insertion costs should work', function () {
-      // delete 10 0's at cost 1 and insert the letters for doctor at cost -1
-      expect(damerauLevenshtein('0000000000', 'doctor', { search: true, insertion_cost: -1 }))
-        .toEqual({ substring: 'doctor', distance: 4 });
-    });
-
-    it('different deletion costs should work', function () {
-      // delete 10 0's at cost -10
-      expect(damerauLevenshtein('0000000000', 'doctor', { search: true, deletion_cost: -1 }))
-        .toEqual({ substring: '', distance: -10 });
-    });
-  });
-
-  describe('default / options.search = false', function () {
-    it('should replace 2', function () {
-      expect(damerauLevenshtein('doctor', 'doktor')).toBe(1);
-    });
-
-    it('should allow altering replacement value', function () {
-      expect(damerauLevenshtein('doctor', 'doktor', { substitution_cost: 1 })).toBe(1);
-    });
-
-    it('should delete 1', function () {
-      expect(damerauLevenshtein('doctor', 'docto')).toBe(1);
-    });
-
-    it('should insert 1', function () {
-      expect(damerauLevenshtein('flat', 'flats')).toBe(1);
-    });
-
-    it('should combine operations', function () {
-      expect(damerauLevenshtein('flad', 'flaten')).toBe(3);
-      expect(damerauLevenshtein('flaten', 'flad')).toBe(3);
-    });
-
-    it('should consider perfect matches 0', function () {
-      expect(damerauLevenshtein('one', 'one')).toBe(0);
-    });
-
-    it('different deletion cost should work', function () {
-      expect(damerauLevenshtein('ones', 'one', { deletion_cost: 3 })).toBe(3);
-    });
-
-    it('different insertion cost should work', function () {
-      expect(damerauLevenshtein('one', 'ones', { deletion_cost: 3, insertion_cost: 5 })).toBe(5);
-    });
-
-    it('delete all characters with -ve cost', function () {
-      expect(damerauLevenshtein('delete', '', { deletion_cost: -1 })).toBe(-6);
-    });
-
-    it('insert all characters', function () {
-      expect(damerauLevenshtein('', 'insert')).toBe(6);
-    });
-
+  describe('default', function () {
     it('should be 0 when given equal strings', function () {
       expect(damerauLevenshtein('test', 'test')).toBe(0);
     })
