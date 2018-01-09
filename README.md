@@ -163,7 +163,7 @@ Comparison:
 console.log(natural.DamerauLevenshteinDistance('ABC', 'ACB'), { restricted: true });
 1
 console.log(natural.DamerauLevenshteinDistance('CA', 'ABC', { restricted: true }));
-3
+2
 // Unrestricted Damerau-Levenshtein
 console.log(natural.DamerauLevenshteinDistance('CA', 'ABC', { restricted: false }));
 1
