@@ -849,14 +849,14 @@ get the number of vertexes:
 ```javascript
 console.log(digraph.v());
 ```
-you will get 5.
+you will get 7.
 
 get the number of edges:
 
 ```javascript
 console.log(digraph.e());
 ```
-you will get 5.
+you will get 6.
 
 
 
@@ -884,22 +884,9 @@ console.log(spt.getDistTo(4));
 ```
 the output will be: 0.35
 
-### hasDistTo(vertex)
-
-```javascript
-console.log(spt.hasDistTo(4));
-console.log(spt.hasDistTo(5));
-```
-
-output will be:
-
-```javascript
-true
-false
-```
-
 ### pathTo(vertex)
-this will return a shortest path:
+
+Will return the shortest path:
 
 ```javascript
 console.log(spt.pathTo(4));
@@ -921,8 +908,8 @@ hasPathTo(vertex),
 pathTo(vertex).
 
 ```javascript
-var ShortestPathTree = natural.ShortestPathTree;
-var spt = new ShortestPathTree(digraph, 5);
+var LongestPathTree = natural.LongestPathTree;
+var lpt = new LongestPathTree(digraph, 5);
 ```
 digraph is an instance of EdgeWeightedDigraph, the second param is the start vertex of DAG.
 
@@ -931,29 +918,16 @@ digraph is an instance of EdgeWeightedDigraph, the second param is the start ver
 Will return the dist to vertex.
 
 ```javascript
-console.log(spt.getDistTo(4));
+console.log(lpt.getDistTo(4));
 ```
 the output will be: 2.06
 
-### hasDistTo(vertex)
-
-```javascript
-console.log(spt.hasDistTo(4));
-console.log(spt.hasDistTo(5));
-```
-
-output will be:
-
-```javascript
-true
-false
-```
-
 ### pathTo(vertex)
-this will return a longest path:
+
+Will return the longest path:
 
 ```javascript
-console.log(spt.pathTo(4));
+console.log(lpt.pathTo(4));
 ```
 
 output will be:
