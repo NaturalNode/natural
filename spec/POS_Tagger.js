@@ -1,5 +1,5 @@
 /*
-  Brill's POS Tagger
+  Simple POS Tagger based on a lexicon
   Copyright (C) 2016 Hugo W.L. ter Doest
 
   This program is free software: you can redistribute it and/or modify
@@ -18,23 +18,21 @@
 
 var fs = require("fs");
 
-var TF_Parser = require('./TF_Parser');
+//var TF_Parser = require('./TF_Parser');
 
-function Brill_POS_Tagger(lexicon, ruleSet) {
+function POS_Tagger(lexicon) {
   this.lexicon = lexicon;
-  this.ruleSet = ruleSet;
 }
 
 // Tags a sentence, sentence is an array of words
 // Returns an array of tagged words; a tagged words is an array consisting of
 // the word itself followed by its lexical category
-Brill_POS_Tagger.prototype.tag = function(sentence) {
+POS_Tagger.prototype.tag = function(sentence) {
   var taggedSentence = this.tagWithLexicon(sentence);
-  console.log(taggedSentence);
   return this.applyRules(taggedSentence);
 };
 
-Brill_POS_Tagger.prototype.tagWithLexicon = function(sentence) {
+POS_Tagger.prototype.tagWithLexicon = function(sentence) {
   var taggedSentence = new Array(sentence.length);
 
   var that = this;
@@ -47,18 +45,4 @@ Brill_POS_Tagger.prototype.tagWithLexicon = function(sentence) {
   return(taggedSentence);
 };
 
-// Applies the transformation rules to an initially tagged sentence.
-// taggedSentence is an array of tagged words.
-// A tagged word is an array consisting of the word itself followed by its lexical category.
-// Returns an array of tagged words as well
-Brill_POS_Tagger.prototype.applyRules = function(taggedSentence) {
-  // Apply transformation rules
-  for (var i = 0, size = taggedSentence.length; i < size; i++) {
-    this.ruleSet.getRules().forEach(function(rule) {
-      rule.apply(taggedSentence, i);
-    });
-  }
-  return(taggedSentence);
-};
-
-module.exports = Brill_POS_Tagger;
+module.exports = POS_Tagger;

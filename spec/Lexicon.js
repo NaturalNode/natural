@@ -19,34 +19,8 @@
 var fs = require('fs');
 
 // Parses a lexicon in JSON or text format
-function Lexicon(filename, defaultCategory, defaultCategoryCapitalised) {
+function Lexicon() {
   this.lexicon = {};
-
-  if (filename) {
-    this.defaultCategory = defaultCategory;
-    // Read lexicon
-    try {
-      var data = fs.readFileSync(filename, 'utf8');
-      if (data[0] === "{") {
-        // Lexicon is in JSON format
-        this.lexicon = JSON.parse(data);
-      }
-      else {
-        // Lexicon is plain text
-        this.parseLexicon(data);
-      }
-      //console.log('Brill_POS_Tagger.read_lexicon: number of lexicon entries read: ' + Object.keys(this.lexicon).length);
-    }
-    catch (error) {
-      console.error(error);
-    }
-    if (defaultCategory) {
-      this.defaultCategory = defaultCategory;
-      if (defaultCategoryCapitalised) {
-        this.defaultCategoryCapitalised = defaultCategoryCapitalised;
-      }
-    }
-  }
 }
 
 // Parses a lexicon in text format: word cat1 cat2 ... catn
@@ -64,6 +38,17 @@ Lexicon.prototype.parseLexicon = function(data) {
   });
 };
 
+Lexicon.prototype.tagWordWithDefaults = function(word) {
+  if (/[A-Z]/.test(word[0]) && this.defaultCategoryCapitalised) {
+    // Capitalised
+    return this.defaultCategoryCapitalised;
+  }
+  else {
+    // If not found assign default_category
+    return this.defaultCategory;
+  }
+};
+
 // Returns a list of categories for word
 Lexicon.prototype.tagWord = function(word) {
   var categories = this.lexicon[word];
@@ -71,16 +56,8 @@ Lexicon.prototype.tagWord = function(word) {
     categories = this.lexicon[word.toLowerCase()];
   }
   if (!categories) {
-    if (/[A-Z]/.test(word[0]) && this.defaultCategoryCapitalised) {
-      // Capitalised
-      categories = [this.defaultCategoryCapitalised];
-    }
-    else {
-      // If not found assign default_category
-      categories = [this.defaultCategory];
-    }
+    categories = [this.tagWordWithDefaults(word)];
   }
-  console.log(word + " tagged with " + categories);
   return(categories);
 };
 
@@ -104,6 +81,10 @@ Lexicon.prototype.prettyPrint = function() {
 
 Lexicon.prototype.nrEntries = function() {
   return Object.keys(this.lexicon).length;
+};
+
+Lexicon.prototype.size = function() {
+  return this.nrEntries();
 };
 
 Lexicon.prototype.setDefaultCategories = function(category, categoryCapitalised) {
