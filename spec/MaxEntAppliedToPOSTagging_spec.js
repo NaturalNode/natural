@@ -24,7 +24,7 @@ var sampleFile = base_folder_test_data + 'sample.json';
 var classifierFile = base_folder_test_data + 'classifier.json';
 
 var natural = require('../lib/natural');
-var Sample = natural.Sample;
+//var Sample = natural.Sample;
 var Classifier = natural.MaxEntClassifier;
 var Feature = natural.Feature;
 var FeatureSet = natural.FeatureSet;
@@ -156,6 +156,7 @@ describe("Maximum Entropy Classifier applied to POS tagging", function() {
     });
   });
 
+/*
   it("loads a sample from a file", function(done) {
     sample.load(sampleFile, POS_Element, function(err, newSample) {
       if (err) {
@@ -170,7 +171,7 @@ describe("Maximum Entropy Classifier applied to POS tagging", function() {
       done();
     });
   });
-
+*/
   it ("generates a set of features from the sample", function() {
     featureSet = new FeatureSet();
     sample.generateFeatures(featureSet);

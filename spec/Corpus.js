@@ -22,6 +22,7 @@
 
 var natural = require('../lib/natural');
 var Sample = natural.Sample;
+var ElementClass = require('./POS_Element');
 
 var Lexicon = require('./Lexicon');
 var Sentence = require('./Sentence');
@@ -185,7 +186,7 @@ Corpus.prototype.generateFeatures = function() {
 Corpus.prototype.generateSample = function() {
   var sample = new Sample([]);
   this.sentences.forEach(function(sentence) {
-    sentence.generateSampleElements(sample);
+    sentence.generateSampleElements(sample, ElementClass);
   });
   return sample;
 };

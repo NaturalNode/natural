@@ -1,6 +1,6 @@
 /*
   Sentence class that generates sample elements from sentences
-  Copyright (C) 2016 Hugo W.L. ter Doest
+  Copyright (C) 2018 Hugo W.L. ter Doest
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -18,7 +18,6 @@
 
 var natural = require('../lib/natural');
 var Context = natural.Context;
-var Element = natural.Element;
 var Feature = natural.Feature;
 
 function Sentence() {
@@ -32,10 +31,10 @@ Sentence.prototype.addTaggedWord = function(token, tag) {
   });
 };
 
-Sentence.prototype.generateSampleElements = function(sample) {
+Sentence.prototype.generateSampleElements = function(sample, ElementClass) {
   var sentence = this.taggedWords;
   sentence.forEach(function(token, index) {
-    var x = new Element(
+    var x = new ElementClass(
       token.tag,
       new Context({
         wordWindow: {},
