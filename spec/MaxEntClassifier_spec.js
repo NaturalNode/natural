@@ -35,6 +35,7 @@ var featureSet = null;
 var classifier = null;
 
 describe("The MaxEnt module", function() {
+
   it("The Sample class creates a sample", function() {
     sample = new Sample();
     sample.addElement(new SE_Element("x", new Context("0")));
@@ -92,6 +93,7 @@ describe("The MaxEnt module", function() {
     });
   });
 
+  var newClassifier = null;
   it("Load classifer", function(done) {
     classifier.load(classifierFilename, SE_Element, function(err, c) {
       if (err) {
@@ -99,9 +101,13 @@ describe("The MaxEnt module", function() {
       }
       else {
         console.log("Classifier loaded from " + classifierFilename);
+        newClassifier = c;
       }
       done();
     });
+    if (newClassifier) {
+      classifier = newClassifier;
+    }
   });
 
   it("The classifier classifies events", function() {
