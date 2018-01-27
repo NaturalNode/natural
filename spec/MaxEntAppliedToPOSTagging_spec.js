@@ -38,6 +38,7 @@ var Tagger = natural.BrillPOSTagger; //require('./POS_Tagger');
 var BROWN = 1;
 var nrIterations = 1;
 var minImprovement = 0.01;
+var trainCorpusSize = 20; // percentage
 
 // Structure of the event space
 // - Classes are possible tags
@@ -108,6 +109,10 @@ function applyClassifierToTestCorpus(testCorpus, tagger, classifier) {
       // Classify using maximum entropy model
       var tag = classifier.classify(context);
 
+      if (tag === "") {
+        tag = tagger.lexicon.tagWordWithDefaults(context.data.wordWindow["0"])
+      }
+
       // Collect stats
       if (tag === sentence.taggedWords[index].tag) {
         // Correctly tagged
@@ -127,7 +132,7 @@ describe("Maximum Entropy Classifier applied to POS tagging", function() {
   // Prepare the train and test corpus
   var data = fs.readFileSync(brownCorpusFile, 'utf8');
   var corpus = new Corpus(data, BROWN);
-  var trainAndTestCorpus = corpus.splitInTrainAndTest(10);
+  var trainAndTestCorpus = corpus.splitInTrainAndTest(trainCorpusSize);
   var trainCorpus = trainAndTestCorpus[0];
   var testCorpus = trainAndTestCorpus[1];
   var sample = null;
@@ -214,8 +219,7 @@ describe("Maximum Entropy Classifier applied to POS tagging", function() {
 
   var newClassifier = null;
   it("loads the classifier from a file", function(done) {
-    /*
-    classifier.load(classifierFile, function(err, c) {
+    classifier.load(classifierFile, POS_Element, function(err, c) {
       if (err) {
         console.log(err);
         expect(false).toBe(true);
@@ -228,9 +232,8 @@ describe("Maximum Entropy Classifier applied to POS tagging", function() {
     });
     if (newClassifier) {
       expect(newClassifier.sample.size()).toEqual(classifier.sample.size());
-      //classifier = newClassifier;
+      classifier = newClassifier;
     }
-    */
   });
 
   it("compares maximum entropy based POS tagger to lexicon-based tagger", function() {
