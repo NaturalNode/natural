@@ -31,14 +31,15 @@ var FeatureSet = natural.FeatureSet;
 var Context = natural.Context;
 
 // Load some classes specific to part of speech tagging
-var Corpus = natural.Corpus; //require('./Corpus');
+var Corpus = natural.ME_Corpus;
 var POS_Element = natural.POS_Element;
-var Tagger = natural.BrillPOSTagger; //require('./POS_Tagger');
+var Sentence = natural.ME_Sentence;
+var Tagger = natural.BrillPOSTagger;
 
 var BROWN = 1;
-var nrIterations = 1;
+var nrIterations = 3;
 var minImprovement = 0.01;
-var trainCorpusSize = 20; // percentage
+var trainCorpusSize = 10; // percentage
 
 // Structure of the event space
 // - Classes are possible tags
@@ -60,50 +61,46 @@ function applyClassifierToTestCorpus(testCorpus, tagger, classifier) {
     // Count the right tags
     sentence.taggedWords.forEach(function(token, i) {
       totalWords++;
-      if (token.tag === taggedSentence[i][1]) {
+      if (token.tag === taggedSentence.taggedWords[i].tag) {
         correctyTaggedLexicon++;
       }
     });
 
     // Classify tags using maxent
-    taggedSentence.forEach(function(taggedWord, index) {
+    taggedSentence.taggedWords.forEach(function(taggedWord, index) {
 
       // Create context for classication
       var context = new Context({
           wordWindow: {},
           tagWindow: {}
       });
+      // And fill it:
+
       // Current wordWindow
-      context.data.wordWindow["0"] = taggedWord[0];
+      context.data.wordWindow["0"] = taggedWord.token;
       // Previous bigram
       if (index > 1) {
-        context.data.tagWindow["-2"] = taggedSentence[index - 2][1];
-        //context.data.tagWindow["-1"] = taggedSentence[index - 1][1];
+        context.data.tagWindow["-2"] = taggedSentence.taggedWords[index - 2].tag;
       }
       // Left bigram
       if (index > 0) {
-        context.data.tagWindow["-1"] = taggedSentence[index - 1][1];
-        //context.data.tagWindow["0"] = taggedSentence[index][1];
+        context.data.tagWindow["-1"] = taggedSentence.taggedWords[index - 1].tag;
       }
       // Right bigram
       if (index < sentence.length - 1) {
-        //context.data.tagWindow["0"] = taggedSentence[index][1];
-        context.data.tagWindow["1"] = taggedSentence[index + 1][1];
+        context.data.tagWindow["1"] = taggedSentence.taggedWords[index + 1].tag;
       }
       // Next bigram
       if (index < sentence.length - 2) {
-        //context.data.tagWindow["1"] = taggedSentence[index + 1][1];
-        context.data.tagWindow["2"] = taggedSentence[index + 2][1];
+        context.data.tagWindow["2"] = taggedSentence.taggedWords[index + 2].tag;
       }
       // Left bigram words
       if (index > 0) {
-        context.data.wordWindow["-1"] = taggedSentence[index - 1][0];
-        //context.data.wordWindow["0"] = taggedSentence[index][0];
+        context.data.wordWindow["-1"] = taggedSentence.taggedWords[index - 1].token;
       }
       // Right bigram words
       if (index < sentence.length - 1) {
-        //context.data.wordWindow["0"] = taggedSentence[index][0];
-        context.data.wordWindow["1"] = taggedSentence[index + 1][0];
+        context.data.wordWindow["1"] = taggedSentence.taggedWords[index + 1].token;
       }
 
       // Classify using maximum entropy model
@@ -131,7 +128,7 @@ function applyClassifierToTestCorpus(testCorpus, tagger, classifier) {
 describe("Maximum Entropy Classifier applied to POS tagging", function() {
   // Prepare the train and test corpus
   var data = fs.readFileSync(brownCorpusFile, 'utf8');
-  var corpus = new Corpus(data, BROWN);
+  var corpus = new Corpus(data, BROWN, Sentence);
   var trainAndTestCorpus = corpus.splitInTrainAndTest(trainCorpusSize);
   var trainCorpus = trainAndTestCorpus[0];
   var testCorpus = trainAndTestCorpus[1];

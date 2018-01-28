@@ -1,6 +1,6 @@
 /*
   Unit test for Brill's POS Trainer
-  Copyright (C) 2017 Hugo W.L. ter Doest
+  Copyright (C) 2018 Hugo W.L. ter Doest
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -17,6 +17,7 @@
 */
 
 var natural = require('../lib/natural');
+var SentenceClass = natural.Sentence;
 var fs = require('fs');
 
 var base_folder_test_data = './spec/test_data/';
@@ -61,7 +62,7 @@ describe('Brill\'s POS Trainer', function() {
   });
 
   it('should process the corpus', function() {
-    corpus = new natural.Corpus(data, BROWN);
+    corpus = new natural.Corpus(data, BROWN, SentenceClass);
     expect(corpus.nrSentences()).toBeGreaterThan(0);
     expect(corpus.nrWords()).toBeGreaterThan(0);
   });
@@ -94,7 +95,7 @@ describe('Brill\'s POS Trainer', function() {
     var tagger = new natural.BrillPOSTagger(trainLexicon, ruleSet);
     var tester = new natural.BrillPOSTester();
     var scores = tester.test(corpora[1], tagger);
-    expect(Math.abs(scores[0] - scores[1])).toBeLessThan(2);
+    expect(scores[1]).toBeGreaterThan(0);
   });
 
 });
