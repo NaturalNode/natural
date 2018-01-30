@@ -1184,9 +1184,19 @@ var rules = new natural.RuleSet(rulesFilename);
 var tagger = new natural.BrillPOSTagger(lexicon, rules);
 
 var sentence = ["I", "see", "the", "man", "with", "the", "telescope"];
-console.log(JSON.stringify(tagger.tag(sentence)));
-// [["I","NN"],["see","VB"],["the","DT"],["man","NN"],["with","IN"],["the","DT"],["telescope","NN"]]
-
+console.log(tagger.tag(sentence));
+```
+This outputs the following:
+```
+Sentence {
+  taggedWords:
+   [ { token: 'I', tag: 'NN' },
+     { token: 'see', tag: 'VB' },
+     { token: 'the', tag: 'DT' },
+     { token: 'man', tag: 'NN' },
+     { token: 'with', tag: 'IN' },
+     { token: 'the', tag: 'DT' },
+     { token: 'telescope', tag: 'NN' } ] }
 ```
 
 ### Lexicon
@@ -1227,21 +1237,16 @@ VBD NN PREV-TAG DT
 Here the category of the previous word must be <code>DT</code> for the rule to be applied.
 
 ### Algorithm
-The tagger applies transformation rules that may change the category of words. The input sentence must be split into words which are assigned with categories. The tagged sentence is then processed from left to right. At each step all rules are applied once; rules are applied in the order in which they are specified. Algorithm:
+The tagger applies transformation rules that may change the category of words. The input sentence is a Sentence object with tagged words. The tagged sentence is processed from left to right. At each step all rules are applied once; rules are applied in the order in which they are specified. Algorithm:
 ```javascript
-function(sentence) {
-  var tagged_sentence = new Array(sentence.length);
-
-  // snip
-
-  // Apply transformation rules
-  for (var i = 0, size = sentence.length; i < size; i++) {
-    this.transformation_rules.forEach(function(rule) {
-      rule.apply(tagged_sentence, i);
+Brill_POS_Tagger.prototype.applyRules = function(sentence) {
+  for (var i = 0, size = sentence.taggedWords.length; i < size; i++) {
+    this.ruleSet.getRules().forEach(function(rule) {
+      rule.apply(sentence, i);
     });
   }
-  return(tagged_sentence);
-}
+  return sentence;
+};
 ```
 
 ### Adding a predicate
@@ -1270,13 +1275,13 @@ A typical entry for a rule templates looks like this:
     "parameter1Values": nextTagParameterValues
   }
 ```
-A predicate function accepts a tagged sentence, the current position in the
+A predicate function accepts a Sentence object, the current position in the
 sentence that should be tagged, and the outcome(s) of the predicate.
 An example of a predicate that checks the category of the current word:
 ```javascript
-function next_tag_is(tagged_sentence, i, parameter) {
-  if (i < tagged_sentence.length - 1) {
-    return(tagged_sentence[i+1][1] === parameter);
+function next_tag_is(sentence, i, parameter) {
+  if (i < sentence.taggedWords.length - 1) {
+    return(sentence.taggedWords[i + 1][1] === parameter);
   }
   else {
     return(false);
@@ -1296,10 +1301,6 @@ function nextTagParameterValues(sentence, i) {
   }
 }
 ```
-Please note that these functions work with a different data type. Here, a
-sentence is an array of tokens and tokens are maps that have at least a
-token (word) and a tag.
-
 
 ### Training
 The trainer allows to learn a new set of transformation rules from a corpus.
