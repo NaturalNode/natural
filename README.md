@@ -27,6 +27,8 @@ Aside from this README, the only documentation is [this DZone article](http://ww
 * [Approximate String Matching](#approximate-string-matching)
 * [Stemmers](#stemmers)
 * [Classifiers](#classifiers)
+** [Bayesian and logistic regression] (#bayesian-and-logistic-regression)
+** [Maximum Entropy Classifier] (#maximum-entropy-classifier)
 * [Phonetics](#phonetics)
 * [Inflectors](#inflectors)
 * [N-Grams](#n-grams)
@@ -38,7 +40,6 @@ Aside from this README, the only documentation is [this DZone article](http://ww
 * [WordNet](#wordnet)
 * [Spellcheck](#spellcheck)
 * [POS Tagger](#pos-tagger)
-* [Acknowledgements/references](#acknowledgements-and-references)
 * [Development](#development)
 * [License](#license)
 
@@ -474,13 +475,14 @@ After setting up your own element class, the classifier can be created and train
 #### Application to POS tagging
 A more elaborate example of maximum entropy modelling is provided for part of speech tagging. The following steps are taken to create a classifier and apply it to a test set:
 * A new element class POS_Element is created that has a word window and a tag window around the word to be tagged.
-* From the Brown corpus a sample is generated that contains POS elements.
-* Feature functions are generated for each sample element.
-* Classifier is created and trained.
-* Classifier is applied to a test set. Results are compared to a simple lexicon-based tagger.  
+* From the Brown corpus a sample is generated consisting of POS elements.
+* Feature functions are generated from the sample.
+* A classifier is created and trained.
+* The classifier is applied to a test set. Results are compared to a simple lexicon-based tagger.  
 
 #### References
 * Adwait RatnaParkhi, Maximum Entropy Models For Natural Language Ambiguity Resolution, University of Pennsylvania, 1998, URL: http://repository.upenn.edu/cgi/viewcontent.cgi?article=1061&context=ircs_reports
+* Darroch, J.N.; Ratcliff, D. (1972). Generalized iterative scaling for log-linear models, The Annals of Mathematical Statistics, Institute of Mathematical Statistics, 43 (5): 1470–1480.
 
 ## Phonetics
 
@@ -1248,6 +1250,7 @@ Brill_POS_Tagger.prototype.applyRules = function(sentence) {
   return sentence;
 };
 ```
+The output is a Sentence object just like the input sentence.
 
 ### Adding a predicate
 Predicates are defined in module <code>lib/RuleTemplates.js</code>. In that file
