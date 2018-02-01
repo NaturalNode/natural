@@ -19,7 +19,7 @@
 var fs = require('fs');
 
 var base_folder_test_data = './spec/test_data/';
-var brownCorpusFile = base_folder_test_data + 'browntag_nolines_excerpt.txt';
+var brownCorpusFile = base_folder_test_data + 'browntag_nolines_excerpt_maxent.txt';
 var sampleFile = base_folder_test_data + 'sample.json';
 var classifierFile = base_folder_test_data + 'classifier.json';
 
@@ -34,12 +34,13 @@ var Context = natural.Context;
 var Corpus = natural.ME_Corpus;
 var POS_Element = natural.POS_Element;
 var Sentence = natural.ME_Sentence;
+// Lexicon-based tagger is used for comparison
 var Tagger = natural.BrillPOSTagger;
 
 var BROWN = 1;
-var nrIterations = 3;
+var nrIterations = 1;
 var minImprovement = 0.01;
-var trainCorpusSize = 10; // percentage
+var trainCorpusSize = 50; // percentage
 
 // Structure of the event space
 // - Classes are possible tags
