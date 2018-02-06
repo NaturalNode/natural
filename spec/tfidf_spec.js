@@ -74,8 +74,8 @@ describe('tfidf', function() {
 
         it('should work with the restoreCache flag set to true', function() {
             tfidf = new TfIdf();
-            tfidf.addDocument('document one', 'un');
-            expect(tfidf.idf("one")).toBe(1 + Math.log( 1.0 / 2.0 ));
+            tfidf.addDocument('document one example', 'un');
+            expect(tfidf.idf("example")).toBe(1 + Math.log( 1.0 / 2.0 ));
             tfidf.addDocument('document Two', 'deux', true);
 
             tfidf.tfidfs('two', function(i, tfidf, key) {
