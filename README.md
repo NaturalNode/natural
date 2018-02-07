@@ -291,6 +291,23 @@ console.log(natural.PorterStemmerRu.stem("падший"));
 console.log(natural.PorterStemmerEs.stem("jugaría"));
 ```
 
+The following stemmers are available:
+
+* `PorterStemmer`
+* `LancasterStemmer`
+* `PorterStemmerFa`
+* `PorterStemmerFr`
+* `PorterStemmerRu`
+* `PorterStemmerEs`
+* `PorterStemmerIt`
+* `PorterStemmerNo`
+* `PorterStemmerSv`
+* `PorterStemmerPt`
+* `StemmerFr`
+* `StemmerPl`
+* `StemmerJa`
+* `StemmerId`
+
 `attach()` patches `stem()` and `tokenizeAndStem()` to String as a shortcut to
 `PorterStemmer.stem(token)`. `tokenizeAndStem()` breaks text up into single words
 and returns an array of stemmed tokens.
