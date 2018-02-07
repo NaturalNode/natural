@@ -81,6 +81,68 @@ console.log(tokenizer.tokenize("my dog hasn't any fleas."));
 // [ 'my',  'dog',  'hasn',  '\'',  't',  'any',  'fleas',  '.' ]
 ```
 
+The following tokenizers are available:
+
+<a name="WordTokenizer" href="#WordTokenizer">#</a><i>natural</i>.<b>WordTokenizer</b>()
+
+Word tokenizer: a tokenizer that divides a text into sequences of alphabetic and numeric characters. E.g.:
+
+```javascript
+WordTokenizer().tokenize("She said 'hello'.")
+// ['She', 'said', 'hello']
+```
+
+<a name="WordPunctTokenizer" href="#WordPunctTokenizer">#</a><i>natural</i>.<b>WordPunctTokenizer</b>()
+
+Word + punctuation tokenizer: a tokenizer that divides a text into sequences of alphabetic and non-alphabetic characters. E.g.:
+
+```javascript
+WordTokenizer().tokenize("She said 'hello'.")
+// ['She','said',''','hello',''','.']
+```
+
+<a name="CaseTokenizer" href="#CaseTokenizer">#</a><i>natural</i>.<b>CaseTokenizer</b>()
+
+A word tokenizer that works with all UTF-8 alphabets (cf #245).
+
+```javascript
+CaseTokenizer().tokenize('Vy mOzhite mne pamOch? Вы можете мне помочь?')
+// ['Vy', 'mOzhite', 'mne', 'pamOch', 'Вы', 'можете', 'мне', 'помочь']
+
+CaseTokenizer().tokenize('isso é coração')
+// ['isso', 'é', 'coração']
+```
+
+<a name="RegexpTokenizer" href="#RegexpTokenizer">#</a><i>natural</i>.<b>RegexpTokenizer</b>()
+
+<a name="TreebankWordTokenizer" href="#TreebankWordTokenizer">#</a><i>natural</i>.<b>TreebankWordTokenizer</b>()
+
+<a name="SentenceTokenizer" href="#SentenceTokenizer">#</a><i>natural</i>.<b>SentenceTokenizer</b>()
+
+<a name="AggressiveTokenizer" href="#AggressiveTokenizer">#</a><i>natural</i>.<b>AggressiveTokenizer</b>()
+
+<a name="TokenizerJa" href="#TokenizerJa">#</a><i>natural</i>.<b>TokenizerJa</b>()
+
+<a name="AggressiveTokenizerNl" href="#AggressiveTokenizerNl">#</a><i>natural</i>.<b>AggressiveTokenizerNl</b>()
+
+<a name="AggressiveTokenizerFa" href="#AggressiveTokenizerFa">#</a><i>natural</i>.<b>AggressiveTokenizerFa</b>()
+
+<a name="AggressiveTokenizerFr" href="#AggressiveTokenizerFr">#</a><i>natural</i>.<b>AggressiveTokenizerFr</b>()
+
+<a name="AggressiveTokenizerRu" href="#AggressiveTokenizerRu">#</a><i>natural</i>.<b>AggressiveTokenizerRu</b>()
+
+<a name="AggressiveTokenizerEs" href="#AggressiveTokenizerEs">#</a><i>natural</i>.<b>AggressiveTokenizerEs</b>()
+
+<a name="AggressiveTokenizerIt" href="#AggressiveTokenizerIt">#</a><i>natural</i>.<b>AggressiveTokenizerIt</b>()
+
+<a name="AggressiveTokenizerPl" href="#AggressiveTokenizerPl">#</a><i>natural</i>.<b>AggressiveTokenizerPl</b>()
+
+<a name="AggressiveTokenizerPt" href="#AggressiveTokenizerPt">#</a><i>natural</i>.<b>AggressiveTokenizerPt</b>()
+
+<a name="AggressiveTokenizerNo" href="#AggressiveTokenizerNo">#</a><i>natural</i>.<b>AggressiveTokenizerNo</b>()
+
+<a name="AggressiveTokenizerSv" href="#AggressiveTokenizerSv">#</a><i>natural</i>.<b>AggressiveTokenizerSv</b>()
+
 ## String Distance
 
 Natural provides an implementation of the [Jaro–Winkler](http://en.wikipedia.org/wiki/Jaro%E2%80%93Winkler_distance) string distance measuring algorithm.
