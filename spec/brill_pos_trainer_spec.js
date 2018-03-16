@@ -21,7 +21,7 @@ var SentenceClass = natural.Sentence;
 var fs = require('fs');
 
 var base_folder_test_data = './spec/test_data/';
-var brownCorpusFile = base_folder_test_data + 'browntag_nolines_excerpt_brill.txt';
+var brownCorpusFile = base_folder_test_data + 'browntag_nolines_excerpt.txt';
 
 function selectRuleTemplates(templateNames) {
   var templates = [];

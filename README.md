@@ -84,12 +84,30 @@ console.log(tokenizer.tokenize("my dog hasn't any fleas."));
 
 ## String Distance
 
-Natural provides an implementation of the [Jaro–Winkler](http://en.wikipedia.org/wiki/Jaro%E2%80%93Winkler_distance) string distance measuring algorithm.
-This will return a number between 0 and 1 which tells how closely the strings match (0 = not at all, 1 = exact match):
+Natural provides an implementation of three algorithms for calculating string distance: Hamming distance, Jaro-Winkler, and Levenshtein distance.
+
+[Hamming distance](https://en.wikipedia.org/wiki/Hamming_distance) measures the distance between two strings of equal length by counting the number of different characters. The third parameter indicates whether case should be ignored. By default the algorithm is case sensitive.
+```javascript
+var natural = require('natural');
+console.log(natural.HammingDistance("karolin", "kathrin", false));
+console.log(natural.HammingDistance("karolin", "kerstin", false));
+// If strings differ in length -1 is returned
+console.log(natural.HammingDistance("short string", "longer string", false));
+```
+
+Output:
+```javascript
+3
+3
+-1
+```
+
+
+The [Jaro–Winkler](http://en.wikipedia.org/wiki/Jaro%E2%80%93Winkler_distance) string distance measuring algorithm will return a number between 0 and 1 which tells how closely the strings match (0 = not at all, 1 = exact match):
 
 ```javascript
 var natural = require('natural');
-console.log(natural.JaroWinklerDistance("dixon","dicksonx"))
+console.log(natural.JaroWinklerDistance("dixon","dicksonx"));
 console.log(natural.JaroWinklerDistance('not', 'same'));
 ```
 
@@ -100,7 +118,7 @@ Output:
 0
 ```
 
-Natural also offers support for Levenshtein distances:
+Natural also offers support for [Levenshtein](https://en.wikipedia.org/wiki/Levenshtein_distance) distances:
 
 ```javascript
 var natural = require('natural');
