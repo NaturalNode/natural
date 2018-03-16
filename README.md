@@ -118,6 +118,13 @@ Output:
 0
 ```
 
+If the distance between the strings is already known you can pass it as a third parameter. And you can force the algorithm to ignore case by passing a fourth parameter as follows:
+```javascript
+var natural = require('natural');
+console.log(natural.JaroWinklerDistance("dixon","dicksonx", undefined, true));
+```
+
+
 Natural also offers support for [Levenshtein](https://en.wikipedia.org/wiki/Levenshtein_distance) distances:
 
 ```javascript
