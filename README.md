@@ -27,6 +27,8 @@ Aside from this README, the only documentation is [this DZone article](http://ww
 * [Approximate String Matching](#approximate-string-matching)
 * [Stemmers](#stemmers)
 * [Classifiers](#classifiers)
+  * [Bayesian and logistic regression](#bayesian-and-logistic-regression)
+  * [Maximum Entropy Classifier](#maximum-entropy-classifier)
 * [Phonetics](#phonetics)
 * [Inflectors](#inflectors)
 * [N-Grams](#n-grams)
@@ -38,7 +40,6 @@ Aside from this README, the only documentation is [this DZone article](http://ww
 * [WordNet](#wordnet)
 * [Spellcheck](#spellcheck)
 * [POS Tagger](#pos-tagger)
-* [Acknowledgements/references](#acknowledgements-and-references)
 * [Development](#development)
 * [License](#license)
 
@@ -249,6 +250,8 @@ console.log("chainsaws".stem());
 
 ## Classifiers
 
+### Bayesian and logistic regression
+
 Two classifiers are currently supported, [Naive Bayes](http://en.wikipedia.org/wiki/Naive_Bayes_classifier) and [logistic regression](http://en.wikipedia.org/wiki/Logistic_regression).
 The following examples use the BayesClassifier class, but the
 LogisticRegressionClassifier class could be substituted instead.
@@ -356,6 +359,171 @@ alternate English stemmers. The default is the `PorterStemmer`.
 const PorterStemmerRu = require('./node_modules/natural/lib/natural/stemmers/porter_stemmer_ru');
 var classifier = new natural.BayesClassifier(PorterStemmerRu);
 ```
+
+### Maximum Entropy Classifier
+This module provides a classifier based on maximum entropy modelling. The central idea to maximum entropy modelling is to estimate a probability distribution that that has maximum entropy subject to the evidence that is available. This means that the distribution follows the data it has "seen" but does not make any assumptions beyond that.
+
+The module is not specific to natural language processing, or any other application domain. There are little requirements with regard to the data structure it can be trained on. For training, it needs a sample that consists of elements. These elements have two parts:
+* part a: the class of the element
+* part b: the context of the element
+The classifier will, once trained, return the most probable class for a particular context.
+
+We start with an explanation of samples and elements. You have to create your own specialisation of the Element class. Your element class should implement the generateFeatures method for inferring feature functions from the sample.
+
+#### Samples and elements
+Elements and contexts are created as follows:
+
+```javascript
+var MyElement = require('MyElementClass');
+var Context = require('Context');
+var Sample = require('Sample');
+
+var x = new MyElementClass("x", new Context("0"));
+// A sample is created from an array of elements
+var sample = new Sample();
+sample.addElement(x);
+```
+A class is a string, contexts may be as complex as you want (as long as it can be serialised).
+
+A sample can be saved to and loaded from a file:
+```javascript
+sample.save('sample.json', function(error, sample) {
+  ...
+});
+```
+A sample can be read from a file as follows.
+
+```javascript
+sample.load('sample.json', MyElementClass, function(err, sample) {
+
+});
+```
+You have to pass the element class to the load method so that the right element objects can be created from the data.
+
+#### Features and feature sets
+Features are functions that map elements to zero or one. Features are defined as follows:
+```javascript
+var Feature = require('Feature');
+
+function f(x) {
+  if (x.b === "0") {
+    return 1;
+  }
+  return 0;
+}
+
+var feature = new Feature(f, name, parameters);
+```
+<code>name</code> is a string for the name of the feature function, <code>parameters</code> is an array of strings for the parameters of the feature function. The combination of name and parameters should uniquely distinguish features from each other. Features that are added to a feature set are tested for uniqueness using these properties.
+
+A feature set is created like this
+```javascript
+var FeatureSet = require('FeatureSet');
+
+var set = new FeatureSet();
+set.addFeature(f, "f", ["0"]);
+```
+
+In most cases you will generate feature functions using closures. For instance, when you generate feature functions in a loop that iterates through an array
+```javascript
+var FeatureSet = require('FeatureSet');
+var Feature = require('Feature');
+
+var listOfTags = ['NN', 'DET', 'PREP', 'ADJ'];
+var featureSet = new FeatureSet();
+
+listofTags.forEach(function(tag) {
+  function isTag(x) {
+    if (x.b.data.tag === tag) {
+      return 1
+    }
+    return 0;
+  }
+  featureSet.addFeature(new Feature(f, "f", [tag]));
+});
+```
+In this example you create feature functions that each have a different value for <code>tag</code> in their closure.
+
+#### Setting up and training the classifier
+A classifier needs the following parameter:
+* Classes: an array of classes (strings)
+* Features: an array of feature functions
+* Sample: a sample of elements for training the classifier
+
+A classifier can be created as follows:
+```javascript
+var Classifier = require('Classifier');
+var classifier = new Classifier(classes, featureSet, sample);
+```
+And it starts training with:
+```javascript
+var maxIterations = 100;
+var minImprovement = .01;
+var p = classifier.train(maxIterations, minImprovement);
+```
+Training is finished when either <code>maxIterations</code> is reached or the improvement in likelihood (of the sample) becomes smaller than <code>minImprovement</code>. It returns a probability distribution that can be stored and retrieved for later usage:
+```javascript
+classifier.save('classifier.json', function(err, c) {
+  if (err) {
+    console.log(err);
+  }
+  else {
+    // Continue using the classifier
+  }
+});
+
+classifier.load('classifier.json', function(err, c) {
+  if (err) {
+    console.log(err);
+  }
+  else {
+    // Use the classifier
+  }
+});
+```
+
+The training algorithm is based on Generalised Iterative Scaling.
+
+#### Applying the classifier
+The classifier can be used to classify contexts in two ways. To get the probabilities for all classes:
+```javascript
+var classifications = classifier.getClassifications(context);
+classifications.forEach(function(classPlusProbability) {
+  console.log('Class ' + classPlusProbability.label + ' has score ' + classPlusProbability.value);
+});
+```
+This returns a map from classes to probabilities.
+To get the highest scoring class:
+```javascript
+var class = classifier.classify(context);
+console.log(class);
+```
+
+#### Simple example of maximum entropy modelling
+A  test is added to the spec folder based on simple elements that have contexts that are either "0" or "1", and classes are "x" and "y".
+```javascript
+{
+  "a": "x",
+  "b": {
+    "data": "0"
+  }
+}
+```
+In the SE_Element class that inherits from Element, the method generateFeatures is implemented. It creates a feature function that tests for context "0".
+
+After setting up your own element class, the classifier can be created and trained.
+
+#### Application to POS tagging
+A more elaborate example of maximum entropy modelling is provided for part of speech tagging. The following steps are taken to create a classifier and apply it to a test set:
+* A new element class POS_Element is created that has a word window and a tag window around the word to be tagged.
+* From the Brown corpus a sample is generated consisting of POS elements.
+* Feature functions are generated from the sample.
+* A classifier is created and trained.
+* The classifier is applied to a test set. Results are compared to a simple lexicon-based tagger.  
+
+#### References
+* Adwait RatnaParkhi, Maximum Entropy Models For Natural Language Ambiguity Resolution, University of Pennsylvania, 1998, URL: http://repository.upenn.edu/cgi/viewcontent.cgi?article=1061&context=ircs_reports
+* Darroch, J.N.; Ratcliff, D. (1972). Generalized iterative scaling for log-linear models, The Annals of Mathematical Statistics, Institute of Mathematical Statistics, 43 (5): 1470–1480.
 
 ## Phonetics
 
@@ -1033,9 +1201,19 @@ var rules = new natural.RuleSet(rulesFilename);
 var tagger = new natural.BrillPOSTagger(lexicon, rules);
 
 var sentence = ["I", "see", "the", "man", "with", "the", "telescope"];
-console.log(JSON.stringify(tagger.tag(sentence)));
-// [["I","NN"],["see","VB"],["the","DT"],["man","NN"],["with","IN"],["the","DT"],["telescope","NN"]]
-
+console.log(tagger.tag(sentence));
+```
+This outputs the following:
+```
+Sentence {
+  taggedWords:
+   [ { token: 'I', tag: 'NN' },
+     { token: 'see', tag: 'VB' },
+     { token: 'the', tag: 'DT' },
+     { token: 'man', tag: 'NN' },
+     { token: 'with', tag: 'IN' },
+     { token: 'the', tag: 'DT' },
+     { token: 'telescope', tag: 'NN' } ] }
 ```
 
 ### Lexicon
@@ -1076,22 +1254,18 @@ VBD NN PREV-TAG DT
 Here the category of the previous word must be <code>DT</code> for the rule to be applied.
 
 ### Algorithm
-The tagger applies transformation rules that may change the category of words. The input sentence must be split into words which are assigned with categories. The tagged sentence is then processed from left to right. At each step all rules are applied once; rules are applied in the order in which they are specified. Algorithm:
+The tagger applies transformation rules that may change the category of words. The input sentence is a Sentence object with tagged words. The tagged sentence is processed from left to right. At each step all rules are applied once; rules are applied in the order in which they are specified. Algorithm:
 ```javascript
-function(sentence) {
-  var tagged_sentence = new Array(sentence.length);
-
-  // snip
-
-  // Apply transformation rules
-  for (var i = 0, size = sentence.length; i < size; i++) {
-    this.transformation_rules.forEach(function(rule) {
-      rule.apply(tagged_sentence, i);
+Brill_POS_Tagger.prototype.applyRules = function(sentence) {
+  for (var i = 0, size = sentence.taggedWords.length; i < size; i++) {
+    this.ruleSet.getRules().forEach(function(rule) {
+      rule.apply(sentence, i);
     });
   }
-  return(tagged_sentence);
-}
+  return sentence;
+};
 ```
+The output is a Sentence object just like the input sentence.
 
 ### Adding a predicate
 Predicates are defined in module <code>lib/RuleTemplates.js</code>. In that file
@@ -1119,13 +1293,13 @@ A typical entry for a rule templates looks like this:
     "parameter1Values": nextTagParameterValues
   }
 ```
-A predicate function accepts a tagged sentence, the current position in the
+A predicate function accepts a Sentence object, the current position in the
 sentence that should be tagged, and the outcome(s) of the predicate.
 An example of a predicate that checks the category of the current word:
 ```javascript
-function next_tag_is(tagged_sentence, i, parameter) {
-  if (i < tagged_sentence.length - 1) {
-    return(tagged_sentence[i+1][1] === parameter);
+function next_tag_is(sentence, i, parameter) {
+  if (i < sentence.taggedWords.length - 1) {
+    return(sentence.taggedWords[i + 1][1] === parameter);
   }
   else {
     return(false);
@@ -1145,10 +1319,6 @@ function nextTagParameterValues(sentence, i) {
   }
 }
 ```
-Please note that these functions work with a different data type. Here, a
-sentence is an array of tokens and tokens are maps that have at least a
-token (word) and a tag.
-
 
 ### Training
 The trainer allows to learn a new set of transformation rules from a corpus.
