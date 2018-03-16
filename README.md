@@ -131,6 +131,45 @@ Output:
 1
 ```
 
+Full Damerau-Levenshtein matching can be used if you want to consider character transpositions as a valid edit operation.
+
+```javascript
+console.log(natural.DamerauLevenshteinDistance("az", "za"));
+```
+
+Output:
+```javascript
+1
+```
+
+The transposition cost can be modified as well:
+
+```javascript
+console.log(natural.DamerauLevenshteinDistance("az", "za", { transposition_cost: 0 }))
+```
+
+Output:
+```javascript
+0
+```
+
+A restricted form of Damerau-Levenshtein (Optimal String Alignment) is available.
+
+This form of matching is more space efficient than unrestricted Damerau-Levenshtein, by only considering a transposition if there are no characters between the transposed characters.
+
+Comparison:
+
+```javascript
+// Optimal String Alignment
+console.log(natural.DamerauLevenshteinDistance('ABC', 'ACB'), { restricted: true });
+1
+console.log(natural.DamerauLevenshteinDistance('CA', 'ABC', { restricted: true }));
+2
+// Unrestricted Damerau-Levenshtein
+console.log(natural.DamerauLevenshteinDistance('CA', 'ABC', { restricted: false }));
+1
+```
+
 And Dice's co-efficient:
 
 ```javascript
@@ -162,6 +201,8 @@ Output:
 ```javascript
 { substring: 'the Rain Coats Book Store', distance: 4 }
 ```
+
+The following
 
 ## Stemmers
 
@@ -976,14 +1017,14 @@ get the number of vertexes:
 ```javascript
 console.log(digraph.v());
 ```
-you will get 5.
+you will get 7.
 
 get the number of edges:
 
 ```javascript
 console.log(digraph.e());
 ```
-you will get 5.
+you will get 6.
 
 
 
@@ -1011,22 +1052,9 @@ console.log(spt.getDistTo(4));
 ```
 the output will be: 0.35
 
-### hasDistTo(vertex)
-
-```javascript
-console.log(spt.hasDistTo(4));
-console.log(spt.hasDistTo(5));
-```
-
-output will be:
-
-```javascript
-true
-false
-```
-
 ### pathTo(vertex)
-this will return a shortest path:
+
+Will return the shortest path:
 
 ```javascript
 console.log(spt.pathTo(4));
@@ -1048,8 +1076,8 @@ hasPathTo(vertex),
 pathTo(vertex).
 
 ```javascript
-var ShortestPathTree = natural.ShortestPathTree;
-var spt = new ShortestPathTree(digraph, 5);
+var LongestPathTree = natural.LongestPathTree;
+var lpt = new LongestPathTree(digraph, 5);
 ```
 digraph is an instance of EdgeWeightedDigraph, the second param is the start vertex of DAG.
 
@@ -1058,29 +1086,16 @@ digraph is an instance of EdgeWeightedDigraph, the second param is the start ver
 Will return the dist to vertex.
 
 ```javascript
-console.log(spt.getDistTo(4));
+console.log(lpt.getDistTo(4));
 ```
 the output will be: 2.06
 
-### hasDistTo(vertex)
-
-```javascript
-console.log(spt.hasDistTo(4));
-console.log(spt.hasDistTo(5));
-```
-
-output will be:
-
-```javascript
-true
-false
-```
-
 ### pathTo(vertex)
-this will return a longest path:
+
+Will return the longest path:
 
 ```javascript
-console.log(spt.pathTo(4));
+console.log(lpt.pathTo(4));
 ```
 
 output will be:
