@@ -55,4 +55,14 @@ describe('jaro-winkler', function () {
         expect(jaroWinklerDistance('class', 'clams').approxEql(0.90666)).toBeTruthy();
         expect(jaroWinklerDistance('clams', 'class').approxEql(0.90666)).toBeTruthy();
     });
+
+    it('should ignore case when asked to', function() {
+        expect(jaroWinklerDistance('aaa', 'aAa', undefined, true)).toEqual(jaroWinklerDistance('aaa', 'aaa'));
+        expect(jaroWinklerDistance('aaa', 'aAa')).not.toEqual(jaroWinklerDistance('aaa', 'aaa'));
+        expect(jaroWinklerDistance('dixon', 'DICKSONX', undefined, true)).toEqual(jaroWinklerDistance('DIXON', 'DICKSONX'));
+        expect(jaroWinklerDistance('seddon', 'SEDDON', undefined, true)).toEqual(jaroWinklerDistance('SEDDON', 'SEDDON'));
+        expect(jaroWinklerDistance('MARTHA', 'MARHTA', undefined, true).approxEql(0.96111)).toBeTruthy();
+        expect(jaroWinklerDistance('abcd', 'ABCD', undefined, true)).toBe(1);
+    });
+
 });
