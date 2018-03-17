@@ -78,6 +78,10 @@ console.log(tokenizer.tokenize("flea-dog"));
 tokenizer = new natural.WordPunctTokenizer();
 console.log(tokenizer.tokenize("my dog hasn't any fleas."));
 // [ 'my',  'dog',  'hasn',  '\'',  't',  'any',  'fleas',  '.' ]
+
+tokenizer = new natural.OrthographyTokenizer({language: "fi"});
+console.log(tokenizer.tokenize("Mikä sinun nimesi on?"));
+// [ 'Mikä', 'sinun', 'nimesi', 'on' ]
 ```
 
 ## String Distance
