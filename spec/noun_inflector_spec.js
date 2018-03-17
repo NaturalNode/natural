@@ -55,6 +55,7 @@ describe('noun inflector', function() {
             expect(inflector.singularize('oxen')).toBe('ox');
             expect(inflector.singularize('clothes')).toBe('cloth');
             expect(inflector.singularize('heroes')).toBe('hero');
+            expect(inflector.singularize('torsi')).toBe('torso');
         });
 
         it('should handle IX cases', function() {
@@ -92,6 +93,13 @@ describe('noun inflector', function() {
             expect(inflector.singularize('nuclei')).toBe('nucleus');
             expect(inflector.singularize('fungi')).toBe('fungus');
             expect(inflector.singularize('cacti')).toBe('cactus');
+            expect(inflector.singularize('alumni')).toBe('alumnus');
+            expect(inflector.singularize('calculi')).toBe('calculus');
+            expect(inflector.singularize('hippopotami')).toBe('hippopotamus');
+            expect(inflector.singularize('macrofungi')).toBe('macrofungus');
+            expect(inflector.singularize('phoeti')).toBe('phoetus');
+            expect(inflector.singularize('syllabi')).toBe('syllabus');
+            expect(inflector.singularize('trophi')).toBe('trophus');
         });
 
         it('should handle IVES cases', function() {
