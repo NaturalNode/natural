@@ -84,7 +84,7 @@ console.log(tokenizer.tokenize("my dog hasn't any fleas."));
 
 ## String Distance
 
-Natural provides an implementation of three algorithms for calculating string distance: Hamming distance, Jaro-Winkler, and Levenshtein distance.
+Natural provides an implementation of three algorithms for calculating string distance: Hamming distance, Jaro-Winkler, Levenshtein distance, and Dice coefficient.
 
 [Hamming distance](https://en.wikipedia.org/wiki/Hamming_distance) measures the distance between two strings of equal length by counting the number of different characters. The third parameter indicates whether case should be ignored. By default the algorithm is case sensitive.
 ```javascript
@@ -195,7 +195,7 @@ console.log(natural.DamerauLevenshteinDistance('CA', 'ABC', { restricted: false 
 1
 ```
 
-And Dice's co-efficient:
+And [Dice's co-efficient](https://en.wikipedia.org/wiki/S%C3%B8rensen%E2%80%93Dice_coefficient):
 
 ```javascript
 var natural = require('natural');
