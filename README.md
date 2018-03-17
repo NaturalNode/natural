@@ -14,8 +14,7 @@ contributions and the like.
 Note that many algorithms from Rob Ellis's [node-nltools](https://github.com/NaturalNode/node-nltools) are
 being merged into this project and will be maintained from here onward.
 
-At the moment, most of the algorithms are English-specific, but in the long-term, some diversity
-will be in order. Thanks to Polyakov Vladimir, Russian stemming has been added!, Thanks to David Przybilla, Spanish stemming has been added!.
+While most of the algorithms are English-specific, contributors have implemented support for other languages. Thanks to Polyakov Vladimir, Russian stemming has been added! Thanks to David Przybilla, Spanish stemming has been added! Thanks to [even more contributors](https://github.com/NaturalNode/natural/graphs/contributors), stemming and tokenizing in more languages have been added.
 
 Aside from this README, the only documentation is [this DZone article](http://www.dzone.com/links/r/using_natural_a_nlp_module_for_nodejs.html), [this free course on Egghead.io](https://egghead.io/courses/natural-language-processing-in-javascript-with-natural), and [here on my blog](http://www.chrisumbel.com/article/node_js_natural_language_porter_stemmer_lancaster_bayes_naive_metaphone_soundex), which is a bit older.
 
@@ -85,6 +84,68 @@ tokenizer = new natural.OrthographyTokenizer({language: "fi"});
 console.log(tokenizer.tokenize("Mikä sinun nimesi on?"));
 // [ 'Mikä', 'sinun', 'nimesi', 'on' ]
 ```
+
+The following tokenizers are available:
+
+<a name="WordTokenizer" href="#WordTokenizer">#</a><i>natural</i>.<b>WordTokenizer</b>()
+
+Word tokenizer: a tokenizer that divides a text into sequences of alphabetic and numeric characters. E.g.:
+
+```javascript
+WordTokenizer().tokenize("She said 'hello'.")
+// ['She', 'said', 'hello']
+```
+
+<a name="WordPunctTokenizer" href="#WordPunctTokenizer">#</a><i>natural</i>.<b>WordPunctTokenizer</b>()
+
+Word + punctuation tokenizer: a tokenizer that divides a text into sequences of alphabetic and non-alphabetic characters. E.g.:
+
+```javascript
+WordTokenizer().tokenize("She said 'hello'.")
+// ['She','said',''','hello',''','.']
+```
+
+<a name="CaseTokenizer" href="#CaseTokenizer">#</a><i>natural</i>.<b>CaseTokenizer</b>()
+
+A word tokenizer that works with all UTF-8 alphabets (cf #245).
+
+```javascript
+CaseTokenizer().tokenize('Vy mOzhite mne pamOch? Вы можете мне помочь?')
+// ['Vy', 'mOzhite', 'mne', 'pamOch', 'Вы', 'можете', 'мне', 'помочь']
+
+CaseTokenizer().tokenize('isso é coração')
+// ['isso', 'é', 'coração']
+```
+
+<a name="RegexpTokenizer" href="#RegexpTokenizer">#</a><i>natural</i>.<b>RegexpTokenizer</b>()
+
+<a name="TreebankWordTokenizer" href="#TreebankWordTokenizer">#</a><i>natural</i>.<b>TreebankWordTokenizer</b>()
+
+<a name="SentenceTokenizer" href="#SentenceTokenizer">#</a><i>natural</i>.<b>SentenceTokenizer</b>()
+
+<a name="AggressiveTokenizer" href="#AggressiveTokenizer">#</a><i>natural</i>.<b>AggressiveTokenizer</b>()
+
+<a name="TokenizerJa" href="#TokenizerJa">#</a><i>natural</i>.<b>TokenizerJa</b>()
+
+<a name="AggressiveTokenizerNl" href="#AggressiveTokenizerNl">#</a><i>natural</i>.<b>AggressiveTokenizerNl</b>()
+
+<a name="AggressiveTokenizerFa" href="#AggressiveTokenizerFa">#</a><i>natural</i>.<b>AggressiveTokenizerFa</b>()
+
+<a name="AggressiveTokenizerFr" href="#AggressiveTokenizerFr">#</a><i>natural</i>.<b>AggressiveTokenizerFr</b>()
+
+<a name="AggressiveTokenizerRu" href="#AggressiveTokenizerRu">#</a><i>natural</i>.<b>AggressiveTokenizerRu</b>()
+
+<a name="AggressiveTokenizerEs" href="#AggressiveTokenizerEs">#</a><i>natural</i>.<b>AggressiveTokenizerEs</b>()
+
+<a name="AggressiveTokenizerIt" href="#AggressiveTokenizerIt">#</a><i>natural</i>.<b>AggressiveTokenizerIt</b>()
+
+<a name="AggressiveTokenizerPl" href="#AggressiveTokenizerPl">#</a><i>natural</i>.<b>AggressiveTokenizerPl</b>()
+
+<a name="AggressiveTokenizerPt" href="#AggressiveTokenizerPt">#</a><i>natural</i>.<b>AggressiveTokenizerPt</b>()
+
+<a name="AggressiveTokenizerNo" href="#AggressiveTokenizerNo">#</a><i>natural</i>.<b>AggressiveTokenizerNo</b>()
+
+<a name="AggressiveTokenizerSv" href="#AggressiveTokenizerSv">#</a><i>natural</i>.<b>AggressiveTokenizerSv</b>()
 
 ## String Distance
 
@@ -258,6 +319,23 @@ console.log(natural.PorterStemmerRu.stem("падший"));
 ```javascript
 console.log(natural.PorterStemmerEs.stem("jugaría"));
 ```
+
+The following stemmers are available:
+
+* `PorterStemmer`
+* `LancasterStemmer`
+* `PorterStemmerFa`
+* `PorterStemmerFr`
+* `PorterStemmerRu`
+* `PorterStemmerEs`
+* `PorterStemmerIt`
+* `PorterStemmerNo`
+* `PorterStemmerSv`
+* `PorterStemmerPt`
+* `StemmerFr`
+* `StemmerPl`
+* `StemmerJa`
+* `StemmerId`
 
 `attach()` patches `stem()` and `tokenizeAndStem()` to String as a shortcut to
 `PorterStemmer.stem(token)`. `tokenizeAndStem()` breaks text up into single words
