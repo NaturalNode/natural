@@ -17,15 +17,18 @@ being merged into this project and will be maintained from here onward.
 At the moment, most of the algorithms are English-specific, but in the long-term, some diversity
 will be in order. Thanks to Polyakov Vladimir, Russian stemming has been added!, Thanks to David Przybilla, Spanish stemming has been added!.
 
-Aside from this README, the only documentation is [this DZone article](http://www.dzone.com/links/r/using_natural_a_nlp_module_for_nodejs.html) and [here on my blog](http://www.chrisumbel.com/article/node_js_natural_language_porter_stemmer_lancaster_bayes_naive_metaphone_soundex), which is a bit older.
+Aside from this README, the only documentation is [this DZone article](http://www.dzone.com/links/r/using_natural_a_nlp_module_for_nodejs.html), [this free course on Egghead.io](https://egghead.io/courses/natural-language-processing-in-javascript-with-natural), and [here on my blog](http://www.chrisumbel.com/article/node_js_natural_language_porter_stemmer_lancaster_bayes_naive_metaphone_soundex), which is a bit older.
 
 ### TABLE OF CONTENTS
 
 * [Installation](#installation)
 * [Tokenizers](#tokenizers)
 * [String Distance](#string-distance)
+* [Approximate String Matching](#approximate-string-matching)
 * [Stemmers](#stemmers)
 * [Classifiers](#classifiers)
+  * [Bayesian and logistic regression](#bayesian-and-logistic-regression)
+  * [Maximum Entropy Classifier](#maximum-entropy-classifier)
 * [Phonetics](#phonetics)
 * [Inflectors](#inflectors)
 * [N-Grams](#n-grams)
@@ -37,7 +40,6 @@ Aside from this README, the only documentation is [this DZone article](http://ww
 * [WordNet](#wordnet)
 * [Spellcheck](#spellcheck)
 * [POS Tagger](#pos-tagger)
-* [Acknowledgements/references](#acknowledgements-and-references)
 * [Development](#development)
 * [License](#license)
 
@@ -58,8 +60,8 @@ Word, Regexp, and [Treebank tokenizers](http://www.cis.upenn.edu/~treebank/token
 arrays of tokens:
 
 ```javascript
-var natural = require('natural'),
-  tokenizer = new natural.WordTokenizer();
+var natural = require('natural');
+var tokenizer = new natural.WordTokenizer();
 console.log(tokenizer.tokenize("your dog has fleas."));
 // [ 'your', 'dog', 'has', 'fleas' ]
 ```
@@ -86,12 +88,30 @@ console.log(tokenizer.tokenize("Mikä sinun nimesi on?"));
 
 ## String Distance
 
-Natural provides an implementation of the [Jaro–Winkler](http://en.wikipedia.org/wiki/Jaro%E2%80%93Winkler_distance) string distance measuring algorithm.
-This will return a number between 0 and 1 which tells how closely the strings match (0 = not at all, 1 = exact match):
+Natural provides an implementation of three algorithms for calculating string distance: Hamming distance, Jaro-Winkler, Levenshtein distance, and Dice coefficient.
+
+[Hamming distance](https://en.wikipedia.org/wiki/Hamming_distance) measures the distance between two strings of equal length by counting the number of different characters. The third parameter indicates whether case should be ignored. By default the algorithm is case sensitive.
+```javascript
+var natural = require('natural');
+console.log(natural.HammingDistance("karolin", "kathrin", false));
+console.log(natural.HammingDistance("karolin", "kerstin", false));
+// If strings differ in length -1 is returned
+console.log(natural.HammingDistance("short string", "longer string", false));
+```
+
+Output:
+```javascript
+3
+3
+-1
+```
+
+
+The [Jaro–Winkler](http://en.wikipedia.org/wiki/Jaro%E2%80%93Winkler_distance) string distance measuring algorithm will return a number between 0 and 1 which tells how closely the strings match (0 = not at all, 1 = exact match):
 
 ```javascript
 var natural = require('natural');
-console.log(natural.JaroWinklerDistance("dixon","dicksonx"))
+console.log(natural.JaroWinklerDistance("dixon","dicksonx"));
 console.log(natural.JaroWinklerDistance('not', 'same'));
 ```
 
@@ -102,7 +122,14 @@ Output:
 0
 ```
 
-Natural also offers support for Levenshtein distances:
+If the distance between the strings is already known you can pass it as a third parameter. And you can force the algorithm to ignore case by passing a fourth parameter as follows:
+```javascript
+var natural = require('natural');
+console.log(natural.JaroWinklerDistance("dixon","dicksonx", undefined, true));
+```
+
+
+Natural also offers support for [Levenshtein](https://en.wikipedia.org/wiki/Levenshtein_distance) distances:
 
 ```javascript
 var natural = require('natural');
@@ -133,7 +160,46 @@ Output:
 1
 ```
 
-And Dice's co-efficient:
+Full Damerau-Levenshtein matching can be used if you want to consider character transpositions as a valid edit operation.
+
+```javascript
+console.log(natural.DamerauLevenshteinDistance("az", "za"));
+```
+
+Output:
+```javascript
+1
+```
+
+The transposition cost can be modified as well:
+
+```javascript
+console.log(natural.DamerauLevenshteinDistance("az", "za", { transposition_cost: 0 }))
+```
+
+Output:
+```javascript
+0
+```
+
+A restricted form of Damerau-Levenshtein (Optimal String Alignment) is available.
+
+This form of matching is more space efficient than unrestricted Damerau-Levenshtein, by only considering a transposition if there are no characters between the transposed characters.
+
+Comparison:
+
+```javascript
+// Optimal String Alignment
+console.log(natural.DamerauLevenshteinDistance('ABC', 'ACB'), { restricted: true });
+1
+console.log(natural.DamerauLevenshteinDistance('CA', 'ABC', { restricted: true }));
+2
+// Unrestricted Damerau-Levenshtein
+console.log(natural.DamerauLevenshteinDistance('CA', 'ABC', { restricted: false }));
+1
+```
+
+And [Dice's co-efficient](https://en.wikipedia.org/wiki/S%C3%B8rensen%E2%80%93Dice_coefficient):
 
 ```javascript
 var natural = require('natural');
@@ -147,6 +213,25 @@ Output:
 1
 0
 ```
+
+## Approximate String Matching
+Currently matching is supported via the Levenshtein algorithm.
+
+```javascript
+var natural = require('natural');
+var source = 'The RainCoat BookStore';
+var target = 'All the best books are here at the Rain Coats Book Store';
+
+console.log(natural.LevenshteinDistance(source, target, {search: true}));
+```
+
+Output:
+
+```javascript
+{ substring: 'the Rain Coats Book Store', distance: 4 }
+```
+
+The following
 
 ## Stemmers
 
@@ -194,13 +279,15 @@ console.log("chainsaws".stem());
 
 ## Classifiers
 
+### Bayesian and logistic regression
+
 Two classifiers are currently supported, [Naive Bayes](http://en.wikipedia.org/wiki/Naive_Bayes_classifier) and [logistic regression](http://en.wikipedia.org/wiki/Logistic_regression).
 The following examples use the BayesClassifier class, but the
 LogisticRegressionClassifier class could be substituted instead.
 
 ```javascript
-var natural = require('natural'),
-  classifier = new natural.BayesClassifier();
+var natural = require('natural');
+var classifier = new natural.BayesClassifier();
 ```
 
 You can train the classifier on sample text. It will use reasonable defaults to
@@ -293,14 +380,189 @@ var restoredClassifier = natural.BayesClassifier.restore(JSON.parse(raw));
 console.log(restoredClassifier.classify('i should sell that'));
 ```
 
+__Note:__ if using the classifier for languages other than English you may need
+to pass in the stemmer to use. In fact, you can do this for any stemmer including
+alternate English stemmers. The default is the `PorterStemmer`.
+
+```javascript
+const PorterStemmerRu = require('./node_modules/natural/lib/natural/stemmers/porter_stemmer_ru');
+var classifier = new natural.BayesClassifier(PorterStemmerRu);
+```
+
+### Maximum Entropy Classifier
+This module provides a classifier based on maximum entropy modelling. The central idea to maximum entropy modelling is to estimate a probability distribution that that has maximum entropy subject to the evidence that is available. This means that the distribution follows the data it has "seen" but does not make any assumptions beyond that.
+
+The module is not specific to natural language processing, or any other application domain. There are little requirements with regard to the data structure it can be trained on. For training, it needs a sample that consists of elements. These elements have two parts:
+* part a: the class of the element
+* part b: the context of the element
+The classifier will, once trained, return the most probable class for a particular context.
+
+We start with an explanation of samples and elements. You have to create your own specialisation of the Element class. Your element class should implement the generateFeatures method for inferring feature functions from the sample.
+
+#### Samples and elements
+Elements and contexts are created as follows:
+
+```javascript
+var MyElement = require('MyElementClass');
+var Context = require('Context');
+var Sample = require('Sample');
+
+var x = new MyElementClass("x", new Context("0"));
+// A sample is created from an array of elements
+var sample = new Sample();
+sample.addElement(x);
+```
+A class is a string, contexts may be as complex as you want (as long as it can be serialised).
+
+A sample can be saved to and loaded from a file:
+```javascript
+sample.save('sample.json', function(error, sample) {
+  ...
+});
+```
+A sample can be read from a file as follows.
+
+```javascript
+sample.load('sample.json', MyElementClass, function(err, sample) {
+
+});
+```
+You have to pass the element class to the load method so that the right element objects can be created from the data.
+
+#### Features and feature sets
+Features are functions that map elements to zero or one. Features are defined as follows:
+```javascript
+var Feature = require('Feature');
+
+function f(x) {
+  if (x.b === "0") {
+    return 1;
+  }
+  return 0;
+}
+
+var feature = new Feature(f, name, parameters);
+```
+<code>name</code> is a string for the name of the feature function, <code>parameters</code> is an array of strings for the parameters of the feature function. The combination of name and parameters should uniquely distinguish features from each other. Features that are added to a feature set are tested for uniqueness using these properties.
+
+A feature set is created like this
+```javascript
+var FeatureSet = require('FeatureSet');
+
+var set = new FeatureSet();
+set.addFeature(f, "f", ["0"]);
+```
+
+In most cases you will generate feature functions using closures. For instance, when you generate feature functions in a loop that iterates through an array
+```javascript
+var FeatureSet = require('FeatureSet');
+var Feature = require('Feature');
+
+var listOfTags = ['NN', 'DET', 'PREP', 'ADJ'];
+var featureSet = new FeatureSet();
+
+listofTags.forEach(function(tag) {
+  function isTag(x) {
+    if (x.b.data.tag === tag) {
+      return 1
+    }
+    return 0;
+  }
+  featureSet.addFeature(new Feature(f, "f", [tag]));
+});
+```
+In this example you create feature functions that each have a different value for <code>tag</code> in their closure.
+
+#### Setting up and training the classifier
+A classifier needs the following parameter:
+* Classes: an array of classes (strings)
+* Features: an array of feature functions
+* Sample: a sample of elements for training the classifier
+
+A classifier can be created as follows:
+```javascript
+var Classifier = require('Classifier');
+var classifier = new Classifier(classes, featureSet, sample);
+```
+And it starts training with:
+```javascript
+var maxIterations = 100;
+var minImprovement = .01;
+var p = classifier.train(maxIterations, minImprovement);
+```
+Training is finished when either <code>maxIterations</code> is reached or the improvement in likelihood (of the sample) becomes smaller than <code>minImprovement</code>. It returns a probability distribution that can be stored and retrieved for later usage:
+```javascript
+classifier.save('classifier.json', function(err, c) {
+  if (err) {
+    console.log(err);
+  }
+  else {
+    // Continue using the classifier
+  }
+});
+
+classifier.load('classifier.json', function(err, c) {
+  if (err) {
+    console.log(err);
+  }
+  else {
+    // Use the classifier
+  }
+});
+```
+
+The training algorithm is based on Generalised Iterative Scaling.
+
+#### Applying the classifier
+The classifier can be used to classify contexts in two ways. To get the probabilities for all classes:
+```javascript
+var classifications = classifier.getClassifications(context);
+classifications.forEach(function(classPlusProbability) {
+  console.log('Class ' + classPlusProbability.label + ' has score ' + classPlusProbability.value);
+});
+```
+This returns a map from classes to probabilities.
+To get the highest scoring class:
+```javascript
+var class = classifier.classify(context);
+console.log(class);
+```
+
+#### Simple example of maximum entropy modelling
+A  test is added to the spec folder based on simple elements that have contexts that are either "0" or "1", and classes are "x" and "y".
+```javascript
+{
+  "a": "x",
+  "b": {
+    "data": "0"
+  }
+}
+```
+In the SE_Element class that inherits from Element, the method generateFeatures is implemented. It creates a feature function that tests for context "0".
+
+After setting up your own element class, the classifier can be created and trained.
+
+#### Application to POS tagging
+A more elaborate example of maximum entropy modelling is provided for part of speech tagging. The following steps are taken to create a classifier and apply it to a test set:
+* A new element class POS_Element is created that has a word window and a tag window around the word to be tagged.
+* From the Brown corpus a sample is generated consisting of POS elements.
+* Feature functions are generated from the sample.
+* A classifier is created and trained.
+* The classifier is applied to a test set. Results are compared to a simple lexicon-based tagger.  
+
+#### References
+* Adwait RatnaParkhi, Maximum Entropy Models For Natural Language Ambiguity Resolution, University of Pennsylvania, 1998, URL: http://repository.upenn.edu/cgi/viewcontent.cgi?article=1061&context=ircs_reports
+* Darroch, J.N.; Ratcliff, D. (1972). Generalized iterative scaling for log-linear models, The Annals of Mathematical Statistics, Institute of Mathematical Statistics, 43 (5): 1470–1480.
+
 ## Phonetics
 
 Phonetic matching (sounds-like) matching can be done with the [SoundEx](http://en.wikipedia.org/wiki/Soundex),
 [Metaphone](http://en.wikipedia.org/wiki/Metaphone) or [DoubleMetaphone](http://en.wikipedia.org/wiki/Metaphone#Double_Metaphone) algorithms
 
 ```javascript
-var natural = require('natural'),
-    metaphone = natural.Metaphone, soundEx = natural.SoundEx;
+var natural = require('natural');
+var metaphone = natural.Metaphone;
+var soundEx = natural.SoundEx;
 
 var wordA = 'phonetics';
 var wordB = 'fonetix';
@@ -329,8 +591,8 @@ console.log(metaphone.process('phonetics', 3));
 feature is experimental and subject to change:
 
 ```javascript
-var natural = require('natural'),
-  dm = natural.DoubleMetaphone;
+var natural = require('natural');
+var dm = natural.DoubleMetaphone;
 
 var encodings = dm.process('Matrix');
 console.log(encodings[0]);
@@ -387,8 +649,8 @@ console.log('phonetics'.phonetics());
 Nouns can be pluralized/singularized with a `NounInflector`:
 
 ```javascript
-var natural = require('natural'),
-nounInflector = new natural.NounInflector();
+var natural = require('natural');
+var nounInflector = new natural.NounInflector();
 ```
 
 To pluralize a word (outputs "radii"):
@@ -564,9 +826,9 @@ a corpus and determine the weight of the word "node" and then the weight of the
 word "ruby" in each document.
 
 ```javascript
-var natural = require('natural'),
-    TfIdf = natural.TfIdf,
-    tfidf = new TfIdf();
+var natural = require('natural');
+var TfIdf = natural.TfIdf;
+var tfidf = new TfIdf();
 
 tfidf.addDocument('this document is about node.');
 tfidf.addDocument('this document is about ruby.');
@@ -621,9 +883,9 @@ a single measure value. The following example determines that the last document
 is the most relevant to the words "node" and "ruby".
 
 ```javascript
-var natural = require('natural'),
-    TfIdf = natural.TfIdf,
-    tfidf = new TfIdf();
+var natural = require('natural');
+var TfIdf = natural.TfIdf;
+var tfidf = new TfIdf();
 
 tfidf.addDocument('this document is about node.');
 tfidf.addDocument('this document is about ruby.');
@@ -642,15 +904,15 @@ document #1 is 1
 document #2 is 2
 ```
 
-The examples above all use strings, which case natural to automatically tokenize the input.
+The examples above all use strings, which causes natural to automatically tokenize the input.
 If you wish to perform your own tokenization or other kinds of processing, you
 can do so, then pass in the resultant arrays later. This approach allows you to bypass natural's
 default preprocessing.
 
 ```javascript
-var natural = require('natural'),
-    TfIdf = natural.TfIdf,
-    tfidf = new TfIdf();
+var natural = require('natural');
+var TfIdf = natural.TfIdf;
+var tfidf = new TfIdf();
 
 tfidf.addDocument(['document', 'about', 'node']);
 tfidf.addDocument(['document', 'about', 'ruby']);
@@ -695,8 +957,8 @@ existence search and prefix search.
 You need to add words to build up the dictionary of the Trie, this is an example of basic Trie set up:
 
 ```javascript
-var natural = require('natural'),
-    Trie = natural.Trie;
+var natural = require('natural');
+var Trie = natural.Trie;
 
 var trie = new Trie();
 
@@ -784,14 +1046,14 @@ get the number of vertexes:
 ```javascript
 console.log(digraph.v());
 ```
-you will get 5.
+you will get 7.
 
 get the number of edges:
 
 ```javascript
 console.log(digraph.e());
 ```
-you will get 5.
+you will get 6.
 
 
 
@@ -819,22 +1081,9 @@ console.log(spt.getDistTo(4));
 ```
 the output will be: 0.35
 
-### hasDistTo(vertex)
-
-```javascript
-console.log(spt.hasDistTo(4));
-console.log(spt.hasDistTo(5));
-```
-
-output will be:
-
-```javascript
-true
-false
-```
-
 ### pathTo(vertex)
-this will return a shortest path:
+
+Will return the shortest path:
 
 ```javascript
 console.log(spt.pathTo(4));
@@ -848,7 +1097,7 @@ output will be:
 
 ## LongestPathTree
 
-LongestPathTree represents a data type for solving the single-source shortest paths problem in
+LongestPathTree represents a data type for solving the single-source longest paths problem in
 edge-weighted directed acyclic graphs (DAGs).
 The edge weights can be positive, negative, or zero. There are three APIs same as ShortestPathTree:
 getDistTo(vertex),
@@ -856,8 +1105,8 @@ hasPathTo(vertex),
 pathTo(vertex).
 
 ```javascript
-var ShortestPathTree = natural.ShortestPathTree;
-var spt = new ShortestPathTree(digraph, 5);
+var LongestPathTree = natural.LongestPathTree;
+var lpt = new LongestPathTree(digraph, 5);
 ```
 digraph is an instance of EdgeWeightedDigraph, the second param is the start vertex of DAG.
 
@@ -866,29 +1115,16 @@ digraph is an instance of EdgeWeightedDigraph, the second param is the start ver
 Will return the dist to vertex.
 
 ```javascript
-console.log(spt.getDistTo(4));
+console.log(lpt.getDistTo(4));
 ```
 the output will be: 2.06
 
-### hasDistTo(vertex)
-
-```javascript
-console.log(spt.hasDistTo(4));
-console.log(spt.hasDistTo(5));
-```
-
-output will be:
-
-```javascript
-true
-false
-```
-
 ### pathTo(vertex)
-this will return a shortest path:
+
+Will return the longest path:
 
 ```javascript
-console.log(spt.pathTo(4));
+console.log(lpt.pathTo(4));
 ```
 
 output will be:
@@ -958,7 +1194,7 @@ This is best constructed with an array of tokens from a corpus, but a simple lis
 
 ```javascript
 var corpus = ['something', 'soothing'];
-var spellcheck = new Spellcheck(corpus);
+var spellcheck = new natural.Spellcheck(corpus);
 ```
 
 It uses the trie datastructure for fast boolean lookup of a word
@@ -981,19 +1217,32 @@ algorithm. Transformation rules are specified in external files.
 
 ### Usage
 ```javascript
-var natural = require("./lib/natural");
+var natural = require("natural");
+var path = require("path");
 
-var base_folder = "some_path/lib/natural/brill_pos_tagger";
-var rulesFilename = base_folder + "/data/tr_from_posjs.txt";
-var lexiconFilename = base_folder + "/data/lexicon_from_posjs.json";
+var base_folder = path.join(path.dirname(require.resolve("natural")), "brill_pos_tagger");
+var rulesFilename = base_folder + "/data/English/tr_from_posjs.txt";
+var lexiconFilename = base_folder + "/data/English/lexicon_from_posjs.json";
 var defaultCategory = 'N';
 
 var lexicon = new natural.Lexicon(lexiconFilename, defaultCategory);
-var rules = new natural.Ruleset(rulesFilename);
+var rules = new natural.RuleSet(rulesFilename);
 var tagger = new natural.BrillPOSTagger(lexicon, rules);
 
 var sentence = ["I", "see", "the", "man", "with", "the", "telescope"];
-console.log(JSON.stringify(tagger.tag(sentence)));
+console.log(tagger.tag(sentence));
+```
+This outputs the following:
+```
+Sentence {
+  taggedWords:
+   [ { token: 'I', tag: 'NN' },
+     { token: 'see', tag: 'VB' },
+     { token: 'the', tag: 'DT' },
+     { token: 'man', tag: 'NN' },
+     { token: 'with', tag: 'IN' },
+     { token: 'the', tag: 'DT' },
+     { token: 'telescope', tag: 'NN' } ] }
 ```
 
 ### Lexicon
@@ -1034,48 +1283,135 @@ VBD NN PREV-TAG DT
 Here the category of the previous word must be <code>DT</code> for the rule to be applied.
 
 ### Algorithm
-The tagger applies transformation rules that may change the category of words. The input sentence must be split into words which are assigned with categories. The tagged sentence is then processed from left to right. At each step all rules are applied once; rules are applied in the order in which they are specified. Algorithm:
+The tagger applies transformation rules that may change the category of words. The input sentence is a Sentence object with tagged words. The tagged sentence is processed from left to right. At each step all rules are applied once; rules are applied in the order in which they are specified. Algorithm:
 ```javascript
-function(sentence) {
-  var tagged_sentence = new Array(sentence.length);
-
-  // snip
-
-  // Apply transformation rules
-  for (var i = 0, size = sentence.length; i < size; i++) {
-    this.transformation_rules.forEach(function(rule) {
-      rule.apply(tagged_sentence, i);
+Brill_POS_Tagger.prototype.applyRules = function(sentence) {
+  for (var i = 0, size = sentence.taggedWords.length; i < size; i++) {
+    this.ruleSet.getRules().forEach(function(rule) {
+      rule.apply(sentence, i);
     });
   }
-  return(tagged_sentence);
+  return sentence;
+};
+```
+The output is a Sentence object just like the input sentence.
+
+### Adding a predicate
+Predicates are defined in module <code>lib/RuleTemplates.js</code>. In that file
+predicate names are mapped to metadata for generaring transformation rules. The following properties must be supplied:
+* Name of the predicate
+* A function that evaluates the predicate (should return a boolean)
+* A window <code>[i, j]</code> that defines the span of the predicate in the
+sentence relative to the current position
+* The number of parameter the predicate needs: 0, 1 or 2
+* If relevant, a function for parameter 1 that returns its possible values
+at the current position in the sentence (for generating rules in training)
+* If relevant, a function for parameter 2 that returns its possible values
+at the current position in the sentence (for training)
+
+A typical entry for a rule templates looks like this:
+```javascript
+"NEXT-TAG": {
+    // maps to the predicate function
+    "function": next_tag_is,
+    // Minimum required window before or after current position to be a relevant predicate
+    "window": [0, 1],
+    // The number of parameters the predicate takes
+    "nrParameters": 1,
+    // Function that returns relevant values for parameter 1
+    "parameter1Values": nextTagParameterValues
+  }
+```
+A predicate function accepts a Sentence object, the current position in the
+sentence that should be tagged, and the outcome(s) of the predicate.
+An example of a predicate that checks the category of the current word:
+```javascript
+function next_tag_is(sentence, i, parameter) {
+  if (i < sentence.taggedWords.length - 1) {
+    return(sentence.taggedWords[i + 1][1] === parameter);
+  }
+  else {
+    return(false);
+  }
 }
 ```
 
-### Adding a predicate
-Predicates are defined in module <code>lib/Predicate.js</code>. In that file
-a function must be created that serves as predicate. A predicate accepts a
-tagged sentence, the current position in the sentence that should be tagged, and
- the
- outcome(s) of the predicate. An example of a predicate that checks the category of the current word:
+A values function for a parameter returns an array all possible parameter
+values given a location in a tagged sentence.
 ```javascript
-function current_word_is_tag(tagged_sentence, i, parameter) {
-  return(tagged_sentence[i][0] === parameter);
+function nextTagParameterValues(sentence, i) {
+  if (i < sentence.length - 1) {
+    return [sentence[i + 1].tag];
+  }
+  else {
+    return [];
+  }
 }
 ```
-Some predicates accept two parameters. Next step is to map a keyword to this predicate so that it can be used in the transformation rules. The mapping is also defined in <code>lib/Predicate.js</code>:
+
+### Training
+The trainer allows to learn a new set of transformation rules from a corpus.
+It takes as input a tagged corpus and a set of rule templates. The algorithm
+generates positive rules (rules that apply at some location in the corpus)
+from the templates and iteratively extends and optimises the rule set.
+
+First, a corpus should be loaded. Currently, the format of Brown corpus is supported. Then a lexicon can be created from the corpus. The lexicon is needed for tagging the sentences before the learning algorithm is applied.
 ```javascript
-var predicates = {
-  "CURRENT-WORD-IS-TAG": current_word_is_tag,
-  "PREV-WORD-IS-CAP": prev_word_is_cap
-}
+var natural = require(natural);
+var text = fs.readFileSync(brownCorpusFile, 'utf8');
+var corpus = new natural.Corpus(text, 1);
+var lexicon = corpus.buildLexicon();
+```
+The next step is to create a set of rule templates from which the learning
+algorithm can generate transformation rules. Rule templates are defined in
+<code>PredicateMapping.js</code>.
+```javascript
+var natural require('natural');
+var templateNames = [
+  "NEXT-TAG",
+  "NEXT-WORD-IS-CAP",
+  "PREV-1-OR-2-OR-3-TAG",
+  "...",
+];
+var templates = templateNames.map(function(name) {
+  return new natural.RuleTemplate(name);
+});
+```
+Using lexicon and rule templates we can now start the trainer as follows.
+```javascript
+var natural require('natural');
+var Tester = require('natural.BrillPOSTrainer');
+var trainer = new Trainer(/* optional threshold */);
+var ruleSet = trainer.train(corpus, templates, lexicon);
+```
+A threshold value can be passed to constructor. Transformation rules with
+a score below the threshold are removed after training.
+The train method returns a set of transformation rules that can be used to
+create a POS tagger as usual. Also you can output the rule set in the right
+format for later usage.
+```javascript
+console.log(ruleSet.prettyPrint());
+```
+
+### Testing
+Now we can apply the lexicon and rule set to a test set.
+```javascript
+var tester = new natural.BrillPOSTester();
+var tagger = new natural.BrillPOSTagger(lexicon, ruleSet);
+var scores = tester.test(corpora[1], tagger);
+```
+The test method returns an array of two percentages: first percentage is the ratio of right tags after tagging with the lexicon; second percentage is the ratio of right tags after applying the transformation rules.
+```javascript
+console.log("Test score lexicon " + scores[0] + "%");
+console.log("Test score after applying rules " + scores[1] + "%");
 ```
 
 ### Acknowledgements and References
 * Part of speech tagger by Percy Wegmann, https://code.google.com/p/jspos/
 * Node.js version of jspos: https://github.com/neopunisher/pos-js
 * A simple rule-based part of speech tagger, Eric Brill, Published in: Proceeding ANLC '92 Proceedings of the third conference on Applied natural language processing, Pages 152-155. http://dl.acm.org/citation.cfm?id=974526
-
-
+* Exploring the Statistical Derivation of Transformational Rule Sequences for Part-of-Speech Tagging, Lance A. Ramshaw and Mitchell P. Marcus. http://acl-arc.comp.nus.edu.sg/archives/acl-arc-090501d4/data/pdf/anthology-PDF/W/W94/W94-0111.pdf
+* Brown Corpus, https://en.wikipedia.org/wiki/Brown_Corpus
 
 ## Development
 

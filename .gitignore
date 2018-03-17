@@ -9,3 +9,4 @@ io_spec/test_data/wordnet/download/*
 *.adj
 *.adv
 npm-debug.log
+.vscode
