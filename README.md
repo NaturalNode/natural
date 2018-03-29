@@ -28,7 +28,7 @@ Aside from this README, the only documentation is [this DZone article](http://ww
 * [Classifiers](#classifiers)
   * [Bayesian and logistic regression](#bayesian-and-logistic-regression)
   * [Maximum Entropy Classifier](#maximum-entropy-classifier)
-* [Sentiment Analysis](#sentiment)
+* [Sentiment Analysis](#sentiment-analysis)
 * [Phonetics](#phonetics)
 * [Inflectors](#inflectors)
 * [N-Grams](#n-grams)
@@ -634,7 +634,7 @@ A more elaborate example of maximum entropy modelling is provided for part of sp
 * Darroch, J.N.; Ratcliff, D. (1972). Generalized iterative scaling for log-linear models, The Annals of Mathematical Statistics, Institute of Mathematical Statistics, 43 (5): 1470–1480.
 
 ## Sentiment Analysis
-This is a simple sentiment analysis algorithm based on a vocabulary that assigns polarity to words. The algorithm calculates the sentiment by summing the polarity of each word and normalizing with the length of the sentence. If a negation occurs the result is made negative. It is used as follows:
+This is a simple sentiment analysis algorithm based on a vocabulary that assigns polarity to words. The algorithm calculates the sentiment of a piece of text by summing the polarity of each word and normalizing with the length of the sentence. If a negation occurs the result is made negative. It is used as follows:
 ```javascript
 var Analyzer = require('natural').SentimentAnalyzer;
 var stemmer = require('natural').PorterStemmer;
@@ -642,7 +642,22 @@ var analyzer = new Analyzer("English", stemmer, "afinn")
 console.log(analyzer.getSentiment("I like cherries"));
 // 0.6666666666666666
 ```
-Currently, English and Spanish are supported, but more languages can be added by adding vocabularies and extending the map `languageFiles` in `SentimentAnalyzer.js`.
+The constructor has three parameters:
+* Language: currently English and Spanish are supported.
+* Stemmer, to increase the coverage of the sentiment analyzer a stemmer may be provided. May be `null`.
+* Vocabulary, "afinn" or "senticon", these are different formats for vocabulary.
+
+Currently, English and Spanish (both in afinn format and senticon format) are supported, but more languages can be added by adding vocabularies and extending the map `languageFiles` in `SentimentAnalyzer.js`.
+
+### Acknowledgements
+Thanks to Domingo Martín Mancera for providing the basis for this sentiment analyzer in his repo [Lorca](https://github.com/dmarman/lorca).
+
+AFINN is a list of English words rated for valence with an integer
+between minus five (negative) and plus five (positive). The words have
+been manually labeled by Finn Årup Nielsen in 2009-2011. Scientific reference can be found [here](http://www2.imm.dtu.dk/pubdb/views/publication_details.php?id=6010). We used [afinn-165](https://github.com/words/afinn-165) which is available as nodejs module.
+
+The senticon vocabulary is based on work nby Fermin L. Cruz and others:
+Cruz, Fermín L., José A. Troyano, Beatriz Pontes, F. Javier Ortega. Building layered, multilingual sentiment lexicons at synset and lemma levels, Expert Systems with Applications, 2014.
 
 ## Phonetics
 
