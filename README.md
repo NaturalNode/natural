@@ -643,13 +643,21 @@ console.log(analyzer.getSentiment("I like cherries"));
 // 0.6666666666666666
 ```
 The constructor has three parameters:
-* Language: currently English and Spanish are supported.
+* Language: currently English, Spanish are supported.
 * Stemmer, to increase the coverage of the sentiment analyzer a stemmer may be provided. May be `null`.
 * Vocabulary, "afinn" or "senticon", these are different formats for vocabulary.
 
-Currently, English and Spanish (both in afinn format and senticon format) are supported, but more languages can be added by adding vocabularies and extending the map `languageFiles` in `SentimentAnalyzer.js`.
+Currently, English, Spanish, Catalan, Basque and Galician are supported, but more languages can be added by adding vocabularies and extending the map `languageFiles` in `SentimentAnalyzer.js`. Here is an overview of the supported languages with type of vocabulary and availability of negations:
 
-### Acknowledgements
+| Language        | AFINN     | Senticon  | Negations |
+| ------------- |:-----------:|:---------:|:---------:|
+| English       | X           |  X        | X         |
+| Spanish       | X           |  X        | X         |
+| Catalan       |             |  X        |           |
+| Basque        |             |  X        |           |
+| Galician      |             |  X        |           ||   
+
+### Acknowledgements and References
 Thanks to Domingo Martín Mancera for providing the basis for this sentiment analyzer in his repo [Lorca](https://github.com/dmarman/lorca).
 
 AFINN is a list of English words rated for valence with an integer
