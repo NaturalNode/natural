@@ -28,6 +28,7 @@ Aside from this README, the only documentation is [this DZone article](http://ww
 * [Classifiers](#classifiers)
   * [Bayesian and logistic regression](#bayesian-and-logistic-regression)
   * [Maximum Entropy Classifier](#maximum-entropy-classifier)
+* [Sentiment Analysis](#sentiment)
 * [Phonetics](#phonetics)
 * [Inflectors](#inflectors)
 * [N-Grams](#n-grams)
@@ -416,7 +417,7 @@ classifier.addDocument(['sell', 'gold'], 'sell');
 ```
 
 The training process can be monitored by subscribing to the event `trainedWithDocument` that's emitted by the classifier, this event's emitted each time a document is finished being trained against:
-
+```javascript
     classifier.events.on('trainedWithDocument', function (obj) {
        console.log(obj);
        /* {
@@ -426,7 +427,7 @@ The training process can be monitored by subscribing to the event `trainedWithDo
        *  }
        */
     });
-
+```
 A classifier can also be persisted and recalled so you can reuse a training
 
 ```javascript
@@ -631,6 +632,17 @@ A more elaborate example of maximum entropy modelling is provided for part of sp
 #### References
 * Adwait RatnaParkhi, Maximum Entropy Models For Natural Language Ambiguity Resolution, University of Pennsylvania, 1998, URL: http://repository.upenn.edu/cgi/viewcontent.cgi?article=1061&context=ircs_reports
 * Darroch, J.N.; Ratcliff, D. (1972). Generalized iterative scaling for log-linear models, The Annals of Mathematical Statistics, Institute of Mathematical Statistics, 43 (5): 1470–1480.
+
+## Sentiment Analysis
+This is a simple sentiment analysis algorithm based on a vocabulary that assigns polarity to words. The algorithm calculates the sentiment by summing the polarity of each word and normalizing with the length of the sentence. If a negation occurs the result is made negative. It is used as follows:
+```javascript
+var Analyzer = require('natural').SentimentAnalyzer;
+var stemmer = require('natural').PorterStemmer;
+var analyzer = new Analyzer("English", stemmer, "afinn")
+console.log(analyzer.getSentiment("I like cherries"));
+// 0.6666666666666666
+```
+Currently, English and Spanish are supported, but more languages can be added by adding vocabularies and extending the map `languageFiles` in `SentimentAnalyzer.js`.
 
 ## Phonetics
 
