@@ -645,17 +645,22 @@ console.log(analyzer.getSentiment("I like cherries"));
 The constructor has three parameters:
 * Language: currently English, Spanish are supported.
 * Stemmer, to increase the coverage of the sentiment analyzer a stemmer may be provided. May be `null`.
-* Vocabulary, "afinn" or "senticon", these are different formats for vocabulary.
+* Vocabulary, "afinn", "senticon" or "pattern" these are different formats for vocabulary.
 
-Currently, English, Spanish, Catalan, Basque and Galician are supported, but more languages can be added by adding vocabularies and extending the map `languageFiles` in `SentimentAnalyzer.js`. Here is an overview of the supported languages with type of vocabulary and availability of negations:
+Currently, the following languages are supported with type of vocabulary and availability of negations (in alphabetic order):
 
-| Language        | AFINN     | Senticon  | Negations |
-| ------------- |:-----------:|:---------:|:---------:|
-| English       | X           |  X        | X         |
-| Spanish       | X           |  X        | X         |
-| Catalan       |             |  X        |           |
-| Basque        |             |  X        |           |
-| Galician      |             |  X        |           ||   
+| Language      | AFINN       | Senticon  | Pattern   | Negations |
+| ------------- |:-----------:|:---------:|:---------:|:---------:|
+| Basque        |             |  X        |           |           |
+| Catalan       |             |  X        |           |           |
+| Dutch         |             |           | X         | X         |
+| English       | X           |  X        | X         | X         |
+| French        |             |           | X         |           |
+| Galician      |             |  X        |           |           |   
+| Italian       |             |           | X         |           |
+| Spanish       | X           |  X        |           | X         |     
+
+More languages can be added by adding vocabularies and extending the map `languageFiles` in `SentimentAnalyzer.js`. In the tools folder below `lib/natural/sentiment` some tools are provided for transforming vocabularies in Senticon and Pattern format into a JSON format.
 
 ### Acknowledgements and References
 Thanks to Domingo Martín Mancera for providing the basis for this sentiment analyzer in his repo [Lorca](https://github.com/dmarman/lorca).
@@ -664,11 +669,12 @@ AFINN is a list of English words rated for valence with an integer
 between minus five (negative) and plus five (positive). The words have
 been manually labeled by Finn Årup Nielsen in 2009-2011. Scientific reference can be found [here](http://www2.imm.dtu.dk/pubdb/views/publication_details.php?id=6010). We used [afinn-165](https://github.com/words/afinn-165) which is available as nodejs module.
 
-The senticon vocabulary is based on work nby Fermin L. Cruz and others:
+The senticon vocabulary is based on work by Fermin L. Cruz and others:
 Cruz, Fermín L., José A. Troyano, Beatriz Pontes, F. Javier Ortega. Building layered, multilingual sentiment lexicons at synset and lemma levels, Expert Systems with Applications, 2014.
 
-## Phonetics
+The Pattern vocabularies are from the [Pattern project](https://github.com/clips/pattern) of the CLiPS Research Center of University of Antwerpen.
 
+## Phonetics
 Phonetic matching (sounds-like) matching can be done with the [SoundEx](http://en.wikipedia.org/wiki/Soundex),
 [Metaphone](http://en.wikipedia.org/wiki/Metaphone) or [DoubleMetaphone](http://en.wikipedia.org/wiki/Metaphone#Double_Metaphone) algorithms
 

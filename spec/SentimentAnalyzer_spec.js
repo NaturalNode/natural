@@ -22,7 +22,7 @@
 
 var stemmer = require('../lib/natural/stemmers/porter_stemmer');
 var Analyzer = require("../lib/natural/sentiment/SentimentAnalyzer");
-var analyzer = new Analyzer("English", stemmer, "senticon");
+var analyzer = new Analyzer("Dutch", stemmer, "pattern");
 var sentences = [
   "I like cherries",
   "I like cherries very much",
@@ -33,6 +33,10 @@ var sentences = [
   "I am fine",
   "I feel a lot better today",
   "I feel great",
+  ""
+];
+
+var sentences = [
   ""
 ];
 
