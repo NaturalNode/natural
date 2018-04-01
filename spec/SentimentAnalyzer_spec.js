@@ -36,15 +36,81 @@ var sentences = [
   ""
 ];
 
-var sentences = [
-  ""
+var testConfigurations = [
+  {
+    "language": "Basque",
+    "stemmer": "",
+    "vocabularyType": "senticon",
+    "testSentences": [{"sentence": "Korrika egitea ez du batere gogoko", "score": 0},
+                      {"sentence": "Nire pasaportea galdu nuen", "score": 0},
+                      {"sentence": "Lasterketa aise irabazi zuen", "score": 0},
+                      {"sentence": "Seguru nago hori gezurra dela", "score": 0},
+                      {"sentence": "Tom-i ez zaio galtzea gustatzen", "score": 0},
+                      {"sentence": "mahai bat pertsona batentzako/bi personentzako, mesedez", "score": 0},
+                      {"sentence": "Uda zoragarri bat igaro nahi duzu Donostian, Euskal Herriko hiririk ederrenetako batean? Euskal Herriko Unibertsitatea liderra da euskal unibertsitate sisteman, eta aukera ematen dizu \"Basque Culture II. International Summer School\" ikastaro erakargarrian parte hartzeko 2017ko uztailaren 3tik 14ra. Ikastaroa mundu osoan izen handia duten profesionalek emango dute, eta akademikoki aukera paregabea da euskal gizartea gertutik ezagutzeko eta aldi berean hemengo hizkuntza eta ohiturak ikasteko.", "score": 0}
+                     ]
+  }/*,
+  {
+    "language": "Catalan",
+    "stemmer": "",
+    "vocabularyType": "",
+    "testSentences": []
+  },
+  {
+    "language": "Dutch",
+    "stemmer": "",
+    "vocabularyType": "",
+    "testSentences": []
+  },
+  {
+    "language": "English",
+    "stemmer": "",
+    "vocabularyType": "",
+    "testSentences": []
+  },
+  {
+    "language": "French",
+    "stemmer": "",
+    "vocabularyType": "",
+    "testSentences": []
+  },
+  {
+    "language": "Galician",
+    "stemmer": "",
+    "vocabularyType": "",
+    "testSentences": []
+  },
+  {
+    "language": "Italian",
+    "stemmer": "",
+    "vocabularyType": "",
+    "testSentences": []
+  },
+  {
+    "language": "Spanish",
+    "stemmer": "",
+    "vocabularyType": "",
+    "testSentences": []
+  }*/
+
 ];
 
-describe("The sentiment analyzer analyzes the sentiment in sententes", function() {
-  it("should analyze a sentence correctly", function() {
-    sentences.forEach(function(s) {
-      var words = s.split(/\s+/);
-      console.log("Sentiment of \"" + s + "\": " + analyzer.getSentiment(words));
+describe("The sentiment analyzer analyzes the sentiment of sentences in multiple languages using different types of vocabularies", function() {
+  testConfigurations.forEach(config => {
+    it("Should analyze a set of sentences with each configuration " + config, function() {
+      var stemmer = null;
+      // Create the stemmer
+      if (config.stemmer != "") {
+        stemmer = require(config.stemmer);
+      }
+      // Create analyzer
+      var analyzer = new Analyzer(config.language, stemmer, config.vocabularyType);
+      config.testSentences.forEach(sentencePlusScore => {
+        var words = sentencePlusScore.sentence.split(/\s+/);
+        var score = analyzer.getSentiment(words);
+        console.log(score);
+        expect(score).toEqual(sentencePlusScore.score);
+      });
     });
   });
 });
