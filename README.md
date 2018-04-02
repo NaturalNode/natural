@@ -643,9 +643,9 @@ console.log(analyzer.getSentiment("I like cherries"));
 // 0.6666666666666666
 ```
 The constructor has three parameters:
-* Language: currently English, Spanish are supported.
-* Stemmer, to increase the coverage of the sentiment analyzer a stemmer may be provided. May be `null`.
-* Vocabulary, "afinn", "senticon" or "pattern" these are different formats for vocabulary.
+* Language: see below for support languages.
+* Stemmer: to increase the coverage of the sentiment analyzer a stemmer may be provided. May be `null`.
+* Vocabulary: sets the type of vocabulary, `"afinn"`, `"senticon"` or `"pattern"` are valid values.
 
 Currently, the following languages are supported with type of vocabulary and availability of negations (in alphabetic order):
 
