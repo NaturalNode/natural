@@ -672,7 +672,7 @@ been manually labeled by Finn Årup Nielsen in 2009-2011. Scientific reference c
 The senticon vocabulary is based on work by Fermin L. Cruz and others:
 Cruz, Fermín L., José A. Troyano, Beatriz Pontes, F. Javier Ortega. Building layered, multilingual sentiment lexicons at synset and lemma levels, Expert Systems with Applications, 2014.
 
-The Pattern vocabularies are from the [Pattern project](https://github.com/clips/pattern) of the CLiPS Research Center of University of Antwerpen.
+The Pattern vocabularies are from the [Pattern project](https://github.com/clips/pattern) of the CLiPS Research Center of University of Antwerpen. These have a PDDL license.
 
 ## Phonetics
 Phonetic matching (sounds-like) matching can be done with the [SoundEx](http://en.wikipedia.org/wiki/Soundex),
