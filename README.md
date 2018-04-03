@@ -28,6 +28,7 @@ Aside from this README, the only documentation is [this DZone article](http://ww
 * [Classifiers](#classifiers)
   * [Bayesian and logistic regression](#bayesian-and-logistic-regression)
   * [Maximum Entropy Classifier](#maximum-entropy-classifier)
+* [Sentiment Analysis](#sentiment-analysis)
 * [Phonetics](#phonetics)
 * [Inflectors](#inflectors)
 * [N-Grams](#n-grams)
@@ -416,7 +417,7 @@ classifier.addDocument(['sell', 'gold'], 'sell');
 ```
 
 The training process can be monitored by subscribing to the event `trainedWithDocument` that's emitted by the classifier, this event's emitted each time a document is finished being trained against:
-
+```javascript
     classifier.events.on('trainedWithDocument', function (obj) {
        console.log(obj);
        /* {
@@ -426,7 +427,7 @@ The training process can be monitored by subscribing to the event `trainedWithDo
        *  }
        */
     });
-
+```
 A classifier can also be persisted and recalled so you can reuse a training
 
 ```javascript
@@ -632,8 +633,48 @@ A more elaborate example of maximum entropy modelling is provided for part of sp
 * Adwait RatnaParkhi, Maximum Entropy Models For Natural Language Ambiguity Resolution, University of Pennsylvania, 1998, URL: http://repository.upenn.edu/cgi/viewcontent.cgi?article=1061&context=ircs_reports
 * Darroch, J.N.; Ratcliff, D. (1972). Generalized iterative scaling for log-linear models, The Annals of Mathematical Statistics, Institute of Mathematical Statistics, 43 (5): 1470–1480.
 
-## Phonetics
+## Sentiment Analysis
+This is a simple sentiment analysis algorithm based on a vocabulary that assigns polarity to words. The algorithm calculates the sentiment of a piece of text by summing the polarity of each word and normalizing with the length of the sentence. If a negation occurs the result is made negative. It is used as follows:
+```javascript
+var Analyzer = require('natural').SentimentAnalyzer;
+var stemmer = require('natural').PorterStemmer;
+var analyzer = new Analyzer("English", stemmer, "afinn")
+console.log(analyzer.getSentiment("I like cherries"));
+// 0.6666666666666666
+```
+The constructor has three parameters:
+* Language: see below for support languages.
+* Stemmer: to increase the coverage of the sentiment analyzer a stemmer may be provided. May be `null`.
+* Vocabulary: sets the type of vocabulary, `"afinn"`, `"senticon"` or `"pattern"` are valid values.
 
+Currently, the following languages are supported with type of vocabulary and availability of negations (in alphabetic order):
+
+| Language      | AFINN       | Senticon  | Pattern   | Negations |
+| ------------- |:-----------:|:---------:|:---------:|:---------:|
+| Basque        |             |  X        |           |           |
+| Catalan       |             |  X        |           |           |
+| Dutch         |             |           | X         | X         |
+| English       | X           |  X        | X         | X         |
+| French        |             |           | X         |           |
+| Galician      |             |  X        |           |           |   
+| Italian       |             |           | X         |           |
+| Spanish       | X           |  X        |           | X         |     
+
+More languages can be added by adding vocabularies and extending the map `languageFiles` in `SentimentAnalyzer.js`. In the tools folder below `lib/natural/sentiment` some tools are provided for transforming vocabularies in Senticon and Pattern format into a JSON format.
+
+### Acknowledgements and References
+Thanks to Domingo Martín Mancera for providing the basis for this sentiment analyzer in his repo [Lorca](https://github.com/dmarman/lorca).
+
+AFINN is a list of English words rated for valence with an integer
+between minus five (negative) and plus five (positive). The words have
+been manually labeled by Finn Årup Nielsen in 2009-2011. Scientific reference can be found [here](http://www2.imm.dtu.dk/pubdb/views/publication_details.php?id=6010). We used [afinn-165](https://github.com/words/afinn-165) which is available as nodejs module.
+
+The senticon vocabulary is based on work by Fermin L. Cruz and others:
+Cruz, Fermín L., José A. Troyano, Beatriz Pontes, F. Javier Ortega. Building layered, multilingual sentiment lexicons at synset and lemma levels, Expert Systems with Applications, 2014.
+
+The Pattern vocabularies are from the [Pattern project](https://github.com/clips/pattern) of the CLiPS Research Center of University of Antwerpen. These have a PDDL license.
+
+## Phonetics
 Phonetic matching (sounds-like) matching can be done with the [SoundEx](http://en.wikipedia.org/wiki/Soundex),
 [Metaphone](http://en.wikipedia.org/wiki/Metaphone) or [DoubleMetaphone](http://en.wikipedia.org/wiki/Metaphone#Double_Metaphone) algorithms
 
