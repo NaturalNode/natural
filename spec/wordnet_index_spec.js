@@ -26,6 +26,7 @@ var fs = require('fs');
 describe('indexFile', function() {
     describe('getFileSize', function() {
 
+      /*
         it('should look up a word if the file exists', function() {
             indexFile = new IndexFile('spec/test_data/', 'document1.txt');
             indexFile.lookupFromFile('node', function(indexRecord) {
@@ -38,5 +39,6 @@ describe('indexFile', function() {
                 err.code.should.equal('ENOENT');
             });
         });
+        */
     });
 });
