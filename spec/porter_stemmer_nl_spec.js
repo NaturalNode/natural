@@ -36,7 +36,7 @@ describe('porter_stemmer_es', function() {
  					stemmed = PorterStemmer.stem(fields[0]);
 
  				if (stemmed !== fields[1]) {
-					console.log('Error:', fields[0], 'Expected:', fields[1], 'Got:', stemmed);
+					//console.log('Error:', fields[0], 'Expected:', fields[1], 'Got:', stemmed);
  					errors.push({
  						word:     fields[0],
  						expected: fields[1],

@@ -297,7 +297,7 @@ The following
 
 ## Stemmers
 
-Currently stemming is supported via the [Porter](http://tartarus.org/martin/PorterStemmer/index.html) and [Lancaster](http://www.comp.lancs.ac.uk/computing/research/stemming/) (Paice/Husk) algorithms.
+Currently stemming is supported via the [Porter](http://tartarus.org/martin/PorterStemmer/index.html) and [Lancaster](http://www.comp.lancs.ac.uk/computing/research/stemming/) (Paice/Husk) algorithms. The Indonesian and Japanese stemmers do not follow a known algorithm.
 
 ```javascript
 var natural = require('natural');
@@ -323,20 +323,21 @@ console.log(natural.PorterStemmerEs.stem("jugaría"));
 
 The following stemmers are available:
 
-* `PorterStemmer`
-* `LancasterStemmer`
-* `PorterStemmerFa`
-* `PorterStemmerFr`
-* `PorterStemmerRu`
-* `PorterStemmerEs`
-* `PorterStemmerIt`
-* `PorterStemmerNo`
-* `PorterStemmerSv`
-* `PorterStemmerPt`
-* `StemmerFr`
-* `StemmerPl`
-* `StemmerJa`
-* `StemmerId`
+| Language      | Porter      | Lancaster | Other     | Module name(s) | Unit test |
+| ------------- |:-----------:|:---------:|:---------:|----------------|:---------:|
+| Dutch         | X           |           |           | `PorterStemmer`   | X        |
+| English       | X           |  X        |           | `PorterStemmer`, `LancasterStemmer` | XX |
+| Farsi (in progress) |  X    |           |           | `PorterStemmerFa` |          |
+| Dutch         |             |           |           | `PorterStemmerNl` | X        |
+| French        | X           |           |           | `PorterStemmerFr` | X        |
+| Indonesian    |             |           | X         | `StemmerId`       |          |
+| Italian       | X           |           |           | `PorterStemmerIt` | X        |
+| Japanese      | X           |           | X         | `StemmerJa`       | X        |
+| Norwegian     | X           |           |           | `PorterStemmerNo` | X        |
+| Portugese     | X           |           |           | `PorterStemmerPt` | X        |
+| Russian       | X           |           |           | `PorterStemmerRu` | X        |
+| Swedish       | X           |           |           | `PorterStemmerSv` | X        |
+
 
 `attach()` patches `stem()` and `tokenizeAndStem()` to String as a shortcut to
 `PorterStemmer.stem(token)`. `tokenizeAndStem()` breaks text up into single words
@@ -348,7 +349,7 @@ console.log("i am waking up to the sounds of chainsaws".tokenizeAndStem());
 console.log("chainsaws".stem());
 ```
 
-the same thing can be done with a Lancaster stemmer:
+The same thing can be done with a Lancaster stemmer:
 
 ```javascript
 natural.LancasterStemmer.attach();
