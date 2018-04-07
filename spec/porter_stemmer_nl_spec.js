@@ -46,7 +46,7 @@ describe('porter_stemmer_es', function() {
  			}
  		});
 
- 		expect(errors.length).toBe(339);
+ 		expect(errors.length).toBe(305);
  	});
   
   
