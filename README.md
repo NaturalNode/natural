@@ -294,7 +294,7 @@ The following stemmers are available:
 | Farsi (in progress) |  X    |           |           | `PorterStemmerFa` |          |
 | Dutch         |             |           |           | `PorterStemmerNl` | X        |
 | French        | X           |           |           | `PorterStemmerFr` | X        |
-| Indonesian    |             |           | X         | `StemmerId`       |          |
+| Indonesian    |             |           | X         | `StemmerId`       | X        |
 | Italian       | X           |           |           | `PorterStemmerIt` | X        |
 | Japanese      | X           |           | X         | `StemmerJa`       | X        |
 | Norwegian     | X           |           |           | `PorterStemmerNo` | X        |
