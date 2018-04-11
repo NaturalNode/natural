@@ -287,20 +287,20 @@ console.log(natural.PorterStemmerEs.stem("jugaría"));
 
 The following stemmers are available:
 
-| Language      | Porter      | Lancaster | Other     | Module name(s) | Unit test |
-| ------------- |:-----------:|:---------:|:---------:|----------------|:---------:|
-| Dutch         | X           |           |           | `PorterStemmer`   | X        |
-| English       | X           |  X        |           | `PorterStemmer`, `LancasterStemmer` | XX |
-| Farsi (in progress) |  X    |           |           | `PorterStemmerFa` |          |
-| Dutch         |             |           |           | `PorterStemmerNl` | X        |
-| French        | X           |           |           | `PorterStemmerFr` | X        |
-| Indonesian    |             |           | X         | `StemmerId`       | X        |
-| Italian       | X           |           |           | `PorterStemmerIt` | X        |
-| Japanese      | X           |           | X         | `StemmerJa`       | X        |
-| Norwegian     | X           |           |           | `PorterStemmerNo` | X        |
-| Portugese     | X           |           |           | `PorterStemmerPt` | X        |
-| Russian       | X           |           |           | `PorterStemmerRu` | X        |
-| Swedish       | X           |           |           | `PorterStemmerSv` | X        |
+| Language      | Porter      | Lancaster | Other     | Module            |
+|:------------- |:-----------:|:---------:|:---------:|:------------------|
+| Dutch         | X           |           |           | `PorterStemmerNl` |
+| English       | X           |           |           | `PorterStemmer`   |
+| English       |             |  X        |           | `LancasterStemmer` |
+| Farsi (in progress) |  X    |           |           | `PorterStemmerFa` |
+| French        | X           |           |           | `PorterStemmerFr` |
+| Indonesian    |             |           | X         | `StemmerId`       |
+| Italian       | X           |           |           | `PorterStemmerIt` |
+| Japanese      |             |           | X         | `StemmerJa`       |
+| Norwegian     | X           |           |           | `PorterStemmerNo` |
+| Portugese     | X           |           |           | `PorterStemmerPt` |
+| Russian       | X           |           |           | `PorterStemmerRu` |
+| Swedish       | X           |           |           | `PorterStemmerSv` |
 
 
 `attach()` patches `stem()` and `tokenizeAndStem()` to String as a shortcut to
@@ -608,7 +608,7 @@ console.log(analyzer.getSentiment("I like cherries"));
 // 0.6666666666666666
 ```
 The constructor has three parameters:
-* Language: see below for support languages.
+* Language: see below for supported languages.
 * Stemmer: to increase the coverage of the sentiment analyzer a stemmer may be provided. May be `null`.
 * Vocabulary: sets the type of vocabulary, `"afinn"`, `"senticon"` or `"pattern"` are valid values.
 
