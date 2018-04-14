@@ -3,6 +3,7 @@ natural
 
 [![NPM version](https://img.shields.io/npm/v/natural.svg)](https://www.npmjs.com/package/natural)
 [![Build Status](https://travis-ci.org/NaturalNode/natural.png?branch=master)](https://travis-ci.org/NaturalNode/natural)
+[![Slack](https://slack.bri.im/badge.svg)](https://slack.bri.im)
 
 "Natural" is a general natural language facility for nodejs. Tokenizing,
 stemming, classification, phonetics, tf-idf, WordNet, string similarity,
