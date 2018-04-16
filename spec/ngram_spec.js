@@ -20,7 +20,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+var fs = require('fs');
 var NGrams = require('../lib/natural/ngrams/ngrams');
+var textFilename = './spec/test_data/NYT-20150205-picassos-granddaughter-plans-to-sell-art-worrying-the-market.txt';
 
 describe('ngrams', function() {
     it('should bigram a string via ngrams', function() {
@@ -127,4 +129,15 @@ describe('ngrams', function() {
         expect(NGrams.ngrams('Un Éléphant rouge', 2)).toEqual([['Un', 'Éléphant'],
             ['Éléphant', 'rouge' ]]);
     });
+
+    it('should trigram a string via ngrams including statistics', function() {
+        var text = fs.readFileSync(textFilename, 'utf-8');
+        var T = require('../lib/natural/tokenizers/aggressive_tokenizer');
+        var t = new T();
+        NGrams.setTokenizer(t);
+        expect(NGrams.ngrams(text, 3, null, null, true)).toEqual([['these', 'are', 'some'],
+                ['are', 'some', 'words']]);
+    });    
+
+    
 });
