@@ -135,9 +135,12 @@ describe('ngrams', function() {
         var T = require('../lib/natural/tokenizers/aggressive_tokenizer');
         var t = new T();
         NGrams.setTokenizer(t);
-        expect(NGrams.ngrams(text, 3, null, null, true)).toEqual([['these', 'are', 'some'],
-                ['are', 'some', 'words']]);
+        var result = NGrams.ngrams(text, 3, null, null, true);
+        var nrNgrams = 0;
+        Object.keys(result.Nr).forEach(function(f) {
+          nrNgrams += result.Nr[f] * f;
+        });
+        expect(nrNgrams).toEqual(result.numberOfNgrams);
     });    
-
     
 });
