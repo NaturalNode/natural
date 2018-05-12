@@ -906,7 +906,11 @@ console.log(NGramsZH.ngrams(['一', '个', '中', '文', '测',
 ## tf-idf
 
 [Term Frequency–Inverse Document Frequency (tf-idf)](http://en.wikipedia.org/wiki/Tf%E2%80%93idf) is implemented to determine how important a word (or words) is to a
-document relative to a corpus. The following example will add four documents to
+document relative to a corpus. The following formulas are used for calculating tf and idf:
+* tf(t, d) is a so-called raw count, so just the count of the term in the document
+* idf(t, D) uses the following formula: 1 + ln(N / (1 + n_t)) where N is the number of documents, and n_t the number of documents in which the term appears. The 1 + in the denominator is for handling the possibility that n_t is 0. 
+
+The following example will add four documents to
 a corpus and determine the weight of the word "node" and then the weight of the
 word "ruby" in each document.
 
