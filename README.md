@@ -3,6 +3,7 @@ natural
 
 [![NPM version](https://img.shields.io/npm/v/natural.svg)](https://www.npmjs.com/package/natural)
 [![Build Status](https://travis-ci.org/NaturalNode/natural.png?branch=master)](https://travis-ci.org/NaturalNode/natural)
+[![Slack](https://slack.bri.im/badge.svg)](https://slack.bri.im)
 
 "Natural" is a general natural language facility for nodejs. Tokenizing,
 stemming, classification, phonetics, tf-idf, WordNet, string similarity,
@@ -86,67 +87,31 @@ console.log(tokenizer.tokenize("Mikä sinun nimesi on?"));
 // [ 'Mikä', 'sinun', 'nimesi', 'on' ]
 ```
 
-The following tokenizers are available:
+Overview of available tokenizers:
 
-<a name="WordTokenizer" href="#WordTokenizer">#</a><i>natural</i>.<b>WordTokenizer</b>()
+| Tokenizer              | Language    | Explanation                                                             |
+|:-----------------------|:------------|:------------------------------------------------------------------------|
+| WordTokenizer          | Any         | Splits on anything except alphabetic characters, digits and underscore  |
+| WordPunctTokenizer     | Any         | Splits on anything except alphabetic characters, digits, punctuation and underscore  |
+| SentenceTokenizer      | Any         | Break string up in to parts based on punctation and quotation marks     |
+| CaseTokenizer          | Any?        | If lower and upper case are the same, the character is assumed to be whitespace or something else (punctuation) |
+| RegexpTokenizer        | Any         | Splits on a regular expression that either defines sequences of word characters or gap characters |
+| OrthographyTokenizer   | Finnish     | Splits on anything except alpabetic characters, digits and underscore   |
+| TreebankWordTokenizer  | Any         |  |
+| AggressiveTokenizer    | English     |  |
+| AggressiveTokenizerFa  | Farsi       |  |
+| AggressiveTokenizerFr  | French      |  |
+| AggressiveTokenizerRu  | Russian     |  |
+| AggressiveTokenizerEs  | Spanish     |  |
+| AggressiveTokenizerIt  | Italian     |  |
+| AggressiveTokenizerPl  | Polish      |  |
+| AggressiveTokenizerPt  | Portugese   |  |
+| AggressiveTokenizerNo  | Norwegian   |  |
+| AggressiveTokenizerSv  | Swedish     |  |
+| AggressiveTokenizerVi  | Vietnamese  |  |
+| TokenizerJa            | Japanese    |  |  |
 
-Word tokenizer: a tokenizer that divides a text into sequences of alphabetic and numeric characters. E.g.:
 
-```javascript
-WordTokenizer().tokenize("She said 'hello'.")
-// ['She', 'said', 'hello']
-```
-
-<a name="WordPunctTokenizer" href="#WordPunctTokenizer">#</a><i>natural</i>.<b>WordPunctTokenizer</b>()
-
-Word + punctuation tokenizer: a tokenizer that divides a text into sequences of alphabetic and non-alphabetic characters. E.g.:
-
-```javascript
-WordTokenizer().tokenize("She said 'hello'.")
-// ['She','said',''','hello',''','.']
-```
-
-<a name="CaseTokenizer" href="#CaseTokenizer">#</a><i>natural</i>.<b>CaseTokenizer</b>()
-
-A word tokenizer that works with all UTF-8 alphabets (cf #245).
-
-```javascript
-CaseTokenizer().tokenize('Vy mOzhite mne pamOch? Вы можете мне помочь?')
-// ['Vy', 'mOzhite', 'mne', 'pamOch', 'Вы', 'можете', 'мне', 'помочь']
-
-CaseTokenizer().tokenize('isso é coração')
-// ['isso', 'é', 'coração']
-```
-
-<a name="RegexpTokenizer" href="#RegexpTokenizer">#</a><i>natural</i>.<b>RegexpTokenizer</b>()
-
-<a name="TreebankWordTokenizer" href="#TreebankWordTokenizer">#</a><i>natural</i>.<b>TreebankWordTokenizer</b>()
-
-<a name="SentenceTokenizer" href="#SentenceTokenizer">#</a><i>natural</i>.<b>SentenceTokenizer</b>()
-
-<a name="AggressiveTokenizer" href="#AggressiveTokenizer">#</a><i>natural</i>.<b>AggressiveTokenizer</b>()
-
-<a name="TokenizerJa" href="#TokenizerJa">#</a><i>natural</i>.<b>TokenizerJa</b>()
-
-<a name="AggressiveTokenizerNl" href="#AggressiveTokenizerNl">#</a><i>natural</i>.<b>AggressiveTokenizerNl</b>()
-
-<a name="AggressiveTokenizerFa" href="#AggressiveTokenizerFa">#</a><i>natural</i>.<b>AggressiveTokenizerFa</b>()
-
-<a name="AggressiveTokenizerFr" href="#AggressiveTokenizerFr">#</a><i>natural</i>.<b>AggressiveTokenizerFr</b>()
-
-<a name="AggressiveTokenizerRu" href="#AggressiveTokenizerRu">#</a><i>natural</i>.<b>AggressiveTokenizerRu</b>()
-
-<a name="AggressiveTokenizerEs" href="#AggressiveTokenizerEs">#</a><i>natural</i>.<b>AggressiveTokenizerEs</b>()
-
-<a name="AggressiveTokenizerIt" href="#AggressiveTokenizerIt">#</a><i>natural</i>.<b>AggressiveTokenizerIt</b>()
-
-<a name="AggressiveTokenizerPl" href="#AggressiveTokenizerPl">#</a><i>natural</i>.<b>AggressiveTokenizerPl</b>()
-
-<a name="AggressiveTokenizerPt" href="#AggressiveTokenizerPt">#</a><i>natural</i>.<b>AggressiveTokenizerPt</b>()
-
-<a name="AggressiveTokenizerNo" href="#AggressiveTokenizerNo">#</a><i>natural</i>.<b>AggressiveTokenizerNo</b>()
-
-<a name="AggressiveTokenizerSv" href="#AggressiveTokenizerSv">#</a><i>natural</i>.<b>AggressiveTokenizerSv</b>()
 
 ## String Distance
 
@@ -297,7 +262,7 @@ The following
 
 ## Stemmers
 
-Currently stemming is supported via the [Porter](http://tartarus.org/martin/PorterStemmer/index.html) and [Lancaster](http://www.comp.lancs.ac.uk/computing/research/stemming/) (Paice/Husk) algorithms.
+Currently stemming is supported via the [Porter](http://tartarus.org/martin/PorterStemmer/index.html) and [Lancaster](http://www.comp.lancs.ac.uk/computing/research/stemming/) (Paice/Husk) algorithms. The Indonesian and Japanese stemmers do not follow a known algorithm.
 
 ```javascript
 var natural = require('natural');
@@ -323,20 +288,21 @@ console.log(natural.PorterStemmerEs.stem("jugaría"));
 
 The following stemmers are available:
 
-* `PorterStemmer`
-* `LancasterStemmer`
-* `PorterStemmerFa`
-* `PorterStemmerFr`
-* `PorterStemmerRu`
-* `PorterStemmerEs`
-* `PorterStemmerIt`
-* `PorterStemmerNo`
-* `PorterStemmerSv`
-* `PorterStemmerPt`
-* `StemmerFr`
-* `StemmerPl`
-* `StemmerJa`
-* `StemmerId`
+| Language      | Porter      | Lancaster | Other     | Module            |
+|:------------- |:-----------:|:---------:|:---------:|:------------------|
+| Dutch         | X           |           |           | `PorterStemmerNl` |
+| English       | X           |           |           | `PorterStemmer`   |
+| English       |             |  X        |           | `LancasterStemmer` |
+| Farsi (in progress) |  X    |           |           | `PorterStemmerFa` |
+| French        | X           |           |           | `PorterStemmerFr` |
+| Indonesian    |             |           | X         | `StemmerId`       |
+| Italian       | X           |           |           | `PorterStemmerIt` |
+| Japanese      |             |           | X         | `StemmerJa`       |
+| Norwegian     | X           |           |           | `PorterStemmerNo` |
+| Portugese     | X           |           |           | `PorterStemmerPt` |
+| Russian       | X           |           |           | `PorterStemmerRu` |
+| Swedish       | X           |           |           | `PorterStemmerSv` |
+
 
 `attach()` patches `stem()` and `tokenizeAndStem()` to String as a shortcut to
 `PorterStemmer.stem(token)`. `tokenizeAndStem()` breaks text up into single words
@@ -348,7 +314,7 @@ console.log("i am waking up to the sounds of chainsaws".tokenizeAndStem());
 console.log("chainsaws".stem());
 ```
 
-the same thing can be done with a Lancaster stemmer:
+The same thing can be done with a Lancaster stemmer:
 
 ```javascript
 natural.LancasterStemmer.attach();
@@ -643,7 +609,7 @@ console.log(analyzer.getSentiment("I like cherries"));
 // 0.6666666666666666
 ```
 The constructor has three parameters:
-* Language: see below for support languages.
+* Language: see below for supported languages.
 * Stemmer: to increase the coverage of the sentiment analyzer a stemmer may be provided. May be `null`.
 * Vocabulary: sets the type of vocabulary, `"afinn"`, `"senticon"` or `"pattern"` are valid values.
 
@@ -661,6 +627,8 @@ Currently, the following languages are supported with type of vocabulary and ava
 | Spanish       | X           |  X        |           | X         |     
 
 More languages can be added by adding vocabularies and extending the map `languageFiles` in `SentimentAnalyzer.js`. In the tools folder below `lib/natural/sentiment` some tools are provided for transforming vocabularies in Senticon and Pattern format into a JSON format.
+
+
 
 ### Acknowledgements and References
 Thanks to Domingo Martín Mancera for providing the basis for this sentiment analyzer in his repo [Lorca](https://github.com/dmarman/lorca).
@@ -940,7 +908,11 @@ console.log(NGramsZH.ngrams(['一', '个', '中', '文', '测',
 ## tf-idf
 
 [Term Frequency–Inverse Document Frequency (tf-idf)](http://en.wikipedia.org/wiki/Tf%E2%80%93idf) is implemented to determine how important a word (or words) is to a
-document relative to a corpus. The following example will add four documents to
+document relative to a corpus. The following formulas are used for calculating tf and idf:
+* tf(t, d) is a so-called raw count, so just the count of the term in the document
+* idf(t, D) uses the following formula: 1 + ln(N / (1 + n_t)) where N is the number of documents, and n_t the number of documents in which the term appears. The 1 + in the denominator is for handling the possibility that n_t is 0. 
+
+The following example will add four documents to
 a corpus and determine the weight of the word "node" and then the weight of the
 word "ruby" in each document.
 
