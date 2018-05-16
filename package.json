@@ -1,7 +1,7 @@
 {
   "name": "natural",
   "description": "General natural language (tokenizing, stemming (English, Russian, Spanish), part-of-speech tagging, sentiment analysis, classification, inflection, phonetics, tfidf, WordNet, jaro-winkler, Levenshtein distance, Dice's Coefficient) facilities for node.",
-  "version": "0.5.7",
+  "version": "0.5.6",
   "homepage": "https://github.com/NaturalNode/natural",
   "repository": {
     "type": "git",
