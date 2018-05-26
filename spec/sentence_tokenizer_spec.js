@@ -71,4 +71,19 @@ describe('sentence_tokenizer', function() {
         '[This is another sentence.]'
     ]);
   });
+  
+  it('should handle repetitive punctuation', function() {
+    expect(
+      tokenizer.tokenize("I love you!! Do you love me??")
+    ).toEqual([ 'I love you!!', 'Do you love me??' 
+    ]);
+  });
+
+  it('should handle repetitive punctuation with space', function() {
+    expect(
+      tokenizer.tokenize("I love you! ! Do you love me? ?")
+    ).toEqual([ 'I love you! !', 'Do you love me? ?' 
+    ]);
+  });
+
 });
