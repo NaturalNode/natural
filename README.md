@@ -604,8 +604,9 @@ This is a simple sentiment analysis algorithm based on a vocabulary that assigns
 ```javascript
 var Analyzer = require('natural').SentimentAnalyzer;
 var stemmer = require('natural').PorterStemmer;
-var analyzer = new Analyzer("English", stemmer, "afinn")
-console.log(analyzer.getSentiment("I like cherries"));
+var analyzer = new Analyzer("English", stemmer, "afinn");
+// getSentiment expects an array of strings
+console.log(analyzer.getSentiment(["I", "like", "cherries"]));
 // 0.6666666666666666
 ```
 The constructor has three parameters:
