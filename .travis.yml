@@ -4,4 +4,6 @@ node_js:
   - "10"
 before_install: 'npm install -g jasmine-node'
 
-install: 'npm ci'
+install:
+  - 'npm i -g npm@latest'
+  - 'npm ci'
