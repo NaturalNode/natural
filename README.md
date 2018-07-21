@@ -513,7 +513,7 @@ listofTags.forEach(function(tag) {
     }
     return 0;
   }
-  featureSet.addFeature(new Feature(f, "f", [tag]));
+  featureSet.addFeature(new Feature(isTag, "isTag", [tag]));
 });
 ```
 In this example you create feature functions that each have a different value for <code>tag</code> in their closure.
