@@ -146,19 +146,19 @@ describe('case_tokenizer_pt', function() {
     expect('isso é coração'.tokenize()).toEqual(['isso', 'é', 'coração']);
   });
 
-  it('should swollow punctuation', function() {
+  it('should swallow punctuation', function() {
     expect(tokenizer.tokenize('isso é coração, no')).toEqual(['isso', 'é', 'coração', 'no']);
   });
 
-  it('should swollow final punctuation', function() {
+  it('should swallow final punctuation', function() {
     expect(tokenizer.tokenize('isso é coração, no?')).toEqual(['isso', 'é', 'coração', 'no']);
   });
 
-  it('should swollow initial punctuation', function() {
+  it('should swallow initial punctuation', function() {
     expect(tokenizer.tokenize('.isso é coração, no')).toEqual(['isso', 'é', 'coração', 'no']);
   });
 
-  it('should swollow duplicate punctuation', function() {
+  it('should swallow duplicate punctuation', function() {
     expect(tokenizer.tokenize('eu vou... pause')).toEqual(['eu', 'vou', 'pause']);
   });
 });
@@ -178,19 +178,19 @@ describe('case_tokenizer_aggressive_tokenizer', function() {
     expect('these are things'.tokenize()).toEqual(['these', 'are', 'things']);
   });
 
-  it('should swollow punctuation', function() {
+  it('should swallow punctuation', function() {
     expect(tokenizer.tokenize('these are things, no')).toEqual(['these', 'are', 'things', 'no']);
   });
 
-  it('should swollow final punctuation', function() {
+  it('should swallow final punctuation', function() {
     expect(tokenizer.tokenize('these are things, no?')).toEqual(['these', 'are', 'things', 'no']);
   });
 
-  it('should swollow initial punctuation', function() {
+  it('should swallow initial punctuation', function() {
     expect(tokenizer.tokenize('.these are things, no')).toEqual(['these', 'are', 'things', 'no']);
   });
 
-  it('should swollow duplicate punctuation', function() {
+  it('should swallow duplicate punctuation', function() {
     expect(tokenizer.tokenize('i shal... pause')).toEqual(['i', 'shal', 'pause']);
   });
 });
