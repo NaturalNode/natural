@@ -17,7 +17,7 @@ being merged into this project and will be maintained from here onward.
 
 While most of the algorithms are English-specific, contributors have implemented support for other languages. Thanks to Polyakov Vladimir, Russian stemming has been added! Thanks to David Przybilla, Spanish stemming has been added! Thanks to [even more contributors](https://github.com/NaturalNode/natural/graphs/contributors), stemming and tokenizing in more languages have been added.
 
-Aside from this README, the only documentation is [this DZone article](http://www.dzone.com/links/r/using_natural_a_nlp_module_for_nodejs.html), [this free course on Egghead.io](https://egghead.io/courses/natural-language-processing-in-javascript-with-natural), and [here on my blog](http://www.chrisumbel.com/article/node_js_natural_language_porter_stemmer_lancaster_bayes_naive_metaphone_soundex), which is a bit older.
+Aside from this README, the only documentation is [this DZone article](http://www.dzone.com/links/r/using_natural_a_nlp_module_for_nodejs.html), [this course on Egghead.io](https://egghead.io/courses/natural-language-processing-in-javascript-with-natural), and [here on my blog](http://www.chrisumbel.com/article/node_js_natural_language_porter_stemmer_lancaster_bayes_naive_metaphone_soundex). The README is up to date, the other sources are somewhat outdated.
 
 ### TABLE OF CONTENTS
 
@@ -513,7 +513,7 @@ listofTags.forEach(function(tag) {
     }
     return 0;
   }
-  featureSet.addFeature(new Feature(f, "f", [tag]));
+  featureSet.addFeature(new Feature(isTag, "isTag", [tag]));
 });
 ```
 In this example you create feature functions that each have a different value for <code>tag</code> in their closure.
@@ -604,8 +604,9 @@ This is a simple sentiment analysis algorithm based on a vocabulary that assigns
 ```javascript
 var Analyzer = require('natural').SentimentAnalyzer;
 var stemmer = require('natural').PorterStemmer;
-var analyzer = new Analyzer("English", stemmer, "afinn")
-console.log(analyzer.getSentiment("I like cherries"));
+var analyzer = new Analyzer("English", stemmer, "afinn");
+// getSentiment expects an array of strings
+console.log(analyzer.getSentiment(["I", "like", "cherries"]));
 // 0.6666666666666666
 ```
 The constructor has three parameters:

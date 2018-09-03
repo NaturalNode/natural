@@ -46,11 +46,11 @@ describe('aggressive_tokenizer_vi', function() {
     expect(tokenizer.tokenize('Tôi đang tìm John.')).toEqual(['Tôi', 'đang', 'tìm', 'John']);
   });
 
-  it('should swollow initial punctuation', function() {
+  it('should swallow initial punctuation', function() {
     expect(tokenizer.tokenize('.Đi thẳng, sau đó rẽ trái / phải')).toEqual(['Đi', 'thẳng', 'sau', 'đó', 'rẽ', 'trái', 'phải']);
   });
 
-  it('should swollow duplicate punctuation', function() {
+  it('should swallow duplicate punctuation', function() {
     expect(tokenizer.tokenize('.Xin giữ máy!')).toEqual(['Xin', 'giữ', 'máy']);
   });
 });

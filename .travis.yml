@@ -1,4 +1,11 @@
 language: node_js
 node_js:
-  - "9"
+  - "8"
+  - "10"
 before_install: 'npm install -g jasmine-node'
+git:
+  depth: 5
+install: 'npm i'
+cache:
+  directories:
+    - node_modules

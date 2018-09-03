@@ -1,7 +1,7 @@
 {
   "name": "natural",
   "description": "General natural language (tokenizing, stemming (English, Russian, Spanish), part-of-speech tagging, sentiment analysis, classification, inflection, phonetics, tfidf, WordNet, jaro-winkler, Levenshtein distance, Dice's Coefficient) facilities for node.",
-  "version": "0.5.7",
+  "version": "0.6.1",
   "homepage": "https://github.com/NaturalNode/natural",
   "repository": {
     "type": "git",
@@ -12,19 +12,24 @@
   },
   "dependencies": {
     "afinn-165": "^1.0.2",
-    "apparatus": ">= 0.0.9",
-    "json-stable-stringify": "*",
-    "sylvester": ">= 0.0.12",
-    "underscore": ">=1.3.1"
+    "apparatus": "^0.0.10",
+    "json-stable-stringify": "^1.0.1",
+    "sylvester": "^0.0.12",
+    "underscore": "^1.3.1"
   },
   "devDependencies": {
     "jasmine-node": "^1.13.1",
     "proxyquire": "^1.8.0",
+    "rimraf": "^2.6.2",
     "sinon": "^1.12.2",
-    "uubench": "0.0.x"
+    "uubench": "^0.0.1"
   },
   "scripts": {
-    "test": "NODE_PATH=. node_modules/jasmine-node/bin/jasmine-node spec/"
+    "benchmark": "node benchmarks",
+    "clean": "rimraf *~ #* *classifier.json",
+    "test": "NODE_PATH=. node_modules/jasmine-node/bin/jasmine-node spec/",
+    "test_io": "NODE_PATH=. node_modules/jasmine-node/bin/jasmine-node io_spec/",
+    "test_io_unclean": "NODE_PATH=. node_modules/jasmine-node/bin/jasmine-node io_spec/"
   },
   "license": "MIT",
   "author": "Chris Umbel <chris@chrisumbel.com>",
