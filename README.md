@@ -22,6 +22,7 @@ Aside from this README, the only documentation is [this DZone article](http://ww
 ### TABLE OF CONTENTS
 
 * [Installation](#installation)
+* [Language support](#language-support)
 * [Tokenizers](#tokenizers)
 * [String Distance](#string-distance)
 * [Approximate String Matching](#approximate-string-matching)
@@ -54,6 +55,60 @@ you can install via NPM like so:
 
 If you're interested in contributing to natural, or just hacking on it, then by all
 means fork away!
+
+
+## Language support
+
+Natural is a multi-language module. Tokenizers, stemmers, part-of-speech tagging and sentiment analysis support multiple languages. At the moment language support is not optimal. For instance, there is a stemmer module per language. To improve this, methods are introduced to set/change the language. Modules will apply the language of choice at runtime. So, you will not have to reload them.
+```javascript
+var natural = require('natural');
+natural.setLanguage("PT");
+console.log(natural.getLanguage());
+// "PT"
+```
+Abbreviations for the language setting follow the [ISO 639 standard](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes). Only languages that are supported by one of the natural modules can be chosen.
+
+| ISO Abbreviation | Language    | Modules                                 |
+|:-----------------|:------------|:----------------------------------------|
+|  CA              | Catalan     | Sentiment                               |
+|  EN              | English     | Tokenizer, Stemmer, Sentiment           |
+|  ES              | Spanish     |                                         | 
+|  EU              | Basque      |                                         | 
+|  FA              | Farsi       |                                         | 
+|  FR              | French      |                                         | 
+|  GL              | Galician    |                                         | 
+|  ID              | Indonesian  |                                         | 
+|  IT              | Italian     |                                         | 
+|  JA              | Japanese    |                                         | 
+|  NL              | Dutch       |                                         | 
+|  NO              | Norwegian   |                                         | 
+|  PL              | Polish      |                                         | 
+|  PT              | Portuguese  |                                         | 
+|  RU              | Russian     |                                         | 
+|  SV              | Swedish     |                                         | 
+|  VI              | Vietnamese  |                                         ||
+
+The Porter stemmer is modified to apply the new language setting. A generic wrapper has been added that looks at the language setting and runs the right stemmer.
+```javascript
+var natural = require('natural');
+var stemmer = new natural.PorterStemmer();
+var config = natural.config;
+
+config.setLanguage('EN');
+stemmer.tokenizeAndStem('He works very hard on these issues');
+```
+
+In the course of time all language-specific modules will be refactored to work with the language setting. And language-specific modules in the index file will be replaced with generic modules that look at the language setting.
+
+Furthermore, the config module is prepared for adding other global settings in the future:
+```javascript
+var config = require('natural').config;
+
+config.setProperty('Country', 'Brazil');
+console.log(config.getPropert('Country'));
+// Brazil
+```
+
 
 ## Tokenizers
 
