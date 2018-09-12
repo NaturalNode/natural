@@ -1,6 +1,6 @@
 /*
 Copyright (c) 2018, Hugo W.L. ter Doest
-Class that maps each call to the stemmer for the right language
+Unit test for config system
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,40 +21,19 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+var natural = require('../lib/natural');
+var config = natural.config;
 
-var config = require('../config/config');
-
-// Maps language codes to modules
-var mapLanguageToModule = {
-  "EN": require("./porter_stemmer_en"),
-  "ES": require("./porter_stemmer_es"),
-  "FA": require("./porter_stemmer_fa"),
-  "FR": require("./porter_stemmer_fr"),
-  "IT": require("./porter_stemmer_it"),
-  "NL": require("./porter_stemmer_nl"),
-  "NO": require("./porter_stemmer_no"),
-  "PT": require("./porter_stemmer_pt"),
-  "RU": require("./porter_stemmer_ru"),
-  "SV": require("./porter_stemmer_sv")
-};
-
-class PorterStemmer {
-  constructor() {
-    
-  }
-  
-  stem(token) {
-    return(mapLanguageToModule[config.getLanguage()].stem(token));
-  }
-  
-  tokenizeAndStem(text, keepStops) { 
-    return(mapLanguageToModule[config.getLanguage()].tokenizeAndStem(text, keepStops));
-  }
-  
-  attach() {
-    mapLanguageToModule[config.getLanguage()].attach();
-  }
-  
-}
-
-module.exports = PorterStemmer;
+describe("Natural's configuration system", function() {
+  it('should set the language', function() {
+    expect(config.setLanguage("EN")).toEqual(true);
+    expect(config.getLanguage()).toEqual("EN");
+  });
+  it('should detect if a language is not supported', function() {
+    expect(config.setLanguage("XX")).toEqual(false);
+  });
+  it('should create a new property', function() {
+    config.setProperty("Country", "Brazil");
+    expect(config.getProperty("Country")).toEqual("Brazil");
+  })
+});
