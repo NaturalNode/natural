@@ -20,10 +20,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var stemmer = require('../lib/natural/stemmers/porter_stemmer');
+var stemmer = require('../lib/natural/stemmers/porter_stemmer_en');
 var stopwords = require('../lib/natural/util/stopwords');
 
 describe('porter_stemmer', function() {
+  
 	it('should categorizeGroups', function() {
 		expect(stemmer.categorizeGroups('syllog')).toBe('CVCVC');
 		expect(stemmer.categorizeGroups('gypsy')).toBe('CVCV');		

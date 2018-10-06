@@ -62,7 +62,7 @@ var testConfigurations = [
   },
   {
     "language": "English",
-    "stemmer": "PorterStemmer",
+    "stemmer": "PorterStemmerEn",
     "vocabularyType": "afinn",
     "testSentences": [
       {"sentence": "So is Gemini a joke, you ask? You're never sure whether Andrew Reed's cinematography is straight borrowing from Michael Mann's cool-blue visuals from Heat or mocking the sort of Angelenos that would watch that heist film and see nothing but a decor schematic for every single interior. Or, for that matter, whether composer Keegan DeWitt's is parodying the sax-heavy scores of Skinemax thrillers past or simply copying one in between icy techno interludes. The fact that the performers, especially the exceptional Kirke, keep their tongues firmly planted in their cheeks helps ground things, as does the fact that the jabs are featherweight enough to pass as shrugs. It may feel insubstantial at times, but somewhere out there, there's a twin of this film that lays on the L.A. Self-Owns Itself mojo in thick clumps. Gemini is the good-sibling version. It's worth a whirl.", "score": -0.027972027972027972},
@@ -74,7 +74,7 @@ var testConfigurations = [
   },
   {
     "language": "English",
-    "stemmer": "PorterStemmer",
+    "stemmer": "PorterStemmerEn",
     "vocabularyType": "senticon",
     "testSentences": [
       {"sentence": "So is Gemini a joke, you ask? You're never sure whether Andrew Reed's cinematography is straight borrowing from Michael Mann's cool-blue visuals from Heat or mocking the sort of Angelenos that would watch that heist film and see nothing but a decor schematic for every single interior. Or, for that matter, whether composer Keegan DeWitt's is parodying the sax-heavy scores of Skinemax thrillers past or simply copying one in between icy techno interludes. The fact that the performers, especially the exceptional Kirke, keep their tongues firmly planted in their cheeks helps ground things, as does the fact that the jabs are featherweight enough to pass as shrugs. It may feel insubstantial at times, but somewhere out there, there's a twin of this film that lays on the L.A. Self-Owns Itself mojo in thick clumps. Gemini is the good-sibling version. It's worth a whirl.", "score": -0.02696503496503496},
@@ -87,7 +87,7 @@ var testConfigurations = [
   },
   {
     "language": "English",
-    "stemmer": "PorterStemmer",
+    "stemmer": "PorterStemmerEn",
     "vocabularyType": "pattern",
     "testSentences": [
       {"sentence": "So is Gemini a joke, you ask? You're never sure whether Andrew Reed's cinematography is straight borrowing from Michael Mann's cool-blue visuals from Heat or mocking the sort of Angelenos that would watch that heist film and see nothing but a decor schematic for every single interior. Or, for that matter, whether composer Keegan DeWitt's is parodying the sax-heavy scores of Skinemax thrillers past or simply copying one in between icy techno interludes. The fact that the performers, especially the exceptional Kirke, keep their tongues firmly planted in their cheeks helps ground things, as does the fact that the jabs are featherweight enough to pass as shrugs. It may feel insubstantial at times, but somewhere out there, there's a twin of this film that lays on the L.A. Self-Owns Itself mojo in thick clumps. Gemini is the good-sibling version. It's worth a whirl.", "score": -0.007692307692307693},
