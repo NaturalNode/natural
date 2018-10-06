@@ -25,7 +25,7 @@ var PorterStemmer = require('../lib/natural/stemmers/porter_stemmer_nl');
 
 var filenameDutchText = "./spec/test_data/Volkskrant-20150205-Knot-geldpers-aanzetten-is-paardenmiddel-voor-half-procent-inflatie.txt";
 
-describe('porter_stemmer_es', function() {
+describe('porter_stemmer_nl', function() {
 
  	it('should perform stemming on a lot of words', function() {
  		var errors = [];
@@ -45,22 +45,22 @@ describe('porter_stemmer_es', function() {
  				}
  			}
  		});
-
- 		expect(errors.length).toBe(305);
+ 		// The stemmer has an error count of 237 against the snowball list for nl that has 45669 entries
+ 		expect(errors.length).toBe(237);
  	});
   
-  
-    it('should tokenize a piece of text', function() {
-      var text = fs.readFileSync(filenameDutchText, 'utf-8');
-      expect(PorterStemmer.tokenizeAndStem(text, true)).toEqual(
-        [ 'knot', 'geldper', 'aanzet', 'is', 'paardenmiddel', 'vor', 'half', 'procent', 'inflatie', 'd', 'president', 'van', 'd', 'nederlandsch', 'bank', 'klas', 'knot', 'vindt', 'd', 'geldinjectie', 'in', 'd', 'europes', 'economie', 'van', 'ruim', '1', '100', 'miljard', 'euro', 'vel', 't', 'hog', 'vor', 'het', 'beoogd', 'resultat', 'een', 'half', 'procent', 'inflatie', 'in', '2016', 'oftewel', '50', 'basispunt', 'dat', 'zijn', 'hel', 'dur', 'basispunt', 'zei', 'knot', 'donderdag', 'in', 'd', 'twed', 'kamer', 'dor', 'robert', 'giebel', '5', 'februari', '2015', '21', '55', 'bron', 'anp', 'd', 'financi', 'l', 'specialist', 'onder', 'd', 'kamerled', 'had', 'knot', 'gevraagd', 'uitleg', 't', 'gev', 'over', 'het', 'ecb', 'besluit', 'van', '22', 'januari', 'd', 'central', 'bank', 'van', 'd', 'eurozon', 'gat', 'vor', '60', 'miljard', 'euro', 'per', 'maand', 'staatsschuld', 'opkop', 'dat', 'komt', 'ner', 'op', 'het', 'aanzet', 'van', 'd', 'geldper', 'om', 'd', 'inflatie', 'en', 'd', 'economie', 'aan', 't', 'jag', 'het', 'ecb', 'bestur', 'd', 'president', 'van', 'd', 'national', 'central', 'bank', 'van', 'evenzovel', 'euroland', 'en', 'zes', 'vast', 'bestuurder', 'beslot', 'daartoe', 'met', '20', 'vor', 'en', '5', 'teg', 'vrij', 'uitzonder', 'was', 'dat', 'knot', 'bekendmaakt', 'een', 'van', 'd', 'vijf', 'tegenstemmer', 't', 'zijn', 'hij', 'vindt', 'd', 'zogenoemd', 'kwantitatiev', 'verruim', 'noodzak', 'noch', 'effectief', 'mar', 'zei', 'knot', 'gister', 'tot', 'd', 'kamer', 'dat', 'besluit', 'is', 'een', 'gegev', 'nu', 'gan', 'besprek', 'of', 'het', 'een', 'goed', 'of', 'slecht', 'besluit', 'was', 'is', 'mosterd', 'na', 'd', 'maaltijd', 'in', 'het', 'vervolg', 'van', 'zijn', 'betog', 'kon', 'knot', 'zich', 'evenwel', 'niet', 'losmak', 'van', 'zijn', 'weerzin', 'erteg', 'd', 'dnb', 'president', 'maakt', 'duidelijk', 'dat', 'het', 'op', 'grot', 'schal', 'aanzet', 'van', 'd', 'geldper', 'vooral', 'een', 'sprong', 'in', 'het', 'diep', 'is', 'het', 'is', 'gen', 'flauwekul', 'mar', 'het', 'is', 'ook', 'niet', 'd', 'silver', 'bullet', 'd', 'oploss', 'van', 'all', 'kwal', 'deflatiespok', 'e', 'n', 'komma', 'n', 'triljoen', 'euro', 'vor', 'een', 'half', 'procent', 'inflatie', 'het', 'effect', 'van', 'd', 'geldinjectie', 'is', 'dan', 'ook', 'een', 'kwestie', 'van', 'appreciatie', 'meent', 'knot', 'welk', 'risico', 'acht', 'j', 'het', 'grootst', 'd', 'meerder', 'van', 'd', 'ecb', 'vindt', 'het', 'risico', 'van', 'deflatie', 'het', 'grootst', 'd', 'economie', 'komt', 'tot', 'stilstand', 'omdat', 'iederen', 'denkt', 'dat', 'alles', 'later', 'goedkoper', 'wordt', 'en', 'op', 'dat', 'later', 'gat', 'wacht', 'om', 'dat', 'deflatiespok', 'enigszin', 'buit', 'd', 'deur', 't', 'houd', 'wordt', 'zo', 'constateert', 'knot', 'een', 'paardenmiddel', 'ingezet', 'e', 'n', 'komma', 'n', 'triljoen', 'euro', 'vor', 'een', 'half', 'procent', 'inflatie', 'd', 'tegenstemmer', 'zoal', 'knot', 'vind', 'het', 'risico', 'van', 'deflatie', 'niet', 'grot', 'ongever', '60', 'procent', 'van', 'd', 'dalend', 'prijz', 'komt', 'dor', 'd', 'lag', 'olieprijs', 'en', 'dat', 'is', 'tijdelijk', 'zei', 'hij', 'het', 'risico', 'op', 'bijvoorbeeld', 'zeepbell', 'op', 'd', 'beur', 'en', 'in', 'd', 'huizenmarkt', 'acht', 'knot', 'vel', 'r', 'ler', 'd', 'kwantitatiev', 'verruim', 'jaagt', 'd', 'prijz', 'van', 'aandel', 'obligaties', 'en', 'vastgoed', 'op', 'tot', 'een', 'niveau', 'dat', 'volgen', 'knot', 'losstat', 'van', 'd', 'economisch', 'werkelijk', 'dat', 'vergrot', 'd', 'verschill', 'tuss', 'vermog', 'en', 'minder', 'vermog', 'gen', 'risico', 'mar', 'een', 'vaststaand', 'negatief', 'effect', 'van', 'd', 'kunstmat', 'lag', 'rent', 'dor', 'd', 'geldper', 'aan', 't', 'zet', 'is', 'volgen', 'knot', 'bovendien', 'dat', 'land', 'dor', 'd', 'actie', 'van', 'd', 'ecb', 'minder', 'gemotiveerd', 'zull', 'zijn', 'economisch', 'en', 'monetair', 't', 'hervorm' ]);
-    });
-  
-    it('should work with the attached notation', function() {
-      PorterStemmer.attach();
-      expect("mogelijkheid".stem()).toEqual("mogelijk");
-      expect("Knot: geldpers aanzetten is paardenmiddel voor half procent inflatie".tokenizeAndStem(true)).toEqual(
-        [ 'knot', 'geldper', 'aanzet', 'is', 'paardenmiddel', 'vor', 'half', 'procent', 'inflatie' ]);
-    });
+  it('should tokenize a piece of text', function() {
+    var text = fs.readFileSync(filenameDutchText, 'utf-8');
+    var result = PorterStemmer.tokenizeAndStem(text, true);
+    expect(result).toEqual(
+      ["knot","geldper","aanzet","is","paardenmiddel","vor","half","procent","inflatie","de","president","van","de","nederlandsch","bank","klas","knot","vindt","de","geldinjectie","in","de","europes","economie","van","ruim","1","100","miljard","euro","vel","te","hog","vor","het","beoogd","resultat","een","half","procent","inflatie","in","2016","oftewel","50","basispunt","dat","zijn","hel","dur","basispunt","zei","knot","donderdag","in","de","twed","kamer","dor","robert","giebel","5","februari","2015","21","55","bron","anp","de","financi","le","specialist","onder","de","kamerled","had","knot","gevraagd","uitleg","te","gev","over","het","ecb","besluit","van","22","januari","de","central","bank","van","de","eurozon","gat","vor","60","miljard","euro","per","maand","staatsschuld","opkop","dat","komt","ner","op","het","aanzet","van","de","geldper","om","de","inflatie","en","de","economie","aan","te","jag","het","ecb","bestur","de","president","van","de","national","central","bank","van","evenzovel","euroland","en","zes","vast","bestuurder","beslot","daartoe","met","20","vor","en","5","teg","vrij","uitzonder","was","dat","knot","bekendmaakt","een","van","de","vijf","tegenstemmer","te","zijn","hij","vindt","de","zogenoemd","kwantitatiev","verruim","noodzak","noch","effectief","mar","zei","knot","gister","tot","de","kamer","dat","besluit","is","een","gegev","nu","gan","besprek","of","het","een","goed","of","slecht","besluit","was","is","mosterd","na","de","maaltijd","in","het","vervolg","van","zijn","betog","kon","knot","zich","evenwel","niet","losmak","van","zijn","weerzin","erteg","de","dnb","president","maakt","duidelijk","dat","het","op","grot","schal","aanzet","van","de","geldper","vooral","een","sprong","in","het","diep","is","het","is","gen","flauwekul","mar","het","is","ook","niet","de","silver","bullet","de","oploss","van","all","kwal","deflatiespok","e","n","komma","n","triljoen","euro","vor","een","half","procent","inflatie","het","effect","van","de","geldinjectie","is","dan","ook","een","kwestie","van","appreciatie","meent","knot","welk","risico","acht","je","het","grootst","de","meerder","van","de","ecb","vindt","het","risico","van","deflatie","het","grootst","de","economie","komt","tot","stilstand","omdat","iederen","denkt","dat","alles","later","goedkoper","wordt","en","op","dat","later","gat","wacht","om","dat","deflatiespok","enigszin","buit","de","deur","te","houd","wordt","zo","constateert","knot","een","paardenmiddel","ingezet","e","n","komma","n","triljoen","euro","vor","een","half","procent","inflatie","de","tegenstemmer","zoal","knot","vind","het","risico","van","deflatie","niet","grot","ongever","60","procent","van","de","dalend","prijz","komt","dor","de","lag","olieprijs","en","dat","is","tijdelijk","zei","hij","het","risico","op","bijvoorbeeld","zeepbell","op","de","beur","en","in","de","huizenmarkt","acht","knot","vel","re","ler","de","kwantitatiev","verruim","jaagt","de","prijz","van","aandel","obligaties","en","vastgoed","op","tot","een","niveau","dat","volgen","knot","losstat","van","de","economisch","werkelijk","dat","vergrot","de","verschill","tuss","vermog","en","minder","vermog","gen","risico","mar","een","vaststaand","negatief","effect","van","de","kunstmat","lag","rent","dor","de","geldper","aan","te","zet","is","volgen","knot","bovendien","dat","land","dor","de","actie","van","de","ecb","minder","gemotiveerd","zull","zijn","economisch","en","monetair","te","hervorm"]);
+  });
+
+  it('should work with the attached notation', function() {
+    PorterStemmer.attach();
+    expect("mogelijkheid".stem()).toEqual("mogelijk");
+    expect("Knot: geldpers aanzetten is paardenmiddel voor half procent inflatie".tokenizeAndStem(true)).toEqual(
+      [ 'knot', 'geldper', 'aanzet', 'is', 'paardenmiddel', 'vor', 'half', 'procent', 'inflatie' ]);
+  });
     
 });
