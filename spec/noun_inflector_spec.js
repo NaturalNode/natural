@@ -227,6 +227,12 @@ describe('noun inflector', function() {
             expect(inflector.pluralize('monstrosity')).toBe('monstrosities');
         });
 
+        it('should handle [aeiou]Y cases', function() {
+          expect(inflector.pluralize('day')).toBe('days');
+          expect(inflector.pluralize('toy')).toBe('toys');
+          expect(inflector.pluralize('journey')).toBe('journeys');
+        });
+
         it('should handle SS cases', function() {
             expect(inflector.pluralize('dress')).toBe('dresses');
             expect(inflector.pluralize('dresses')).toBe('dresses');
