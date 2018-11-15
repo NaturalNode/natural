@@ -229,7 +229,7 @@ describe('noun inflector', function() {
 
         it('should handle [aeiou]Y cases', function() {
           expect(inflector.pluralize('day')).toBe('days');
-          expect(inflector.pluralize('enjoy')).toBe('enjoys');
+          expect(inflector.pluralize('toy')).toBe('toys');
           expect(inflector.pluralize('journey')).toBe('journeys');
         });
 
