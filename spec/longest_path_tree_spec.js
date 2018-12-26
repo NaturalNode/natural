@@ -73,7 +73,8 @@ describe("shortest path tree", function() {
     });
 
     describe("shortest path tree normal operations", function() {
-        var lpt = new LPT(digraph, 5);
+      var lpt = new LPT(digraph, 5);
+      it("should determine existence of paths", function() {
         expect(lpt.hasPathTo(0)).toBe(true);
         expect(lpt.hasPathTo(1)).toBe(true);
         expect(lpt.hasPathTo(2)).toBe(true);
@@ -82,14 +83,18 @@ describe("shortest path tree", function() {
         expect(lpt.hasPathTo(5)).toBe(false);
         expect(lpt.hasPathTo(6)).toBe(true);
         expect(lpt.hasPathTo(7)).toBe(true);
-        expect(lpt.pathTo(0)).toEqual([ 5, 1, 3, 6, 4, 0 ]);
-        expect(lpt.pathTo(1)).toEqual([ 5, 1 ]);
-        expect(lpt.pathTo(2)).toEqual([ 5, 1, 3, 6, 4, 7, 2 ]);
-        expect(lpt.pathTo(3)).toEqual([ 5, 1, 3 ]);
-        expect(lpt.pathTo(4)).toEqual([ 5, 1, 3, 6, 4 ]);
-        expect(lpt.pathTo(5)).toEqual([ ]);
-        expect(lpt.pathTo(6)).toEqual([ 5, 1, 3, 6 ]);
-        expect(lpt.pathTo(7)).toEqual([ 5, 1, 3, 6, 4, 7 ]);
+      });
+      it("should determine paths", function() {
+        expect(lpt.pathTo(0)).toEqual([5, 1, 3, 6, 4, 0]);
+        expect(lpt.pathTo(1)).toEqual([5, 1]);
+        expect(lpt.pathTo(2)).toEqual([5, 1, 3, 6, 4, 7, 2]);
+        expect(lpt.pathTo(3)).toEqual([5, 1, 3]);
+        expect(lpt.pathTo(4)).toEqual([5, 1, 3, 6, 4]);
+        expect(lpt.pathTo(5)).toEqual([]);
+        expect(lpt.pathTo(6)).toEqual([5, 1, 3, 6]);
+        expect(lpt.pathTo(7)).toEqual([5, 1, 3, 6, 4, 7]);
+      });
+      it("should calculate distances", function() {
         expect(lpt.getDistTo(0)).toBe(2.44);
         expect(lpt.getDistTo(1)).toBe(0.32);
         expect(lpt.getDistTo(2)).toBe(2.77);
@@ -98,5 +103,6 @@ describe("shortest path tree", function() {
         expect(lpt.getDistTo(5)).toBe(0);
         expect(lpt.getDistTo(6)).toBe(1.13);
         expect(lpt.getDistTo(7)).toBe(2.43);
+      });
     });
 });

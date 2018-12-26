@@ -26,8 +26,8 @@ describe('count_inflector', function() {
     it('should handle 1st cases', function() {
         expect(CountInflector.nth(1)).toBe('1st');
         expect(CountInflector.nth(101)).toBe('101st');
-        expect(CountInflector.nth(11)).toNotBe('11st');
-        expect(CountInflector.nth(111)).toNotBe('111st');
+        expect(CountInflector.nth(11)).not.toBe('11st');
+        expect(CountInflector.nth(111)).not.toBe('111st');
     });
 
     it('should handle the 12th cases', function() {
@@ -63,11 +63,11 @@ describe('count_inflector', function() {
     
     it('should handle 2nd cases', function() {
         expect(CountInflector.nth(2)).toBe('2nd');
-        expect(CountInflector.nth(12)).toNotBe('12nd');        
+        expect(CountInflector.nth(12)).not.toBe('12nd');
     });
     
     it('should handle 3rd cases', function() {
         expect(CountInflector.nth(3)).toBe('3rd');
-        expect(CountInflector.nth(13)).toNotBe('13rd');         
+        expect(CountInflector.nth(13)).not.toBe('13rd');
     });
 });

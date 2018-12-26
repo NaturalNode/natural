@@ -55,7 +55,7 @@ describe('bayes classifier', function() {
               classifier.trainParallel(2, function(err) {
                 expect(classifier.classify(['bug', 'code'])).toBe('computing');
                 expect(classifier.classify(['read', 'thing'])).toBe('literature');
-                asyncSpecDone();
+                //asyncSpecDone();
               });
             }
         });
@@ -74,7 +74,7 @@ describe('bayes classifier', function() {
               classifier.events.on('doneTraining', function() {
                   expect(classifier.classify(['bug', 'code'])).toBe('computing');
                   expect(classifier.classify(['read', 'thing'])).toBe('literature');
-                  asyncSpecDone();
+                  //asyncSpecDone();
               });
               classifier.trainParallelBatches({numThreads: 2, batchSize: 2});
             }
@@ -194,7 +194,7 @@ describe('bayes classifier', function() {
 		      expect(newClassifier.classify('a bug in the code')).toBe('computing');
 		      expect(newClassifier.classify('read all the books')).toBe('literature');
 		      expect(newClassifier.classify('kick butt')).toBe('sports');
-		      asyncSpecDone();
+		      //asyncSpecDone();
 		  });
             });
 	});
@@ -203,7 +203,7 @@ describe('bayes classifier', function() {
             natural.BayesClassifier.load('nonexistant_bayes_classifier.json', null, function(err, newClassifier){
               expect(err.code).toBe('ENOENT');
               expect(newClassifier).toBe(undefined);
-              asyncSpecDone();
+              //asyncSpecDone();
             });
         });
 

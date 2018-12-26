@@ -115,7 +115,7 @@ describe('logistic regression', function() {
 		expect(newClassifier.classify('read all the books')).toBe('literature');
 		expect(newClassifier.classify('kick butt')).toBe('sports');
 		
-		asyncSpecDone();
+		//asyncSpecDone();
 	    });
 	});
     });
@@ -124,7 +124,7 @@ describe('logistic regression', function() {
         natural.LogisticRegressionClassifier.load('nonexistant_lr_classifier.json', null, function(err, newClassifier){
           expect(err.code).toBe('ENOENT');
           expect(newClassifier).toBe(undefined);
-          asyncSpecDone();
+          //asyncSpecDone();
         });
     });
 });

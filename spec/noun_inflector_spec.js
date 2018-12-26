@@ -267,7 +267,7 @@ describe('noun inflector', function() {
         });
     });
 
-    describe('should pluralize and singularize string from patch', function() {
+    it('should pluralize and singularize string from patch', function() {
         inflector.attach();
         expect('synopsis'.pluralizeNoun()).toBe('synopses');
         expect('synopses'.singularizeNoun()).toBe('synopsis');
@@ -276,7 +276,7 @@ describe('noun inflector', function() {
     });
 
     describe('custom inflections', function() {
-        describe('should pluralize and singularize custom forms', function() {
+        it('should pluralize and singularize custom forms', function() {
             var myInflector = new NounInflector();
             myInflector.attach();
             myInflector.addPlural(/(code|ware)/i, '$1z');
@@ -287,7 +287,7 @@ describe('noun inflector', function() {
             expect('warez'.singularizeNoun()).toBe('ware');
         });
 
-        describe('should not break regular forms', function() {
+        it('should not break regular forms', function() {
             var myInflector = new NounInflector();
             myInflector.attach();
             myInflector.addPlural(/(code|ware)/i, '$1z');
