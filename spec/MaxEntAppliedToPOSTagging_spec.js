@@ -69,6 +69,7 @@ function applyClassifierToTestCorpus(testCorpus, tagger, classifier) {
       }
     });
 
+    var sentenceLength = sentence.length;
     // Classify tags using maxent
     taggedSentence.taggedWords.forEach(function(taggedWord, index) {
 
@@ -90,11 +91,11 @@ function applyClassifierToTestCorpus(testCorpus, tagger, classifier) {
         context.data.tagWindow["-1"] = taggedSentence.taggedWords[index - 1].tag;
       }
       // Right bigram
-      if (index < sentence.length - 1) {
+      if (index < sentenceLength - 1) {
         context.data.tagWindow["1"] = taggedSentence.taggedWords[index + 1].tag;
       }
       // Next bigram
-      if (index < sentence.length - 2) {
+      if (index < sentenceLength - 2) {
         context.data.tagWindow["2"] = taggedSentence.taggedWords[index + 2].tag;
       }
       // Left bigram words
@@ -102,7 +103,7 @@ function applyClassifierToTestCorpus(testCorpus, tagger, classifier) {
         context.data.wordWindow["-1"] = taggedSentence.taggedWords[index - 1].token;
       }
       // Right bigram words
-      if (index < sentence.length - 1) {
+      if (index < sentenceLength - 1) {
         context.data.wordWindow["1"] = taggedSentence.taggedWords[index + 1].token;
       }
 
