@@ -19,17 +19,17 @@
 var natural = require('../lib/natural');
 var fs = require('fs');
 
-var base_folder_rules = './lib/natural/brill_pos_tagger/data';
+var base_folder_rules = 'lib/natural/brill_pos_tagger/data';
 var base_folder_test_data = 'spec/test_data';
 
-var en_rules_file = base_folder_rules + '/English/tr_from_posjs.txt';
+var en_rules_file = base_folder_rules + '/English/tr_from_posjs.json';
 var en_lexicon_file = base_folder_rules + '/English/lexicon_from_posjs.json';
 
 var en_ex_nyt_article = base_folder_test_data + '/NYT-20150205-picassos-granddaughter-plans-to-sell-art-worrying-the-market.txt';
 var en_ex_nyt_article_expected_tag_results = base_folder_test_data + '/NYT-20150205-picassos-granddaughter-plans_expected_tag_results.txt';
 
-var du_rules_file = base_folder_rules + '/Dutch/brill_CONTEXTRULES.jg';
-var du_lexicon_file = base_folder_rules + '/Dutch/brill_LEXICON.jg';
+var du_rules_file = base_folder_rules + '/Dutch/brill_CONTEXTRULES.json';
+var du_lexicon_file = base_folder_rules + '/Dutch/brill_LEXICON.json';
 
 var du_ex_volkskrant_article = base_folder_test_data + '/Volkskrant-20150205-Knot-geldpers-aanzetten-is-paardenmiddel-voor-half-procent-inflatie.txt';
 

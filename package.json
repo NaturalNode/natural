@@ -14,6 +14,7 @@
     "afinn-165": "^1.0.2",
     "apparatus": "^0.0.10",
     "json-stable-stringify": "^1.0.1",
+    "pegjs": "^0.10.0",
     "phantomjs": "^2.1.7",
     "puppeteer": "^1.11.0",
     "sylvester": "^0.0.12",
