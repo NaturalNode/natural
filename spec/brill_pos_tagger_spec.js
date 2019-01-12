@@ -25,13 +25,13 @@ var base_folder_test_data = 'spec/test_data';
 var en_rules_file = base_folder_rules + '/English/tr_from_posjs.json';
 var en_lexicon_file = base_folder_rules + '/English/lexicon_from_posjs.json';
 
-var en_ex_nyt_article = base_folder_test_data + '/NYT-20150205-picassos-granddaughter-plans-to-sell-art-worrying-the-market.txt';
-var en_ex_nyt_article_expected_tag_results = base_folder_test_data + '/NYT-20150205-picassos-granddaughter-plans_expected_tag_results.txt';
+var en_ex_nyt_article = base_folder_test_data + '/NYT-20150205-picassos-granddaughter-plans-to-sell-art-worrying-the-market.json';
+var en_ex_nyt_article_expected_tag_results = base_folder_test_data + '/NYT-20150205-picassos-granddaughter-plans_expected_tag_results.json';
 
 var du_rules_file = base_folder_rules + '/Dutch/brill_CONTEXTRULES.json';
 var du_lexicon_file = base_folder_rules + '/Dutch/brill_LEXICON.json';
 
-var du_ex_volkskrant_article = base_folder_test_data + '/Volkskrant-20150205-Knot-geldpers-aanzetten-is-paardenmiddel-voor-half-procent-inflatie.txt';
+var du_ex_volkskrant_article = base_folder_test_data + '/Volkskrant-20150205-Knot-geldpers-aanzetten-is-paardenmiddel-voor-half-procent-inflatie.json';
 
 // Compares two tagged sentences. First one is in the old POSJS format, i.e.
 // an array of two position arrays. The second one is a Sentence object
@@ -49,26 +49,20 @@ describe('Brill\'s POS Tagger', function() {
   var brill_pos_tagger = null;
   var lexicon = null;
   var ruleSet = null;
+  var sentences = null;
   it('should initialise correctly with tagging rules for English', function() {
     lexicon = new natural.Lexicon(en_lexicon_file, 'NN');
     ruleSet = new natural.RuleSet(en_rules_file);
     brill_pos_tagger = new natural.BrillPOSTagger(lexicon, ruleSet);
   });
 
-  var sentences;
-  it('should correctly read a NYT article about Picasso', function(done) {
-    fs.readFile(en_ex_nyt_article, 'utf8', function (error, text) {
-      sentences = text.split('\n');
-      done();
-    });
+  it('should correctly read a NYT article about Picasso', function() {
+    sentences = require(en_ex_nyt_article).sentences;
   });
 
   var posjs_results;
-  it('should correctly read tag results of pos-js for the NYT article', function(done) {
-    fs.readFile(en_ex_nyt_article_expected_tag_results, 'utf8', function (error, text) {
-      posjs_results = JSON.parse(text);
-      done();
-    });
+  it('should correctly read tag results of pos-js for the NYT article', function() {
+    posjs_results = require(en_ex_nyt_article_expected_tag_results).results;
   });
 
   var tokenizer = new natural.WordTokenizer();
@@ -87,11 +81,8 @@ describe('Brill\'s POS Tagger', function() {
     brill_pos_tagger = new natural.BrillPOSTagger(lexicon, ruleSet);
   });
 
-  it('should correctly read a Volkskrant article about the ECB', function(done) {
-    fs.readFile(du_ex_volkskrant_article, 'utf8', function (error, text) {
-      sentences = text.split('\n');
-      done();
-    });
+  it('should correctly read a Volkskrant article about the ECB', function() {
+    sentences = require(du_ex_volkskrant_article).sentences;
   });
 
   it('should process the Volkskrant article', function() {
