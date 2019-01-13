@@ -10,7 +10,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.json'],
 
-    modules: ['node_modules'],
+    modules: ['node_modules', '.'],
 
     // Use our versions of Node modules.
     alias: {

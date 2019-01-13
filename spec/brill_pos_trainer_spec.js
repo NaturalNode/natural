@@ -20,11 +20,11 @@ var natural = require('../lib/natural');
 var Corpus = require('../lib/natural/brill_pos_tagger/lib/Corpus');
 var SentenceClass = natural.Sentence;
 
+const DEBUG = false;
 const BROWN = 1;
-const JSON = 2;
+const JSON_FLAG = 2;
 
-var base_folder_test_data = 'spec/test_data/';
-var brownCorpusFile = base_folder_test_data + 'browntag_nolines_excerpt.json';
+var brownCorpus = require('spec/test_data/browntag_nolines_excerpt.json');
 
 function selectRuleTemplates(templateNames) {
   var templates = [];
@@ -59,10 +59,9 @@ describe('Brill\'s POS Trainer', function() {
   var ruleSet = null;
 
   it('should split the corpus in a training and testing corpus', function() {
-    corpus = new Corpus(require(brownCorpusFile), JSON, SentenceClass);
-    console.log(corpus);
+    corpus = new Corpus(brownCorpus, JSON_FLAG, SentenceClass);
+    DEBUG && console.log("Corpus: " + JSON.stringify(corpus, null, 2))
     corpora = corpus.splitInTrainAndTest(percentageTrain);
-    console.log(corpora[0].nrSentences());
     expect(corpora[0].nrSentences() + corpora[1].nrSentences()).toEqual(corpus.nrSentences());
   });
 
