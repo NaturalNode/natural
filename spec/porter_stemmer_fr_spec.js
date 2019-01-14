@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2014, Ismaël Héry
+Copyright (c) 2019, Ismaël Héry, Hugo W.L. ter Doest
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,7 @@ THE SOFTWARE.
 */
 
 var stemmer = require('../lib/natural/stemmers/porter_stemmer_fr');
-var fs = require('fs');
+const snowBallDict = require('spec/test_data/snowball_fr.json');
 
 describe('porter_stemmer', function() {
 
@@ -72,26 +72,29 @@ describe('porter_stemmer', function() {
   it('should perform stemming on a lot of words', function() {
     var ok = [];
     var ko = [];
-    fs.readFileSync('spec/test_data/snowball_fr.txt').toString().split('\n').forEach(function(line) {
-      if (line) {
-        var fields = line.replace(/(\s)+/g, ' ').split(' ');
-        var stemmed = stemmer.stem(fields[0]);
-        var regs = stemmer.regions(fields[0]);
-        var txtRegions = {
-          r1: fields[0].substring(regs.r1),
-          r2: fields[0].substring(regs.r2),
-          rv: fields[0].substring(regs.rv)
-        }
 
-        if (stemmed === fields[1])
-          ok.push(fields[0]);
-        else
-          ko.push({
-            word: fields[0],
-            expected: fields[1],
-            actual: stemmed,
-            regions: txtRegions
-          });
+    Object.keys(snowBallDict).forEach(word => {
+
+      var stemmed = stemmer.stem(word);
+      var expectedStem = snowBallDict[word];
+
+      var regs = stemmer.regions(word);
+      var txtRegions = {
+        r1: word.substring(regs.r1),
+        r2: word.substring(regs.r2),
+        rv: word.substring(regs.rv)
+      }
+
+      if (stemmed === expectedStem) {
+        ok.push(word);
+      }
+      else {
+        ko.push({
+          word: word,
+          expected: expectedStem,
+          actual: stemmed,
+          regions: txtRegions
+        });
       }
     });
 
