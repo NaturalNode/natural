@@ -38,7 +38,7 @@ var specs = [
   "spec/orthography_tokenizer_spec.js",
   "spec/porter_stemmer_es_spec.js",
   "spec/porter_stemmer_fr_spec.js",
-  //"spec/porter_stemmer_it_spec.js",
+  "spec/porter_stemmer_it_spec.js",
   //"spec/porter_stemmer_nl_spec.js",
   //"spec/porter_stemmer_no_spec.js",
   //"spec/porter_stemmer_pt_spec.js",

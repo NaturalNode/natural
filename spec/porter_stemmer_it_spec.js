@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2012, Leonardo Fenu, Chris Umbel
+Copyright (c) 2019, Leonardo Fenu, Chris Umbel, Hugo W.L. ter Doest
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,20 +21,27 @@ THE SOFTWARE.
 */
 
 var stemmer = require('../lib/natural/stemmers/porter_stemmer_it');
-var fs = require('fs');
+const snowBallDict = require('spec/test_data/snowball_it.json');
 
 describe('porter_stemmer_it', function() {
   it('should perform stem', function() {
-    fs.readFileSync('spec/test_data/snowball_it.txt').toString().replace(/\r/g, '\n').split('\n').forEach(
-      function(line) {
-        if (line) {
-          var fields = line.split(' -> ');
-          var stemmed = stemmer.stem(fields[0]);
-          expect(stemmed).toEqual(fields[1]);
-        }
+    var errors = [];
+    Object.keys(snowBallDict).forEach(word => {
+      var stemmed = stemmer.stem(word);
+      var expectedStem = snowBallDict[word];
+      if (stemmed !== snowBallDict[word]) {
+        console.log('Error:', word, 'Expected:', expectedStem, 'Got:', stemmed);
+        errors.push({
+          word: word,
+          expected: expectedStem,
+          actual: stemmed
+        });
       }
-    );
+    });
+
+    expect(errors.length).toEqual(0);
   });
+
   it('should tokenize and stem attached', function() {
     stemmer.attach();
 
