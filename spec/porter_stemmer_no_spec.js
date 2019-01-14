@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2014, Kristoffer Brabrand
+Copyright (c) 2019, Kristoffer Brabrand, Hugo W.L. ter Doest
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var stemmer = require('../lib/natural/stemmers/porter_stemmer_no'),
-    fs = require('fs');
+var stemmer = require('../lib/natural/stemmers/porter_stemmer_no');
+const snowBallDict = require('spec/test_data/snowball_no.json');
+
 
 describe('porter_stemmer_no', function() {
     it('should perform step 1a', function() {
@@ -99,27 +100,26 @@ describe('porter_stemmer_no', function() {
     });
 
     it('should perform stemming on a lot of words', function() {
-        var ok = [];
-        var ko = [];
+      var ok = [];
+      var ko = [];
 
-        fs.readFileSync('spec/test_data/snowball_no.txt').toString().split('\n').forEach(function(line) {
-            if (line) {
-                var fields = line.replace(/(\s)+/g, ' ').split(' ');
-                var stemmed = stemmer.stem(fields[0]);
+      Object.keys(snowBallDict).forEach(word => {
+        var stemmed = stemmer.stem(word);
+        var expectedStem = snowBallDict[word];
 
-                if (stemmed === fields[1]) {
-                    ok.push(fields[0]);
-                } else {
-                    ko.push({
-                        word: fields[0],
-                        expected: fields[1],
-                        actual: stemmed
-                    });
-                }
-            }
-        });
+        if (stemmed === expectedStem) {
+          ok.push(word);
+        }
+        else {
+          ko.push({
+            word: word,
+            expected: expectedStem,
+            actual: stemmed
+          });
+        }
+      });
 
-        expect(ko.length).toBe(0);
+      expect(ko.length).toBe(0);
     });
 
     it('should perform complete stemming', function() {
