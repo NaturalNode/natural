@@ -11,7 +11,7 @@ module.exports = {
     extensions: ['.js', '.json'],
 
     modules: ['node_modules', '.'],
-
+    
     // Use our versions of Node modules.
     alias: {
       'fs': 'browserfs/dist/shims/fs.js',

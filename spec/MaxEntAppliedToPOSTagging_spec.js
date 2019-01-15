@@ -40,7 +40,7 @@ var nrIterations = 2;
 var minImprovement = 0.01;
 var trainCorpusSize = 50; // percentage
 
-const DEBUG = true;
+const DEBUG = false;
 
 // Structure of the event space
 // - Classes are possible tags
@@ -117,7 +117,7 @@ function applyClassifierToTestCorpus(testCorpus, tagger, classifier) {
         // Correctly tagged
         correctlyTaggedMaxEnt++;
       }
-      DEBUG && console.log("(word, classification, right tag): " + "(" + taggedWord[0] +
+      DEBUG && console.log("(word, classification, right tag): " + "(" + taggedWord.token +
         ", " + tag + ", " + sentence.taggedWords[index].tag + ")");
     });
   });
@@ -149,7 +149,7 @@ describe("Maximum Entropy Classifier applied to POS tagging", function() {
   it("generates a sample from a corpus", function() {
     sample = trainCorpus.generateSample();
     expect(sample.size()).toBeGreaterThan(0);
-    console.log("Size of the sample: " + sample.size());
+    DEBUG && console.log("Size of the sample: " + sample.size());
   });
 
   /*

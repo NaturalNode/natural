@@ -10,7 +10,7 @@ var specs = [
   "spec/aggressive_tokenizer_spec.js",
   "spec/aggressive_tokenizer_sv_spec.js",
   "spec/aggressive_tokenizer_vi_spec.js",
-  //"spec/bayes_classifier_spec.js",
+  "spec/bayes_classifier_spec.js",
   "spec/brill_pos_tagger_spec.js",
   "spec/brill_pos_trainer_spec.js",
   "spec/count_inflector_fr_spec.js",
@@ -22,7 +22,7 @@ var specs = [
   "spec/jaro-winkler_spec.js",
   "spec/lancaster_stemmer_spec.js",
   "spec/levenshtein_spec.js",
-  //"spec/logistic_regression_classifier_spec.js",
+  "spec/logistic_regression_classifier_spec.js",
   "spec/longest_path_tree_spec.js",
   "spec/MaxEntAppliedToPOSTagging_spec.js",
   "spec/MaxEntClassifier_spec.js",
@@ -56,7 +56,7 @@ var specs = [
   "spec/stemmer_id_spec.js",
   "spec/stemmer_ja_spec.js",
   "spec/stemmer_token_spec.js",
-  //"spec/tfidf_spec.js",
+  "spec/tfidf_spec.js",
   "spec/tokenizer_case_spec.js",
   "spec/tokenizer_ja_spec.js",
   "spec/transliterator_ja_spec.js",
@@ -72,7 +72,12 @@ exports.default = function() {
   return src(specs)
     .pipe(webpackStream(require('webpack.config')))
     //.pipe(dest('.'))
+
     .pipe(jasmineBrowser.specRunner({}))
-    //.pipe(jasmineBrowser.headless({driver: "chrome", random: false}));
     .pipe(jasmineBrowser.server())
+
+
+    //.pipe(jasmineBrowser.specRunner({console: true, random: false}))
+    //.pipe(jasmineBrowser.headless({driver: 'phantomjs'}));
+
 };
