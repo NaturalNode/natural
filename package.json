@@ -38,7 +38,7 @@
   "scripts": {
     "benchmark": "node benchmarks",
     "clean": "rimraf *~ #* *classifier.json",
-    "test": "NODE_PATH=. jasmine --random=false",
+    "test": "NODE_PATH=. jasmine --random=false spec/*_spec.js",
     "test_io": "NODE_PATH=. jasmine ./io_spec/*.js"
   },
   "license": "MIT",
