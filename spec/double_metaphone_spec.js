@@ -60,11 +60,11 @@ describe('double metaphone', function() {
 	    it('should encode BB to P', function() {
 	    	var encodings = doubleMetaphone.process('tabby');
 	    	expect(encodings[0]).toContain('P');
-	    	expect(encodings[0]).toNotContain('PP');
-	    	expect(encodings[0]).toNotContain('PB');    	
+	    	expect(encodings[0]).not.toContain('PP');
+	    	expect(encodings[0]).not.toContain('PB');
 	    	expect(encodings[1]).toContain('P');
-	    	expect(encodings[1]).toNotContain('PP');
-	    	expect(encodings[1]).toNotContain('PB');
+	    	expect(encodings[1]).not.toContain('PP');
+	    	expect(encodings[1]).not.toContain('PB');
 	    });
     });
 
@@ -203,20 +203,20 @@ describe('double metaphone', function() {
     	it('should encode DD to T', function() {
 	    	var encodings = doubleMetaphone.process('fiddle');
 	    	expect(encodings[0]).toContain('T');
-	    	expect(encodings[0]).toNotContain('TT');
-	    	expect(encodings[0]).toNotContain('D');
+	    	expect(encodings[0]).not.toContain('TT');
+	    	expect(encodings[0]).not.toContain('D');
 
 	    	expect(encodings[1]).toContain('T');
-	    	expect(encodings[1]).toNotContain('TT');
-	    	expect(encodings[1]).toNotContain('D');
+	    	expect(encodings[1]).not.toContain('TT');
+	    	expect(encodings[1]).not.toContain('D');
     	});
 
     	it('should encode DG to J', function() {
 	    	var encodings = doubleMetaphone.process('ledge');
 	    	expect(encodings[0]).toContain('J');
-	    	expect(encodings[0]).toNotContain('T');
+	    	expect(encodings[0]).not.toContain('T');
 	    	expect(encodings[1]).toContain('J');
-	    	expect(encodings[1]).toNotContain('T');	    	
+	    	expect(encodings[1]).not.toContain('T');
     	});
 
     	it('should encode DT to T', function() {
@@ -236,9 +236,9 @@ describe('double metaphone', function() {
 	    it('should encode FF to F', function() {
 	    	var encodings = doubleMetaphone.process('effect');
 	    	expect(encodings[0]).toContain('F');
-	    	expect(encodings[0]).toNotContain('FF');
+	    	expect(encodings[0]).not.toContain('FF');
 	    	expect(encodings[1]).toContain('F');
-	    	expect(encodings[1]).toNotContain('FF');
+	    	expect(encodings[1]).not.toContain('FF');
 	    });    	
     });
 
@@ -312,9 +312,9 @@ describe('double metaphone', function() {
     	it('should encode GG to K', function() {
 	    	var encodings = doubleMetaphone.process('daggers');
 	    	expect(encodings[0]).toContain('K');
-	    	expect(encodings[0]).toNotContain('KK');
+	    	expect(encodings[0]).not.toContain('KK');
 	    	expect(encodings[1]).toContain('K');
-	    	expect(encodings[1]).toNotContain('KK');
+	    	expect(encodings[1]).not.toContain('KK');
     	});
     });
 
@@ -333,8 +333,8 @@ describe('double metaphone', function() {
 
 	    it('should drop Hs in words if not surrounded by vowels or starting', function() {
 	    	var encodings = doubleMetaphone.process('charlie');
-	    	expect(encodings[0]).toNotContain('H');
-	    	expect(encodings[1]).toNotContain('H');
+	    	expect(encodings[0]).not.toContain('H');
+	    	expect(encodings[1]).not.toContain('H');
 	    });    	
     });
 
@@ -380,15 +380,15 @@ describe('double metaphone', function() {
     	it('should encode L to LL', function() {
 	    	var encodings = doubleMetaphone.process('functionally');
 	    	expect(encodings[0]).toContain('L');
-	    	expect(encodings[0]).toNotContain('LL');
+	    	expect(encodings[0]).not.toContain('LL');
 	    	expect(encodings[1]).toContain('L');
-	    	expect(encodings[1]).toNotContain('LL');
+	    	expect(encodings[1]).not.toContain('LL');
     	});
 
     	it('should encode ignore spainish-style LL entirely in secondary', function() {
 	    	var encodings = doubleMetaphone.process('cabrillo');
 	    	expect(encodings[0]).toContain('L');
-	    	expect(encodings[1]).toNotContain('LL');
+	    	expect(encodings[1]).not.toContain('LL');
     	});    	
     });
 
@@ -396,13 +396,13 @@ describe('double metaphone', function() {
     	it('should encode M', function() {
 	    	var encodings = doubleMetaphone.process('meter');
 	    	expect(encodings[0]).toMatch(/^M/);
-	    	expect(encodings[1]).toNotContain(/^M/);    		
+	    	expect(encodings[1]).not.toContain(/^M/);
     	});
 
     	it('should skip B after M', function() {
 	    	var encodings = doubleMetaphone.process('thumb');
 	    	expect(encodings[0]).toMatch(/M$/);
-	    	expect(encodings[1]).toNotContain(/M$/);    		
+	    	expect(encodings[1]).not.toContain(/M$/);
     	});
     });
 
@@ -418,8 +418,8 @@ describe('double metaphone', function() {
 	    	expect(encodings[0]).toContain('N');
 	    	expect(encodings[1]).toContain('N');
 
-	    	expect(encodings[0]).toNotContain('NN');
-	    	expect(encodings[1]).toNotContain('NN');
+	    	expect(encodings[0]).not.toContain('NN');
+	    	expect(encodings[1]).not.toContain('NN');
 	    });
 
 	    it('should treat a spainish Ñ as a N', function() {
@@ -445,19 +445,19 @@ describe('double metaphone', function() {
 	    it('should encode PP to P', function() {
 	    	var encodings = doubleMetaphone.process('sappy');
 	    	expect(encodings[0]).toContain('P');
-	    	expect(encodings[0]).toNotContain('PP');
+	    	expect(encodings[0]).not.toContain('PP');
 	    	expect(encodings[1]).toContain('P');    	
-	    	expect(encodings[1]).toNotContain('PP');    	
+	    	expect(encodings[1]).not.toContain('PP');
 	    });
 
 	    it('should skip P before B i.e. raspberry', function() {
 	    	var encodings = doubleMetaphone.process('raspberry');
 	    	expect(encodings[0]).toContain('P');
-	    	expect(encodings[0]).toNotContain('PP');
-	    	expect(encodings[0]).toNotContain('PB');    	
+	    	expect(encodings[0]).not.toContain('PP');
+	    	expect(encodings[0]).not.toContain('PB');
 	    	expect(encodings[1]).toContain('P');
-	    	expect(encodings[1]).toNotContain('PP');
-	    	expect(encodings[1]).toNotContain('PB');    	    	
+	    	expect(encodings[1]).not.toContain('PP');
+	    	expect(encodings[1]).not.toContain('PB');
 	    });    	
     });
 
@@ -573,9 +573,9 @@ describe('double metaphone', function() {
     	it('should encode TD to T', function() {
 	    	var encodings = doubleMetaphone.process('countdown');
 	    	expect(encodings[0]).toContain('T');
-	    	expect(encodings[0]).toNotContain('D');
+	    	expect(encodings[0]).not.toContain('D');
 	    	expect(encodings[1]).toContain('T');
-	    	expect(encodings[1]).toNotContain('D');
+	    	expect(encodings[1]).not.toContain('D');
     	});
     });
 
@@ -589,11 +589,11 @@ describe('double metaphone', function() {
 	    it('should encode VV to F', function() {
 	    	var encodings = doubleMetaphone.process('savvy');
 	    	expect(encodings[0]).toContain('F');
-	    	expect(encodings[0]).toNotContain('FF');
-	    	expect(encodings[0]).toNotContain('FV');    	
+	    	expect(encodings[0]).not.toContain('FF');
+	    	expect(encodings[0]).not.toContain('FV');
 	    	expect(encodings[1]).toContain('F');
-	    	expect(encodings[1]).toNotContain('FF');
-	    	expect(encodings[1]).toNotContain('FV');
+	    	expect(encodings[1]).not.toContain('FF');
+	    	expect(encodings[1]).not.toContain('FV');
 	    });
 	});
 
@@ -618,7 +618,7 @@ describe('double metaphone', function() {
 
 		it('should encode OWSKY alternately to F(V)', function() {
 	    	var encodings = doubleMetaphone.process('lebowski');
-	    	expect(encodings[0]).toNotContain('F');
+	    	expect(encodings[0]).not.toContain('F');
 	    	expect(encodings[1]).toContain('F');
 		});
 
@@ -644,8 +644,8 @@ describe('double metaphone', function() {
 
 		it('should skip X end for French words', function() {
 	    	var encodings = doubleMetaphone.process('lemieux');
-	    	expect(encodings[0]).toNotMatch(/KS$/);
-	    	expect(encodings[1]).toNotMatch(/KS$/);
+	    	expect(encodings[0]).not.toMatch(/KS$/);
+	    	expect(encodings[1]).not.toMatch(/KS$/);
 		});
 	});
 

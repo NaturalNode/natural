@@ -1,0 +1,1101 @@
+{
+  "wordCount": 264,
+  "sentences": [
+    {
+      "taggedWords": [
+        {
+          "token": "the",
+          "tag": "AT"
+        },
+        {
+          "token": "Fulton",
+          "tag": "NP"
+        },
+        {
+          "token": "County",
+          "tag": "NN"
+        },
+        {
+          "token": "Grand",
+          "tag": "JJ"
+        },
+        {
+          "token": "Jury",
+          "tag": "NN"
+        },
+        {
+          "token": "said",
+          "tag": "VBD"
+        },
+        {
+          "token": "Friday",
+          "tag": "NR"
+        },
+        {
+          "token": "an",
+          "tag": "AT"
+        },
+        {
+          "token": "investigation",
+          "tag": "NN"
+        },
+        {
+          "token": "of",
+          "tag": "IN"
+        },
+        {
+          "token": "Atlanta's",
+          "tag": "NP$"
+        },
+        {
+          "token": "recent",
+          "tag": "JJ"
+        },
+        {
+          "token": "primary",
+          "tag": "NN"
+        },
+        {
+          "token": "election",
+          "tag": "NN"
+        },
+        {
+          "token": "produced",
+          "tag": "VBD"
+        },
+        {
+          "token": "no",
+          "tag": "AT"
+        },
+        {
+          "token": "evidence",
+          "tag": "NN"
+        },
+        {
+          "token": "that",
+          "tag": "CS"
+        },
+        {
+          "token": "any",
+          "tag": "DTI"
+        },
+        {
+          "token": "irregularities",
+          "tag": "NNS"
+        },
+        {
+          "token": "took",
+          "tag": "VBD"
+        },
+        {
+          "token": "place",
+          "tag": "NN"
+        },
+        {
+          "token": ".",
+          "tag": "."
+        }
+      ]
+    },
+    {
+      "taggedWords": [
+        {
+          "token": "the",
+          "tag": "AT"
+        },
+        {
+          "token": "jury",
+          "tag": "NN"
+        },
+        {
+          "token": "further",
+          "tag": "RBR"
+        },
+        {
+          "token": "said",
+          "tag": "VBD"
+        },
+        {
+          "token": "in",
+          "tag": "IN"
+        },
+        {
+          "token": "term-end",
+          "tag": "NN"
+        },
+        {
+          "token": "presentments",
+          "tag": "NNS"
+        },
+        {
+          "token": "that",
+          "tag": "CS"
+        },
+        {
+          "token": "the",
+          "tag": "AT"
+        },
+        {
+          "token": "City",
+          "tag": "NN"
+        },
+        {
+          "token": "Executive",
+          "tag": "JJ"
+        },
+        {
+          "token": "Committee",
+          "tag": "NN"
+        },
+        {
+          "token": ",",
+          "tag": ","
+        },
+        {
+          "token": "which",
+          "tag": "WDT"
+        },
+        {
+          "token": "had",
+          "tag": "HVD"
+        },
+        {
+          "token": "over-all",
+          "tag": "JJ"
+        },
+        {
+          "token": "charge",
+          "tag": "NN"
+        },
+        {
+          "token": "of",
+          "tag": "IN"
+        },
+        {
+          "token": "the",
+          "tag": "AT"
+        },
+        {
+          "token": "election",
+          "tag": "NN"
+        },
+        {
+          "token": ",",
+          "tag": ","
+        },
+        {
+          "token": "deserves",
+          "tag": "VBZ"
+        },
+        {
+          "token": "the",
+          "tag": "AT"
+        },
+        {
+          "token": "praise",
+          "tag": "NN"
+        },
+        {
+          "token": "and",
+          "tag": "CC"
+        },
+        {
+          "token": "thanks",
+          "tag": "NNS"
+        },
+        {
+          "token": "of",
+          "tag": "IN"
+        },
+        {
+          "token": "the",
+          "tag": "AT"
+        },
+        {
+          "token": "City",
+          "tag": "NN"
+        },
+        {
+          "token": "of",
+          "tag": "IN"
+        },
+        {
+          "token": "Atlanta",
+          "tag": "NP"
+        },
+        {
+          "token": "for",
+          "tag": "IN"
+        },
+        {
+          "token": "the",
+          "tag": "AT"
+        },
+        {
+          "token": "manner",
+          "tag": "NN"
+        },
+        {
+          "token": "in",
+          "tag": "IN"
+        },
+        {
+          "token": "which",
+          "tag": "WDT"
+        },
+        {
+          "token": "the",
+          "tag": "AT"
+        },
+        {
+          "token": "election",
+          "tag": "NN"
+        },
+        {
+          "token": "was",
+          "tag": "BEDZ"
+        },
+        {
+          "token": "conducted",
+          "tag": "VBN"
+        },
+        {
+          "token": ".",
+          "tag": "."
+        }
+      ]
+    },
+    {
+      "taggedWords": [
+        {
+          "token": "the",
+          "tag": "AT"
+        },
+        {
+          "token": "September-October",
+          "tag": "NP"
+        },
+        {
+          "token": "term",
+          "tag": "NN"
+        },
+        {
+          "token": "jury",
+          "tag": "NN"
+        },
+        {
+          "token": "had",
+          "tag": "HVD"
+        },
+        {
+          "token": "been",
+          "tag": "BEN"
+        },
+        {
+          "token": "charged",
+          "tag": "VBN"
+        },
+        {
+          "token": "by",
+          "tag": "IN"
+        },
+        {
+          "token": "Fulton",
+          "tag": "NP"
+        },
+        {
+          "token": "Superior",
+          "tag": "JJ"
+        },
+        {
+          "token": "Court",
+          "tag": "NN"
+        },
+        {
+          "token": "Judge",
+          "tag": "NN"
+        },
+        {
+          "token": "Durwood",
+          "tag": "NP"
+        },
+        {
+          "token": "Pye",
+          "tag": "NP"
+        },
+        {
+          "token": "to",
+          "tag": "TO"
+        },
+        {
+          "token": "investigate",
+          "tag": "VB"
+        },
+        {
+          "token": "reports",
+          "tag": "NNS"
+        },
+        {
+          "token": "of",
+          "tag": "IN"
+        },
+        {
+          "token": "possible",
+          "tag": "JJ"
+        },
+        {
+          "token": "irregularities",
+          "tag": "NNS"
+        },
+        {
+          "token": "in",
+          "tag": "IN"
+        },
+        {
+          "token": "the",
+          "tag": "AT"
+        },
+        {
+          "token": "hard-fought",
+          "tag": "JJ"
+        },
+        {
+          "token": "primary",
+          "tag": "NN"
+        },
+        {
+          "token": "which",
+          "tag": "WDT"
+        },
+        {
+          "token": "was",
+          "tag": "BEDZ"
+        },
+        {
+          "token": "won",
+          "tag": "VBN"
+        },
+        {
+          "token": "by",
+          "tag": "IN"
+        },
+        {
+          "token": "Mayor-nominate",
+          "tag": "NN"
+        },
+        {
+          "token": "Ivan",
+          "tag": "NP"
+        },
+        {
+          "token": "Allen",
+          "tag": "NP"
+        },
+        {
+          "token": "Jr.",
+          "tag": "NP"
+        },
+        {
+          "token": ".",
+          "tag": "."
+        }
+      ]
+    },
+    {
+      "taggedWords": [
+        {
+          "token": "only",
+          "tag": "RB"
+        },
+        {
+          "token": "a",
+          "tag": "AT"
+        },
+        {
+          "token": "relative",
+          "tag": "JJ"
+        },
+        {
+          "token": "handful",
+          "tag": "NN"
+        },
+        {
+          "token": "of",
+          "tag": "IN"
+        },
+        {
+          "token": "such",
+          "tag": "JJ"
+        },
+        {
+          "token": "reports",
+          "tag": "NNS"
+        },
+        {
+          "token": "was",
+          "tag": "BEDZ"
+        },
+        {
+          "token": "received",
+          "tag": "VBN"
+        },
+        {
+          "token": ",",
+          "tag": ","
+        },
+        {
+          "token": "the",
+          "tag": "AT"
+        },
+        {
+          "token": "jury",
+          "tag": "NN"
+        },
+        {
+          "token": "said",
+          "tag": "VBD"
+        },
+        {
+          "token": ",",
+          "tag": ","
+        },
+        {
+          "token": "considering",
+          "tag": "IN"
+        },
+        {
+          "token": "the",
+          "tag": "AT"
+        },
+        {
+          "token": "widespread",
+          "tag": "JJ"
+        },
+        {
+          "token": "interest",
+          "tag": "NN"
+        },
+        {
+          "token": "in",
+          "tag": "IN"
+        },
+        {
+          "token": "the",
+          "tag": "AT"
+        },
+        {
+          "token": "election",
+          "tag": "NN"
+        },
+        {
+          "token": ",",
+          "tag": ","
+        },
+        {
+          "token": "the",
+          "tag": "AT"
+        },
+        {
+          "token": "number",
+          "tag": "NN"
+        },
+        {
+          "token": "of",
+          "tag": "IN"
+        },
+        {
+          "token": "voters",
+          "tag": "NNS"
+        },
+        {
+          "token": "and",
+          "tag": "CC"
+        },
+        {
+          "token": "the",
+          "tag": "AT"
+        },
+        {
+          "token": "size",
+          "tag": "NN"
+        },
+        {
+          "token": "of",
+          "tag": "IN"
+        },
+        {
+          "token": "this",
+          "tag": "DT"
+        },
+        {
+          "token": "city",
+          "tag": "NN"
+        },
+        {
+          "token": ".",
+          "tag": "."
+        }
+      ]
+    },
+    {
+      "taggedWords": [
+        {
+          "token": "the",
+          "tag": "AT"
+        },
+        {
+          "token": "jury",
+          "tag": "NN"
+        },
+        {
+          "token": "said",
+          "tag": "VBD"
+        },
+        {
+          "token": "it",
+          "tag": "PPS"
+        },
+        {
+          "token": "did",
+          "tag": "DOD"
+        },
+        {
+          "token": "find",
+          "tag": "VB"
+        },
+        {
+          "token": "that",
+          "tag": "CS"
+        },
+        {
+          "token": "many",
+          "tag": "AP"
+        },
+        {
+          "token": "of",
+          "tag": "IN"
+        },
+        {
+          "token": "Georgia's",
+          "tag": "NP$"
+        },
+        {
+          "token": "registration",
+          "tag": "NN"
+        },
+        {
+          "token": "and",
+          "tag": "CC"
+        },
+        {
+          "token": "election",
+          "tag": "NN"
+        },
+        {
+          "token": "laws",
+          "tag": "NNS"
+        },
+        {
+          "token": "are",
+          "tag": "BER"
+        },
+        {
+          "token": "outmoded",
+          "tag": "JJ"
+        },
+        {
+          "token": "or",
+          "tag": "CC"
+        },
+        {
+          "token": "inadequate",
+          "tag": "JJ"
+        },
+        {
+          "token": "and",
+          "tag": "CC"
+        },
+        {
+          "token": "often",
+          "tag": "RB"
+        },
+        {
+          "token": "ambiguous",
+          "tag": "JJ"
+        },
+        {
+          "token": ".",
+          "tag": "."
+        }
+      ]
+    },
+    {
+      "taggedWords": [
+        {
+          "token": "it",
+          "tag": "PPS"
+        },
+        {
+          "token": "recommended",
+          "tag": "VBD"
+        },
+        {
+          "token": "that",
+          "tag": "CS"
+        },
+        {
+          "token": "Fulton",
+          "tag": "NP"
+        },
+        {
+          "token": "legislators",
+          "tag": "NNS"
+        },
+        {
+          "token": "act",
+          "tag": "VB"
+        },
+        {
+          "token": "to",
+          "tag": "TO"
+        },
+        {
+          "token": "have",
+          "tag": "HV"
+        },
+        {
+          "token": "these",
+          "tag": "DTS"
+        },
+        {
+          "token": "laws",
+          "tag": "NNS"
+        },
+        {
+          "token": "studied",
+          "tag": "VBN"
+        },
+        {
+          "token": "and",
+          "tag": "CC"
+        },
+        {
+          "token": "revised",
+          "tag": "VBN"
+        },
+        {
+          "token": "to",
+          "tag": "IN"
+        },
+        {
+          "token": "the",
+          "tag": "AT"
+        },
+        {
+          "token": "end",
+          "tag": "NN"
+        },
+        {
+          "token": "of",
+          "tag": "IN"
+        },
+        {
+          "token": "modernizing",
+          "tag": "VBG"
+        },
+        {
+          "token": "and",
+          "tag": "CC"
+        },
+        {
+          "token": "improving",
+          "tag": "VBG"
+        },
+        {
+          "token": "them",
+          "tag": "PPO"
+        },
+        {
+          "token": ".",
+          "tag": "."
+        }
+      ]
+    },
+    {
+      "taggedWords": [
+        {
+          "token": "the",
+          "tag": "AT"
+        },
+        {
+          "token": "grand",
+          "tag": "JJ"
+        },
+        {
+          "token": "jury",
+          "tag": "NN"
+        },
+        {
+          "token": "commented",
+          "tag": "VBD"
+        },
+        {
+          "token": "on",
+          "tag": "IN"
+        },
+        {
+          "token": "a",
+          "tag": "AT"
+        },
+        {
+          "token": "number",
+          "tag": "NN"
+        },
+        {
+          "token": "of",
+          "tag": "IN"
+        },
+        {
+          "token": "other",
+          "tag": "AP"
+        },
+        {
+          "token": "topics",
+          "tag": "NNS"
+        },
+        {
+          "token": ",",
+          "tag": ","
+        },
+        {
+          "token": "among",
+          "tag": "IN"
+        },
+        {
+          "token": "them",
+          "tag": "PPO"
+        },
+        {
+          "token": "the",
+          "tag": "AT"
+        },
+        {
+          "token": "Atlanta",
+          "tag": "NP"
+        },
+        {
+          "token": "and",
+          "tag": "CC"
+        },
+        {
+          "token": "Fulton",
+          "tag": "NP"
+        },
+        {
+          "token": "County",
+          "tag": "NN"
+        },
+        {
+          "token": "purchasing",
+          "tag": "VBG"
+        },
+        {
+          "token": "departments",
+          "tag": "NNS"
+        },
+        {
+          "token": "which",
+          "tag": "WDT"
+        },
+        {
+          "token": "it",
+          "tag": "PPS"
+        },
+        {
+          "token": "said",
+          "tag": "VBD"
+        },
+        {
+          "token": "are",
+          "tag": "BER"
+        },
+        {
+          "token": "well",
+          "tag": "QL"
+        },
+        {
+          "token": "operated",
+          "tag": "VBN"
+        },
+        {
+          "token": "and",
+          "tag": "CC"
+        },
+        {
+          "token": "follow",
+          "tag": "VB"
+        },
+        {
+          "token": "generally",
+          "tag": "RB"
+        },
+        {
+          "token": "accepted",
+          "tag": "VBN"
+        },
+        {
+          "token": "practices",
+          "tag": "NNS"
+        },
+        {
+          "token": "which",
+          "tag": "WDT"
+        },
+        {
+          "token": "inure",
+          "tag": "VB"
+        },
+        {
+          "token": "to",
+          "tag": "IN"
+        },
+        {
+          "token": "the",
+          "tag": "AT"
+        },
+        {
+          "token": "best",
+          "tag": "JJT"
+        },
+        {
+          "token": "interest",
+          "tag": "NN"
+        },
+        {
+          "token": "of",
+          "tag": "IN"
+        },
+        {
+          "token": "both",
+          "tag": "ABX"
+        },
+        {
+          "token": "governments",
+          "tag": "NNS"
+        },
+        {
+          "token": ".",
+          "tag": "."
+        }
+      ]
+    },
+    {
+      "taggedWords": [
+        {
+          "token": "merger",
+          "tag": "NN"
+        },
+        {
+          "token": "proposed",
+          "tag": "VBN"
+        }
+      ]
+    },
+    {
+      "taggedWords": [
+        {
+          "token": "however",
+          "tag": "WRB"
+        },
+        {
+          "token": ",",
+          "tag": ","
+        },
+        {
+          "token": "the",
+          "tag": "AT"
+        },
+        {
+          "token": "jury",
+          "tag": "NN"
+        },
+        {
+          "token": "said",
+          "tag": "VBD"
+        },
+        {
+          "token": "it",
+          "tag": "PPS"
+        },
+        {
+          "token": "believes",
+          "tag": "VBZ"
+        },
+        {
+          "token": "these",
+          "tag": "DTS"
+        },
+        {
+          "token": "two",
+          "tag": "CD"
+        },
+        {
+          "token": "offices",
+          "tag": "NNS"
+        },
+        {
+          "token": "should",
+          "tag": "MD"
+        },
+        {
+          "token": "be",
+          "tag": "BE"
+        },
+        {
+          "token": "combined",
+          "tag": "VBN"
+        },
+        {
+          "token": "to",
+          "tag": "TO"
+        },
+        {
+          "token": "achieve",
+          "tag": "VB"
+        },
+        {
+          "token": "greater",
+          "tag": "JJR"
+        },
+        {
+          "token": "efficiency",
+          "tag": "NN"
+        },
+        {
+          "token": "and",
+          "tag": "CC"
+        },
+        {
+          "token": "reduce",
+          "tag": "VB"
+        },
+        {
+          "token": "the",
+          "tag": "AT"
+        },
+        {
+          "token": "cost",
+          "tag": "NN"
+        },
+        {
+          "token": "of",
+          "tag": "IN"
+        },
+        {
+          "token": "administration",
+          "tag": "NN"
+        },
+        {
+          "token": ".",
+          "tag": "."
+        }
+      ]
+    },
+    {
+      "taggedWords": [
+        {
+          "token": "the",
+          "tag": "AT"
+        },
+        {
+          "token": "City",
+          "tag": "NN"
+        },
+        {
+          "token": "Purchasing",
+          "tag": "VBG"
+        },
+        {
+          "token": "Department",
+          "tag": "NN"
+        },
+        {
+          "token": ",",
+          "tag": ","
+        },
+        {
+          "token": "the",
+          "tag": "AT"
+        },
+        {
+          "token": "jury",
+          "tag": "NN"
+        },
+        {
+          "token": "said",
+          "tag": "VBD"
+        },
+        {
+          "token": ",",
+          "tag": ","
+        },
+        {
+          "token": "is",
+          "tag": "BEZ"
+        },
+        {
+          "token": "lacking",
+          "tag": "VBG"
+        },
+        {
+          "token": "in",
+          "tag": "IN"
+        },
+        {
+          "token": "experienced",
+          "tag": "VBN"
+        },
+        {
+          "token": "clerical",
+          "tag": "JJ"
+        },
+        {
+          "token": "personnel",
+          "tag": "NNS"
+        },
+        {
+          "token": "as",
+          "tag": "CS"
+        },
+        {
+          "token": "a",
+          "tag": "AT"
+        },
+        {
+          "token": "result",
+          "tag": "NN"
+        },
+        {
+          "token": "of",
+          "tag": "IN"
+        },
+        {
+          "token": "city",
+          "tag": "NN"
+        },
+        {
+          "token": "personnel",
+          "tag": "NNS"
+        },
+        {
+          "token": "policies",
+          "tag": "NNS"
+        },
+        {
+          "token": ".",
+          "tag": "."
+        }
+      ]
+    }
+  ]
+}

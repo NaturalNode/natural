@@ -16,6 +16,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+'use strict'
+
 var natural = require('../lib/natural');
 
 var SE_Element = natural.SE_Element;

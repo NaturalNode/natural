@@ -1,0 +1,14 @@
+{
+  "rules": [
+    "TO IN NEXT-TAG AT",
+    "VBN VBD PREV-WORD-IS-CAP YES",
+    "VBD VBN PREV-1-OR-2-OR-3-TAG HVD",
+    "VB NN PREV-1-OR-2-TAG AT",
+    "NN VB PREV-TAG TO",
+    "TO IN NEXT-WORD-IS-CAP YES",
+    "NN VB PREV-TAG MD",
+    "PPS PPO NEXT-TAG .",
+    "VBN VBD PREV-TAG PPS",
+    "NP NN CURRENT-WORD-IS-CAP NO"
+  ]
+}

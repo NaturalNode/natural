@@ -21,61 +21,54 @@ THE SOFTWARE.
 */
 
 var WordNet = require('lib/natural/wordnet/wordnet');
-jasmine.asyncSpecWait.timeout = 30 * 1000;
+
 
 describe('wordnet', function() {
 
-  it('should lookup synonyms', function() {
+  it('should lookup synonyms', function(done) {
     var wordnet = new WordNet();
 
     wordnet.lookupSynonyms('entity', function(records) {
       expect(records.length).toBe(3);
-      asyncSpecDone();
+      done();
     });
-
-    asyncSpecWait();
   });
 
-  it('should lookup synonyms give a synset offset and a pos', function() {
+  it('should lookup synonyms give a synset offset and a pos', function(done) {
     var wordnet = new WordNet();
 
     wordnet.getSynonyms(1740, 'n', function(records) {
       expect(records.length).toBe(3);
-      expect(records[0].synsetOffset).toBe(4424418);
+      expect(records[0].synsetOffset).toBe(4431553);
       expect(records[1].synsetOffset).toBe(2137);
       expect(records[2].synsetOffset).toBe(1930);
-      asyncSpecDone();
+      done();
     });
-
-    asyncSpecWait();
   });
 
-  it('should lookup synonyms via a provided synset object', function() {
+  it('should lookup synonyms via a provided synset object', function(done) {
     var wordnet = new WordNet();
 
     wordnet.lookup('entity', function(results) {
       wordnet.getSynonyms(results[0], function(records) {
         expect(records.length).toBe(3);
-        expect(records[0].synsetOffset).toBe(4424418);
+        expect(records[0].synsetOffset).toBe(4431553);
         expect(records[1].synsetOffset).toBe(2137);
         expect(records[2].synsetOffset).toBe(1930);
-        asyncSpecDone();
+        done();
       });
     });
-
-    asyncSpecWait();
   });
 
-  it('should add records but once', function() {
+  it('should add records but once', function(done) {
     var wordnet = new WordNet();
 
     wordnet.lookup('node', function(records) {
       expect(records.length).toBe(8);
       expect(records[0].lemma).toBe('node');
 
-      asyncSpecDone();
+      done();
     });
-
-    asyncSpecWait();
   });
+
 });

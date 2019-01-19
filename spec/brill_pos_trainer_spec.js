@@ -1,6 +1,6 @@
 /*
   Unit test for Brill's POS Trainer
-  Copyright (C) 2018 Hugo W.L. ter Doest
+  Copyright (C) 2019 Hugo W.L. ter Doest
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -17,11 +17,14 @@
 */
 
 var natural = require('../lib/natural');
+var Corpus = require('../lib/natural/brill_pos_tagger/lib/Corpus');
 var SentenceClass = natural.Sentence;
-var fs = require('fs');
 
-var base_folder_test_data = './spec/test_data/';
-var brownCorpusFile = base_folder_test_data + 'browntag_nolines_excerpt.txt';
+const DEBUG = false;
+const BROWN = 1;
+const JSON_FLAG = 2;
+
+var brownCorpus = require('spec/test_data/browntag_nolines_excerpt.json');
 
 function selectRuleTemplates(templateNames) {
   var templates = [];
@@ -35,9 +38,8 @@ function selectRuleTemplates(templateNames) {
 }
 
 describe('Brill\'s POS Trainer', function() {
-  var data = null;
   var corpus = null;
-  var BROWN = 1;
+  var corpora = null;
   var percentageTrain = 60;
   var trainLexicon = null;
   // Templates consider only tags, no words
@@ -56,18 +58,9 @@ describe('Brill\'s POS Trainer', function() {
   var trainer = null;
   var ruleSet = null;
 
-  it('should read a file with corpus', function() {
-    data = fs.readFileSync(brownCorpusFile, 'utf8');
-    expect(data).not.toBe("");
-  });
-
-  it('should process the corpus', function() {
-    corpus = new natural.Corpus(data, BROWN, SentenceClass);
-    expect(corpus.nrSentences()).toBeGreaterThan(0);
-    expect(corpus.nrWords()).toBeGreaterThan(0);
-  });
-
   it('should split the corpus in a training and testing corpus', function() {
+    corpus = new Corpus(brownCorpus, JSON_FLAG, SentenceClass);
+    DEBUG && console.log("Corpus: " + JSON.stringify(corpus, null, 2))
     corpora = corpus.splitInTrainAndTest(percentageTrain);
     expect(corpora[0].nrSentences() + corpora[1].nrSentences()).toEqual(corpus.nrSentences());
   });

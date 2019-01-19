@@ -18,15 +18,13 @@
 
 var fs = require('fs');
 
-var base_folder_test_data = './spec/test_data/';
-var brownCorpusFile = base_folder_test_data + 'browntag_nolines_excerpt_maxent.txt';
+var base_folder_test_data = 'spec/test_data/';
+var brownCorpus = require('spec/test_data/browntag_nolines_excerpt_maxent.json');
 var sampleFile = base_folder_test_data + 'sample.json';
 var classifierFile = base_folder_test_data + 'classifier.json';
 
 var natural = require('../lib/natural');
-var Sample = natural.Sample;
 var Classifier = natural.MaxEntClassifier;
-var Feature = natural.Feature;
 var FeatureSet = natural.FeatureSet;
 var Context = natural.Context;
 
@@ -37,7 +35,7 @@ var Sentence = natural.ME_Sentence;
 // Lexicon-based tagger is used for comparison
 var Tagger = natural.BrillPOSTagger;
 
-var BROWN = 1;
+const JSON_FLAG = 2;
 var nrIterations = 2;
 var minImprovement = 0.01;
 var trainCorpusSize = 50; // percentage
@@ -69,6 +67,7 @@ function applyClassifierToTestCorpus(testCorpus, tagger, classifier) {
       }
     });
 
+    var sentenceLength = sentence.length;
     // Classify tags using maxent
     taggedSentence.taggedWords.forEach(function(taggedWord, index) {
 
@@ -90,11 +89,11 @@ function applyClassifierToTestCorpus(testCorpus, tagger, classifier) {
         context.data.tagWindow["-1"] = taggedSentence.taggedWords[index - 1].tag;
       }
       // Right bigram
-      if (index < sentence.length - 1) {
+      if (index < sentenceLength - 1) {
         context.data.tagWindow["1"] = taggedSentence.taggedWords[index + 1].tag;
       }
       // Next bigram
-      if (index < sentence.length - 2) {
+      if (index < sentenceLength - 2) {
         context.data.tagWindow["2"] = taggedSentence.taggedWords[index + 2].tag;
       }
       // Left bigram words
@@ -102,7 +101,7 @@ function applyClassifierToTestCorpus(testCorpus, tagger, classifier) {
         context.data.wordWindow["-1"] = taggedSentence.taggedWords[index - 1].token;
       }
       // Right bigram words
-      if (index < sentence.length - 1) {
+      if (index < sentenceLength - 1) {
         context.data.wordWindow["1"] = taggedSentence.taggedWords[index + 1].token;
       }
 
@@ -118,7 +117,7 @@ function applyClassifierToTestCorpus(testCorpus, tagger, classifier) {
         // Correctly tagged
         correctlyTaggedMaxEnt++;
       }
-      DEBUG && console.log("(word, classification, right tag): " + "(" + taggedWord[0] +
+      DEBUG && console.log("(word, classification, right tag): " + "(" + taggedWord.token +
         ", " + tag + ", " + sentence.taggedWords[index].tag + ")");
     });
   });
@@ -130,11 +129,16 @@ function applyClassifierToTestCorpus(testCorpus, tagger, classifier) {
 
 describe("Maximum Entropy Classifier applied to POS tagging", function() {
   // Prepare the train and test corpus
-  var data = fs.readFileSync(brownCorpusFile, 'utf8');
-  var corpus = new Corpus(data, BROWN, Sentence);
+  DEBUG && console.log("Corpus after require: " + JSON.stringify(brownCorpus, null, 2));
+  var corpus = new Corpus(brownCorpus, JSON_FLAG, Sentence);
+  DEBUG && console.log("Size of corpus: " + corpus.sentences.length);
+  DEBUG && console.log("Corpus: " + JSON.stringify(corpus, null, 2));
   var trainAndTestCorpus = corpus.splitInTrainAndTest(trainCorpusSize);
   var trainCorpus = trainAndTestCorpus[0];
+  DEBUG && console.log("Size of training corpus: " + trainCorpus.sentences.length);
+  DEBUG && console.log("Training corpus: " + JSON.stringify(trainCorpus, null, 2));
   var testCorpus = trainAndTestCorpus[1];
+  DEBUG && console.log("Size of testing corpus: " + testCorpus.sentences.length);
   var sample = null;
   var classifier = null;
   var featureSet = null;
@@ -145,8 +149,10 @@ describe("Maximum Entropy Classifier applied to POS tagging", function() {
   it("generates a sample from a corpus", function() {
     sample = trainCorpus.generateSample();
     expect(sample.size()).toBeGreaterThan(0);
+    DEBUG && console.log("Size of the sample: " + sample.size());
   });
 
+  /*
   it("saves a sample to a file", function(done) {
     sample.save(sampleFile, function(err, sample) {
       if (err) {
@@ -180,9 +186,11 @@ describe("Maximum Entropy Classifier applied to POS tagging", function() {
       sample = newSample;
     }
   });
+  */
 
   it ("generates a set of features from the sample", function() {
     featureSet = new FeatureSet();
+    DEBUG && console.log(sample);
     sample.generateFeatures(featureSet);
     expect(featureSet.size()).toBeGreaterThan(0);
     DEBUG && console.log("Number of features: " + featureSet.size());
@@ -202,6 +210,7 @@ describe("Maximum Entropy Classifier applied to POS tagging", function() {
     DEBUG && console.log("Checksum: " + classifier.p.checkSum());
   });
 
+  /*
   it ("saves the classifier to a file", function(done) {
     classifier.save(classifierFile, function(err, classifier) {
       if (err) {
@@ -234,6 +243,7 @@ describe("Maximum Entropy Classifier applied to POS tagging", function() {
       classifier = newClassifier;
     }
   });
+  */
 
   it("compares maximum entropy based POS tagger to lexicon-based tagger", function() {
       // Test the classifier against the test corpus

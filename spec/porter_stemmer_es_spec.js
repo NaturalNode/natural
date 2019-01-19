@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2018, Luís Rodrigues (adapted for Spanish stemmer)
+Copyright (c) 2019, Luís Rodrigues (adapted for Spanish stemmer), Hugo W.L. ter Doest
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,29 +20,27 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var PorterStemmer = require('../lib/natural/stemmers/porter_stemmer_es'),
-	fs = require('fs');
+var PorterStemmer = require('../lib/natural/stemmers/porter_stemmer_es');
+
+const snowBallDict = require('spec/test_data/snowball_es.json');
 
 describe('porter_stemmer_es', function() {
 
  	it('should perform stemming on a lot of words', function() {
  		var errors = [];
 
- 		fs.readFileSync('spec/test_data/snowball_es.txt').toString().split('\n').forEach(function(line) {
- 			if (line) {
- 				var fields = line.replace(/\s+/g, ' ').split(' '),
- 					stemmed = PorterStemmer.stem(fields[0]);
-
- 				if (stemmed !== fields[1]) {
-					console.log('Error:', fields[0], 'Expected:', fields[1], 'Got:', stemmed);
- 					errors.push({
- 						word:     fields[0],
- 						expected: fields[1],
- 						actual:   stemmed
- 					});
- 				}
- 			}
- 		});
+ 		Object.keys(snowBallDict).forEach(word => {
+      var stemmed = PorterStemmer.stem(word);
+      var expectedStem = snowBallDict[word];
+      if (stemmed !== snowBallDict[word]) {
+        console.log('Error:', word, 'Expected:', expectedStem, 'Got:', stemmed);
+        errors.push({
+          word:     word,
+          expected: expectedStem,
+          actual:   stemmed
+        });
+      }
+    });
 
  		expect(errors.length).toBe(0);
  	});

@@ -217,6 +217,7 @@ describe('tfidf', function() {
             expect( tfidf.tfidf("node", 0) ).toBe( 1 * ( 1 + Math.log( 4.0 / 4.0 ) ));
         });
 
+        /*
         // Test tf-idf computation on files loaded using readFileSync
         it("should load documents from files", function(){
 
@@ -245,7 +246,9 @@ describe('tfidf', function() {
             // addFileSync with restoreCache flag set to true.
             tfidf.addFileSync("spec/test_data/tfidf_document4.txt", null, {node:2, ruby:1}, true);
         });
+        */
 
+        /*
         // Test idf caching when adding documents from addFileSync
         it("should update a terms tf-idf score after adding documents from addFileSync", function(){
             tfidf = new TfIdf();
@@ -264,6 +267,7 @@ describe('tfidf', function() {
             // Ensure that the tf-idf in the same document has changed to reflect the new idf.
             expect( tfidf.tfidf("node", 0) ).toBe( 1 * (1 + Math.log( 4.0 / 4.0 ) ));
         });
+        */
 
         // Test idf.setTokenizer
         it('should allow for specific types of Tokenizers', function(){
@@ -301,6 +305,7 @@ describe('tfidf', function() {
             expect( function() { tfidf.setTokenizer({}); } ).toThrow(new Error('Expected a valid Tokenizer'));
         });
 
+        /*
         // Test encoding for addFileSync
         it('should use the specified encoding for addFileSync', function(){
 
@@ -311,6 +316,7 @@ describe('tfidf', function() {
 
             expect( tfidf.tfidf('dghpcybkb2n1bwvudcbpcybhym91dcbub2rllg', 0) ).toBe( 1 * ( 1 + Math.log( 2.0 / 2.0 ) ));
         });
+        */
 
         // Test encoding check for addFileSync
         it('should require a valid encoding for addFileSync', function(){

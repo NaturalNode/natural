@@ -29,22 +29,23 @@ describe('tfidf io', function() {
         tfidf.addDocument('document one', 'un');
         tfidf.addDocument('document Two', 'deux');
         var s = JSON.stringify(tfidf);
-        expect(s).toBe('{"documents":[{"__key":"un","document":1,"one":1},{"__key":"deux","document":1,"two":1}]}'); 
+        expect(s).toBe('{"documents":[{"__key":"un","document":1,"one":1},{"__key":"deux","document":1,"two":1}],"_idfCache":{}}');
     });
     
     it('should deserialize', function() {
         var s = '{"documents":[{"__key":"un","document":1,"one":1},{"__key":"deux","document":1,"two":1}]}';
         var tfidf = new TfIdf(JSON.parse(s));
-        expect(tfidf.tfidf('one', 0)).toBe(0.9162907318741551);
+        expect(tfidf.tfidf('one', 0)).toBe(1);
         expect(tfidf.tfidf('two', 0)).toBe(0);
     });
     
-    describe('files', function() {
+    it('should process files', function() {
         var tfidf = new TfIdf();
         tfidf.addFileSync('io_spec/test_data/tfidf/one');
         tfidf.addFileSync('io_spec/test_data/tfidf/two');
-        expect(tfidf.tfidf('Document', 0)).toBe(0.8472978603872037);
-        expect(tfidf.tfidf('one', 0)).toBe(0.9162907318741551);
+        expect(tfidf.tfidf('Document', 0)).toBe(0.5945348918918356);
+        expect(tfidf.tfidf('one', 0)).toBe(1);
         expect(tfidf.tfidf('two', 0)).toBe(0);
     });
 });
+

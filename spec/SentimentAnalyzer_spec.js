@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2018, Hugo W.L. ter Doest
+  Copyright (c) 2019, Hugo W.L. ter Doest
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to deal
@@ -162,7 +162,8 @@ var testConfigurations = [
 
 describe("The sentiment analyzer analyzes the sentiment of sentences in multiple languages using different types of vocabularies", function() {
   testConfigurations.forEach(config => {
-    it("Should analyze a set of sentences with each configuration " + config, function() {
+    it("Should analyze a set of sentences with each configuration " +
+      "("  + config.language + ", " + config.vocabularyType + ", " + (config.stemmer ? config.stemmer : "without stemmer") + ")", function() {
       var stemmer = null;
       // Create the stemmer
       if (config.stemmer != "") {
@@ -170,6 +171,7 @@ describe("The sentiment analyzer analyzes the sentiment of sentences in multiple
       }
       // Create analyzer
       var analyzer = new Analyzer(config.language, stemmer, config.vocabularyType);
+
       config.testSentences.forEach(sentencePlusScore => {
         var words = sentencePlusScore.sentence.split(/\s+/);
         var score = analyzer.getSentiment(words);
@@ -178,6 +180,7 @@ describe("The sentiment analyzer analyzes the sentiment of sentences in multiple
           console.log(sentencePlusScore.sentence + "\t" + score);
         }
       });
+
     });
   });
 });

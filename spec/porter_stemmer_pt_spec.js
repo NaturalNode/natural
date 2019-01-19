@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2014, Luís Rodrigues
+Copyright (c) 2019, Luís Rodrigues, Hugo W.L. ter Doest
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,31 +20,28 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var PorterStemmer = require('../lib/natural/stemmers/porter_stemmer_pt'),
-	fs = require('fs');
+var stemmer = require('../lib/natural/stemmers/porter_stemmer_pt');
+const snowBallDict = require('spec/test_data/snowball_pt.json');
 
 describe('porter_stemmer_pt', function() {
 
  	it('should perform stemming on a lot of words', function() {
  		var errors = [];
 
- 		fs.readFileSync('spec/test_data/snowball_pt.txt').toString().split('\n').forEach(function(line) {
- 			if (line) {
- 				var fields = line.replace(/\s+/g, ' ').split(' '),
- 					stemmed = PorterStemmer.stem(fields[0]);
+    Object.keys(snowBallDict).forEach(word => {
+      var stemmed = stemmer.stem(word);
+      var expectedStem = snowBallDict[word];
+      if (stemmed !== snowBallDict[word]) {
+        DEBUG && console.log('Error:', word, 'Expected:', expectedStem, 'Got:', stemmed);
+        errors.push({
+          word: word,
+          expected: expectedStem,
+          actual: stemmed
+        });
+      }
+    });
 
- 				if (stemmed !== fields[1]) {
-					console.log('Error:', fields[0], 'Expected:', fields[1], 'Got:', stemmed);
- 					errors.push({
- 						word:     fields[0],
- 						expected: fields[1],
- 						actual:   stemmed
- 					});
- 				}
- 			}
- 		});
-
- 		expect(errors.length).toBe(0);
+    expect(errors.length).toEqual(0);
  	});
 
 });
