@@ -217,6 +217,7 @@ describe('tfidf', function() {
             expect( tfidf.tfidf("node", 0) ).toBe( 1 * ( 1 + Math.log( 4.0 / 4.0 ) ));
         });
 
+
         // Test idf.setTokenizer
         it('should allow for specific types of Tokenizers', function(){
             tfidf = new TfIdf();
@@ -252,6 +253,6 @@ describe('tfidf', function() {
             expect( function() { tfidf.setTokenizer(1); } ).toThrow(new Error('Expected a valid Tokenizer'));
             expect( function() { tfidf.setTokenizer({}); } ).toThrow(new Error('Expected a valid Tokenizer'));
         });
-
+      
     });
 });

@@ -114,6 +114,5 @@ describe('tfidf io', function() {
 
       expect( function() { tfidf.addFileSync('spec/test_data/tfidf_document1.txt', 'foobar'); } ).toThrow(new Error('Invalid encoding: foobar'));
     });
-
 });
 

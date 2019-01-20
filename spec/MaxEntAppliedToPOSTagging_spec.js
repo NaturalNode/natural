@@ -149,6 +149,7 @@ describe("Maximum Entropy Classifier applied to POS tagging", function() {
     sample = trainCorpus.generateSample();
     expect(sample.size()).toBeGreaterThan(0);
     DEBUG && console.log("Size of the sample: " + sample.size());
+
   });
 
   it ("generates a set of features from the sample", function() {
