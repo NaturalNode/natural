@@ -21,8 +21,6 @@ THE SOFTWARE.
 */
 
 var natural = require('../lib/natural');
-var baseClassifier = require('../lib/natural/classifiers/classifier.js');
-var fs = require('fs');
 
 describe('classifier', function () {
 
@@ -138,52 +136,6 @@ describe('classifier', function () {
             classifier.removeDocument('something else', 'literature');
             classifier.removeDocument('another thing', 'literature');
             expect(classifier.docs.length).toBe(4);
-        });
-    });
-
-    describe('save', function () {
-
-        var tmpFilename = '/spec/test_data/deleteMe';
-        var nonExistentFilename = '/nonExistentDir/deleteMe';
-        var classifier;
-
-        beforeEach(function () {
-            classifier = new natural.BayesClassifier();
-            classifier.addDocument('I went to see the doctor of', 'philosophy');
-        });
-
-        afterEach(function () {
-            if (fs.existsSync(tmpFilename)) {
-                fs.unlinkSync(tmpFilename);
-                fs.unlinkSync(nonExistentFilename);
-            }
-        });
-
-        it('does nothing if called without a callback', function () {
-            classifier.save(tmpFilename);
-            expect(fs.existsSync(tmpFilename)).toBe(false);
-        });
-
-        it('fails if writing to a file fails', function () {
-            classifier.save(nonExistentFilename, function (err) {
-                expect(err).toBe.ok;
-                expect(fs.existsSync(tmpFilename)).toBe(false);
-            });
-        });
-    });
-
-    describe('load', function () {
-
-        it('does nothing if called without a callback', function () {
-            result = baseClassifier.load('/spec/test_data/tfidf_document1.txt');
-            expect(result).not.toBe.ok;
-        });
-
-        it('does nothing if called with a nonexistent filename', function () {
-            result = baseClassifier.load('/nonexistentFilename', function (err, newClassifier){
-                expect(err).toBe.ok;
-                expect(newClassifier).not.toBe.ok;
-            });
         });
     });
 });
