@@ -1302,30 +1302,35 @@ spellcheck.getCorrections('soemthing', 1); // ['something']
 spellcheck.getCorrections('soemthing', 2); // ['something', 'soothing']
 ```
 
+
 ## POS Tagger
 
 This is a part-of-speech tagger based on Eric Brill's transformational
-algorithm. Transformation rules are specified in external files.
+algorithm. It needs a lexicon and a set of transformation rules.
+
 
 ### Usage
+
+First a lexicon is created. First parameter is language (<code>EN</code> for English and <code>DU</code> for Dutch), second is default category. 
+Optionally, a third parameter can be supplied that is the default category for capitalised words. 
 ```javascript
 var natural = require("natural");
-var path = require("path");
+var lexicon = new natural.Lexicon('EN', 'NN', 'NNP');
+```
 
-var base_folder = path.join(path.dirname(require.resolve("natural")), "brill_pos_tagger");
-var rulesFilename = base_folder + "/data/English/tr_from_posjs.txt";
-var lexiconFilename = base_folder + "/data/English/lexicon_from_posjs.json";
-var defaultCategory = 'N';
-
-var lexicon = new natural.Lexicon(lexiconFilename, defaultCategory);
-var rules = new natural.RuleSet(rulesFilename);
-var tagger = new natural.BrillPOSTagger(lexicon, rules);
-
+Then a ruleset is created, as follows. Parameter is the language.
+```javascript
+var ruleSet = new natural.RuleSet('EN');
+```
+Now a tagger can be created by passing lexicon and ruleset:
+```javascript
+var tagger = new natural.BrillPOSTagger(lexicon, ruleSet);
 var sentence = ["I", "see", "the", "man", "with", "the", "telescope"];
 console.log(tagger.tag(sentence));
 ```
+
 This outputs the following:
-```
+```javascript
 Sentence {
   taggedWords:
    [ { token: 'I', tag: 'NN' },
@@ -1338,7 +1343,7 @@ Sentence {
 ```
 
 ### Lexicon
-The lexicon is either a JSON file that has the following structure:
+The lexicon is a JSON file that has the following structure:
 ```javascript
 {
   "word1": ["cat1"],
@@ -1346,19 +1351,19 @@ The lexicon is either a JSON file that has the following structure:
   ...
 }
 ```
-or a text file:
-```
-word1 cat1 cat2
-word2 cat3
-...
-```
 Words may have multiple categories in the lexicon file. The tagger uses only
 the first category specified.
 
+
 ### Specifying transformation rules
-Transformation rules are specified as follows:
-```
-OLD_CAT NEW_CAT PREDICATE PARAMETER
+Transformation rules are specified in a JSON file as well:
+```javascript
+{
+  "rules": [
+    "OLD_CAT NEW_CAT PREDICATE PARAMETER",
+    ...
+  ]
+}
 ```
 This means that if the category of the current position is OLD_CAT and the predicate is true, the category is replaced by NEW_CAT. The predicate
 may use the parameter in different ways: sometimes the parameter is used for
@@ -1374,6 +1379,7 @@ VBD NN PREV-TAG DT
 ```
 Here the category of the previous word must be <code>DT</code> for the rule to be applied.
 
+
 ### Algorithm
 The tagger applies transformation rules that may change the category of words. The input sentence is a Sentence object with tagged words. The tagged sentence is processed from left to right. At each step all rules are applied once; rules are applied in the order in which they are specified. Algorithm:
 ```javascript
@@ -1387,6 +1393,7 @@ Brill_POS_Tagger.prototype.applyRules = function(sentence) {
 };
 ```
 The output is a Sentence object just like the input sentence.
+
 
 ### Adding a predicate
 Predicates are defined in module <code>lib/RuleTemplates.js</code>. In that file
@@ -1450,15 +1457,16 @@ from the templates and iteratively extends and optimises the rule set.
 First, a corpus should be loaded. Currently, the format of Brown corpus is supported. Then a lexicon can be created from the corpus. The lexicon is needed for tagging the sentences before the learning algorithm is applied.
 ```javascript
 var natural = require(natural);
-var text = fs.readFileSync(brownCorpusFile, 'utf8');
-var corpus = new natural.Corpus(text, 1);
+
+const JSON_FLAG = 2;
+var brownCorpus = require('spec/test_data/browntag_nolines_excerpt.json');
+var corpus = new natural.Corpus(brownCorpus, JSON_FLAG, SentenceClass);
 var lexicon = corpus.buildLexicon();
 ```
 The next step is to create a set of rule templates from which the learning
 algorithm can generate transformation rules. Rule templates are defined in
 <code>PredicateMapping.js</code>.
 ```javascript
-var natural require('natural');
 var templateNames = [
   "NEXT-TAG",
   "NEXT-WORD-IS-CAP",
@@ -1471,9 +1479,7 @@ var templates = templateNames.map(function(name) {
 ```
 Using lexicon and rule templates we can now start the trainer as follows.
 ```javascript
-var natural require('natural');
-var Tester = require('natural.BrillPOSTrainer');
-var trainer = new Trainer(/* optional threshold */);
+var trainer = new natural.BrillPOSTrainer(/* optional threshold */);
 var ruleSet = trainer.train(corpus, templates, lexicon);
 ```
 A threshold value can be passed to constructor. Transformation rules with
@@ -1484,6 +1490,7 @@ format for later usage.
 ```javascript
 console.log(ruleSet.prettyPrint());
 ```
+
 
 ### Testing
 Now we can apply the lexicon and rule set to a test set.
@@ -1497,6 +1504,7 @@ The test method returns an array of two percentages: first percentage is the rat
 console.log("Test score lexicon " + scores[0] + "%");
 console.log("Test score after applying rules " + scores[1] + "%");
 ```
+
 
 ### Acknowledgements and References
 * Part of speech tagger by Percy Wegmann, https://code.google.com/p/jspos/
