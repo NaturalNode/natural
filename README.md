@@ -1302,30 +1302,41 @@ spellcheck.getCorrections('soemthing', 1); // ['something']
 spellcheck.getCorrections('soemthing', 2); // ['something', 'soothing']
 ```
 
+
 ## POS Tagger
 
 This is a part-of-speech tagger based on Eric Brill's transformational
-algorithm. Transformation rules are specified in external files.
+algorithm. It needs a lexicon and a set of transformation rules.
+
 
 ### Usage
+
+First a lexicon is created. First parameter is language (<code>EN</code> for English and <code>DU</code> for Dutch), second is default category. 
+Optionally, a third parameter can be supplied that is the default category for capitalised words. 
 ```javascript
 var natural = require("natural");
-var path = require("path");
+const language = "EN"
+const defaultCategory = 'N';
+const defaultCategoryCapitalized = 'NNP';
 
-var base_folder = path.join(path.dirname(require.resolve("natural")), "brill_pos_tagger");
-var rulesFilename = base_folder + "/data/English/tr_from_posjs.txt";
-var lexiconFilename = base_folder + "/data/English/lexicon_from_posjs.json";
-var defaultCategory = 'N';
+var lexicon = new natural.Lexicon(language, defaultCategory, defaultCategoryCapitalized);
+var ruleSet = new natural.RuleSet('EN');
+var tagger = new natural.BrillPOSTagger(lexicon, ruleSet);
+```
 
-var lexicon = new natural.Lexicon(lexiconFilename, defaultCategory);
-var rules = new natural.RuleSet(rulesFilename);
-var tagger = new natural.BrillPOSTagger(lexicon, rules);
-
+Then a ruleset is created, as follows. Parameter is the language.
+```javascript
+var ruleSet = new natural.RuleSet('EN');
+```
+Now a tagger can be created by passing lexicon and ruleset:
+```javascript
+var tagger = new natural.BrillPOSTagger(lexicon, ruleSet);
 var sentence = ["I", "see", "the", "man", "with", "the", "telescope"];
 console.log(tagger.tag(sentence));
 ```
+
 This outputs the following:
-```
+```javascript
 Sentence {
   taggedWords:
    [ { token: 'I', tag: 'NN' },
@@ -1338,7 +1349,7 @@ Sentence {
 ```
 
 ### Lexicon
-The lexicon is either a JSON file that has the following structure:
+The lexicon is a JSON file that has the following structure:
 ```javascript
 {
   "word1": ["cat1"],
@@ -1346,21 +1357,22 @@ The lexicon is either a JSON file that has the following structure:
   ...
 }
 ```
-or a text file:
-```
-word1 cat1 cat2
-word2 cat3
-...
-```
+
 Words may have multiple categories in the lexicon file. The tagger uses only
 the first category specified.
 
+
 ### Specifying transformation rules
-Transformation rules are specified as follows:
+Transformation rules are specified a JSON file as follows:
+```javascript
+{
+  "rules": [
+    "OLD_CAT NEW_CAT PREDICATE PARAMETER",
+    ...
+  ]
+}
 ```
-OLD_CAT NEW_CAT PREDICATE PARAMETER
-```
-This means that if the category of the current position is OLD_CAT and the predicate is true, the category is replaced by NEW_CAT. The predicate
+This particular means that if the category of the current position is OLD_CAT and the predicate is true, the category is replaced by NEW_CAT. The predicate
 may use the parameter in different ways: sometimes the parameter is used for
 specifying the outcome of the predicate:
 ```
@@ -1373,6 +1385,7 @@ The parameter can also be used to check the category of a word in the sentence:
 VBD NN PREV-TAG DT
 ```
 Here the category of the previous word must be <code>DT</code> for the rule to be applied.
+
 
 ### Algorithm
 The tagger applies transformation rules that may change the category of words. The input sentence is a Sentence object with tagged words. The tagged sentence is processed from left to right. At each step all rules are applied once; rules are applied in the order in which they are specified. Algorithm:
@@ -1387,6 +1400,7 @@ Brill_POS_Tagger.prototype.applyRules = function(sentence) {
 };
 ```
 The output is a Sentence object just like the input sentence.
+
 
 ### Adding a predicate
 Predicates are defined in module <code>lib/RuleTemplates.js</code>. In that file
@@ -1450,15 +1464,16 @@ from the templates and iteratively extends and optimises the rule set.
 First, a corpus should be loaded. Currently, the format of Brown corpus is supported. Then a lexicon can be created from the corpus. The lexicon is needed for tagging the sentences before the learning algorithm is applied.
 ```javascript
 var natural = require(natural);
-var text = fs.readFileSync(brownCorpusFile, 'utf8');
-var corpus = new natural.Corpus(text, 1);
+const JSON_FLAG = 2;
+
+var brownCorpus = require('../lib/natural/brill_pos_tagger/lib/Corpus');
+var corpus = new Corpus(brownCorpus, JSON_FLAG, natural.Sentence);
 var lexicon = corpus.buildLexicon();
 ```
 The next step is to create a set of rule templates from which the learning
 algorithm can generate transformation rules. Rule templates are defined in
 <code>PredicateMapping.js</code>.
 ```javascript
-var natural require('natural');
 var templateNames = [
   "NEXT-TAG",
   "NEXT-WORD-IS-CAP",
@@ -1471,9 +1486,7 @@ var templates = templateNames.map(function(name) {
 ```
 Using lexicon and rule templates we can now start the trainer as follows.
 ```javascript
-var natural require('natural');
-var Tester = require('natural.BrillPOSTrainer');
-var trainer = new Trainer(/* optional threshold */);
+var trainer = new natural.BrillPOSTrainer(/* optional threshold */);
 var ruleSet = trainer.train(corpus, templates, lexicon);
 ```
 A threshold value can be passed to constructor. Transformation rules with
@@ -1484,6 +1497,7 @@ format for later usage.
 ```javascript
 console.log(ruleSet.prettyPrint());
 ```
+
 
 ### Testing
 Now we can apply the lexicon and rule set to a test set.
@@ -1498,6 +1512,7 @@ console.log("Test score lexicon " + scores[0] + "%");
 console.log("Test score after applying rules " + scores[1] + "%");
 ```
 
+
 ### Acknowledgements and References
 * Part of speech tagger by Percy Wegmann, https://code.google.com/p/jspos/
 * Node.js version of jspos: https://github.com/neopunisher/pos-js
@@ -1509,16 +1524,17 @@ console.log("Test score after applying rules " + scores[1] + "%");
 
 When developing, please:
 
-+ Write unit tests
++ Write unit tests for jasmine
 + Make sure your unit tests pass
++ Do not use the file system <code>fs</code>. If you need to read files, use JSON and <code>require</code>.
 
 The current configuration of the unit tests requires the following environment variable to be set:
-
+```javascript
     export NODE_PATH=.
+````
 
-
-## License
-
+License
+-------
 Copyright (c) 2011, 2012 Chris Umbel, Rob Ellis, Russell Mull
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -1541,8 +1557,8 @@ THE SOFTWARE.
 
 WordNet License
 ---------------
-
 This license is available as the file LICENSE in any downloaded version of WordNet.
 WordNet 3.0 license: (Download)
 
 WordNet Release 3.0 This software and database is being provided to you, the LICENSEE, by Princeton University under the following license. By obtaining, using and/or copying this software and database, you agree that you have read, understood, and will comply with these terms and conditions.: Permission to use, copy, modify and distribute this software and database and its documentation for any purpose and without fee or royalty is hereby granted, provided that you agree to comply with the following copyright notice and statements, including the disclaimer, and that the same appear on ALL copies of the software, database and documentation, including modifications that you make for internal use or for distribution. WordNet 3.0 Copyright 2006 by Princeton University. All rights reserved. THIS SOFTWARE AND DATABASE IS PROVIDED "AS IS" AND PRINCETON UNIVERSITY MAKES NO REPRESENTATIONS OR WARRANTIES, EXPRESS OR IMPLIED. BY WAY OF EXAMPLE, BUT NOT LIMITATION, PRINCETON UNIVERSITY MAKES NO REPRESENTATIONS OR WARRANTIES OF MERCHANT- ABILITY OR FITNESS FOR ANY PARTICULAR PURPOSE OR THAT THE USE OF THE LICENSED SOFTWARE, DATABASE OR DOCUMENTATION WILL NOT INFRINGE ANY THIRD PARTY PATENTS, COPYRIGHTS, TRADEMARKS OR OTHER RIGHTS. The name of Princeton University or Princeton may not be used in advertising or publicity pertaining to distribution of the software and/or database. Title to copyright in this software, database and any associated documentation shall at all times remain with Princeton University and LICENSEE agrees to preserve same.
+
