@@ -1302,27 +1302,41 @@ spellcheck.getCorrections('soemthing', 1); // ['something']
 spellcheck.getCorrections('soemthing', 2); // ['something', 'soothing']
 ```
 
+
 ## POS Tagger
 
 This is a part-of-speech tagger based on Eric Brill's transformational
-algorithm. Transformation rules are specified in external files.
+algorithm. It needs a lexicon and a set of transformation rules.
+
 
 ### Usage
+
+First a lexicon is created. First parameter is language (<code>EN</code> for English and <code>DU</code> for Dutch), second is default category. 
+Optionally, a third parameter can be supplied that is the default category for capitalised words. 
 ```javascript
 var natural = require("natural");
-
 const language = "EN"
 const defaultCategory = 'N';
+const defaultCategoryCapitalized = 'NNP';
 
-var lexicon = new natural.Lexicon(language, defaultCategory);
+var lexicon = new natural.Lexicon(language, defaultCategory, defaultCategoryCapitalized);
 var ruleSet = new natural.RuleSet('EN');
 var tagger = new natural.BrillPOSTagger(lexicon, ruleSet);
+```
 
+Then a ruleset is created, as follows. Parameter is the language.
+```javascript
+var ruleSet = new natural.RuleSet('EN');
+```
+Now a tagger can be created by passing lexicon and ruleset:
+```javascript
+var tagger = new natural.BrillPOSTagger(lexicon, ruleSet);
 var sentence = ["I", "see", "the", "man", "with", "the", "telescope"];
 console.log(tagger.tag(sentence));
 ```
+
 This outputs the following:
-```
+```javascript
 Sentence {
   taggedWords:
    [ { token: 'I', tag: 'NN' },
@@ -1335,7 +1349,7 @@ Sentence {
 ```
 
 ### Lexicon
-The lexicon is either a JSON file that has the following structure:
+The lexicon is a JSON file that has the following structure:
 ```javascript
 {
   "word1": ["cat1"],
@@ -1347,9 +1361,10 @@ The lexicon is either a JSON file that has the following structure:
 Words may have multiple categories in the lexicon file. The tagger uses only
 the first category specified.
 
+
 ### Specifying transformation rules
 Transformation rules are specified a JSON file as follows:
-```
+```javascript
 {
   "rules": [
     "OLD_CAT NEW_CAT PREDICATE PARAMETER",
@@ -1371,6 +1386,7 @@ VBD NN PREV-TAG DT
 ```
 Here the category of the previous word must be <code>DT</code> for the rule to be applied.
 
+
 ### Algorithm
 The tagger applies transformation rules that may change the category of words. The input sentence is a Sentence object with tagged words. The tagged sentence is processed from left to right. At each step all rules are applied once; rules are applied in the order in which they are specified. Algorithm:
 ```javascript
@@ -1384,6 +1400,7 @@ Brill_POS_Tagger.prototype.applyRules = function(sentence) {
 };
 ```
 The output is a Sentence object just like the input sentence.
+
 
 ### Adding a predicate
 Predicates are defined in module <code>lib/RuleTemplates.js</code>. In that file
@@ -1451,14 +1468,12 @@ const JSON_FLAG = 2;
 
 var brownCorpus = require('../lib/natural/brill_pos_tagger/lib/Corpus');
 var corpus = new Corpus(brownCorpus, JSON_FLAG, natural.Sentence);
-
 var lexicon = corpus.buildLexicon();
 ```
 The next step is to create a set of rule templates from which the learning
 algorithm can generate transformation rules. Rule templates are defined in
 <code>PredicateMapping.js</code>.
 ```javascript
-var natural require('natural');
 var templateNames = [
   "NEXT-TAG",
   "NEXT-WORD-IS-CAP",
@@ -1471,9 +1486,7 @@ var templates = templateNames.map(function(name) {
 ```
 Using lexicon and rule templates we can now start the trainer as follows.
 ```javascript
-var natural require('natural');
-var Tester = require('natural.BrillPOSTrainer');
-var trainer = new Trainer(/* optional threshold */);
+var trainer = new natural.BrillPOSTrainer(/* optional threshold */);
 var ruleSet = trainer.train(corpus, templates, lexicon);
 ```
 A threshold value can be passed to constructor. Transformation rules with
@@ -1484,6 +1497,7 @@ format for later usage.
 ```javascript
 console.log(ruleSet.prettyPrint());
 ```
+
 
 ### Testing
 Now we can apply the lexicon and rule set to a test set.
@@ -1497,6 +1511,7 @@ The test method returns an array of two percentages: first percentage is the rat
 console.log("Test score lexicon " + scores[0] + "%");
 console.log("Test score after applying rules " + scores[1] + "%");
 ```
+
 
 ### Acknowledgements and References
 * Part of speech tagger by Percy Wegmann, https://code.google.com/p/jspos/
