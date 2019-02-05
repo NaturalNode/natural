@@ -1310,16 +1310,13 @@ algorithm. Transformation rules are specified in external files.
 ### Usage
 ```javascript
 var natural = require("natural");
-var path = require("path");
 
-var base_folder = path.join(path.dirname(require.resolve("natural")), "brill_pos_tagger");
-var rulesFilename = base_folder + "/data/English/tr_from_posjs.txt";
-var lexiconFilename = base_folder + "/data/English/lexicon_from_posjs.json";
-var defaultCategory = 'N';
+const language = "EN"
+const defaultCategory = 'N';
 
-var lexicon = new natural.Lexicon(lexiconFilename, defaultCategory);
-var rules = new natural.RuleSet(rulesFilename);
-var tagger = new natural.BrillPOSTagger(lexicon, rules);
+var lexicon = new natural.Lexicon(language, defaultCategory);
+var ruleSet = new natural.RuleSet('EN');
+var tagger = new natural.BrillPOSTagger(lexicon, ruleSet);
 
 var sentence = ["I", "see", "the", "man", "with", "the", "telescope"];
 console.log(tagger.tag(sentence));
@@ -1346,21 +1343,21 @@ The lexicon is either a JSON file that has the following structure:
   ...
 }
 ```
-or a text file:
-```
-word1 cat1 cat2
-word2 cat3
-...
-```
+
 Words may have multiple categories in the lexicon file. The tagger uses only
 the first category specified.
 
 ### Specifying transformation rules
-Transformation rules are specified as follows:
+Transformation rules are specified a JSON file as follows:
 ```
-OLD_CAT NEW_CAT PREDICATE PARAMETER
+{
+  "rules": [
+    "OLD_CAT NEW_CAT PREDICATE PARAMETER",
+    ...
+  ]
+}
 ```
-This means that if the category of the current position is OLD_CAT and the predicate is true, the category is replaced by NEW_CAT. The predicate
+This particular means that if the category of the current position is OLD_CAT and the predicate is true, the category is replaced by NEW_CAT. The predicate
 may use the parameter in different ways: sometimes the parameter is used for
 specifying the outcome of the predicate:
 ```
@@ -1450,8 +1447,11 @@ from the templates and iteratively extends and optimises the rule set.
 First, a corpus should be loaded. Currently, the format of Brown corpus is supported. Then a lexicon can be created from the corpus. The lexicon is needed for tagging the sentences before the learning algorithm is applied.
 ```javascript
 var natural = require(natural);
-var text = fs.readFileSync(brownCorpusFile, 'utf8');
-var corpus = new natural.Corpus(text, 1);
+const JSON_FLAG = 2;
+
+var brownCorpus = require('../lib/natural/brill_pos_tagger/lib/Corpus');
+var corpus = new Corpus(brownCorpus, JSON_FLAG, natural.Sentence);
+
 var lexicon = corpus.buildLexicon();
 ```
 The next step is to create a set of rule templates from which the learning
@@ -1509,16 +1509,17 @@ console.log("Test score after applying rules " + scores[1] + "%");
 
 When developing, please:
 
-+ Write unit tests
++ Write unit tests for jasmine
 + Make sure your unit tests pass
++ Do not use the file system <code>fs</code>. If you need to read files, use JSON and <code>require</code>.
 
 The current configuration of the unit tests requires the following environment variable to be set:
-
+```javascript
     export NODE_PATH=.
-
+````
 
 ## License
-
+```javascript
 Copyright (c) 2011, 2012 Chris Umbel, Rob Ellis, Russell Mull
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -1538,11 +1539,12 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+```
 
 WordNet License
 ---------------
-
 This license is available as the file LICENSE in any downloaded version of WordNet.
 WordNet 3.0 license: (Download)
 
 WordNet Release 3.0 This software and database is being provided to you, the LICENSEE, by Princeton University under the following license. By obtaining, using and/or copying this software and database, you agree that you have read, understood, and will comply with these terms and conditions.: Permission to use, copy, modify and distribute this software and database and its documentation for any purpose and without fee or royalty is hereby granted, provided that you agree to comply with the following copyright notice and statements, including the disclaimer, and that the same appear on ALL copies of the software, database and documentation, including modifications that you make for internal use or for distribution. WordNet 3.0 Copyright 2006 by Princeton University. All rights reserved. THIS SOFTWARE AND DATABASE IS PROVIDED "AS IS" AND PRINCETON UNIVERSITY MAKES NO REPRESENTATIONS OR WARRANTIES, EXPRESS OR IMPLIED. BY WAY OF EXAMPLE, BUT NOT LIMITATION, PRINCETON UNIVERSITY MAKES NO REPRESENTATIONS OR WARRANTIES OF MERCHANT- ABILITY OR FITNESS FOR ANY PARTICULAR PURPOSE OR THAT THE USE OF THE LICENSED SOFTWARE, DATABASE OR DOCUMENTATION WILL NOT INFRINGE ANY THIRD PARTY PATENTS, COPYRIGHTS, TRADEMARKS OR OTHER RIGHTS. The name of Princeton University or Princeton may not be used in advertising or publicity pertaining to distribution of the software and/or database. Title to copyright in this software, database and any associated documentation shall at all times remain with Princeton University and LICENSEE agrees to preserve same.
+
