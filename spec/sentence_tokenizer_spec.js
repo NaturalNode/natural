@@ -24,6 +24,16 @@ var Tokenizer = require('../lib/natural/tokenizers/sentence_tokenizer'),
     tokenizer = new Tokenizer();
 
 describe('sentence_tokenizer', function() {
+
+  it('should tokenize a single sentence without punctuation', function() {
+    expect(
+      tokenizer.tokenize('This is a sentence')
+    )
+    .toEqual([
+        'This is a sentence'
+    ]);
+  });
+
   it('should tokenize strings and trim whitespace', function() {
     expect(
         tokenizer.tokenize('This is a sentence. This is another sentence.')
