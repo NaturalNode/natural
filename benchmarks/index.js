@@ -9,6 +9,7 @@ var uubench = require('uubench')
 fs = require('fs');
 metaphone = natural.Metaphone.process;
 soundex = natural.SoundEx.process;
+stemmerId = natural.StemmerId
 
 suite = new uubench.Suite({
   start: function(){
@@ -20,7 +21,7 @@ suite = new uubench.Suite({
       , ops = stats.iterations * persec;
     console.log('  \033[90m%s : \033[36m%s \033[90mops/s\033[0m', name, ops | 0);
   },
-  
+
   done: function(){
     console.log();
   }
@@ -28,5 +29,6 @@ suite = new uubench.Suite({
 
 require('./metaphone');
 require('./soundex');
+require('./stemmer_id');
 
 suite.run();
