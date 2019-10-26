@@ -906,6 +906,21 @@ console.log(NGramsZH.ngrams(['一', '个', '中', '文', '测',
     '试'], 4));
 ```
 
+
+
+
+
+## Skip N-grams
+
+These work like n-grams, except there is a "skip" or gap of up to `k`. This helps
+with data sparseness. For example, 
+
+<NEWs ITEMS>
+
+
+
+
+
 ## tf-idf
 
 [Term Frequency–Inverse Document Frequency (tf-idf)](http://en.wikipedia.org/wiki/Tf%E2%80%93idf) is implemented to determine how important a word (or words) is to a
