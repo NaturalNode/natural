@@ -906,20 +906,46 @@ console.log(NGramsZH.ngrams(['一', '个', '中', '文', '测',
     '试'], 4));
 ```
 
-
-
-
-
 ## Skip N-grams
 
-These work like n-grams, except there is a "skip" or gap of up to `k`. This helps
-with data sparseness. For example, 
+These work like n-grams, except there is a "skip" or gap of up to `k` words. This helps
+with data sparsity by examing n-grams, but allowing for words to be skipped. To illustrate this,
+consider the following news headlines related to flooding in Wales:
 
-<NEWs ITEMS>
+```
+[ ['Roads and rail hit by flooding across Wales on Sunday'],
+  ['Flooding disruption in Wales, Shropshire and Staffordshire'],
+  ['Floods cause misery across Wales closing roads'],
+  ['Flooding leaves parts of Wales and West England under water'],
+  ['Flooding in Wales, Ludlow and Shropshire updates'],
+  ['Flooding disruption across Wales after heavy rainfall'] ]
+```
 
+With a skip of at least 3, `['Flooding', 'Wales']` will start to emerge as a common phrase.
 
+The same functions have been implemented as `ngram`, with the third parameter being `k`, the maximum number of skips.
 
+```javascript
+console.log(SkipNGrams.skip_ngrams('some other words here for you', 3, 2));
+```
 
+The above will output:
+```
+[ [ 'some', 'other', 'words' ],
+  [ 'some', 'words', 'here' ],
+  [ 'some', 'here', 'for' ],
+  [ 'some', 'other', 'here' ],
+  [ 'some', 'other', 'for' ],
+  [ 'other', 'words', 'here' ],
+  [ 'other', 'here', 'for' ],
+  [ 'other', 'for', 'you' ],
+  [ 'other', 'words', 'for' ],
+  [ 'other', 'words', 'you' ],
+  [ 'words', 'here', 'for' ],
+  [ 'words', 'for', 'you' ],
+  [ 'words', 'here', 'you' ],
+  [ 'here', 'for', 'you' ] ]
+```
 
 ## tf-idf
 
