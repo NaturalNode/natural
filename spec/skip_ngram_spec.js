@@ -54,7 +54,6 @@ describe('ngrams', function() {
     
     it('should bigram a string via ngrams', function() {
         const computed = SkipNGrams.skip_ngrams('these are some words', 2, k);
-        console.log('computed', computed)
         expect(computed).toEqual(expectedBigrams);
     });
 
@@ -182,9 +181,7 @@ describe('ngrams', function() {
     });
 
     it('should 4-gram a string with start and end symbols', function() {
-
         const computed = SkipNGrams.skip_ngrams('these are some words', 4, k, '[start]', '[end]');
-        console.log('computed', computed)
         const expected = [
             [ '[start]', '[start]', '[start]', 'are' ],
             [ '[start]', '[start]', '[start]', 'some' ],
@@ -237,17 +234,6 @@ describe('ngrams', function() {
             ['b', '[end]', '[end]', '[end]'],
             ['c', '[end]', '[end]', '[end]']
         ];
-
-        const a = ['[start]', '[start]', '[start]', 'b'];
-        const b = ['[start]', '[start]', '[start]', 'b'];
-
-        console.log('isEqual', _.isEqual(a, b))
-        console.log('expect', _.indexOf(expected, [ ['[start]', '[start]', '[start]', 'b']]))
-        console.log('unexpected', _.indexOf(expected, [ ['[start]', '[start]', '[start]', '[start]']]))
-        console.log('expect1', expected.indexOf([['[start]', '[start]', '[start]', 'b']]))
-        console.log('unexpected1', expected.indexOf([['[start]', '[start]', '[start]', '[start]']]))
-        console.log('computed', computed)
-
         expect(computed).toEqual(expected);
     });
     it('should 3-gram a string with start and end symbols, skip = 3', function() {
@@ -271,7 +257,6 @@ describe('ngrams', function() {
             [ 'a', '[end]', '[end]' ],
             [ 'b', '[end]', '[end]' ],
             [ 'c', '[end]', '[end]' ] ];
-        console.log('computed', computed)
         expect(computed).toEqual(expected);
     });
 
