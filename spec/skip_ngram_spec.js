@@ -25,16 +25,7 @@ const SkipNGrams = require('../lib/natural/ngrams/skip_ngrams');
 
 var text = require('spec/test_data/NYT-20150205-picassos-granddaughter-plans-to-sell-art-worrying-the-market.json');
 
-//const text = '1 2 3 4 5';
-const n = 3
 const k = 2
-
-/*k = number of spaces to skip
-const output = 1 2 3
-1 2 4
-1 2 5
-1 3 4*/
-
 
 const expectedTrigrams = [
     ['these', 'are', 'some'],
