@@ -23,7 +23,7 @@ const _ = require("underscore")._;
 
 const SkipNGrams = require('../lib/natural/ngrams/skip_ngrams');
 
-var text = require('spec/test_data/NYT-20150205-picassos-granddaughter-plans-to-sell-art-worrying-the-market.json');
+const text = require('spec/test_data/NYT-20150205-picassos-granddaughter-plans-to-sell-art-worrying-the-market.json');
 
 const k = 2
 
@@ -44,13 +44,11 @@ const expectedBigrams = [
 describe('ngrams', function() {
     
     it('should bigram a string via ngrams', function() {
-        const computed = SkipNGrams.skip_ngrams('these are some words', 2, k);
-        expect(computed).toEqual(expectedBigrams);
+        expect(SkipNGrams.skip_ngrams('these are some words', 2, k)).toEqual(expectedBigrams);
     });
 
     it('should trigram a string via ngrams', function() {
-        const computed = SkipNGrams.skip_ngrams('these are some words', 3, k);
-        expect(computed).toEqual(expectedTrigrams);
+        expect(SkipNGrams.skip_ngrams('these are some words', 3, k)).toEqual(expectedTrigrams);
     });    
     
     it('should trigram an array via ngrams', function() {
@@ -69,20 +67,18 @@ describe('ngrams', function() {
 
     describe('trigrams', function() {
         it('should trigram a string', function() {
-            const computed = SkipNGrams.skip_trigrams('these are some words', 2);
-            expect(computed).toEqual(expectedTrigrams);
+            expect(SkipNGrams.skip_trigrams('these are some words', 2)).toEqual(expectedTrigrams);
         });
         
         it('should trigram an array', function() {
-            const computed = SkipNGrams.skip_trigrams(['these', 'are', 'some', 'words'], 2);
-            expect(computed).toEqual(expectedTrigrams);
+            expect(SkipNGrams.skip_trigrams(['these', 'are', 'some', 'words'], 2))
+                .toEqual(expectedTrigrams);
         });        
     });
 
     // New Start/End Symbols Feature
     it('should bigram a string with start and end symbols', function() {
-        const computed = SkipNGrams.skip_ngrams('these are some words', 2, k, "[start]", "[end]");
-        const expected = [
+        expect(SkipNGrams.skip_ngrams('these are some words', 2, k, "[start]", "[end]")).toEqual([
             ['[start]', 'are'], 
             ['[start]', 'some'], 
             ['[start]', 'these'], 
@@ -95,13 +91,11 @@ describe('ngrams', function() {
             ['are', '[end]'],
             ['some', '[end]'], 
             ['words', '[end]'],
-        ];
-        expect(computed).toEqual(expected);
+        ]);
     });
 
     it('should bigram a string with no start symbols only', function() {
-        const computed = SkipNGrams.skip_ngrams('1 2 3 4 5', 2, k);
-        const expected = [
+        expect(SkipNGrams.skip_ngrams('1 2 3 4 5', 2, k)).toEqual([
             ['1', '2'], 
             ['1', '3'],
             ['1', '4'], 
@@ -111,13 +105,11 @@ describe('ngrams', function() {
             ['3', '4'],
             ['3', '5'],
             ['4', '5']
-        ];
-        expect(computed).toEqual(expected);
+        ]);
     });
 
     it('should bigram a string with start symbols only', function() {
-        const computed = SkipNGrams.skip_ngrams('these are some words', 2, k, "[start]");
-        const expected = [ 
+        expect(SkipNGrams.skip_ngrams('these are some words', 2, k, "[start]")).toEqual([
             [ '[start]', 'are' ],
             [ '[start]', 'some' ],
             [ '[start]', 'these' ],
@@ -126,13 +118,11 @@ describe('ngrams', function() {
             [ 'these', 'words' ],
             [ 'are', 'some' ],
             [ 'are', 'words' ],
-            [ 'some', 'words' ] ];    
-        expect(computed).toEqual(expected);
+            [ 'some', 'words' ] ]);
     });
 
     it('should bigram a string with end symbols only', function() {
-        const computed = SkipNGrams.skip_ngrams('these are some words', 2, k, null, "[end]");
-        expect(computed).toEqual([
+        expect(SkipNGrams.skip_ngrams('these are some words', 2, k, null, "[end]")).toEqual([
             ['these', 'are'],
             ['these', 'some'],
             ['these', 'words'],
@@ -145,8 +135,7 @@ describe('ngrams', function() {
         ]);
     });
     it('should trigram a string with start and end symbols', function() {
-        const computed = SkipNGrams.skip_ngrams('a b c d', 3, k, '[start]', '[end]')
-        const expected = [
+        expect(SkipNGrams.skip_ngrams('a b c d', 3, k, '[start]', '[end]')).toEqual([
             ['[start]', '[start]', 'a'],
             ['[start]', '[start]', 'b'],
             ['[start]', '[start]', 'c'],
@@ -167,13 +156,11 @@ describe('ngrams', function() {
             [ 'b', '[end]', '[end]' ],
             [ 'c', '[end]', '[end]' ],
             [ 'd', '[end]', '[end]' ]
-        ];
-        expect(computed).toEqual(expected);
+        ]);
     });
 
     it('should 4-gram a string with start and end symbols', function() {
-        const computed = SkipNGrams.skip_ngrams('these are some words', 4, k, '[start]', '[end]');
-        const expected = [
+        expect(SkipNGrams.skip_ngrams('these are some words', 4, k, '[start]', '[end]')).toEqual([
             [ '[start]', '[start]', '[start]', 'are' ],
             [ '[start]', '[start]', '[start]', 'some' ],
             [ '[start]', '[start]', '[start]', 'these' ],
@@ -201,14 +188,11 @@ describe('ngrams', function() {
             [ 'some', 'words', '[end]', '[end]' ],
             [ 'are', '[end]', '[end]', '[end]' ],
             [ 'some', '[end]', '[end]', '[end]' ],
-            [ 'words', '[end]', '[end]', '[end]' ] ];
-        expect(computed).toEqual(expected);
+            [ 'words', '[end]', '[end]', '[end]' ] ]);
     });
 
     it('should 4-gram a string with start and end symbols, skip = 1', function() {
-
-        const computed = SkipNGrams.skip_ngrams('a b c', 4, 1, '[start]', '[end]');
-        const expected = [
+        expect(SkipNGrams.skip_ngrams('a b c', 4, 1, '[start]', '[end]')).toEqual([
             ['[start]', '[start]', '[start]', 'a'],
             ['[start]', '[start]', '[start]', 'b'],
             ['[start]', '[start]', 'a', 'b'],
@@ -224,13 +208,11 @@ describe('ngrams', function() {
             ['b', 'c', '[end]', '[end]'],
             ['b', '[end]', '[end]', '[end]'],
             ['c', '[end]', '[end]', '[end]']
-        ];
-        expect(computed).toEqual(expected);
+        ]);
     });
-    it('should 3-gram a string with start and end symbols, skip = 3', function() {
 
-        const computed = SkipNGrams.skip_ngrams('a b c', 3, 3, '[start]', '[end]');
-        const expected = [
+    it('should 3-gram a string with start and end symbols, skip = 3', function() {
+        expect(SkipNGrams.skip_ngrams('a b c', 3, 3, '[start]', '[end]')).toEqual([
             [ '[start]', '[end]', '[end]' ],
             [ '[start]', '[start]', '[end]' ],
             [ '[start]', '[start]', 'a' ],
@@ -247,95 +229,93 @@ describe('ngrams', function() {
             [ 'b', 'c', '[end]' ],
             [ 'a', '[end]', '[end]' ],
             [ 'b', '[end]', '[end]' ],
-            [ 'c', '[end]', '[end]' ] ];
-        expect(computed).toEqual(expected);
+            [ 'c', '[end]', '[end]' ] ]);
     });
 
     it('should 4-gram a string with start and end symbols, skip = 4', function() {
 
-        const computed = SkipNGrams.skip_ngrams('a b c d e f g', 4, 4, '[start]', '[end]');
-        const expected = [ [ '[start]', '[start]', '[start]', 'a' ],
-        [ '[start]', '[start]', '[start]', 'b' ],
-        [ '[start]', '[start]', '[start]', 'c' ],
-        [ '[start]', '[start]', '[start]', 'd' ],
-        [ '[start]', '[start]', '[start]', 'e' ],
-        [ '[start]', '[start]', 'a', 'b' ],
-        [ '[start]', '[start]', 'a', 'c' ],
-        [ '[start]', '[start]', 'a', 'd' ],
-        [ '[start]', '[start]', 'a', 'e' ],
-        [ '[start]', '[start]', 'a', 'f' ],
-        [ '[start]', '[start]', 'b', 'c' ],
-        [ '[start]', '[start]', 'c', 'd' ],
-        [ '[start]', '[start]', 'd', 'e' ],
-        [ '[start]', '[start]', 'e', 'f' ],
-        [ '[start]', 'a', 'b', 'c' ],
-        [ '[start]', 'a', 'b', 'd' ],
-        [ '[start]', 'a', 'b', 'e' ],
-        [ '[start]', 'a', 'b', 'f' ],
-        [ '[start]', 'a', 'b', 'g' ],
-        [ '[start]', 'a', 'c', 'd' ],
-        [ '[start]', 'a', 'd', 'e' ],
-        [ '[start]', 'a', 'e', 'f' ],
-        [ '[start]', 'a', 'f', 'g' ],
-        [ '[start]', 'b', 'c', 'd' ],
-        [ '[start]', 'c', 'd', 'e' ],
-        [ '[start]', 'd', 'e', 'f' ],
-        [ '[start]', 'e', 'f', 'g' ],
-        [ 'a', 'b', 'c', 'd' ],
-        [ 'a', 'c', 'd', 'e' ],
-        [ 'a', 'd', 'e', 'f' ],
-        [ 'a', 'e', 'f', 'g' ],
-        [ 'a', 'b', 'd', 'e' ],
-        [ 'a', 'b', 'e', 'f' ],
-        [ 'a', 'b', 'f', 'g' ],
-        [ 'a', 'b', 'c', 'e' ],
-        [ 'a', 'b', 'c', 'f' ],
-        [ 'a', 'b', 'c', 'g' ],
-        [ 'b', 'c', 'd', 'e' ],
-        [ 'b', 'd', 'e', 'f' ],
-        [ 'b', 'e', 'f', 'g' ],
-        [ 'b', 'c', 'e', 'f' ],
-        [ 'b', 'c', 'f', 'g' ],
-        [ 'b', 'c', 'd', 'f' ],
-        [ 'b', 'c', 'd', 'g' ],
-        [ 'c', 'd', 'e', 'f' ],
-        [ 'c', 'e', 'f', 'g' ],
-        [ 'c', 'd', 'f', 'g' ],
-        [ 'c', 'd', 'e', 'g' ],
-        [ 'd', 'e', 'f', 'g' ],
-        [ 'a', 'f', 'g', '[end]' ],
-        [ 'b', 'f', 'g', '[end]' ],
-        [ 'c', 'f', 'g', '[end]' ],
-        [ 'd', 'f', 'g', '[end]' ],
-        [ 'a', 'b', 'g', '[end]' ],
-        [ 'b', 'c', 'g', '[end]' ],
-        [ 'c', 'd', 'g', '[end]' ],
-        [ 'd', 'e', 'g', '[end]' ],
-        [ 'a', 'b', 'c', '[end]' ],
-        [ 'b', 'c', 'd', '[end]' ],
-        [ 'c', 'd', 'e', '[end]' ],
-        [ 'd', 'e', 'f', '[end]' ],
-        [ 'e', 'f', 'g', '[end]' ],
-        [ 'b', 'g', '[end]', '[end]' ],
-        [ 'c', 'g', '[end]', '[end]' ],
-        [ 'd', 'g', '[end]', '[end]' ],
-        [ 'e', 'g', '[end]', '[end]' ],
-        [ 'b', 'c', '[end]', '[end]' ],
-        [ 'c', 'd', '[end]', '[end]' ],
-        [ 'd', 'e', '[end]', '[end]' ],
-        [ 'e', 'f', '[end]', '[end]' ],
-        [ 'f', 'g', '[end]', '[end]' ],
-        [ 'c', '[end]', '[end]', '[end]' ],
-        [ 'd', '[end]', '[end]', '[end]' ],
-        [ 'e', '[end]', '[end]', '[end]' ],
-        [ 'f', '[end]', '[end]', '[end]' ],
-        [ 'g', '[end]', '[end]', '[end]' ] ];
-        expect(computed).toEqual(expected);
+        expect(SkipNGrams.skip_ngrams('a b c d e f g', 4, 4, '[start]', '[end]')).toEqual([
+            [ '[start]', '[start]', '[start]', 'a' ],
+            [ '[start]', '[start]', '[start]', 'b' ],
+            [ '[start]', '[start]', '[start]', 'c' ],
+            [ '[start]', '[start]', '[start]', 'd' ],
+            [ '[start]', '[start]', '[start]', 'e' ],
+            [ '[start]', '[start]', 'a', 'b' ],
+            [ '[start]', '[start]', 'a', 'c' ],
+            [ '[start]', '[start]', 'a', 'd' ],
+            [ '[start]', '[start]', 'a', 'e' ],
+            [ '[start]', '[start]', 'a', 'f' ],
+            [ '[start]', '[start]', 'b', 'c' ],
+            [ '[start]', '[start]', 'c', 'd' ],
+            [ '[start]', '[start]', 'd', 'e' ],
+            [ '[start]', '[start]', 'e', 'f' ],
+            [ '[start]', 'a', 'b', 'c' ],
+            [ '[start]', 'a', 'b', 'd' ],
+            [ '[start]', 'a', 'b', 'e' ],
+            [ '[start]', 'a', 'b', 'f' ],
+            [ '[start]', 'a', 'b', 'g' ],
+            [ '[start]', 'a', 'c', 'd' ],
+            [ '[start]', 'a', 'd', 'e' ],
+            [ '[start]', 'a', 'e', 'f' ],
+            [ '[start]', 'a', 'f', 'g' ],
+            [ '[start]', 'b', 'c', 'd' ],
+            [ '[start]', 'c', 'd', 'e' ],
+            [ '[start]', 'd', 'e', 'f' ],
+            [ '[start]', 'e', 'f', 'g' ],
+            [ 'a', 'b', 'c', 'd' ],
+            [ 'a', 'c', 'd', 'e' ],
+            [ 'a', 'd', 'e', 'f' ],
+            [ 'a', 'e', 'f', 'g' ],
+            [ 'a', 'b', 'd', 'e' ],
+            [ 'a', 'b', 'e', 'f' ],
+            [ 'a', 'b', 'f', 'g' ],
+            [ 'a', 'b', 'c', 'e' ],
+            [ 'a', 'b', 'c', 'f' ],
+            [ 'a', 'b', 'c', 'g' ],
+            [ 'b', 'c', 'd', 'e' ],
+            [ 'b', 'd', 'e', 'f' ],
+            [ 'b', 'e', 'f', 'g' ],
+            [ 'b', 'c', 'e', 'f' ],
+            [ 'b', 'c', 'f', 'g' ],
+            [ 'b', 'c', 'd', 'f' ],
+            [ 'b', 'c', 'd', 'g' ],
+            [ 'c', 'd', 'e', 'f' ],
+            [ 'c', 'e', 'f', 'g' ],
+            [ 'c', 'd', 'f', 'g' ],
+            [ 'c', 'd', 'e', 'g' ],
+            [ 'd', 'e', 'f', 'g' ],
+            [ 'a', 'f', 'g', '[end]' ],
+            [ 'b', 'f', 'g', '[end]' ],
+            [ 'c', 'f', 'g', '[end]' ],
+            [ 'd', 'f', 'g', '[end]' ],
+            [ 'a', 'b', 'g', '[end]' ],
+            [ 'b', 'c', 'g', '[end]' ],
+            [ 'c', 'd', 'g', '[end]' ],
+            [ 'd', 'e', 'g', '[end]' ],
+            [ 'a', 'b', 'c', '[end]' ],
+            [ 'b', 'c', 'd', '[end]' ],
+            [ 'c', 'd', 'e', '[end]' ],
+            [ 'd', 'e', 'f', '[end]' ],
+            [ 'e', 'f', 'g', '[end]' ],
+            [ 'b', 'g', '[end]', '[end]' ],
+            [ 'c', 'g', '[end]', '[end]' ],
+            [ 'd', 'g', '[end]', '[end]' ],
+            [ 'e', 'g', '[end]', '[end]' ],
+            [ 'b', 'c', '[end]', '[end]' ],
+            [ 'c', 'd', '[end]', '[end]' ],
+            [ 'd', 'e', '[end]', '[end]' ],
+            [ 'e', 'f', '[end]', '[end]' ],
+            [ 'f', 'g', '[end]', '[end]' ],
+            [ 'c', '[end]', '[end]', '[end]' ],
+            [ 'd', '[end]', '[end]', '[end]' ],
+            [ 'e', '[end]', '[end]', '[end]' ],
+            [ 'f', '[end]', '[end]', '[end]' ],
+            [ 'g', '[end]', '[end]', '[end]' ] ]);
     });
  
     it('should use french tokenizer', function(){
-        var T = require('../lib/natural/tokenizers/aggressive_tokenizer_fr');
-        var t = new T();
+        const T = require('../lib/natural/tokenizers/aggressive_tokenizer_fr');
+        const t = new T();
         SkipNGrams.setTokenizer(t);
         expect(SkipNGrams.skip_ngrams('Un Éléphant rouge', 2, k)).toEqual([['Un', 'Éléphant'],
             ['Un', 'rouge'],
@@ -343,12 +323,12 @@ describe('ngrams', function() {
     });
 
     it('should trigram a string via ngrams including statistics', function() {
-        var T = require('../lib/natural/tokenizers/aggressive_tokenizer');
-        var t = new T();
+        const T = require('../lib/natural/tokenizers/aggressive_tokenizer');
+        const t = new T();
         SkipNGrams.setTokenizer(t);
         text.sentences.forEach(sentence => {
-            var result = SkipNGrams.skip_ngrams(sentence, 3, k, null, null, true);
-            var nrNgrams = 0;
+            const result = SkipNGrams.skip_ngrams(sentence, 3, k, null, null, true);
+            let nrNgrams = 0;
 
             Object.keys(result.Nr).forEach(function (f) {
                 nrNgrams += result.Nr[f] * f;
