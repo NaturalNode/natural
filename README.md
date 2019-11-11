@@ -42,6 +42,7 @@ Aside from this README, the only documentation is [this DZone article](http://ww
 * [Spellcheck](#spellcheck)
 * [POS Tagger](#pos-tagger)
 * [Development](#development)
+* [Hosted API](#hosted-api)
 * [License](#license)
 
 
@@ -1532,6 +1533,14 @@ The current configuration of the unit tests requires the following environment v
 ```javascript
     export NODE_PATH=.
 ````
+
+## Hosted API
+
+We also provide a hosted API for natural which may simplify your use case.
+
+<a href="https://natural.saasify.sh">
+	<img src="https://badges.saasify.sh?text=View%20Hosted%20API" height="40"/>
+</a>
 
 License
 -------
