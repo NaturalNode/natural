@@ -1539,7 +1539,7 @@ The current configuration of the unit tests requires the following environment v
 We also provide a hosted API for natural which may simplify your use case.
 
 <a href="https://natural.saasify.sh">
-	<img src="https://badges.saasify.sh?text=View%20Hosted%20API" height="40"/>
+  <img src="https://badges.saasify.sh?text=View%20Hosted%20API" height="40"/>
 </a>
 
 License
