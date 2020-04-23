@@ -105,7 +105,7 @@ Overview of available tokenizers:
 | AggressiveTokenizerEs  | Spanish     |  |
 | AggressiveTokenizerIt  | Italian     |  |
 | AggressiveTokenizerPl  | Polish      |  |
-| AggressiveTokenizerPt  | Portugese   |  |
+| AggressiveTokenizerPt  | Portuguese   |  |
 | AggressiveTokenizerNo  | Norwegian   |  |
 | AggressiveTokenizerSv  | Swedish     |  |
 | AggressiveTokenizerVi  | Vietnamese  |  |
