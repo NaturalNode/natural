@@ -301,6 +301,7 @@ The following stemmers are available:
 | Norwegian     | X           |           |           | `PorterStemmerNo` |
 | Portugese     | X           |           |           | `PorterStemmerPt` |
 | Russian       | X           |           |           | `PorterStemmerRu` |
+| Spanish       | X           |           |           | `PorterStemmerEs` |
 | Swedish       | X           |           |           | `PorterStemmerSv` |
 
 
