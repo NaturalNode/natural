@@ -53,4 +53,10 @@ describe('aggressive_tokenizer', function() {
   it('should swallow duplicate punctuation', function() {
     expect(tokenizer.tokenize('i shal... pause')).toEqual(['i', 'shal', 'pause']);
   });  
+
+    it('should remove underscores', function() {
+    expect(tokenizer.tokenize('_ hi_this_is_a_test_case_ for__removing___underscores_')).toEqual(['hi', 'this', 'is', 'a', 'test', 'case', 'for', 'removing', 'underscores']);
+  });  
+
+  
 });
