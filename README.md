@@ -595,7 +595,7 @@ A more elaborate example of maximum entropy modelling is provided for part of sp
 * From the Brown corpus a sample is generated consisting of POS elements.
 * Feature functions are generated from the sample.
 * A classifier is created and trained.
-* The classifier is applied to a test set. Results are compared to a simple lexicon-based tagger.  
+* The classifier is applied to a test set. Results are compared to a simple lexicon-based tagger.
 
 #### References
 * Adwait RatnaParkhi, Maximum Entropy Models For Natural Language Ambiguity Resolution, University of Pennsylvania, 1998, URL: http://repository.upenn.edu/cgi/viewcontent.cgi?article=1061&context=ircs_reports
@@ -625,9 +625,9 @@ Currently, the following languages are supported with type of vocabulary and ava
 | Dutch         |             |           | X         | X         |
 | English       | X           |  X        | X         | X         |
 | French        |             |           | X         |           |
-| Galician      |             |  X        |           |           |   
+| Galician      |             |  X        |           |           |
 | Italian       |             |           | X         |           |
-| Spanish       | X           |  X        |           | X         |     
+| Spanish       | X           |  X        |           | X         |
 
 More languages can be added by adding vocabularies and extending the map `languageFiles` in `SentimentAnalyzer.js`. In the tools folder below `lib/natural/sentiment` some tools are provided for transforming vocabularies in Senticon and Pattern format into a JSON format.
 
@@ -913,7 +913,7 @@ console.log(NGramsZH.ngrams(['一', '个', '中', '文', '测',
 [Term Frequency–Inverse Document Frequency (tf-idf)](http://en.wikipedia.org/wiki/Tf%E2%80%93idf) is implemented to determine how important a word (or words) is to a
 document relative to a corpus. The following formulas are used for calculating tf and idf:
 * tf(t, d) is a so-called raw count, so just the count of the term in the document
-* idf(t, D) uses the following formula: 1 + ln(N / (1 + n_t)) where N is the number of documents, and n_t the number of documents in which the term appears. The 1 + in the denominator is for handling the possibility that n_t is 0. 
+* idf(t, D) uses the following formula: 1 + ln(N / (1 + n_t)) where N is the number of documents, and n_t the number of documents in which the term appears. The 1 + in the denominator is for handling the possibility that n_t is 0.
 
 The following example will add four documents to
 a corpus and determine the weight of the word "node" and then the weight of the
@@ -1091,7 +1091,7 @@ This search will return all prefix matches along the search string path.
 
 ```javascript
 trie.addString("tes");
-trie.addString("est");
+trie.addString("test");
 console.log(trie.findMatchesOnPath("tester")); // ['tes', 'test'];
 ```
 
@@ -1313,8 +1313,8 @@ algorithm. It needs a lexicon and a set of transformation rules.
 
 ### Usage
 
-First a lexicon is created. First parameter is language (<code>EN</code> for English and <code>DU</code> for Dutch), second is default category. 
-Optionally, a third parameter can be supplied that is the default category for capitalised words. 
+First a lexicon is created. First parameter is language (<code>EN</code> for English and <code>DU</code> for Dutch), second is default category.
+Optionally, a third parameter can be supplied that is the default category for capitalised words.
 ```javascript
 var natural = require("natural");
 const language = "EN"
