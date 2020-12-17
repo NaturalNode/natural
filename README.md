@@ -296,6 +296,7 @@ The following stemmers are available:
 | English       |             |  X        |           | `LancasterStemmer` |
 | Farsi (in progress) |  X    |           |           | `PorterStemmerFa` |
 | French        | X           |           |           | `PorterStemmerFr` |
+| French        |             |           | X         | `CarryStemmer`    |
 | Indonesian    |             |           | X         | `StemmerId`       |
 | Italian       | X           |           |           | `PorterStemmerIt` |
 | Japanese      |             |           | X         | `StemmerJa`       |
@@ -323,6 +324,11 @@ natural.LancasterStemmer.attach();
 console.log("i am waking up to the sounds of chainsaws".tokenizeAndStem());
 console.log("chainsaws".stem());
 ```
+
+### Carry stemmer
+For French an additional stemmer is added called Carry stemmer. This is a **Galileo Carry algorithm** based on http://www.otlet-institute.org/docs/Carry.pdf
+
+Note :bangbang:: The implementation descibed in the PDF differs with the one from [the official C++ implementation](http://www.otlet-institute.org/wikics/Building_GALILEI_Platform.html#toc-Section-3). This implementation follows the C++ implementation rules which solves some problems of the algorithm described in the article.
 
 ## Classifiers
 
@@ -1521,6 +1527,7 @@ console.log("Test score after applying rules " + scores[1] + "%");
 * A simple rule-based part of speech tagger, Eric Brill, Published in: Proceeding ANLC '92 Proceedings of the third conference on Applied natural language processing, Pages 152-155. http://dl.acm.org/citation.cfm?id=974526
 * Exploring the Statistical Derivation of Transformational Rule Sequences for Part-of-Speech Tagging, Lance A. Ramshaw and Mitchell P. Marcus. http://acl-arc.comp.nus.edu.sg/archives/acl-arc-090501d4/data/pdf/anthology-PDF/W/W94/W94-0111.pdf
 * Brown Corpus, https://en.wikipedia.org/wiki/Brown_Corpus
+* Carry stemmer is a contribution by Johan Maupetit.
 
 ## Development
 
@@ -1563,4 +1570,3 @@ This license is available as the file LICENSE in any downloaded version of WordN
 WordNet 3.0 license: (Download)
 
 WordNet Release 3.0 This software and database is being provided to you, the LICENSEE, by Princeton University under the following license. By obtaining, using and/or copying this software and database, you agree that you have read, understood, and will comply with these terms and conditions.: Permission to use, copy, modify and distribute this software and database and its documentation for any purpose and without fee or royalty is hereby granted, provided that you agree to comply with the following copyright notice and statements, including the disclaimer, and that the same appear on ALL copies of the software, database and documentation, including modifications that you make for internal use or for distribution. WordNet 3.0 Copyright 2006 by Princeton University. All rights reserved. THIS SOFTWARE AND DATABASE IS PROVIDED "AS IS" AND PRINCETON UNIVERSITY MAKES NO REPRESENTATIONS OR WARRANTIES, EXPRESS OR IMPLIED. BY WAY OF EXAMPLE, BUT NOT LIMITATION, PRINCETON UNIVERSITY MAKES NO REPRESENTATIONS OR WARRANTIES OF MERCHANT- ABILITY OR FITNESS FOR ANY PARTICULAR PURPOSE OR THAT THE USE OF THE LICENSED SOFTWARE, DATABASE OR DOCUMENTATION WILL NOT INFRINGE ANY THIRD PARTY PATENTS, COPYRIGHTS, TRADEMARKS OR OTHER RIGHTS. The name of Princeton University or Princeton may not be used in advertising or publicity pertaining to distribution of the software and/or database. Title to copyright in this software, database and any associated documentation shall at all times remain with Princeton University and LICENSEE agrees to preserve same.
-
