@@ -296,7 +296,7 @@ The following stemmers are available:
 | English       |             |  X        |           | `LancasterStemmer` |
 | Farsi (in progress) |  X    |           |           | `PorterStemmerFa` |
 | French        | X           |           |           | `PorterStemmerFr` |
-| French        |             |           | X         | `CarryStemmer`    |
+| French        |             |           | X         | `CarryStemmerFr`  |
 | Indonesian    |             |           | X         | `StemmerId`       |
 | Italian       | X           |           |           | `PorterStemmerIt` |
 | Japanese      |             |           | X         | `StemmerJa`       |

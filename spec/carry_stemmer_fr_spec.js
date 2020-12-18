@@ -39,6 +39,10 @@ const tests = [
   {
       input: "Dleyton",
       output: "Dleyton"
+  },
+  {
+      input: "volera",
+      output: "vol"
   }
 ]
 
