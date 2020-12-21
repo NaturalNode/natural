@@ -91,11 +91,11 @@ URI
   }
 
 OpenSymbol
-  = [\(\[\}\"\'\`] {
+  = [\(\[\}\"\'\`\‘] {
       return text()
     }
 
 CloseSymbol
-  = [\)\]\}\"\'\`] {
+  = [\)\]\}\"\'\`\’] {
       return text()
     }
