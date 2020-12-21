@@ -71,18 +71,18 @@ describe('sentence_tokenizer', function() {
         '[This is another sentence.]'
     ]);
   });
-  
+
   it('should handle repetitive punctuation', function() {
     expect(
       tokenizer.tokenize("I love you!! Do you love me??")
-    ).toEqual([ 'I love you!!', 'Do you love me??' 
+    ).toEqual([ 'I love you!!', 'Do you love me??'
     ]);
   });
 
   it('should handle repetitive punctuation with space', function() {
     expect(
       tokenizer.tokenize("I love you! ! Do you love me? ?")
-    ).toEqual([ 'I love you! !', 'Do you love me? ?' 
+    ).toEqual([ 'I love you! !', 'Do you love me? ?'
     ]);
   });
 
@@ -127,4 +127,23 @@ describe('sentence_tokenizer', function() {
       'Same Bat-Channel!'
     ]);
   });
+
+  it('should handle a sentence that does not end with punctuation (issue #549))', function() {
+    expect(
+      tokenizer.tokenize("This is a sentence. But is this also one")
+    ).toEqual([
+      "This is a sentence.",
+      "But is this also one"
+    ]);
+  })
+
+
+  it('should handle a sentence that contains a quoted phrase (issue #550 but with . and ’ reversed))', function() {
+    expect(
+      tokenizer.tokenize("This is a sentence. And another where ‘Someone says something’.")
+    ).toEqual([
+      "This is a sentence.",
+      "And another where ‘Someone says something’."
+    ]);
+  })
 });
