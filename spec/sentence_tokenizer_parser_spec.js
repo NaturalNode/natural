@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2011, Chris Umbel
+Copyright (c) 2011, 2020 Chris Umbel, Hugo W.L. ter Doest
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var Tokenizer = require('../lib/natural/tokenizers/sentence_tokenizer'),
+var Tokenizer = require('../lib/natural/tokenizers/sentence_tokenizer_parser'),
     tokenizer = new Tokenizer();
 
 describe('sentence_tokenizer', function() {
@@ -128,4 +128,22 @@ describe('sentence_tokenizer', function() {
     ]);
   });
 
+  it('should handle a sentence that does not end with punctuation (issue #549))', function() {
+    expect(
+      tokenizer.tokenize("This is a sentence. But is this also one")
+    ).toEqual([
+      "This is a sentence.",
+      "But is this also one"
+    ]);
+  })
+
+
+  it('should handle a sentence that contains a quoted phrase (issue #550 but with . and ’ reversed))', function() {
+    expect(
+      tokenizer.tokenize("This is a sentence. And another where ‘Someone says something’.")
+    ).toEqual([
+      "This is a sentence.",
+      "And another where ‘Someone says something’."
+    ]);
+  })
 });
