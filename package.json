@@ -16,12 +16,11 @@
     "json-stable-stringify": "^1.0.1",
     "sylvester": "^0.0.12",
     "underscore": "^1.9.1",
-    "webpack": "^4.29.0",
     "wordnet-db": "^3.1.11"
   },
   "devDependencies": {
     "browserfs": "^1.4.3",
-    "gulp": "^4.0.0",
+    "gulp": "^4.0.2",
     "gulp-jasmine": "^4.0.0",
     "gulp-jasmine-browser": "^4.1.0",
     "jasmine": "^3.3.1",
@@ -31,6 +30,7 @@
     "rimraf": "^2.6.3",
     "sinon": "^1.12.2",
     "uubench": "^0.0.1",
+    "webpack": "^4.29.0",
     "webpack-stream": "^5.2.1"
   },
   "scripts": {
