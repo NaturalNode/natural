@@ -1533,8 +1533,9 @@ console.log("Test score after applying rules " + scores[1] + "%");
 * Node.js version of jspos: https://github.com/neopunisher/pos-js
 * A simple rule-based part of speech tagger, Eric Brill, Published in: Proceeding ANLC '92 Proceedings of the third conference on Applied natural language processing, Pages 152-155. http://dl.acm.org/citation.cfm?id=974526
 * Exploring the Statistical Derivation of Transformational Rule Sequences for Part-of-Speech Tagging, Lance A. Ramshaw and Mitchell P. Marcus. http://acl-arc.comp.nus.edu.sg/archives/acl-arc-090501d4/data/pdf/anthology-PDF/W/W94/W94-0111.pdf
-* Brown Corpus, https://en.wikipedia.org/wiki/Brown_Corpus
+* Brown Corpus: https://en.wikipedia.org/wiki/Brown_Corpus
 * Carry stemmer is a contribution by Johan Maupetit.
+* PEGjs: Parser Generator for JavaScript, https://pegjs.org/
 
 ## Development
 
