@@ -85,7 +85,13 @@ console.log(tokenizer.tokenize("my dog hasn't any fleas."));
 tokenizer = new natural.OrthographyTokenizer({language: "fi"});
 console.log(tokenizer.tokenize("Mikä sinun nimesi on?"));
 // [ 'Mikä', 'sinun', 'nimesi', 'on' ]
+
+tokenizer = new natural.SentenceTokenizer();
+console.log(tokenizer.tokenize("This is a sentence. This is another sentence"));
+// ["This is a sentence.", "This is another sentence."]
 ```
+
+In addition to the sentence tokenizer based on regular expressions (called `SentenceTokenizer`), there is a sentence tokenizer based on parsing (called `SentenceTokenizerNew`). It is build using PEGjs. It handles more cases, and can be extended in a more structured way (than regular expressions).
 
 Overview of available tokenizers:
 
@@ -93,7 +99,8 @@ Overview of available tokenizers:
 |:-----------------------|:------------|:------------------------------------------------------------------------|
 | WordTokenizer          | Any         | Splits on anything except alphabetic characters, digits and underscore  |
 | WordPunctTokenizer     | Any         | Splits on anything except alphabetic characters, digits, punctuation and underscore  |
-| SentenceTokenizer      | Any         | Break string up in to parts based on punctation and quotation marks     |
+| SentenceTokenizer      | Any         | Break string up into parts based on punctation and quotation marks     |
+| SentenceTokenizerNew   | Any         | Break string up into parts based on punctation and quotation marks (grammar/parser based)     |
 | CaseTokenizer          | Any?        | If lower and upper case are the same, the character is assumed to be whitespace or something else (punctuation) |
 | RegexpTokenizer        | Any         | Splits on a regular expression that either defines sequences of word characters or gap characters |
 | OrthographyTokenizer   | Finnish     | Splits on anything except alpabetic characters, digits and underscore   |
@@ -1526,8 +1533,9 @@ console.log("Test score after applying rules " + scores[1] + "%");
 * Node.js version of jspos: https://github.com/neopunisher/pos-js
 * A simple rule-based part of speech tagger, Eric Brill, Published in: Proceeding ANLC '92 Proceedings of the third conference on Applied natural language processing, Pages 152-155. http://dl.acm.org/citation.cfm?id=974526
 * Exploring the Statistical Derivation of Transformational Rule Sequences for Part-of-Speech Tagging, Lance A. Ramshaw and Mitchell P. Marcus. http://acl-arc.comp.nus.edu.sg/archives/acl-arc-090501d4/data/pdf/anthology-PDF/W/W94/W94-0111.pdf
-* Brown Corpus, https://en.wikipedia.org/wiki/Brown_Corpus
+* Brown Corpus: https://en.wikipedia.org/wiki/Brown_Corpus
 * Carry stemmer is a contribution by Johan Maupetit.
+* PEGjs: Parser Generator for JavaScript, https://pegjs.org/
 
 ## Development
 
