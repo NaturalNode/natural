@@ -1527,15 +1527,9 @@ console.log("Test score lexicon " + scores[0] + "%");
 console.log("Test score after applying rules " + scores[1] + "%");
 ```
 
+## Using the library in browser
 
-### Acknowledgements and References
-* Part of speech tagger by Percy Wegmann, https://code.google.com/p/jspos/
-* Node.js version of jspos: https://github.com/neopunisher/pos-js
-* A simple rule-based part of speech tagger, Eric Brill, Published in: Proceeding ANLC '92 Proceedings of the third conference on Applied natural language processing, Pages 152-155. http://dl.acm.org/citation.cfm?id=974526
-* Exploring the Statistical Derivation of Transformational Rule Sequences for Part-of-Speech Tagging, Lance A. Ramshaw and Mitchell P. Marcus. http://acl-arc.comp.nus.edu.sg/archives/acl-arc-090501d4/data/pdf/anthology-PDF/W/W94/W94-0111.pdf
-* Brown Corpus: https://en.wikipedia.org/wiki/Brown_Corpus
-* Carry stemmer is a contribution by Johan Maupetit.
-* PEGjs: Parser Generator for JavaScript, https://pegjs.org/
+The package can be used in the browser using Webpack. It is tested using Webpack, Gulp and Jasmine. The test suite is run using the command: `npm run test_browser`. The server is at http://localhost:8888. You should  uncheck "run tests in random order" in the browser.
 
 ## Development
 
@@ -1549,6 +1543,15 @@ The current configuration of the unit tests requires the following environment v
 ```javascript
     export NODE_PATH=.
 ````
+
+### Acknowledgements and References
+* Part of speech tagger by Percy Wegmann, https://code.google.com/p/jspos/
+* Node.js version of jspos: https://github.com/neopunisher/pos-js
+* A simple rule-based part of speech tagger, Eric Brill, Published in: Proceeding ANLC '92 Proceedings of the third conference on Applied natural language processing, Pages 152-155. http://dl.acm.org/citation.cfm?id=974526
+* Exploring the Statistical Derivation of Transformational Rule Sequences for Part-of-Speech Tagging, Lance A. Ramshaw and Mitchell P. Marcus. http://acl-arc.comp.nus.edu.sg/archives/acl-arc-090501d4/data/pdf/anthology-PDF/W/W94/W94-0111.pdf
+* Brown Corpus: https://en.wikipedia.org/wiki/Brown_Corpus
+* Carry stemmer is a contribution by Johan Maupetit.
+* PEGjs: Parser Generator for JavaScript, https://pegjs.org/
 
 License
 -------
