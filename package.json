@@ -1,7 +1,7 @@
 {
   "name": "natural",
   "description": "General natural language (tokenizing, stemming (English, Russian, Spanish), part-of-speech tagging, sentiment analysis, classification, inflection, phonetics, tfidf, WordNet, jaro-winkler, Levenshtein distance, Dice's Coefficient) facilities for node.",
-  "version": "2.2.2",
+  "version": "2.2.1",
   "homepage": "https://github.com/NaturalNode/natural",
   "repository": {
     "type": "git",
@@ -36,9 +36,9 @@
   "scripts": {
     "benchmark": "node benchmarks",
     "clean": "rimraf *~ #* *classifier.json",
-    "test": "node ./node_modules/jasmine/bin/jasmine.js --random=false spec/*_spec.js",
-    "test_io": "node ./node_modules/jasmine/bin/jasmine.js --random=false io_spec/*_spec.js",
-    "test_browser": "node ./node_modules/gulp/bin/gulp.js"
+    "test": "NODE_PATH=. node ./node_modules/jasmine/bin/jasmine.js --random=false spec/*_spec.js",
+    "test_io": "NODE_PATH=. node ./node_modules/jasmine/bin/jasmine.js --random=false io_spec/*_spec.js",
+    "test_browser": "NODE_PATH=. node ./node_modules/gulp/bin/gulp.js"
   },
   "license": "MIT",
   "author": "Chris Umbel <chris@chrisumbel.com>",
