@@ -146,4 +146,30 @@ describe('sentence_tokenizer', function() {
       "And another where ‘Someone says something’."
     ]);
   })
+
+  it('should handle sentences with an abbreviation', function() {
+    expect(
+      tokenizer.tokenize("Acme, Inc. is creating exciting products. Use at your own risk.")
+    ).toEqual([
+      "Acme, Inc. is creating exciting products.",
+      "Use at your own risk."
+    ]);
+    expect(
+      tokenizer.tokenize("I need the parts A.S.A.P. please. Send them when they are ready")
+    ).toEqual(
+      [
+        "I need the parts A.S.A.P. please.",
+        "Send them when they are ready"
+      ]
+    );
+    expect(
+      tokenizer.tokenize("I need the parts from Inc.. Send them when they are ready!")
+    ).toEqual(
+      [
+        "I need the parts from Inc..",
+        "Send them when they are ready!"
+      ]
+    )
+
+  })
 });

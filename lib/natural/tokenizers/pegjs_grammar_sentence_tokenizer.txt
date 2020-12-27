@@ -20,6 +20,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+{
+	const knownAbbreviations = require("../util/abbreviations_en").knownAbbreviations
+}
+
 Sentences
   = sentences: (Sentence Whitespace) * {
       //return sentences
@@ -66,12 +70,20 @@ Whitespace
     }
 
 Token
-	= t: (URI / Email / Number / Word) {
+	= t: (URI / Email / Number / Abbreviation / Word) {
       return t
     }
 
+// An abbreviation may contain periods
+Abbreviation
+    = word: [^ \t\n\r!?\(\[\}\"\`\)\]\}\"\`0-9\@]+ & {
+        const tmp = word.reduce((accu, elt) => accu + elt)
+        return knownAbbreviations.indexOf(tmp) > -1} {
+    	return text()
+    }
+
 Word
-    = [^ \t\n\r!?\.\(\[\}\"\'\`\)\]\}\"\'\`0-9\@]+ {
+    = [^ \t\n\r!?\.\(\[\}\"\`\)\]\}\"\`0-9\@]+ {
   	  return text()
     }
 
