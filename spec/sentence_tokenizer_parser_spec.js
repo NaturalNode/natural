@@ -86,11 +86,17 @@ describe('sentence_tokenizer', function() {
     ]);
   });
 
-  it('should handle decimal points in numbers', function() {
+  it('should handle decimal numbers in sentences', function() {
     expect(
       tokenizer.tokenize("Pi is approximately equal to 3.14.")
     ).toEqual([
       'Pi is approximately equal to 3.14.'
+    ]);
+    expect(
+      tokenizer.tokenize("This is a sentence that can't 1) be parsed with SentenceTokenizerNew. Here is another sentence.")
+    ).toEqual([
+      "This is a sentence that can't 1) be parsed with SentenceTokenizerNew.",
+      "Here is another sentence."
     ]);
   });
 
