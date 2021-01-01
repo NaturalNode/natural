@@ -31,7 +31,8 @@
     "sinon": "^1.12.2",
     "uubench": "^0.0.1",
     "webpack": "^4.29.0",
-    "webpack-stream": "^5.2.1"
+    "webpack-stream": "^5.2.1",
+    "pegjs": "^0.10.0"
   },
   "scripts": {
     "benchmark": "node benchmarks",
