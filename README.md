@@ -27,8 +27,6 @@ Aside from this README, the only documentation is [this DZone article](http://ww
 * [Approximate String Matching](#approximate-string-matching)
 * [Stemmers](#stemmers)
 * [Classifiers](#classifiers)
-  * [Bayesian and logistic regression](#bayesian-and-logistic-regression)
-  * [Maximum Entropy Classifier](#maximum-entropy-classifier)
 * [Sentiment Analysis](#sentiment-analysis)
 * [Phonetics](#phonetics)
 * [Inflectors](#inflectors)
@@ -92,6 +90,11 @@ console.log(tokenizer.tokenize("This is a sentence. This is another sentence"));
 ```
 
 In addition to the sentence tokenizer based on regular expressions (called `SentenceTokenizer`), there is a sentence tokenizer based on parsing (called `SentenceTokenizerNew`). It is build using PEGjs. It handles more cases, and can be extended in a more structured way (than regular expressions).
+
+The sentence tokenizer can be adapted by editing the PEGjs grammar in `./lib/natural/tokenizers/pegjs_grammar_sentence_tokenizer.txt` and then
+```
+pegjs -o ./lib/natural/tokenizers/parser_sentence_tokenizer.js ./lib/natural/tokenizers/pegjs_grammar_sentence_tokenizer.txt
+```
 
 Overview of available tokenizers:
 
