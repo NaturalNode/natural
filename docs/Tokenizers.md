@@ -1,6 +1,8 @@
+---
 layout: page
 title: "Tokenizers"
 permalink: /modules/Tokenizers/
+---
 
 ## Tokenizers
 
