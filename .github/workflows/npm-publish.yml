@@ -27,8 +27,8 @@ jobs:
         with:
           node-version: 14
           registry-url: https://registry.npmjs.org/
-        if: ${{ steps.release.outputs.release_created }}
       - run: npm ci
+      - run: git config user.name $GITHUB_ACTOR
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_SECRET}}
