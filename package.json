@@ -1,7 +1,7 @@
 {
   "name": "natural",
   "description": "General natural language (tokenizing, stemming (English, Russian, Spanish), part-of-speech tagging, sentiment analysis, classification, inflection, phonetics, tfidf, WordNet, jaro-winkler, Levenshtein distance, Dice's Coefficient) facilities for node.",
-  "version": "2.4.1",
+  "version": "2.4.2",
   "homepage": "https://github.com/NaturalNode/natural",
   "repository": {
     "type": "git",
@@ -31,8 +31,7 @@
     "sinon": "^1.12.2",
     "uubench": "^0.0.1",
     "webpack": "^4.29.0",
-    "webpack-stream": "^5.2.1",
-    "pegjs": "^0.10.0"
+    "webpack-stream": "^5.2.1"
   },
   "scripts": {
     "benchmark": "node benchmarks",
