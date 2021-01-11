@@ -1530,11 +1530,10 @@ console.log("Test score lexicon " + scores[0] + "%");
 console.log("Test score after applying rules " + scores[1] + "%");
 ```
 
-## Using the library in browser
-
-The package can be used in the browser using Webpack. It is tested using Webpack, Gulp and Jasmine. The test suite is run using the command: `npm run test_browser`. The server is at http://localhost:8888. You should  uncheck "run tests in random order" in the browser.
 
 ## Development
+
+### Contributing
 
 When developing, please:
 
@@ -1547,7 +1546,17 @@ The current configuration of the unit tests requires the following environment v
     export NODE_PATH=.
 ````
 
-### Acknowledgements and References
+### CD/CD
+
+The repository uses Github Actions for testing and publishing. Testing is done with the four most recent releases of Nodejs. The natural package is automatically published to NPM when a release is created.
+
+Github workflows can be found at `./.github/workflows`.
+
+### Using the library in a browser
+
+The package can be used in the browser using Webpack. It is tested using Webpack, Gulp and Jasmine. The test suite is run using the command: `npm run test_browser`. The server is at http://localhost:8888. You should  uncheck "run tests in random order" in the browser to make it work. There are some tests that are sensitive to the order in which tests are run.
+
+## Acknowledgements and References
 * Part of speech tagger by Percy Wegmann, https://code.google.com/p/jspos/
 * Node.js version of jspos: https://github.com/neopunisher/pos-js
 * A simple rule-based part of speech tagger, Eric Brill, Published in: Proceeding ANLC '92 Proceedings of the third conference on Applied natural language processing, Pages 152-155. http://dl.acm.org/citation.cfm?id=974526
