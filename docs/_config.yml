@@ -1,0 +1,13 @@
+title: Natural
+description: Natural is a Javascript library for natural language processing
+remote_theme: carlosperate/jekyll-theme-rtd
+
+# Theme settings:
+site_author: Hugo ter Doest
+repo_url: "https://github.com/NaturalNode/natural"
+edit_on_github: true
+github_docs_folder: true
+sticky_navigation: true
+prev_next_buttons_location: bottom
+search_enabled: false
+hljs_style: github-gist

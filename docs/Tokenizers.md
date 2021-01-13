@@ -1,13 +1,13 @@
 ---
-layout: page
-title: "Tokenizers"
-permalink: /modules/Tokenizers/
+layout: default
+title: Tokenizers
+nav_order: 3
 ---
 
-## Tokenizers
+# Tokenizers
 
 Word, Regexp, and [Treebank tokenizers](ftp://ftp.cis.upenn.edu/pub/treebank/public_html/tokenization.html) are provided for breaking text up into
-arrays of tokens: 
+arrays of tokens:
 
 ```javascript
 var natural = require('natural');
