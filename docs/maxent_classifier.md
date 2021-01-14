@@ -15,6 +15,7 @@ The classifier will, once trained, return the most probable class for a particul
 We start with an explanation of samples and elements. You have to create your own specialisation of the Element class. Your element class should implement the generateFeatures method for inferring feature functions from the sample.
 
 ## Samples and elements
+{:toc}
 Elements and contexts are created as follows:
 
 ```javascript
