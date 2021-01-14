@@ -9,5 +9,5 @@ edit_on_github: true
 github_docs_folder: true
 sticky_navigation: true
 prev_next_buttons_location: bottom
-search_enabled: false
+search_enabled: true
 hljs_style: github-gist
