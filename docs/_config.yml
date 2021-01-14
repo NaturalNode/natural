@@ -11,3 +11,11 @@ sticky_navigation: true
 prev_next_buttons_location: bottom
 search_enabled: true
 hljs_style: github-gist
+
+# Aux links for the upper right navigation
+aux_links:
+  "Natural on Github":
+    - "https://github.com/NaturalNode/natural/"
+
+# Makes Aux links open in a new tab. Default is false
+aux_links_new_tab: false
