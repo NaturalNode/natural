@@ -1,6 +1,6 @@
 title: Natural
 description: Natural is a Javascript library for natural language processing
-remote_theme: carlosperate/jekyll-theme-rtd
+remote_theme: pmarsceill/just-the-docs
 
 # Theme settings:
 site_author: Various authors
