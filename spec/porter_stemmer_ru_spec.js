@@ -54,10 +54,11 @@ describe('porter_stemmer', function() {
 		for (var i = 0; i < test.length; i++) {
 			expect(stemmer.stem(test[i])).toBe(testResult[i]);
 		}
-	}),
+	})/*,
 	it('should tokenize and stem attached', function() {
 		stemmer.attach();
 		expect('мама мыла раму'.tokenizeAndStem()).toEqual(['мам', 'мыл', 'рам']);
 		expect('МАМА МЫЛА РАМУ'.tokenizeAndStem()).toEqual(['мам', 'мыл', 'рам']);
 	});
+	*/
 });

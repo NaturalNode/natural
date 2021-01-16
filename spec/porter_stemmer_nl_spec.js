@@ -48,7 +48,7 @@ describe('porter_stemmer_nl', function() {
     // The stemmer has an error count of 237 against the snowball list for nl that has 45669 entries
     expect(errors.length).toEqual(237);
  	});
-  
+
   it('should tokenize a piece of text', function() {
     dutchSentences.sentences.forEach((sentence, index)  => {
       var result = stemmer.tokenizeAndStem(sentence, true);
@@ -57,11 +57,13 @@ describe('porter_stemmer_nl', function() {
     });
   });
 
+  /*
   it('should work with the attached notation', function() {
     stemmer.attach();
     expect("mogelijkheid".stem()).toEqual("mogelijk");
     expect("Knot: geldpers aanzetten is paardenmiddel voor half procent inflatie".tokenizeAndStem(true)).toEqual(
       [ 'knot', 'geldper', 'aanzet', 'is', 'paardenmiddel', 'vor', 'half', 'procent', 'inflatie' ]);
   });
-    
+  */
+
 });

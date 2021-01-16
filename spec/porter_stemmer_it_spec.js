@@ -42,10 +42,12 @@ describe('porter_stemmer_it', function() {
     expect(errors.length).toEqual(0);
   });
 
+  /*
   it('should tokenize and stem attached', function() {
     stemmer.attach();
 
     expect('SOPRA la panca la capra CAMPA'.tokenizeAndStem()).toEqual([ 'sopr', 'panc', 'capr', 'camp' ]);
     expect('SOTTO la panca la capra CREPA'.tokenizeAndStem()).toEqual([ 'sott', 'panc', 'capr', 'crep' ]);
   });
+  */
 });

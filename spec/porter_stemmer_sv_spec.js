@@ -28,10 +28,12 @@ describe('porter_stemmer_sv', function() {
     const res = sample.words.map(w => stemmer.stem(w))
     expect(res).toEqual(sample.stemmedWords)
   })
-  
+
+  /*
   it('should tokenize and stem attached', function() {
     stemmer.attach();
     expect('björks jaktbössa'.tokenizeAndStem()).toEqual(['björk', 'jaktböss'])
     expect('bJöRks JaKtböSsa'.tokenizeAndStem()).toEqual(['björk', 'jaktböss'])
   })
+  */
 })

@@ -26,7 +26,7 @@ var stopwords = require('../lib/natural/util/stopwords');
 describe('porter_stemmer', function() {
 	it('should categorizeGroups', function() {
 		expect(stemmer.categorizeGroups('syllog')).toBe('CVCVC');
-		expect(stemmer.categorizeGroups('gypsy')).toBe('CVCV');		
+		expect(stemmer.categorizeGroups('gypsy')).toBe('CVCV');
 	});
 
 	it('should measure', function() {
@@ -163,34 +163,37 @@ describe('porter_stemmer', function() {
 	});
 
 	it('issue 176 step 2', function() {
-		expect(stemmer.stem('terribly')).toBe('terribl');				
-		expect(stemmer.stem('apology')).toBe('apolog');	
+		expect(stemmer.stem('terribly')).toBe('terribl');
+		expect(stemmer.stem('apology')).toBe('apolog');
 	});
 
 	it('issue 176 - step 5a', function() {
 		expect(stemmer.stem('type')).toBe('type');
-	});	
+	});
 
 	it('issue 176 - corruptiblity', function() {
 		expect(stemmer.stem('corruptibility')).toBe('corrupt');
-	});	
+	});
 
+	/*
 	it('should tokenize and stem attached', function() {
 		stemmer.attach();
 		expect('scoring stinks'.tokenizeAndStem()).toEqual(['score', 'stink']);
 		expect('SCORING STINKS'.tokenizeAndStem()).toEqual(['score', 'stink']);
 	});
+	*/
 
 	it('should tokenize and stem ignoring stopwords', function() {
-		expect('My dog is very fun TO play with And another thing, he is A poodle.'.tokenizeAndStem()).toEqual(['dog', 'fun', 'plai', 'thing', 'poodl']);
+		expect(stemmer.tokenizeAndStem('My dog is very fun TO play with And another thing, he is A poodle.')).toEqual(['dog', 'fun', 'plai', 'thing', 'poodl']);
 	});
 
 	it('should tokenize and stem ignoring all capital stopwords', function() {
 		var allCapitalStopwords = stopwords.words.join(' ').toUpperCase();
-		expect(allCapitalStopwords.tokenizeAndStem()).toEqual([]);
+		expect(stemmer.tokenizeAndStem(allCapitalStopwords)).toEqual([]);
 	});
 
 	it('should tokenize and stem including stopwords', function() {
-		expect('My dog is very fun TO play with And another thing, he is A poodle.'.tokenizeAndStem(true)).toEqual(['my', 'dog', 'is', 'veri', 'fun', 'to', 'plai', 'with', 'and', 'anoth', 'thing', 'he', 'is', 'a', 'poodl']);
+		expect(stemmer.tokenizeAndStem('My dog is very fun TO play with And another thing, he is A poodle.', true)).toEqual(['my', 'dog', 'is', 'veri', 'fun', 'to', 'plai', 'with', 'and', 'anoth', 'thing', 'he', 'is', 'a', 'poodl']);
 	});
+
 });

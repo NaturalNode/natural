@@ -44,17 +44,18 @@ describe('porter_stemmer_es', function() {
 
  		expect(errors.length).toBe(0);
  	});
-  
+
     it('should tokenize a piece of text', function() {
       expect(PorterStemmer.tokenizeAndStem("Pues, en efecto, es solo el plano y lo que muestra aquello que interesa a Zemeckis.", true)).toEqual(
         [ 'pues', 'en', 'efect', 'es', 'sol', 'el', 'plan', 'y', 'lo', 'que', 'muestr', 'aquell', 'que', 'interes', 'a', 'zemeckis' ]);
     });
-  
+
+/*
     it('should work with the attached notation', function() {
       PorterStemmer.attach();
       expect("efecto".stem()).toEqual("efect");
       expect("Pues, en efecto, es solo el plano y lo que muestra aquello que interesa a Zemeckis.".tokenizeAndStem(true)).toEqual(
         [ 'pues', 'en', 'efect', 'es', 'sol', 'el', 'plan', 'y', 'lo', 'que', 'muestr', 'aquell', 'que', 'interes', 'a', 'zemeckis' ]);
     });
-
+*/
 });

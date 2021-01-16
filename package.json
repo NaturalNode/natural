@@ -13,6 +13,7 @@
   "dependencies": {
     "afinn-165": "^1.0.2",
     "apparatus": "^0.0.10",
+    "jshint": "^2.12.0",
     "json-stable-stringify": "^1.0.1",
     "sylvester": "^0.0.12",
     "underscore": "^1.9.1",
@@ -29,6 +30,7 @@
     "proxyquire": "^1.8.0",
     "rimraf": "^2.6.3",
     "sinon": "^1.12.2",
+    "standard": "^16.0.3",
     "uubench": "^0.0.1",
     "webpack": "^4.29.0",
     "webpack-stream": "^5.2.1"
