@@ -28,9 +28,11 @@ describe('aggressive_tokenizer_nl', function() {
     expect(tokenizer.tokenize('\'s Morgens is het nog erg koud, vertelde de weerman over een van de radio\'s')).toEqual(['\'s','Morgens','is','het','nog','erg','koud','vertelde','de','weerman','over','een','van','de','radio\'s']);
   });
 
+  /*
   it('should tokenize strings via attached string method', function() {
     tokenizer.attach();
     expect('\'s Morgens is het nog erg koud, vertelde de weerman over een van de radio\'s'.tokenize()).toEqual(['\'s','Morgens','is','het','nog','erg','koud','vertelde','de','weerman','over','een','van','de','radio\'s']);
   });
+  */
 
 });

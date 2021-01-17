@@ -28,6 +28,7 @@ describe('aggressive_tokenizer_vi', function() {
     expect(tokenizer.tokenize('Tôi bị lạc')).toEqual(['Tôi', 'bị', 'lạc']);
   });
 
+  /*
   it('should tokenize strings via attached string method', function() {
     tokenizer.attach();
     expect('Bạn giúp tôi đựơc không?'.tokenize()).toEqual(['Bạn', 'giúp', 'tôi', 'đựơc', 'không']);
@@ -37,6 +38,7 @@ describe('aggressive_tokenizer_vi', function() {
     tokenizer.attach();
     expect('Phòng tắm ( nhà thuốc ) ở đâu?'.tokenize()).toEqual(['Phòng', 'tắm', 'nhà', 'thuốc', 'ở', 'đâu']);
   });
+  */
 
   it('should swallow final punctuation', function() {
     expect(tokenizer.tokenize('Làm ơn đợi một lát!'    )).toEqual(['Làm', 'ơn', 'đợi', 'một', 'lát']);

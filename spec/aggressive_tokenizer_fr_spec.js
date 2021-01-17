@@ -93,9 +93,11 @@ describe('aggressive_tokenizer_fr', function() {
     expect(tokenizer.tokenize(text)).toEqual(tokenized);
   });
 
+  /*
   it('should tokenize strings via attached string method', function() {
     tokenizer.attach();
     expect(text.tokenize()).toEqual(tokenized);
   });
+  */
 
 });

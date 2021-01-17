@@ -34,6 +34,7 @@ describe('sentence_tokenizer', function() {
     ]);
   });
 
+  /*
   it('should tokenize strings via attached string method', function() {
     tokenizer.attach();
     expect(
@@ -53,7 +54,8 @@ describe('sentence_tokenizer', function() {
         'This is another sentence.'
     ]);
   });
-
+  */
+  
   it('should include quotation marks', function() {
     expect(
         tokenizer.tokenize('"This is a sentence." This is another sentence.')

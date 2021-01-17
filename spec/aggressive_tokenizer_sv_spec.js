@@ -28,10 +28,12 @@ describe('aggressive_tokenizer_sv', function() {
     expect(tokenizer.tokenize('Ett tu tre')).toEqual(['Ett', 'tu', 'tre']);
   });
 
+  /*
   it('should tokenize strings via attached string method', function() {
     tokenizer.attach();
     expect('Ett tu tre'.tokenize()).toEqual(['Ett', 'tu', 'tre']);
   });
+  */
 
   it('should swallow punctuation', function() {
     expect(tokenizer.tokenize('Ett, tu, tre')).toEqual(['Ett', 'tu', 'tre']);

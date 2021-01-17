@@ -28,6 +28,7 @@ describe('aggressive_tokenizer_pt', function() {
     expect(tokenizer.tokenize('isso é coração')).toEqual(['isso', 'é', 'coração']);
   });
 
+  /*
   it('should tokenize strings via attached string method', function() {
     tokenizer.attach();
     expect('isso é coração'.tokenize()).toEqual(['isso', 'é', 'coração']);
@@ -37,6 +38,7 @@ describe('aggressive_tokenizer_pt', function() {
     tokenizer.attach();
     expect('isso é coração'.tokenize()).toEqual(['isso', 'é', 'coração']);
   });
+  */
 
   it('should swallow punctuation', function() {
     expect(tokenizer.tokenize('isso é coração, no')).toEqual(['isso', 'é', 'coração', 'no']);

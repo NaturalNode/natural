@@ -28,9 +28,11 @@ describe('aggressive_tokenizer_es', function() {
     expect(tokenizer.tokenize('hola yo me llamo eduardo y esudié ingeniería')).toEqual(['hola', 'yo', 'me', 'llamo', 'eduardo', 'y', 'esudié', 'ingeniería']);
   });
 
+  /*
   it('should tokenize strings via attached string method', function() {
     tokenizer.attach();
     expect('hola yo me llamo eduardo y esudié ingeniería'.tokenize()).toEqual(['hola', 'yo', 'me', 'llamo', 'eduardo', 'y', 'esudié', 'ingeniería']);
   });
+  */
 
 });

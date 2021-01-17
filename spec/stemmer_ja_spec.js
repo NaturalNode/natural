@@ -52,6 +52,7 @@ describe('StemmerJa', function() {
       '図書館', 'で', '資料', 'を', 'コピー', 'し', 'まし', 'た']);
   });
 
+  /*
   it('should attach new methods to String', function() {
     stemmer.attach();
     expect('コーヒー'.stem()).toEqual('コーヒ');
@@ -63,4 +64,5 @@ describe('StemmerJa', function() {
     expect('図書館で資料をコピーしました。'.tokenizeAndStem(true)).toEqual([
       '図書館', 'で', '資料', 'を', 'コピー', 'し', 'まし', 'た']);
   });
+  */
 });
