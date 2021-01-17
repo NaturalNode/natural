@@ -34,10 +34,12 @@ describe('case_tokenizer_es', function() {
     expect(tokenizer.tokenize('hola yo me llamo eduardo y esudié ingeniería')).toEqual(['hola', 'yo', 'me', 'llamo', 'eduardo', 'y', 'esudié', 'ingeniería']);
   });
 
+  /*
   it('should tokenize strings via attached string method', function() {
     tokenizer.attach();
     expect('hola yo me llamo eduardo y esudié ingeniería'.tokenize()).toEqual(['hola', 'yo', 'me', 'llamo', 'eduardo', 'y', 'esudié', 'ingeniería']);
   });
+  */
 
 });
 
@@ -112,10 +114,12 @@ describe('case_tokenizer_fr', function() {
     expect(tokenizer.tokenize(text)).toEqual(tokenized);
   });
 
+  /*
   it('should tokenize strings via attached string method', function() {
     tokenizer.attach();
     expect(text.tokenize()).toEqual(tokenized);
   });
+  */
 
 });
 
@@ -124,10 +128,12 @@ describe('case_tokenizer_nl', function() {
     expect(tokenizer.tokenize('\'s Morgens is het nog erg koud, vertelde de weerman over een van de radio\'s', true)).toEqual(['\'s','Morgens','is','het','nog','erg','koud','vertelde','de','weerman','over','een','van','de','radio\'s']);
   });
 
+  /*
   it('should tokenize strings via attached string method', function() {
     tokenizer.attach();
     expect('\'s Morgens is het nog erg koud, vertelde de weerman over een van de radio\'s'.tokenize(true)).toEqual(['\'s','Morgens','is','het','nog','erg','koud','vertelde','de','weerman','over','een','van','de','radio\'s']);
   });
+  */
 
 });
 
