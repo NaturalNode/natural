@@ -100,6 +100,7 @@ describe('NounInflector', function() {
     });
   });
 
+  /*
   describe('.attach()', function() {
     it('should attach new methods to String', function() {
       inflector.attach();
@@ -109,4 +110,5 @@ describe('NounInflector', function() {
       expect('人人'.singularizeNoun()).toBe('人');
     });
   });
+  */
 });

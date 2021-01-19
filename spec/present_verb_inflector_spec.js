@@ -64,24 +64,24 @@ describe('present verb inflector', function() {
             expect(inflector.singularize('fly')).toBe('flies');
             expect(inflector.singularize('try')).toBe('tries');
         });
-        
+
         it('should handle ambiguous forms', function() {
             expect(inflector.singularize('will')).toBe('will');
-        });                
+        });
     });
-    
+
     describe('pluralization', function() {
         it('should pluralize regular ES forms', function() {
             expect(inflector.pluralize('catches')).toBe('catch');
             expect(inflector.pluralize('does')).toBe('do');
             expect(inflector.pluralize('goes')).toBe('go');
         });
-        
+
         it('should handle [CS]HES forms', function () {
             expect(inflector.pluralize('cashes')).toBe('cash');
-            expect(inflector.pluralize('aches')).toBe('ach');            
-        });        
-        
+            expect(inflector.pluralize('aches')).toBe('ach');
+        });
+
         it('should handle XES forms', function() {
             expect(inflector.pluralize('annexes')).toBe('annex');
         });
@@ -100,11 +100,11 @@ describe('present verb inflector', function() {
 
         it('should pluralize regular S forms', function() {
             expect(inflector.pluralize('drinks')).toBe('drink');
-            expect(inflector.pluralize('claims')).toBe('claim');            
+            expect(inflector.pluralize('claims')).toBe('claim');
         });
-        
+
         it('should pluralize irregular forms', function() {
-            expect(inflector.pluralize('was')).toBe('were');                        
+            expect(inflector.pluralize('was')).toBe('were');
             expect(inflector.pluralize('is')).toBe('are');
             expect(inflector.pluralize('am')).toBe('are');
             expect(inflector.pluralize('has')).toBe('have');
@@ -114,15 +114,14 @@ describe('present verb inflector', function() {
             expect(inflector.pluralize('flies')).toBe('fly');
             expect(inflector.pluralize('tries')).toBe('try');
         });
-        
+
         it('should handle ambiguous forms', function() {
-            expect(inflector.pluralize('will')).toBe('will');                        
+            expect(inflector.pluralize('will')).toBe('will');
         });
     });
-    
-    it('should pluralize and singularize string from patch', function() {
-        inflector.attach();
-        expect('becomes'.pluralizePresentVerb()).toBe('become');
-        expect('become'.singularizePresentVerb()).toBe('becomes');
+
+    it('should pluralize and singularize string', function() {
+        expect(inflector.pluralize('becomes')).toBe('become');
+        expect(inflector.singularize('become')).toBe('becomes');
     });
 });

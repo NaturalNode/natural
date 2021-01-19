@@ -268,32 +268,29 @@ describe('noun inflector', function() {
     });
 
     it('should pluralize and singularize string from patch', function() {
-        inflector.attach();
-        expect('synopsis'.pluralizeNoun()).toBe('synopses');
-        expect('synopses'.singularizeNoun()).toBe('synopsis');
-        expect('mess'.pluralizeNoun()).toBe('messes');
-        expect('messes'.singularizeNoun()).toBe('mess');
+        expect(inflector.pluralize('synopsis')).toBe('synopses')
+        expect(inflector.singularize('synopses')).toBe('synopsis')
+        expect(inflector.pluralize('mess')).toBe('messes')
+        expect(inflector.singularize('messes')).toBe('mess')
     });
 
     describe('custom inflections', function() {
-        it('should pluralize and singularize custom forms', function() {
-            var myInflector = new NounInflector();
-            myInflector.attach();
-            myInflector.addPlural(/(code|ware)/i, '$1z');
-            myInflector.addSingular(/(code|ware)z/i, '$1');
-            expect('code'.pluralizeNoun()).toBe('codez');
-            expect('ware'.pluralizeNoun()).toBe('warez');
-            expect('codez'.singularizeNoun()).toBe('code');
-            expect('warez'.singularizeNoun()).toBe('ware');
-        });
+      it('should pluralize and singularize custom forms', function() {
+        var myInflector = new NounInflector();
+        myInflector.addPlural(/(code|ware)/i, '$1z');
+        myInflector.addSingular(/(code|ware)z/i, '$1');
+        expect(myInflector.pluralize('code')).toBe('codez');
+        expect(myInflector.pluralize('ware')).toBe('warez');
+        expect(myInflector.singularize('codez')).toBe('code');
+        expect(myInflector.singularize('warez')).toBe('ware');
+      });
 
-        it('should not break regular forms', function() {
-            var myInflector = new NounInflector();
-            myInflector.attach();
-            myInflector.addPlural(/(code|ware)/i, '$1z');
-            myInflector.addSingular(/(code|ware)z/i, '$1');
-            expect('bus'.pluralizeNoun()).toBe('buses');
-            expect('buses'.singularizeNoun()).toBe('bus');
-        });
+      it('should not break regular forms', function() {
+        var myInflector = new NounInflector();
+        myInflector.addPlural(/(code|ware)/i, '$1z');
+        myInflector.addSingular(/(code|ware)z/i, '$1');
+        expect(myInflector.pluralize('bus')).toBe('buses');
+        expect(myInflector.singularize('buses')).toBe('bus');
+      });
     });
 });

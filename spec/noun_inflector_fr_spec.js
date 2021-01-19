@@ -464,6 +464,7 @@ describe('NounInflector', function() {
     });
   });
 
+  /*
   describe('.attach()', function() {
     it('should attach new methods to String', function() {
       inflector.attach();
@@ -473,4 +474,5 @@ describe('NounInflector', function() {
       expect('récitals'.singularizeNoun()).toBe('récital');
     });
   });
+  */
 });
