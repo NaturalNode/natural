@@ -20,7 +20,7 @@
  THE SOFTWARE.
  */
 
-var normalize_ja = require('../lib/natural/normalizers/normalizer_ja').normalize_ja;
+var normalize_ja = require('../lib/natural/normalizers/normalizer_ja').normalizeJa;
 var converters = require('../lib/natural/normalizers/normalizer_ja').converters;
 
 describe('normalize_ja', function() {
