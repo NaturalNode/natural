@@ -20,7 +20,7 @@
 
 var natural = require('../lib/natural');
 
-var SE_Element = natural.SE_Element;
+var SE_Element = natural.SEElement;
 var Context = natural.Context;
 var Feature = natural.Feature;
 var FeatureSet = natural.FeatureSet;

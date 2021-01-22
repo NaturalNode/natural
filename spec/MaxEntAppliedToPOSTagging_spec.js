@@ -28,9 +28,9 @@ var FeatureSet = natural.FeatureSet;
 var Context = natural.Context;
 
 // Load some classes specific to part of speech tagging
-var Corpus = natural.ME_Corpus;
-var POS_Element = natural.POS_Element;
-var Sentence = natural.ME_Sentence;
+var Corpus = natural.MECorpus;
+var POS_Element = natural.POSElement;
+var Sentence = natural.MESentence;
 // Lexicon-based tagger is used for comparison
 var Tagger = natural.BrillPOSTagger;
 
