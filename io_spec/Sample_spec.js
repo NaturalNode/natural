@@ -20,57 +20,54 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var fs = require('fs');
+'use strict'
 
-var Sample = require('lib/natural/classifiers/maxent/Sample');
-var Element = require('lib/natural/classifiers/maxent/Element');
-var Context = require('lib/natural/classifiers/maxent/Context');
+const fs = require('fs')
 
-const DEBUG = false;
-const sampleFile = 'io_spec/test_data/sample.json';
+const Sample = require('lib/natural/classifiers/maxent/Sample')
+const Element = require('lib/natural/classifiers/maxent/Element')
+const Context = require('lib/natural/classifiers/maxent/Context')
 
+const DEBUG = false
+const sampleFile = 'io_spec/test_data/sample.json'
 
-describe("Sample class", function() {
-
+describe('Sample class', function () {
   // Create sample
-  var sample = new Sample();
-  sample.addElement(new Element("x", new Context("0")));
-  sample.addElement(new Element("y", new Context("0")));
-  sample.addElement(new Element("x", new Context("1")));
-  sample.addElement(new Element("y", new Context("1")));
+  let sample = new Sample()
+  sample.addElement(new Element('x', new Context('0')))
+  sample.addElement(new Element('y', new Context('0')))
+  sample.addElement(new Element('x', new Context('1')))
+  sample.addElement(new Element('y', new Context('1')))
 
-  it("saves a sample to a file", function(done) {
-    sample.save(sampleFile, function(err, sample) {
+  it('saves a sample to a file', function (done) {
+    sample.save(sampleFile, function (err, sample) {
       if (err) {
-        console.log(err);
-        expect(false).toBe(true);
+        console.log(err)
+        expect(false).toBe(true)
+      } else {
+        DEBUG && console.log('Sample saved to ' + sampleFile)
+        expect(fs.existsSync(sampleFile)).toBe(true)
       }
-      else {
-        DEBUG && console.log("Sample saved to "  + sampleFile);
-        expect(fs.existsSync(sampleFile)).toBe(true);
-      }
-      done();
-    });
-  });
+      done()
+    })
+  })
 
-  var newSample = null;
-  it("loads a sample from a file", function(done) {
-    sample.load(sampleFile, Element, function(err, s) {
+  let newSample = null
+  it('loads a sample from a file', function (done) {
+    sample.load(sampleFile, Element, function (err, s) {
       if (err) {
-        console.log(err);
-        expect(false).toBe(true);
+        console.log(err)
+        expect(false).toBe(true)
+      } else {
+        DEBUG && console.log('Sample loaded from ' + sampleFile)
+        expect(s.size()).toEqual(sample.size())
+        newSample = s
       }
-      else {
-        DEBUG && console.log("Sample loaded from "  + sampleFile);
-        expect(s.size()).toEqual(sample.size());
-        newSample = s;
-      }
-      done();
-    });
+      done()
+    })
     if (newSample) {
-      expect(newSample.size()).toEqual(sample.size());
-      sample = newSample;
+      expect(newSample.size()).toEqual(sample.size())
+      sample = newSample
     }
-  });
-
-});
+  })
+})
