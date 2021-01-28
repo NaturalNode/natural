@@ -20,25 +20,27 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var natural = require('natural'),
-    TfIdf = natural.TfIdf,
-    tfidf = new TfIdf();
+'use strict'
 
-tfidf.addDocument('this document is about node.');
-tfidf.addDocument('this document is about ruby.');
-tfidf.addDocument('this document is about ruby and node.');
-tfidf.addDocument('this document is about node. it has node examples');
+const natural = require('natural')
+const TfIdf = natural.TfIdf
+const tfidf = new TfIdf()
 
-console.log('node --------------------------------');
-tfidf.tfidfs('node', function(i, measure) {
-    console.log('document #' + i + ' is ' + measure);
-});
+tfidf.addDocument('this document is about node.')
+tfidf.addDocument('this document is about ruby.')
+tfidf.addDocument('this document is about ruby and node.')
+tfidf.addDocument('this document is about node. it has node examples')
 
-console.log('ruby --------------------------------');
-tfidf.tfidfs('ruby', function(i, measure) {
-    console.log('document #' + i + ' is ' + measure);
-});
+console.log('node --------------------------------')
+tfidf.tfidfs('node', function (i, measure) {
+  console.log('document #' + i + ' is ' + measure)
+})
 
-console.log('-------------------------------------');
-console.log(tfidf.tfidf('ruby', 0));
-console.log(tfidf.tfidf('ruby', 1));
+console.log('ruby --------------------------------')
+tfidf.tfidfs('ruby', function (i, measure) {
+  console.log('document #' + i + ' is ' + measure)
+})
+
+console.log('-------------------------------------')
+console.log(tfidf.tfidf('ruby', 0))
+console.log(tfidf.tfidf('ruby', 1))

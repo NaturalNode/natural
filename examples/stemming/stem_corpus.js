@@ -20,10 +20,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var natural = require('natural'),
-    stemmer = natural.PorterStemmer;
-    
-stemmer.attach();
-    
-console.log('i stemmed words.'.tokenizeAndStem());
-console.log('i stemmed words.'.tokenizeAndStem(true));
+'use strict'
+
+const natural = require('lib/natural')
+const stemmer = natural.PorterStemmer
+
+console.log(stemmer.tokenizeAndStem('i stemmed words.'))
+console.log(stemmer.tokenizeAndStem('i stemmed words.', true))
