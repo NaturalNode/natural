@@ -37,8 +37,8 @@
   },
   "standard": {
     "ignore": [
-      "./lib/natural/brill_pos_tagger/lib/TF_Parser.js",
-      "./lib/natural/tokenizers/parser_sentence_tokenizer.js"
+      "/lib/natural/brill_pos_tagger/lib/TF_Parser.js",
+      "/lib/natural/tokenizers/parser_sentence_tokenizer.js"
     ],
     "env": {
       "jasmine": true

@@ -20,15 +20,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-const { src, dest } = require('gulp');
-var jasmineBrowser = require('gulp-jasmine-browser');
-var webpackStream = require('webpack-stream');
+const { src } = require('gulp')
+const jasmineBrowser = require('gulp-jasmine-browser')
+const webpackStream = require('webpack-stream')
 
-exports.default = function() {
+exports.default = function () {
   return src(['spec/*_spec.js'])
     .pipe(webpackStream(require('webpack.config')))
-    .pipe(jasmineBrowser.specRunner({"random":  false}))
+    .pipe(jasmineBrowser.specRunner({ random: false }))
     // Server is at http://localhost:8888
     // In the options tab uncheck "run tests in random order"
     .pipe(jasmineBrowser.server())
-};
+}
