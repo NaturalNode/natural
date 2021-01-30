@@ -20,42 +20,43 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var stemmer = require('../lib/natural/stemmers/porter_stemmer_nl');
-const snowBallDict = require('spec/test_data/snowball_nl.json');
-const dutchSentences = require('spec/test_data/Volkskrant-20150205-Knot-geldpers-aanzetten-is-paardenmiddel-voor-half-procent-inflatie.json');
-const dutchStemResults = require('spec/test_data/dutchStemResults.json');
+'use strict'
 
-const DEBUG = false;
+const stemmer = require('../lib/natural/stemmers/porter_stemmer_nl')
+const snowBallDict = require('spec/test_data/snowball_nl.json')
+const dutchSentences = require('spec/test_data/Volkskrant-20150205-Knot-geldpers-aanzetten-is-paardenmiddel-voor-half-procent-inflatie.json')
+const dutchStemResults = require('spec/test_data/dutchStemResults.json')
 
-describe('porter_stemmer_nl', function() {
+const DEBUG = false
 
- 	it('should perform stemming on a lot of words', function() {
-    var errors = [];
+describe('porter_stemmer_nl', function () {
+  it('should perform stemming on a lot of words', function () {
+    const errors = []
 
     Object.keys(snowBallDict).forEach(word => {
-      var stemmed = stemmer.stem(word);
-      var expectedStem = snowBallDict[word];
+      const stemmed = stemmer.stem(word)
+      const expectedStem = snowBallDict[word]
       if (stemmed !== snowBallDict[word]) {
-        DEBUG && console.log('Error:', word, 'Expected:', expectedStem, 'Got:', stemmed);
+        DEBUG && console.log('Error:', word, 'Expected:', expectedStem, 'Got:', stemmed)
         errors.push({
           word: word,
           expected: expectedStem,
           actual: stemmed
-        });
+        })
       }
-    });
+    })
 
     // The stemmer has an error count of 237 against the snowball list for nl that has 45669 entries
-    expect(errors.length).toEqual(237);
- 	});
+    expect(errors.length).toEqual(237)
+  })
 
-  it('should tokenize a piece of text', function() {
-    dutchSentences.sentences.forEach((sentence, index)  => {
-      var result = stemmer.tokenizeAndStem(sentence, true);
-      DEBUG && console.log(result);
-      expect(result).toEqual(dutchStemResults.results[index]);
-    });
-  });
+  it('should tokenize a piece of text', function () {
+    dutchSentences.sentences.forEach((sentence, index) => {
+      const result = stemmer.tokenizeAndStem(sentence, true)
+      DEBUG && console.log(result)
+      expect(result).toEqual(dutchStemResults.results[index])
+    })
+  })
 
   /*
   it('should work with the attached notation', function() {
@@ -65,5 +66,4 @@ describe('porter_stemmer_nl', function() {
       [ 'knot', 'geldper', 'aanzet', 'is', 'paardenmiddel', 'vor', 'half', 'procent', 'inflatie' ]);
   });
   */
-
-});
+})

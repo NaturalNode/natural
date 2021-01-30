@@ -20,10 +20,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+'use strict'
+
 const stemmer = require('../lib/natural/stemmers/porter_stemmer_sv.js')
 
-describe('porter_stemmer_sv', function() {
-  it('Stem whole sample data', function() {
+describe('porter_stemmer_sv', function () {
+  it('Stem whole sample data', function () {
     const sample = require('./test_data/sv_stemmer_sample.js')
     const res = sample.words.map(w => stemmer.stem(w))
     expect(res).toEqual(sample.stemmedWords)

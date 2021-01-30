@@ -20,128 +20,128 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var NGrams = require('../lib/natural/ngrams/ngrams');
+'use strict'
 
-var text = require('spec/test_data/NYT-20150205-picassos-granddaughter-plans-to-sell-art-worrying-the-market.json');
+const NGrams = require('../lib/natural/ngrams/ngrams')
 
-describe('ngrams', function() {
-    it('should bigram a string via ngrams', function() {
-        expect(NGrams.ngrams('these are some words', 2)).toEqual([['these', 'are'],
-            ['are', 'some' ], ['some', 'words']]);
-    });
-    
-    it('should bigram an array via ngrams', function() {
-        expect(NGrams.ngrams(['these', 'are', 'some', 'words'], 2)).toEqual([['these', 'are'],
-            ['are', 'some' ], ['some', 'words']]);   
-    });
-    
-    it('should trigram a string via ngrams', function() {
-        expect(NGrams.ngrams('these are some words', 3)).toEqual([['these', 'are', 'some'],
-                ['are', 'some', 'words']]);
-    });    
-    
-    it('should trigram an array via ngrams', function() {
-        expect(NGrams.ngrams(['these', 'are', 'some', 'words'], 3)).toEqual([['these', 'are', 'some'],
-                ['are', 'some', 'words']]);
-    });    
+const text = require('spec/test_data/NYT-20150205-picassos-granddaughter-plans-to-sell-art-worrying-the-market.json')
 
-    describe('bigrams', function() {
-        it('should bigram a string', function() {
-            expect(NGrams.bigrams('these are some words')).toEqual([['these', 'are'],
-                ['are', 'some' ], ['some', 'words']]);
-        });
-        
-        it('should bigram an array', function() {
-            expect(NGrams.bigrams(['these', 'are', 'some', 'words'])).toEqual([['these', 'are'],
-                ['are', 'some' ], ['some', 'words']]);   
-        });        
-    });
+describe('ngrams', function () {
+  it('should bigram a string via ngrams', function () {
+    expect(NGrams.ngrams('these are some words', 2)).toEqual([['these', 'are'],
+      ['are', 'some'], ['some', 'words']])
+  })
 
-    describe('trigrams', function() {
-        it('should bigram a string', function() {
-            expect(NGrams.trigrams('these are some words')).toEqual([['these', 'are', 'some'],
-                ['are', 'some', 'words']]);
-        });
-        
-        it('should bigram an array', function() {
-            expect(NGrams.trigrams(['these', 'are', 'some', 'words'])).toEqual([['these', 'are', 'some'],
-                ['are', 'some', 'words']]);
-        });        
-    });
+  it('should bigram an array via ngrams', function () {
+    expect(NGrams.ngrams(['these', 'are', 'some', 'words'], 2)).toEqual([['these', 'are'],
+      ['are', 'some'], ['some', 'words']])
+  })
 
-    // New Start/End Symbols Feature
-    it('should bigram a string with start and end symbols', function() {
-        expect(NGrams.ngrams('these are some words', 2, "[start]", "[end]")).toEqual([
-            ['[start]', 'these'], 
-            ['these', 'are'],
-            ['are', 'some' ], 
-            ['some', 'words'], 
-            ['words', '[end]']
-        ]);
-    });
+  it('should trigram a string via ngrams', function () {
+    expect(NGrams.ngrams('these are some words', 3)).toEqual([['these', 'are', 'some'],
+      ['are', 'some', 'words']])
+  })
 
-    it('should bigram a string with start symbols only', function() {
-        expect(NGrams.ngrams('these are some words', 2, "[start]")).toEqual([
-            ['[start]', 'these'], 
-            ['these', 'are'],
-            ['are', 'some' ], 
-            ['some', 'words']
-        ]);
-    });
+  it('should trigram an array via ngrams', function () {
+    expect(NGrams.ngrams(['these', 'are', 'some', 'words'], 3)).toEqual([['these', 'are', 'some'],
+      ['are', 'some', 'words']])
+  })
 
+  describe('bigrams', function () {
+    it('should bigram a string', function () {
+      expect(NGrams.bigrams('these are some words')).toEqual([['these', 'are'],
+        ['are', 'some'], ['some', 'words']])
+    })
 
-    it('should bigram a string with end symbols only', function() {
-        expect(NGrams.ngrams('these are some words', 2, null, "[end]")).toEqual([
-            ['these', 'are'],
-            ['are', 'some' ], 
-            ['some', 'words'],
-            ['words', '[end]']
-        ]);
-    });
+    it('should bigram an array', function () {
+      expect(NGrams.bigrams(['these', 'are', 'some', 'words'])).toEqual([['these', 'are'],
+        ['are', 'some'], ['some', 'words']])
+    })
+  })
 
-    it('should trigram a string with start and end symbols', function() {
-        expect(NGrams.ngrams('these are some words', 3, '[start]', '[end]')).toEqual([
-            ['[start]', '[start]', 'these'],
-            ['[start]', 'these', 'are'], 
-            ['these', 'are', 'some'],
-            ['are', 'some', 'words'], 
-            ['some', 'words', '[end]'],
-            ['words', '[end]', '[end]']
-        ]);
-    });
+  describe('trigrams', function () {
+    it('should bigram a string', function () {
+      expect(NGrams.trigrams('these are some words')).toEqual([['these', 'are', 'some'],
+        ['are', 'some', 'words']])
+    })
 
-    it('should 4-gram a string with start and end symbols', function() {
-        expect(NGrams.ngrams('these are some words', 4, '[start]', '[end]')).toEqual([
-            ['[start]', '[start]', '[start]', 'these'],
-            ['[start]', '[start]', 'these', 'are'],
-            ['[start]', 'these', 'are', 'some'],
-            ['these', 'are', 'some', 'words'], 
-            ['are', 'some', 'words', '[end]'],
-            ['some', 'words', '[end]', '[end]'],
-            ['words', '[end]', '[end]', '[end]']
-        ]);
-    });
-    
-    it('should use french tokenizer', function(){
-        var T = require('../lib/natural/tokenizers/aggressive_tokenizer_fr');
-        var t = new T();
-        NGrams.setTokenizer(t);
-        expect(NGrams.ngrams('Un Éléphant rouge', 2)).toEqual([['Un', 'Éléphant'],
-            ['Éléphant', 'rouge' ]]);
-    });
+    it('should bigram an array', function () {
+      expect(NGrams.trigrams(['these', 'are', 'some', 'words'])).toEqual([['these', 'are', 'some'],
+        ['are', 'some', 'words']])
+    })
+  })
 
-    it('should trigram a string via ngrams including statistics', function() {
-      var T = require('../lib/natural/tokenizers/aggressive_tokenizer');
-      var t = new T();
-      NGrams.setTokenizer(t);
-      text.sentences.forEach(sentence => {
-        var result = NGrams.ngrams(sentence, 3, null, null, true);
-        var nrNgrams = 0;
-        Object.keys(result.Nr).forEach(function (f) {
-          nrNgrams += result.Nr[f] * f;
-        });
-        expect(nrNgrams).toEqual(result.numberOfNgrams);
-      });
-    });    
-    
-});
+  // New Start/End Symbols Feature
+  it('should bigram a string with start and end symbols', function () {
+    expect(NGrams.ngrams('these are some words', 2, '[start]', '[end]')).toEqual([
+      ['[start]', 'these'],
+      ['these', 'are'],
+      ['are', 'some'],
+      ['some', 'words'],
+      ['words', '[end]']
+    ])
+  })
+
+  it('should bigram a string with start symbols only', function () {
+    expect(NGrams.ngrams('these are some words', 2, '[start]')).toEqual([
+      ['[start]', 'these'],
+      ['these', 'are'],
+      ['are', 'some'],
+      ['some', 'words']
+    ])
+  })
+
+  it('should bigram a string with end symbols only', function () {
+    expect(NGrams.ngrams('these are some words', 2, null, '[end]')).toEqual([
+      ['these', 'are'],
+      ['are', 'some'],
+      ['some', 'words'],
+      ['words', '[end]']
+    ])
+  })
+
+  it('should trigram a string with start and end symbols', function () {
+    expect(NGrams.ngrams('these are some words', 3, '[start]', '[end]')).toEqual([
+      ['[start]', '[start]', 'these'],
+      ['[start]', 'these', 'are'],
+      ['these', 'are', 'some'],
+      ['are', 'some', 'words'],
+      ['some', 'words', '[end]'],
+      ['words', '[end]', '[end]']
+    ])
+  })
+
+  it('should 4-gram a string with start and end symbols', function () {
+    expect(NGrams.ngrams('these are some words', 4, '[start]', '[end]')).toEqual([
+      ['[start]', '[start]', '[start]', 'these'],
+      ['[start]', '[start]', 'these', 'are'],
+      ['[start]', 'these', 'are', 'some'],
+      ['these', 'are', 'some', 'words'],
+      ['are', 'some', 'words', '[end]'],
+      ['some', 'words', '[end]', '[end]'],
+      ['words', '[end]', '[end]', '[end]']
+    ])
+  })
+
+  it('should use french tokenizer', function () {
+    const T = require('../lib/natural/tokenizers/aggressive_tokenizer_fr')
+    const t = new T()
+    NGrams.setTokenizer(t)
+    expect(NGrams.ngrams('Un Éléphant rouge', 2)).toEqual([['Un', 'Éléphant'],
+      ['Éléphant', 'rouge']])
+  })
+
+  it('should trigram a string via ngrams including statistics', function () {
+    const T = require('../lib/natural/tokenizers/aggressive_tokenizer')
+    const t = new T()
+    NGrams.setTokenizer(t)
+    text.sentences.forEach(sentence => {
+      const result = NGrams.ngrams(sentence, 3, null, null, true)
+      let nrNgrams = 0
+      Object.keys(result.Nr).forEach(function (f) {
+        nrNgrams += result.Nr[f] * f
+      })
+      expect(nrNgrams).toEqual(result.numberOfNgrams)
+    })
+  })
+})

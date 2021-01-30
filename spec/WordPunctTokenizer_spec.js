@@ -20,36 +20,38 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var natural = require('../lib/natural');
-var tokenizer = new natural.WordPunctTokenizer();
+'use strict'
 
-var sentences = [
-  "Knot: geldpers aanzetten is paardenmiddel voor half procent inflatie",
-  "De president van De Nederlandsche Bank, Klaas Knot, vindt de geldinjectie in de Europese economie van ruim 1.100 miljard euro veel te hoog voor het beoogde resultaat: een half procent inflatie in 2016.",
+const natural = require('../lib/natural')
+const tokenizer = new natural.WordPunctTokenizer()
+
+const sentences = [
+  'Knot: geldpers aanzetten is paardenmiddel voor half procent inflatie',
+  'De president van De Nederlandsche Bank, Klaas Knot, vindt de geldinjectie in de Europese economie van ruim 1.100 miljard euro veel te hoog voor het beoogde resultaat: een half procent inflatie in 2016.',
   "'Oftewel 50 basispunten, dat zijn heel dure basispunten', zei Knot donderdag in de Tweede Kamer.",
-  "Door: Robert Giebels 5 februari 2015, 21:55 Bron: ANP",
-  "De financiële specialisten onder de Kamerleden hadden Knot gevraagd uitleg te geven over het ECB-besluit van 22 januari.;",
-  "Hoe gaat de tokenizer om met? vraagtekens ?",
-  "Verbindingsstreepje in  een woord: ECB-besluit",
-  "Gedachtestreepje in een zin met spaties eromheen - dit is de gedachte na het streepje ! "
-];
+  'Door: Robert Giebels 5 februari 2015, 21:55 Bron: ANP',
+  'De financiële specialisten onder de Kamerleden hadden Knot gevraagd uitleg te geven over het ECB-besluit van 22 januari.;',
+  'Hoe gaat de tokenizer om met? vraagtekens ?',
+  'Verbindingsstreepje in  een woord: ECB-besluit',
+  'Gedachtestreepje in een zin met spaties eromheen - dit is de gedachte na het streepje ! '
+]
 
-var expectedResults = [
-  ["Knot",":","geldpers","aanzetten","is","paardenmiddel","voor","half","procent","inflatie"],
-  ["De","president","van","De","Nederlandsche","Bank",",","Klaas","Knot",",","vindt","de","geldinjectie","in","de","Europese","economie","van","ruim","1.100","miljard","euro","veel","te","hoog","voor","het","beoogde","resultaat",":","een","half","procent","inflatie","in","2016."],
-  ["'","Oftewel","50","basispunten",",","dat","zijn","heel","dure","basispunten","'",",","zei","Knot","donderdag","in","de","Tweede","Kamer","."],
-  ["Door",":","Robert","Giebels","5","februari","2015",",","21",":","55","Bron",":","ANP"],
-  ["De","financiële","specialisten","onder","de","Kamerleden","hadden","Knot","gevraagd","uitleg","te","geven","over","het","ECB-besluit","van","22","januari",".",";"],
-  ["Hoe","gaat","de","tokenizer","om","met","?","vraagtekens","?"],
-  ["Verbindingsstreepje","in","een","woord",":","ECB-besluit"],
-  ["Gedachtestreepje","in","een","zin","met","spaties","eromheen","-","dit","is","de","gedachte","na","het","streepje","!"]
-];
+const expectedResults = [
+  ['Knot', ':', 'geldpers', 'aanzetten', 'is', 'paardenmiddel', 'voor', 'half', 'procent', 'inflatie'],
+  ['De', 'president', 'van', 'De', 'Nederlandsche', 'Bank', ',', 'Klaas', 'Knot', ',', 'vindt', 'de', 'geldinjectie', 'in', 'de', 'Europese', 'economie', 'van', 'ruim', '1.100', 'miljard', 'euro', 'veel', 'te', 'hoog', 'voor', 'het', 'beoogde', 'resultaat', ':', 'een', 'half', 'procent', 'inflatie', 'in', '2016.'],
+  ["'", 'Oftewel', '50', 'basispunten', ',', 'dat', 'zijn', 'heel', 'dure', 'basispunten', "'", ',', 'zei', 'Knot', 'donderdag', 'in', 'de', 'Tweede', 'Kamer', '.'],
+  ['Door', ':', 'Robert', 'Giebels', '5', 'februari', '2015', ',', '21', ':', '55', 'Bron', ':', 'ANP'],
+  ['De', 'financiële', 'specialisten', 'onder', 'de', 'Kamerleden', 'hadden', 'Knot', 'gevraagd', 'uitleg', 'te', 'geven', 'over', 'het', 'ECB-besluit', 'van', '22', 'januari', '.', ';'],
+  ['Hoe', 'gaat', 'de', 'tokenizer', 'om', 'met', '?', 'vraagtekens', '?'],
+  ['Verbindingsstreepje', 'in', 'een', 'woord', ':', 'ECB-besluit'],
+  ['Gedachtestreepje', 'in', 'een', 'zin', 'met', 'spaties', 'eromheen', '-', 'dit', 'is', 'de', 'gedachte', 'na', 'het', 'streepje', '!']
+]
 
-describe("Word Punctuation Tokenizer", function() {
-  it('should correctly tokenize words and punctuation symbols', function() {
+describe('Word Punctuation Tokenizer', function () {
+  it('should correctly tokenize words and punctuation symbols', function () {
     sentences.forEach((sentence, index) => {
-      var result = tokenizer.tokenize(sentence);
-      expect(result).toEqual(expectedResults[index]);
-    });
-  });
-});
+      const result = tokenizer.tokenize(sentence)
+      expect(result).toEqual(expectedResults[index])
+    })
+  })
+})

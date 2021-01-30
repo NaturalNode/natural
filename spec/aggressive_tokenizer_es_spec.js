@@ -20,13 +20,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWé OR THE USE OR OTHER DEALINGS IN
 THE SOFTWé.
 */
 
-var Tokenizer = require('../lib/natural/tokenizers/aggressive_tokenizer_es'),
-    tokenizer = new Tokenizer();
+'use strict'
 
-describe('aggressive_tokenizer_es', function() {
-  it('should tokenize strings', function() {
-    expect(tokenizer.tokenize('hola yo me llamo eduardo y esudié ingeniería')).toEqual(['hola', 'yo', 'me', 'llamo', 'eduardo', 'y', 'esudié', 'ingeniería']);
-  });
+const Tokenizer = require('../lib/natural/tokenizers/aggressive_tokenizer_es')
+const tokenizer = new Tokenizer()
+
+describe('aggressive_tokenizer_es', function () {
+  it('should tokenize strings', function () {
+    expect(tokenizer.tokenize('hola yo me llamo eduardo y esudié ingeniería')).toEqual(['hola', 'yo', 'me', 'llamo', 'eduardo', 'y', 'esudié', 'ingeniería'])
+  })
 
   /*
   it('should tokenize strings via attached string method', function() {
@@ -34,5 +36,4 @@ describe('aggressive_tokenizer_es', function() {
     expect('hola yo me llamo eduardo y esudié ingeniería'.tokenize()).toEqual(['hola', 'yo', 'me', 'llamo', 'eduardo', 'y', 'esudié', 'ingeniería']);
   });
   */
-
-});
+})

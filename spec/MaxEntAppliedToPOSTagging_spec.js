@@ -16,168 +16,166 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-var fs = require('fs');
+// const fs = require('fs')
 
-var base_folder_test_data = 'spec/test_data/';
-var brownCorpus = require('spec/test_data/browntag_nolines_excerpt_maxent.json');
-var classifierFile = base_folder_test_data + 'classifier.json';
+// const base_folder_test_data = 'spec/test_data/'
+const brownCorpus = require('spec/test_data/browntag_nolines_excerpt_maxent.json')
+// const classifierFile = base_folder_test_data + 'classifier.json'
 
-var natural = require('../lib/natural');
-var Classifier = natural.MaxEntClassifier;
-var FeatureSet = natural.FeatureSet;
-var Context = natural.Context;
+const natural = require('../lib/natural')
+const Classifier = natural.MaxEntClassifier
+const FeatureSet = natural.FeatureSet
+const Context = natural.Context
 
 // Load some classes specific to part of speech tagging
-var Corpus = natural.MECorpus;
-var POS_Element = natural.POSElement;
-var Sentence = natural.MESentence;
+const Corpus = natural.MECorpus
+// const POS_Element = natural.POSElement
+const Sentence = natural.MESentence
 // Lexicon-based tagger is used for comparison
-var Tagger = natural.BrillPOSTagger;
+const Tagger = natural.BrillPOSTagger
 
-const JSON_FLAG = 2;
-var nrIterations = 2;
-var minImprovement = 0.01;
-var trainCorpusSize = 50; // percentage
+const JSON_FLAG = 2
+const nrIterations = 2
+const minImprovement = 0.01
+const trainCorpusSize = 50 // percentage
 
-const DEBUG = false;
+const DEBUG = false
 
 // Structure of the event space
 // - Classes are possible tags
 // - A context consists of a window of words and a window of tags
 
-function applyClassifierToTestCorpus(testCorpus, tagger, classifier) {
-  var totalWords = 0;
-  var correctyTaggedLexicon = 0;
-  var correctlyTaggedMaxEnt = 0;
+function applyClassifierToTestCorpus (testCorpus, tagger, classifier) {
+  let totalWords = 0
+  let correctyTaggedLexicon = 0
+  let correctlyTaggedMaxEnt = 0
 
-  testCorpus.sentences.forEach(function(sentence){
+  testCorpus.sentences.forEach(function (sentence) {
     // Put the words of the sentence in an array
-    var s = sentence.taggedWords.map(function(token) {
-      return token.token;
-    });
+    const s = sentence.taggedWords.map(function (token) {
+      return token.token
+    })
 
     // Use the lexicon to tag the sentence
-    var taggedSentence = tagger.tagWithLexicon(s);
+    const taggedSentence = tagger.tagWithLexicon(s)
     // Count the right tags
-    sentence.taggedWords.forEach(function(token, i) {
-      totalWords++;
+    sentence.taggedWords.forEach(function (token, i) {
+      totalWords++
       if (token.tag === taggedSentence.taggedWords[i].tag) {
-        correctyTaggedLexicon++;
+        correctyTaggedLexicon++
       }
-    });
+    })
 
-    var sentenceLength = sentence.length;
+    const sentenceLength = sentence.length
     // Classify tags using maxent
-    taggedSentence.taggedWords.forEach(function(taggedWord, index) {
-
+    taggedSentence.taggedWords.forEach(function (taggedWord, index) {
       // Create context for classication
-      var context = new Context({
-          wordWindow: {},
-          tagWindow: {}
-      });
+      const context = new Context({
+        wordWindow: {},
+        tagWindow: {}
+      })
       // And fill it:
 
       // Current wordWindow
-      context.data.wordWindow["0"] = taggedWord.token;
+      context.data.wordWindow['0'] = taggedWord.token
       // Previous bigram
       if (index > 1) {
-        context.data.tagWindow["-2"] = taggedSentence.taggedWords[index - 2].tag;
+        context.data.tagWindow['-2'] = taggedSentence.taggedWords[index - 2].tag
       }
       // Left bigram
       if (index > 0) {
-        context.data.tagWindow["-1"] = taggedSentence.taggedWords[index - 1].tag;
+        context.data.tagWindow['-1'] = taggedSentence.taggedWords[index - 1].tag
       }
       // Right bigram
       if (index < sentenceLength - 1) {
-        context.data.tagWindow["1"] = taggedSentence.taggedWords[index + 1].tag;
+        context.data.tagWindow['1'] = taggedSentence.taggedWords[index + 1].tag
       }
       // Next bigram
       if (index < sentenceLength - 2) {
-        context.data.tagWindow["2"] = taggedSentence.taggedWords[index + 2].tag;
+        context.data.tagWindow['2'] = taggedSentence.taggedWords[index + 2].tag
       }
       // Left bigram words
       if (index > 0) {
-        context.data.wordWindow["-1"] = taggedSentence.taggedWords[index - 1].token;
+        context.data.wordWindow['-1'] = taggedSentence.taggedWords[index - 1].token
       }
       // Right bigram words
       if (index < sentenceLength - 1) {
-        context.data.wordWindow["1"] = taggedSentence.taggedWords[index + 1].token;
+        context.data.wordWindow['1'] = taggedSentence.taggedWords[index + 1].token
       }
 
       // Classify using maximum entropy model
-      var tag = classifier.classify(context);
+      let tag = classifier.classify(context)
 
-      if (tag === "") {
-        tag = tagger.lexicon.tagWordWithDefaults(context.data.wordWindow["0"])
+      if (tag === '') {
+        tag = tagger.lexicon.tagWordWithDefaults(context.data.wordWindow['0'])
       }
 
       // Collect stats
       if (tag === sentence.taggedWords[index].tag) {
         // Correctly tagged
-        correctlyTaggedMaxEnt++;
+        correctlyTaggedMaxEnt++
       }
-      DEBUG && console.log("(word, classification, right tag): " + "(" + taggedWord.token +
-        ", " + tag + ", " + sentence.taggedWords[index].tag + ")");
-    });
-  });
+      DEBUG && console.log('(word, classification, right tag): ' + '(' + taggedWord.token +
+        ', ' + tag + ', ' + sentence.taggedWords[index].tag + ')')
+    })
+  })
 
-  DEBUG && console.log("Number of words tagged: " + totalWords);
-  DEBUG && console.log("Percentage correctly tagged lexicon: " + correctyTaggedLexicon/totalWords * 100 + "%");
-  DEBUG && console.log("Percentage correctly tagged maxent:  " + correctlyTaggedMaxEnt/totalWords * 100 + "%");
+  DEBUG && console.log('Number of words tagged: ' + totalWords)
+  DEBUG && console.log('Percentage correctly tagged lexicon: ' + correctyTaggedLexicon / totalWords * 100 + '%')
+  DEBUG && console.log('Percentage correctly tagged maxent:  ' + correctlyTaggedMaxEnt / totalWords * 100 + '%')
 }
 
-describe("Maximum Entropy Classifier applied to POS tagging", function() {
+describe('Maximum Entropy Classifier applied to POS tagging', function () {
   // Prepare the train and test corpus
-  DEBUG && console.log("Corpus after require: " + JSON.stringify(brownCorpus, null, 2));
-  var corpus = new Corpus(brownCorpus, JSON_FLAG, Sentence);
-  DEBUG && console.log("Size of corpus: " + corpus.sentences.length);
-  DEBUG && console.log("Corpus: " + JSON.stringify(corpus, null, 2));
-  var trainAndTestCorpus = corpus.splitInTrainAndTest(trainCorpusSize);
-  var trainCorpus = trainAndTestCorpus[0];
-  DEBUG && console.log("Size of training corpus: " + trainCorpus.sentences.length);
-  DEBUG && console.log("Training corpus: " + JSON.stringify(trainCorpus, null, 2));
-  var testCorpus = trainAndTestCorpus[1];
-  DEBUG && console.log("Size of testing corpus: " + testCorpus.sentences.length);
-  var sample = null;
-  var classifier = null;
-  var featureSet = null;
-  var lexicon = null;
-  var tagger = null;
+  DEBUG && console.log('Corpus after require: ' + JSON.stringify(brownCorpus, null, 2))
+  const corpus = new Corpus(brownCorpus, JSON_FLAG, Sentence)
+  DEBUG && console.log('Size of corpus: ' + corpus.sentences.length)
+  DEBUG && console.log('Corpus: ' + JSON.stringify(corpus, null, 2))
+  const trainAndTestCorpus = corpus.splitInTrainAndTest(trainCorpusSize)
+  const trainCorpus = trainAndTestCorpus[0]
+  DEBUG && console.log('Size of training corpus: ' + trainCorpus.sentences.length)
+  DEBUG && console.log('Training corpus: ' + JSON.stringify(trainCorpus, null, 2))
+  const testCorpus = trainAndTestCorpus[1]
+  DEBUG && console.log('Size of testing corpus: ' + testCorpus.sentences.length)
+  let sample = null
+  let classifier = null
+  let featureSet = null
+  let lexicon = null
+  let tagger = null
 
   // Generate sample from trainCorpus
-  it("generates a sample from a corpus", function() {
-    sample = trainCorpus.generateSample();
-    expect(sample.size()).toBeGreaterThan(0);
-    DEBUG && console.log("Size of the sample: " + sample.size());
+  it('generates a sample from a corpus', function () {
+    sample = trainCorpus.generateSample()
+    expect(sample.size()).toBeGreaterThan(0)
+    DEBUG && console.log('Size of the sample: ' + sample.size())
+  })
 
-  });
+  it('generates a set of features from the sample', function () {
+    featureSet = new FeatureSet()
+    DEBUG && console.log(sample)
+    sample.generateFeatures(featureSet)
+    expect(featureSet.size()).toBeGreaterThan(0)
+    DEBUG && console.log('Number of features: ' + featureSet.size())
+    DEBUG && console.log(featureSet.prettyPrint())
+  })
 
-  it ("generates a set of features from the sample", function() {
-    featureSet = new FeatureSet();
-    DEBUG && console.log(sample);
-    sample.generateFeatures(featureSet);
-    expect(featureSet.size()).toBeGreaterThan(0);
-    DEBUG && console.log("Number of features: " + featureSet.size());
-    DEBUG && console.log(featureSet.prettyPrint());
-  });
+  it('analyses the sample', function () {
+    trainCorpus.analyse()
+    lexicon = trainCorpus.buildLexicon()
+    expect(lexicon.size()).toBeGreaterThan(0)
+  })
 
-  it("analyses the sample", function() {
-    trainCorpus.analyse();
-    lexicon = trainCorpus.buildLexicon();
-    expect(lexicon.size()).toBeGreaterThan(0);
-  });
+  it('trains the maximum entropy classifier', function () {
+    classifier = new Classifier(featureSet, sample)
+    DEBUG && console.log('Classifier created')
+    classifier.train(nrIterations, minImprovement)
+    DEBUG && console.log('Checksum: ' + classifier.p.checkSum())
+  })
 
-  it("trains the maximum entropy classifier", function() {
-    classifier = new Classifier(featureSet, sample);
-    DEBUG && console.log("Classifier created");
-    classifier.train(nrIterations, minImprovement);
-    DEBUG && console.log("Checksum: " + classifier.p.checkSum());
-  });
-
-  it("compares maximum entropy based POS tagger to lexicon-based tagger", function() {
-      // Test the classifier against the test corpus
-      //lexicon.setDefaultCategories('NN', 'NP');
-      tagger = new Tagger(lexicon);
-      applyClassifierToTestCorpus(testCorpus, tagger, classifier);
-  });
-});
+  it('compares maximum entropy based POS tagger to lexicon-based tagger', function () {
+    // Test the classifier against the test corpus
+    // lexicon.setDefaultCategories('NN', 'NP');
+    tagger = new Tagger(lexicon)
+    applyClassifierToTestCorpus(testCorpus, tagger, classifier)
+  })
+})

@@ -20,19 +20,21 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var Tokenizer = require('../lib/natural/tokenizers/sentence_tokenizer_parser'),
-    tokenizer = new Tokenizer();
+'use strict'
 
-describe('sentence_tokenizer', function() {
-  it('should tokenize strings and trim whitespace', function() {
+const Tokenizer = require('../lib/natural/tokenizers/sentence_tokenizer_parser')
+const tokenizer = new Tokenizer()
+
+describe('sentence_tokenizer', function () {
+  it('should tokenize strings and trim whitespace', function () {
     expect(
-        tokenizer.tokenize('This is a sentence. This is another sentence.')
+      tokenizer.tokenize('This is a sentence. This is another sentence.')
     )
-    .toEqual([
+      .toEqual([
         'This is a sentence.',
         'This is another sentence.'
-    ]);
-  });
+      ])
+  })
 
   /*
   it('should tokenize strings via attached string method', function() {
@@ -55,129 +57,127 @@ describe('sentence_tokenizer', function() {
     ]);
   });
   */
-  
-  it('should include quotation marks', function() {
+
+  it('should include quotation marks', function () {
     expect(
-        tokenizer.tokenize('"This is a sentence." This is another sentence.')
+      tokenizer.tokenize('"This is a sentence." This is another sentence.')
     ).toEqual([
-        '"This is a sentence."',
-        'This is another sentence.'
-    ]);
-  });
+      '"This is a sentence."',
+      'This is another sentence.'
+    ])
+  })
 
-  it('should include brackets', function() {
+  it('should include brackets', function () {
     expect(
-        tokenizer.tokenize('This is a sentence. [This is another sentence.]')
+      tokenizer.tokenize('This is a sentence. [This is another sentence.]')
     ).toEqual([
-        'This is a sentence.',
-        '[This is another sentence.]'
-    ]);
-  });
+      'This is a sentence.',
+      '[This is another sentence.]'
+    ])
+  })
 
-  it('should handle repetitive punctuation', function() {
+  it('should handle repetitive punctuation', function () {
     expect(
-      tokenizer.tokenize("I love you!! Do you love me??")
-    ).toEqual([ 'I love you!!', 'Do you love me??'
-    ]);
-  });
+      tokenizer.tokenize('I love you!! Do you love me??')
+    ).toEqual(['I love you!!', 'Do you love me??'
+    ])
+  })
 
-  it('should handle repetitive punctuation with space', function() {
+  it('should handle repetitive punctuation with space', function () {
     expect(
-      tokenizer.tokenize("I love you! ! Do you love me? ?")
-    ).toEqual([ 'I love you! !', 'Do you love me? ?'
-    ]);
-  });
+      tokenizer.tokenize('I love you! ! Do you love me? ?')
+    ).toEqual(['I love you! !', 'Do you love me? ?'
+    ])
+  })
 
-  it('should handle decimal numbers in sentences', function() {
+  it('should handle decimal numbers in sentences', function () {
     expect(
-      tokenizer.tokenize("Pi is approximately equal to 3.14.")
+      tokenizer.tokenize('Pi is approximately equal to 3.14.')
     ).toEqual([
       'Pi is approximately equal to 3.14.'
-    ]);
+    ])
     expect(
       tokenizer.tokenize("This is a sentence that can't 1) be parsed with SentenceTokenizerNew. Here is another sentence.")
     ).toEqual([
       "This is a sentence that can't 1) be parsed with SentenceTokenizerNew.",
-      "Here is another sentence."
-    ]);
-  });
+      'Here is another sentence.'
+    ])
+  })
 
-  it('should handle periods in email addresses', function() {
+  it('should handle periods in email addresses', function () {
     expect(
-      tokenizer.tokenize("My email address is batman@example.com.")
+      tokenizer.tokenize('My email address is batman@example.com.')
     ).toEqual([
       'My email address is batman@example.com.'
-    ]);
-  });
+    ])
+  })
 
-  it('should handle periods in web addresses', function() {
+  it('should handle periods in web addresses', function () {
     expect(
-      tokenizer.tokenize("My twitter feed can be found at https://twitter.com/user1.")
+      tokenizer.tokenize('My twitter feed can be found at https://twitter.com/user1.')
     ).toEqual([
       'My twitter feed can be found at https://twitter.com/user1.'
-    ]);
-  });
+    ])
+  })
 
-  it('should handle an ellipsis followed by punctuation', function() {
+  it('should handle an ellipsis followed by punctuation', function () {
     expect(
-      tokenizer.tokenize("Is this the end for our heroes...?")
+      tokenizer.tokenize('Is this the end for our heroes...?')
     ).toEqual([
       'Is this the end for our heroes...?'
-    ]);
-  });
+    ])
+  })
 
-  it('should handle multiple spaces separating sentences', function() {
+  it('should handle multiple spaces separating sentences', function () {
     expect(
-      tokenizer.tokenize("Tune in tomorrow and find out!  Same Bat-Time!  Same Bat-Channel!")
+      tokenizer.tokenize('Tune in tomorrow and find out!  Same Bat-Time!  Same Bat-Channel!')
     ).toEqual([
       'Tune in tomorrow and find out!',
       'Same Bat-Time!',
       'Same Bat-Channel!'
-    ]);
-  });
-
-  it('should handle a sentence that does not end with punctuation (issue #549))', function() {
-    expect(
-      tokenizer.tokenize("This is a sentence. But is this also one")
-    ).toEqual([
-      "This is a sentence.",
-      "But is this also one"
-    ]);
+    ])
   })
 
-
-  it('should handle a sentence that contains a quoted phrase (issue #550 but with . and ’ reversed))', function() {
+  it('should handle a sentence that does not end with punctuation (issue #549))', function () {
     expect(
-      tokenizer.tokenize("This is a sentence. And another where ‘Someone says something’.")
+      tokenizer.tokenize('This is a sentence. But is this also one')
     ).toEqual([
-      "This is a sentence.",
-      "And another where ‘Someone says something’."
-    ]);
+      'This is a sentence.',
+      'But is this also one'
+    ])
   })
 
-  it('should handle sentences with an abbreviation', function() {
+  it('should handle a sentence that contains a quoted phrase (issue #550 but with . and ’ reversed))', function () {
     expect(
-      tokenizer.tokenize("Acme, Inc. is creating exciting products. Use at your own risk.")
+      tokenizer.tokenize('This is a sentence. And another where ‘Someone says something’.')
     ).toEqual([
-      "Acme, Inc. is creating exciting products.",
-      "Use at your own risk."
-    ]);
+      'This is a sentence.',
+      'And another where ‘Someone says something’.'
+    ])
+  })
+
+  it('should handle sentences with an abbreviation', function () {
     expect(
-      tokenizer.tokenize("I need the parts A.S.A.P. please. Send them when they are ready")
+      tokenizer.tokenize('Acme, Inc. is creating exciting products. Use at your own risk.')
+    ).toEqual([
+      'Acme, Inc. is creating exciting products.',
+      'Use at your own risk.'
+    ])
+    expect(
+      tokenizer.tokenize('I need the parts A.S.A.P. please. Send them when they are ready')
     ).toEqual(
       [
-        "I need the parts A.S.A.P. please.",
-        "Send them when they are ready"
-      ]
-    );
-    expect(
-      tokenizer.tokenize("I need the parts from Inc.. Send them when they are ready!")
-    ).toEqual(
-      [
-        "I need the parts from Inc..",
-        "Send them when they are ready!"
+        'I need the parts A.S.A.P. please.',
+        'Send them when they are ready'
       ]
     )
-
+    expect(
+      tokenizer.tokenize('I need the parts from Inc.. Send them when they are ready!')
+    ).toEqual(
+      [
+        'I need the parts from Inc..',
+        'Send them when they are ready!'
+      ]
+    )
   })
-});
+})

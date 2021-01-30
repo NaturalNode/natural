@@ -20,108 +20,108 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var VerbInflector = require('../lib/natural/inflectors/present_verb_inflector'),
-    inflector = new VerbInflector ();
+const VerbInflector = require('../lib/natural/inflectors/present_verb_inflector')
+const inflector = new VerbInflector()
 
-describe('present verb inflector', function() {
-    describe('singularization', function() {
-        it('should singularize regular ES forms', function() {
-            expect(inflector.singularize('catch')).toBe('catches');
-            expect(inflector.singularize('do')).toBe('does');
-            expect(inflector.singularize('go')).toBe('goes');
-        });
+describe('present verb inflector', function () {
+  describe('singularization', function () {
+    it('should singularize regular ES forms', function () {
+      expect(inflector.singularize('catch')).toBe('catches')
+      expect(inflector.singularize('do')).toBe('does')
+      expect(inflector.singularize('go')).toBe('goes')
+    })
 
-        it('should handle [CS]HES forms', function () {
-            expect(inflector.singularize('cash')).toBe('cashes');
-            expect(inflector.singularize('ach')).toBe('aches');
-        });
+    it('should handle [CS]HES forms', function () {
+      expect(inflector.singularize('cash')).toBe('cashes')
+      expect(inflector.singularize('ach')).toBe('aches')
+    })
 
-        it('should ignore XES forms', function() {
-            expect(inflector.singularize('annex')).toBe('annexes');
-        });
+    it('should ignore XES forms', function () {
+      expect(inflector.singularize('annex')).toBe('annexes')
+    })
 
-        it('should handle SSES forms', function() {
-            expect(inflector.singularize('access')).toBe('accesses');
-        });
+    it('should handle SSES forms', function () {
+      expect(inflector.singularize('access')).toBe('accesses')
+    })
 
-        it('should ignore ZZES forms', function() {
-            expect(inflector.singularize('buzz')).toBe('buzzes');
-        });
+    it('should ignore ZZES forms', function () {
+      expect(inflector.singularize('buzz')).toBe('buzzes')
+    })
 
-        it('should singularize regular S forms', function() {
-            expect(inflector.singularize('claim')).toBe('claims');
-            expect(inflector.singularize('drink')).toBe('drinks');
-            expect(inflector.singularize('become')).toBe('becomes');
-        });
+    it('should singularize regular S forms', function () {
+      expect(inflector.singularize('claim')).toBe('claims')
+      expect(inflector.singularize('drink')).toBe('drinks')
+      expect(inflector.singularize('become')).toBe('becomes')
+    })
 
-        it('should singularize irregular forms', function() {
-            expect(inflector.singularize('are')).toBe('is');
-            expect(inflector.singularize('were')).toBe('was');
-            expect(inflector.singularize('have')).toBe('has');
-        });
+    it('should singularize irregular forms', function () {
+      expect(inflector.singularize('are')).toBe('is')
+      expect(inflector.singularize('were')).toBe('was')
+      expect(inflector.singularize('have')).toBe('has')
+    })
 
-        it('should singularize ies forms', function() {
-            expect(inflector.singularize('fly')).toBe('flies');
-            expect(inflector.singularize('try')).toBe('tries');
-        });
+    it('should singularize ies forms', function () {
+      expect(inflector.singularize('fly')).toBe('flies')
+      expect(inflector.singularize('try')).toBe('tries')
+    })
 
-        it('should handle ambiguous forms', function() {
-            expect(inflector.singularize('will')).toBe('will');
-        });
-    });
+    it('should handle ambiguous forms', function () {
+      expect(inflector.singularize('will')).toBe('will')
+    })
+  })
 
-    describe('pluralization', function() {
-        it('should pluralize regular ES forms', function() {
-            expect(inflector.pluralize('catches')).toBe('catch');
-            expect(inflector.pluralize('does')).toBe('do');
-            expect(inflector.pluralize('goes')).toBe('go');
-        });
+  describe('pluralization', function () {
+    it('should pluralize regular ES forms', function () {
+      expect(inflector.pluralize('catches')).toBe('catch')
+      expect(inflector.pluralize('does')).toBe('do')
+      expect(inflector.pluralize('goes')).toBe('go')
+    })
 
-        it('should handle [CS]HES forms', function () {
-            expect(inflector.pluralize('cashes')).toBe('cash');
-            expect(inflector.pluralize('aches')).toBe('ach');
-        });
+    it('should handle [CS]HES forms', function () {
+      expect(inflector.pluralize('cashes')).toBe('cash')
+      expect(inflector.pluralize('aches')).toBe('ach')
+    })
 
-        it('should handle XES forms', function() {
-            expect(inflector.pluralize('annexes')).toBe('annex');
-        });
+    it('should handle XES forms', function () {
+      expect(inflector.pluralize('annexes')).toBe('annex')
+    })
 
-        it('should handle SSES forms', function() {
-            expect(inflector.pluralize('accesses')).toBe('access');
-        });
+    it('should handle SSES forms', function () {
+      expect(inflector.pluralize('accesses')).toBe('access')
+    })
 
-        it('should handle ZZES forms', function() {
-            expect(inflector.pluralize('buzzes')).toBe('buzz');
-        });
+    it('should handle ZZES forms', function () {
+      expect(inflector.pluralize('buzzes')).toBe('buzz')
+    })
 
-        it('should pluralize regular S forms that done drop e', function() {
-            expect(inflector.pluralize('becomes')).toBe('become');
-        });
+    it('should pluralize regular S forms that done drop e', function () {
+      expect(inflector.pluralize('becomes')).toBe('become')
+    })
 
-        it('should pluralize regular S forms', function() {
-            expect(inflector.pluralize('drinks')).toBe('drink');
-            expect(inflector.pluralize('claims')).toBe('claim');
-        });
+    it('should pluralize regular S forms', function () {
+      expect(inflector.pluralize('drinks')).toBe('drink')
+      expect(inflector.pluralize('claims')).toBe('claim')
+    })
 
-        it('should pluralize irregular forms', function() {
-            expect(inflector.pluralize('was')).toBe('were');
-            expect(inflector.pluralize('is')).toBe('are');
-            expect(inflector.pluralize('am')).toBe('are');
-            expect(inflector.pluralize('has')).toBe('have');
-        });
+    it('should pluralize irregular forms', function () {
+      expect(inflector.pluralize('was')).toBe('were')
+      expect(inflector.pluralize('is')).toBe('are')
+      expect(inflector.pluralize('am')).toBe('are')
+      expect(inflector.pluralize('has')).toBe('have')
+    })
 
-        it('should pluralize ies forms', function() {
-            expect(inflector.pluralize('flies')).toBe('fly');
-            expect(inflector.pluralize('tries')).toBe('try');
-        });
+    it('should pluralize ies forms', function () {
+      expect(inflector.pluralize('flies')).toBe('fly')
+      expect(inflector.pluralize('tries')).toBe('try')
+    })
 
-        it('should handle ambiguous forms', function() {
-            expect(inflector.pluralize('will')).toBe('will');
-        });
-    });
+    it('should handle ambiguous forms', function () {
+      expect(inflector.pluralize('will')).toBe('will')
+    })
+  })
 
-    it('should pluralize and singularize string', function() {
-        expect(inflector.pluralize('becomes')).toBe('become');
-        expect(inflector.singularize('become')).toBe('becomes');
-    });
-});
+  it('should pluralize and singularize string', function () {
+    expect(inflector.pluralize('becomes')).toBe('become')
+    expect(inflector.singularize('become')).toBe('becomes')
+  })
+})

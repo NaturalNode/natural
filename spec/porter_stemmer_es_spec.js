@@ -20,35 +20,36 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var PorterStemmer = require('../lib/natural/stemmers/porter_stemmer_es');
+'use strict'
 
-const snowBallDict = require('spec/test_data/snowball_es.json');
+const PorterStemmer = require('../lib/natural/stemmers/porter_stemmer_es')
 
-describe('porter_stemmer_es', function() {
+const snowBallDict = require('spec/test_data/snowball_es.json')
 
- 	it('should perform stemming on a lot of words', function() {
- 		var errors = [];
+describe('porter_stemmer_es', function () {
+  it('should perform stemming on a lot of words', function () {
+    const errors = []
 
- 		Object.keys(snowBallDict).forEach(word => {
-      var stemmed = PorterStemmer.stem(word);
-      var expectedStem = snowBallDict[word];
+    Object.keys(snowBallDict).forEach(word => {
+      const stemmed = PorterStemmer.stem(word)
+      const expectedStem = snowBallDict[word]
       if (stemmed !== snowBallDict[word]) {
-        console.log('Error:', word, 'Expected:', expectedStem, 'Got:', stemmed);
+        console.log('Error:', word, 'Expected:', expectedStem, 'Got:', stemmed)
         errors.push({
-          word:     word,
+          word: word,
           expected: expectedStem,
-          actual:   stemmed
-        });
+          actual: stemmed
+        })
       }
-    });
+    })
 
- 		expect(errors.length).toBe(0);
- 	});
+    expect(errors.length).toBe(0)
+  })
 
-    it('should tokenize a piece of text', function() {
-      expect(PorterStemmer.tokenizeAndStem("Pues, en efecto, es solo el plano y lo que muestra aquello que interesa a Zemeckis.", true)).toEqual(
-        [ 'pues', 'en', 'efect', 'es', 'sol', 'el', 'plan', 'y', 'lo', 'que', 'muestr', 'aquell', 'que', 'interes', 'a', 'zemeckis' ]);
-    });
+  it('should tokenize a piece of text', function () {
+    expect(PorterStemmer.tokenizeAndStem('Pues, en efecto, es solo el plano y lo que muestra aquello que interesa a Zemeckis.', true)).toEqual(
+      ['pues', 'en', 'efect', 'es', 'sol', 'el', 'plan', 'y', 'lo', 'que', 'muestr', 'aquell', 'que', 'interes', 'a', 'zemeckis'])
+  })
 
 /*
     it('should work with the attached notation', function() {
@@ -58,4 +59,4 @@ describe('porter_stemmer_es', function() {
         [ 'pues', 'en', 'efect', 'es', 'sol', 'el', 'plan', 'y', 'lo', 'que', 'muestr', 'aquell', 'que', 'interes', 'a', 'zemeckis' ]);
     });
 */
-});
+})

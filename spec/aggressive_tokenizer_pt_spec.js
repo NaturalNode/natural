@@ -20,13 +20,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWé OR THE USE OR OTHER DEALINGS IN
 THE SOFTWé.
 */
 
-var Tokenizer = require('../lib/natural/tokenizers/aggressive_tokenizer_pt'),
-    tokenizer = new Tokenizer();
+'use strict'
 
-describe('aggressive_tokenizer_pt', function() {
-  it('should tokenize strings', function() {
-    expect(tokenizer.tokenize('isso é coração')).toEqual(['isso', 'é', 'coração']);
-  });
+const Tokenizer = require('../lib/natural/tokenizers/aggressive_tokenizer_pt')
+const tokenizer = new Tokenizer()
+
+describe('aggressive_tokenizer_pt', function () {
+  it('should tokenize strings', function () {
+    expect(tokenizer.tokenize('isso é coração')).toEqual(['isso', 'é', 'coração'])
+  })
 
   /*
   it('should tokenize strings via attached string method', function() {
@@ -40,19 +42,19 @@ describe('aggressive_tokenizer_pt', function() {
   });
   */
 
-  it('should swallow punctuation', function() {
-    expect(tokenizer.tokenize('isso é coração, no')).toEqual(['isso', 'é', 'coração', 'no']);
-  });
+  it('should swallow punctuation', function () {
+    expect(tokenizer.tokenize('isso é coração, no')).toEqual(['isso', 'é', 'coração', 'no'])
+  })
 
-  it('should swallow final punctuation', function() {
-    expect(tokenizer.tokenize('isso é coração, no?')).toEqual(['isso', 'é', 'coração', 'no']);
-  });
+  it('should swallow final punctuation', function () {
+    expect(tokenizer.tokenize('isso é coração, no?')).toEqual(['isso', 'é', 'coração', 'no'])
+  })
 
-  it('should swallow initial punctuation', function() {
-    expect(tokenizer.tokenize('.isso é coração, no')).toEqual(['isso', 'é', 'coração', 'no']);
-  });
+  it('should swallow initial punctuation', function () {
+    expect(tokenizer.tokenize('.isso é coração, no')).toEqual(['isso', 'é', 'coração', 'no'])
+  })
 
-  it('should swallow duplicate punctuation', function() {
-    expect(tokenizer.tokenize('eu vou... pause')).toEqual(['eu', 'vou', 'pause']);
-  });
-});
+  it('should swallow duplicate punctuation', function () {
+    expect(tokenizer.tokenize('eu vou... pause')).toEqual(['eu', 'vou', 'pause'])
+  })
+})

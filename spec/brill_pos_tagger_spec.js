@@ -16,61 +16,61 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-var natural = require('../lib/natural');
+'use strict'
 
-var englishSentences = require('spec/test_data/NYT-20150205-picassos-granddaughter-plans-to-sell-art-worrying-the-market.json').sentences;
-var englishTagResults = require('spec/test_data/NYT-20150205-picassos-granddaughter-plans_expected_tag_results.json').results;
+const natural = require('../lib/natural')
 
-var dutchSentences = require('spec/test_data/Volkskrant-20150205-Knot-geldpers-aanzetten-is-paardenmiddel-voor-half-procent-inflatie.json').sentences;
+const englishSentences = require('spec/test_data/NYT-20150205-picassos-granddaughter-plans-to-sell-art-worrying-the-market.json').sentences
+const englishTagResults = require('spec/test_data/NYT-20150205-picassos-granddaughter-plans_expected_tag_results.json').results
 
-var DEBUG = false;
+const dutchSentences = require('spec/test_data/Volkskrant-20150205-Knot-geldpers-aanzetten-is-paardenmiddel-voor-half-procent-inflatie.json').sentences
 
+const DEBUG = false
 
 // Compares two tagged sentences. First one is in the old POSJS format, i.e.
 // an array of two position arrays. The second one is a Sentence object
 // that holds an array of objects for each position {token: "string", tag: "string"}
-function compareTaggedSentences(sentenceInOldFormat, sentenceInNewFormat) {
-  var equal = true;
-  sentenceInOldFormat.forEach(function(wordPlusTag, index) {
+function compareTaggedSentences (sentenceInOldFormat, sentenceInNewFormat) {
+  let equal = true
+  sentenceInOldFormat.forEach(function (wordPlusTag, index) {
     equal = equal &&
-      (wordPlusTag[1] === sentenceInNewFormat.taggedWords[index].tag);
-    DEBUG && console.log(wordPlusTag[1] + ' ' + sentenceInNewFormat.taggedWords[index].tag);
-  });
-  return equal;
+      (wordPlusTag[1] === sentenceInNewFormat.taggedWords[index].tag)
+    DEBUG && console.log(wordPlusTag[1] + ' ' + sentenceInNewFormat.taggedWords[index].tag)
+  })
+  return equal
 }
 
-describe('Brill\'s POS Tagger', function() {
-  var brill_pos_tagger = null;
-  var lexicon = null;
-  var ruleSet = null;
-  var tokenizer = new natural.WordTokenizer();
+describe('Brill\'s POS Tagger', function () {
+  let brillPOSTagger = null
+  let lexicon = null
+  let ruleSet = null
+  const tokenizer = new natural.WordTokenizer()
 
-  it('should process an English newspaper article just like the dariusk/pos-js module', function() {
-    lexicon = new natural.Lexicon('EN', 'NN');
-    expect(lexicon.nrEntries()).toBeGreaterThan(0);
-    ruleSet = new natural.RuleSet('EN');
-    expect(ruleSet.nrRules()).toBeGreaterThan(0);
-    brill_pos_tagger = new natural.BrillPOSTagger(lexicon, ruleSet);
+  it('should process an English newspaper article just like the dariusk/pos-js module', function () {
+    lexicon = new natural.Lexicon('EN', 'NN')
+    expect(lexicon.nrEntries()).toBeGreaterThan(0)
+    ruleSet = new natural.RuleSet('EN')
+    expect(ruleSet.nrRules()).toBeGreaterThan(0)
+    brillPOSTagger = new natural.BrillPOSTagger(lexicon, ruleSet)
 
-    englishSentences.forEach(function(sentence, index) {
-      var tokenized_sentence = tokenizer.tokenize(sentence);
-      var taggedSentence = brill_pos_tagger.tag(tokenized_sentence);
-      expect(compareTaggedSentences(englishTagResults[index], taggedSentence)).toBe(true);
-    });
-  });
+    englishSentences.forEach(function (sentence, index) {
+      const tokenizedSentence = tokenizer.tokenize(sentence)
+      const taggedSentence = brillPOSTagger.tag(tokenizedSentence)
+      expect(compareTaggedSentences(englishTagResults[index], taggedSentence)).toBe(true)
+    })
+  })
 
-  it('should tag a Dutch news paper article', function() {
-    lexicon = new natural.Lexicon('DU', 'N');
-    expect(lexicon.nrEntries()).toBeGreaterThan(0);
-    var ruleSet = new natural.RuleSet('DU');
-    expect(ruleSet.nrRules()).toBeGreaterThan(0);
-    brill_pos_tagger = new natural.BrillPOSTagger(lexicon, ruleSet);
+  it('should tag a Dutch news paper article', function () {
+    lexicon = new natural.Lexicon('DU', 'N')
+    expect(lexicon.nrEntries()).toBeGreaterThan(0)
+    const ruleSet = new natural.RuleSet('DU')
+    expect(ruleSet.nrRules()).toBeGreaterThan(0)
+    brillPOSTagger = new natural.BrillPOSTagger(lexicon, ruleSet)
 
-    dutchSentences.forEach(function(sentence, index) {
-      var tokenized_sentence = tokenizer.tokenize(sentence);
-      var taggedSentence = brill_pos_tagger.tag(tokenized_sentence);
-      expect(tokenized_sentence.length).toEqual(taggedSentence.taggedWords.length);
-    });
-  });
-
-});
+    dutchSentences.forEach(function (sentence, index) {
+      const tokenizedSentence = tokenizer.tokenize(sentence)
+      const taggedSentence = brillPOSTagger.tag(tokenizedSentence)
+      expect(tokenizedSentence.length).toEqual(taggedSentence.taggedWords.length)
+    })
+  })
+})

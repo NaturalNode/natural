@@ -20,126 +20,126 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var stemmer = require('../lib/natural/stemmers/porter_stemmer_no');
-const snowBallDict = require('spec/test_data/snowball_no.json');
+'use strict'
 
+const stemmer = require('../lib/natural/stemmers/porter_stemmer_no')
+const snowBallDict = require('spec/test_data/snowball_no.json')
 
-describe('porter_stemmer_no', function() {
-    it('should perform step 1a', function() {
-        expect(stemmer.step1a('forenkla')).toBe('forenkl');
-        expect(stemmer.step1a('aase')).toBe('aas');
-        expect(stemmer.step1a('allerede')).toBe('aller');
-        expect(stemmer.step1a('aukande')).toBe('auk');
-        expect(stemmer.step1a('avbøtende')).toBe('avbøt');
-        expect(stemmer.step1a('avdelingane')).toBe('avdeling');
-        expect(stemmer.step1a('avgiftene')).toBe('avgift');
-        expect(stemmer.step1a('havnevirksomhetene')).toBe('havnevirksom');
-        expect(stemmer.step1a('heimelen')).toBe('heimel');
-        expect(stemmer.step1a('hovedvirksomheten')).toBe('hovedvirksom');
-        expect(stemmer.step1a('hovudreglar')).toBe('hovudregl');
-        expect(stemmer.step1a('hugger')).toBe('hugg');
-        expect(stemmer.step1a('importvirksomheter')).toBe('importvirksom');
-        expect(stemmer.step1a('ivaretas')).toBe('ivaret');
-        expect(stemmer.step1a('iverksettes')).toBe('iverksett');
-        expect(stemmer.step1a('konsekvensutredes')).toBe('konsekvensutr');
-        expect(stemmer.step1a('oversendes')).toBe('overs');
-        expect(stemmer.step1a('pensjonenes')).toBe('pensjon');
-        expect(stemmer.step1a('myndighetenes')).toBe('myndig');
-        expect(stemmer.step1a('møteleiarens')).toBe('møteleiar');
-        expect(stemmer.step1a('virksomhetens')).toBe('virksom');
-        expect(stemmer.step1a('aktørers')).toBe('aktør');
-        expect(stemmer.step1a('arbeidslivets')).toBe('arbeidsliv');
-        expect(stemmer.step1a('arbeidskapasitet')).toBe('arbeidskapasit');
-        expect(stemmer.step1a('arealknapphet')).toBe('arealknapp');
-        expect(stemmer.step1a('attgjevast')).toBe('attgjev');
-    });
+describe('porter_stemmer_no', function () {
+  it('should perform step 1a', function () {
+    expect(stemmer.step1a('forenkla')).toBe('forenkl')
+    expect(stemmer.step1a('aase')).toBe('aas')
+    expect(stemmer.step1a('allerede')).toBe('aller')
+    expect(stemmer.step1a('aukande')).toBe('auk')
+    expect(stemmer.step1a('avbøtende')).toBe('avbøt')
+    expect(stemmer.step1a('avdelingane')).toBe('avdeling')
+    expect(stemmer.step1a('avgiftene')).toBe('avgift')
+    expect(stemmer.step1a('havnevirksomhetene')).toBe('havnevirksom')
+    expect(stemmer.step1a('heimelen')).toBe('heimel')
+    expect(stemmer.step1a('hovedvirksomheten')).toBe('hovedvirksom')
+    expect(stemmer.step1a('hovudreglar')).toBe('hovudregl')
+    expect(stemmer.step1a('hugger')).toBe('hugg')
+    expect(stemmer.step1a('importvirksomheter')).toBe('importvirksom')
+    expect(stemmer.step1a('ivaretas')).toBe('ivaret')
+    expect(stemmer.step1a('iverksettes')).toBe('iverksett')
+    expect(stemmer.step1a('konsekvensutredes')).toBe('konsekvensutr')
+    expect(stemmer.step1a('oversendes')).toBe('overs')
+    expect(stemmer.step1a('pensjonenes')).toBe('pensjon')
+    expect(stemmer.step1a('myndighetenes')).toBe('myndig')
+    expect(stemmer.step1a('møteleiarens')).toBe('møteleiar')
+    expect(stemmer.step1a('virksomhetens')).toBe('virksom')
+    expect(stemmer.step1a('aktørers')).toBe('aktør')
+    expect(stemmer.step1a('arbeidslivets')).toBe('arbeidsliv')
+    expect(stemmer.step1a('arbeidskapasitet')).toBe('arbeidskapasit')
+    expect(stemmer.step1a('arealknapphet')).toBe('arealknapp')
+    expect(stemmer.step1a('attgjevast')).toBe('attgjev')
+  })
 
-    it('should perform step 1b', function() {
-        expect(stemmer.step1b('hinder')).toBe('hinder');
-        expect(stemmer.step1b('erwerbs')).toBe('erwerb');
-        expect(stemmer.step1b('alltids')).toBe('alltid');
-    });
+  it('should perform step 1b', function () {
+    expect(stemmer.step1b('hinder')).toBe('hinder')
+    expect(stemmer.step1b('erwerbs')).toBe('erwerb')
+    expect(stemmer.step1b('alltids')).toBe('alltid')
+  })
 
-    it('should perform step 1c', function() {
-        expect(stemmer.step1c('akkumulerte')).toBe('akkumuler');
-        expect(stemmer.step1c('akseptert')).toBe('aksepter');
-    });
+  it('should perform step 1c', function () {
+    expect(stemmer.step1c('akkumulerte')).toBe('akkumuler')
+    expect(stemmer.step1c('akseptert')).toBe('aksepter')
+  })
 
-    it('should perform step 1 (a-c)', function() {
-        expect(stemmer.step1('andelar')).toBe('andel');
-        expect(stemmer.step1('andeleigar')).toBe('andeleig');
-        expect(stemmer.step1('andeleigarane')).toBe('andeleigar');
-        expect(stemmer.step1('andeleigarbok')).toBe('andeleigarbok');
-        expect(stemmer.step1('andelen')).toBe('andel');
-        expect(stemmer.step1('andelene')).toBe('andel');
-        expect(stemmer.step1('andeler')).toBe('andel');
-        expect(stemmer.step1('andelsbevis')).toBe('andelsbevis');
-        expect(stemmer.step1('andelsbok')).toBe('andelsbok');
-        expect(stemmer.step1('andelsboka')).toBe('andelsbok');
-        expect(stemmer.step1('andelsboligforening')).toBe('andelsboligforening');
-        expect(stemmer.step1('andelsboligforeninger')).toBe('andelsboligforening');
-        expect(stemmer.step1('andelsboligorganisation')).toBe('andelsboligorganisation');
-        expect(stemmer.step1('andelsboligorganisationer')).toBe('andelsboligorganisation');
-        expect(stemmer.step1('andelsbrev')).toBe('andelsbrev');
-    });
+  it('should perform step 1 (a-c)', function () {
+    expect(stemmer.step1('andelar')).toBe('andel')
+    expect(stemmer.step1('andeleigar')).toBe('andeleig')
+    expect(stemmer.step1('andeleigarane')).toBe('andeleigar')
+    expect(stemmer.step1('andeleigarbok')).toBe('andeleigarbok')
+    expect(stemmer.step1('andelen')).toBe('andel')
+    expect(stemmer.step1('andelene')).toBe('andel')
+    expect(stemmer.step1('andeler')).toBe('andel')
+    expect(stemmer.step1('andelsbevis')).toBe('andelsbevis')
+    expect(stemmer.step1('andelsbok')).toBe('andelsbok')
+    expect(stemmer.step1('andelsboka')).toBe('andelsbok')
+    expect(stemmer.step1('andelsboligforening')).toBe('andelsboligforening')
+    expect(stemmer.step1('andelsboligforeninger')).toBe('andelsboligforening')
+    expect(stemmer.step1('andelsboligorganisation')).toBe('andelsboligorganisation')
+    expect(stemmer.step1('andelsboligorganisationer')).toBe('andelsboligorganisation')
+    expect(stemmer.step1('andelsbrev')).toBe('andelsbrev')
+  })
 
-    it('should perform step 2', function() {
-        expect(stemmer.step2('hvorvidt')).toBe('hvorvid');
-        expect(stemmer.step2('innovativt')).toBe('innovativ');
-    });
+  it('should perform step 2', function () {
+    expect(stemmer.step2('hvorvidt')).toBe('hvorvid')
+    expect(stemmer.step2('innovativt')).toBe('innovativ')
+  })
 
-    it('should perform step 3', function() {
-        expect(stemmer.step3('lovleg')).toBe('lov');
-        expect(stemmer.step3('konkurranseskadeleg')).toBe('konkurranseskad');
-        expect(stemmer.step3('lystig')).toBe('lyst');
-        expect(stemmer.step3('utrolig')).toBe('utro');
-        expect(stemmer.step3('utrøstelig')).toBe('utrøst');
-        expect(stemmer.step3('boliglov')).toBe('bolig');
-        expect(stemmer.step3('samvirkelov')).toBe('samvirk');
-        expect(stemmer.step3('arveavgiftslov')).toBe('arveavgift');
-    });
+  it('should perform step 3', function () {
+    expect(stemmer.step3('lovleg')).toBe('lov')
+    expect(stemmer.step3('konkurranseskadeleg')).toBe('konkurranseskad')
+    expect(stemmer.step3('lystig')).toBe('lyst')
+    expect(stemmer.step3('utrolig')).toBe('utro')
+    expect(stemmer.step3('utrøstelig')).toBe('utrøst')
+    expect(stemmer.step3('boliglov')).toBe('bolig')
+    expect(stemmer.step3('samvirkelov')).toBe('samvirk')
+    expect(stemmer.step3('arveavgiftslov')).toBe('arveavgift')
+  })
 
-    it('should perform stemming on a lot of words', function() {
-      var ok = [];
-      var ko = [];
+  it('should perform stemming on a lot of words', function () {
+    const ok = []
+    const ko = []
 
-      Object.keys(snowBallDict).forEach(word => {
-        var stemmed = stemmer.stem(word);
-        var expectedStem = snowBallDict[word];
+    Object.keys(snowBallDict).forEach(word => {
+      const stemmed = stemmer.stem(word)
+      const expectedStem = snowBallDict[word]
 
-        if (stemmed === expectedStem) {
-          ok.push(word);
-        }
-        else {
-          ko.push({
-            word: word,
-            expected: expectedStem,
-            actual: stemmed
-          });
-        }
-      });
+      if (stemmed === expectedStem) {
+        ok.push(word)
+      } else {
+        ko.push({
+          word: word,
+          expected: expectedStem,
+          actual: stemmed
+        })
+      }
+    })
 
-      expect(ko.length).toBe(0);
-    });
+    expect(ko.length).toBe(0)
+  })
 
-    it('should perform complete stemming', function() {
-        expect(stemmer.step1a('forenkla')).toBe('forenkl');
-        expect(stemmer.step1a('aase')).toBe('aas');
-        expect(stemmer.step1a('allerede')).toBe('aller');
-        expect(stemmer.step1a('aukande')).toBe('auk');
-        expect(stemmer.step1a('avbøtende')).toBe('avbøt');
-        expect(stemmer.step1b('hinder')).toBe('hinder');
-        expect(stemmer.step1b('erwerbs')).toBe('erwerb');
-        expect(stemmer.step3('boliglov')).toBe('bolig');
-        expect(stemmer.step3('samvirkelov')).toBe('samvirk');
-        expect(stemmer.step3('arveavgiftslov')).toBe('arveavgift');
-    });
+  it('should perform complete stemming', function () {
+    expect(stemmer.step1a('forenkla')).toBe('forenkl')
+    expect(stemmer.step1a('aase')).toBe('aas')
+    expect(stemmer.step1a('allerede')).toBe('aller')
+    expect(stemmer.step1a('aukande')).toBe('auk')
+    expect(stemmer.step1a('avbøtende')).toBe('avbøt')
+    expect(stemmer.step1b('hinder')).toBe('hinder')
+    expect(stemmer.step1b('erwerbs')).toBe('erwerb')
+    expect(stemmer.step3('boliglov')).toBe('bolig')
+    expect(stemmer.step3('samvirkelov')).toBe('samvirk')
+    expect(stemmer.step3('arveavgiftslov')).toBe('arveavgift')
+  })
 
-    /*
+  /*
     it('should tokenize and stem attached', function() {
         stemmer.attach();
         expect('forebygger vedlikeholdsbehovene'.tokenizeAndStem()).toEqual(['forebygg', 'vedlikeholdsbehov']);
         expect('FOREBYGGER VEDLIKEHOLDSBEHOVENE'.tokenizeAndStem()).toEqual(['forebygg', 'vedlikeholdsbehov']);
     });
     */
-});
+})

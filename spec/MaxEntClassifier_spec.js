@@ -18,112 +18,106 @@
 
 'use strict'
 
-var natural = require('../lib/natural');
+const natural = require('../lib/natural')
 
-var SE_Element = natural.SEElement;
-var Context = natural.Context;
-var Feature = natural.Feature;
-var FeatureSet = natural.FeatureSet;
-var Sample = natural.Sample;
-var Scaler = natural.GISScaler;
-var Classifier = natural.MaxEntClassifier;
+const SEElement = natural.SEElement
+const Context = natural.Context
+const FeatureSet = natural.FeatureSet
+const Sample = natural.Sample
+const Classifier = natural.MaxEntClassifier
 
-var classifierFilename = "classifier.json";
-var minImprovement = 0.01;
-var nrIterations = 20;
+const classifierFilename = 'classifier.json'
+const minImprovement = 0.01
+const nrIterations = 20
 
-var sample = null;
-var featureSet = null;
-var classifier = null;
+let sample = null
+let featureSet = null
+let classifier = null
 
-const DEBUG = false;
+const DEBUG = false
 
-describe("The MaxEnt module", function() {
+describe('The MaxEnt module', function () {
+  it('The Sample class creates a sample', function () {
+    sample = new Sample()
+    sample.addElement(new SEElement('x', new Context('0')))
+    sample.addElement(new SEElement('x', new Context('0')))
+    sample.addElement(new SEElement('x', new Context('0')))
+    sample.addElement(new SEElement('y', new Context('0')))
+    sample.addElement(new SEElement('y', new Context('0')))
+    sample.addElement(new SEElement('y', new Context('0')))
 
-  it("The Sample class creates a sample", function() {
-    sample = new Sample();
-    sample.addElement(new SE_Element("x", new Context("0")));
-    sample.addElement(new SE_Element("x", new Context("0")));
-    sample.addElement(new SE_Element("x", new Context("0")));
-    sample.addElement(new SE_Element("y", new Context("0")));
-    sample.addElement(new SE_Element("y", new Context("0")));
-    sample.addElement(new SE_Element("y", new Context("0")));
+    sample.addElement(new SEElement('x', new Context('1')))
+    sample.addElement(new SEElement('y', new Context('1')))
+    sample.addElement(new SEElement('y', new Context('1')))
+    sample.addElement(new SEElement('y', new Context('1')))
 
-    sample.addElement(new SE_Element("x", new Context("1")));
-    sample.addElement(new SE_Element("y", new Context("1")));
-    sample.addElement(new SE_Element("y", new Context("1")));
-    sample.addElement(new SE_Element("y", new Context("1")));
+    expect(sample.size()).toBe(10)
+  })
 
-    expect(sample.size()).toBe(10);
-  });
+  it('The FeatureSet class creates a feature set', function () {
+    featureSet = new FeatureSet()
+    sample.generateFeatures(featureSet)
 
-  it("The FeatureSet class creates a feature set", function() {
-    featureSet = new FeatureSet();
-    sample.generateFeatures(featureSet);
+    expect(featureSet.size()).toBe(2)
+  })
 
-    expect(featureSet.size()).toBe(2);
-  });
-
-  it("The Classifier class creates a classifier", function() {
+  it('The Classifier class creates a classifier', function () {
     // Create a classifier
-    classifier = new Classifier(featureSet, sample);
+    classifier = new Classifier(featureSet, sample)
 
-    expect(classifier).not.toBe(undefined);
-  });
+    expect(classifier).not.toBe(undefined)
+  })
 
-  it("Classifier does not need a correction feature", function() {
+  it('Classifier does not need a correction feature', function () {
 
-  });
+  })
 
-  it("The classifier stops training after a specified number or iterations " +
-    "or when the minimum improvement in likelihood is reached", function() {
-    classifier.train(nrIterations, minImprovement);
+  it('The classifier stops training after a specified number or iterations ' +
+    'or when the minimum improvement in likelihood is reached', function () {
+    classifier.train(nrIterations, minImprovement)
 
-    expect(classifier.scaler.iteration).toBeLessThan(nrIterations + 1);
+    expect(classifier.scaler.iteration).toBeLessThan(nrIterations + 1)
     if (classifier.scaler.iteration < nrIterations) {
-      expect(classifier.scaler.improvement).toBeLessThan(minImprovement);
+      expect(classifier.scaler.improvement).toBeLessThan(minImprovement)
     }
-  });
+  })
 
-  it("Save classifer to a file", function(done) {
-    classifier.save(classifierFilename, function(err, c) {
+  it('Save classifer to a file', function (done) {
+    classifier.save(classifierFilename, function (err, c) {
       if (err) {
-        console.log(err);
+        console.log(err)
+      } else {
+        DEBUG && console.log('Classifier saved to ' + classifierFilename)
       }
-      else {
-        DEBUG && console.log("Classifier saved to "  + classifierFilename);
-      }
-      done();
-    });
-  });
+      done()
+    })
+  })
 
-  var newClassifier = null;
-  it("Load classifer", function(done) {
-    classifier.load(classifierFilename, SE_Element, function(err, c) {
+  let newClassifier = null
+  it('Load classifer', function (done) {
+    classifier.load(classifierFilename, SEElement, function (err, c) {
       if (err) {
-        console.log(err);
+        console.log(err)
+      } else {
+        DEBUG && console.log('Classifier loaded from ' + classifierFilename)
+        newClassifier = c
       }
-      else {
-        DEBUG && console.log("Classifier loaded from " + classifierFilename);
-        newClassifier = c;
-      }
-      done();
-    });
+      done()
+    })
     if (newClassifier) {
-      classifier = newClassifier;
+      classifier = newClassifier
     }
-  });
+  })
 
-  it("The classifier classifies events", function() {
-    var context = new Context("0");
-    DEBUG && console.log("Classes plus scores " + JSON.stringify(classifier.getClassifications(context)));
-    var classification = classifier.classify(context);
-    expect(classification).toBe("x");
+  it('The classifier classifies events', function () {
+    let context = new Context('0')
+    DEBUG && console.log('Classes plus scores ' + JSON.stringify(classifier.getClassifications(context)))
+    let classification = classifier.classify(context)
+    expect(classification).toBe('x')
 
-    var context = new Context("1");
-    DEBUG && console.log("Classes plus scores " + JSON.stringify(classifier.getClassifications(context)));
-    var classification = classifier.classify(context);
-    expect(classification).toBe("y");
-  });
-
-});
+    context = new Context('1')
+    DEBUG && console.log('Classes plus scores ' + JSON.stringify(classifier.getClassifications(context)))
+    classification = classifier.classify(context)
+    expect(classification).toBe('y')
+  })
+})

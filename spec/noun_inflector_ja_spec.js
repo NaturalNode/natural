@@ -20,85 +20,87 @@
  THE SOFTWARE.
  */
 
-var NounInflector = require('../lib/natural/inflectors/ja/noun_inflector'),
-    inflector = new NounInflector();
+'use strict'
 
-describe('NounInflector', function() {
-  describe('.pluralize()', function() {
-    it('should pluralize nouns', function() {
-      expect(inflector.pluralize('ひと')).toBe('ひとたち');
-      expect(inflector.pluralize('わたし')).toBe('わたしたち');
-      expect(inflector.pluralize('私')).toBe('私たち');
-    });
+const NounInflector = require('../lib/natural/inflectors/ja/noun_inflector')
+const inflector = new NounInflector()
 
-    it('should not pluralize exceptions', function() {
-      expect(inflector.pluralize('ともだち')).toBe('ともだち');
-      expect(inflector.pluralize('友だち')).toBe('友だち');
-      expect(inflector.pluralize('友達')).toBe('友達');
-    });
+describe('NounInflector', function () {
+  describe('.pluralize()', function () {
+    it('should pluralize nouns', function () {
+      expect(inflector.pluralize('ひと')).toBe('ひとたち')
+      expect(inflector.pluralize('わたし')).toBe('わたしたち')
+      expect(inflector.pluralize('私')).toBe('私たち')
+    })
 
-    it('should pluralize archaic forms', function() {
-      expect(inflector.pluralize('神')).toBe('神神');
-      expect(inflector.pluralize('人')).toBe('人人');
-      expect(inflector.pluralize('我')).toBe('我我');
-    });
-  });
+    it('should not pluralize exceptions', function () {
+      expect(inflector.pluralize('ともだち')).toBe('ともだち')
+      expect(inflector.pluralize('友だち')).toBe('友だち')
+      expect(inflector.pluralize('友達')).toBe('友達')
+    })
 
-  describe('.singularize()', function() {
-    it('should singularize regular nouns ending by -tachi in Hiragana', function() {
-      expect(inflector.singularize('わたしたち')).toBe('わたし');
-      expect(inflector.singularize('人たち')).toBe('人');
-      expect(inflector.singularize('りかたち')).toBe('りか');
-    });
+    it('should pluralize archaic forms', function () {
+      expect(inflector.pluralize('神')).toBe('神神')
+      expect(inflector.pluralize('人')).toBe('人人')
+      expect(inflector.pluralize('我')).toBe('我我')
+    })
+  })
 
-    it('should not singularize exception nouns ending by -tachi in Hiragana', function() {
-      expect(inflector.singularize('ついたち')).toBe('ついたち');
-      expect(inflector.singularize('かたち')).toBe('かたち');
-      expect(inflector.singularize('はたち')).toBe('はたち');
-    });
+  describe('.singularize()', function () {
+    it('should singularize regular nouns ending by -tachi in Hiragana', function () {
+      expect(inflector.singularize('わたしたち')).toBe('わたし')
+      expect(inflector.singularize('人たち')).toBe('人')
+      expect(inflector.singularize('りかたち')).toBe('りか')
+    })
 
-    it('should singularize regular nouns ending by -tachi in Kanji', function() {
-      expect(inflector.singularize('わたし達')).toBe('わたし');
-      expect(inflector.singularize('人達')).toBe('人');
-      expect(inflector.singularize('日伊達')).toBe('日伊');
-    });
+    it('should not singularize exception nouns ending by -tachi in Hiragana', function () {
+      expect(inflector.singularize('ついたち')).toBe('ついたち')
+      expect(inflector.singularize('かたち')).toBe('かたち')
+      expect(inflector.singularize('はたち')).toBe('はたち')
+    })
 
-    it('should not singularize exception nouns ending by -tachi in Kanji', function() {
-      expect(inflector.singularize('上達')).toBe('上達');
-      expect(inflector.singularize('配達')).toBe('配達');
-      expect(inflector.singularize('発達')).toBe('発達');
-    });
+    it('should singularize regular nouns ending by -tachi in Kanji', function () {
+      expect(inflector.singularize('わたし達')).toBe('わたし')
+      expect(inflector.singularize('人達')).toBe('人')
+      expect(inflector.singularize('日伊達')).toBe('日伊')
+    })
 
-    it('should singularize regular nouns ending by -ra in Kanji', function() {
-      expect(inflector.singularize('僕等')).toBe('僕');
-      expect(inflector.singularize('貴様等')).toBe('貴様');
-      expect(inflector.singularize('圭一等')).toBe('圭一');
-    });
+    it('should not singularize exception nouns ending by -tachi in Kanji', function () {
+      expect(inflector.singularize('上達')).toBe('上達')
+      expect(inflector.singularize('配達')).toBe('配達')
+      expect(inflector.singularize('発達')).toBe('発達')
+    })
 
-    it('should not singularize exception nouns ending by -ra in Kanji', function() {
-      expect(inflector.singularize('下等')).toBe('下等');
-      expect(inflector.singularize('初等')).toBe('初等');
-      expect(inflector.singularize('一等')).toBe('一等');
-    });
+    it('should singularize regular nouns ending by -ra in Kanji', function () {
+      expect(inflector.singularize('僕等')).toBe('僕')
+      expect(inflector.singularize('貴様等')).toBe('貴様')
+      expect(inflector.singularize('圭一等')).toBe('圭一')
+    })
 
-    it('should singularize regular nouns ending by -gata', function() {
-      expect(inflector.singularize('神様方')).toBe('神様');
-      expect(inflector.singularize('先生方')).toBe('先生');
-      expect(inflector.singularize('あなたがた')).toBe('あなた');
-    });
+    it('should not singularize exception nouns ending by -ra in Kanji', function () {
+      expect(inflector.singularize('下等')).toBe('下等')
+      expect(inflector.singularize('初等')).toBe('初等')
+      expect(inflector.singularize('一等')).toBe('一等')
+    })
 
-    it('should singularize regular nouns ending by -domo', function() {
-      expect(inflector.singularize('人間共')).toBe('人間');
-      expect(inflector.singularize('野郎共')).toBe('野郎');
-      expect(inflector.singularize('ガキども')).toBe('ガキ');
-    });
+    it('should singularize regular nouns ending by -gata', function () {
+      expect(inflector.singularize('神様方')).toBe('神様')
+      expect(inflector.singularize('先生方')).toBe('先生')
+      expect(inflector.singularize('あなたがた')).toBe('あなた')
+    })
 
-    it('should pluralize archaic forms', function() {
-      expect(inflector.singularize('神神')).toBe('神');
-      expect(inflector.singularize('人人')).toBe('人');
-      expect(inflector.singularize('我我')).toBe('我');
-    });
-  });
+    it('should singularize regular nouns ending by -domo', function () {
+      expect(inflector.singularize('人間共')).toBe('人間')
+      expect(inflector.singularize('野郎共')).toBe('野郎')
+      expect(inflector.singularize('ガキども')).toBe('ガキ')
+    })
+
+    it('should pluralize archaic forms', function () {
+      expect(inflector.singularize('神神')).toBe('神')
+      expect(inflector.singularize('人人')).toBe('人')
+      expect(inflector.singularize('我我')).toBe('我')
+    })
+  })
 
   /*
   describe('.attach()', function() {
@@ -111,4 +113,4 @@ describe('NounInflector', function() {
     });
   });
   */
-});
+})

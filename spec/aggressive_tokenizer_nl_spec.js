@@ -20,13 +20,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWé OR THE USE OR OTHER DEALINGS IN
 THE SOFTWé.
 */
 
-var Tokenizer = require('../lib/natural/tokenizers/aggressive_tokenizer_nl'),
-    tokenizer = new Tokenizer();
+'use strict'
 
-describe('aggressive_tokenizer_nl', function() {
-  it('should tokenize strings', function() {
-    expect(tokenizer.tokenize('\'s Morgens is het nog erg koud, vertelde de weerman over een van de radio\'s')).toEqual(['\'s','Morgens','is','het','nog','erg','koud','vertelde','de','weerman','over','een','van','de','radio\'s']);
-  });
+const Tokenizer = require('../lib/natural/tokenizers/aggressive_tokenizer_nl')
+const tokenizer = new Tokenizer()
+
+describe('aggressive_tokenizer_nl', function () {
+  it('should tokenize strings', function () {
+    expect(tokenizer.tokenize('\'s Morgens is het nog erg koud, vertelde de weerman over een van de radio\'s')).toEqual(['\'s', 'Morgens', 'is', 'het', 'nog', 'erg', 'koud', 'vertelde', 'de', 'weerman', 'over', 'een', 'van', 'de', 'radio\'s'])
+  })
 
   /*
   it('should tokenize strings via attached string method', function() {
@@ -34,5 +36,4 @@ describe('aggressive_tokenizer_nl', function() {
     expect('\'s Morgens is het nog erg koud, vertelde de weerman over een van de radio\'s'.tokenize()).toEqual(['\'s','Morgens','is','het','nog','erg','koud','vertelde','de','weerman','over','een','van','de','radio\'s']);
   });
   */
-
-});
+})

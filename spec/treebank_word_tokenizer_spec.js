@@ -20,17 +20,19 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var Tokenizer = require('../lib/natural/tokenizers/treebank_word_tokenizer'),
-  tokenizer = new Tokenizer();
+'use strict'
 
-describe('treebank', function() {
-    it('should tokenize', function() {
-        var tokens = tokenizer.tokenize("If we 'all' can't go. I'll stay home.");
-        expect(tokens).toEqual(['If', 'we', "'all", "'", 'ca', "n't", 'go.',
-            'I', "'ll", 'stay', 'home', '.']);
-        
-        tokens = tokenizer.tokenize("If we 'all' can't go. I'll stay home. If we 'all' can't go. I'll stay home.");
-        expect(tokens).toEqual(['If', 'we', "'all", "'", 'ca', "n't", 'go.',
-            'I', "'ll", 'stay', 'home.', 'If', 'we', "'all", "'", 'ca', "n't", 'go.', 'I', "'ll", 'stay', 'home', '.']);        
-    });    
-});
+const Tokenizer = require('../lib/natural/tokenizers/treebank_word_tokenizer')
+const tokenizer = new Tokenizer()
+
+describe('treebank', function () {
+  it('should tokenize', function () {
+    let tokens = tokenizer.tokenize("If we 'all' can't go. I'll stay home.")
+    expect(tokens).toEqual(['If', 'we', "'all", "'", 'ca', "n't", 'go.',
+      'I', "'ll", 'stay', 'home', '.'])
+
+    tokens = tokenizer.tokenize("If we 'all' can't go. I'll stay home. If we 'all' can't go. I'll stay home.")
+    expect(tokens).toEqual(['If', 'we', "'all", "'", 'ca', "n't", 'go.',
+      'I', "'ll", 'stay', 'home.', 'If', 'we', "'all", "'", 'ca', "n't", 'go.', 'I', "'ll", 'stay', 'home', '.'])
+  })
+})
