@@ -1,8 +1,7 @@
 # natural
 
 [![NPM version](https://img.shields.io/npm/v/natural.svg)](https://www.npmjs.com/package/natural)
-[![Build Status](https://travis-ci.org/NaturalNode/natural.png?branch=master)](https://travis-ci.org/NaturalNode/natural)
-https://github.com/NaturalNode/natural/workflows/Node.js%20CI/badge.svg
+[![Node.js CI](https://github.com/NaturalNode/natural/workflows/Node.js%20CI/badge.svg)](https://github.com/marketplace/actions)
 [![GitHub Super-Linter](https://github.com/NaturalNode/natural/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
 [![Slack](https://slack.bri.im/badge.svg)](https://slack.bri.im)
 
