@@ -57,7 +57,7 @@ describe('logistic regression', function () {
     expect(classifier.getClassifications('i write code')[1].label).toBe('literature')
   })
 
-  it('should classify with arrays', function () {
+  function createClassifier () {
     const classifier = new natural.LogisticRegressionClassifier()
     classifier.addDocument('i fixed the box', 'computing')
     classifier.addDocument('i write code', 'computing')
@@ -66,20 +66,18 @@ describe('logistic regression', function () {
     classifier.addDocument('read a book', 'literature')
     classifier.addDocument('study the books', 'literature')
 
-    classifier.train()
+    return classifier
+  }
 
+  it('should classify with arrays', function () {
+    const classifier = createClassifier()
+    classifier.train()
     expect(classifier.classify('a bug in the code')).toBe('computing')
     expect(classifier.classify('read all the books')).toBe('literature')
   })
 
   it('should serialize and deserialize a working classifier', function () {
-    const classifier = new natural.LogisticRegressionClassifier()
-    classifier.addDocument('i fixed the box', 'computing')
-    classifier.addDocument('i write code', 'computing')
-    classifier.addDocument('nasty script code', 'computing')
-    classifier.addDocument('write a book', 'literature')
-    classifier.addDocument('read a book', 'literature')
-    classifier.addDocument('study the books', 'literature')
+    const classifier = createClassifier()
 
     const obj = JSON.stringify(classifier)
     const newClassifier = natural.LogisticRegressionClassifier.restore(JSON.parse(obj))
