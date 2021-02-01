@@ -53,7 +53,7 @@ describe('tfidf', function () {
         ]
       })
       tfidf.tfidfs('two', function (i, tfidf, key) {
-        if (i === 0) { expect(key).toBe('un') } else { expect(key).toBe('deux') }
+        if (i === 1) { expect(key).toBe('deux') } else { expect(key).toBe('un') }
       })
     })
 

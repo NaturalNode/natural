@@ -30,6 +30,29 @@ describe('sentence analyzer', function () {
     new SentenceAnalyzer(null, function () { })
   })
 
+  function testSentenceAnalyzer (sentenceTags, tests, callback) {
+    new SentenceAnalyzer({ tags: sentenceTags }, function (analyzer) {
+      analyzer.part(function (part) {
+        const posTags = part.posObj.tags
+        for (let tagNum = 0; tagNum < posTags.length; tagNum++) {
+          const posTag = posTags[tagNum]
+          tests.forEach(t => {
+            if (posTag.token === t.token) {
+              expect(posTag[t.argument]).toEqual(t.result)
+            }
+          })
+        }
+        const lastTagNum = posTags.length - 1
+        tests.forEach(t => {
+          if (t.index) {
+            expect(posTags[lastTagNum][t.argument]).toEqual(t.result)
+          }
+        })
+      })
+      callback(analyzer)
+    })
+  }
+
   it('should determine PP and SP, given a POS', function () {
     const sentenceTags = [
       { token: 'The', pos: 'DT' },
@@ -41,22 +64,25 @@ describe('sentence analyzer', function () {
       { token: 'little', pos: 'JJ' },
       { token: 'squirrel', pos: 'NN' }
     ]
-    new SentenceAnalyzer({ tags: sentenceTags }, function (analyzer) {
-      analyzer.part(function (part) {
-        const posTags = part.posObj.tags
-        for (let tagNum = 0; tagNum < posTags.length; tagNum++) {
-          const posTag = posTags[tagNum]
-          if (posTag.token === 'angry') {
-            expect(posTag.spos).toEqual('SP')
-          } else if (posTag.token === 'squirrel') {
-            expect(posTag.spos).toEqual('PP')
-          }
-        }
-        expect(analyzer.subjectToString().trim()).toEqual('The angry bear')
-        expect(analyzer.predicateToString().trim()).toEqual('chased the frightened little squirrel')
-        expect(analyzer.toString().trim()).toEqual('The angry bear chased the frightened little squirrel')
-        expect(analyzer.implicitYou()).toEqual(false)
-      })
+
+    const tests = [
+      {
+        token: 'angry',
+        argument: 'spos',
+        result: 'SP'
+      },
+      {
+        token: 'squirrel',
+        argument: 'spos',
+        result: 'PP'
+      }
+    ]
+
+    testSentenceAnalyzer(sentenceTags, tests, function (analyzer) {
+      expect(analyzer.subjectToString().trim()).toEqual('The angry bear')
+      expect(analyzer.predicateToString().trim()).toEqual('chased the frightened little squirrel')
+      expect(analyzer.toString().trim()).toEqual('The angry bear chased the frightened little squirrel')
+      expect(analyzer.implicitYou()).toEqual(false)
     })
   })
 
@@ -66,24 +92,37 @@ describe('sentence analyzer', function () {
       { token: 'for', pos: 'IN' },
       { token: 'me', pos: 'PRP' }
     ]
-    new SentenceAnalyzer({ tags: sentenceTags }, function (analyzer) {
-      analyzer.part(function (part) {
-        const posTags = part.posObj.tags
-        for (let tagNum = 0; tagNum < posTags.length; tagNum++) {
-          const posTag = posTags[tagNum]
-          if (posTag.token === 'Vote') {
-            expect(posTag.spos).toEqual('PP')
-          } else if (posTag.token === 'me') {
-            expect(posTag.pp).toEqual(true)
-          }
-        }
-        // Adds implicit you.
-        const lastTagNum = posTags.length - 1
-        expect(posTags[lastTagNum].token).toEqual('You')
-        expect(posTags[lastTagNum].pos).toEqual('PRP')
-        expect(posTags[lastTagNum].added).toEqual(true)
-        expect(analyzer.implicitYou()).toEqual(true)
-      })
+
+    const tests = [
+      {
+        token: 'Vote',
+        argument: 'spos',
+        result: 'PP'
+      },
+      {
+        token: 'me',
+        argument: 'pp',
+        result: true
+      },
+      {
+        index: 'LAST',
+        argument: 'token',
+        result: 'You'
+      },
+      {
+        index: 'LAST',
+        argument: 'pos',
+        result: 'PRP'
+      },
+      {
+        index: 'LAST',
+        argument: 'added',
+        result: true
+      }
+    ]
+
+    testSentenceAnalyzer(sentenceTags, tests, function (analyzer) {
+      expect(analyzer.implicitYou()).toEqual(true)
     })
   })
 
@@ -97,24 +136,38 @@ describe('sentence analyzer', function () {
       { token: 'the', pos: 'DT' },
       { token: 'valley', pos: 'DT' }
     ]
-    new SentenceAnalyzer({ tags: sentenceTags }, function (analyzer) {
-      analyzer.part(function (part) {
-        const posTags = part.posObj.tags
-        for (let tagNum = 0; tagNum < posTags.length; tagNum++) {
-          const posTag = posTags[tagNum]
-          if (posTag.token === 'There') {
-            expect(posTag.spos).toEqual('SP')
-          } else if (posTag.token === 'is') {
-            expect(posTag.spos).toEqual('SP')
-          }
-        }
-        expect(analyzer.subjectToString().trim()).toEqual('There is a house')
-        expect(analyzer.predicateToString().trim()).toEqual('')
-        expect(analyzer.toString().trim()).toEqual('There is a house in the valley')
-        expect(analyzer.implicitYou()).toEqual(false)
-      })
+
+    const tests = [
+      {
+        token: 'There',
+        argument: 'spos',
+        result: 'SP'
+      },
+      {
+        token: 'is',
+        argument: 'spos',
+        result: 'SP'
+      }
+    ]
+
+    testSentenceAnalyzer(sentenceTags, tests, function (analyzer) {
+      expect(analyzer.subjectToString().trim()).toEqual('There is a house')
+      expect(analyzer.predicateToString().trim()).toEqual('')
+      expect(analyzer.toString().trim()).toEqual('There is a house in the valley')
+      expect(analyzer.implicitYou()).toEqual(false)
     })
   })
+
+  function testSentenceType (args, sentenceType, callback) {
+    new SentenceAnalyzer(args, function (analyzer) {
+      analyzer.part(function () {
+        analyzer.type(function (type) {
+          expect(analyzer.senType).toEqual(sentenceType)
+        })
+      })
+      callback && callback(analyzer)
+    })
+  }
 
   describe('#type', function () {
     it('should determine a command without punctuation', function () {
@@ -126,13 +179,8 @@ describe('sentence analyzer', function () {
       const punct = function () {
         return []
       }
-      new SentenceAnalyzer({ tags: sentenceTags, punct: punct }, function (analyzer) {
-        analyzer.part(function () {
-          analyzer.type(function (type) {
-            expect(analyzer.senType).toEqual('COMMAND')
-          })
-        })
-      })
+
+      testSentenceType({ tags: sentenceTags, punct: punct }, 'COMMAND', null)
     })
 
     it('should determine an interrogative beginning with who', function () {
@@ -143,13 +191,8 @@ describe('sentence analyzer', function () {
       const punct = function () {
         return []
       }
-      new SentenceAnalyzer({ tags: sentenceTags, punct: punct }, function (analyzer) {
-        analyzer.part(function () {
-          analyzer.type(function (type) {
-            expect(analyzer.senType).toEqual('INTERROGATIVE')
-          })
-        })
-      })
+
+      testSentenceType({ tags: sentenceTags, punct: punct }, 'INTERROGATIVE', null)
     })
 
     it('should determine an interrogative ending with a personal pronoun', function () {
@@ -160,13 +203,8 @@ describe('sentence analyzer', function () {
       const punct = function () {
         return ''
       }
-      new SentenceAnalyzer({ tags: sentenceTags, punct: punct }, function (analyzer) {
-        analyzer.part(function () {
-          analyzer.type(function (type) {
-            expect(analyzer.senType).toEqual('INTERROGATIVE')
-          })
-        })
-      })
+
+      testSentenceType({ tags: sentenceTags, punct: punct }, 'INTERROGATIVE', null)
     })
 
     it('should classify other sentences as unknown', function () {
@@ -178,13 +216,8 @@ describe('sentence analyzer', function () {
       const punct = function () {
         return ''
       }
-      new SentenceAnalyzer({ tags: sentenceTags, punct: punct }, function (analyzer) {
-        analyzer.part(function () {
-          analyzer.type(function (type) {
-            expect(analyzer.senType).toEqual('UNKNOWN')
-          })
-        })
-      })
+
+      testSentenceType({ tags: sentenceTags, punct: punct }, 'UNKNOWN', null)
     })
 
     it('should determine an interrogative ending with a question mark', function () {
@@ -196,84 +229,52 @@ describe('sentence analyzer', function () {
       const punct = function () {
         return [{ token: '?', pos: '.' }]
       }
-      new SentenceAnalyzer({ tags: sentenceTags, punct: punct }, function (analyzer) {
-        analyzer.part(function () {
-          analyzer.type(function (type) {
-            expect(analyzer.senType).toEqual('INTERROGATIVE')
-          })
-        })
-      })
+
+      testSentenceType({ tags: sentenceTags, punct: punct }, 'INTERROGATIVE', null)
     })
+
+    const taggedSentForCommand = [
+      { token: 'Vote', pos: 'VB' },
+      { token: 'for', pos: 'IN' },
+      { token: 'me', pos: 'PRP' }
+    ]
 
     it('should determine a command ending in an exclamation point', function () {
-      const sentenceTags = [
-        { token: 'Vote', pos: 'VB' },
-        { token: 'for', pos: 'IN' },
-        { token: 'me', pos: 'PRP' }
-      ]
       const punct = function () {
         return [{ token: '!', pos: '.' }]
       }
-      new SentenceAnalyzer({ tags: sentenceTags, punct: punct }, function (analyzer) {
-        analyzer.part(function () {
-          analyzer.type(function (type) {
-            expect(analyzer.senType).toEqual('COMMAND')
-          })
-        })
-      })
-    })
 
-    it('should determine an exclamation ending in an exclamation point', function () {
-      const sentenceTags = [
-        { token: 'We', pos: 'PRP' },
-        { token: 'like', pos: 'VB' },
-        { token: 'sheep', pos: 'NN' }
-      ]
-      const punct = function () {
-        return [{ token: '!', pos: '.' }]
-      }
-      new SentenceAnalyzer({ tags: sentenceTags, punct: punct }, function (analyzer) {
-        analyzer.part(function () {
-          analyzer.type(function (type) {
-            expect(analyzer.senType).toEqual('EXCLAMATORY')
-          })
-        })
-      })
+      testSentenceType({ tags: taggedSentForCommand, punct: punct }, 'COMMAND', null)
     })
 
     it('should determine a command ending with .', function () {
-      const sentenceTags = [
-        { token: 'Vote', pos: 'VB' },
-        { token: 'for', pos: 'IN' },
-        { token: 'me', pos: 'PRP' }
-      ]
       const punct = function () {
         return [{ token: '.', pos: '.' }]
       }
-      new SentenceAnalyzer({ tags: sentenceTags, punct: punct }, function (analyzer) {
-        analyzer.part(function () {
-          analyzer.type(function (type) {
-            expect(analyzer.senType).toEqual('COMMAND')
-          })
-        })
-      })
+
+      testSentenceType({ tags: taggedSentForCommand, punct: punct }, 'COMMAND', null)
+    })
+
+    const taggedSentenceForExclam = [
+      { token: 'We', pos: 'PRP' },
+      { token: 'like', pos: 'VB' },
+      { token: 'sheep', pos: 'NN' }
+    ]
+
+    it('should determine an exclamation ending in an exclamation point', function () {
+      const punct = function () {
+        return [{ token: '!', pos: '.' }]
+      }
+
+      testSentenceType({ tags: taggedSentenceForExclam, punct: punct }, 'EXCLAMATORY', null)
     })
 
     it('should determine a declaration ending with a .', function () {
-      const sentenceTags = [
-        { token: 'We', pos: 'PRP' },
-        { token: 'like', pos: 'VB' },
-        { token: 'sheep', pos: 'NN' }
-      ]
       const punct = function () {
         return [{ token: '.', pos: '.' }]
       }
-      new SentenceAnalyzer({ tags: sentenceTags, punct: punct }, function (analyzer) {
-        analyzer.part(function () {
-          const type = analyzer.type()
-          expect(type).toEqual('DECLARATIVE')
-        })
-      })
+
+      testSentenceType({ tags: taggedSentenceForExclam, punct: punct }, 'DECLARATIVE', null)
     })
   })
 })

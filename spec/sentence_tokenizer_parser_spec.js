@@ -96,6 +96,9 @@ describe('sentence_tokenizer', function () {
     ).toEqual([
       'Pi is approximately equal to 3.14.'
     ])
+  })
+
+  it('should tokenize text with a number like "1)" present ', function () {
     expect(
       tokenizer.tokenize("This is a sentence that can't 1) be parsed with SentenceTokenizerNew. Here is another sentence.")
     ).toEqual([

@@ -107,27 +107,27 @@ describe('trie', function () {
     })
   })
 
+  function expectResults (results) {
+    expect(results).toContain('a')
+    expect(results).toContain('ab')
+    expect(results).toContain('abc')
+    expect(results).not.toContain('bc')
+    expect(results).not.toContain('cd')
+  }
+
   describe('prefix searching', function () {
     it('should be able to find all full prefix matched words along a path.', function () {
       const trie = new Trie()
       trie.addStrings(['a', 'ab', 'bc', 'cd', 'abc'])
       const results = trie.findMatchesOnPath('abcd')
-      expect(results).toContain('a')
-      expect(results).toContain('ab')
-      expect(results).toContain('abc')
-      expect(results).not.toContain('bc')
-      expect(results).not.toContain('cd')
+      expectResults(results)
     })
 
     it('should be able to guess all full prefix matched words.', function () {
       const trie = new Trie()
       trie.addStrings(['a', 'ab', 'bc', 'cd', 'abc'])
       let results = trie.keysWithPrefix('a')
-      expect(results).toContain('a')
-      expect(results).toContain('ab')
-      expect(results).toContain('abc')
-      expect(results).not.toContain('bc')
-      expect(results).not.toContain('cd')
+      expectResults(results)
       results = trie.keysWithPrefix('ab')
       expect(results).toContain('ab')
       expect(results).toContain('abc')
@@ -183,11 +183,7 @@ describe('trie', function () {
       const trie = new Trie(false)
       trie.addStrings(['a', 'ab', 'bc', 'cd', 'abc'])
       const results = trie.findMatchesOnPath('ABcD')
-      expect(results).toContain('a')
-      expect(results).toContain('ab')
-      expect(results).toContain('abc')
-      expect(results).not.toContain('bc')
-      expect(results).not.toContain('cd')
+      expectResults(results)
     })
 
     it('should have findPrefix in case-insensitive mode', function () {
