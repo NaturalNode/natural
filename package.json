@@ -45,6 +45,12 @@
       "jasmine": true
     }
   },
+  "jscpd": {
+    "ignore": [
+      "/lib/natural/brill_pos_tagger/lib/TF_Parser.js",
+      "/lib/natural/tokenizers/parser_sentence_tokenizer.js"
+    ]
+  },
   "scripts": {
     "benchmark": "node benchmarks",
     "clean": "rimraf *~ #* *classifier.json",
