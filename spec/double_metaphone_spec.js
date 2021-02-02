@@ -451,6 +451,7 @@ describe('double metaphone', function () {
       expect(encodings[1]).not.toContain('PP')
     })
 
+    /* jscpd:ignore-start */
     it('should skip P before B i.e. raspberry', function () {
       const encodings = doubleMetaphone.process('raspberry')
       expect(encodings[0]).toContain('P')
@@ -460,6 +461,7 @@ describe('double metaphone', function () {
       expect(encodings[1]).not.toContain('PP')
       expect(encodings[1]).not.toContain('PB')
     })
+    /* jscpd:ignore-end */
   })
 
   describe('Q', function () {
