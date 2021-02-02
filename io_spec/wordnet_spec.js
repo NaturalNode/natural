@@ -34,14 +34,18 @@ describe('wordnet', function () {
     })
   })
 
+  function expectResults (records) {
+    expect(records.length).toBe(3)
+    expect(records[0].synsetOffset).toBe(4431553)
+    expect(records[1].synsetOffset).toBe(2137)
+    expect(records[2].synsetOffset).toBe(1930)
+  }
+
   it('should lookup synonyms give a synset offset and a pos', function (done) {
     const wordnet = new WordNet()
 
     wordnet.getSynonyms(1740, 'n', function (records) {
-      expect(records.length).toBe(3)
-      expect(records[0].synsetOffset).toBe(4431553)
-      expect(records[1].synsetOffset).toBe(2137)
-      expect(records[2].synsetOffset).toBe(1930)
+      expectResults(records)
       done()
     })
   })
@@ -51,10 +55,7 @@ describe('wordnet', function () {
 
     wordnet.lookup('entity', function (results) {
       wordnet.getSynonyms(results[0], function (records) {
-        expect(records.length).toBe(3)
-        expect(records[0].synsetOffset).toBe(4431553)
-        expect(records[1].synsetOffset).toBe(2137)
-        expect(records[2].synsetOffset).toBe(1930)
+        expectResults(records)
         done()
       })
     })
