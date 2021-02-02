@@ -26,7 +26,7 @@ const natural = require('../lib/natural')
 // var sinon = require('sinon');
 // var baseClassifier = require('../lib/natural/classifiers/classifier.js');
 
-function setupClassifier( ) {
+function setupClassifier () {
   const classifier = new natural.BayesClassifier()
   classifier.addDocument(['fix', 'box'], 'computing')
   classifier.addDocument(['write', 'code'], 'computing')
@@ -41,16 +41,7 @@ describe('bayes classifier', function () {
   describe('classifier', function () {
     it('should classify with arrays', function () {
       const classifier = setupClassifier()
-      /*new natural.BayesClassifier()
-      classifier.addDocument(['fix', 'box'], 'computing')
-      classifier.addDocument(['write', 'code'], 'computing')
-      classifier.addDocument(['script', 'code'], 'computing')
-      classifier.addDocument(['write', 'book'], 'literature')
-      classifier.addDocument(['read', 'book'], 'literature')
-      classifier.addDocument(['study', 'book'], 'literature')*/
-
       classifier.train()
-
       expect(classifier.classify(['bug', 'code'])).toBe('computing')
       expect(classifier.classify(['read', 'thing'])).toBe('literature')
     })
@@ -92,7 +83,7 @@ describe('bayes classifier', function () {
       expect(classifier.getClassifications('i write code')[1].label).toBe('literature')
     })
 
-    it('should classify with strings', function () {
+    function setupClassifierWithSentences () {
       const classifier = new natural.BayesClassifier()
       classifier.addDocument('i fixed the box', 'computing')
       classifier.addDocument('i write code', 'computing')
@@ -100,9 +91,12 @@ describe('bayes classifier', function () {
       classifier.addDocument('write a book', 'literature')
       classifier.addDocument('read a book', 'literature')
       classifier.addDocument('study the books', 'literature')
+      return classifier
+    }
 
+    it('should classify with strings', function () {
+      const classifier = setupClassifierWithSentences()
       classifier.train()
-
       expect(classifier.classify('a bug in the code')).toBe('computing')
       expect(classifier.classify('read all the books')).toBe('literature')
     })
@@ -145,14 +139,7 @@ describe('bayes classifier', function () {
     })
 
     it('should serialize and deserialize a working classifier', function () {
-      const classifier = new natural.BayesClassifier()
-      classifier.addDocument('i fixed the box', 'computing')
-      classifier.addDocument('i write code', 'computing')
-      classifier.addDocument('nasty script code', 'computing')
-      classifier.addDocument('write a book', 'literature')
-      classifier.addDocument('read a book', 'literature')
-      classifier.addDocument('study the books', 'literature')
-
+      const classifier = setupClassifierWithSentences()
       const obj = JSON.stringify(classifier)
       const newClassifier = natural.BayesClassifier.restore(JSON.parse(obj))
 
