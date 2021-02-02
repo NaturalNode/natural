@@ -26,16 +26,28 @@ const natural = require('../lib/natural')
 // var sinon = require('sinon');
 // var baseClassifier = require('../lib/natural/classifiers/classifier.js');
 
+function setupClassifier( ) {
+  const classifier = new natural.BayesClassifier()
+  classifier.addDocument(['fix', 'box'], 'computing')
+  classifier.addDocument(['write', 'code'], 'computing')
+  classifier.addDocument(['script', 'code'], 'computing')
+  classifier.addDocument(['write', 'book'], 'literature')
+  classifier.addDocument(['read', 'book'], 'literature')
+  classifier.addDocument(['study', 'book'], 'literature')
+  return classifier
+}
+
 describe('bayes classifier', function () {
   describe('classifier', function () {
     it('should classify with arrays', function () {
-      const classifier = new natural.BayesClassifier()
+      const classifier = setupClassifier()
+      /*new natural.BayesClassifier()
       classifier.addDocument(['fix', 'box'], 'computing')
       classifier.addDocument(['write', 'code'], 'computing')
       classifier.addDocument(['script', 'code'], 'computing')
       classifier.addDocument(['write', 'book'], 'literature')
       classifier.addDocument(['read', 'book'], 'literature')
-      classifier.addDocument(['study', 'book'], 'literature')
+      classifier.addDocument(['study', 'book'], 'literature')*/
 
       classifier.train()
 
@@ -44,16 +56,9 @@ describe('bayes classifier', function () {
     })
 
     it('should classify with parallel training', function () {
-      const classifier = new natural.BayesClassifier()
+      const classifier = setupClassifier()
       // Check for parallel method
       if (classifier.trainParallel) {
-        classifier.addDocument(['fix', 'box'], 'computing')
-        classifier.addDocument(['write', 'code'], 'computing')
-        classifier.addDocument(['script', 'code'], 'computing')
-        classifier.addDocument(['write', 'book'], 'literature')
-        classifier.addDocument(['read', 'book'], 'literature')
-        classifier.addDocument(['study', 'book'], 'literature')
-
         classifier.trainParallel(2, function (err) {
           if (err) {
             console.log(err)
@@ -67,16 +72,9 @@ describe('bayes classifier', function () {
     })
 
     it('should classify with parallel batched training', function () {
-      const classifier = new natural.BayesClassifier()
+      const classifier = setupClassifier()
       if (classifier.trainParallelBatches) {
         // Check for parallel method
-        classifier.addDocument(['fix', 'box'], 'computing')
-        classifier.addDocument(['write', 'code'], 'computing')
-        classifier.addDocument(['script', 'code'], 'computing')
-        classifier.addDocument(['write', 'book'], 'literature')
-        classifier.addDocument(['read', 'book'], 'literature')
-        classifier.addDocument(['study', 'book'], 'literature')
-
         classifier.events.on('doneTraining', function () {
           expect(classifier.classify(['bug', 'code'])).toBe('computing')
           expect(classifier.classify(['read', 'thing'])).toBe('literature')
@@ -87,14 +85,7 @@ describe('bayes classifier', function () {
     })
 
     it('should provide all classification scores', function () {
-      const classifier = new natural.BayesClassifier()
-      classifier.addDocument(['fix', 'box'], 'computing')
-      classifier.addDocument(['write', 'code'], 'computing')
-      classifier.addDocument(['script', 'code'], 'computing')
-      classifier.addDocument(['write', 'book'], 'literature')
-      classifier.addDocument(['read', 'book'], 'literature')
-      classifier.addDocument(['study', 'book'], 'literature')
-
+      const classifier = setupClassifier()
       classifier.train()
 
       expect(classifier.getClassifications('i write code')[0].label).toBe('computing')
