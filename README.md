@@ -2,7 +2,7 @@
 
 [![NPM version](https://img.shields.io/npm/v/natural.svg)](https://www.npmjs.com/package/natural)
 [![Node.js CI](https://github.com/NaturalNode/natural/workflows/Node.js%20CI/badge.svg)](https://github.com/marketplace/actions/setup-node-js-environment)
-[![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![GitHub Super-Linter](https://github.com/NaturalNode/natural/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
 [![Slack](https://slack.bri.im/badge.svg)](https://slack.bri.im)
 
