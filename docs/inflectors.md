@@ -28,16 +28,6 @@ To singularize a word (outputs "beer"):
 console.log(nounInflector.singularize('beers'));
 ```
 
-Like many of the other features, String can be patched to perform the operations
-directly. The "Noun" suffix on the methods is necessary, as verbs will be
-supported in the future.
-
-```javascript
-nounInflector.attach();
-console.log('radius'.pluralizeNoun());
-console.log('beers'.singularizeNoun());
-```
-
 ## Numbers
 
 Numbers can be counted with a CountInflector:
@@ -78,13 +68,4 @@ Outputs "become":
 
 ```javascript
 console.log(verbInflector.pluralize('becomes'));
-```
-
-Like many other natural modules, `attach()` can be used to patch strings with
-handy methods.
-
-```javascript
-verbInflector.attach();
-console.log('walk'.singularizePresentVerb());
-console.log('walks'.pluralizePresentVerb());
 ```

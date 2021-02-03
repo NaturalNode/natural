@@ -48,19 +48,6 @@ console.log(encodings[0]);
 console.log(encodings[1]);
 ```
 
-Attaching will patch String with useful methods:
-
-```javascript
-metaphone.attach();
-```
-
-`soundsLike` is essentially a shortcut to `Metaphone.compare`:
-
-```javascript
-if(wordA.soundsLike(wordB))
-    console.log('they sound alike!');
-```
-
 The raw phonetics are obtained with `phonetics()`:
 
 ```javascript
@@ -78,15 +65,4 @@ Same module operations applied with `SoundEx`:
 ```javascript
 if(soundEx.compare(wordA, wordB))
     console.log('they sound alike!');
-```
-
-The same String patches apply with `soundEx`:
-
-```javascript
-soundEx.attach();
-
-if(wordA.soundsLike(wordB))
-    console.log('they sound alike!');
-
-console.log('phonetics'.phonetics());
 ```
