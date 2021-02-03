@@ -20,12 +20,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWé OR THE USE OR OTHER DEALINGS IN
 THE SOFTWé.
 */
 
-var Tokenizer = require('../lib/natural/tokenizers/aggressive_tokenizer_fr'),
-    tokenizer = new Tokenizer();
+'use strict'
 
-var text = "Affectueusement surnommé « Gabo » dans toute l'Amérique latine, le Colombien Gabriel Garcia Marquez, prix Nobel de littérature 1982, l'un des plus grands écrivains du XXe siècle, est mort À son domicile de Mexico jeudi 17 avril. Il était âgé de 87 ans. Son Œuvre a été traduite dans toutes les langues ou presque, et vendue à quelque 50 millions d'exemplaires.";
+const Tokenizer = require('../lib/natural/tokenizers/aggressive_tokenizer_fr')
+const tokenizer = new Tokenizer()
 
-var tokenized = [ 'Affectueusement',
+const text = "Affectueusement surnommé « Gabo » dans toute l'Amérique latine, le Colombien Gabriel Garcia Marquez, prix Nobel de littérature 1982, l'un des plus grands écrivains du XXe siècle, est mort À son domicile de Mexico jeudi 17 avril. Il était âgé de 87 ans. Son Œuvre a été traduite dans toutes les langues ou presque, et vendue à quelque 50 millions d'exemplaires."
+
+const tokenized = ['Affectueusement',
   'surnommé',
   'Gabo',
   'dans',
@@ -86,16 +88,17 @@ var tokenized = [ 'Affectueusement',
   '50',
   'millions',
   'd',
-  'exemplaires' ];
+  'exemplaires']
 
-describe('aggressive_tokenizer_fr', function() {
-  it('should tokenize strings', function() {
-    expect(tokenizer.tokenize(text)).toEqual(tokenized);
-  });
+describe('aggressive_tokenizer_fr', function () {
+  it('should tokenize strings', function () {
+    expect(tokenizer.tokenize(text)).toEqual(tokenized)
+  })
 
+  /*
   it('should tokenize strings via attached string method', function() {
     tokenizer.attach();
     expect(text.tokenize()).toEqual(tokenized);
   });
-
-});
+  */
+})

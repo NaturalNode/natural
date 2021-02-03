@@ -20,239 +20,223 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var TfIdf = require('../lib/natural/tfidf/tfidf');
-var tfidf;
+'use strict'
 
-describe('tfidf', function() {
-    describe('stateless operations', function() {
-        it('should tf', function() {
-            expect(TfIdf.tf('document', { document : 2, one : 1 })).toBe(2);
-            expect(TfIdf.tf('document', { greetings : 1, program : 1 })).toBe(0);
-            expect(TfIdf.tf('program', { greetings : 1, program : 1 })).toBe(1);
-        });
-    });
+const TfIdf = require('../lib/natural/tfidf/tfidf')
+let tfidf
 
-    describe('keys', function() {
-        it('should store and recall keys', function() {
-            tfidf = new TfIdf();
-            tfidf.addDocument('document one', 'un');
-            tfidf.addDocument('document Two', 'deux');
+describe('tfidf', function () {
+  describe('stateless operations', function () {
+    it('should tf', function () {
+      expect(TfIdf.tf('document', { document: 2, one: 1 })).toBe(2)
+      expect(TfIdf.tf('document', { greetings: 1, program: 1 })).toBe(0)
+      expect(TfIdf.tf('program', { greetings: 1, program: 1 })).toBe(1)
+    })
+  })
 
-            tfidf.tfidfs('two', function(i, tfidf, key) {
-                if(i === 0)
-                    expect(key).toBe('un');
-                else
-                    expect(key).toBe('deux');
-            });
-        });
+  describe('keys', function () {
+    it('should store and recall keys', function () {
+      tfidf = new TfIdf()
+      tfidf.addDocument('document one', 'un')
+      tfidf.addDocument('document Two', 'deux')
 
-        it('should handle a deserialized object passed to the constructor', function () {
-            tfidf = new TfIdf({
-                documents: [
-                    {__key: 'un', document: 1, one: 1},
-                    {__key: 'deux', document: 1, two: 1}
-                ]
-            });
-            tfidf.tfidfs('two', function(i, tfidf, key) {
-                if(i === 0)
-                    expect(key).toBe('un');
-                else
-                    expect(key).toBe('deux');
-            });
-        });
+      tfidf.tfidfs('two', function (i, tfidf, key) {
+        if (i === 0) { expect(key).toBe('un') } else { expect(key).toBe('deux') }
+      })
+    })
 
-        it('should work when called without a callback', function () {
-            tfidf = new TfIdf({
-                documents: [
-                    {__key: 'un', document: 1, one: 1},
-                    {__key: 'deux', document: 1, two: 1}
-                ]
-            });
-            tfidfs = tfidf.tfidfs('two');
-            expect(tfidfs[1]).toBe(1 + Math.log( 2.0 / 2.0 ));
-        });
+    it('should handle a deserialized object passed to the constructor', function () {
+      tfidf = new TfIdf({
+        documents: [
+          { __key: 'un', document: 1, one: 1 },
+          { __key: 'deux', document: 1, two: 1 }
+        ]
+      })
+      tfidf.tfidfs('two', function (i, tfidf, key) {
+        if (i === 1) { expect(key).toBe('deux') } else { expect(key).toBe('un') }
+      })
+    })
 
-        it('should work with the restoreCache flag set to true', function() {
-            tfidf = new TfIdf();
-            tfidf.addDocument('document one', 'un');
-            expect(tfidf.idf("one")).toBe(1 + Math.log( 1.0 / 2.0 ));
-            tfidf.addDocument('document Two', 'deux', true);
+    it('should work when called without a callback', function () {
+      tfidf = new TfIdf({
+        documents: [
+          { __key: 'un', document: 1, one: 1 },
+          { __key: 'deux', document: 1, two: 1 }
+        ]
+      })
+      const tfidfs = tfidf.tfidfs('two')
+      expect(tfidfs[1]).toBe(1 + Math.log(2.0 / 2.0))
+    })
 
-            tfidf.tfidfs('two', function(i, tfidf, key) {
-                if(i === 0)
-                    expect(key).toBe('un');
-                else
-                    expect(key).toBe('deux');
-            });
-        });
-    });
+    it('should work with the restoreCache flag set to true', function () {
+      tfidf = new TfIdf()
+      tfidf.addDocument('document one', 'un')
+      expect(tfidf.idf('one')).toBe(1 + Math.log(1.0 / 2.0))
+      tfidf.addDocument('document Two', 'deux', true)
 
-    describe('stateful operations', function() {
-        beforeEach(function() {
-            tfidf = new TfIdf();
-            tfidf.addDocument('document one');
-            tfidf.addDocument('document Two');
-        });
+      tfidf.tfidfs('two', function (i, tfidf, key) {
+        if (i === 0) { expect(key).toBe('un') } else { expect(key).toBe('deux') }
+      })
+    })
+  })
 
-        it('should list important terms', function() {
-            var terms = tfidf.listTerms(0);
-            expect(terms[0].tfidf).toBeGreaterThan(terms[1].tfidf);
-        });
-    });
+  describe('stateful operations', function () {
+    beforeEach(function () {
+      tfidf = new TfIdf()
+      tfidf.addDocument('document one')
+      tfidf.addDocument('document Two')
+    })
 
-    describe("special cases", function(){
+    it('should list important terms', function () {
+      const terms = tfidf.listTerms(0)
+      expect(terms[0].tfidf).toBeGreaterThan(terms[1].tfidf)
+    })
+  })
 
-        // In response to
-        it("should handle reserved function names correctly in documents", function(){
-            var reservedWords = [
-                'toString',
-                'toLocaleString',
-                'valueOf',
-                'hasOwnProperty',
-                'isPrototypeOf',
-                'propertyIsEnumerable',
-                'constructor'
-            ];
-            tfidf = new TfIdf();
-            tfidf.addDocument(reservedWords.join(" "));
+  describe('special cases', function () {
+    // In response to
+    it('should handle reserved function names correctly in documents', function () {
+      const reservedWords = [
+        'toString',
+        'toLocaleString',
+        'valueOf',
+        'hasOwnProperty',
+        'isPrototypeOf',
+        'propertyIsEnumerable',
+        'constructor'
+      ]
+      tfidf = new TfIdf()
+      tfidf.addDocument(reservedWords.join(' '))
 
-            for(var i in reservedWords) {
-                expect(tfidf.tfidf(reservedWords[i], 0)).toBe(1*(1+Math.log(1/2)));
-            }
-        });
+      for (const i in reservedWords) {
+        expect(tfidf.tfidf(reservedWords[i], 0)).toBe(1 * (1 + Math.log(1 / 2)))
+      }
+    })
 
-        it('should handle an array passed to tfidf()', function() {
-            tfidf = new TfIdf();
-            var terms = ['this', 'document', 'is', 'about', 'poetry'];
-            tfidf.addDocument(terms.join(" "));
-            expect(tfidf.tfidf(terms, 0)).toBe( 2 * (1 + Math.log( 1.0 / 2.0 )) );
-        });
-    });
+    it('should handle an array passed to tfidf()', function () {
+      tfidf = new TfIdf()
+      const terms = ['this', 'document', 'is', 'about', 'poetry']
+      tfidf.addDocument(terms.join(' '))
+      expect(tfidf.tfidf(terms, 0)).toBe(2 * (1 + Math.log(1.0 / 2.0)))
+    })
+  })
 
-    describe("correct calculations", function(){
+  describe('correct calculations', function () {
+    it('should compute idf correctly', function () {
+      tfidf = new TfIdf()
+      tfidf.addDocument('this document is about node.')
+      tfidf.addDocument('this document is about ruby.')
+      tfidf.addDocument('this document is about ruby and node.')
+      tfidf.addDocument('this document is about node. it has node examples')
 
-        it("should compute idf correctly", function(){
+      expect(tfidf.idf('node')).toBe(1 + Math.log(4.0 / 4.0))
+    })
 
-            tfidf = new TfIdf();
-            tfidf.addDocument('this document is about node.');
-            tfidf.addDocument('this document is about ruby.');
-            tfidf.addDocument('this document is about ruby and node.');
-            tfidf.addDocument('this document is about node. it has node examples');
+    it('should compute idf correctly with non-string documents', function () {
+      tfidf = new TfIdf()
+      tfidf.addDocument('this document is about node.')
+      tfidf.addDocument('this document is about ruby.')
+      tfidf.addDocument('this document is about ruby and node.')
+      tfidf.addDocument('this document is about node. it has node examples')
+      tfidf.addDocument({ text: 'this document is about python' })
+      tfidf.addDocument(['this', 'document', 'is', 'about', 'node', 'and', 'JavaScript'])
 
-            expect(tfidf.idf("node")).toBe(1 + Math.log( 4.0 / 4.0 ));
-        });
+      expect(tfidf.idf('node')).toBe(1 + Math.log(6.0 / 5.0))
+    })
 
-        it("should compute idf correctly with non-string documents", function(){
+    it('should compute tf correctly', function () {
+      expect(TfIdf.tf('node', { this: 1, document: 1, is: 1, about: 1, node: 1 })).toBe(1)
+      expect(TfIdf.tf('node', { this: 1, document: 1, is: 1, about: 1, ruby: 1 })).toBe(0)
+      expect(TfIdf.tf('node', { this: 1, document: 1, is: 1, about: 1, ruby: 1, and: 1, node: 1 })).toBe(1)
+      expect(TfIdf.tf('node', { this: 1, document: 1, is: 1, about: 1, node: 2, it: 1, has: 1, examples: 1 })).toBe(2)
+    })
 
-            tfidf = new TfIdf();
-            tfidf.addDocument('this document is about node.');
-            tfidf.addDocument('this document is about ruby.');
-            tfidf.addDocument('this document is about ruby and node.');
-            tfidf.addDocument('this document is about node. it has node examples');
-            tfidf.addDocument({text: 'this document is about python'});
-            tfidf.addDocument(['this', 'document', 'is', 'about', 'node', 'and', 'JavaScript']);
+    // This is a test of the use case outlined in the readme.
+    it('should compute tf-idf correctly', function () {
+      const correctCalculations = [
+        1 * (1 + Math.log(4.0 / 4.0)),
+        0,
+        2 * (1 + Math.log(4.0 / 4.0)),
+        1 * (1 + Math.log(4.0 / 3.0))
+      ]
 
-            expect(tfidf.idf("node")).toBe(1 + Math.log( 6.0 / 5.0 ));
-        });
+      tfidf = new TfIdf()
+      tfidf.addDocument('this document is about node.', { node: 0, ruby: 1 })
+      tfidf.addDocument('this document is about ruby.', { node: 1, ruby: 3 })
+      tfidf.addDocument('this document is about ruby and node.', { node: 0, ruby: 3 })
+      tfidf.addDocument('this document is about node. it has node examples', { node: 2, ruby: 1 })
 
-        it("should compute tf correctly", function(){
-            expect(TfIdf.tf("node", {this:1, document:1, is:1, about:1, node:1})).toBe(1);
-            expect(TfIdf.tf("node", {this:1, document:1, is:1, about:1, ruby:1})).toBe(0);
-            expect(TfIdf.tf("node", {this:1, document:1, is:1, about:1, ruby:1, and:1, node:1})).toBe(1);
-            expect(TfIdf.tf("node", {this:1, document:1, is:1, about:1, node:2, it:1, has:1, examples:1})).toBe(2);
-        });
+      tfidf.tfidfs('node', function (i, measure, k) {
+        expect(measure).toBe(correctCalculations[k.node])
+      })
 
-        // This is a test of the use case outlined in the readme.
-        it("should compute tf-idf correctly", function(){
+      tfidf.tfidfs('ruby', function (i, measure, k) {
+        expect(measure).toBe(correctCalculations[k.ruby])
+      })
+    })
 
-            var correctCalculations = [
-                1 * (1 + Math.log( 4.0 / 4.0 )),
-                0,
-                2 * (1 + Math.log( 4.0 / 4.0 )),
-                1 * (1 + Math.log( 4.0 / 3.0 ))
-            ];
+    it('should not return NaN if a term is not present in any documents', function () {
+      tfidf = new TfIdf()
+      tfidf.addDocument('this document is about node.')
 
-            tfidf = new TfIdf();
-            tfidf.addDocument('this document is about node.', {node: 0, ruby:1});
-            tfidf.addDocument('this document is about ruby.', {node:1, ruby:3});
-            tfidf.addDocument('this document is about ruby and node.', {node:0, ruby:3});
-            tfidf.addDocument('this document is about node. it has node examples', {node:2, ruby:1});
+      expect(tfidf.tfidf('ruby', 0)).toBe(0)
+    })
 
-            tfidf.tfidfs('node', function(i, measure, k) {
-                expect(measure).toBe(correctCalculations[k.node]);
-            });
+    // This test assures that tf-idf is computed correctly before and after a document is added
+    // Computes and tests a few tf-idfs, then adds a document and ensures that those terms tf-idf value
+    // is updated accordingly.
+    it('should update a terms tf-idf score after adding documents', function () {
+      tfidf = new TfIdf()
 
-            tfidf.tfidfs('ruby', function(i, measure, k) {
-                expect(measure).toBe(correctCalculations[k.ruby]);
-            });
+      // Add 2 documents
+      tfidf.addDocument('this document is about node.', 0)
+      tfidf.addDocument('this document is about ruby.', 1)
 
-        });
+      // check the tf-idf for 'node'
+      expect(tfidf.tfidf('node', 0)).toBe(1 * (1 + Math.log(2.0 / 2.0)))
 
-        it("should not return NaN if a term is not present in any documents", function() {
-            tfidf = new TfIdf();
-            tfidf.addDocument('this document is about node.');
+      // Add 2 more documents
+      tfidf.addDocument('this document is about ruby and node.')
+      tfidf.addDocument('this document is about node. it has node examples')
 
-            expect(tfidf.tfidf('ruby', 0)).toBe(0);
-        });
+      // Ensure that the tf-idf in the same document has changed to reflect the new idf.
+      expect(tfidf.tfidf('node', 0)).toBe(1 * (1 + Math.log(4.0 / 4.0)))
+    })
 
-        // This test assures that tf-idf is computed correctly before and after a document is added
-        // Computes and tests a few tf-idfs, then adds a document and ensures that those terms tf-idf value
-        // is updated accordingly.
-        it("should update a terms tf-idf score after adding documents", function(){
+    // Test idf.setTokenizer
+    it('should allow for specific types of Tokenizers', function () {
+      tfidf = new TfIdf()
 
-            tfidf = new TfIdf();
+      tfidf.addDocument('this document isn\'t about node.', 0)
+      tfidf.addDocument('that doc is about node.', 1)
+      expect(tfidf.tfidf('n\'t', 0)).toBe(0)
+      expect(tfidf.tfidf('isn', 0)).toBe(1 * (1 + Math.log(2 / 2)))
 
-            // Add 2 documents
-            tfidf.addDocument('this document is about node.', 0);
-            tfidf.addDocument('this document is about ruby.', 1);
+      tfidf = new TfIdf()
 
-            // check the tf-idf for 'node'
-            expect( tfidf.tfidf("node", 0) ).toBe( 1 * ( 1 + Math.log( 2.0 / 2.0 ) ));
+      tfidf.addDocument('this document isn\'t about node.', 0)
+      tfidf.addDocument('this document isn\'t about node.', 1)
 
-            // Add 2 more documents
-            tfidf.addDocument('this document is about ruby and node.');
-            tfidf.addDocument('this document is about node. it has node examples');
+      expect(tfidf.tfidf('isn', 0)).toBe(1 * (1 + Math.log(2 / 3)))
 
-            // Ensure that the tf-idf in the same document has changed to reflect the new idf.
-            expect( tfidf.tfidf("node", 0) ).toBe( 1 * ( 1 + Math.log( 4.0 / 4.0 ) ));
-        });
+      tfidf = new TfIdf()
+      const TreebankWordTokenizer = require('../lib/natural/tokenizers/treebank_word_tokenizer')
+      const tokenizer = new TreebankWordTokenizer()
 
+      tfidf.addDocument('this document isn\'t about node.', 0)
+      tfidf.setTokenizer(tokenizer)
+      tfidf.addDocument('this doc isn\'t about node.', 1)
 
-        // Test idf.setTokenizer
-        it('should allow for specific types of Tokenizers', function(){
-            tfidf = new TfIdf();
+      expect(tfidf.tfidf('isn', 0)).toBe(1 * (1 + Math.log(2 / 2)))
+      expect(tfidf.tfidf('n\'t', 1)).toBe(1 * (1 + Math.log(2 / 2)))
+      expect(tfidf.tfidf('isn', 1)).toBe(0)
+    })
 
-            tfidf.addDocument('this document isn\'t about node.', 0);
-            tfidf.addDocument('that doc is about node.', 1);
-            expect( tfidf.tfidf('n\'t', 0) ).toBe(0);
-            expect( tfidf.tfidf('isn', 0) ).toBe( 1 * (1 + Math.log( 2 / 2 ) ));
+    it('should require a valid tokenizer when using setTokenizer', function () {
+      tfidf = new TfIdf()
 
-            tfidf = new TfIdf();
-
-            tfidf.addDocument('this document isn\'t about node.', 0);
-            tfidf.addDocument('this document isn\'t about node.', 1);
-
-            expect( tfidf.tfidf('isn', 0) ).toBe(1 * (1 + Math.log (2/3)));
-
-            tfidf = new TfIdf();
-            var TreebankWordTokenizer = require('../lib/natural/tokenizers/treebank_word_tokenizer');
-            var tokenizer = new TreebankWordTokenizer();
-
-            tfidf.addDocument('this document isn\'t about node.', 0);
-            tfidf.setTokenizer(tokenizer);
-            tfidf.addDocument('this doc isn\'t about node.', 1);
-
-            expect( tfidf.tfidf('isn', 0) ).toBe( 1 * ( 1 + Math.log( 2 / 2 ) ));
-            expect( tfidf.tfidf('n\'t', 1) ).toBe( 1 * ( 1 + Math.log( 2 / 2 ) ));
-            expect( tfidf.tfidf('isn', 1) ).toBe(0);
-        });
-
-        it('should require a valid tokenizer when using setTokenizer', function(){
-            tfidf = new TfIdf();
-
-            expect( function() { tfidf.setTokenizer(1); } ).toThrow(new Error('Expected a valid Tokenizer'));
-            expect( function() { tfidf.setTokenizer({}); } ).toThrow(new Error('Expected a valid Tokenizer'));
-        });
-      
-    });
-});
+      expect(function () { tfidf.setTokenizer(1) }).toThrow(new Error('Expected a valid Tokenizer'))
+      expect(function () { tfidf.setTokenizer({}) }).toThrow(new Error('Expected a valid Tokenizer'))
+    })
+  })
+})

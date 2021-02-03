@@ -20,25 +20,27 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var CountInflector = (require('../lib/natural/inflectors/fr/count_inflector'));
+'use strict'
 
-describe('count_inflector', function() {
-  it('should handle 1er cases', function() {
-    expect(CountInflector.nth(1)).toBe('1er');
-  });
+const CountInflector = (require('../lib/natural/inflectors/fr/count_inflector'))
 
-  it('should handle the 2e cases', function() {
-    expect(CountInflector.nth(0)).toBe('0e');
-    expect(CountInflector.nth(2)).toBe('2e');
-    expect(CountInflector.nth(3)).toBe('3e');
-    expect(CountInflector.nth(5)).toBe('5e');
-    expect(CountInflector.nth(11)).toBe('11e');
-    expect(CountInflector.nth(100)).toBe('100e');
-    expect(CountInflector.nth(999)).toBe('999e');
-  });
+describe('count_inflector', function () {
+  it('should handle 1er cases', function () {
+    expect(CountInflector.nth(1)).toBe('1er')
+  })
 
-  it('should handle roman numerals', function() {
-    expect(CountInflector.nth('I')).toBe('Ier');
-    expect(CountInflector.nth('XX')).toBe('XXe');
-  });
-});
+  it('should handle the 2e cases', function () {
+    expect(CountInflector.nth(0)).toBe('0e')
+    expect(CountInflector.nth(2)).toBe('2e')
+    expect(CountInflector.nth(3)).toBe('3e')
+    expect(CountInflector.nth(5)).toBe('5e')
+    expect(CountInflector.nth(11)).toBe('11e')
+    expect(CountInflector.nth(100)).toBe('100e')
+    expect(CountInflector.nth(999)).toBe('999e')
+  })
+
+  it('should handle roman numerals', function () {
+    expect(CountInflector.nth('I')).toBe('Ier')
+    expect(CountInflector.nth('XX')).toBe('XXe')
+  })
+})

@@ -20,20 +20,23 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var Tokenizer = require('../lib/natural/tokenizers/sentence_tokenizer'),
-    tokenizer = new Tokenizer();
+'use strict'
 
-describe('sentence_tokenizer', function() {
-  it('should tokenize strings and trim whitespace', function() {
+const Tokenizer = require('../lib/natural/tokenizers/sentence_tokenizer')
+const tokenizer = new Tokenizer()
+
+describe('sentence_tokenizer', function () {
+  it('should tokenize strings and trim whitespace', function () {
     expect(
-        tokenizer.tokenize('This is a sentence. This is another sentence.')
+      tokenizer.tokenize('This is a sentence. This is another sentence.')
     )
-    .toEqual([
+      .toEqual([
         'This is a sentence.',
         'This is another sentence.'
-    ]);
-  });
+      ])
+  })
 
+  /*
   it('should tokenize strings via attached string method', function() {
     tokenizer.attach();
     expect(
@@ -53,79 +56,79 @@ describe('sentence_tokenizer', function() {
         'This is another sentence.'
     ]);
   });
+  */
 
-  it('should include quotation marks', function() {
+  it('should include quotation marks', function () {
     expect(
-        tokenizer.tokenize('"This is a sentence." This is another sentence.')
+      tokenizer.tokenize('"This is a sentence." This is another sentence.')
     ).toEqual([
-        '"This is a sentence."',
-        'This is another sentence.'
-    ]);
-  });
+      '"This is a sentence."',
+      'This is another sentence.'
+    ])
+  })
 
-  it('should include brackets', function() {
+  it('should include brackets', function () {
     expect(
-        tokenizer.tokenize('This is a sentence. [This is another sentence.]')
+      tokenizer.tokenize('This is a sentence. [This is another sentence.]')
     ).toEqual([
-        'This is a sentence.',
-        '[This is another sentence.]'
-    ]);
-  });
+      'This is a sentence.',
+      '[This is another sentence.]'
+    ])
+  })
 
-  it('should handle repetitive punctuation', function() {
+  it('should handle repetitive punctuation', function () {
     expect(
-      tokenizer.tokenize("I love you!! Do you love me??")
-    ).toEqual([ 'I love you!!', 'Do you love me??'
-    ]);
-  });
+      tokenizer.tokenize('I love you!! Do you love me??')
+    ).toEqual(['I love you!!', 'Do you love me??'
+    ])
+  })
 
-  it('should handle repetitive punctuation with space', function() {
+  it('should handle repetitive punctuation with space', function () {
     expect(
-      tokenizer.tokenize("I love you! ! Do you love me? ?")
-    ).toEqual([ 'I love you! !', 'Do you love me? ?'
-    ]);
-  });
+      tokenizer.tokenize('I love you! ! Do you love me? ?')
+    ).toEqual(['I love you! !', 'Do you love me? ?'
+    ])
+  })
 
-  it('should handle decimal points in numbers', function() {
+  it('should handle decimal points in numbers', function () {
     expect(
-      tokenizer.tokenize("Pi is approximately equal to 3.14.")
+      tokenizer.tokenize('Pi is approximately equal to 3.14.')
     ).toEqual([
       'Pi is approximately equal to 3.14.'
-    ]);
-  });
+    ])
+  })
 
-  it('should handle periods in email addresses', function() {
+  it('should handle periods in email addresses', function () {
     expect(
-      tokenizer.tokenize("My email address is batman@example.com.")
+      tokenizer.tokenize('My email address is batman@example.com.')
     ).toEqual([
       'My email address is batman@example.com.'
-    ]);
-  });
+    ])
+  })
 
-  it('should handle periods in web addresses', function() {
+  it('should handle periods in web addresses', function () {
     expect(
-      tokenizer.tokenize("My twitter feed can be found at https://twitter.com/user1.")
+      tokenizer.tokenize('My twitter feed can be found at https://twitter.com/user1.')
     ).toEqual([
       'My twitter feed can be found at https://twitter.com/user1.'
-    ]);
-  });
+    ])
+  })
 
-  it('should handle an ellipsis followed by punctuation', function() {
+  it('should handle an ellipsis followed by punctuation', function () {
     expect(
-      tokenizer.tokenize("Is this the end for our heroes...?")
+      tokenizer.tokenize('Is this the end for our heroes...?')
     ).toEqual([
       'Is this the end for our heroes...?'
-    ]);
-  });
+    ])
+  })
 
-  it('should handle multiple spaces separating sentences', function() {
+  it('should handle multiple spaces separating sentences', function () {
     expect(
-      tokenizer.tokenize("Tune in tomorrow and find out!  Same Bat-Time!  Same Bat-Channel!")
+      tokenizer.tokenize('Tune in tomorrow and find out!  Same Bat-Time!  Same Bat-Channel!')
     ).toEqual([
       'Tune in tomorrow and find out!',
       'Same Bat-Time!',
       'Same Bat-Channel!'
-    ]);
-  });
-
-});
+    ])
+  })
+})

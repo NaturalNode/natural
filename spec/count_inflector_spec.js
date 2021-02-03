@@ -20,54 +20,56 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var CountInflector = (require('../lib/natural/inflectors/count_inflector'));
+'use strict'
 
-describe('count_inflector', function() {
-    it('should handle 1st cases', function() {
-        expect(CountInflector.nth(1)).toBe('1st');
-        expect(CountInflector.nth(101)).toBe('101st');
-        expect(CountInflector.nth(11)).not.toBe('11st');
-        expect(CountInflector.nth(111)).not.toBe('111st');
-    });
+const CountInflector = (require('../lib/natural/inflectors/count_inflector'))
 
-    it('should handle the 12th cases', function() {
-        expect(CountInflector.nth(12)).toBe('12th');
-        expect(CountInflector.nth(112)).toBe('112th');
-        expect(CountInflector.nth(1112)).toBe('1112th');
-    });
-    
-    it('should handle the 11th cases', function() {
-        expect(CountInflector.nth(11)).toBe('11th');
-        expect(CountInflector.nth(111)).toBe('111th');
-        expect(CountInflector.nth(1111)).toBe('1111th');
-    });
+describe('count_inflector', function () {
+  it('should handle 1st cases', function () {
+    expect(CountInflector.nth(1)).toBe('1st')
+    expect(CountInflector.nth(101)).toBe('101st')
+    expect(CountInflector.nth(11)).not.toBe('11st')
+    expect(CountInflector.nth(111)).not.toBe('111st')
+  })
 
-    it('should handle the 13th cases', function() {
-        expect(CountInflector.nth(13)).toBe('13th');
-        expect(CountInflector.nth(113)).toBe('113th');
-        expect(CountInflector.nth(1113)).toBe('1113th');
-    });
-    
-    it('should handle the th cases', function() {
-        expect(CountInflector.nth(10)).toBe('10th');
-        expect(CountInflector.nth(4)).toBe('4th');
-        expect(CountInflector.nth(400)).toBe('400th');
-        expect(CountInflector.nth(404)).toBe('404th');
-        expect(CountInflector.nth(5)).toBe('5th');
-        expect(CountInflector.nth(5000)).toBe('5000th');
-        expect(CountInflector.nth(5005)).toBe('5005th');
-        expect(CountInflector.nth(9)).toBe('9th');
-        expect(CountInflector.nth(90009)).toBe('90009th');
-        expect(CountInflector.nth(90000)).toBe('90000th');
-    });
-    
-    it('should handle 2nd cases', function() {
-        expect(CountInflector.nth(2)).toBe('2nd');
-        expect(CountInflector.nth(12)).not.toBe('12nd');
-    });
-    
-    it('should handle 3rd cases', function() {
-        expect(CountInflector.nth(3)).toBe('3rd');
-        expect(CountInflector.nth(13)).not.toBe('13rd');
-    });
-});
+  it('should handle the 12th cases', function () {
+    expect(CountInflector.nth(12)).toBe('12th')
+    expect(CountInflector.nth(112)).toBe('112th')
+    expect(CountInflector.nth(1112)).toBe('1112th')
+  })
+
+  it('should handle the 11th cases', function () {
+    expect(CountInflector.nth(11)).toBe('11th')
+    expect(CountInflector.nth(111)).toBe('111th')
+    expect(CountInflector.nth(1111)).toBe('1111th')
+  })
+
+  it('should handle the 13th cases', function () {
+    expect(CountInflector.nth(13)).toBe('13th')
+    expect(CountInflector.nth(113)).toBe('113th')
+    expect(CountInflector.nth(1113)).toBe('1113th')
+  })
+
+  it('should handle the th cases', function () {
+    expect(CountInflector.nth(10)).toBe('10th')
+    expect(CountInflector.nth(4)).toBe('4th')
+    expect(CountInflector.nth(400)).toBe('400th')
+    expect(CountInflector.nth(404)).toBe('404th')
+    expect(CountInflector.nth(5)).toBe('5th')
+    expect(CountInflector.nth(5000)).toBe('5000th')
+    expect(CountInflector.nth(5005)).toBe('5005th')
+    expect(CountInflector.nth(9)).toBe('9th')
+    expect(CountInflector.nth(90009)).toBe('90009th')
+    expect(CountInflector.nth(90000)).toBe('90000th')
+  })
+
+  it('should handle 2nd cases', function () {
+    expect(CountInflector.nth(2)).toBe('2nd')
+    expect(CountInflector.nth(12)).not.toBe('12nd')
+  })
+
+  it('should handle 3rd cases', function () {
+    expect(CountInflector.nth(3)).toBe('3rd')
+    expect(CountInflector.nth(13)).not.toBe('13rd')
+  })
+})

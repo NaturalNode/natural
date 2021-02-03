@@ -20,80 +20,80 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var natural = new require('../lib/natural'),
-    LogisticRegressionClassifier = natural.LogisticRegressionClassifier;
+'use strict'
 
-describe('logistic regression', function() {
-    it('should classify with individually trained documents', function() {
-        var classifier = new LogisticRegressionClassifier();
-        
-        classifier.addDocument(['have', 'computer'], 'IT');
-        classifier.addDocument(['have', 'phone'], 'IT');
-        classifier.addDocument(['computer', 'suck'], 'IT');
-        classifier.addDocument(['field', 'goal'], 'sports');
-        classifier.addDocument(['score', 'goal'], 'sports');
-        classifier.addDocument(['great', 'speed'], 'sports');
-        
-        classifier.train();
-        
-        expect(classifier.classify(['hate', 'computer'])).toBe('IT');
-        expect(classifier.classify(['score', 'please'])).toBe('sports');
-    });
+const natural = require('../lib/natural')
+const LogisticRegressionClassifier = natural.LogisticRegressionClassifier
 
-    it('should provide all classification scores', function() {
-        var classifier = new natural.LogisticRegressionClassifier();
-        classifier.addDocument(['fix', 'box'], 'computing');
-        classifier.addDocument(['write', 'code'], 'computing');
-        classifier.addDocument(['script', 'code'], 'computing');
-        classifier.addDocument(['write', 'book'], 'literature');
-        classifier.addDocument(['read', 'book'], 'literature');
-        classifier.addDocument(['study', 'book'], 'literature');
+describe('logistic regression', function () {
+  it('should classify with individually trained documents', function () {
+    const classifier = new LogisticRegressionClassifier()
 
-        classifier.train();
+    classifier.addDocument(['have', 'computer'], 'IT')
+    classifier.addDocument(['have', 'phone'], 'IT')
+    classifier.addDocument(['computer', 'suck'], 'IT')
+    classifier.addDocument(['field', 'goal'], 'sports')
+    classifier.addDocument(['score', 'goal'], 'sports')
+    classifier.addDocument(['great', 'speed'], 'sports')
 
-        expect(classifier.getClassifications('i write code')[0].label).toBe('computing');
-        expect(classifier.getClassifications('i write code')[1].label).toBe('literature');
-    });
+    classifier.train()
 
-    it('should classify with arrays', function() {
-        var classifier = new natural.LogisticRegressionClassifier();
-        classifier.addDocument('i fixed the box', 'computing');
-        classifier.addDocument('i write code', 'computing');
-        classifier.addDocument('nasty script code', 'computing');
-        classifier.addDocument('write a book', 'literature');
-        classifier.addDocument('read a book', 'literature');
-        classifier.addDocument('study the books', 'literature');
+    expect(classifier.classify(['hate', 'computer'])).toBe('IT')
+    expect(classifier.classify(['score', 'please'])).toBe('sports')
+  })
 
-        classifier.train();
+  it('should provide all classification scores', function () {
+    const classifier = new natural.LogisticRegressionClassifier()
+    classifier.addDocument(['fix', 'box'], 'computing')
+    classifier.addDocument(['write', 'code'], 'computing')
+    classifier.addDocument(['script', 'code'], 'computing')
+    classifier.addDocument(['write', 'book'], 'literature')
+    classifier.addDocument(['read', 'book'], 'literature')
+    classifier.addDocument(['study', 'book'], 'literature')
 
-        expect(classifier.classify('a bug in the code')).toBe('computing');
-        expect(classifier.classify('read all the books')).toBe('literature');
-    });
+    classifier.train()
 
-    it('should serialize and deserialize a working classifier', function() {
-        var classifier = new natural.LogisticRegressionClassifier();
-        classifier.addDocument('i fixed the box', 'computing');
-        classifier.addDocument('i write code', 'computing');
-        classifier.addDocument('nasty script code', 'computing');
-        classifier.addDocument('write a book', 'literature');
-        classifier.addDocument('read a book', 'literature');
-        classifier.addDocument('study the books', 'literature');
+    expect(classifier.getClassifications('i write code')[0].label).toBe('computing')
+    expect(classifier.getClassifications('i write code')[1].label).toBe('literature')
+  })
 
-        var obj = JSON.stringify(classifier);
-        var newClassifier = natural.LogisticRegressionClassifier.restore(JSON.parse(obj));
+  function createClassifier () {
+    const classifier = new natural.LogisticRegressionClassifier()
+    classifier.addDocument('i fixed the box', 'computing')
+    classifier.addDocument('i write code', 'computing')
+    classifier.addDocument('nasty script code', 'computing')
+    classifier.addDocument('write a book', 'literature')
+    classifier.addDocument('read a book', 'literature')
+    classifier.addDocument('study the books', 'literature')
 
-        newClassifier.addDocument('kick a ball', 'sports');
-        newClassifier.addDocument('hit some balls', 'sports');
-        newClassifier.addDocument('kick and punch', 'sports');
+    return classifier
+  }
 
-        newClassifier.train();
+  it('should classify with arrays', function () {
+    const classifier = createClassifier()
+    classifier.train()
+    expect(classifier.classify('a bug in the code')).toBe('computing')
+    expect(classifier.classify('read all the books')).toBe('literature')
+  })
 
-        expect(newClassifier.classify('a bug in the code')).toBe('computing');
-        expect(newClassifier.classify('read all the books')).toBe('literature');
-        expect(newClassifier.classify('kick butt')).toBe('sports');
-    });
+  it('should serialize and deserialize a working classifier', function () {
+    const classifier = createClassifier()
 
-    /*
+    const obj = JSON.stringify(classifier)
+    const newClassifier = natural.LogisticRegressionClassifier.restore(JSON.parse(obj))
+
+    newClassifier.addDocument('kick a ball', 'sports')
+    newClassifier.addDocument('hit some balls', 'sports')
+    newClassifier.addDocument('kick and punch', 'sports')
+
+    newClassifier.train()
+
+    expect(newClassifier.classify('a bug in the code')).toBe('computing')
+    expect(newClassifier.classify('read all the books')).toBe('literature')
+    expect(newClassifier.classify('kick butt')).toBe('sports')
+  })
+
+  /*
     it('should save and load a working classifier', function() {
         var classifier = new natural.LogisticRegressionClassifier();
         classifier.addDocument('i fixed the box', 'computing');
@@ -102,7 +102,7 @@ describe('logistic regression', function() {
         classifier.addDocument('write a book', 'literature');
         classifier.addDocument('read a book', 'literature');
         classifier.addDocument('study the books', 'literature');
-	      classifier.train();
+        classifier.train();
 
         classifier.save('lr_classifier.json', function(err) {
           natural.LogisticRegressionClassifier.load('lr_classifier.json', null, function(err, newClassifier) {
@@ -115,15 +115,15 @@ describe('logistic regression', function() {
             expect(newClassifier.classify('read all the books')).toBe('literature');
             expect(newClassifier.classify('kick butt')).toBe('sports');
 
-		        done();
-	        });
+            done();
+          });
 
-	      });
+        });
 
     });
     */
 
-    /*
+  /*
     it('should only execute the callback once when failing to load a classifier', function() {
         natural.LogisticRegressionClassifier.load('nonexistant_lr_classifier.json', null, function(err, newClassifier){
           expect(err.code).toBe('ENOENT');
@@ -132,4 +132,4 @@ describe('logistic regression', function() {
         });
     });
     */
-});
+})

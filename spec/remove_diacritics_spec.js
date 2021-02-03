@@ -20,12 +20,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var removeDiacritics = require("../lib/natural/normalizers/remove_diacritics.js");
+const removeDiacritics = require('../lib/natural/normalizers/remove_diacritics.js')
 
-describe('remove_diacritics', function() {
-
-    it('should correctly remove diacritics', function () {
-        var original_phrase = 'piñon ça va über résumé œdipe';
-        expect(removeDiacritics(original_phrase)).toEqual('pinon ca va uber resume oedipe');
-    });
-});
+describe('remove_diacritics', function () {
+  it('should correctly remove diacritics', function () {
+    const originalPhrase = 'piñon ça va über résumé œdipe'
+    expect(removeDiacritics(originalPhrase)).toEqual('pinon ca va uber resume oedipe')
+  })
+})

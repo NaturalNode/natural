@@ -20,7 +20,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var natural = require('natural'),
-    stemmer = natural.LancasterStemmer;
-    
-console.log(stemmer.stem('stemming'));
+'use strict'
+
+const natural = require('natural')
+const stemmer = natural.LancasterStemmer
+
+console.log(stemmer.stem('stemming'))

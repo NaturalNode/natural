@@ -20,122 +20,119 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var natural = require('../lib/natural');
+'use strict'
+
+const natural = require('../lib/natural')
 
 describe('classifier', function () {
+  describe('addDocument', function () {
+    it('should ignore an empty document', function () {
+      const classifier = new natural.BayesClassifier()
+      classifier.addDocument('', 'philosophy')
+      expect(classifier.docs.length).toBe(0)
+    })
 
-    describe('addDocument', function () {
+    it('should increment features', function () {
+      const classifier = new natural.BayesClassifier()
+      classifier.addDocument('foo', '')
+      classifier.addDocument('foo', '')
+      classifier.addDocument('bar', '')
+      classifier.addDocument('bar', '')
+      classifier.addDocument('bar', '')
+      classifier.addDocument('baz', '')
+      expect(classifier.docs.length).toBe(6)
+      expect(classifier.features.foo).toBe(2)
+      expect(classifier.features.bar).toBe(3)
+      expect(classifier.features.baz).toBe(1)
+    })
+  })
 
-        it('should ignore an empty document', function () {
-            var classifier = new natural.BayesClassifier();
-            classifier.addDocument('', 'philosophy');
-            expect(classifier.docs.length).toBe(0);
-        });
+  describe('events emitters', function () {
+    it('should be emitted when a document is classified', function () {
+      const classifier = new natural.BayesClassifier()
+      classifier.addDocument('i fixed the box', 'computing')
+      classifier.addDocument('i write code', 'computing')
+      classifier.addDocument('nasty script code', 'computing')
+      classifier.addDocument('write a book', 'literature')
+      classifier.addDocument('read a book', 'literature')
+      classifier.addDocument('study the books', 'literature')
 
-        it('should increment features', function () {
-            var classifier = new natural.BayesClassifier();
-            classifier.addDocument('foo', '');
-            classifier.addDocument('foo', '');
-            classifier.addDocument('bar', '');
-            classifier.addDocument('bar', '');
-            classifier.addDocument('bar', '');
-            classifier.addDocument('baz', '');
-            expect(classifier.docs.length).toBe(6);
-            expect(classifier.features['foo']).toBe(2);
-            expect(classifier.features['bar']).toBe(3);
-            expect(classifier.features['baz']).toBe(1);
-        });
-    });
+      classifier.train()
 
-    describe('events emitters', function () {
+      const pushedEvents = []
 
-        it('should be emitted when a document is classified', function () {
-            var classifier = new natural.BayesClassifier();
-            classifier.addDocument('i fixed the box', 'computing');
-            classifier.addDocument('i write code', 'computing');
-            classifier.addDocument('nasty script code', 'computing');
-            classifier.addDocument('write a book', 'literature');
-            classifier.addDocument('read a book', 'literature');
-            classifier.addDocument('study the books', 'literature');
+      function eventRegister (obj) {
+        pushedEvents.push(obj)
+      };
 
-            classifier.train();
+      function assertEventResults () {
+        teardown()
+        expect(pushedEvents[0].index).toBe(0)
+        expect(pushedEvents[0].total).toBe(6)
+        expect(pushedEvents.length).toBe(6)
+      }
 
-            var pushedEvents = [];
+      function teardown () {
+        classifier.events.removeListener('trainedWithDocument', eventRegister)
+        classifier.events.removeListener('doneTraining', assertEventResults)
+      }
 
-            function eventRegister(obj) {
-                pushedEvents.push(obj);
-            };
+      classifier.events.on('trainedWithDocument', eventRegister)
+      classifier.events.on('doneTraining', assertEventResults)
+    })
 
-            function assertEventResults() {
-                teardown();
-                expect(pushedEvents[0].index).toBe(0);
-                expect(pushedEvents[0].total).toBe(6);
-                expect(pushedEvents.length).toBe(6);
-            }
+    it('should emit events only on an instance of Classifier', function () {
+      const classifier = new natural.BayesClassifier()
+      classifier.addDocument('i fixed the box', 'computing')
+      classifier.addDocument('i write code', 'computing')
+      classifier.addDocument('write a book', 'literature')
+      classifier.addDocument('study the books', 'literature')
 
-            function teardown() {
-                classifier.events.removeListener('trainedWithDocument', eventRegister);
-                classifier.events.removeListener('doneTraining', assertEventResults);
-            }
+      const pushedEvents = []
 
-            classifier.events.on('trainedWithDocument', eventRegister);
-            classifier.events.on('doneTraining', assertEventResults);
-        });
+      function eventRegister (obj) {
+        pushedEvents.push(obj)
+      };
 
-        it('should emit events only on an instance of Classifier', function () {
-            var classifier = new natural.BayesClassifier();
-            classifier.addDocument('i fixed the box', 'computing');
-            classifier.addDocument('i write code', 'computing');
-            classifier.addDocument('write a book', 'literature');
-            classifier.addDocument('study the books', 'literature');
+      function assertEventResults () {
+        teardown()
+        expect(pushedEvents.length).toBe(0)
+      }
 
-            var pushedEvents = [];
+      function teardown () {
+        classifier.events.removeListener('trainedWithDocument', eventRegister)
+        classifier.events.removeListener('doneTraining', assertEventResults)
+      }
 
-            function eventRegister(obj) {
-                pushedEvents.push(obj);
-            };
+      const classifier2 = new natural.BayesClassifier()
+      classifier2.events.on('trainedWithDocument', eventRegister)
+      classifier.events.on('doneTraining', assertEventResults)
+      classifier.train()
+    })
+  })
 
-            function assertEventResults() {
-                teardown();
-                expect(pushedEvents.length).toBe(0);
-            }
+  describe('removeDocument', function () {
+    let classifier
+    beforeEach(function () {
+      classifier = new natural.BayesClassifier()
+      classifier.addDocument('i fixed the box', 'computing')
+      classifier.addDocument('i write code', 'computing')
+      classifier.addDocument('write a book', 'literature')
+      classifier.addDocument('study the books', 'literature')
+    })
 
-            function teardown() {
-                classifier.events.removeListener('trainedWithDocument', eventRegister);
-                classifier.events.removeListener('doneTraining', assertEventResults);
-            }
+    it('should do nothing if text is not a string', function () {
+      expect(classifier.docs.length).toBe(4)
+      classifier.removeDocument(['write a book'], 'literature')
+      classifier.removeDocument(['study the books'], 'literature')
+      expect(classifier.docs.length).toBe(4)
+    })
 
-            var classifier2 = new natural.BayesClassifier();
-            classifier2.events.on('trainedWithDocument', eventRegister);
-            classifier.events.on('doneTraining', assertEventResults);
-            classifier.train();
-        });
-
-    });
-
-    describe('removeDocument', function () {
-
-        var classifier;
-        beforeEach(function () {
-            classifier = new natural.BayesClassifier();
-            classifier.addDocument('i fixed the box', 'computing');
-            classifier.addDocument('i write code', 'computing');
-            classifier.addDocument('write a book', 'literature');
-            classifier.addDocument('study the books', 'literature');
-        });
-
-        it('should do nothing if text is not a string', function () {
-            expect(classifier.docs.length).toBe(4);
-            classifier.removeDocument(['write a book'], 'literature');
-            classifier.removeDocument(['study the books'], 'literature');
-            expect(classifier.docs.length).toBe(4);
-        });
-
-        it('should do nothing if text is not a match', function () {
-            expect(classifier.docs.length).toBe(4);
-            classifier.removeDocument('something else', 'literature');
-            classifier.removeDocument('another thing', 'literature');
-            expect(classifier.docs.length).toBe(4);
-        });
-    });
-});
+    it('should do nothing if text is not a match', function () {
+      expect(classifier.docs.length).toBe(4)
+      classifier.removeDocument('something else', 'literature')
+      classifier.removeDocument('another thing', 'literature')
+      expect(classifier.docs.length).toBe(4)
+    })
+  })
+})

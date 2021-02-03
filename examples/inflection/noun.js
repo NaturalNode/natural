@@ -20,18 +20,19 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var natural = require('natural'),
-    nounInflector = new natural.NounInflector();
+'use strict'
 
-plural = nounInflector.pluralize('radius');
-console.log(plural);
+const natural = require('natural')
+const nounInflector = new natural.NounInflector()
 
-plural = nounInflector.pluralize('beer');
-console.log(plural);
+let plural = nounInflector.pluralize('radius')
+console.log(plural)
 
-singular = nounInflector.singularize('radii');
-console.log(singular);
+plural = nounInflector.pluralize('beer')
+console.log(plural)
 
-singular = nounInflector.singularize('beers');
-console.log(singular);
+let singular = nounInflector.singularize('radii')
+console.log(singular)
 
+singular = nounInflector.singularize('beers')
+console.log(singular)

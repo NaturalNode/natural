@@ -20,9 +20,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var natural = require('natural'),
-    classifier = new natural.BayesClassifier();
+'use strict'
 
-natural.BayesClassifier.load('classifier.json', null, function(err, classifier) {
-	console.log(classifier.classify('did the tests pass?'));
-    });
+const natural = require('natural')
+
+natural.BayesClassifier.load('classifier.json', null, function (err, classifier) {
+  if (err) {
+    console.log(err)
+    return
+  }
+  console.log(classifier.classify('did the tests pass?'))
+})

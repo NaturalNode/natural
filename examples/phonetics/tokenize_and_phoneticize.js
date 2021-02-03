@@ -20,35 +20,38 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var natural = require('natural'),
-    phonetic = natural.DoubleMetaphone;
+'use strict'
 
-var sentence = 'phonetic modules contain algorithms';
-var stdin = process.openStdin();
-stdin.setEncoding('ascii');
-phonetic.attach();
-process.stdout.write('enter a word that sounds like one of these, "' + sentence +'": ');
+const natural = require('natural')
+const phonetic = natural.DoubleMetaphone
 
-words = sentence.tokenizeAndPhoneticize();
+const sentence = 'phonetic modules contain algorithms'
+const stdin = process.openStdin()
+stdin.setEncoding('ascii')
+// phonetic.attach()
+process.stdout.write('enter a word that sounds like one of these, "' + sentence + '": ')
 
-function findMatch(input) {
-    inputSounds = input.phonetics();
-    console.log(inputSounds);
-    
-    for(var i = 0; i < words.length; i++) {
-	wordSounds = words[i];
-	
-	if(wordSounds == inputSounds) {
-	    process.stdout.write('match found!\n');
-	    return;
-	}
+const words = phonetic.tokenizeAndPhoneticize(sentence, phonetic)
+console.log(words)
+
+function findMatch (input) {
+  const inputSounds = phonetic.process(input)
+  console.log(inputSounds)
+
+  for (let i = 0; i < words.length; i++) {
+    const wordSounds = words[i]
+
+    if (wordSounds[0] === inputSounds[0] &&
+        wordSounds[1] === inputSounds[1]) {
+      process.stdout.write('match found!\n')
+      return
     }
+  }
 
-    process.stdout.write('no match found.\n');
-    return;
+  process.stdout.write('no match found.\n')
 }
 
 stdin.on('data', function (input) {
-	findMatch(input);
-	process.exit();
-    });
+  findMatch(input)
+  process.exit()
+})

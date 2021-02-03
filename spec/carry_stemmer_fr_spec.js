@@ -20,53 +20,55 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-const stemmer = require('../lib/natural/stemmers/Carry');
-const snowBallDict = require('spec/test_data/snowball_fr.json');
+'use strict'
+
+const stemmer = require('../lib/natural/stemmers/Carry')
+// const snowBallDict = require('spec/test_data/snowball_fr.json')
 
 const tests = [
   {
-      input: "action",
-      output: "ac"
+    input: 'action',
+    output: 'ac'
   },
   {
-      input: "acteur",
-      output: "ac"
+    input: 'acteur',
+    output: 'ac'
   },
   {
-      input: "actrices",
-      output: "ac"
+    input: 'actrices',
+    output: 'ac'
   },
   {
-      input: "Dleyton",
-      output: "Dleyton"
+    input: 'Dleyton',
+    output: 'Dleyton'
   },
   {
-      input: "volera",
-      output: "vol"
+    input: 'volera',
+    output: 'vol'
   }
 ]
 
 const testSentences = [
   {
-    input: "Le petit cheval de manège",
+    input: 'Le petit cheval de manège',
     output: ['pet', 'cheval', 'manèg']
-  },
+  }
 ]
 
-describe("Carry stemmer", function() {
+describe('Carry stemmer', function () {
   tests.forEach(test => {
-    it("stems " + test.input + " correctly", function() {
-      expect(stemmer.stem(test.input)).toBe(test.output);
-    });
+    it('stems ' + test.input + ' correctly', function () {
+      expect(stemmer.stem(test.input)).toBe(test.output)
+    })
   })
 
   testSentences.forEach(test => {
-    it("tokenizes and stems " + test.input + " correctly", function() {
-      expect(stemmer.tokenizeAndStem(test.input)).toEqual(test.output);
-    });
+    it('tokenizes and stems ' + test.input + ' correctly', function () {
+      expect(stemmer.tokenizeAndStem(test.input)).toEqual(test.output)
+    })
   })
 
-/*
+  /*
   it('should perform stemming on a lot of words', function() {
     var ok = [];
     var ko = [];
@@ -91,5 +93,4 @@ describe("Carry stemmer", function() {
     expect(ko.length).toBe(0);
   });
 */
-
-});
+})

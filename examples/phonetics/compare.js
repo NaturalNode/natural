@@ -20,20 +20,19 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var natural = require('natural'),
-    phonetic = natural.Metaphone;
+'use strict'
 
-var wordA = 'phonetics';
-var stdin = process.openStdin();
-stdin.setEncoding('ascii');
+const natural = require('natural')
+const phonetic = natural.Metaphone
 
-process.stdout.write('try to enter a word that sounds like "' + wordA +'": ');
+const wordA = 'phonetics'
+const stdin = process.openStdin()
+stdin.setEncoding('ascii')
+
+process.stdout.write('try to enter a word that sounds like "' + wordA + '": ')
 
 stdin.on('data', function (wordB) {
-	if(phonetic.compare(wordA, wordB))
-	    process.stdout.write('they sound alike!\n');
-	else
-	    process.stdout.write('sorry, they don\'t sound alike.\n');
+  if (phonetic.compare(wordA, wordB)) { process.stdout.write('they sound alike!\n') } else { process.stdout.write('sorry, they don\'t sound alike.\n') }
 
-	process.exit();
-    });
+  process.exit()
+})

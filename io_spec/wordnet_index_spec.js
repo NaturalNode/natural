@@ -20,22 +20,23 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var IndexFile = require('../lib/natural/wordnet/index_file');
+'use strict'
 
-describe('indexFile', function() {
-    describe('getFileSize', function() {
+const IndexFile = require('../lib/natural/wordnet/index_file')
 
-        it('should look up a word if the file exists', function() {
-            indexFile = new IndexFile('spec/test_data/', 'document1.txt');
-            indexFile.lookupFromFile('node', function(indexRecord) {
-            });
-        });
+describe('indexFile', function () {
+  describe('getFileSize', function () {
+    it('should look up a word if the file exists', function () {
+      const indexFile = new IndexFile('spec/test_data/', 'document1.txt')
+      indexFile.lookupFromFile('node', function (indexRecord) {
+      })
+    })
 
-        it('should fail to lookup a word if the file does not exist', function() {
-            indexFile = new IndexFile('spec/test_data/', 'nonexistent.txt');
-            indexFile.lookupFromFile('node', function(err) {
-                err.code.should.equal('ENOENT');
-            });
-        });
-    });
-});
+    it('should fail to lookup a word if the file does not exist', function () {
+      const indexFile = new IndexFile('spec/test_data/', 'nonexistent.txt')
+      indexFile.lookupFromFile('node', function (err) {
+        err.code.should.equal('ENOENT')
+      })
+    })
+  })
+})

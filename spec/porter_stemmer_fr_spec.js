@@ -20,85 +20,83 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var stemmer = require('../lib/natural/stemmers/porter_stemmer_fr');
-const snowBallDict = require('spec/test_data/snowball_fr.json');
+'use strict'
 
-describe('porter_stemmer', function() {
+const stemmer = require('../lib/natural/stemmers/porter_stemmer_fr')
+const snowBallDict = require('spec/test_data/snowball_fr.json')
 
-  it('should prelude', function() {
-    expect(stemmer.prelude('JOUER')).toBe('joUer');
-    expect(stemmer.prelude('ennuie')).toBe('ennuIe');
-    expect(stemmer.prelude('yeux')).toBe('Yeux');
-    expect(stemmer.prelude('quand')).toBe('qUand');
-  });
+describe('porter_stemmer', function () {
+  it('should prelude', function () {
+    expect(stemmer.prelude('JOUER')).toBe('joUer')
+    expect(stemmer.prelude('ennuie')).toBe('ennuIe')
+    expect(stemmer.prelude('yeux')).toBe('Yeux')
+    expect(stemmer.prelude('quand')).toBe('qUand')
+  })
 
-  it('should compute regions', function() {
-    expect(stemmer.regions('fameusement').r1).toBe(3);
-    expect(stemmer.regions('fameusement').r2).toBe(6);
+  it('should compute regions', function () {
+    expect(stemmer.regions('fameusement').r1).toBe(3)
+    expect(stemmer.regions('fameusement').r2).toBe(6)
 
-    expect(stemmer.regions('taii').r1).toBe(4);
-    expect(stemmer.regions('taii').r2).toBe(4);
+    expect(stemmer.regions('taii').r1).toBe(4)
+    expect(stemmer.regions('taii').r2).toBe(4)
 
-    expect(stemmer.regions('parade').rv).toBe(3);
-    expect(stemmer.regions('colet').rv).toBe(3);
-    expect(stemmer.regions('tapis').rv).toBe(3);
-    expect(stemmer.regions('aimer').rv).toBe(3);
-    expect(stemmer.regions('adorer').rv).toBe(3);
-    expect(stemmer.regions('voler').rv).toBe(2);
-    expect(stemmer.regions('tue').rv).toBe(2);
-  });
+    expect(stemmer.regions('parade').rv).toBe(3)
+    expect(stemmer.regions('colet').rv).toBe(3)
+    expect(stemmer.regions('tapis').rv).toBe(3)
+    expect(stemmer.regions('aimer').rv).toBe(3)
+    expect(stemmer.regions('adorer').rv).toBe(3)
+    expect(stemmer.regions('voler').rv).toBe(2)
+    expect(stemmer.regions('tue').rv).toBe(2)
+  })
 
-  it('should compute longest suffix ends in Arr', function() {
-    expect(stemmer.endsinArr('voudriez', ['ez', 'iez', 'z'])).toBe('iez');
-  });
+  it('should compute longest suffix ends in Arr', function () {
+    expect(stemmer.endsinArr('voudriez', ['ez', 'iez', 'z'])).toBe('iez')
+  })
 
-  it('should stem some word', function() {
-    expect(stemmer.stem('volera')).toBe('vol');
-    expect(stemmer.stem('volerait')).toBe('vol');
-    expect(stemmer.stem('subitement')).toBe('subit');
-    expect(stemmer.stem('tempérament')).toBe('temper');
-    expect(stemmer.stem('voudriez')).toBe('voudr');
-    expect(stemmer.stem('vengeait')).toBe('veng');
-    expect(stemmer.stem('saisissement')).toBe('sais');
-    expect(stemmer.stem('transatlantique')).toBe('transatlant');
-    expect(stemmer.stem('premièrement')).toBe('premi');
-    expect(stemmer.stem('instruments')).toBe('instrument');
-    expect(stemmer.stem('trouverions')).toBe('trouv');
-    expect(stemmer.stem('voyiez')).toBe('voi');
-    expect(stemmer.stem('publicité')).toBe('publiqu');
-    expect(stemmer.stem('pitoyable')).toBe('pitoi');
-  });
+  it('should stem some word', function () {
+    expect(stemmer.stem('volera')).toBe('vol')
+    expect(stemmer.stem('volerait')).toBe('vol')
+    expect(stemmer.stem('subitement')).toBe('subit')
+    expect(stemmer.stem('tempérament')).toBe('temper')
+    expect(stemmer.stem('voudriez')).toBe('voudr')
+    expect(stemmer.stem('vengeait')).toBe('veng')
+    expect(stemmer.stem('saisissement')).toBe('sais')
+    expect(stemmer.stem('transatlantique')).toBe('transatlant')
+    expect(stemmer.stem('premièrement')).toBe('premi')
+    expect(stemmer.stem('instruments')).toBe('instrument')
+    expect(stemmer.stem('trouverions')).toBe('trouv')
+    expect(stemmer.stem('voyiez')).toBe('voi')
+    expect(stemmer.stem('publicité')).toBe('publiqu')
+    expect(stemmer.stem('pitoyable')).toBe('pitoi')
+  })
 
-  it('should perform stemming on a lot of words', function() {
-    var ok = [];
-    var ko = [];
+  it('should perform stemming on a lot of words', function () {
+    const ok = []
+    const ko = []
 
     Object.keys(snowBallDict).forEach(word => {
+      const stemmed = stemmer.stem(word)
+      const expectedStem = snowBallDict[word]
 
-      var stemmed = stemmer.stem(word);
-      var expectedStem = snowBallDict[word];
-
-      var regs = stemmer.regions(word);
-      var txtRegions = {
+      const regs = stemmer.regions(word)
+      const txtRegions = {
         r1: word.substring(regs.r1),
         r2: word.substring(regs.r2),
         rv: word.substring(regs.rv)
       }
 
       if (stemmed === expectedStem) {
-        ok.push(word);
-      }
-      else {
+        ok.push(word)
+      } else {
         ko.push({
           word: word,
           expected: expectedStem,
           actual: stemmed,
           regions: txtRegions
-        });
+        })
       }
-    });
+    })
 
-    expect(ko.length).toBe(0);
-  });
-
-});
+    expect(ko.length).toBe(0)
+  })
+})

@@ -20,15 +20,17 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var natural = require('natural'),
-    TfIdf = natural.TfIdf,
-    tfidf = new TfIdf();
+'use strict'
 
-tfidf.addDocument(['document', 'about', 'node']);
-tfidf.addDocument(['document', 'about', 'ruby']);
-tfidf.addDocument(['document', 'about', 'ruby', 'node']);
-tfidf.addDocument(['document', 'about', 'node', 'node']);
+const natural = require('natural')
+const TfIdf = natural.TfIdf
+const tfidf = new TfIdf()
 
-tfidf.tfidfs(['node', 'ruby'], function(i, measure) {
-    console.log('document #' + i + ' is ' + measure);
-});
+tfidf.addDocument(['document', 'about', 'node'])
+tfidf.addDocument(['document', 'about', 'ruby'])
+tfidf.addDocument(['document', 'about', 'ruby', 'node'])
+tfidf.addDocument(['document', 'about', 'node', 'node'])
+
+tfidf.tfidfs(['node', 'ruby'], function (i, measure) {
+  console.log('document #' + i + ' is ' + measure)
+})

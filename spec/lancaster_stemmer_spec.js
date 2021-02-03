@@ -20,54 +20,50 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-describe('lancaster_stemmer', function() {
-    var stemmer = require('../lib/natural/stemmers/lancaster_stemmer');
+'use strict'
 
-    it('should stem', function() {
-	stemmer.attach();
+describe('lancaster_stemmer', function () {
+  const stemmer = require('../lib/natural/stemmers/lancaster_stemmer')
 
-        expect('marks'.stem()).toBe('mark');
-        expect('MARKs'.stem()).toBe('mark');        
-    });
+  it('should stem', function () {
+    // stemmer.attach();
+    expect(stemmer.stem('marks')).toBe('mark')
+    expect(stemmer.stem('MARKs')).toBe('mark')
+  })
 
-    it('should stop running rules where appropriate', function() {
-	stemmer.attach();
+  it('should stop running rules where appropriate', function () {
+    // stemmer.attach();
+    expect(stemmer.stem('living')).toBe('liv')
+    expect(stemmer.stem('thing')).toBe('thing')
+    expect(stemmer.stem('ear')).toBe('ear')
+    expect(stemmer.stem('string')).toBe('string')
+  })
 
-        expect('living'.stem()).toBe('liv');
-        expect('thing'.stem()).toBe('thing');
-        expect('ear'.stem()).toBe('ear');
-        expect('string'.stem()).toBe('string');
-    });
+  it('should only pop the size specified by the rule', function () {
+    // stemmer.attach();
+    expect(stemmer.stem('triplicate')).toBe('triply')
+    expect(stemmer.stem('triPlicAte')).toBe('triply')
+  })
 
-    it('should only pop the size specified by the rule', function() {
-	stemmer.attach();
+  it('should stem and append and recurse', function () {
+    // stemmer.attach();
+    expect(stemmer.stem('classified')).toBe('class')
+    expect(stemmer.stem('ClaSsiFied')).toBe('class')
+  })
 
-        expect('triplicate'.stem()).toBe('triply');
-        expect('triPlicAte'.stem()).toBe('triply');        
-    });
-    
-    it('should stem and append and recurse', function() {
-	stemmer.attach();
+  it('should apply intact rules only to intact string', function () {
+    // stemmer.attach();
+    expect(stemmer.stem('maximum')).toBe('maxim')
+    expect(stemmer.stem('presumably')).toBe('presum')
+    expect(stemmer.stem('MAXIMUM')).toBe('maxim')
+    expect(stemmer.stem('PRESUMABLY')).toBe('presum')
+  })
 
-        expect('classified'.stem()).toBe('class');
-        expect('ClaSsiFied'.stem()).toBe('class');        
-    });
-    
-    it('should apply intact rules only to intact string', function() {
-    stemmer.attach();
-
-        expect('maximum'.stem()).toBe('maxim');
-        expect('presumably'.stem()).toBe('presum');
-        expect('MAXIMUM'.stem()).toBe('maxim');
-        expect('PRESUMABLY'.stem()).toBe('presum');        
-    });
-
-    it('#171 and #174, exceed, anguish, affluxion, discept', function() {
-    stemmer.attach();
-
-        expect('exceed'.stem()).toBe('excess');
-        expect('anguish'.stem()).toBe('anct');
-        expect('affluxion'.stem()).toBe('affluct');
-        expect('discept'.stem()).toBe('disceiv');
-    });
-});
+  it('#171 and #174, exceed, anguish, affluxion, discept', function () {
+    // stemmer.attach();
+    expect(stemmer.stem('exceed')).toBe('excess')
+    expect(stemmer.stem('anguish')).toBe('anct')
+    expect(stemmer.stem('affluxion')).toBe('affluct')
+    expect(stemmer.stem('discept')).toBe('disceiv')
+  })
+})

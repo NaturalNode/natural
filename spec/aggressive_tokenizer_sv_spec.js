@@ -20,36 +20,40 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var Tokenizer = require('../lib/natural/tokenizers/aggressive_tokenizer_sv'),
-    tokenizer = new Tokenizer();
+'use strict'
 
-describe('aggressive_tokenizer_sv', function() {
-  it('should tokenize strings', function() {
-    expect(tokenizer.tokenize('Ett tu tre')).toEqual(['Ett', 'tu', 'tre']);
-  });
+const Tokenizer = require('../lib/natural/tokenizers/aggressive_tokenizer_sv')
+const tokenizer = new Tokenizer()
 
+describe('aggressive_tokenizer_sv', function () {
+  it('should tokenize strings', function () {
+    expect(tokenizer.tokenize('Ett tu tre')).toEqual(['Ett', 'tu', 'tre'])
+  })
+
+  /*
   it('should tokenize strings via attached string method', function() {
     tokenizer.attach();
     expect('Ett tu tre'.tokenize()).toEqual(['Ett', 'tu', 'tre']);
   });
+  */
 
-  it('should swallow punctuation', function() {
-    expect(tokenizer.tokenize('Ett, tu, tre')).toEqual(['Ett', 'tu', 'tre']);
-  });
-
-  it('should swallow final punctuation', function() {
-    expect(tokenizer.tokenize('Ett, tu, tre?')).toEqual(['Ett', 'tu', 'tre']);
-  });
-
-  it('should swallow initial punctuation', function() {
-    expect(tokenizer.tokenize('.Ett, tu, tre')).toEqual(['Ett', 'tu', 'tre']);
-  });
-
-  it('should swallow duplicate punctuation', function() {
-    expect(tokenizer.tokenize('Ett, tu... tre')).toEqual(['Ett', 'tu', 'tre']);
-  });
-
-  it('should not split on hyphen or Swedish letters', function() {
-    expect(tokenizer.tokenize('It-bolaget ägs av en 30-åring')).toEqual(['It-bolaget', 'ägs', 'av', 'en', '30-åring']);
+  it('should swallow punctuation', function () {
+    expect(tokenizer.tokenize('Ett, tu, tre')).toEqual(['Ett', 'tu', 'tre'])
   })
-});
+
+  it('should swallow final punctuation', function () {
+    expect(tokenizer.tokenize('Ett, tu, tre?')).toEqual(['Ett', 'tu', 'tre'])
+  })
+
+  it('should swallow initial punctuation', function () {
+    expect(tokenizer.tokenize('.Ett, tu, tre')).toEqual(['Ett', 'tu', 'tre'])
+  })
+
+  it('should swallow duplicate punctuation', function () {
+    expect(tokenizer.tokenize('Ett, tu... tre')).toEqual(['Ett', 'tu', 'tre'])
+  })
+
+  it('should not split on hyphen or Swedish letters', function () {
+    expect(tokenizer.tokenize('It-bolaget ägs av en 30-åring')).toEqual(['It-bolaget', 'ägs', 'av', 'en', '30-åring'])
+  })
+})
