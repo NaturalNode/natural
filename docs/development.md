@@ -11,7 +11,7 @@ nav_order: 19
 When developing, please:
 
 + Comply with [Standard JS](https://standardjs.com/). This is tested when you commit to natural.
-+ Prevent code duplication. Use jscpd to test this. This is tested when you commit to natural.
++ Prevent code duplication. Use [jscpd](https://www.npmjs.com/package/jscpd) to test this. This is tested when you commit to natural.
 + Write unit tests for jasmine. Make sure your unit tests pass.
 + For compatibility with browsers, do not use the file system <code>fs</code>. If you need to read files, use JSON and <code>require</code>.
 + Write documentation and commit this to the `gh-pages` branch.
