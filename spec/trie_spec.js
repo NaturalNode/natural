@@ -22,7 +22,7 @@ THE SOFTWARE.
 
 'use strict'
 
-const Trie = require('../lib/natural/trie/trie')
+const Trie = require('../lib/natural/trie').Trie
 
 describe('trie', function () {
   describe('adding strings', function () {
