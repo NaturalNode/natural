@@ -27,6 +27,7 @@
     "gulp-jasmine-browser": "^4.1.0",
     "jasmine": "^3.3.1",
     "jasmine-core": "^3.3.0",
+    "nyc": "^15.1.0",
     "pegjs": "^0.10.0",
     "proxyquire": "^1.8.0",
     "rimraf": "^2.6.3",
@@ -54,7 +55,8 @@
   "scripts": {
     "benchmark": "node benchmarks",
     "clean": "rimraf *~ #* *classifier.json",
-    "test": "NODE_PATH=. node ./node_modules/jasmine/bin/jasmine.js --random=false spec/*_spec.js",
+    "test": "node ./node_modules/jasmine/bin/jasmine.js --random=false spec/*_spec.js",
+    "coverage": "nyc --reporter=lcov npm test",
     "test_io": "NODE_PATH=. node ./node_modules/jasmine/bin/jasmine.js --random=false io_spec/*_spec.js",
     "test_browser": "NODE_PATH=. node ./node_modules/gulp/bin/gulp.js"
   },
