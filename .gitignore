@@ -10,3 +10,4 @@ io_spec/test_data/wordnet/download/*
 *.adv
 npm-debug.log
 .vscode
+.nyc_output/*
