@@ -4,6 +4,7 @@
 [![Node.js CI](https://github.com/NaturalNode/natural/workflows/Node.js%20CI/badge.svg)](https://github.com/marketplace/actions/setup-node-js-environment)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![GitHub Super-Linter](https://github.com/NaturalNode/natural/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
+[![Coverage Status](https://coveralls.io/repos/github/NaturalNode/natural/badge.svg?branch=master)](https://coveralls.io/github/NaturalNode/natural?branch=master)
 [![Slack](https://slack.bri.im/badge.svg)](https://slack.bri.im)
 
 "Natural" is a general natural language facility for nodejs. It offers a broad range of functionalities for natural language processing. Documentation can be found [here on Github Pages](http://naturalnode.github.io/natural/).
