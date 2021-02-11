@@ -26,11 +26,19 @@ The current configuration of the unit tests requires the following environment v
 The repository uses Github Actions for testing and publishing.
 
 Currently, there three workflows:
-- Node CI: tests natural on the four most recent releases of Nodejs.
+- Node CI: tests natural on the four most recent releases of Nodejs. Code coverage is analysed with [Istanbul](https://istanbul.js.org/). Results are forwarded to [Coveralls](https://coveralls.io/). In the README a badge shows the coverage.
 - Nodejs package: The natural package is automatically published to NPM when a release is created (tagged).
 - Lint Code Base: the repository is linted using the Github super linter which includes `jslint` and `jscpd`.
 
 Github workflows can be found at `./.github/workflows`.
+
+## Versioning
+
+We apply [semantic versioning](https://semver.org/). Given natural's version number MAJOR.MINOR.PATCH, increment the:
+
++ MAJOR version when you make incompatible API changes,
++ MINOR version when you add functionality in a backwards compatible manner, and
++ PATCH version when you make backwards compatible bug fixes.
 
 ## Using the library in a browser
 
