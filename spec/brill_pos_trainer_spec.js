@@ -83,6 +83,7 @@ describe('Brill\'s POS Trainer', function () {
     trainer = new natural.BrillPOSTrainer(1)
     ruleSet = trainer.train(corpora[0], templates, trainLexicon)
     expect(ruleSet.nrRules()).toBeGreaterThan(0)
+    expect(trainer.printRulesWithScores()).not.toEqual('')
   })
 
   it('should test the derived transformation rules on the test corpus', function () {
