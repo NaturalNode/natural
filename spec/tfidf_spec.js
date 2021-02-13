@@ -244,12 +244,20 @@ describe('tfidf', function () {
     it('should load a custom set of stopwords', function () {
       tfidf = new TfIdf()
       const stopwords = require('lib/natural/util/stopwords').words
-      tfidf.setStopwords(stopwords)
+      expect(tfidf.setStopwords(stopwords)).toEqual(true)
       tfidf.addDocument('this document is about node.', 0)
       const terms = tfidf.listTerms(0)
       const tokens = terms.map(t => t.term)
       expect(tokens.indexOf('about')).toEqual(-1)
       expect(tokens.indexOf('this')).toEqual(-1)
+    })
+    it('should detect an incorrect stopwords list (not an array)', function () {
+      const stopwords = {}
+      expect(tfidf.setStopwords(stopwords)).toEqual(false)
+    })
+    it('should detect an incorrect stopwords list (one of the elements is not a string)', function () {
+      const stopwords = [function f () {}]
+      expect(tfidf.setStopwords(stopwords)).toEqual(false)
     })
   })
 })
