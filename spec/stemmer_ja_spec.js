@@ -22,8 +22,7 @@ THE SOFTWARE.
 
 'use strict'
 
-const StemmerJa = require('../lib/natural/stemmers/stemmer_ja')
-const stemmer = new StemmerJa()
+const stemmer = require('../lib/natural/stemmers/stemmer_ja')
 
 const test = ['コピー', 'コーヒー', 'タクシー', 'パーティー', 'パーティ', 'ヘルプ・センター']
 const testResult = ['コピー', 'コーヒ', 'タクシ', 'パーティ', 'パーティ', 'ヘルプ・センタ']
