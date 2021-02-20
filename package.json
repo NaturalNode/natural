@@ -55,7 +55,7 @@
   "scripts": {
     "benchmark": "node benchmarks",
     "clean": "rimraf *~ #* *classifier.json",
-    "test": "NODE_PATH=. node ./node_modules/jasmine/bin/jasmine.js --random=false spec/*_spec.js",
+    "test": "NODE_PATH=. node ./node_modules/jasmine/bin/jasmine.js io_spec/*_spec.js spec/*_spec.js",
     "coverage": "nyc --reporter=lcov npm test",
     "test_io": "NODE_PATH=. node ./node_modules/jasmine/bin/jasmine.js --random=false io_spec/*_spec.js",
     "test_browser": "NODE_PATH=. node ./node_modules/gulp/bin/gulp.js"
