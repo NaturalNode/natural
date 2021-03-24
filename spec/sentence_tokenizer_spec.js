@@ -131,4 +131,31 @@ describe('sentence_tokenizer', function () {
       'Same Bat-Channel!'
     ])
   })
+
+  it('should handle braces and quotes (issue #591)', function () {
+    expect(
+      tokenizer.tokenize('Teste. Test test. Test test: “Test.”')
+    ).toEqual([
+      'Teste.',
+      'Test test.',
+      'Test test: “Test.”'
+    ])
+    expect(
+      tokenizer.tokenize('Test Test. Test test, test test (test test) test: “Test.”')
+    ).toEqual([
+      'Test Test.',
+      'Test test, test test (test test) test: “Test.”'
+    ])
+    expect(
+      tokenizer.tokenize('Test Test. Test test, test (test) test (test test) test: “Test.”')
+    ).toEqual([
+      'Test Test.',
+      'Test test, test (test) test (test test) test: “Test.”'
+    ])
+    expect(
+      tokenizer.tokenize('Test: Test (test) test “Test.”')
+    ).toEqual([
+      'Test: Test (test) test “Test.”'
+    ])
+  })
 })
