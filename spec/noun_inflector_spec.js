@@ -296,7 +296,7 @@ describe('noun inflector', function () {
     })
   })
 
-  describe('should handle words ending in f, ff, ffe', function() {
+  describe('should handle words ending in f, ff, ffe', function () {
     it('should handle words ending in ff and ffe', function () {
       const myInflector = new NounInflector()
       expect(myInflector.pluralize('sherriff')).toBe('sherriffs')
@@ -340,7 +340,6 @@ describe('noun inflector', function () {
       expect(myInflector.singularize('shelves')).toBe('shelf')
       expect(myInflector.singularize('thieves')).toBe('thief')
       expect(myInflector.singularize('yourselves')).toBe('yourself')
-
     })
 
     it('should handle words ending in rf', function () {
@@ -358,9 +357,5 @@ describe('noun inflector', function () {
       expect(myInflector.singularize('wharves')).toBe('wharf')
       expect(myInflector.singularize('handkerchieves')).toBe('handkerchief')
     })
-
-
   })
-
-
 })
