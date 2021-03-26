@@ -24,38 +24,40 @@ THE SOFTWARE.
 
 const levenshteinDistance =
   require('../lib/natural/distance/levenshtein_distance').LevenshteinDistance
+const levenshteinDistanceSearch =
+  require('../lib/natural/distance/levenshtein_distance').LevenshteinDistanceSearch
 
 describe('levenshtein_distance', function () {
   describe('options.search = true', function () {
     it('should find cheapest substring', function () {
-      expect(levenshteinDistance('kitten', 'sitting', { search: true }))
+      expect(levenshteinDistanceSearch('kitten', 'sitting'))
         .toEqual({ substring: 'sittin', distance: 2, offset: 0 })
     })
 
     it('should find 0 cost substring in target', function () {
-      expect(levenshteinDistance('doctor', 'the doctor is in', { search: true }))
+      expect(levenshteinDistanceSearch('doctor', 'the doctor is in'))
         .toEqual({ substring: 'doctor', distance: 0, offset: 4 })
     })
 
     it('should find 1 cost substring in target', function () {
-      expect(levenshteinDistance('doctor', 'the doktor is in', { search: true }))
+      expect(levenshteinDistanceSearch('doctor', 'the doktor is in'))
         .toEqual({ substring: 'doktor', distance: 1, offset: 4 })
     })
 
     it('should return empty substring when that is cleapest match', function () {
-      expect(levenshteinDistance('doctor', '000000000000', { search: true }))
+      expect(levenshteinDistanceSearch('doctor', '000000000000'))
         .toEqual({ substring: '', distance: 6, offset: 0 })
     })
 
     it('different insertion costs should work', function () {
       // delete 10 0's at cost 1 and insert the letters for doctor at cost -1
-      expect(levenshteinDistance('0000000000', 'doctor', { search: true, insertion_cost: -1 }))
+      expect(levenshteinDistanceSearch('0000000000', 'doctor', { insertion_cost: -1 }))
         .toEqual({ substring: 'doctor', distance: 4, offset: 0 })
     })
 
     it('different deletion costs should work', function () {
       // delete 10 0's at cost -10
-      expect(levenshteinDistance('0000000000', 'doctor', { search: true, deletion_cost: -1 }))
+      expect(levenshteinDistanceSearch('0000000000', 'doctor', { deletion_cost: -1 }))
         .toEqual({ substring: '', distance: -10, offset: 0 })
     })
   })
