@@ -146,5 +146,5 @@ console.log(natural.LevenshteinDistanceSearch(source, target));
 Output:
 
 ```javascript
-{ substring: 'the Rain Coats Book Store', distance: 4 }
+{ substring: 'the Rain Coats Book Store', distance: 4, offset: 31 }
 ```
