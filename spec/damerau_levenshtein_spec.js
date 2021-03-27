@@ -2,6 +2,8 @@
 
 const damerauLevenshtein = require('../lib/natural/distance/levenshtein_distance')
   .DamerauLevenshteinDistance
+const damerauLevenshteinSearch = require('../lib/natural/distance/levenshtein_distance')
+  .DamerauLevenshteinDistanceSearch
 
 describe('DamerauLevenshtein', function () {
   describe('default', function () {
@@ -40,4 +42,16 @@ describe('DamerauLevenshtein', function () {
       expect(damerauLevenshtein('CA', 'ABC', restricted)).toBe(3)
     })
   })
+
+  it('should combine search with Damerau', function () {
+    const source = 'The RainCoat BookStore';
+    const target = 'All the best books are here at the Rain Coats Book Store';
+    const result = damerauLevenshteinSearch(source, target)
+    expect(result).toEqual({
+      substring: 'the Rain Coats Book Store',
+      distance: 4,
+      offset: 31
+    })
+  })
+
 })
