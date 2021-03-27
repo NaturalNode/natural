@@ -44,8 +44,8 @@ describe('DamerauLevenshtein', function () {
   })
 
   it('should combine search with Damerau', function () {
-    const source = 'The RainCoat BookStore';
-    const target = 'All the best books are here at the Rain Coats Book Store';
+    const source = 'The RainCoat BookStore'
+    const target = 'All the best books are here at the Rain Coats Book Store'
     const result = damerauLevenshteinSearch(source, target)
     expect(result).toEqual({
       substring: 'the Rain Coats Book Store',
