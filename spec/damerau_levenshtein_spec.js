@@ -53,5 +53,4 @@ describe('DamerauLevenshtein', function () {
       offset: 31
     })
   })
-
 })
