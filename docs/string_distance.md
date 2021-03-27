@@ -140,7 +140,7 @@ var natural = require('natural');
 var source = 'The RainCoat BookStore';
 var target = 'All the best books are here at the Rain Coats Book Store';
 
-console.log(natural.LevenshteinDistance(source, target, {search: true}));
+console.log(natural.LevenshteinDistanceSearch(source, target));
 ```
 
 Output:
@@ -148,5 +148,3 @@ Output:
 ```javascript
 { substring: 'the Rain Coats Book Store', distance: 4 }
 ```
-
-The following
