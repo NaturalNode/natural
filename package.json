@@ -13,7 +13,6 @@
   "dependencies": {
     "afinn-165": "^1.0.2",
     "apparatus": "^0.0.10",
-    "jshint": "^2.12.0",
     "json-stable-stringify": "^1.0.1",
     "sylvester": "^0.0.12",
     "underscore": "^1.9.1",
