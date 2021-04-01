@@ -362,6 +362,8 @@ describe('noun inflector', function () {
       const myInflector = new NounInflector()
       expect(myInflector.singularize('expenses')).toBe('expense')
       expect(myInflector.singularize('defenses')).toBe('defense')
+      expect(myInflector.pluralize('expense')).toBe('expenses')
+      expect(myInflector.pluralize('defense')).toBe('defenses')
     })
   })
 })
