@@ -357,5 +357,13 @@ describe('noun inflector', function () {
       expect(myInflector.singularize('wharves')).toBe('wharf')
       expect(myInflector.singularize('handkerchieves')).toBe('handkerchief')
     })
+
+    it('should handle words ending in rf', function () {
+      const myInflector = new NounInflector()
+      expect(myInflector.singularize('expenses')).toBe('expense')
+      expect(myInflector.singularize('defenses')).toBe('defense')
+      expect(myInflector.pluralize('expense')).toBe('expenses')
+      expect(myInflector.pluralize('defense')).toBe('defenses')
+    })
   })
 })
