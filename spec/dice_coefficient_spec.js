@@ -28,4 +28,10 @@ describe('dice', function () {
   it('should sanitize spacing', function () {
     expect(dice('the   space', 'the space')).toBe(1)
   })
+
+  it('should compare complete texts', function () {
+    const text1 = require('./test_data/Wikipedia_EN_FrenchRevolution.json').text
+    const text2 = require('./test_data/Wikipedia_EN_InfluenceOfTheFrenchRevolution.json').text
+    expect(dice(text1, text2)).toBe(0.7897503285151117)
+  })
 })
