@@ -30,6 +30,13 @@ describe('aggressive_tokenizer_nl', function () {
     expect(tokenizer.tokenize('\'s Morgens is het nog erg koud, vertelde de weerman over een van de radio\'s')).toEqual(['\'s', 'Morgens', 'is', 'het', 'nog', 'erg', 'koud', 'vertelde', 'de', 'weerman', 'over', 'een', 'van', 'de', 'radio\'s'])
   })
 
+  it('should handle hyphens in words correctly', function () {
+    const sentence = 'clearing-systeem front-office-automatisering christelijk-historisch mond-op-mond, kant-en-klaar, kruidje-roer-me-niet, doe-het-zelver'
+    const res = tokenizer.tokenize(sentence)
+    const expectedRes = ['clearing-systeem', 'front-office-automatisering', 'christelijk-historisch', 'mond-op-mond', 'kant-en-klaar', 'kruidje-roer-me-niet', 'doe-het-zelver']
+    expect(res).toEqual(expectedRes)
+  })
+
   /*
   it('should tokenize strings via attached string method', function() {
     tokenizer.attach();

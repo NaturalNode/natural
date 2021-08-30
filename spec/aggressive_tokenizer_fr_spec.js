@@ -95,6 +95,13 @@ describe('aggressive_tokenizer_fr', function () {
     expect(tokenizer.tokenize(text)).toEqual(tokenized)
   })
 
+  it('should handle hyphens in words correctly', function () {
+    const sentence = 'Des sous-pages dans le sous-bois de la ville de Paris'
+    const res = tokenizer.tokenize(sentence)
+    const expectedRes = ['Des', 'sous-pages', 'dans', 'le', 'sous-bois', 'de', 'la', 'ville', 'de', 'Paris']
+    expect(res).toEqual(expectedRes)
+  })
+
   /*
   it('should tokenize strings via attached string method', function() {
     tokenizer.attach();
