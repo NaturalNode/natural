@@ -13,7 +13,7 @@
   "dependencies": {
     "afinn-165": "^1.0.2",
     "apparatus": "^0.0.10",
-    "json-stable-stringify": "^1.0.1",
+    "safe-stable-stringify": "^2.2.0",
     "sylvester": "^0.0.12",
     "underscore": "^1.9.1",
     "wordnet-db": "^3.1.11"
