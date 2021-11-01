@@ -20,4 +20,4 @@ currently being supported with security updates.
 
 If you find a vulnerability please report a security issue in the Issues section of the repository. If you know how to fix it, create a pull request.
 
-We will analyse the issue, and repair it a.s.a.p.
+We will analyse the issue, and repair it a.s.a.p (best effort).
