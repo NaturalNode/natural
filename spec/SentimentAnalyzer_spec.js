@@ -100,6 +100,14 @@ const testConfigurations = [
     ]
   },
   {
+    language: 'English',
+    stemmer: 'PorterStemmer',
+    vocabularyType: 'pattern',
+    testSentences: [
+      { sentence: 'constructor hasOwnProperty toString setPrototypeOf', score: 0 }
+    ]
+  },
+  {
     language: 'French',
     stemmer: 'PorterStemmerFr',
     vocabularyType: 'pattern',
