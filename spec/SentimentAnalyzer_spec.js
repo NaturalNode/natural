@@ -166,6 +166,16 @@ const testConfigurations = [
       { sentence: 'El poco miedo a parecer estúpida, por otra parte, hace de esta incursión en las debilidades masculinas un retrato divertido a la par que honesto, e incluso cuando se sitúa en espacios más frívolos sabe encontrar los resortes adecuados para hacer que del chiste broten risas ácidas.', score: 0.00719148936170213 },
       { sentence: 'Hay imágenes en Ready Player One realmente ingeniosas, así como set pieces abrumadores (que mejor no desvelar para no estropear el visionado); aunque el conglomerado de citas no siempre acaba funcionando, y la mezcla, por tanto, se transforma en mezcolanza: en un abigarrado fresco de todas esas cosas que han molado en los últimos 40 años, apelotonadas sin demasiado rigor ni pensamiento. Poca duda cabe de que Spielberg ha pulido mucho la literatura de Cline (es notorio en el último tramo del largometraje), pero aún y así el toque mágico del Rey Midas se resiente (algo), sobre todo cuando nos damos cuenta de que debajo de los adoquines, esa pátina espectacular de píxeles destellantes, no está escondida la playa. Ni nada que se le parezca.', score: -0.00584 }
     ]
+  },
+  {
+    language: 'Portuguese',
+    stemmer: 'PorterStemmerPt',
+    vocabularyType: 'afinn',
+    testSentences: [
+      { sentence: 'Juan Carlos prepara regresso a Espanha. Victoria Federica, neta do rei emérito, confirmou a informação à imprensa.', score: 0 },
+      { sentence: 'fortalecimento', score: 2 },
+      { sentence: 'fortalecimento controverso', score: 0 }
+    ]
   }
 
 ]
