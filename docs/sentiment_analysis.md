@@ -30,6 +30,7 @@ Currently, the following languages are supported with type of vocabulary and ava
 | French        |             |           | X         |           |
 | Galician      |             |  X        |           |           |
 | Italian       |             |           | X         |           |
+| Portuguese    | X           |           |           | X         |
 | Spanish       | X           |  X        |           | X         |
 
 More languages can be added by adding vocabularies and extending the map `languageFiles` in `SentimentAnalyzer.js`. In the tools folder below `lib/natural/sentiment` some tools are provided for transforming vocabularies in Senticon and Pattern format into a JSON format.
