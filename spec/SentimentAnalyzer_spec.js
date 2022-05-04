@@ -29,7 +29,7 @@ const testConfigurations = [
   {
     language: 'Basque',
     stemmer: '',
-    vocabularyType: 'senticon',
+    vocabularyType: Analyzer.SENTICON,
     testSentences: [
       { sentence: '2018ko martxoaren 30ean, Baionako Etxepare Lizeoko ikasleek Axut !-en, Artedrama eta Le Petit Théâtre de Pain antzerki taldeen "Zazpi senideko" obra berria ikusteko parada izanen dute. Aitzineko bi egunetan ere, hainbat tailerretan parte hartzeko parada ukanen dute. Sorkuntza laguntzeaz gain, Euskal kultur erakundeak lizeoan iraganen diren mediazio tailer batzuk sustatzen ditu.', score: 0.014705882352941176 },
       { sentence: 'Xiberuan, beste antzerki mota bat bada, kanpoan kantatzen eta dantzatzen dena: maskarada. Dantza ikusgarria eta "predikua" uztartzen dituen ihauterietako besta bat da. Xiberutarrak bizitzeko kostaldera joatearekin gelditu baldin baziren ere, berriki berriz bizi-bizi hasi dira, tradizioa eta modernismoa nahasten jakin duten tokiko jendeei esker.', score: 0.01490909090909091 },
@@ -41,7 +41,7 @@ const testConfigurations = [
   {
     language: 'Catalan',
     stemmer: '',
-    vocabularyType: 'senticon',
+    vocabularyType: Analyzer.SENTICON,
     testSentences: [
       { sentence: 'Un total de 18 entitats catalanes entre empreses, festivals, institucions i un programa de ràdio especialitzat en jazz participaran amb l’estand català a Jazzahead!, la fira internacional de jazz que tindrà lloc del 19 al 22 d’abril a Bremen, Alemanya. La presència catalana a Bremen es concentrarà a l’estand del Departament de Cultura, organitzat per l’Institut Català de les Empreses Culturals (ICEC), sota la seva marca d’internacionalització, Catalan Arts - Music, que oferirà una imatge conjunta del sector i servirà als professionals com a punt de trobada i de negoci on desenvolupar les seves activitats a la fira amb les màximes facilitats. A més, amb l’objectiu de fomentar el networking entre els professionals catalans i els delegats internacionals acreditats a la fira, s’oferirà una recepció a l’estand català divendres 20 a les 18:00h.', score: 0.009398496240601503 },
       { sentence: 'La setmana passada parlàvem del projecte cinematogràfic de Pep Puig, 40 hectàrees. La terra i el pagès, format per deu peces audiovisuals de quinze minuts accessibles a Penedès Televisió. Pep Puig el resumeix en tres grans aspectes. El primer: ‘Parlen els pagesos. Els pagesos ben poques vegades ocupen un paper protagonista quan ens referim a la vinya i el vi. Aquest poc protagonisme pagès, segurament el podríem fer extensiu també als pagesos que treballen els altres conreus. El relat sempre ve dels elaboradors, dels enòlegs, dels publicistes. Mai, o quasi mai, dels pagesos. També, quan es parla del camp o del món rural, la interpretació que se’n fa ve donada majoritàriament des de la ciutat.’', score: 0.006521739130434782 },
@@ -53,7 +53,7 @@ const testConfigurations = [
   {
     language: 'Dutch',
     stemmer: 'PorterStemmerNl',
-    vocabularyType: 'pattern',
+    vocabularyType: Analyzer.PATTERN,
     testSentences: [
       { sentence: 'Zo wordt het verhaal in een grappig sausje gerold, maar niet té grappig. De rondreis door Europa was leuk, hoewel Amsterdam wel erg cliché overkwam. Maar dit is misschien ook wel hoe toeristen het beleven, dat kan heel goed. Connie blijft het hele verhaal wat op de achtergrond waardoor we meer over haar in het verleden leren, dan over hoe ze nu is. Hun relatiegeschiedenis wordt in stukjes en beetjes verteld en daaruit merk je hoeveel Douglas van Connie houdt, en hoe onwaarschijnlijk het is dat ze uit elkaar zullen gaan. Als personage in de huidige tijd telt Connie minder mee dan Albie, de zoon. De relatie tussen vader en zoon wordt dus eigenlijk meer uitgediept dan die tussen man en vrouw. Maar vooral is het een boek waarin een man van middelbare leeftijd zichzelf leert kennen.', score: 0.007299270072992698 },
       { sentence: 'Wat Het Diner toch de moeite waard maakt is het spel van Jacob Derwig. Deze Derwig bewijst zich een ‘natural’, een acteur die met slechts een verveelde blik de camera weet te veroveren. Er is maar één term voor dergelijk charisma: filmster. En nee, dat indrukwekkende spel is niet te danken is aan Meyes’ acteursregie, want alle andere rollen zijn tenenkrommend. Dus. Laten ze die 20 miljoen aan Derwig geven, zodat hij kan verkassen naar Hollywood om daar in de remake te stralen. Kan ie doen wat Meyes had willen doen en wat Van Gogh had moeten doen. Ontsnappen aan onze schouderklopjes.', score: 0.024509803921568627 },
@@ -65,7 +65,7 @@ const testConfigurations = [
   {
     language: 'English',
     stemmer: 'PorterStemmer',
-    vocabularyType: 'afinn',
+    vocabularyType: Analyzer.AFINN,
     testSentences: [
       { sentence: "So is Gemini a joke, you ask? You're never sure whether Andrew Reed's cinematography is straight borrowing from Michael Mann's cool-blue visuals from Heat or mocking the sort of Angelenos that would watch that heist film and see nothing but a decor schematic for every single interior. Or, for that matter, whether composer Keegan DeWitt's is parodying the sax-heavy scores of Skinemax thrillers past or simply copying one in between icy techno interludes. The fact that the performers, especially the exceptional Kirke, keep their tongues firmly planted in their cheeks helps ground things, as does the fact that the jabs are featherweight enough to pass as shrugs. It may feel insubstantial at times, but somewhere out there, there's a twin of this film that lays on the L.A. Self-Owns Itself mojo in thick clumps. Gemini is the good-sibling version. It's worth a whirl.", score: -0.027972027972027972 },
       { sentence: "Sadly, stereotypes are this film’s stock in trade. Is Melinda a victim or a warrior or just batshit crazy? The movie can't or won’t decide. Taraji will rise again, she always does. But enduing a full 120 minutes of this shitstorm takes its toll. Bitterness, anger, malice, bad blood – that’s acrimony, baby. And that's what you'll feel if you blow the price of ticket on this hack job.", score: -0.10144927536231885 },
@@ -77,7 +77,7 @@ const testConfigurations = [
   {
     language: 'English',
     stemmer: 'PorterStemmer',
-    vocabularyType: 'senticon',
+    vocabularyType: Analyzer.SENTICON,
     testSentences: [
       { sentence: "So is Gemini a joke, you ask? You're never sure whether Andrew Reed's cinematography is straight borrowing from Michael Mann's cool-blue visuals from Heat or mocking the sort of Angelenos that would watch that heist film and see nothing but a decor schematic for every single interior. Or, for that matter, whether composer Keegan DeWitt's is parodying the sax-heavy scores of Skinemax thrillers past or simply copying one in between icy techno interludes. The fact that the performers, especially the exceptional Kirke, keep their tongues firmly planted in their cheeks helps ground things, as does the fact that the jabs are featherweight enough to pass as shrugs. It may feel insubstantial at times, but somewhere out there, there's a twin of this film that lays on the L.A. Self-Owns Itself mojo in thick clumps. Gemini is the good-sibling version. It's worth a whirl.", score: -0.02696503496503496 },
       { sentence: "Sadly, stereotypes are this film’s stock in trade. Is Melinda a victim or a warrior or just batshit crazy? The movie can't or won’t decide. Taraji will rise again, she always does. But enduing a full 120 minutes of this shitstorm takes its toll. Bitterness, anger, malice, bad blood – that’s acrimony, baby. And that's what you'll feel if you blow the price of ticket on this hack job.", score: 0.037159420289855076 },
@@ -90,7 +90,7 @@ const testConfigurations = [
   {
     language: 'English',
     stemmer: 'PorterStemmer',
-    vocabularyType: 'pattern',
+    vocabularyType: Analyzer.PATTERN,
     testSentences: [
       { sentence: "So is Gemini a joke, you ask? You're never sure whether Andrew Reed's cinematography is straight borrowing from Michael Mann's cool-blue visuals from Heat or mocking the sort of Angelenos that would watch that heist film and see nothing but a decor schematic for every single interior. Or, for that matter, whether composer Keegan DeWitt's is parodying the sax-heavy scores of Skinemax thrillers past or simply copying one in between icy techno interludes. The fact that the performers, especially the exceptional Kirke, keep their tongues firmly planted in their cheeks helps ground things, as does the fact that the jabs are featherweight enough to pass as shrugs. It may feel insubstantial at times, but somewhere out there, there's a twin of this film that lays on the L.A. Self-Owns Itself mojo in thick clumps. Gemini is the good-sibling version. It's worth a whirl.", score: -0.007692307692307693 },
       { sentence: "Sadly, stereotypes are this film’s stock in trade. Is Melinda a victim or a warrior or just batshit crazy? The movie can't or won’t decide. Taraji will rise again, she always does. But enduing a full 120 minutes of this shitstorm takes its toll. Bitterness, anger, malice, bad blood – that’s acrimony, baby. And that's what you'll feel if you blow the price of ticket on this hack job.", score: -0.010144927536231883 },
@@ -102,7 +102,7 @@ const testConfigurations = [
   {
     language: 'English',
     stemmer: 'PorterStemmer',
-    vocabularyType: 'pattern',
+    vocabularyType: Analyzer.PATTERN,
     testSentences: [
       { sentence: 'constructor hasOwnProperty toString setPrototypeOf', score: 0 }
     ]
@@ -110,7 +110,7 @@ const testConfigurations = [
   {
     language: 'French',
     stemmer: 'PorterStemmerFr',
-    vocabularyType: 'pattern',
+    vocabularyType: Analyzer.PATTERN,
     testSentences: [
       { sentence: 'La décision provoquait des réactions contrastées sur les réseaux sociaux, où certains rappelaient le mode d’action spectaculaire qui était la signature d’Act Up dans les années 1990 (préservatif géant sur l’obélisque de la Concorde à Paris, jets de faux sang ou de vraies cendres de militants…)', score: 0.0021739130434782596 },
       { sentence: '« How’s your mug ? » Un simple tour de voix et c’est le rire assuré dans le public : la « Théière anglaise » Michel Sénéchal vient de s’adresser ce 29 février 2004 à la Tasse chinoise dans L’Enfant et les sortilèges de Ravel au Théâtre des Champs-Elysées. Le ténor français, que sa voix aux aigus faciles et bien projetés, son sens de la comédie et son irrésistible charisme avaient destiné aux « rôles » de caractère, cette aptitude à camper des personnages à la fois émouvants et ridicules, s’est éteint le 1er avril à l’âge de 91 ans à l’hôpital d’Eaubonne, dans le Val-d’Oise.', score: 0.021132075471698115 },
@@ -122,7 +122,7 @@ const testConfigurations = [
   {
     language: 'Galician',
     stemmer: '',
-    vocabularyType: 'senticon',
+    vocabularyType: Analyzer.SENTICON,
     testSentences: [
       { sentence: 'A decisión da proxección deste filme non foi doada, por tratarse dun filme rodado por dous estadounidenses ó redor dun sinistro suceso, sen embargo, Santoalla é moito máis que o relato dunha crónica negra. É a historia dun soño truncado, é a mirada que doe, é o abandono do rural e sobre todo, é a procura do fogar. Lingüisticamente -ó igual que no GFF- nel conviven o inglés e o galego e nel, están reflectidos dous modos distintos de ver o mundo – o do que chega de fóra e do que sempre estivo-.  Santoalla constrúe dende o concreto unha historia universal e convértese nun incómodo retrato sociolóxico dunha Galiza en vías de extinción mais non extinta.', score: 0.01852136752136752 },
       { sentence: 'A nova edición do Galician Film Forum (e van oito!) xa está en marcha así que ide reservando a data e hora nas vosas axendas. Vémonos o venres 23 de marzo para a estrea en Londres de Santoalla, un filme dos estadounidenses Andrew Becker e Daniel Mehrer. A proxección vai ser na universidade King´s College de Londres [18:45 h, Strand Campus, Edmond J Safra Theatre WC2R 2LS] e a entrada será gratuíta, pero cómpre reservala con antelación nesta ligazón. Como en edicións anteriores, contamos co apoio do departamento de Spanish, Portuguese and Latin American Studies do King´s College. Grazas! Deixámosvos co tráiler da película e animándovos a reservar axiña as entradas. Vémonos nun chisco!', score: 0.008771929824561403 },
@@ -134,7 +134,7 @@ const testConfigurations = [
   {
     language: 'Italian',
     stemmer: 'PorterStemmerIt',
-    vocabularyType: 'pattern',
+    vocabularyType: Analyzer.PATTERN,
     testSentences: [
       { sentence: "Merito del film, è quello di provare a fornire allo spettatore una visione ampia e obiettiva sui motivi dell'odio, facendo parlare le persone, oltre che le immagini. Nonostante le fiamme, destinate ad aumentare fin dall'incipit, divampino furiosamente. Come nella scena dell'impiccagione, quando un uomo di colore viene appeso a un albero mentre la sua casa brucia alle spalle. E una voce extradiegetica intona una preghiera triste e piena di rabbia.", score: 0.004428571428571428 },
       { sentence: "Apparso di sbieco solo in un paio di sceneggiati tv, Karl Marx entra qui in scena, per la prima volta da protagonista, nel film di Raoul Peck, con il volto e il corpo di August Diehl. Un interprete in parte ma sopra le righe, a volte troppo compiaciuto, che tuttavia serve a perfezione l'obiettivo: rappresentare Marx come uomo prima che come filosofo, come artista prima che come teorico, raccontarlo arrabbiato, innamorato, umiliato, ubriaco, come fosse una persona normale.", score: -0.0016666666666666668 },
@@ -146,7 +146,7 @@ const testConfigurations = [
   {
     language: 'Spanish',
     stemmer: 'PorterStemmerEs',
-    vocabularyType: 'afinn',
+    vocabularyType: Analyzer.AFINN,
     testSentences: [
       { sentence: 'Pues, en efecto, es solo el plano y lo que muestra aquello que interesa a Zemeckis. Y también aquello que, finalmente, acaba evocando una cierta fantasmagoría que está detrás de muchas de las películas del cineasta, ese espacio entre las cosas que se dedica a atisbar desde su cámara, o desde el avión de El vuelo, o desde la isla de Náufrago, el aire y el agua, o simplemente la presencia imponente de las Torres Gemelas que aquí se transforma poco a poco en ausencia inquietante, mezcla de pasado y presente, hasta el punto de que El desafío podría ser también una película política. ¿Estamos ya en condiciones de equiparar todo lo dicho con el metraje encontrado de Forrest Gump, al fin y al cabo otra celebración de ese espacio inmaterial, de ese tiempo suspendido que es la Historia? ', score: 0.05 },
       { sentence: 'En este sentido, El insulto, una de las cintas nominadas al Oscar a la Mejor película de habla no inglesa en los pasados Premios de la Academia, también subraya lo rápido que olvidamos los traumas de nuestra historia reciente, sepultados por los distintos discursos e ideologías agitadoras del odio. Tal vez Doueiri haya simplificado un conflicto complejo, pero los estereotipos que aparecen en El insulto explican bastante bien cómo funcionamos cuando la rabia nos corroe.', score: 0.04 },
@@ -158,7 +158,7 @@ const testConfigurations = [
   {
     language: 'Spanish',
     stemmer: 'PorterStemmerEs',
-    vocabularyType: 'senticon',
+    vocabularyType: Analyzer.SENTICON,
     testSentences: [
       { sentence: 'Pues, en efecto, es solo el plano y lo que muestra aquello que interesa a Zemeckis. Y también aquello que, finalmente, acaba evocando una cierta fantasmagoría que está detrás de muchas de las películas del cineasta, ese espacio entre las cosas que se dedica a atisbar desde su cámara, o desde el avión de El vuelo, o desde la isla de Náufrago, el aire y el agua, o simplemente la presencia imponente de las Torres Gemelas que aquí se transforma poco a poco en ausencia inquietante, mezcla de pasado y presente, hasta el punto de que El desafío podría ser también una película política. ¿Estamos ya en condiciones de equiparar todo lo dicho con el metraje encontrado de Forrest Gump, al fin y al cabo otra celebración de ese espacio inmaterial, de ese tiempo suspendido que es la Historia? ', score: 0.007957142857142857 },
       { sentence: 'En este sentido, El insulto, una de las cintas nominadas al Oscar a la Mejor película de habla no inglesa en los pasados Premios de la Academia, también subraya lo rápido que olvidamos los traumas de nuestra historia reciente, sepultados por los distintos discursos e ideologías agitadoras del odio. Tal vez Doueiri haya simplificado un conflicto complejo, pero los estereotipos que aparecen en El insulto explican bastante bien cómo funcionamos cuando la rabia nos corroe.', score: 0.0020133333333333327 },
@@ -170,7 +170,7 @@ const testConfigurations = [
   {
     language: 'Portuguese',
     stemmer: 'PorterStemmerPt',
-    vocabularyType: 'afinn',
+    vocabularyType: Analyzer.AFINN,
     testSentences: [
       { sentence: 'Juan Carlos prepara regresso a Espanha. Victoria Federica, neta do rei emérito, confirmou a informação à imprensa.', score: 0 },
       { sentence: 'fortalecimento', score: 2 },
@@ -183,7 +183,7 @@ const testConfigurations = [
 describe('The sentiment analyzer analyzes the sentiment of sentences in multiple languages using different types of vocabularies', function () {
   testConfigurations.forEach(config => {
     it('Should analyze a set of sentences with each configuration ' +
-      '(' + config.language + ', ' + config.vocabularyType + ', ' + (config.stemmer ? config.stemmer : 'without stemmer') + ')', function () {
+      '(' + config.language + ', ' + config.vocabularyType.toString() + ', ' + (config.stemmer ? config.stemmer : 'without stemmer') + ')', function () {
       let stemmer = null
       // Create the stemmer
       if (config.stemmer !== '') {
