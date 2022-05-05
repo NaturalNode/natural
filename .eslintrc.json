@@ -1,3 +1,5 @@
-"settings": {
-    "import/parser": "babel-eslint"
+{
+  "settings": {
+      "import/parser": "babel-eslint"
+  }
 }
