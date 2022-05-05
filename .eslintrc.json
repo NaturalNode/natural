@@ -1,0 +1,3 @@
+"settings": {
+    "import/parser": "babel-eslint"
+}
