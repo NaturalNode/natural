@@ -19,6 +19,8 @@
     "wordnet-db": "^3.1.11"
   },
   "devDependencies": {
+    "@istanbuljs/nyc-config-babel": "^3.0.0",
+    "babel-plugin-istanbul": "^6.1.1",
     "browserfs": "^1.4.3",
     "gulp": "^4.0.2",
     "gulp-jasmine": "^4.0.0",
