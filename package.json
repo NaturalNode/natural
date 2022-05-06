@@ -19,6 +19,7 @@
     "wordnet-db": "^3.1.11"
   },
   "devDependencies": {
+    "@babel/core": "^7.17.10",
     "@istanbuljs/nyc-config-babel": "^3.0.0",
     "babel-plugin-istanbul": "^6.1.1",
     "browserfs": "^1.4.3",
