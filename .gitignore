@@ -4,6 +4,7 @@
 *classifier.json
 node_modules
 io_spec/test_data/wordnet/download/*
+io_spec/test_data/sample.json
 *.noun
 *.verb
 *.adj
