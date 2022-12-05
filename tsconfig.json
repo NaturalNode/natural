@@ -15,7 +15,7 @@
         "types": [],
         "noEmit": true,
         "forceConsistentCasingInFileNames": true
-    },,
+    },
     "include": ["./lib/natural/**/*"],
     "files": [
         "tokenizers.d.ts"
