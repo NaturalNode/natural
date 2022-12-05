@@ -183,4 +183,18 @@ describe('sentence_tokenizer', function () {
       ]
     )
   })
+  it('Should correctly parse multiple sentences with a subset of the sentences surrounded with quotes', function () {
+    expect(
+      tokenizer.tokenize('"All ticketed passengers should now be in the Blue Concourse sleep lounge. Make sure your validation papers are in order. Thank you." The upstairs lounge was not at all grungy.')
+    ).toEqual(
+      [
+        '"',
+        'All ticketed passengers should now be in the Blue Concourse sleep lounge.',
+        'Make sure your validation papers are in order.',
+        'Thank you.',
+        '"',
+        'The upstairs lounge was not at all grungy.'
+      ]
+    )
+  })
 })

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2020, Hugo W.L. ter Doest
+Copyright (c) 2020, 2022 Hugo W.L. ter Doest
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -24,8 +24,19 @@ THE SOFTWARE.
 	const knownAbbreviations = require("../util/abbreviations_en").knownAbbreviations
 }
 
+s
+	= sentences: (Sentences Whitespace / QuotedSentences Whitespace)+ {
+		let result = []
+		sentences.forEach(sent0 => {
+			sent0[0].forEach(sent1 => {
+				result.push(sent1)
+			})
+		})
+		return result
+	}
+
 Sentences
-  = sentences: (Sentence Whitespace) * {
+  = sentences: (Sentence Whitespace) + {
       //return sentences
       return(
           sentences.map(sent => {
@@ -35,6 +46,22 @@ Sentences
             return sent[0].reduce((accu, str) =>  accu + str).trim()
           })
       )
+    }
+
+QuotedSentences
+  = open: OpenSymbol sentences: (Sentence Whitespace) + close: CloseSymbol? {
+      //return sentences
+      let result = sentences.map(sent => {
+      	//if (sent[1]) {
+      	  sent[0].push(sent[1])
+        //}
+        return sent[0].reduce((accu, str) =>  accu + str).trim()
+      })
+			result.unshift(open)
+			if (close) {
+      	result.push(close)
+			}
+      return result
     }
 
 Sentence
@@ -83,7 +110,7 @@ Abbreviation
     }
 
 Word
-    = [^ \t\n\r!?\.\(\[\}\"\`\)\]\}\"\`0-9\@]+ {
+    = [^ \t\n\r!?\.\(\[\}\)\]\}\`\"0-9\@]+ {
   	  return text()
     }
 
@@ -103,7 +130,7 @@ URI
   }
 
 OpenSymbol
-  = [\(\[\}\"\'\`\‘] {
+  = [\(\[\{\"\'\`\‘] {
       return text()
     }
 
