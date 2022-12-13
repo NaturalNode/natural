@@ -15,10 +15,12 @@
     "apparatus": "^0.0.10",
     "safe-stable-stringify": "^2.2.0",
     "sylvester": "^0.0.12",
+    "tsc": "^2.0.4",
     "underscore": "^1.9.1",
     "wordnet-db": "^3.1.11"
   },
   "devDependencies": {
+    "@types/node": "^18.11.14",
     "browserfs": "^1.4.3",
     "gulp": "^4.0.2",
     "gulp-jasmine": "^4.0.0",
