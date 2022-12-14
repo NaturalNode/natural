@@ -15,8 +15,8 @@
         "skipLibCheck": true
     },
     "include": [
-        "./lib/natural",
-        "./spec"
+        "lib/natural",
+        "spec"
     ],
     "exclude": [
         "./node_modules"
