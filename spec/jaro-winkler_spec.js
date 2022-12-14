@@ -70,7 +70,7 @@ describe('jaro-winkler', function () {
     expect(jaroWinklerDistance('aaa', 'aAa', {})).not.toEqual(jaroWinklerDistance('aaa', 'aaa', {}))
     expect(jaroWinklerDistance('dixon', 'DICKSONX', { ignoreCase: true })).toEqual(jaroWinklerDistance('DIXON', 'DICKSONX', {}))
     expect(jaroWinklerDistance('seddon', 'SEDDON', { ignoreCase: true })).toEqual(jaroWinklerDistance('SEDDON', 'SEDDON', {}))
-    expect(approxEql(jaroWinklerDistance('MARTHA', 'MARHTA', {ignoreCase: true }), 0.96111)).toBeTruthy()
+    expect(approxEql(jaroWinklerDistance('MARTHA', 'MARHTA', { ignoreCase: true }), 0.96111)).toBeTruthy()
     expect(jaroWinklerDistance('abcd', 'ABCD', { ignoreCase: true })).toBe(1)
   })
 })
