@@ -12,3 +12,4 @@ io_spec/test_data/sample.json
 npm-debug.log
 .vscode
 .nyc_output/*
+dist
