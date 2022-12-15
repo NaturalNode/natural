@@ -22,8 +22,8 @@ THE SOFTWARE.
 
 // Based on type definitions on Definitely Typed
 
-export interface Tokenizer {
-  function tokenize (text: string): string[]
+interface Tokenizer {
+  tokenize (text: string): string[]
 }
 export declare class WordTokenizer implements Tokenizer {
   tokenize (text: string): string[]
