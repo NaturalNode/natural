@@ -22,7 +22,7 @@ THE SOFTWARE.
 
 // Based on type definitions on Definitely Typed
 
-interface Tokenizer {
+export interface Tokenizer {
   tokenize: (text: string) => string[]
 }
 export declare class WordTokenizer implements Tokenizer {
@@ -71,10 +71,10 @@ export declare class AggressiveTokenizerId implements Tokenizer {
   tokenize (text: string): string[]
 }
 export declare class AggressiveTokenizerIt implements Tokenizer {
-  tokenize(text: string): string[]
+  tokenize (text: string): string[]
 }
 export declare class AggressiveTokenizerNl implements Tokenizer {
-  tokenize(text: string): string[]
+  tokenize (text: string): string[]
 }
 export declare class AggressiveTokenizerNo implements Tokenizer {
   tokenize (text: string): string[]
