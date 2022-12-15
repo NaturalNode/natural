@@ -23,77 +23,77 @@ THE SOFTWARE.
 // Based on type definitions on Definitely Typed
 
 export interface Tokenizer {
-    tokenize(text: string): string[];
+  function tokenize (text: string): string[]
 }
 export declare class WordTokenizer implements Tokenizer {
-    tokenize(text: string): string[];
+  tokenize (text: string): string[]
 }
 export declare class TreebankWordTokenizer implements Tokenizer {
-    tokenize(text: string): string[];
+  tokenize (text: string): string[]
 }
 export interface RegexTokenizerOptions {
-    pattern?: RegExp | undefined;
-    discardEmpty?: boolean | undefined;
+  pattern?: RegExp | undefined
+  discardEmpty?: boolean | undefined
 }
 export declare class RegexpTokenizer implements Tokenizer {
-    constructor(options: RegexTokenizerOptions);
-    tokenize(text: string): string[];
+  constructor (options: RegexTokenizerOptions)
+  tokenize (text: string): string[];
 }
 export declare class OrthographyTokenizer implements Tokenizer {
-    constructor(options: RegexTokenizerOptions & { language: string });
-    tokenize(text: string): string[];
+  constructor (options: RegexTokenizerOptions & { language: string })
+  tokenize (text: string): string[]
 }
 export declare class WordPunctTokenizer implements Tokenizer {
-    tokenize(text: string): string[];
+  tokenize (text: string): string[]
 }
 export declare class SentenceTokenizer implements Tokenizer {
-    tokenize(text: string): string[];
+  tokenize (text: string): string[]
 }
 export declare class SentenceTokenizerNew implements Tokenizer {
-    tokenize(text: string): string[];
+  tokenize (text: string): string[]
 }
 export declare class CaseTokenizer implements Tokenizer {
-    tokenize(text: string, preserveApostrophy?: boolean): string[];
+  tokenize (text: string, preserveApostrophy?: boolean): string[]
 }
 export declare class AggressiveTokenizer implements Tokenizer {
-    tokenize(text: string): string[];
+  tokenize (text: string): string[]
 }
 export declare class AggressiveTokenizerEs implements Tokenizer {
-    tokenize(text: string): string[];
+  tokenize (text: string): string[]
 }
 export declare class AggressiveTokenizerFa implements Tokenizer {
-    tokenize(text: string): string[];
+  tokenize (text: string): string[]
 }
 export declare class AggressiveTokenizerFr implements Tokenizer {
-    tokenize(text: string): string[];
+  tokenize (text: string): string[]
 }
 export declare class AggressiveTokenizerId implements Tokenizer {
-    tokenize(text: string): string[];
+  tokenize (text: string): string[]
 }
 export declare class AggressiveTokenizerIt implements Tokenizer {
-    tokenize(text: string): string[];
+  tokenize(text: string): string[]
 }
 export declare class AggressiveTokenizerNl implements Tokenizer {
-    tokenize(text: string): string[];
+  tokenize(text: string): string[]
 }
 export declare class AggressiveTokenizerNo implements Tokenizer {
-    tokenize(text: string): string[];
+  tokenize (text: string): string[]
 }
 export declare class AggressiveTokenizerPl implements Tokenizer {
-    tokenize(text: string): string[];
+  tokenize (text: string): string[]
 }
 export declare class AggressiveTokenizerPt implements Tokenizer {
-    tokenize(text: string): string[];
+  tokenize (text: string): string[]
 }
 export declare class AggressiveTokenizerRu implements Tokenizer {
-    tokenize(text: string): string[];
+  tokenize (text: string): string[]
 }
 export declare class AggressiveTokenizerSv implements Tokenizer {
-    tokenize(text: string): string[];
+  tokenize (text: string): string[]
 }
 export declare class AggressiveTokenizerVi implements Tokenizer {
-    tokenize(text: string): string[];
+  tokenize (text: string): string[]
 }
 export declare class TokenizerJa implements Tokenizer {
-    tokenize(text: string): string[];
+  tokenize (text: string): string[]
 }
