@@ -30,7 +30,6 @@ export interface JaroWinklerOptions {
 }
 export declare function JaroWinklerDistance(s1: string, s2: string, options: JaroWinklerOptions): number;
 
-export declare function LevenshteinDistance(source: string, target: string, options?: any): number;
 export interface DamerauLevenshteinDistanceOptions {
     /** @default 1 */
     insertion_cost?: number | undefined;
@@ -44,11 +43,13 @@ export interface DamerauLevenshteinDistanceOptions {
     search?: boolean | undefined;
     /** @default false */
     restricted?: boolean | undefined;
+    damerau?: boolean | undefined;
 }
 interface SubstringDistanceResult {
     substring: string;
     distance: number;
 }
+export declare function LevenshteinDistance(source: string, target: string, options?: DamerauLevenshteinDistanceOptions): number;
 /**
  * Returns the Damerau-Levenshtein distance between strings. Counts the distance
  * between two strings by returning the number of edit operations required to
