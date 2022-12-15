@@ -15,7 +15,7 @@
         "skipLibCheck": true
     },
     "include": [
-        "lib/natural/**/*",
+        "lib/natural/**/*.ts",
         "spec/*"
     ],
     "exclude": [
