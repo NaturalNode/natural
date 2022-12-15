@@ -46,8 +46,8 @@ export interface DamerauLevenshteinDistanceOptions {
   damerau?: boolean | undefined
 }
 interface SubstringDistanceResult {
-    substring: string
-    distance: number
+  substring: string
+  distance: number
 }
 export declare function LevenshteinDistance (source: string, target: string, options?: DamerauLevenshteinDistanceOptions): number
 /**
