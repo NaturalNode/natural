@@ -15,7 +15,7 @@ console.log(tokenizer.tokenize ("my dog hasn't any fleas."))
 // [ 'my', 'dog', 'has', 'n\'t', 'any', 'fleas', '.' ]
 
 tokenizer = new RegexpTokenizer ({ pattern: /-/ })
-console.log(tokenizer.tokenize 'flea-dog'))
+console.log(tokenizer.tokenize ('flea-dog'))
 // [ 'flea', 'dog' ]
 
 tokenizer = new WordPunctTokenizer ()
