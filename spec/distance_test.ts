@@ -16,7 +16,7 @@ console.log(
   LevenshteinDistance('ones', 'onez', {
     insertion_cost: 1,
     deletion_cost: 1,
-    substitution_cost: 1,
+    substitution_cost: 1
   })
 )
 // $ExpectType SubstringDistanceResult
