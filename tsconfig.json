@@ -15,9 +15,7 @@
         "skipLibCheck": true
     },
     "include": [
-        "lib/natural/index.d.ts",
-        "lib/natural/tokenizers/index.ts",
-        "lib/natural/distance/index.d.ts",
+        "lib/natural/**/*",
         "spec/*"
     ],
     "exclude": [
