@@ -13,6 +13,7 @@
   "dependencies": {
     "afinn-165": "^1.0.2",
     "apparatus": "^0.0.10",
+    "eslint": "^7.13.0",
     "safe-stable-stringify": "^2.2.0",
     "sylvester": "^0.0.12",
     "tsc": "^2.0.4",
@@ -21,6 +22,7 @@
   },
   "devDependencies": {
     "@types/node": "^18.11.14",
+    "@typescript-eslint/eslint-plugin": "^5.46.1",
     "browserfs": "^1.4.3",
     "gulp": "^4.0.2",
     "gulp-jasmine": "^4.0.0",
@@ -59,7 +61,8 @@
     "test": "NODE_PATH=. node ./node_modules/jasmine/bin/jasmine.js io_spec/*_spec.js spec/*_spec.js",
     "coverage": "nyc --reporter=lcov npm test",
     "test_io": "NODE_PATH=. node ./node_modules/jasmine/bin/jasmine.js --random=false io_spec/*_spec.js",
-    "test_browser": "NODE_PATH=. node ./node_modules/gulp/bin/gulp.js"
+    "test_browser": "NODE_PATH=. node ./node_modules/gulp/bin/gulp.js",
+    "lint": "eslint . --ext .ts"
   },
   "license": "MIT",
   "author": "Chris Umbel <chris@chrisumbel.com>",

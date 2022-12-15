@@ -1,2 +1,2 @@
 
-import {JaroWinklerDistance} from "./distance";
+import {JaroWinklerDistance} from "./distance"
