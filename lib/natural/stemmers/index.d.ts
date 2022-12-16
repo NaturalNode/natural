@@ -23,9 +23,9 @@ THE SOFTWARE.
 // Based on the type definitions on definitely typed
 
 export interface Stemmer {
-  stem: (token: string) => string;
-  tokenizeAndStem: (text: string) => string[];
-  attach: () => void;
+  stem: (token: string) => string
+  tokenizeAndStem: (text: string) => string[]
+  attach: () => void
 }
 
 declare const CarryStemmerFr: Stemmer
