@@ -29,7 +29,7 @@ export interface Stemmer {
 }
 
 declare const CarryStemmerFr: Stemmer
-declare const  LancasterStemmer: Stemmer
+declare const LancasterStemmer: Stemmer
 declare const PorterStemmer: Stemmer
 declare const PorterStemmerEs: Stemmer
 declare const PorterStemmerFa: Stemmer
