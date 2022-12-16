@@ -23,22 +23,22 @@ THE SOFTWARE.
 // Based on the type definitions on definitely typed
 
 export interface Stemmer {
-    stem: (token: string) => string;
-    tokenizeAndStem: (text: string) => string[];
-    attach: () => void;
+  stem: (token: string) => string;
+  tokenizeAndStem: (text: string) => string[];
+  attach: () => void;
 }
 
-declare var CarryStemmerFr: Stemmer
-declare var LancasterStemmer: Stemmer
-declare var PorterStemmer: Stemmer
-declare var PorterStemmerEs: Stemmer
-declare var PorterStemmerFa: Stemmer
-declare var PorterStemmerFr: Stemmer
-declare var PorterStemmerIt: Stemmer
-declare var PorterStemmerNl: Stemmer
-declare var PorterStemmerNo: Stemmer
-declare var PorterStemmerPt: Stemmer
-declare var PorterStemmerRu: Stemmer
-declare var PorterStemmerSv: Stemmer
-declare var StemmerId: Stemmer
-declare var StemmerJa: Stemmer
+declare const CarryStemmerFr: Stemmer
+declare const  LancasterStemmer: Stemmer
+declare const PorterStemmer: Stemmer
+declare const PorterStemmerEs: Stemmer
+declare const PorterStemmerFa: Stemmer
+declare const PorterStemmerFr: Stemmer
+declare const PorterStemmerIt: Stemmer
+declare const PorterStemmerNl: Stemmer
+declare const PorterStemmerNo: Stemmer
+declare const PorterStemmerPt: Stemmer
+declare const PorterStemmerRu: Stemmer
+declare const PorterStemmerSv: Stemmer
+declare const StemmerId: Stemmer
+declare const StemmerJa: Stemmer
