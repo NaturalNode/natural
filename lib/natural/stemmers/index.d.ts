@@ -28,17 +28,17 @@ export interface Stemmer {
     attach: () => void;
 }
 
-declare var CarryStemmerFr: Stemmer;
-declare var LancasterStemmer: Stemmer;
-declare var PorterStemmer: Stemmer;
-declare var PorterStemmerEs: Stemmer;
-declare var PorterStemmerFa: Stemmer;
-declare var PorterStemmerFr: Stemmer;
-declare var PorterStemmerIt: Stemmer;
-declare var PorterStemmerNl: Stemmer;
-declare var PorterStemmerNo: Stemmer;
-declare var PorterStemmerPt: Stemmer;
-declare var PorterStemmerRu: Stemmer;
-declare var PorterStemmerSv: Stemmer;
-declare var StemmerId: Stemmer;
-declare var StemmerJa: Stemmer;
+declare var CarryStemmerFr: Stemmer
+declare var LancasterStemmer: Stemmer
+declare var PorterStemmer: Stemmer
+declare var PorterStemmerEs: Stemmer
+declare var PorterStemmerFa: Stemmer
+declare var PorterStemmerFr: Stemmer
+declare var PorterStemmerIt: Stemmer
+declare var PorterStemmerNl: Stemmer
+declare var PorterStemmerNo: Stemmer
+declare var PorterStemmerPt: Stemmer
+declare var PorterStemmerRu: Stemmer
+declare var PorterStemmerSv: Stemmer
+declare var StemmerId: Stemmer
+declare var StemmerJa: Stemmer
