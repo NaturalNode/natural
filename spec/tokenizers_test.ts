@@ -24,3 +24,4 @@ console.log(tokenizer.tokenize("my dog hasn't any fleas."))
 
 tokenizer = new SentenceTokenizer()
 console.log(tokenizer.tokenize('One sentence. Another sentence.'))
+//  [ 'One sentence.', 'Another sentence.' ]

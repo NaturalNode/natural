@@ -1,24 +1,25 @@
 {
-    "compilerOptions": {
-        "target": "es6",
-        "lib": [
-            "es6"
-        ],
-        "module": "commonjs",
-        "rootDir": "./",
-        "moduleResolution": "node",
-        "allowJs": true,
-        "outDir": "./dist",
-        "esModuleInterop": true,
-        "forceConsistentCasingInFileNames": true,
-        "strict": true,
-        "skipLibCheck": true
-    },
-    "include": [
-        "lib/natural/**/*",
-        "spec/*"
+  "compilerOptions": {
+    "target": "es6",
+    "resolveJsonModule": true,
+    "lib": [
+      "es6"
     ],
-    "exclude": [
-        "./node_modules"
-    ]
+    "module": "commonjs",
+    "rootDir": "./",
+    "moduleResolution": "node",
+    "allowJs": true,
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "lib/natural/**/*",
+    "spec/*"
+  ],
+  "exclude": [
+    "./node_modules"
+  ]
 }
