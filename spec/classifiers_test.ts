@@ -22,17 +22,22 @@ classifier.events.on('trainedWithDocument', function (obj: any) {
 })
 
 classifier.save('classifier.json', function (err: any, classifier: BayesClassifier) {
-  // the classifier is saved to the classifier.json file!
-  console.log('The classifier is saved to the classifier.json file!')
-  BayesClassifier.load('classifier.json', null, function (err: any, classifier: BayesClassifier) {
-    if (err) {
-      console.log(err)
-    }
-    else {
-      console.log(classifier.classify('long SUNW'))
-      console.log(classifier.classify('short SUNW'))
-    }
-  })
+  if (err) {
+    console.log(err)
+  }
+  else {
+    // the classifier is saved to the classifier.json file!
+    console.log('The classifier is saved to the classifier.json file!')
+    BayesClassifier.load('classifier.json', null, function (err: any, classifier: BayesClassifier) {
+      if (err) {
+        console.log(err)
+      }
+      else {
+        console.log(classifier.classify('long SUNW'))
+        console.log(classifier.classify('short SUNW'))
+      }
+    })
+  }
 })
 
 classifier = new BayesClassifier()
