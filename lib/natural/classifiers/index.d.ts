@@ -4,8 +4,8 @@ export interface BayesClassifierClassification {
   value: number
 }
 
-interface BayesClassifierCallback {
-  (err: any, classifier: any): void
+export interface Function {
+  BayesClassifierCallback(err: any, classifier: BayesClassifier): void
 }
 
 declare class BayesClassifier {
@@ -27,8 +27,8 @@ interface LogisticRegressionClassifierClassification {
   value: number
 }
 
-interface LogisticRegressionCallback {
-    (err: any, result: LogisticRegressionClassifier): void
+export interface Function {
+  LogisticRegressionCallback(err: any, result: LogisticRegressionClassifier): void
 }
 
 declare class LogisticRegressionClassifier {
@@ -44,8 +44,8 @@ declare class LogisticRegressionClassifier {
   static restore(classifier: any, stemmer?: Stemmer): LogisticRegressionClassifier
 }
 
-interface MaxEntClassifierCallback {
-    (err: any, result: MaxEntClassifier): void
+export interface Function {
+  MaxEntClassifierCallback(err: any, result: MaxEntClassifier): void
 }
 
 declare class MaxEntClassifier {
@@ -62,8 +62,8 @@ declare class MaxEntClassifier {
   static load(filename: string, elementClass: Element, callback: MaxEntClassifierCallback): void
 }
 
-interface FeatureFunction {
-    (x: Element): number
+export interface Function {
+  FeatureFunction(x: Element): number
 }
 
 declare class Feature {
@@ -89,8 +89,8 @@ declare class FeatureSet {
   prettyPrint(): string
 }
 
-interface SampleCallback {
-    (err: any, result: Sample): void
+export interface Function {
+  SampleCallback(err: any, result: Sample): void
 }
 
 declare class Sample {
