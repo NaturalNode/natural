@@ -29,12 +29,12 @@ classifier.save('classifier.json', function (err: any, classifier: BayesClassifi
     // the classifier is saved to the classifier.json file!
     console.log('The classifier is saved to the classifier.json file!')
     BayesClassifier.load('classifier.json', null, function (err: any, classifier: BayesClassifier) {
-      if (err) {
+      if (err !== undefined) {
         console.log(err)
       }
       else {
-        console.log(classifier.classify('long SUNW'))
-        console.log(classifier.classify('short SUNW'))
+        console.log('Classify long SUNW' + classifier.classify('long SUNW'))
+        console.log('Classify short SUNW' +  + classifier.classify('short SUNW'))
       }
     })
   }
