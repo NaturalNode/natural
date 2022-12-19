@@ -10,11 +10,11 @@ classifier.addDocument('sell gold', 'sell')
 classifier.train()
 console.log(classifier.classify('i am short silver'))
 console.log(classifier.classify('i am long copper'))
-let classifications = classifier.getClassifications('i am long copper')
+const classifications = classifier.getClassifications('i am long copper')
 classifications.forEach(function (classification) {
-  let label = classification.label
-  let value = classification.value
-  console.log('label: ' + label + ', value: ' + value)
+  const label = classification.label
+  const value = classification.value
+  console.log('label: ' + label + ', value: ' + value.toString())
 })
 classifier.addDocument(['sell', 'gold'], 'sell')
 classifier.events.on('trainedWithDocument', function (obj: any) {
@@ -34,7 +34,7 @@ classifier = new BayesClassifier()
 classifier.addDocument(['sell', 'gold'], 'sell')
 classifier.addDocument(['buy', 'silver'], 'buy')
 classifier.train()
-let raw = JSON.stringify(classifier)
-let restoredClassifier = BayesClassifier.restore(JSON.parse(raw))
+const raw = JSON.stringify(classifier)
+const restoredClassifier = BayesClassifier.restore(JSON.parse(raw))
 console.log('Restored classifier from raw JSON')
 console.log(restoredClassifier.classify('i should sell that'))
