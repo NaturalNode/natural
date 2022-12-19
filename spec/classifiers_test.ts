@@ -1,6 +1,6 @@
 import { BayesClassifier } from '../lib/natural/classifiers'
 
-var classifier = new BayesClassifier()
+let classifier = new BayesClassifier()
 
 classifier.addDocument('i am long qqqq', 'buy')
 classifier.addDocument("buy the q's", 'buy')
@@ -10,10 +10,10 @@ classifier.addDocument('sell gold', 'sell')
 classifier.train()
 console.log(classifier.classify('i am short silver'))
 console.log(classifier.classify('i am long copper'))
-var classifications = classifier.getClassifications('i am long copper')
+let classifications = classifier.getClassifications('i am long copper')
 classifications.forEach(function (classification) {
-  var label = classification.label
-  var value = classification.value
+  let label = classification.label
+  let value = classification.value
   console.log('label: ' + label + ', value: ' + value)
 })
 classifier.addDocument(['sell', 'gold'], 'sell')
@@ -30,11 +30,11 @@ classifier.save('classifier.json', function (err: any, classifier: BayesClassifi
   })
 })
 
-var classifier = new BayesClassifier()
+classifier = new BayesClassifier()
 classifier.addDocument(['sell', 'gold'], 'sell')
 classifier.addDocument(['buy', 'silver'], 'buy')
 classifier.train()
-var raw = JSON.stringify(classifier)
-var restoredClassifier = BayesClassifier.restore(JSON.parse(raw))
+let raw = JSON.stringify(classifier)
+let restoredClassifier = BayesClassifier.restore(JSON.parse(raw))
 console.log('Restored classifier from raw JSON')
 console.log(restoredClassifier.classify('i should sell that'))
