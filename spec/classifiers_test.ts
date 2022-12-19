@@ -22,7 +22,7 @@ classifier.events.on('trainedWithDocument', function (obj: any) {
 })
 
 classifier.save('classifier.json', function (err: any, classifier: BayesClassifier) {
-  if (err) {
+  if (err !== undefined) {
     console.log(err)
   }
   else {
