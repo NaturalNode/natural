@@ -32,7 +32,7 @@ classifier.save('classifier.json', function (err: any, classifier: BayesClassifi
         console.log(err)
       } else {
         console.log('Classify long SUNW' + classifier.classify('long SUNW'))
-        console.log('Classify short SUNW' +  + classifier.classify('short SUNW'))
+        console.log('Classify short SUNW' + classifier.classify('short SUNW'))
       }
     })
   }
