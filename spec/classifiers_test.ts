@@ -24,15 +24,13 @@ classifier.events.on('trainedWithDocument', function (obj: any) {
 classifier.save('classifier.json', function (err: any, classifier: BayesClassifier) {
   if (err !== undefined) {
     console.log(err)
-  }
-  else {
+  } else {
     // the classifier is saved to the classifier.json file!
     console.log('The classifier is saved to the classifier.json file!')
     BayesClassifier.load('classifier.json', null, function (err: any, classifier: BayesClassifier) {
       if (err !== undefined) {
         console.log(err)
-      }
-      else {
+      } else {
         console.log('Classify long SUNW' + classifier.classify('long SUNW'))
         console.log('Classify short SUNW' +  + classifier.classify('short SUNW'))
       }
