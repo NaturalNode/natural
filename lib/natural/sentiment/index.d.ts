@@ -22,6 +22,6 @@ THE SOFTWARE.
 */
 
 export declare class SentimentAnalyzer {
-  constructor(language: string, stemmer: Stemmer, vocabulary: string)
-  getSentiment(words: string[]): number
+  constructor (language: string, stemmer: Stemmer, vocabulary: string)
+  getSentiment (words: string[]): number
 }
