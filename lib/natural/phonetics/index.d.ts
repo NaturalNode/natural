@@ -25,17 +25,17 @@ export interface Phonetic {
   process: (token: string, maxLength?: number) => string
 }
 
-declare var Metaphone: {
-  compare(stringA: string, stringB: string): boolean
-  process(token: string, maxLength?: number): string
+declare let Metaphone: {
+  compare: (stringA: string, stringB: string) => boolean
+  process: (token: string, maxLength?: number) => string
 }
 
-declare var SoundEx: {
-  compare(stringA: string, stringB: string): boolean
-  process(token: string, maxLength?: number): string
+declare let SoundEx: {
+  compare: (stringA: string, stringB: string) => boolean
+  process: (token: string, maxLength?: number) => string
 }
 
-declare var DoubleMetaphone: {
-  compare(stringA: string, stringB: string): boolean
-  process(token: string, maxLength?: number): string[]
+declare let DoubleMetaphone: {
+  compare: (stringA: string, stringB: string) => boolean
+  process: (token: string, maxLength?: number) => string[]
 }
