@@ -21,8 +21,8 @@ THE SOFTWARE.
 */
 
 export interface Phonetic {
-  compare(stringA: string, stringB: string): boolean
-  process(token: string, maxLength?: number): string
+  compare: (stringA: string, stringB: string) => boolean
+  process: (token: string, maxLength?: number) => string
 }
 
 declare var Metaphone: {
