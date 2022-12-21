@@ -21,15 +21,15 @@ THE SOFTWARE.
 */
 
 export declare class NounInflector {
-  pluralize(token: string): string
-  singularize(token: string): string
+  pluralize (token: string): string
+  singularize (token: string): string
 }
 
-export declare var CountInflector: {
-  nth(i: number): string
+export declare let CountInflector: {
+  nth: (i: number) => string
 }
 
 export declare class PresentVerbInflector {
-  pluralize(token: string): string
-  singularize(token: string): string
+  pluralize (token: string): string
+  singularize (token: string): string
 }
