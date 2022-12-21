@@ -1,6 +1,8 @@
-import { NounInflector,
+import {
+  NounInflector,
   CountInflector,
-  PresentVerbInflector } from '../lib/natural/inflectors'
+  PresentVerbInflector
+} from '../lib/natural/inflectors'
 
 // Inflectors
 const nounInflector = new NounInflector()
