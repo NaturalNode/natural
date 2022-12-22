@@ -22,9 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export interface TfIdfCallback {
-  (i: number, measure: number): void
-}
+export type TfIdfCallback = (i: number, measure: number) => void
 
 export interface TfIdfTerm {
   term: string
