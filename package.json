@@ -20,12 +20,7 @@
     "wordnet-db": "^3.1.11"
   },
   "devDependencies": {
-    "@types/node": "^18.11.14",
-    "@typescript-eslint/eslint-plugin": "^5.47.0",
-    "@typescript-eslint/parser": "^5.47.0",
     "browserfs": "^1.4.3",
-    "eslint": "^8.30.0",
-    "eslint-config-standard": "^17.0.0",
     "gulp": "^4.0.2",
     "gulp-jasmine": "^4.0.0",
     "gulp-jasmine-browser": "^4.1.0",
