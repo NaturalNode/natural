@@ -34,7 +34,6 @@ export interface WordNetLookupResults {
 export type WordNetLookupCallback  = (results: WordNetLookupResults[]) => void
 
 export type WordNetGetCallback = (results: WordNetLookupResults) => void
-}
 
 export declare class WordNet {
   constructor (filename?: string)
