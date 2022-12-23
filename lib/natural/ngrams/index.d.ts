@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-declare type ngramsFunctions = {
+declare interface ngramsFunctions {
   bigrams: (sequence: string | string[], startSymbol?: string, endSymbol?: string) => string[][]
   // bigrams: (sequence: string[], startSymbol?: string, endSymbol?: string) => string[][]
   trigrams: (sequence: string | string[], startSymbol?: string, endSymbol?: string) => string[][]
