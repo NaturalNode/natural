@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export declare let NGrams: {
+declare type ngramsFunctions = {
   bigrams: (sequence: string | string[], startSymbol?: string, endSymbol?: string) => string[][]
   // bigrams: (sequence: string[], startSymbol?: string, endSymbol?: string) => string[][]
   trigrams: (sequence: string | string[], startSymbol?: string, endSymbol?: string) => string[][]
@@ -31,11 +31,5 @@ export declare let NGrams: {
   // ngrams: (sequence: string[], n: number, startSymbol?: string, endSymbol?: string) => string[][]
 }
 
-export declare let NGramsZH: {
-  bigrams: (sequence: string | string[], startSymbol?: string, endSymbol?: string) => string[][]
-  // bigrams: (sequence: string[], startSymbol?: string, endSymbol?: string) => string[][]
-  trigrams: (sequence: string | string[], startSymbol?: string, endSymbol?: string) => string[][]
-  // trigrams: (sequence: string[], startSymbol?: string, endSymbol?: string) => string[][]
-  ngrams: (sequence: string | string[], n: number, startSymbol?: string, endSymbol?: string) => string[][]
-  // ngrams: (sequence: string[], n: number, startSymbol?: string, endSymbol?: string) => string[][]
-}
+export declare let NGrams: ngramsFunctions
+export declare let NGramsZH: ngramsFunctions
