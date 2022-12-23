@@ -23,20 +23,22 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export type TfIdfCallback = (i: number, measure: number) => void
-
-export interface TfIdfTerm {
-  term: string
-  tfidf: number
+export declare class EdgeWeightedDigraph {
+  add(start: number, end: number, weight: number): void
+  v(): number
+  e(): number
 }
 
-export declare class TfIdf {
-  constructor (deserialized?: any)
-  addDocument (document: string, key?: string, restoreCache?: boolean): void
-  addDocument (document: string[], key?: string, restoreCache?: boolean): void
-  addFileSync (path: string, encoding?: string, key?: string, restoreCache?: boolean): void
-  tfidf (terms: string, d: number): void
-  tfidfs (terms: string, callback: TfIdfCallback): void
-  tfidfs (terms: string[], callback: TfIdfCallback): void
-  listTerms (d: number): TfIdfTerm[]
+export declare class ShortestPathTree {
+  constructor(diagraph: EdgeWeightedDigraph, startVertex: number)
+  getDistTo(vertex: number): number
+  hasPathTo(vertex: number): boolean
+  pathTo(vertex: number): number[]
+}
+
+export declare class LongestPathTree {
+  constructor(diagraph: EdgeWeightedDigraph, startVertex: number)
+  getDistTo(vertex: number): number
+  hasPathTo(vertex: number): boolean
+  pathTo(vertex: number): number[]
 }
