@@ -24,21 +24,21 @@ THE SOFTWARE.
 */
 
 export declare class EdgeWeightedDigraph {
-  add(start: number, end: number, weight: number): void
-  v(): number
-  e(): number
+  add (start: number, end: number, weight: number): void
+  v (): number
+  e (): number
 }
 
 export declare class ShortestPathTree {
-  constructor(diagraph: EdgeWeightedDigraph, startVertex: number)
-  getDistTo(vertex: number): number
-  hasPathTo(vertex: number): boolean
-  pathTo(vertex: number): number[]
+  constructor (diagraph: EdgeWeightedDigraph, startVertex: number)
+  getDistTo (vertex: number): number
+  hasPathTo (vertex: number): boolean
+  pathTo (vertex: number): number[]
 }
 
 export declare class LongestPathTree {
-  constructor(diagraph: EdgeWeightedDigraph, startVertex: number)
-  getDistTo(vertex: number): number
-  hasPathTo(vertex: number): boolean
-  pathTo(vertex: number): number[]
+  constructor (diagraph: EdgeWeightedDigraph, startVertex: number)
+  getDistTo (vertex: number): number
+  hasPathTo (vertex: number): boolean
+  pathTo (vertex: number): number[]
 }
