@@ -23,11 +23,11 @@ THE SOFTWARE.
 */
 
 export declare class Trie {
-  constructor(caseSensitive?: boolean)
-  addString(text: string): boolean
-  addStrings(strings: string[]): void
-  contains(token: string): boolean
-  findPrefix(text: string): string[]
-  findMatchesOnPath(text: string): string[]
-  keysWithPrefix(text: string): string[]
+  constructor (caseSensitive?: boolean)
+  addString (text: string): boolean
+  addStrings (strings: string[]): void
+  contains (token: string): boolean
+  findPrefix (text: string): string[]
+  findMatchesOnPath (text: string): string[]
+  keysWithPrefix (text: string): string[]
 }
