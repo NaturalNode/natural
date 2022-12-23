@@ -31,16 +31,13 @@ export interface WordNetLookupResults {
   gloss: string
 }
 
-export interface WordNetLookupCallback {
-  (results: WordNetLookupResults[]): void
-}
+export type WordNetLookupCallback  = (results: WordNetLookupResults[]) => void
 
-export interface WordNetGetCallback {
-  (results: WordNetLookupResults): void
+export type WordNetGetCallback = (results: WordNetLookupResults) => void
 }
 
 export declare class WordNet {
-  constructor(filename?: string)
-  lookup(word: string, callback: WordNetLookupCallback): void
-  get(synsetOffset: number, pos: string, callback: WordNetGetCallback): void
+  constructor (filename?: string)
+  lookup (word: string, callback: WordNetLookupCallback): void
+  get (synsetOffset: number, pos: string, callback: WordNetGetCallback): void
 }
