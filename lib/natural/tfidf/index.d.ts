@@ -30,12 +30,12 @@ export interface TfIdfTerm {
 }
 
 export declare class TfIdf {
-    constructor(deserialized?: any)
-    addDocument(document: string, key?: string, restoreCache?: boolean): void
-    addDocument(document: string[], key?: string, restoreCache?: boolean): void
-    addFileSync(path: string, encoding?: string, key?: string, restoreCache?: boolean): void
-    tfidf(terms: string, d: number): void
-    tfidfs(terms: string, callback: TfIdfCallback): void
-    tfidfs(terms: string[], callback: TfIdfCallback): void
-    listTerms(d: number): TfIdfTerm[]
+  constructor (deserialized?: any)
+  addDocument (document: string, key?: string, restoreCache?: boolean): void
+  addDocument (document: string[], key?: string, restoreCache?: boolean): void
+  addFileSync (path: string, encoding?: string, key?: string, restoreCache?: boolean): void
+  tfidf (terms: string, d: number): void
+  tfidfs (terms: string, callback: TfIdfCallback): void
+  tfidfs (terms: string[], callback: TfIdfCallback): void
+  listTerms (d: number): TfIdfTerm[]
 }
