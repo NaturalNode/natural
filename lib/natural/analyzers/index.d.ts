@@ -21,14 +21,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export declare interface TaggedWord = {
+export declare interface TaggedWord {
   token: string
   pos: string
   spos?: string
   added?: boolean
 }
 
-export declare interface TaggedSentence = {
+export declare interface TaggedSentence {
   tags: TaggedWord[]
 }
 
