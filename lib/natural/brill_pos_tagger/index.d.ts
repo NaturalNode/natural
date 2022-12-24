@@ -38,7 +38,7 @@ export declare class TransformationRule {
   predicate: Predicate
   old_category: string
   new_category: string
-  apply (tagged_sentence: string[][], position: number): void
+  apply (taggedSentence: string[][], position: number): void
 }
 
 export declare class RuleSet {
