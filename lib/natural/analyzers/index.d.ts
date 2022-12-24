@@ -21,14 +21,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export declare type TaggedWord = {
-  token: string,
-  pos: string,
-  spos?: string,
+export declare interface TaggedWord = {
+  token: string
+  pos: string
+  spos?: string
   added?: boolean
 }
 
-export declare type TaggedSentence = {
+export declare interface TaggedSentence = {
   tags: TaggedWord[]
 }
 
@@ -46,6 +46,6 @@ export declare class SentenceAnalyzer {
   subjectToString (): string | null
   predicateToString (): string | null
   implicitYou (): boolean
-  toString(): string
-  type(cbf: CallbackFunction): void | SenType
+  toString (): string
+  type (cbf: CallbackFunction): void | SenType
 }
