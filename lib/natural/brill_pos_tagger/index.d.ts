@@ -29,7 +29,7 @@ export declare class Predicate {
   parameter1: string
   parameter2?: string | undefined
   function?: ((tagged_sentence: string[][], i: number, parameter: string) => boolean) | undefined
-  evaluate (tagged_sentence: string[][], position: number): boolean
+  evaluate (taggedSentence: string[][], position: number): boolean
 }
 
 export declare class TransformationRule {
