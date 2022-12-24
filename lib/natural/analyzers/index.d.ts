@@ -47,5 +47,5 @@ export declare class SentenceAnalyzer {
   predicateToString (): string | null
   implicitYou (): boolean
   toString (): string
-  type (cbf: CallbackFunction): void | SenType
+  type (cbf: CallbackFunction): SenType
 }
