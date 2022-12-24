@@ -31,7 +31,7 @@ export interface WordNetLookupResults {
   gloss: string
 }
 
-export type WordNetLookupCallback  = (results: WordNetLookupResults[]) => void
+export type WordNetLookupCallback = (results: WordNetLookupResults[]) => void
 
 export type WordNetGetCallback = (results: WordNetLookupResults) => void
 
