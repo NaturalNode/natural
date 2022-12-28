@@ -13,7 +13,7 @@ const sentenceTags: TaggedSentence = {
     { token: 'frightened', pos: 'JJ' },
     { token: 'little', pos: 'JJ' },
     { token: 'squirrel', pos: 'NN' },
-    { token: '.', pos: '.'}
+    { token: '.', pos: '.' }
   ],
   punct: function () { return [] }
 }
