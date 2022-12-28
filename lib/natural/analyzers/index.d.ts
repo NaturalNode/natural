@@ -22,14 +22,18 @@ THE SOFTWARE.
 */
 
 export declare interface TaggedWord {
+  [key: string]: string
   token: string
   pos: string
   spos?: string
   added?: boolean
 }
 
+export declare type PunctuationFunction = () => string[] | ''
+
 export declare interface TaggedSentence {
   tags: TaggedWord[]
+  punct?: PunctuationFunction
 }
 
 export declare type CallbackFunction = (obj: SentenceAnalyzer) => void
