@@ -1,6 +1,7 @@
 import {
   TaggedSentence,
-  SentenceAnalyzer } from '../lib/natural/analyzers'
+  SentenceAnalyzer
+} from '../lib/natural/analyzers'
 
 const sentenceTags: TaggedSentence = {
   tags: [
@@ -17,7 +18,7 @@ const sentenceTags: TaggedSentence = {
   punct: function () { return [] }
 }
 
-new SentenceAnalyzer(sentenceTags, function (analyzer) {
+const myAnalyzer = new SentenceAnalyzer(sentenceTags, function (analyzer) {
   analyzer.part(function (part) {
     console.log(JSON.stringify(part, null, 2))
   })
