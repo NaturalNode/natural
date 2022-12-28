@@ -26,3 +26,4 @@ const myAnalyzer = new SentenceAnalyzer(sentenceTags, function (analyzer) {
     console.log(JSON.stringify(type, null, 2))
   })
 })
+console.log(myAnalyzer)
