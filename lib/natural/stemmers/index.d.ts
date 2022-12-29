@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2011, Chris Umbel
+Copyright (c) 2022, Dylan R. E. Moonfire <https://github.com/dmoonfire>, Emily Marigold Klassen <https://github.com/forivall>, Hugo W.L. ter Doest
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,6 +20,25 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-'use strict'
+// Based on the type definitions on definitely typed
 
-exports.TransliterateJa = require('./ja')
+export interface Stemmer {
+  stem: (token: string) => string
+  tokenizeAndStem: (text: string) => string[]
+  attach: () => void
+}
+
+declare const CarryStemmerFr: Stemmer
+declare const LancasterStemmer: Stemmer
+declare const PorterStemmer: Stemmer
+declare const PorterStemmerEs: Stemmer
+declare const PorterStemmerFa: Stemmer
+declare const PorterStemmerFr: Stemmer
+declare const PorterStemmerIt: Stemmer
+declare const PorterStemmerNl: Stemmer
+declare const PorterStemmerNo: Stemmer
+declare const PorterStemmerPt: Stemmer
+declare const PorterStemmerRu: Stemmer
+declare const PorterStemmerSv: Stemmer
+declare const StemmerId: Stemmer
+declare const StemmerJa: Stemmer

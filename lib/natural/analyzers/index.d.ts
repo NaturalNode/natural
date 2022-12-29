@@ -1,5 +1,6 @@
 /*
-Copyright (c) 2011, Chris Umbel
+Copyright (c) 2022,
+Hugo W.L. ter Doest <https://github.com/Hugo-ter-Doest>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,6 +21,35 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-'use strict'
+export declare interface TaggedWord {
+  [key: string]: string
+  token: string
+  pos: string
+  spos?: string
+  added?: boolean
+}
 
-exports.TransliterateJa = require('./ja')
+export declare type PunctuationFunction = () => string[] | ''
+
+export declare interface TaggedSentence {
+  tags: TaggedWord[]
+  punct?: PunctuationFunction
+}
+
+export declare type CallbackFunction = (obj: SentenceAnalyzer) => void
+
+export declare type SenType = string
+
+export declare class SentenceAnalyzer {
+  posObj: TaggedSentence
+  senType: string | null
+
+  constructor (pos: TaggedSentence, cbf: CallbackFunction)
+  part (cbf: CallbackFunction): void
+  prepositionPhrases (): void
+  subjectToString (): string | null
+  predicateToString (): string | null
+  implicitYou (): boolean
+  toString (): string
+  type (cbf: CallbackFunction): SenType
+}

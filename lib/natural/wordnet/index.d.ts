@@ -1,5 +1,8 @@
 /*
-Copyright (c) 2011, Chris Umbel
+Copyright (c) 2022,
+Dylan R. E. Moonfire <https://github.com/dmoonfire>,
+Emily Marigold Klassen <https://github.com/forivall>,
+Hugo W.L. ter Doest <https://github.com/Hugo-ter-Doest>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,6 +23,20 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-'use strict'
+export interface WordNetLookupResults {
+  synsetOffset: number
+  pos: string
+  lemma: string
+  synonyms: string[]
+  gloss: string
+}
 
-exports.TransliterateJa = require('./ja')
+export type WordNetLookupCallback = (results: WordNetLookupResults[]) => void
+
+export type WordNetGetCallback = (results: WordNetLookupResults) => void
+
+export declare class WordNet {
+  constructor (filename?: string)
+  lookup (word: string, callback: WordNetLookupCallback): void
+  get (synsetOffset: number, pos: string, callback: WordNetGetCallback): void
+}

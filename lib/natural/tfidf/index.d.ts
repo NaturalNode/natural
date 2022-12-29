@@ -1,5 +1,8 @@
 /*
-Copyright (c) 2011, Chris Umbel
+Copyright (c) 2022,
+Dylan R. E. Moonfire <https://github.com/dmoonfire>,
+Emily Marigold Klassen <https://github.com/forivall>,
+Hugo W.L. ter Doest <https://github.com/Hugo-ter-Doest>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,6 +23,20 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-'use strict'
+export type TfIdfCallback = (i: number, measure: number) => void
 
-exports.TransliterateJa = require('./ja')
+export interface TfIdfTerm {
+  term: string
+  tfidf: number
+}
+
+export declare class TfIdf {
+  constructor (deserialized?: any)
+  addDocument (document: string, key?: string, restoreCache?: boolean): void
+  addDocument (document: string[], key?: string, restoreCache?: boolean): void
+  addFileSync (path: string, encoding?: string, key?: string, restoreCache?: boolean): void
+  tfidf (terms: string, d: number): void
+  tfidfs (terms: string, callback: TfIdfCallback): void
+  tfidfs (terms: string[], callback: TfIdfCallback): void
+  listTerms (d: number): TfIdfTerm[]
+}

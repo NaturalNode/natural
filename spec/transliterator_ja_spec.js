@@ -22,7 +22,8 @@ THE SOFTWARE.
 
 'use strict'
 
-const transliterateJa = require('../lib/natural/transliterators/ja')
+const Transliterators = require('../lib/natural/transliterators')
+const transliterateJa = Transliterators.TransliterateJa
 
 describe('transliterateJa', function () {
   it('should transliterate hiragana', function () {

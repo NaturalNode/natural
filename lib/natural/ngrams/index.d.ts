@@ -1,5 +1,7 @@
 /*
-Copyright (c) 2011, Chris Umbel
+Copyright (c) 2022, Dylan R. E. Moonfire <https://github.com/dmoonfire>,
+Emily Marigold Klassen <https://github.com/forivall>,
+Hugo W.L. ter Doest <https://github.com/Hugo-ter-Doest>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,6 +22,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-'use strict'
+declare interface ngramsFunctions {
+  bigrams: (sequence: string | string[], startSymbol?: string, endSymbol?: string) => string[][]
+  // bigrams: (sequence: string[], startSymbol?: string, endSymbol?: string) => string[][]
+  trigrams: (sequence: string | string[], startSymbol?: string, endSymbol?: string) => string[][]
+  // trigrams: (sequence: string[], startSymbol?: string, endSymbol?: string) => string[][]
+  ngrams: (sequence: string | string[], n: number, startSymbol?: string, endSymbol?: string) => string[][]
+  // ngrams: (sequence: string[], n: number, startSymbol?: string, endSymbol?: string) => string[][]
+}
 
-exports.TransliterateJa = require('./ja')
+export declare let NGrams: ngramsFunctions
+export declare let NGramsZH: ngramsFunctions

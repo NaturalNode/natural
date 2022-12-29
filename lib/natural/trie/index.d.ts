@@ -1,5 +1,7 @@
 /*
-Copyright (c) 2011, Chris Umbel
+Copyright (c) 2022, Dylan R. E. Moonfire <https://github.com/dmoonfire>,
+Emily Marigold Klassen <https://github.com/forivall>,
+Hugo W.L. ter Doest <https://github.com/Hugo-ter-Doest>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,6 +22,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-'use strict'
-
-exports.TransliterateJa = require('./ja')
+export declare class Trie {
+  constructor (caseSensitive?: boolean)
+  addString (text: string): boolean
+  addStrings (strings: string[]): void
+  contains (token: string): boolean
+  findPrefix (text: string): string[]
+  findMatchesOnPath (text: string): string[]
+  keysWithPrefix (text: string): string[]
+}

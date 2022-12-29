@@ -9,6 +9,8 @@ io_spec/test_data/sample.json
 *.verb
 *.adj
 *.adv
+.npm
 npm-debug.log
 .vscode
 .nyc_output/*
+dist

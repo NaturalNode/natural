@@ -1,5 +1,6 @@
 /*
-Copyright (c) 2011, Chris Umbel
+Copyright (c) 2022,
+Hugo W.L. ter Doest <https://github.com/Hugo-ter-Doest>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,6 +21,19 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-'use strict'
-
-exports.TransliterateJa = require('./ja')
+export * from './analyzers'
+export * from './brill_pos_tagger'
+export * from './classifiers'
+export * from './distance'
+export * from './inflectors'
+export * from './ngrams'
+export * from './normalizers'
+export * from './phonetics'
+export * from './sentiment'
+export * from './spelcheck'
+export * from './stemmers'
+export * from './tfidf'
+export * from './tokenizers'
+export * from './transliterators'
+export * from './util'
+export * from './wordnet'

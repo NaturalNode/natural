@@ -37,40 +37,40 @@ function approxEql (val1, val2) {
 
 describe('jaro-winkler', function () {
   it('should evaluate string similarity', function () {
-    expect(approxEql(jaroWinklerDistance('DIXON', 'DICKSONX'), 0.81333)).toBeTruthy()
-    expect(approxEql(jaroWinklerDistance('DWAYNE', 'DUANE'), 0.84)).toBeTruthy()
+    expect(approxEql(jaroWinklerDistance('DIXON', 'DICKSONX', {}), 0.81333)).toBeTruthy()
+    expect(approxEql(jaroWinklerDistance('DWAYNE', 'DUANE', {}), 0.84)).toBeTruthy()
   })
 
   it('should handle exact matches', function () {
-    expect(jaroWinklerDistance('RICK', 'RICK')).toBe(1)
-    expect(jaroWinklerDistance('abc', 'abc')).toBe(1)
-    expect(jaroWinklerDistance('abcd', 'abcd')).toBe(1)
-    expect(jaroWinklerDistance('seddon', 'seddon')).toBe(1)
+    expect(jaroWinklerDistance('RICK', 'RICK', {})).toBe(1)
+    expect(jaroWinklerDistance('abc', 'abc', {})).toBe(1)
+    expect(jaroWinklerDistance('abcd', 'abcd', {})).toBe(1)
+    expect(jaroWinklerDistance('seddon', 'seddon', {})).toBe(1)
   })
 
   it('should handle total mis-matches', function () {
-    expect(jaroWinklerDistance('NOT', 'SAME')).toBe(0)
+    expect(jaroWinklerDistance('NOT', 'SAME', {})).toBe(0)
   })
 
   it('should handle partial mis-matches', function () {
-    expect(approxEql(jaroWinklerDistance('aaa', 'abcd'), 0.575)).toBeTruthy()
+    expect(approxEql(jaroWinklerDistance('aaa', 'abcd', {}), 0.575)).toBeTruthy()
   })
 
   it('should handle transpositions', function () {
-    expect(approxEql(jaroWinklerDistance('MARTHA', 'MARHTA'), 0.96111)).toBeTruthy()
+    expect(approxEql(jaroWinklerDistance('MARTHA', 'MARHTA', {}), 0.96111)).toBeTruthy()
   })
 
   it('should handle transpositions regardless of string order', function () {
-    expect(approxEql(jaroWinklerDistance('class', 'clams'), 0.90666)).toBeTruthy()
-    expect(approxEql(jaroWinklerDistance('clams', 'class'), 0.90666)).toBeTruthy()
+    expect(approxEql(jaroWinklerDistance('class', 'clams', {}), 0.90666)).toBeTruthy()
+    expect(approxEql(jaroWinklerDistance('clams', 'class', {}), 0.90666)).toBeTruthy()
   })
 
   it('should ignore case when asked to', function () {
-    expect(jaroWinklerDistance('aaa', 'aAa', undefined, true)).toEqual(jaroWinklerDistance('aaa', 'aaa'))
-    expect(jaroWinklerDistance('aaa', 'aAa')).not.toEqual(jaroWinklerDistance('aaa', 'aaa'))
-    expect(jaroWinklerDistance('dixon', 'DICKSONX', undefined, true)).toEqual(jaroWinklerDistance('DIXON', 'DICKSONX'))
-    expect(jaroWinklerDistance('seddon', 'SEDDON', undefined, true)).toEqual(jaroWinklerDistance('SEDDON', 'SEDDON'))
-    expect(approxEql(jaroWinklerDistance('MARTHA', 'MARHTA', undefined, true), 0.96111)).toBeTruthy()
-    expect(jaroWinklerDistance('abcd', 'ABCD', undefined, true)).toBe(1)
+    expect(jaroWinklerDistance('aaa', 'aAa', { ignoreCase: true })).toEqual(jaroWinklerDistance('aaa', 'aaa', {}))
+    expect(jaroWinklerDistance('aaa', 'aAa', {})).not.toEqual(jaroWinklerDistance('aaa', 'aaa', {}))
+    expect(jaroWinklerDistance('dixon', 'DICKSONX', { ignoreCase: true })).toEqual(jaroWinklerDistance('DIXON', 'DICKSONX', {}))
+    expect(jaroWinklerDistance('seddon', 'SEDDON', { ignoreCase: true })).toEqual(jaroWinklerDistance('SEDDON', 'SEDDON', {}))
+    expect(approxEql(jaroWinklerDistance('MARTHA', 'MARHTA', { ignoreCase: true }), 0.96111)).toBeTruthy()
+    expect(jaroWinklerDistance('abcd', 'ABCD', { ignoreCase: true })).toBe(1)
   })
 })

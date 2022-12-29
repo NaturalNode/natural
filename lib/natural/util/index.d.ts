@@ -1,5 +1,8 @@
 /*
-Copyright (c) 2011, Chris Umbel
+Copyright (c) 2022,
+Dylan R. E. Moonfire <https://github.com/dmoonfire>,
+Emily Marigold Klassen <https://github.com/forivall>,
+Hugo W.L. ter Doest <https://github.com/Hugo-ter-Doest>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,6 +23,22 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-'use strict'
+export declare class EdgeWeightedDigraph {
+  add (start: number, end: number, weight: number): void
+  v (): number
+  e (): number
+}
 
-exports.TransliterateJa = require('./ja')
+export declare class ShortestPathTree {
+  constructor (diagraph: EdgeWeightedDigraph, startVertex: number)
+  getDistTo (vertex: number): number
+  hasPathTo (vertex: number): boolean
+  pathTo (vertex: number): number[]
+}
+
+export declare class LongestPathTree {
+  constructor (diagraph: EdgeWeightedDigraph, startVertex: number)
+  getDistTo (vertex: number): number
+  hasPathTo (vertex: number): boolean
+  pathTo (vertex: number): number[]
+}

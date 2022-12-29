@@ -15,6 +15,7 @@
     "apparatus": "^0.0.10",
     "safe-stable-stringify": "^2.2.0",
     "sylvester": "^0.0.12",
+    "tsc": "^2.0.4",
     "underscore": "^1.9.1",
     "wordnet-db": "^3.1.11"
   },
@@ -57,7 +58,8 @@
     "test": "NODE_PATH=. node ./node_modules/jasmine/bin/jasmine.js io_spec/*_spec.js spec/*_spec.js",
     "coverage": "nyc --reporter=lcov npm test",
     "test_io": "NODE_PATH=. node ./node_modules/jasmine/bin/jasmine.js --random=false io_spec/*_spec.js",
-    "test_browser": "NODE_PATH=. node ./node_modules/gulp/bin/gulp.js"
+    "test_browser": "NODE_PATH=. node ./node_modules/gulp/bin/gulp.js",
+    "lint": "eslint . --ext .ts"
   },
   "license": "MIT",
   "author": "Chris Umbel <chris@chrisumbel.com>",
