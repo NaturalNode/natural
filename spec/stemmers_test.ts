@@ -13,7 +13,7 @@ import {
   PorterStemmerSv,
   StemmerId,
   StemmerJa
-} from '../lib/natural/stemmers'
+} from '../lib/natural'
 
 // Carry stemmers
 console.log(CarryStemmerFr.stem('jugaría'))
