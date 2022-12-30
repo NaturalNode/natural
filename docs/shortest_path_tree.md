@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Shortest Path Tree
-nav_order: 14
+nav_order: 16
 ---
 
 # ShortestPathTree

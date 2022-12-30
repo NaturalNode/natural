@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Edge Weighted Digraph
-nav_order: 13
+nav_order: 15
 ---
 
 # EdgeWeightedDigraph

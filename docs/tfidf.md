@@ -1,7 +1,7 @@
 ---
 layout: default
 title: TF-IDF
-nav_order: 11
+nav_order: 13
 ---
 
 # tf-idf
