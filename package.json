@@ -95,7 +95,7 @@
     "maximum entropy modelling"
   ],
   "main": "./lib/natural/index.js",
-  "types": "./lib/natural/index.d.ts"
+  "types": "./lib/natural/index.d.ts",
   "maintainers": [
     {
       "name": "Chris Umbel",
