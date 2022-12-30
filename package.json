@@ -95,6 +95,7 @@
     "maximum entropy modelling"
   ],
   "main": "./lib/natural/index.js",
+  "types": "./lib/natural/index.d.ts",
   "maintainers": [
     {
       "name": "Chris Umbel",
@@ -108,6 +109,10 @@
     {
       "name": "Ken Koch",
       "email": "kkoch986@gmail.com"
+    },
+    {
+      "name": "Hugo W.L. ter Doest",
+      "email": "hwl.ter.doest@gmail.com"
     }
   ]
 }
