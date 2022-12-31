@@ -10,7 +10,8 @@ nav_order: 30
 
 When developing, please:
 
-+ Comply with [Standard JS](https://standardjs.com/). This is tested when you commit to natural.
++ Comply with [Standard JS](https://standardjs.com/). This is checked with superlinter when you create pull requests and commit to natural.
++ Comply with [ts-standard](https://standardjs.com/#typescript). This is tested when you create pull requests and commit to natural.
 + Prevent code duplication. Use [jscpd](https://www.npmjs.com/package/jscpd) to test this. This is tested when you commit to natural.
 + Write unit tests for jasmine. Make sure your unit tests pass.
 + For compatibility with browsers, do not use the file system <code>fs</code>. If you need to read files, use JSON and <code>require</code>.
