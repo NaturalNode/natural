@@ -22,4 +22,6 @@ You can also import from the complete library:
 import { WordTokenizer } from '../lib/natural'
 ```
 
-For the Typescript syntax [ts-standard](https://standardjs.com/#typescript) is applied. This checked with superlinter on pull requests and commits. 
+# Standard syntax
+
+For the Typescript syntax [`ts-standard`](https://standardjs.com/#typescript) is applied. This checked with superlinter on pull requests and commits.
