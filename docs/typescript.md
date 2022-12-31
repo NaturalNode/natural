@@ -10,7 +10,7 @@ Natural offers type declarations for TypeScript. Each module has a index.d.ts fi
 
 # Example: importing tokenizer module
 
-```
+```javascript
 import { WordTokenizer } from '../lib/natural/tokenizers'
 
 let tokenizer = new WordTokenizer()
@@ -18,7 +18,7 @@ console.log(tokenizer.tokenize('your dog has fleas.'))
 // [ 'your', 'dog', 'has', 'fleas' ]
 ```
 You can also import from the complete library:
-```
+```javascript
 import { WordTokenizer } from '../lib/natural'
 ```
 
