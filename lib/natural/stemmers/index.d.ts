@@ -34,6 +34,7 @@ declare const PorterStemmer: Stemmer
 declare const PorterStemmerEs: Stemmer
 declare const PorterStemmerFa: Stemmer
 declare const PorterStemmerFr: Stemmer
+declare const PorterStemmerDe: Stemmer
 declare const PorterStemmerIt: Stemmer
 declare const PorterStemmerNl: Stemmer
 declare const PorterStemmerNo: Stemmer

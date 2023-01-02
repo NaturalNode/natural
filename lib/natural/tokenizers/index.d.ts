@@ -67,6 +67,9 @@ export declare class AggressiveTokenizerFa implements Tokenizer {
 export declare class AggressiveTokenizerFr implements Tokenizer {
   tokenize (text: string): string[]
 }
+export declare class AggressiveTokenizerDe implements Tokenizer {
+  tokenize (text: string): string[]
+}
 export declare class AggressiveTokenizerId implements Tokenizer {
   tokenize (text: string): string[]
 }
