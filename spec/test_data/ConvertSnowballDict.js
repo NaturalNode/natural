@@ -24,10 +24,10 @@ THE SOFTWARE.
 
 const fs = require('fs')
 const filenameIn = './snowball-de-diffs.txt'
-let dict = {}
+const dict = {}
 const filenameOut = './snowball_de.json'
 
-fs.readFile(filenameIn, 'utf8', function(err, data) {
+fs.readFile(filenameIn, 'utf8', function (err, data) {
   if (err) {
     console.log(err)
   } else {
@@ -38,7 +38,7 @@ fs.readFile(filenameIn, 'utf8', function(err, data) {
       dict[pair[0]] = pair[1]
     })
   }
-  fs.writeFile(filenameOut, JSON.stringify(dict, null, 2), null, function(err) {
+  fs.writeFile(filenameOut, JSON.stringify(dict, null, 2), null, function (err) {
     if (err) {
       console.log(err)
     } else {
