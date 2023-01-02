@@ -14,6 +14,7 @@
     "afinn-165": "^1.0.2",
     "apparatus": "^0.0.10",
     "safe-stable-stringify": "^2.2.0",
+    "stopwords-iso": "^1.1.0",
     "sylvester": "^0.0.12",
     "tsc": "^2.0.4",
     "underscore": "^1.9.1",

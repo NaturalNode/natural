@@ -8,12 +8,14 @@
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/4651/badge)](https://bestpractices.coreinfrastructure.org/projects/4651)
 [![TypeScript support](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
-"Natural" is a general natural language facility for nodejs. It offers a broad range of functionalities for natural language processing. Documentation can be found [here on GitHub Pages](https://naturalnode.github.io/natural/).
+"Natural" is a general natural language facility for nodejs. It offers a broad range of functionalities for natural language processing. Documentation can be found [here on GitHub Pages](http://naturalnode.github.io/natural/).
 
 
-## License
+## Open source licenses
 
-Copyright (c) 2011, 2012 Chris Umbel, Rob Ellis, Russell Mull
+### Natural: MIT License
+
+Copyright (c) 2011, 2012 Chris Umbel, Rob Ellis, Russell Mull, Hugo W.L. ter Doest
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -33,7 +35,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-## WordNet License
+### WordNet License
 
 This license is available as the file LICENSE in any downloaded version of WordNet.
 WordNet 3.0 license: (Download)
@@ -58,3 +60,7 @@ Princeton University or Princeton may not be used in advertising or publicity
 pertaining to distribution of the software and/or database. Title to copyright
 in this software, database and any associated documentation shall at all times
 remain with Princeton University and LICENSEE agrees to preserve same.
+
+### Porter stemmer German: BSD License
+
+The Porter stemmer for German is licensed by a BSD license. It states Standard BSD License in the source code, interpreted as the original BSD license consisting of four clauses.
