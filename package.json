@@ -21,6 +21,7 @@
     "wordnet-db": "^3.1.11"
   },
   "devDependencies": {
+    "@types/node": "^18.11.18",
     "browserfs": "^1.4.3",
     "gulp": "^4.0.2",
     "gulp-jasmine": "^4.0.0",
