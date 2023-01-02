@@ -40,6 +40,7 @@ The following stemmers are available:
 | Farsi (in progress) |  X    |           |           | `PorterStemmerFa` |
 | French        | X           |           |           | `PorterStemmerFr` |
 | French        |             |           | X         | `CarryStemmerFr`  |
+| German        | X           |           |           | `PorterStemmerDe` |
 | Indonesian    |             |           | X         | `StemmerId`       |
 | Italian       | X           |           |           | `PorterStemmerIt` |
 | Japanese      |             |           | X         | `StemmerJa`       |

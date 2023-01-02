@@ -62,6 +62,7 @@ Overview of available tokenizers:
 | AggressiveTokenizer    | English     |  |
 | AggressiveTokenizerFa  | Farsi       |  |
 | AggressiveTokenizerFr  | French      |  |
+| AggressiveTokenizerDe  | German      |  |
 | AggressiveTokenizerRu  | Russian     |  |
 | AggressiveTokenizerEs  | Spanish     |  |
 | AggressiveTokenizerIt  | Italian     |  |
