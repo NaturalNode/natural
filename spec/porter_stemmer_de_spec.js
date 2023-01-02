@@ -27,7 +27,6 @@ const snowBallDict = require('spec/test_data/snowball_de.json')
 const DEBUG = false
 
 describe('porter_stemmer_no', function () {
-
   it('should perform stemming on a lot of words', function () {
     const ok = []
     const ko = []
@@ -50,5 +49,4 @@ describe('porter_stemmer_no', function () {
 
     expect(ko.length).toBe(0)
   })
-
 })
