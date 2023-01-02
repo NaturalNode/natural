@@ -11,9 +11,9 @@
 "Natural" is a general natural language facility for nodejs. It offers a broad range of functionalities for natural language processing. Documentation can be found [here on GitHub Pages](http://naturalnode.github.io/natural/).
 
 
-# Open source licenses
+## Open source licenses
 
-## Natural: MIT License
+### Natural: MIT License
 
 Copyright (c) 2011, 2012 Chris Umbel, Rob Ellis, Russell Mull, Hugo W.L. ter Doest
 
@@ -35,7 +35,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-## WordNet License
+### WordNet License
 
 This license is available as the file LICENSE in any downloaded version of WordNet.
 WordNet 3.0 license: (Download)
@@ -61,6 +61,6 @@ pertaining to distribution of the software and/or database. Title to copyright
 in this software, database and any associated documentation shall at all times
 remain with Princeton University and LICENSEE agrees to preserve same.
 
-## Porter stemmer German: BSD License
+### Porter stemmer German: BSD License
 
 The Porter stemmer for German is licensed by a BSD license. It states Standard BSD License in the source code, interpreted as the original BSD license consisting of four clauses.
