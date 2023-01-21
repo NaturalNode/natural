@@ -1,3 +1,5 @@
+import events from 'events'
+import { Stemmer } from '../stemmers'
 
 export interface BayesClassifierClassification {
   label: string
@@ -16,7 +18,7 @@ declare class BayesClassifier {
   classify (observation: string): string
   getClassifications (observation: string): BayesClassifierClassification[]
   save (filename: string, callback: BayesClassifierCallback): void
-  static load (filename: string, stemmer: Stemmer, callback: BayesClassifierCallback): void
+  static load (filename: string, stemmer: Stemmer | null, callback: BayesClassifierCallback): void
   static restore (classifier: any, stemmer?: Stemmer): BayesClassifier
 }
 
@@ -36,8 +38,13 @@ declare class LogisticRegressionClassifier {
   classify (observation: string): string
   getClassifications (observation: string): LogisticRegressionClassifierClassification[]
   save (filename: string, callback: LogisticRegressionCallback): void
-  static load (filename: string, stemmer: Stemmer, callback: LogisticRegressionCallback): void
+  static load (filename: string, stemmer: Stemmer | null, callback: LogisticRegressionCallback): void
   static restore (classifier: any, stemmer?: Stemmer): LogisticRegressionClassifier
+}
+
+interface MaxEntClassifierClassification {
+  label: string
+  value: number
 }
 
 export type MaxEntClassifierCallback = (err: any, result: MaxEntClassifier) => void
@@ -50,10 +57,30 @@ declare class MaxEntClassifier {
   addElement (x: Element): void
   addDocument (context: Context, classification: string, elementClass: Element): void
   train (maxIterations: number, minImprovement: number, approxExpectation: object): void
-  getClassifications (b: Context): array
+  getClassifications (b: Context): MaxEntClassifierClassification[]
   classify (b: Context): string
   save (filename: string, callback: MaxEntClassifierCallback): void
   static load (filename: string, elementClass: Element, callback: MaxEntClassifierCallback): void
+}
+
+declare class Distribution {
+  alpha: number[]
+  featureSet: FeatureSet
+  sample: Sample
+
+  constructor (alpha: number[], features: FeatureSet, sample: Sample)
+  toString (): string
+  weight(x: Element): number
+  calculateAPriori(x: Element): number
+  prepareWeights(): void
+  calculateAPosteriori(x: Element): number
+  aPosterioriNormalisation(b: Context): number
+  prepareAPosterioris(): void
+  prepare(): void
+  KullbackLieblerDistance(): number
+  logLikelihood(): number
+  entropy(): number
+  checkSum(): number
 }
 
 export type FeatureFunction = (x: Element) => number
@@ -61,22 +88,22 @@ export type FeatureFunction = (x: Element) => number
 declare class Feature {
   evaluate: FeatureFunction
   name: string
-  parameters: array
+  parameters: string[]
 
-  constructor (f: FeatureFunction, name: string, parameters: array)
+  constructor (f: FeatureFunction, name: string, parameters: string[])
   apply (x: Element): number
   expectationApprox (p: Distribution, sample: Sample): number
-  expectation (p: Distribution, A: array, B: array): number
+  expectation (p: Distribution, A: string[], B: Context[]): number
   observedExpectation (sample: Sample): number
 }
 
 declare class FeatureSet {
-  features: array
+  features: Feature[]
   map: object
 
   addFeature (feature: FeatureFunction): boolean
   featureExists (feature: FeatureFunction): boolean
-  getFeatures (): array
+  getFeatures (): Feature[]
   size (): number
   prettyPrint (): string
 }
@@ -86,15 +113,15 @@ export type SampleCallback = (err: any, result: Sample) => void
 declare class Sample {
   frequencyOfContext: object
   frequency: object
-  classes: array
+  classes: string[]
 
-  constructor (elements)
+  constructor (elements: Element[])
   analyse (): void
   addElement (x: Element): void
   observedProbabilityOfContext (context: Context): number
-  observedProbability (x): number
+  observedProbability (x: Element): number
   size (): number
-  getClasses (): array
+  getClasses (): string[]
   generateFeatures (featureSet: FeatureSet): void
   save (filename: string, callback: SampleCallback): void
   load (filename: string, elementClass: Element, callback: SampleCallback): void
@@ -125,11 +152,11 @@ declare class GISScaler {
 }
 
 declare class MESentence {
-  constructor (data: array): void
+  constructor (data?: string[])
   generateSampleElements (sample: Sample): void
 }
 
 declare class MECorpus {
   generateSample (): Sample
-  splitInTrainAndTest (percentageTrain: number): array
+  splitInTrainAndTest (percentageTrain: number): [MECorpus, MECorpus]
 }

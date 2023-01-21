@@ -53,14 +53,14 @@ export declare class Lexicon {
   tagWord (word: string): string[]
 }
 
-export interface TaggedWord {
+export interface BrillPOSTaggedWord {
   token: string
   tag: string
 }
 
 export declare class Sentence {
   constructor (data?: string[])
-  taggedWords: TaggedWord[]
+  taggedWords: BrillPOSTaggedWord[]
   addTaggedWord (token: string, tag: string): void
   clone (): Sentence
 }

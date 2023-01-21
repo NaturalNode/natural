@@ -1,4 +1,4 @@
-import { BayesClassifier } from '../lib/natural/classifiers'
+import { BayesClassifier } from '../lib/natural'
 
 let classifier = new BayesClassifier()
 

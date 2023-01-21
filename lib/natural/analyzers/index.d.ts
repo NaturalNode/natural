@@ -21,13 +21,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export declare interface TaggedWord {
-  [key: string]: string
+export declare type TaggedWord = {
   token: string
   pos: string
   spos?: string
   added?: boolean
-}
+} | { [key: string]: string | undefined }
 
 export declare type PunctuationFunction = () => string[] | ''
 
