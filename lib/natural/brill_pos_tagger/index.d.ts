@@ -23,7 +23,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export interface RuleTemplate {
+interface RuleTemplatesItem {
   function: (sentence: Sentence, i: number, parameter1?: string, parameter2?: string) => boolean
   window: number[]
   nrParameters: number
@@ -32,7 +32,12 @@ export interface RuleTemplate {
 }
 
 export interface RuleTemplates {
-  [key: string]: RuleTemplate | undefined
+  [key: string]: RuleTemplatesItem | undefined
+}
+
+export declare class RuleTemplate {
+  constructor (templateName: string, metadata: RuleTemplatesItem)
+  windowFitsSite (sentence: Sentence, i: number): void
 }
 
 export declare class Predicate {
@@ -40,7 +45,7 @@ export declare class Predicate {
   name: string
   parameter1: string
   parameter2: string | undefined
-  meta: RuleTemplate
+  meta: RuleTemplatesItem
   evaluate (sentence: Sentence, position: number): boolean
 }
 
@@ -120,4 +125,38 @@ export declare class BrillPOSTagger {
   lexicon: Lexicon
   ruleSet: RuleSet
   tag (sentence: string[]): Sentence
+  tagWithLexicon (sentence: string[]): Sentence
+  applyRules (sentence: Sentence): Sentence
+}
+
+export declare class BrillPOSTester {
+  constructor (lexicon: Lexicon, ruleSet: RuleSet)
+  lexicon: Lexicon
+  ruleSet: RuleSet
+  test (corpus: Corpus, tagger: BrillPOSTagger): [number, number]
+}
+
+export declare class BrillPOSTrainer {
+  constructor (ruleScoreThreshold: number)
+  ruleScoreThreshold: number
+  corpus: Corpus
+  templates: RuleTemplates
+  positiveRules: RuleSet
+  mapRuleToSites: { [key: string]: { [key: number ]: { [key: number ]: boolean | undefined } | undefined } | undefined }
+  mapSiteToRules: { [key: number]: { [key: number ]: { [key: string ]: TransformationRule | undefined } | undefined } | undefined }
+  selectHighRule (): TransformationRule
+  mapRuleToSite (rule: TransformationRule, i: number, j: number): void
+  mapSiteToRule (i: number, j: number, rule: TransformationRule): void
+  associateSiteWithRule (i: number, j: number, rule: TransformationRule): void
+  siteIsAssociatedWithRule (i: number, j: number, rule: TransformationRule): boolean
+  getSites (rule: TransformationRule): [number, number][]
+  getRules (i: number, j: number): TransformationRule[]
+  disconnectSiteFromRule (i: number, j: number, rule: TransformationRule): void
+  scoreRule (rule: TransformationRule, i: number, j: number): void
+  generatePositiveRules (i: number, j: number): RuleSet
+  scanForPositiveRules (): void
+  scanForSites (): void
+  neighbourhood (i: number, j: number): [number, number][]
+  train (corpus: Corpus, templates: RuleTemplates, lexicon: Lexicon): RuleSet
+  printRulesWithScores (): string
 }
