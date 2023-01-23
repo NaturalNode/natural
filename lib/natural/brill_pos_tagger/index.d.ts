@@ -23,13 +23,25 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+export interface RuleTemplate {
+  function: (sentence: Sentence, i: number, parameter1?: string, parameter2?: string) => boolean
+  window: number[]
+  nrParameters: number
+  parameter1Values?: (sentence: Sentence, i: number) => string[]
+  parameter2Values?: (sentence: Sentence, i: number) => string[]
+}
+
+export interface RuleTemplates {
+  [key: string]: RuleTemplate | undefined
+}
+
 export declare class Predicate {
   constructor (name: string, parameter1: string, parameter2?: string)
   name: string
   parameter1: string
-  parameter2?: string | undefined
-  function?: ((tagged_sentence: string[][], i: number, parameter: string) => boolean) | undefined
-  evaluate (taggedSentence: string[][], position: number): boolean
+  parameter2: string | undefined
+  meta: RuleTemplate
+  evaluate (sentence: Sentence, position: number): boolean
 }
 
 export declare class TransformationRule {
@@ -38,19 +50,57 @@ export declare class TransformationRule {
   predicate: Predicate
   old_category: string
   new_category: string
-  apply (taggedSentence: string[][], position: number): void
+  neutral: number
+  positive: number
+  negative: number
+  hasBeenSelectedAsHighRuleBefore: boolean
+  key (): string
+  apply (sentence: Sentence, position: number): void
+  isApplicableAt (sentence: Sentence, taggedSentence: Sentence, i: number): boolean
+  prettyPrint (): string
+  applyAt (sentence: Sentence, position: number): void
+  score (): number
 }
 
 export declare class RuleSet {
-  constructor (filename: string)
+  constructor (language: string)
   rules: TransformationRule[]
+  addRule (rule: TransformationRule): boolean
+  removeRule (rule: TransformationRule): void
+  getRules (): TransformationRule[]
+  nrRules (): number
+  hasRule (rule: TransformationRule): boolean
+  prettyPrint (): string
 }
 
 export declare class Lexicon {
-  constructor (filename: string, defaultCategory: string)
+  constructor (language: string, defaultCategory: string, defaultCategoryCapitalised?: string)
+  lexicon: { [key: string]: string[] | undefined }
   defaultCategory: string
+  defaultCategoryCapitalised: string | undefined
   parseLexicon (data: string): void
+  tagWordWithDefaults (word: string): string
   tagWord (word: string): string[]
+  addWord (word: string, categories: string[]): void
+  prettyPrint (): string
+  nrEntries (): number
+  size (): number
+  setDefaultCategories (category: string, categoryCapitalised: string): void
+}
+
+export declare class Corpus {
+  constructor (data: string | Corpus, typeOfCorpus: number, SentenceClass: typeof Sentence)
+  parseBrownCorpus (data: string, SentenceClass: typeof Sentence): void
+  getTags (): string[]
+  splitInTrainAndTest (percentageTrain: number): [Corpus, Corpus]
+  analyse (): void
+  buildLexicon (): Lexicon
+  tag (lexicon: Lexicon): void
+  nrSentences (): number
+  nrWords (): number
+  // Incomplete methods
+  // generateFeatures
+  // prettyPrint
 }
 
 export interface BrillPOSTaggedWord {
