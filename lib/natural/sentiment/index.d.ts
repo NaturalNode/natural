@@ -21,7 +21,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import { Stemmer } from "../stemmers";
+import { Stemmer } from '../stemmers'
 
 export declare class SentimentAnalyzer {
   constructor (language: string, stemmer: Stemmer, vocabulary: string)

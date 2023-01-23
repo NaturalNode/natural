@@ -70,17 +70,17 @@ declare class Distribution {
 
   constructor (alpha: number[], features: FeatureSet, sample: Sample)
   toString (): string
-  weight(x: Element): number
-  calculateAPriori(x: Element): number
-  prepareWeights(): void
-  calculateAPosteriori(x: Element): number
-  aPosterioriNormalisation(b: Context): number
-  prepareAPosterioris(): void
-  prepare(): void
-  KullbackLieblerDistance(): number
-  logLikelihood(): number
-  entropy(): number
-  checkSum(): number
+  weight (x: Element): number
+  calculateAPriori (x: Element): number
+  prepareWeights (): void
+  calculateAPosteriori (x: Element): number
+  aPosterioriNormalisation (b: Context): number
+  prepareAPosterioris (): void
+  prepare (): void
+  KullbackLieblerDistance (): number
+  logLikelihood (): number
+  entropy (): number
+  checkSum (): number
 }
 
 export type FeatureFunction = (x: Element) => number

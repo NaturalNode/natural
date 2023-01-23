@@ -149,14 +149,14 @@ export declare class BrillPOSTrainer {
   mapSiteToRule (i: number, j: number, rule: TransformationRule): void
   associateSiteWithRule (i: number, j: number, rule: TransformationRule): void
   siteIsAssociatedWithRule (i: number, j: number, rule: TransformationRule): boolean
-  getSites (rule: TransformationRule): [number, number][]
+  getSites (rule: TransformationRule): Array<[number, number]>
   getRules (i: number, j: number): TransformationRule[]
   disconnectSiteFromRule (i: number, j: number, rule: TransformationRule): void
   scoreRule (rule: TransformationRule, i: number, j: number): void
   generatePositiveRules (i: number, j: number): RuleSet
   scanForPositiveRules (): void
   scanForSites (): void
-  neighbourhood (i: number, j: number): [number, number][]
+  neighbourhood (i: number, j: number): Array<[number, number]>
   train (corpus: Corpus, templates: RuleTemplates, lexicon: Lexicon): RuleSet
   printRulesWithScores (): string
 }

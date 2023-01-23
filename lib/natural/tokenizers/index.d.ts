@@ -37,7 +37,7 @@ export interface RegexTokenizerOptions {
 }
 export declare class RegexpTokenizer implements Tokenizer {
   constructor (options: RegexTokenizerOptions)
-  tokenize (text: string): string[];
+  tokenize (text: string): string[]
 }
 export declare class OrthographyTokenizer implements Tokenizer {
   constructor (options: RegexTokenizerOptions & { language: string })
