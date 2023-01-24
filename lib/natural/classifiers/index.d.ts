@@ -63,7 +63,7 @@ export interface ClassifierOptions {
   keepStops?: boolean
 }
 
-export type ClassifierCallback = (err: NodeJS.ErrnoException, classifier?: ClassifierBase) => void
+export type ClassifierCallback = (err: NodeJS.ErrnoException | null, classifier?: ClassifierBase) => void
 
 declare class ClassifierBase {
   classifier: ApparatusClassifier
@@ -85,7 +85,7 @@ declare class ClassifierBase {
   save (filename: string, callback: ClassifierCallback): void
 }
 
-export type BayesClassifierCallback = (err: NodeJS.ErrnoException, classifier?: BayesClassifier) => void
+export type BayesClassifierCallback = (err: NodeJS.ErrnoException | null, classifier?: BayesClassifier) => void
 
 export declare class BayesClassifier extends ClassifierBase {
   constructor (stemmer?: Stemmer, smoothing?: number)
@@ -93,7 +93,7 @@ export declare class BayesClassifier extends ClassifierBase {
   static restore (classifier: BayesClassifier, stemmer?: Stemmer): BayesClassifier
 }
 
-export type LogisticRegressionClassifierCallback = (err: NodeJS.ErrnoException, classifier?: LogisticRegressionClassifier) => void
+export type LogisticRegressionClassifierCallback = (err: NodeJS.ErrnoException | null, classifier?: LogisticRegressionClassifier) => void
 
 export declare class LogisticRegressionClassifier extends ClassifierBase {
   constructor (stemmer?: Stemmer)
@@ -101,7 +101,7 @@ export declare class LogisticRegressionClassifier extends ClassifierBase {
   static restore (classifier: LogisticRegressionClassifier, stemmer?: Stemmer): LogisticRegressionClassifier
 }
 
-export type MaxEntClassifierCallback = (err: NodeJS.ErrnoException, classifier?: MaxEntClassifier | null) => void
+export type MaxEntClassifierCallback = (err: NodeJS.ErrnoException | null, classifier?: MaxEntClassifier | null) => void
 
 declare class MaxEntClassifier {
   sample: Sample

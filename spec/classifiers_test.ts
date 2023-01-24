@@ -21,13 +21,13 @@ classifier.events.on('trainedWithDocument', function (obj: any) {
   console.log(obj)
 })
 
-classifier.save('classifier.json', function (err: NodeJS.ErrnoException, classifier?: BayesClassifier) {
+classifier.save('classifier.json', function (err: NodeJS.ErrnoException | null, classifier?: BayesClassifier) {
   if (err !== undefined) {
     console.log(err)
   } else {
     // the classifier is saved to the classifier.json file!
     console.log('The classifier is saved to the classifier.json file!')
-    BayesClassifier.load('classifier.json', null, function (err: NodeJS.ErrnoException, classifier?: BayesClassifier) {
+    BayesClassifier.load('classifier.json', null, function (err: NodeJS.ErrnoException | null, classifier?: BayesClassifier) {
       if (err !== undefined) {
         console.log(err)
       } else if (classifier == null) { // coercion catches null or undefined
