@@ -1,53 +1,107 @@
 import events from 'events'
 import { Stemmer } from '../stemmers'
 
-export interface BayesClassifierClassification {
+// Start apparatus declarations
+
+// TODO: Once TS declarations are available in NaturalNode/apparatus,
+// replace local definitions with imports:
+// import {
+//   BayesClassifier as ApparatusBayesClassifier,
+//   Classifier as ApparatusClassifier,
+//   LogisticRegressionClassifier as ApparatusLogisticRegressionClassifier,
+// } from 'apparatus'
+
+export interface ApparatusClassification {
   label: string
   value: number
 }
 
-export type BayesClassifierCallback = (err: any, classifier: BayesClassifier) => void
+type ApparatusObservation = number[] | { [key: string]: number | string | boolean | undefined }
 
-declare class BayesClassifier {
+export declare class ApparatusClassifier {
+  addExample (observation: ApparatusObservation, label: string): void
+  classify (observation: ApparatusObservation): string
+  train (): void
+  static restore (classifier: string | ApparatusClassifier): ApparatusClassifier
+}
+
+declare class ApparatusBayesClassifier extends ApparatusClassifier {
+  classFeatures: { [key: string]: { [key: number]: number | undefined } | undefined }
+  classTotals: { [key: string]: number | undefined }
+  totalExamples: number
+  smoothing: number
+
+  constructor (smoothing?: number)
+  getClassifications (observation: ApparatusObservation): ApparatusClassification[]
+  probabilityOfClass (observation: ApparatusObservation, label: string): number
+  static restore (classifier: string | ApparatusBayesClassifier): ApparatusBayesClassifier
+}
+
+declare class ApparatusLogisticRegressionClassifier extends ApparatusClassifier {
+  examples: { [key: string]: number[] | undefined }
+  // TODO: These appear used
+  // features: any[]
+  // featurePositions: { [key: string]: any | undefined }
+  maxFeaturePosition: number
+  classifications: string[]
+  exampleCount: number
+
+  createClassifications (): number[][]
+  addExample (data: number[], classification: string): void
+  getClassifications (observation: number[]): ApparatusClassification[]
+  static restore (classifier: string | ApparatusLogisticRegressionClassifier): ApparatusLogisticRegressionClassifier
+}
+
+// End apparatus declarations
+
+export interface ClassifierDoc {
+  label: string
+  text: string
+}
+
+export interface ClassifierOptions {
+  keepStops?: boolean
+}
+
+export type ClassifierCallback = (err: NodeJS.ErrnoException, classifier?: ClassifierBase) => void
+
+declare class ClassifierBase {
+  classifier: ApparatusClassifier
+  docs: ClassifierDoc[]
+  features: { [key: string]: number | undefined }
+  stemmer: Stemmer
+  lastAdded: number
   events: events.EventEmitter
 
-  constructor (stem?: Stemmer)
-  addDocument (text: string, stem: string): void
-  addDocument (text: string[], stem: string): void
+  constructor (classifier: ApparatusClassifier, stemmer?: Stemmer)
+  addDocument (text: string | string[], classification: string): void
+  removeDocument (text: string | string[], classification: string): void
+  textToFeatures (observation: string | string[]): number[]
   train (): void
-  classify (observation: string): string
-  getClassifications (observation: string): BayesClassifierClassification[]
-  save (filename: string, callback: BayesClassifierCallback): void
-  static load (filename: string, stemmer: Stemmer | null, callback: BayesClassifierCallback): void
-  static restore (classifier: any, stemmer?: Stemmer): BayesClassifier
+  retrain (): void
+  getClassifications (observation: string | string[]): ApparatusClassification[]
+  classify (observation: string | string[]): string
+  setOptions (options: ClassifierOptions): void
+  save (filename: string, callback: ClassifierCallback): void
 }
 
-interface LogisticRegressionClassifierClassification {
-  label: string
-  value: number
+export type BayesClassifierCallback = (err: NodeJS.ErrnoException, classifier?: BayesClassifier) => void
+
+export declare class BayesClassifier extends ClassifierBase {
+  constructor (stemmer?: Stemmer, smoothing?: number)
+  static load (filename: string, stemmer: Stemmer | null | undefined, callback: BayesClassifierCallback): void
+  static restore (classifier: BayesClassifier, stemmer?: Stemmer): BayesClassifier
 }
 
-export type LogisticRegressionCallback = (err: any, result: LogisticRegressionClassifier) => void
+export type LogisticRegressionClassifierCallback = (err: NodeJS.ErrnoException, classifier?: LogisticRegressionClassifier) => void
 
-declare class LogisticRegressionClassifier {
-  events: events.EventEmitter
-
-  addDocument (text: string, stem: string): void
-  addDocument (text: string[], stem: string): void
-  train (): void
-  classify (observation: string): string
-  getClassifications (observation: string): LogisticRegressionClassifierClassification[]
-  save (filename: string, callback: LogisticRegressionCallback): void
-  static load (filename: string, stemmer: Stemmer | null, callback: LogisticRegressionCallback): void
-  static restore (classifier: any, stemmer?: Stemmer): LogisticRegressionClassifier
+export declare class LogisticRegressionClassifier extends ClassifierBase {
+  constructor (stemmer?: Stemmer)
+  static load (filename: string, stemmer: Stemmer | null | undefined, callback: LogisticRegressionClassifierCallback): void
+  static restore (classifier: LogisticRegressionClassifier, stemmer?: Stemmer): LogisticRegressionClassifier
 }
 
-interface MaxEntClassifierClassification {
-  label: string
-  value: number
-}
-
-export type MaxEntClassifierCallback = (err: any, result: MaxEntClassifier) => void
+export type MaxEntClassifierCallback = (err: NodeJS.ErrnoException, classifier?: MaxEntClassifier | null) => void
 
 declare class MaxEntClassifier {
   sample: Sample
@@ -57,7 +111,7 @@ declare class MaxEntClassifier {
   addElement (x: Element): void
   addDocument (context: Context, classification: string, elementClass: Element): void
   train (maxIterations: number, minImprovement: number, approxExpectation: object): void
-  getClassifications (b: Context): MaxEntClassifierClassification[]
+  getClassifications (b: Context): ApparatusClassification[]
   classify (b: Context): string
   save (filename: string, callback: MaxEntClassifierCallback): void
   static load (filename: string, elementClass: Element, callback: MaxEntClassifierCallback): void
