@@ -1,4 +1,5 @@
 import events from 'events'
+import { Corpus, Sentence } from '../brill_pos_tagger'
 import { Stemmer } from '../stemmers'
 
 // Start apparatus declarations
@@ -7,8 +8,10 @@ import { Stemmer } from '../stemmers'
 // replace local definitions with imports:
 // import {
 //   BayesClassifier as ApparatusBayesClassifier,
+//   Classification as ApparatusClassification,
 //   Classifier as ApparatusClassifier,
 //   LogisticRegressionClassifier as ApparatusLogisticRegressionClassifier,
+//   Observation as ApparatusObservation,
 // } from 'apparatus'
 
 export interface ApparatusClassification {
@@ -16,15 +19,17 @@ export interface ApparatusClassification {
   value: number
 }
 
-type ApparatusObservation = number[] | { [key: string]: number | string | boolean | undefined }
+export type ApparatusObservation = number[] | { [key: string]: number | string | boolean | undefined }
 
-export declare class ApparatusClassifier {
+declare class ApparatusClassifier {
   addExample (observation: ApparatusObservation, label: string): void
   classify (observation: ApparatusObservation): string
   train (): void
   static restore (classifier: string | ApparatusClassifier): ApparatusClassifier
 }
 
+// TODO: Not needed for natural repository, but could be moved to
+// aparatus repository. Temporarily leaving here for copypasta.
 declare class ApparatusBayesClassifier extends ApparatusClassifier {
   classFeatures: { [key: string]: { [key: number]: number | undefined } | undefined }
   classTotals: { [key: string]: number | undefined }
@@ -37,6 +42,8 @@ declare class ApparatusBayesClassifier extends ApparatusClassifier {
   static restore (classifier: string | ApparatusBayesClassifier): ApparatusBayesClassifier
 }
 
+// TODO: Not needed for natural repository, but could be moved to
+// aparatus repository. Temporarily leaving here for copypasta.
 declare class ApparatusLogisticRegressionClassifier extends ApparatusClassifier {
   examples: { [key: string]: number[] | undefined }
   // TODO: These appear used
@@ -87,7 +94,7 @@ declare class ClassifierBase {
 
 export type BayesClassifierCallback = (err: NodeJS.ErrnoException | null, classifier?: BayesClassifier) => void
 
-export declare class BayesClassifier extends ClassifierBase {
+declare class BayesClassifier extends ClassifierBase {
   constructor (stemmer?: Stemmer, smoothing?: number)
   static load (filename: string, stemmer: Stemmer | null | undefined, callback: BayesClassifierCallback): void
   static restore (classifier: BayesClassifier, stemmer?: Stemmer): BayesClassifier
@@ -95,7 +102,7 @@ export declare class BayesClassifier extends ClassifierBase {
 
 export type LogisticRegressionClassifierCallback = (err: NodeJS.ErrnoException | null, classifier?: LogisticRegressionClassifier) => void
 
-export declare class LogisticRegressionClassifier extends ClassifierBase {
+declare class LogisticRegressionClassifier extends ClassifierBase {
   constructor (stemmer?: Stemmer)
   static load (filename: string, stemmer: Stemmer | null | undefined, callback: LogisticRegressionClassifierCallback): void
   static restore (classifier: LogisticRegressionClassifier, stemmer?: Stemmer): LogisticRegressionClassifier
@@ -110,11 +117,12 @@ declare class MaxEntClassifier {
   constructor (features: FeatureSet, sample: Sample)
   addElement (x: Element): void
   addDocument (context: Context, classification: string, elementClass: Element): void
-  train (maxIterations: number, minImprovement: number, approxExpectation: object): void
+  train (maxIterations: number, minImprovement: number, unused: any): void
   getClassifications (b: Context): ApparatusClassification[]
   classify (b: Context): string
+  // These are not static like in other Classifier classes
   save (filename: string, callback: MaxEntClassifierCallback): void
-  static load (filename: string, elementClass: Element, callback: MaxEntClassifierCallback): void
+  load (filename: string, elementClass: Element, callback: MaxEntClassifierCallback): void
 }
 
 declare class Distribution {
@@ -122,7 +130,7 @@ declare class Distribution {
   featureSet: FeatureSet
   sample: Sample
 
-  constructor (alpha: number[], features: FeatureSet, sample: Sample)
+  constructor (alpha: number[], featureSet: FeatureSet, sample: Sample)
   toString (): string
   weight (x: Element): number
   calculateAPriori (x: Element): number
@@ -153,23 +161,23 @@ declare class Feature {
 
 declare class FeatureSet {
   features: Feature[]
-  map: object
+  map: { [key: string]: boolean | undefined }
 
-  addFeature (feature: FeatureFunction): boolean
-  featureExists (feature: FeatureFunction): boolean
+  addFeature (feature: Feature): boolean
+  featureExists (feature: Feature): boolean
   getFeatures (): Feature[]
   size (): number
   prettyPrint (): string
 }
 
-export type SampleCallback = (err: any, result: Sample) => void
+export type SampleCallback = (err: NodeJS.ErrnoException | null, sample?: Sample | null) => void
 
 declare class Sample {
-  frequencyOfContext: object
-  frequency: object
+  frequencyOfContext: { [key: string]: number | undefined }
+  frequency: { [key: string]: number | undefined }
   classes: string[]
 
-  constructor (elements: Element[])
+  constructor (elements?: Element[])
   analyse (): void
   addElement (x: Element): void
   observedProbabilityOfContext (context: Context): number
@@ -178,29 +186,38 @@ declare class Sample {
   getClasses (): string[]
   generateFeatures (featureSet: FeatureSet): void
   save (filename: string, callback: SampleCallback): void
-  load (filename: string, elementClass: Element, callback: SampleCallback): void
+  load (filename: string, elementClass: typeof Element, callback: SampleCallback): void
 }
 
 declare class Context {
+  key: string | undefined;
+
+  constructor (data: any)
   toString (): string
 }
 
 declare class Element {
-  constructor (a: any, b: Context)
-  key (): string
+  a: string
+  b: Context
+  key: string | undefined
+
+  constructor (a: string, b: Context)
+  toString (): string
 }
 
 declare class SEElement extends Element {
+  constructor (a: string, b: Context)
   generateFeatures (featureSet: FeatureSet): void
 }
 
 declare class POSElement extends Element {
+  constructor (a: string, b: Context)
   generateFeatures (featureSet: FeatureSet): void
 }
 
 declare class GISScaler {
   constructor (featureSet: FeatureSet, sample: Sample)
-  calculateMaxSumOfFeatures (): void
+  calculateMaxSumOfFeatures (): boolean
   addCorrectionFeature (): void
   run (maxIterations: number, minImprovement: number): Distribution
 }
@@ -211,6 +228,7 @@ declare class MESentence {
 }
 
 declare class MECorpus {
+  constructor (data: string | Corpus, BROWN: number, SentenceClass: typeof Sentence)
   generateSample (): Sample
   splitInTrainAndTest (percentageTrain: number): [MECorpus, MECorpus]
 }
