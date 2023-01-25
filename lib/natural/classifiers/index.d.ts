@@ -190,7 +190,7 @@ declare class Sample {
 }
 
 declare class Context {
-  key: string | undefined;
+  key: string | undefined
 
   constructor (data: any)
   toString (): string
