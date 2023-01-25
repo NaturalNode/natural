@@ -24,32 +24,37 @@ THE SOFTWARE.
 // Based on type definitions on Definitely Typed
 
 export interface JaroWinklerOptions {
-  dj?: number | undefined
-  // default: false
-  ignoreCase?: boolean | undefined
+  dj?: number
+  /** @default false */
+  ignoreCase?: boolean
 }
+
 export declare function JaroWinklerDistance (s1: string, s2: string, options: JaroWinklerOptions): number
 
 export interface DamerauLevenshteinDistanceOptions {
   /** @default 1 */
-  insertion_cost?: number | undefined
+  insertion_cost?: number
   /** @default 1 */
-  deletion_cost?: number | undefined
+  deletion_cost?: number
   /** @default 1 */
-  substitution_cost?: number | undefined
+  substitution_cost?: number
   /** @default 1 */
-  transposition_cost?: number | undefined
+  transposition_cost?: number
   /** @default false */
-  search?: boolean | undefined
+  search?: boolean
   /** @default false */
-  restricted?: boolean | undefined
-  damerau?: boolean | undefined
+  restricted?: boolean
+  damerau?: boolean
 }
-interface SubstringDistanceResult {
+
+export interface SubstringDistanceResult {
   substring: string
   distance: number
+  offset: number
 }
+
 export declare function LevenshteinDistance (source: string, target: string, options?: DamerauLevenshteinDistanceOptions): number
+
 /**
  * Returns the Damerau-Levenshtein distance between strings. Counts the distance
  * between two strings by returning the number of edit operations required to
@@ -63,14 +68,19 @@ export function DamerauLevenshteinDistance (
   target: string,
   options: DamerauLevenshteinDistanceOptions & { search: true }
 ): SubstringDistanceResult
+
 export function DamerauLevenshteinDistance (
   source: string,
   target: string,
-  options?: DamerauLevenshteinDistanceOptions & { search?: false | undefined }
+  options?: DamerauLevenshteinDistanceOptions & { search?: false }
 ): number
+
 export function DamerauLevenshteinDistance (
   source: string,
   target: string,
   options: DamerauLevenshteinDistanceOptions & { search: boolean }
 ): number | SubstringDistanceResult
+
 export declare function DiceCoefficient (str1: string, str2: string): number
+
+export declare function HammingDistance (str1: string, str2: string, ignoreCase: boolean): number
