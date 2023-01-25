@@ -33,6 +33,7 @@
     "rimraf": "^2.6.3",
     "sinon": "^1.12.2",
     "standard": "^16.0.3",
+    "ts-standard": "^12.0.2",
     "typescript": "^4.9.3",
     "uubench": "^0.0.1",
     "webpack": "^4.29.0",
@@ -60,7 +61,8 @@
     "coverage": "nyc --reporter=lcov npm test",
     "test_io": "NODE_PATH=. node ./node_modules/jasmine/bin/jasmine.js --random=false io_spec/*_spec.js",
     "test_browser": "NODE_PATH=. node ./node_modules/gulp/bin/gulp.js",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --ext .ts",
+    "lint-ts": "ts-standard **/*.ts"
   },
   "license": "MIT",
   "author": "Chris Umbel <chris@chrisumbel.com>",
