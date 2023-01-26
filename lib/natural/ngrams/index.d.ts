@@ -32,6 +32,9 @@ declare interface NGramsStats {
 }
 
 declare interface NGramsFunctions {
+  // To support function overloads where the return type can differ depending on a parameter
+  // value, method signatures are necessary. Key collisions occur with property signatures.
+  /* eslint-disable @typescript-eslint/method-signature-style */
   setTokenizer (t: Tokenizer): void
   ngrams (sequence: string | string[], n: number, startSymbol: string | undefined, endSymbol: string | undefined, stats: true): NGramsStats
   ngrams (sequence: string | string[], n: number, startSymbol?: string, endSymbol?: string, stats?: boolean): string[][]
@@ -41,6 +44,7 @@ declare interface NGramsFunctions {
   trigrams (sequence: string | string[], startSymbol?: string, endSymbol?: string, stats?: boolean): string[][]
   multrigrams (sequence: string | string[], n: number, startSymbol: string | undefined, endSymbol: string | undefined, stats: true): NGramsStats
   multrigrams (sequence: string | string[], n: number, startSymbol?: string, endSymbol?: string, stats?: boolean): string[][]
+  /* eslint-enable @typescript-eslint/method-signature-style */
 }
 
 export let NGrams: NGramsFunctions

@@ -26,7 +26,7 @@ declare class NounInflector {
 }
 
 declare interface CountInflector {
-  nth (i: number): string
+  nth: (i: number) => string
 }
 
 declare class PresentVerbInflector {
