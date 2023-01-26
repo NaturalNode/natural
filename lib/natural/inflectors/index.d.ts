@@ -20,16 +20,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export declare class NounInflector {
+declare class NounInflector {
   pluralize (token: string): string
   singularize (token: string): string
 }
 
-export declare class CountInflector {
-  static nth (i: number): string
+declare interface CountInflector {
+  nth (i: number): string
 }
 
-export declare class PresentVerbInflector {
+declare class PresentVerbInflector {
   pluralize (token: string): string
   singularize (token: string): string
 }

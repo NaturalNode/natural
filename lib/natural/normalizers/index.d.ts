@@ -23,5 +23,6 @@ THE SOFTWARE.
 */
 
 export function normalize (tokens: string | string[]): string[]
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export function normalize_ja (str: string): string
 export function removeDiacritics (str: string): string
