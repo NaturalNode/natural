@@ -22,14 +22,26 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-declare interface ngramsFunctions {
-  bigrams: (sequence: string | string[], startSymbol?: string, endSymbol?: string) => string[][]
-  // bigrams: (sequence: string[], startSymbol?: string, endSymbol?: string) => string[][]
-  trigrams: (sequence: string | string[], startSymbol?: string, endSymbol?: string) => string[][]
-  // trigrams: (sequence: string[], startSymbol?: string, endSymbol?: string) => string[][]
-  ngrams: (sequence: string | string[], n: number, startSymbol?: string, endSymbol?: string) => string[][]
-  // ngrams: (sequence: string[], n: number, startSymbol?: string, endSymbol?: string) => string[][]
+import Tokenizer from "../tokenizers/tokenizer"
+
+declare interface NGramsStats {
+  ngrams: string[][],
+  frequencies: { [key: string]: number | undefined },
+  Nr: { [key: number]: number | undefined },
+  numberOfNgrams: number,
 }
 
-export declare let NGrams: ngramsFunctions
-export declare let NGramsZH: ngramsFunctions
+declare interface NGramsFunctions {
+  setTokenizer (t: Tokenizer): void
+  ngrams (sequence: string | string[], n: number, startSymbol: string | undefined, endSymbol: string | undefined, stats: true): NGramsStats
+  ngrams (sequence: string | string[], n: number, startSymbol?: string, endSymbol?: string, stats?: boolean): string[][]
+  bigrams (sequence: string | string[], startSymbol: string | undefined, endSymbol: string | undefined, stats: true): NGramsStats
+  bigrams (sequence: string | string[], startSymbol?: string, endSymbol?: string, stats?: boolean): string[][]
+  trigrams (sequence: string | string[], startSymbol: string | undefined, endSymbol: string | undefined, stats: true): NGramsStats
+  trigrams (sequence: string | string[], startSymbol?: string, endSymbol?: string, stats?: boolean): string[][]
+  multrigrams (sequence: string | string[], n: number, startSymbol: string | undefined, endSymbol: string | undefined, stats: true): NGramsStats
+  multrigrams (sequence: string | string[], n: number, startSymbol?: string, endSymbol?: string, stats?: boolean): string[][]
+}
+
+export let NGrams: NGramsFunctions
+export let NGramsZH: NGramsFunctions
