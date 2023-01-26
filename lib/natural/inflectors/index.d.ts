@@ -25,8 +25,8 @@ export declare class NounInflector {
   singularize (token: string): string
 }
 
-export declare let CountInflector: {
-  nth: (i: number) => string
+export declare class CountInflector {
+  static nth (i: number): string
 }
 
 export declare class PresentVerbInflector {
