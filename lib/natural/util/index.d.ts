@@ -23,21 +23,49 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export declare class EdgeWeightedDigraph {
-  add (start: number, end: number, weight: number): void
-  v (): number
-  e (): number
+export let stopwords: string[]
+
+declare class Bag<T> {
+  add (element: T): Bag<T>
+  isEmpty (): boolean
+  contains (item: T): boolean
+  unpack (): T[]
 }
 
-export declare class ShortestPathTree {
-  constructor (diagraph: EdgeWeightedDigraph, startVertex: number)
+declare class DirectedEdge {
+  constructor (start: number, end: number, weight: number)
+  weight (): number
+  from (): number
+  to (): number
+  toString (): string
+}
+
+export class EdgeWeightedDigraph {
+  edgesNum: number
+  adj: Bag<DirectedEdge>[]
+
+  add (start: number, end: number, weight: number): void
+  addEdge (e: DirectedEdge): void
+  v (): number
+  e (): number
+  getAdj (v: number): DirectedEdge[]
+  edges (): DirectedEdge[]
+  toString (): string
+}
+
+export class ShortestPathTree {
+  constructor (diagraph: EdgeWeightedDigraph, start: number)
+  relaxEdge (e: DirectedEdge): void
+  relaxVertex (digraph: EdgeWeightedDigraph, vertex: number, tree: ShortestPathTree): void
   getDistTo (vertex: number): number
   hasPathTo (vertex: number): boolean
   pathTo (vertex: number): number[]
 }
 
-export declare class LongestPathTree {
-  constructor (diagraph: EdgeWeightedDigraph, startVertex: number)
+export class LongestPathTree {
+  constructor (diagraph: EdgeWeightedDigraph, start: number)
+  relaxEdge (e: DirectedEdge): void
+  relaxVertex (digraph: EdgeWeightedDigraph, vertex: number, tree: LongestPathTree): void
   getDistTo (vertex: number): number
   hasPathTo (vertex: number): boolean
   pathTo (vertex: number): number[]
