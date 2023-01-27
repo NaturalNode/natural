@@ -21,7 +21,4 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-// First define a function type for transliterators ...
-export declare type TransliteratorFunction = (s: string) => string
-// and then export the Japanese transliterator as a function of that type
-export declare let TransliterateJa: TransliteratorFunction
+export let TransliterateJa: (s: string) => string
