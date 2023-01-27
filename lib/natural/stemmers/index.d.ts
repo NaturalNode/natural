@@ -20,26 +20,27 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-// Based on the type definitions on definitely typed
-
-export interface Stemmer {
+declare interface Stemmer {
   stem: (token: string) => string
-  tokenizeAndStem: (text: string) => string[]
-  attach: () => void
+  addStopWord: (stopWord: string) => void
+  addStopWords: (moreStopWords: string[]) => void
+  removeStopWord: (stopWord: string) => void
+  removeStopWords: (moreStopWords: string[]) => void
+  tokenizeAndStem: (text: string, keepStops?: boolean) => string[]
 }
 
-declare const CarryStemmerFr: Stemmer
-declare const LancasterStemmer: Stemmer
-declare const PorterStemmer: Stemmer
-declare const PorterStemmerEs: Stemmer
-declare const PorterStemmerFa: Stemmer
-declare const PorterStemmerFr: Stemmer
-declare const PorterStemmerDe: Stemmer
-declare const PorterStemmerIt: Stemmer
-declare const PorterStemmerNl: Stemmer
-declare const PorterStemmerNo: Stemmer
-declare const PorterStemmerPt: Stemmer
-declare const PorterStemmerRu: Stemmer
-declare const PorterStemmerSv: Stemmer
-declare const StemmerId: Stemmer
-declare const StemmerJa: Stemmer
+export let CarryStemmerFr: Stemmer
+export let LancasterStemmer: Stemmer
+export let PorterStemmer: Stemmer
+export let PorterStemmerDe: Stemmer
+export let PorterStemmerEs: Stemmer
+export let PorterStemmerFa: Stemmer
+export let PorterStemmerFr: Stemmer
+export let PorterStemmerIt: Stemmer
+export let PorterStemmerNl: Stemmer
+export let PorterStemmerNo: Stemmer
+export let PorterStemmerPt: Stemmer
+export let PorterStemmerRu: Stemmer
+export let PorterStemmerSv: Stemmer
+export let StemmerId: Stemmer
+export let StemmerJa: Stemmer
