@@ -25,6 +25,9 @@ export class NounInflector {
   singularize (token: string): string
 }
 
+export class NounInflectorFr extends NounInflector {}
+export class NounInflectorJa extends NounInflector {}
+
 export let CountInflector: {
   nth: (i: number) => string
 }
