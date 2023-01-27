@@ -14,12 +14,12 @@ import { Stemmer } from '../stemmers'
 //   Observation as ApparatusObservation,
 // } from 'apparatus'
 
-export interface ApparatusClassification {
+declare interface ApparatusClassification {
   label: string
   value: number
 }
 
-export type ApparatusObservation = number[] | { [key: string]: number | string | boolean | undefined }
+declare type ApparatusObservation = number[] | { [key: string]: number | string | boolean | undefined }
 
 declare class ApparatusClassifier {
   addExample (observation: ApparatusObservation, label: string): void
@@ -61,16 +61,16 @@ declare class ApparatusLogisticRegressionClassifier extends ApparatusClassifier 
 
 // End apparatus declarations
 
-export interface ClassifierDoc {
+declare interface ClassifierDoc {
   label: string
   text: string
 }
 
-export interface ClassifierOptions {
+declare interface ClassifierOptions {
   keepStops?: boolean
 }
 
-export type ClassifierCallback = (err: NodeJS.ErrnoException | null, classifier?: ClassifierBase) => void
+declare type ClassifierCallback = (err: NodeJS.ErrnoException | null, classifier?: ClassifierBase) => void
 
 declare class ClassifierBase {
   classifier: ApparatusClassifier
@@ -92,25 +92,25 @@ declare class ClassifierBase {
   save (filename: string, callback: ClassifierCallback): void
 }
 
-export type BayesClassifierCallback = (err: NodeJS.ErrnoException | null, classifier?: BayesClassifier) => void
+declare type BayesClassifierCallback = (err: NodeJS.ErrnoException | null, classifier?: BayesClassifier) => void
 
-declare class BayesClassifier extends ClassifierBase {
+export class BayesClassifier extends ClassifierBase {
   constructor (stemmer?: Stemmer, smoothing?: number)
   static load (filename: string, stemmer: Stemmer | null | undefined, callback: BayesClassifierCallback): void
   static restore (classifier: BayesClassifier, stemmer?: Stemmer): BayesClassifier
 }
 
-export type LogisticRegressionClassifierCallback = (err: NodeJS.ErrnoException | null, classifier?: LogisticRegressionClassifier) => void
+declare type LogisticRegressionClassifierCallback = (err: NodeJS.ErrnoException | null, classifier?: LogisticRegressionClassifier) => void
 
-declare class LogisticRegressionClassifier extends ClassifierBase {
+export class LogisticRegressionClassifier extends ClassifierBase {
   constructor (stemmer?: Stemmer)
   static load (filename: string, stemmer: Stemmer | null | undefined, callback: LogisticRegressionClassifierCallback): void
   static restore (classifier: LogisticRegressionClassifier, stemmer?: Stemmer): LogisticRegressionClassifier
 }
 
-export type MaxEntClassifierCallback = (err: NodeJS.ErrnoException | null, classifier?: MaxEntClassifier | null) => void
+declare type MaxEntClassifierCallback = (err: NodeJS.ErrnoException | null, classifier?: MaxEntClassifier | null) => void
 
-declare class MaxEntClassifier {
+export class MaxEntClassifier {
   sample: Sample
   features: FeatureSet
 
@@ -145,9 +145,9 @@ declare class Distribution {
   checkSum (): number
 }
 
-export type FeatureFunction = (x: Element) => number
+declare type FeatureFunction = (x: Element) => number
 
-declare class Feature {
+export class Feature {
   evaluate: FeatureFunction
   name: string
   parameters: string[]
@@ -159,7 +159,7 @@ declare class Feature {
   observedExpectation (sample: Sample): number
 }
 
-declare class FeatureSet {
+export class FeatureSet {
   features: Feature[]
   map: { [key: string]: boolean | undefined }
 
@@ -170,9 +170,9 @@ declare class FeatureSet {
   prettyPrint (): string
 }
 
-export type SampleCallback = (err: NodeJS.ErrnoException | null, sample?: Sample | null) => void
+declare type SampleCallback = (err: NodeJS.ErrnoException | null, sample?: Sample | null) => void
 
-declare class Sample {
+export class Sample {
   frequencyOfContext: { [key: string]: number | undefined }
   frequency: { [key: string]: number | undefined }
   classes: string[]
@@ -189,14 +189,14 @@ declare class Sample {
   load (filename: string, elementClass: typeof Element, callback: SampleCallback): void
 }
 
-declare class Context {
+export class Context {
   key: string | undefined
 
   constructor (data: any)
   toString (): string
 }
 
-declare class Element {
+export class Element {
   a: string
   b: Context
   key: string | undefined
@@ -205,29 +205,29 @@ declare class Element {
   toString (): string
 }
 
-declare class SEElement extends Element {
+export class SEElement extends Element {
   constructor (a: string, b: Context)
   generateFeatures (featureSet: FeatureSet): void
 }
 
-declare class POSElement extends Element {
+export class POSElement extends Element {
   constructor (a: string, b: Context)
   generateFeatures (featureSet: FeatureSet): void
 }
 
-declare class GISScaler {
+export class GISScaler {
   constructor (featureSet: FeatureSet, sample: Sample)
   calculateMaxSumOfFeatures (): boolean
   addCorrectionFeature (): void
   run (maxIterations: number, minImprovement: number): Distribution
 }
 
-declare class MESentence {
+export class MESentence {
   constructor (data?: string[])
   generateSampleElements (sample: Sample): void
 }
 
-declare class MECorpus {
+export class MECorpus {
   constructor (data: string | Corpus, BROWN: number, SentenceClass: typeof Sentence)
   generateSample (): Sample
   splitInTrainAndTest (percentageTrain: number): [MECorpus, MECorpus]

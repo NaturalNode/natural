@@ -25,19 +25,19 @@ export interface Phonetic<T> {
   tokenizeAndPhoneticize: (str: string, phoneticsProcessor: Phonetic<T>, keepStops: boolean) => T
 }
 
-declare let Metaphone: Phonetic<string> & {
+export let Metaphone: Phonetic<string> & {
   process: (token: string, maxLength?: number) => string
 }
 
-declare let SoundEx: Phonetic<string> & {
+export let SoundEx: Phonetic<string> & {
   process: (token: string, maxLength?: number) => string
 }
 
-declare let DoubleMetaphone: Phonetic<string[]> & {
+export let DoubleMetaphone: Phonetic<string[]> & {
   process: (token: string, maxLength?: number) => string[]
   isVowel: (c: string) => string | RegExpMatchArray | null
 }
 
-declare let SoundExDM: Phonetic<string> & {
+export let SoundExDM: Phonetic<string> & {
   process: (word: string, codeLength?: number) => string
 }

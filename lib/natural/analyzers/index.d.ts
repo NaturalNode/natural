@@ -21,7 +21,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export declare interface TaggedWord {
+declare interface TaggedWord {
   token: string
   pos: string
   pp?: boolean
@@ -29,16 +29,16 @@ export declare interface TaggedWord {
   added?: boolean
 }
 
-export declare type PunctuationFunction = () => string[] | ''
+declare type PunctuationFunction = () => string[] | ''
 
-export declare interface TaggedSentence {
+declare interface TaggedSentence {
   tags: TaggedWord[]
   punct: PunctuationFunction
 }
 
-export declare type CallbackFunction = (obj: SentenceAnalyzer) => void
+declare type CallbackFunction = (obj: SentenceAnalyzer) => void
 
-export declare enum SenType {
+declare enum SenType {
   Unknown = 'UNKNOWN',
   Command = 'COMMAND',
   Interrogative = 'INTERROGATIVE',
@@ -46,7 +46,7 @@ export declare enum SenType {
   Declarative = 'DECLARATIVE',
 }
 
-export declare class SentenceAnalyzer {
+export class SentenceAnalyzer {
   posObj: TaggedSentence
   senType: SenType | null
 

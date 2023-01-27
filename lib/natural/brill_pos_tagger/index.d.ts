@@ -23,7 +23,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-interface RuleTemplatesItem {
+declare interface RuleTemplatesItem {
   function: (sentence: Sentence, i: number, parameter1?: string, parameter2?: string) => boolean
   window: number[]
   nrParameters: number
@@ -35,12 +35,12 @@ export interface RuleTemplates {
   [key: string]: RuleTemplatesItem | undefined
 }
 
-export declare class RuleTemplate {
+export class RuleTemplate {
   constructor (templateName: string, metadata: RuleTemplatesItem)
   windowFitsSite (sentence: Sentence, i: number): void
 }
 
-export declare class Predicate {
+declare class Predicate {
   constructor (name: string, parameter1: string, parameter2?: string)
   name: string
   parameter1: string
@@ -49,7 +49,7 @@ export declare class Predicate {
   evaluate (sentence: Sentence, position: number): boolean
 }
 
-export declare class TransformationRule {
+declare class TransformationRule {
   constructor (c1: string, c2: string, predicate: string, parameter1: string, parameter2?: string)
   literal: string[]
   predicate: Predicate
@@ -67,7 +67,7 @@ export declare class TransformationRule {
   score (): number
 }
 
-export declare class RuleSet {
+export class RuleSet {
   constructor (language: string)
   rules: TransformationRule[]
   addRule (rule: TransformationRule): boolean
@@ -78,7 +78,7 @@ export declare class RuleSet {
   prettyPrint (): string
 }
 
-export declare class Lexicon {
+export class Lexicon {
   constructor (language: string, defaultCategory: string, defaultCategoryCapitalised?: string)
   lexicon: { [key: string]: string[] | undefined }
   defaultCategory: string
@@ -93,7 +93,7 @@ export declare class Lexicon {
   setDefaultCategories (category: string, categoryCapitalised: string): void
 }
 
-export declare class Corpus {
+export class Corpus {
   constructor (data: string | Corpus, typeOfCorpus: number, SentenceClass: typeof Sentence)
   parseBrownCorpus (data: string, SentenceClass: typeof Sentence): void
   getTags (): string[]
@@ -108,19 +108,19 @@ export declare class Corpus {
   // prettyPrint
 }
 
-export interface BrillPOSTaggedWord {
+declare interface BrillPOSTaggedWord {
   token: string
   tag: string
 }
 
-export declare class Sentence {
+export class Sentence {
   constructor (data?: string[])
   taggedWords: BrillPOSTaggedWord[]
   addTaggedWord (token: string, tag: string): void
   clone (): Sentence
 }
 
-export declare class BrillPOSTagger {
+export class BrillPOSTagger {
   constructor (lexicon: Lexicon, ruleSet: RuleSet)
   lexicon: Lexicon
   ruleSet: RuleSet
@@ -129,14 +129,14 @@ export declare class BrillPOSTagger {
   applyRules (sentence: Sentence): Sentence
 }
 
-export declare class BrillPOSTester {
+export class BrillPOSTester {
   constructor (lexicon: Lexicon, ruleSet: RuleSet)
   lexicon: Lexicon
   ruleSet: RuleSet
   test (corpus: Corpus, tagger: BrillPOSTagger): [number, number]
 }
 
-export declare class BrillPOSTrainer {
+export class BrillPOSTrainer {
   constructor (ruleScoreThreshold: number)
   ruleScoreThreshold: number
   corpus: Corpus

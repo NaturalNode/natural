@@ -23,15 +23,15 @@ THE SOFTWARE.
 
 // Based on type definitions on Definitely Typed
 
-export interface JaroWinklerOptions {
+declare interface JaroWinklerOptions {
   dj?: number
   /** @default false */
   ignoreCase?: boolean
 }
 
-export declare function JaroWinklerDistance (s1: string, s2: string, options: JaroWinklerOptions): number
+export function JaroWinklerDistance (s1: string, s2: string, options: JaroWinklerOptions): number
 
-export interface DamerauLevenshteinDistanceOptions {
+declare interface DamerauLevenshteinDistanceOptions {
   /** @default 1 */
   insertion_cost?: number
   /** @default 1 */
@@ -47,13 +47,17 @@ export interface DamerauLevenshteinDistanceOptions {
   damerau?: boolean
 }
 
-export interface SubstringDistanceResult {
+declare interface SubstringDistanceResult {
   substring: string
   distance: number
   offset: number
 }
 
-export declare function LevenshteinDistance (source: string, target: string, options?: DamerauLevenshteinDistanceOptions): number
+export function LevenshteinDistance (
+  source: string,
+  target: string,
+  options?: DamerauLevenshteinDistanceOptions
+): number
 
 /**
  * Returns the Damerau-Levenshtein distance between strings. Counts the distance
@@ -81,6 +85,6 @@ export function DamerauLevenshteinDistance (
   options: DamerauLevenshteinDistanceOptions & { search: boolean }
 ): number | SubstringDistanceResult
 
-export declare function DiceCoefficient (str1: string, str2: string): number
+export function DiceCoefficient (str1: string, str2: string): number
 
-export declare function HammingDistance (str1: string, str2: string, ignoreCase: boolean): number
+export function HammingDistance (str1: string, str2: string, ignoreCase: boolean): number
