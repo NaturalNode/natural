@@ -29,7 +29,7 @@ declare class Bag<T> {
   add (element: T): Bag<T>
   isEmpty (): boolean
   contains (item: T): boolean
-  unpack (): Array<T>
+  unpack (): T[]
 }
 
 declare class DirectedEdge {
@@ -42,7 +42,7 @@ declare class DirectedEdge {
 
 export class EdgeWeightedDigraph {
   edgesNum: number
-  adj: Bag<DirectedEdge>[]
+  adj: Array<Bag<DirectedEdge>>
 
   add (start: number, end: number, weight: number): void
   addEdge (e: DirectedEdge): void
