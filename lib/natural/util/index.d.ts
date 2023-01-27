@@ -29,7 +29,7 @@ declare class Bag<T> {
   add (element: T): Bag<T>
   isEmpty (): boolean
   contains (item: T): boolean
-  unpack (): T[]
+  unpack (): Array<T>
 }
 
 declare class DirectedEdge {

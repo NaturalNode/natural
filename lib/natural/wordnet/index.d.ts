@@ -24,9 +24,9 @@ THE SOFTWARE.
 */
 
 declare interface DataPtr {
-  pointerSymbol: string,
-  synsetOffset: number,
-  pos: string,
+  pointerSymbol: string
+  synsetOffset: number
+  pos: string
   sourceTarget: string
 }
 

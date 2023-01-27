@@ -23,7 +23,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import Tokenizer from "../tokenizers/tokenizer"
+import Tokenizer from '../tokenizers/tokenizer'
 
 declare type TfIdfCallback = (i: number, measure: number, key?: string) => void
 
