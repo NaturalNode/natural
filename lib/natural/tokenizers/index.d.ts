@@ -20,83 +20,117 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-// Based on type definitions on Definitely Typed
+declare class Tokenizer {
+  trim: (array: string[]) => string[]
+}
 
-export interface Tokenizer {
-  tokenize: (text: string) => string[]
-}
-export declare class WordTokenizer implements Tokenizer {
+export class AggressiveTokenizerNl extends Tokenizer {
   tokenize (text: string): string[]
 }
-export declare class TreebankWordTokenizer implements Tokenizer {
+
+export class AggressiveTokenizerFa extends Tokenizer {
+  clearEmptyString (array: string[]): string[]
+  clearText (text: string): string
   tokenize (text: string): string[]
 }
-export interface RegexTokenizerOptions {
-  pattern?: RegExp | undefined
-  discardEmpty?: boolean | undefined
-}
-export declare class RegexpTokenizer implements Tokenizer {
-  constructor (options: RegexTokenizerOptions)
+
+export class AggressiveTokenizerFr extends Tokenizer {
   tokenize (text: string): string[]
 }
-export declare class OrthographyTokenizer implements Tokenizer {
-  constructor (options: RegexTokenizerOptions & { language: string })
+
+export class AggressiveTokenizerDe extends Tokenizer {
   tokenize (text: string): string[]
 }
-export declare class WordPunctTokenizer implements Tokenizer {
+
+export class AggressiveTokenizerRu extends Tokenizer {
+  withoutEmpty (array: string[]): string[]
+  clearText (text: string): string
   tokenize (text: string): string[]
 }
-export declare class SentenceTokenizer implements Tokenizer {
+
+export class AggressiveTokenizerEs extends Tokenizer {
   tokenize (text: string): string[]
 }
-export declare class SentenceTokenizerNew implements Tokenizer {
+
+export class AggressiveTokenizerIt extends Tokenizer {
   tokenize (text: string): string[]
 }
-export declare class CaseTokenizer implements Tokenizer {
-  tokenize (text: string, preserveApostrophy?: boolean): string[]
-}
-export declare class AggressiveTokenizer implements Tokenizer {
+
+export class AggressiveTokenizerPl extends Tokenizer {
+  withoutEmpty (array: string[]): string[]
+  clearText (text: string): string
   tokenize (text: string): string[]
 }
-export declare class AggressiveTokenizerEs implements Tokenizer {
+
+export class AggressiveTokenizerPt extends Tokenizer {
+  withoutEmpty (array: string[]): string[]
   tokenize (text: string): string[]
 }
-export declare class AggressiveTokenizerFa implements Tokenizer {
+
+export class AggressiveTokenizerNo extends Tokenizer {
   tokenize (text: string): string[]
 }
-export declare class AggressiveTokenizerFr implements Tokenizer {
+
+export class AggressiveTokenizerSv extends Tokenizer {
   tokenize (text: string): string[]
 }
-export declare class AggressiveTokenizerDe implements Tokenizer {
+
+export class AggressiveTokenizerVi extends Tokenizer {
   tokenize (text: string): string[]
 }
-export declare class AggressiveTokenizerId implements Tokenizer {
+
+export class AggressiveTokenizerId extends Tokenizer {
   tokenize (text: string): string[]
 }
-export declare class AggressiveTokenizerIt implements Tokenizer {
+
+export class AggressiveTokenizer extends Tokenizer {
   tokenize (text: string): string[]
 }
-export declare class AggressiveTokenizerNl implements Tokenizer {
+
+export class CaseTokenizer extends Tokenizer {
   tokenize (text: string): string[]
 }
-export declare class AggressiveTokenizerNo implements Tokenizer {
+
+declare interface RegexTokenizerOptions {
+  pattern?: RegExp
+  discardEmpty?: boolean
+  gaps?: boolean
+}
+
+export class RegexpTokenizer extends Tokenizer {
+  constructor (opts?: RegexTokenizerOptions)
+  tokenize (text: string): string[] | null
+}
+
+declare interface OrthographyTokenizerOptions extends RegexTokenizerOptions {
+  language: string
+}
+
+export class OrthographyTokenizer extends RegexpTokenizer {
+  constructor (options: OrthographyTokenizerOptions)
+}
+
+export class WordTokenizer extends RegexpTokenizer {
+  constructor (options?: RegexTokenizerOptions)
+}
+
+export class WordPunctTokenizer extends RegexpTokenizer {
+  constructor (options?: RegexTokenizerOptions)
+}
+
+export class TreebankWordTokenizer extends Tokenizer {
   tokenize (text: string): string[]
 }
-export declare class AggressiveTokenizerPl implements Tokenizer {
+
+export class TokenizerJa extends Tokenizer {
+  removePuncTokens (tokens: string[]): string[]
   tokenize (text: string): string[]
 }
-export declare class AggressiveTokenizerPt implements Tokenizer {
+
+export class SentenceTokenizer extends Tokenizer {
   tokenize (text: string): string[]
 }
-export declare class AggressiveTokenizerRu implements Tokenizer {
-  tokenize (text: string): string[]
-}
-export declare class AggressiveTokenizerSv implements Tokenizer {
-  tokenize (text: string): string[]
-}
-export declare class AggressiveTokenizerVi implements Tokenizer {
-  tokenize (text: string): string[]
-}
-export declare class TokenizerJa implements Tokenizer {
+
+export class SentenceTokenizerNew extends Tokenizer {
   tokenize (text: string): string[]
 }
