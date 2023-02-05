@@ -21,34 +21,40 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export declare interface TaggedWord {
-  [key: string]: string
+declare interface TaggedWord {
   token: string
   pos: string
+  pp?: boolean
   spos?: string
   added?: boolean
 }
 
-export declare type PunctuationFunction = () => string[] | ''
+declare type PunctuationFunction = () => string[] | ''
 
-export declare interface TaggedSentence {
+declare interface TaggedSentence {
   tags: TaggedWord[]
-  punct?: PunctuationFunction
+  punct: PunctuationFunction
 }
 
-export declare type CallbackFunction = (obj: SentenceAnalyzer) => void
+declare type CallbackFunction = (obj: SentenceAnalyzer) => void
 
-export declare type SenType = string
+declare enum SenType {
+  Unknown = 'UNKNOWN',
+  Command = 'COMMAND',
+  Interrogative = 'INTERROGATIVE',
+  Exclamatory = 'EXCLAMATORY',
+  Declarative = 'DECLARATIVE',
+}
 
-export declare class SentenceAnalyzer {
+export class SentenceAnalyzer {
   posObj: TaggedSentence
-  senType: string | null
+  senType: SenType | null
 
   constructor (pos: TaggedSentence, cbf: CallbackFunction)
   part (cbf: CallbackFunction): void
   prepositionPhrases (): void
-  subjectToString (): string | null
-  predicateToString (): string | null
+  subjectToString (): string
+  predicateToString (): string
   implicitYou (): boolean
   toString (): string
   type (cbf: CallbackFunction): SenType

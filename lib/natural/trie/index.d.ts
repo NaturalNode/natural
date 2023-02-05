@@ -22,12 +22,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export declare class Trie {
+export class Trie {
   constructor (caseSensitive?: boolean)
-  addString (text: string): boolean
-  addStrings (strings: string[]): void
-  contains (token: string): boolean
-  findPrefix (text: string): string[]
-  findMatchesOnPath (text: string): string[]
-  keysWithPrefix (text: string): string[]
+  addString (string: string): boolean
+  addStrings (list: string[]): void
+  contains (string: string): boolean
+  findPrefix (search: string): string[]
+  findMatchesOnPath (search: string): string[]
+  keysWithPrefix (prefix: string): string[]
+  getSize (): number
 }

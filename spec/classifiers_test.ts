@@ -1,4 +1,4 @@
-import { BayesClassifier } from '../lib/natural/classifiers'
+import { BayesClassifier } from '../lib/natural'
 
 let classifier = new BayesClassifier()
 
@@ -21,15 +21,17 @@ classifier.events.on('trainedWithDocument', function (obj: any) {
   console.log(obj)
 })
 
-classifier.save('classifier.json', function (err: any, classifier: BayesClassifier) {
+classifier.save('classifier.json', function (err: NodeJS.ErrnoException | null, classifier?: BayesClassifier) {
   if (err !== undefined) {
     console.log(err)
   } else {
     // the classifier is saved to the classifier.json file!
     console.log('The classifier is saved to the classifier.json file!')
-    BayesClassifier.load('classifier.json', null, function (err: any, classifier: BayesClassifier) {
+    BayesClassifier.load('classifier.json', null, function (err: NodeJS.ErrnoException | null, classifier?: BayesClassifier) {
       if (err !== undefined) {
         console.log(err)
+      } else if (classifier == null) { // coercion catches null or undefined
+        console.error('Classifier is missing from callback arguments')
       } else {
         console.log('Classify long SUNW' + classifier.classify('long SUNW'))
         console.log('Classify short SUNW' + classifier.classify('short SUNW'))

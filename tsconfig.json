@@ -12,8 +12,7 @@
     "outDir": "./dist",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "skipLibCheck": true
+    "strict": true
   },
   "include": [
     "lib/natural/**/*",

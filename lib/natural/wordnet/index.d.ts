@@ -23,20 +23,76 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export interface WordNetLookupResults {
+declare interface DataPtr {
+  pointerSymbol: string
   synsetOffset: number
   pos: string
-  lemma: string
-  synonyms: string[]
-  gloss: string
+  sourceTarget: string
 }
 
-export type WordNetLookupCallback = (results: WordNetLookupResults[]) => void
+declare interface DataRecord {
+  synsetOffset: number
+  lexFilenum: number
+  pos: string
+  wCnt: number
+  lemma: string
+  synonyms: string[]
+  lexId: string
+  ptrs: DataPtr[]
+  gloss: string
+  def: string
+  exp: string[]
+}
 
-export type WordNetGetCallback = (results: WordNetLookupResults) => void
+declare type DataRecordCallback = (results: DataRecord) => void
+declare type DataRecordsCallback = (results: DataRecord[]) => void
 
-export declare class WordNet {
-  constructor (filename?: string)
-  lookup (word: string, callback: WordNetLookupCallback): void
-  get (synsetOffset: number, pos: string, callback: WordNetGetCallback): void
+declare class DataFile {
+  constructor (dataDir: string, name: string)
+  get (location: number, callback: DataRecordCallback): void
+}
+
+declare interface IndexRecord {
+  lemma: string
+  pos: string
+  ptrSymbol: string[]
+  senseCnt: number
+  tagsenseCnt: number
+  synsetOffset: number[]
+}
+
+declare type IndexRecordCallback = (results: IndexRecord) => void
+
+declare interface IndexFind {
+  status: string
+  key: string
+  line: string
+  tokens: string[]
+}
+
+declare type IndexFindCallback = (results: IndexFind) => void
+
+declare class IndexFile {
+  constructor (dataDir: string, name: string)
+  lookup (word: string, callback: IndexRecordCallback): void
+  lookupFromFile (word: string, callback: IndexRecordCallback): void
+  find (word: string, callback: IndexFindCallback): void
+}
+
+declare interface WordNetLookupFile {
+  index: IndexFile
+  data: DataFile
+}
+
+export class WordNet {
+  constructor (dataDir?: string)
+  get (synsetOffset: number, pos: string, callback: DataRecordCallback): void
+  lookup (word: string, callback: DataRecordsCallback): void
+  lookupFromFiles (files: WordNetLookupFile[], results: DataRecord[], word: string, callback: DataRecordsCallback): void
+  pushResults (data: DataFile, results: DataRecord[], offsets: number[], callback: DataRecordsCallback): void
+  loadResultSynonyms (synonyms: DataRecord[], results: DataRecord[], callback: DataRecordsCallback): void
+  loadSynonyms (synonyms: DataRecord[], results: DataRecord[], ptrs: DataPtr[], callback: DataRecordsCallback): void
+  lookupSynonyms (word: string, callback: DataRecordsCallback): void
+  getSynonyms (record: DataRecord, callback: DataRecordsCallback): void
+  getDataFile (pos: string): DataFile
 }

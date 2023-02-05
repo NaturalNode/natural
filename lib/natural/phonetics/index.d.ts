@@ -20,22 +20,24 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export interface Phonetic {
+export interface Phonetic<T> {
   compare: (stringA: string, stringB: string) => boolean
+  tokenizeAndPhoneticize: (str: string, phoneticsProcessor: Phonetic<T>, keepStops: boolean) => T
+}
+
+export let Metaphone: Phonetic<string> & {
   process: (token: string, maxLength?: number) => string
 }
 
-declare let Metaphone: {
-  compare: (stringA: string, stringB: string) => boolean
+export let SoundEx: Phonetic<string> & {
   process: (token: string, maxLength?: number) => string
 }
 
-declare let SoundEx: {
-  compare: (stringA: string, stringB: string) => boolean
-  process: (token: string, maxLength?: number) => string
-}
-
-declare let DoubleMetaphone: {
-  compare: (stringA: string, stringB: string) => boolean
+export let DoubleMetaphone: Phonetic<string[]> & {
   process: (token: string, maxLength?: number) => string[]
+  isVowel: (c: string) => string | RegExpMatchArray | null
+}
+
+export let SoundExDM: Phonetic<string> & {
+  process: (word: string, codeLength?: number) => string
 }

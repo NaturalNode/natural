@@ -23,20 +23,31 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export type TfIdfCallback = (i: number, measure: number) => void
+import Tokenizer from '../tokenizers/tokenizer'
 
-export interface TfIdfTerm {
+declare type TfIdfCallback = (i: number, measure: number, key?: string) => void
+
+declare interface TfIdfTerm {
   term: string
+  tf: number
+  idf: number
   tfidf: number
 }
 
-export declare class TfIdf {
-  constructor (deserialized?: any)
-  addDocument (document: string, key?: string, restoreCache?: boolean): void
-  addDocument (document: string[], key?: string, restoreCache?: boolean): void
+declare type TfIdfDocument = { __key: string | undefined } | { [key: string]: number | undefined }
+
+export class TfIdf {
+  documents: TfIdfDocument | undefined
+  _idfCache: { [key: string]: number } | undefined
+
+  constructor (deserialized?: { documents: TfIdfDocument[] })
+  idf (term: string, force?: boolean): number
+  addDocument (document: string | string[], key?: string, restoreCache?: boolean): void
   addFileSync (path: string, encoding?: string, key?: string, restoreCache?: boolean): void
-  tfidf (terms: string, d: number): void
-  tfidfs (terms: string, callback: TfIdfCallback): void
-  tfidfs (terms: string[], callback: TfIdfCallback): void
+  tfidf (terms: string | string[], d: number): number
+  tfidfs (terms: string | string[], callback?: TfIdfCallback): number[]
   listTerms (d: number): TfIdfTerm[]
+  setTokenizer (t: Tokenizer): void
+  setStopwords (customStopwords: string[]): boolean
+  static tf (term: string, document: TfIdfDocument): number
 }

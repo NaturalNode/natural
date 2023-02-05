@@ -1,6 +1,7 @@
-
 /*
-Copyright (c) 2022, Dylan R. E. Moonfire <https://github.com/dmoonfire>, Emily Marigold Klassen <https://github.com/forivall>, Hugo W.L. ter Doest
+Copyright (c) 2022, Dylan R. E. Moonfire <https://github.com/dmoonfire>,
+Emily Marigold Klassen <https://github.com/forivall>,
+Hugo W.L. ter Doest <https://github.com/Hugo-ter-Doest>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,20 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import { Stemmer } from '../stemmers'
-
-export type AfinnLanguageType = 'afinn'
-export type AfinnLanguage = 'English' | 'Spanish' | 'Portuguese'
-
-export type SenticonLanguageType = 'senticon'
-export type SenticonLanguage = 'Spanish' | 'English' | 'Galician' | 'Catalan' | 'Basque'
-
-export type PatternLanguageType = 'pattern'
-export type PatternLanguage = 'Dutch' | 'Italian' | 'English' | 'French'
-
-export declare class SentimentAnalyzer {
-  constructor (language: AfinnLanguage, stemmer: Stemmer, type: AfinnLanguageType)
-  constructor (language: SenticonLanguage, stemmer: Stemmer, type: SenticonLanguageType)
-  constructor (language: PatternLanguage, stemmer: Stemmer, type: PatternLanguageType)
-  getSentiment (words: string[]): number
-}
+export function normalize (tokens: string | string[]): string[]
+// eslint-disable-next-line @typescript-eslint/naming-convention
+export function normalize_ja (str: string): string
+export function removeDiacritics (str: string): string

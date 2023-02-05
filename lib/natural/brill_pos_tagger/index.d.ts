@@ -23,51 +23,140 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export declare class Predicate {
+declare interface RuleTemplatesItem {
+  function: (sentence: Sentence, i: number, parameter1?: string, parameter2?: string) => boolean
+  window: number[]
+  nrParameters: number
+  parameter1Values?: (sentence: Sentence, i: number) => string[]
+  parameter2Values?: (sentence: Sentence, i: number) => string[]
+}
+
+export interface RuleTemplates {
+  [key: string]: RuleTemplatesItem | undefined
+}
+
+export class RuleTemplate {
+  constructor (templateName: string, metadata: RuleTemplatesItem)
+  windowFitsSite (sentence: Sentence, i: number): void
+}
+
+declare class Predicate {
   constructor (name: string, parameter1: string, parameter2?: string)
   name: string
   parameter1: string
-  parameter2?: string | undefined
-  function?: ((tagged_sentence: string[][], i: number, parameter: string) => boolean) | undefined
-  evaluate (taggedSentence: string[][], position: number): boolean
+  parameter2: string | undefined
+  meta: RuleTemplatesItem
+  evaluate (sentence: Sentence, position: number): boolean
 }
 
-export declare class TransformationRule {
+declare class TransformationRule {
   constructor (c1: string, c2: string, predicate: string, parameter1: string, parameter2?: string)
   literal: string[]
   predicate: Predicate
   old_category: string
   new_category: string
-  apply (taggedSentence: string[][], position: number): void
+  neutral: number
+  positive: number
+  negative: number
+  hasBeenSelectedAsHighRuleBefore: boolean
+  key (): string
+  apply (sentence: Sentence, position: number): void
+  isApplicableAt (sentence: Sentence, taggedSentence: Sentence, i: number): boolean
+  prettyPrint (): string
+  applyAt (sentence: Sentence, position: number): void
+  score (): number
 }
 
-export declare class RuleSet {
-  constructor (filename: string)
+export class RuleSet {
+  constructor (language: string)
   rules: TransformationRule[]
+  addRule (rule: TransformationRule): boolean
+  removeRule (rule: TransformationRule): void
+  getRules (): TransformationRule[]
+  nrRules (): number
+  hasRule (rule: TransformationRule): boolean
+  prettyPrint (): string
 }
 
-export declare class Lexicon {
-  constructor (filename: string, defaultCategory: string)
+export class Lexicon {
+  constructor (language: string, defaultCategory: string, defaultCategoryCapitalised?: string)
+  lexicon: { [key: string]: string[] | undefined }
   defaultCategory: string
+  defaultCategoryCapitalised: string | undefined
   parseLexicon (data: string): void
+  tagWordWithDefaults (word: string): string
   tagWord (word: string): string[]
+  addWord (word: string, categories: string[]): void
+  prettyPrint (): string
+  nrEntries (): number
+  size (): number
+  setDefaultCategories (category: string, categoryCapitalised: string): void
 }
 
-export interface TaggedWord {
+export class Corpus {
+  constructor (data: string | Corpus, typeOfCorpus: number, SentenceClass: typeof Sentence)
+  parseBrownCorpus (data: string, SentenceClass: typeof Sentence): void
+  getTags (): string[]
+  splitInTrainAndTest (percentageTrain: number): [Corpus, Corpus]
+  analyse (): void
+  buildLexicon (): Lexicon
+  tag (lexicon: Lexicon): void
+  nrSentences (): number
+  nrWords (): number
+  // Incomplete methods
+  // generateFeatures
+  // prettyPrint
+}
+
+declare interface BrillPOSTaggedWord {
   token: string
   tag: string
 }
 
-export declare class Sentence {
+export class Sentence {
   constructor (data?: string[])
-  taggedWords: TaggedWord[]
+  taggedWords: BrillPOSTaggedWord[]
   addTaggedWord (token: string, tag: string): void
   clone (): Sentence
 }
 
-export declare class BrillPOSTagger {
+export class BrillPOSTagger {
   constructor (lexicon: Lexicon, ruleSet: RuleSet)
   lexicon: Lexicon
   ruleSet: RuleSet
   tag (sentence: string[]): Sentence
+  tagWithLexicon (sentence: string[]): Sentence
+  applyRules (sentence: Sentence): Sentence
+}
+
+export class BrillPOSTester {
+  constructor (lexicon: Lexicon, ruleSet: RuleSet)
+  lexicon: Lexicon
+  ruleSet: RuleSet
+  test (corpus: Corpus, tagger: BrillPOSTagger): [number, number]
+}
+
+export class BrillPOSTrainer {
+  constructor (ruleScoreThreshold: number)
+  ruleScoreThreshold: number
+  corpus: Corpus
+  templates: RuleTemplates
+  positiveRules: RuleSet
+  mapRuleToSites: { [key: string]: { [key: number ]: { [key: number ]: boolean | undefined } | undefined } | undefined }
+  mapSiteToRules: { [key: number]: { [key: number ]: { [key: string ]: TransformationRule | undefined } | undefined } | undefined }
+  selectHighRule (): TransformationRule
+  mapRuleToSite (rule: TransformationRule, i: number, j: number): void
+  mapSiteToRule (i: number, j: number, rule: TransformationRule): void
+  associateSiteWithRule (i: number, j: number, rule: TransformationRule): void
+  siteIsAssociatedWithRule (i: number, j: number, rule: TransformationRule): boolean
+  getSites (rule: TransformationRule): Array<[number, number]>
+  getRules (i: number, j: number): TransformationRule[]
+  disconnectSiteFromRule (i: number, j: number, rule: TransformationRule): void
+  scoreRule (rule: TransformationRule, i: number, j: number): void
+  generatePositiveRules (i: number, j: number): RuleSet
+  scanForPositiveRules (): void
+  scanForSites (): void
+  neighbourhood (i: number, j: number): Array<[number, number]>
+  train (corpus: Corpus, templates: RuleTemplates, lexicon: Lexicon): RuleSet
+  printRulesWithScores (): string
 }
