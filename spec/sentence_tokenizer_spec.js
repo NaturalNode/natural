@@ -159,7 +159,7 @@ describe('sentence_tokenizer', function () {
     ])
   })
 
-  it('should handle text with the ellipsis symbol … and it should handle last sentence without punctuation', function() {
+  it('should handle text with the ellipsis symbol … and it should handle last sentence without punctuation', function () {
     expect(
       tokenizer.tokenize(`We’re heading for a catastrophic global temperature rise… Fires are blazing from the Amazon to the Arctic.`)
     ).toEqual([
