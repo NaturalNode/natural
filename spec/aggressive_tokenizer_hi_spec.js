@@ -59,7 +59,7 @@ describe('aggressive_tokenizer_hi', function () {
     const expectedArray = ['राजा', 'बाजीराव']
     expect(tokenizer.tokenize(string)).toEqual(expectedArray)
   })
-  it('should swallow question mark symbols', function () {
+  it('should swallow comma mark symbols', function () {
     const string = 'राजा, बाजीराव'
     const expectedArray = ['राजा', 'बाजीराव']
     expect(tokenizer.tokenize(string)).toEqual(expectedArray)
