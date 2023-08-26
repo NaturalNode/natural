@@ -74,6 +74,7 @@
     "Porter stemmer",
     "Lancaster stemmer",
     "tokenizer",
+    "tokenizer hindi",
     "bigram",
     "trigram",
     "quadgram",
