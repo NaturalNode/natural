@@ -29,6 +29,7 @@ Currently, the following languages are supported with type of vocabulary and ava
 | English       | X           |  X        | X         | X         |
 | French        |             |           | X         |           |
 | Galician      |             |  X        |           |           |
+| German        |             |           | X         |           |
 | Italian       |             |           | X         |           |
 | Portuguese    | X           |           |           | X         |
 | Spanish       | X           |  X        |           | X         |

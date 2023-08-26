@@ -72,4 +72,5 @@ Overview of available tokenizers:
 | AggressiveTokenizerSv  | Swedish     |  |
 | AggressiveTokenizerVi  | Vietnamese  |  |
 | AggressiveTokenizerId  | Indonesian  |  |
+| AggressiveTokenizerHi  | Hindi       |  |
 | TokenizerJa            | Japanese    |  |  |
