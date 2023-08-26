@@ -30,7 +30,7 @@ export type SenticonLanguageType = 'senticon'
 export type SenticonLanguage = 'Spanish' | 'English' | 'Galician' | 'Catalan' | 'Basque'
 
 export type PatternLanguageType = 'pattern'
-export type PatternLanguage = 'Dutch' | 'Italian' | 'English' | 'French'
+export type PatternLanguage = 'Dutch' | 'Italian' | 'English' | 'French' | 'German'
 
 export declare class SentimentAnalyzer {
   constructor (language: AfinnLanguage, stemmer: Stemmer, type: AfinnLanguageType)
