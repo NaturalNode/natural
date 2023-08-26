@@ -83,6 +83,10 @@ export class AggressiveTokenizerId extends Tokenizer {
   tokenize (text: string): string[]
 }
 
+export class AggressiveTokenizerHi extends Tokenizer {
+  tokenize (text: string): string[]
+}
+
 export class AggressiveTokenizer extends Tokenizer {
   tokenize (text: string): string[]
 }
