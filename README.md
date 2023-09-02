@@ -8,7 +8,7 @@
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/4651/badge)](https://bestpractices.coreinfrastructure.org/projects/4651)
 [![TypeScript support](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
-"Natural" is a general natural language facility for nodejs. It offers a broad range of functionalities for natural language processing. Documentation can be found [here on GitHub Pages](http://naturalnode.github.io/natural/).
+"Natural" is a general natural language facility for nodejs. It offers a broad range of functionalities for natural language processing. Documentation can be found [here on GitHub Pages](https://naturalnode.github.io/natural/).
 
 
 ## Open source licenses
