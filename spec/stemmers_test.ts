@@ -10,6 +10,7 @@ import {
   PorterStemmerNo,
   PorterStemmerPt,
   PorterStemmerRu,
+  PorterStemmerUk,
   PorterStemmerSv,
   StemmerId,
   StemmerJa
@@ -30,6 +31,7 @@ console.log(PorterStemmerIt.stem('jugaría'))
 console.log(PorterStemmerNl.stem('tulp'))
 console.log(PorterStemmerNo.stem('jugaría'))
 console.log(PorterStemmerPt.stem('jugaría'))
+console.log(PorterStemmerRu.stem('весною'))
 console.log(PorterStemmerRu.stem('падший'))
 console.log(PorterStemmerSv.stem('Riksdag'))
 
