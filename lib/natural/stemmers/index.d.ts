@@ -40,6 +40,7 @@ export let PorterStemmerIt: Stemmer
 export let PorterStemmerNl: Stemmer
 export let PorterStemmerNo: Stemmer
 export let PorterStemmerPt: Stemmer
+export let PorterStemmerUk: Stemmer
 export let PorterStemmerRu: Stemmer
 export let PorterStemmerSv: Stemmer
 export let StemmerId: Stemmer
