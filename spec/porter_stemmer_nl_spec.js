@@ -39,9 +39,9 @@ describe('porter_stemmer_nl', function () {
       if (stemmed !== snowBallDict[word]) {
         DEBUG && console.log('Error:', word, 'Expected:', expectedStem, 'Got:', stemmed)
         errors.push({
-          'word': word,
-          'expected': expectedStem,
-          'actual': stemmed
+          word,
+          expected: expectedStem,
+          actual: stemmed
         })
       }
     })
