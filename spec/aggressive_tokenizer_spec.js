@@ -61,4 +61,9 @@ describe('aggressive_tokenizer', function () {
   it('should remove underscores', function () {
     expect(tokenizer.tokenize('_ hi_this_is_a_test_case_ for__removing___underscores_')).toEqual(['hi', 'this', 'is', 'a', 'test', 'case', 'for', 'removing', 'underscores'])
   })
+
+  it('should handle the use of hyphen inside words (issue #656)', function () {
+    expect(tokenizer.tokenize('links text-based opposed image-based links/CTA\'s')).toEqual(
+      ['links', 'text-based', 'opposed', 'image-based', 'links', 'CTA\'s'])
+  })
 })
