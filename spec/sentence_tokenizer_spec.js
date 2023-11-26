@@ -182,8 +182,8 @@ describe('sentence_tokenizer', function () {
       We're trying to figure out variations in versions of the package.
     `.trim()
     expect(tokenizer.tokenize(testInput)).toEqual([
-        'This is some test content.',
-        'We\'re trying to figure out variations in versions of the package.'
-      ])
+      'This is some test content.',
+      'We\'re trying to figure out variations in versions of the package.'
+    ])
   }) 
 })
