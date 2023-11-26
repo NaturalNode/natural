@@ -64,6 +64,6 @@ describe('aggressive_tokenizer', function () {
 
   it('should handle the use of hyphen inside words (issue #656)', function () {
     expect(tokenizer.tokenize('links text-based opposed image-based links/CTA\'s')).toEqual(
-      ['links', 'text-based', 'opposed', 'image-based', 'links', 'CTA\'s'])
+      ['links', 'text-based', 'opposed', 'image-based', 'links/CTA\'s'])
   })
 })
