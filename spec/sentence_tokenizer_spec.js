@@ -185,5 +185,5 @@ describe('sentence_tokenizer', function () {
       'This is some test content.',
       'We\'re trying to figure out variations in versions of the package.'
     ])
-  }) 
+  })
 })
