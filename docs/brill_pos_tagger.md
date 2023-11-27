@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Brill's POS Tagger
-nav_order: 18
+nav_order: 19
 ---
 
 # POS Tagger

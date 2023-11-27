@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Tokenizers
-nav_order: 3
+nav_order: 4
 ---
 
 # Tokenizers
@@ -62,6 +62,7 @@ Overview of available tokenizers:
 | AggressiveTokenizer    | English     |  |
 | AggressiveTokenizerFa  | Farsi       |  |
 | AggressiveTokenizerFr  | French      |  |
+| AggressiveTokenizerDe  | German      |  |
 | AggressiveTokenizerRu  | Russian     |  |
 | AggressiveTokenizerEs  | Spanish     |  |
 | AggressiveTokenizerIt  | Italian     |  |
@@ -71,4 +72,6 @@ Overview of available tokenizers:
 | AggressiveTokenizerSv  | Swedish     |  |
 | AggressiveTokenizerVi  | Vietnamese  |  |
 | AggressiveTokenizerId  | Indonesian  |  |
+| AggressiveTokenizerHi  | Hindi       |  |
+| AggressiveTokenizerUk  | Ukrainian   |  |
 | TokenizerJa            | Japanese    |  |  |

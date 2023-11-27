@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Sentiment Analysis
-nav_order: 8
+nav_order: 9
 ---
 
 # Sentiment Analysis
@@ -29,6 +29,7 @@ Currently, the following languages are supported with type of vocabulary and ava
 | English       | X           |  X        | X         | X         |
 | French        |             |           | X         |           |
 | Galician      |             |  X        |           |           |
+| German        |             |           | X         |           |
 | Italian       |             |           | X         |           |
 | Portuguese    | X           |           |           | X         |
 | Spanish       | X           |  X        |           | X         |

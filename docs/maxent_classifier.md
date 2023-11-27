@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Maximum Entropy Classifier
-nav_order: 7
+nav_order: 8
 ---
 
 # Maximum Entropy Classifier

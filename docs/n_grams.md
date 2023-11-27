@@ -1,7 +1,7 @@
 ---
 layout: default
 title: N-grams
-nav_order: 10
+nav_order: 12
 ---
 
 # N-Grams

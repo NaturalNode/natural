@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Bayesian and Logistic Regression Classifiers
-nav_order: 6
+nav_order: 7
 ---
 
 # Bayesian and Logistic Regression Classifiers

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Stemmers
-nav_order: 5
+nav_order: 6
 ---
 
 # Stemmers
@@ -40,6 +40,7 @@ The following stemmers are available:
 | Farsi (in progress) |  X    |           |           | `PorterStemmerFa` |
 | French        | X           |           |           | `PorterStemmerFr` |
 | French        |             |           | X         | `CarryStemmerFr`  |
+| German        | X           |           |           | `PorterStemmerDe` |
 | Indonesian    |             |           | X         | `StemmerId`       |
 | Italian       | X           |           |           | `PorterStemmerIt` |
 | Japanese      |             |           | X         | `StemmerJa`       |
@@ -48,25 +49,7 @@ The following stemmers are available:
 | Russian       | X           |           |           | `PorterStemmerRu` |
 | Spanish       | X           |           |           | `PorterStemmerEs` |
 | Swedish       | X           |           |           | `PorterStemmerSv` |
-
-
-`attach()` patches `stem()` and `tokenizeAndStem()` to String as a shortcut to
-`PorterStemmer.stem(token)`. `tokenizeAndStem()` breaks text up into single words
-and returns an array of stemmed tokens.
-
-```javascript
-natural.PorterStemmer.attach();
-console.log("i am waking up to the sounds of chainsaws".tokenizeAndStem());
-console.log("chainsaws".stem());
-```
-
-The same thing can be done with a Lancaster stemmer:
-
-```javascript
-natural.LancasterStemmer.attach();
-console.log("i am waking up to the sounds of chainsaws".tokenizeAndStem());
-console.log("chainsaws".stem());
-```
+| Ukrainian     | X           |           |           | `PorterStemmerUk` |
 
 ## Carry stemmer
 For French an additional stemmer is added called Carry stemmer. This is a **Galileo Carry algorithm** based on http://www.otlet-institute.org/docs/Carry.pdf
@@ -76,4 +59,5 @@ Note :bangbang:: The implementation descibed in the PDF differs with the one fro
 ## References
 
 * Carry stemmer is a contribution by Johan Maupetit.
+* Ukrainian stemmer is contributed by Pluto Rotegott @rotegott
 * PEGjs: Parser Generator for JavaScript, https://pegjs.org/
