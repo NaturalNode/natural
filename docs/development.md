@@ -43,3 +43,11 @@ We apply [semantic versioning](https://semver.org/). Given natural's version num
 ## Using the library in a browser
 
 The package can be used in the browser using Webpack. It is tested using Webpack, Gulp and Jasmine. The test suite is run using the command: `npm run test_browser`. The server is at http://localhost:8888. You should  uncheck "run tests in random order" in the browser to make it work. There are some tests that are sensitive to the order in which tests are run.
+
+## Modularity
+
+Each part of the library has its own `index.js` file. You only have to include the module you are actually using. For instance, if you are using one of the tokenizers:
+```javascript
+const tokenenizers = require('natural/lib/natural/tokenizers')
+const tokenizer = new tokenizers.SentenceTokenizer()
+```

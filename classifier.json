@@ -1,0 +1,418 @@
+{
+  "features": {
+    "features": [
+      {
+        "name": "isZero",
+        "parameters": [
+          "0"
+        ],
+        "parametersKey": "0",
+        "observedExpect": 0.3
+      },
+      {
+        "name": "isOne",
+        "parameters": [
+          "1"
+        ],
+        "parametersKey": "1",
+        "observedExpect": 0.3
+      },
+      {
+        "name": "Correction feature",
+        "parameters": [],
+        "parametersKey": "",
+        "observedExpect": 0.4
+      }
+    ],
+    "map": {
+      "isZero | 0": true,
+      "isOne | 1": true,
+      "Correction feature | ": true
+    }
+  },
+  "sample": {
+    "frequencyOfContext": {
+      "\"0\"": 6,
+      "\"1\"": 4
+    },
+    "frequency": {
+      "x\"0\"": 3,
+      "y\"0\"": 3,
+      "x\"1\"": 1,
+      "y\"1\"": 3
+    },
+    "classes": [
+      "x",
+      "y"
+    ],
+    "elements": [
+      {
+        "a": "x",
+        "b": {
+          "data": "0",
+          "key": "\"0\""
+        },
+        "key": "x\"0\""
+      },
+      {
+        "a": "x",
+        "b": {
+          "data": "0",
+          "key": "\"0\""
+        },
+        "key": "x\"0\""
+      },
+      {
+        "a": "x",
+        "b": {
+          "data": "0",
+          "key": "\"0\""
+        },
+        "key": "x\"0\""
+      },
+      {
+        "a": "y",
+        "b": {
+          "data": "0",
+          "key": "\"0\""
+        },
+        "key": "y\"0\""
+      },
+      {
+        "a": "y",
+        "b": {
+          "data": "0",
+          "key": "\"0\""
+        },
+        "key": "y\"0\""
+      },
+      {
+        "a": "y",
+        "b": {
+          "data": "0",
+          "key": "\"0\""
+        },
+        "key": "y\"0\""
+      },
+      {
+        "a": "x",
+        "b": {
+          "data": "1",
+          "key": "\"1\""
+        },
+        "key": "x\"1\""
+      },
+      {
+        "a": "y",
+        "b": {
+          "data": "1",
+          "key": "\"1\""
+        },
+        "key": "y\"1\""
+      },
+      {
+        "a": "y",
+        "b": {
+          "data": "1",
+          "key": "\"1\""
+        },
+        "key": "y\"1\""
+      },
+      {
+        "a": "y",
+        "b": {
+          "data": "1",
+          "key": "\"1\""
+        },
+        "key": "y\"1\""
+      }
+    ]
+  },
+  "scaler": {
+    "featureSet": {
+      "features": [
+        {
+          "name": "isZero",
+          "parameters": [
+            "0"
+          ],
+          "parametersKey": "0",
+          "observedExpect": 0.3
+        },
+        {
+          "name": "isOne",
+          "parameters": [
+            "1"
+          ],
+          "parametersKey": "1",
+          "observedExpect": 0.3
+        },
+        {
+          "name": "Correction feature",
+          "parameters": [],
+          "parametersKey": "",
+          "observedExpect": 0.4
+        }
+      ],
+      "map": {
+        "isZero | 0": true,
+        "isOne | 1": true,
+        "Correction feature | ": true
+      }
+    },
+    "sample": {
+      "frequencyOfContext": {
+        "\"0\"": 6,
+        "\"1\"": 4
+      },
+      "frequency": {
+        "x\"0\"": 3,
+        "y\"0\"": 3,
+        "x\"1\"": 1,
+        "y\"1\"": 3
+      },
+      "classes": [
+        "x",
+        "y"
+      ],
+      "elements": [
+        {
+          "a": "x",
+          "b": {
+            "data": "0",
+            "key": "\"0\""
+          },
+          "key": "x\"0\""
+        },
+        {
+          "a": "x",
+          "b": {
+            "data": "0",
+            "key": "\"0\""
+          },
+          "key": "x\"0\""
+        },
+        {
+          "a": "x",
+          "b": {
+            "data": "0",
+            "key": "\"0\""
+          },
+          "key": "x\"0\""
+        },
+        {
+          "a": "y",
+          "b": {
+            "data": "0",
+            "key": "\"0\""
+          },
+          "key": "y\"0\""
+        },
+        {
+          "a": "y",
+          "b": {
+            "data": "0",
+            "key": "\"0\""
+          },
+          "key": "y\"0\""
+        },
+        {
+          "a": "y",
+          "b": {
+            "data": "0",
+            "key": "\"0\""
+          },
+          "key": "y\"0\""
+        },
+        {
+          "a": "x",
+          "b": {
+            "data": "1",
+            "key": "\"1\""
+          },
+          "key": "x\"1\""
+        },
+        {
+          "a": "y",
+          "b": {
+            "data": "1",
+            "key": "\"1\""
+          },
+          "key": "y\"1\""
+        },
+        {
+          "a": "y",
+          "b": {
+            "data": "1",
+            "key": "\"1\""
+          },
+          "key": "y\"1\""
+        },
+        {
+          "a": "y",
+          "b": {
+            "data": "1",
+            "key": "\"1\""
+          },
+          "key": "y\"1\""
+        }
+      ]
+    },
+    "iteration": 3,
+    "improvement": 0.008269762368828815,
+    "C": 1,
+    "featureSums": {
+      "x\"0\"": 1,
+      "y\"0\"": 0,
+      "x\"1\"": 0,
+      "y\"1\"": 1
+    }
+  },
+  "p": {
+    "alpha": [
+      0.8442857142857142,
+      1.8851785714285711,
+      0.777505117061545
+    ],
+    "featureSet": {
+      "features": [
+        {
+          "name": "isZero",
+          "parameters": [
+            "0"
+          ],
+          "parametersKey": "0",
+          "observedExpect": 0.3
+        },
+        {
+          "name": "isOne",
+          "parameters": [
+            "1"
+          ],
+          "parametersKey": "1",
+          "observedExpect": 0.3
+        },
+        {
+          "name": "Correction feature",
+          "parameters": [],
+          "parametersKey": "",
+          "observedExpect": 0.4
+        }
+      ],
+      "map": {
+        "isZero | 0": true,
+        "isOne | 1": true,
+        "Correction feature | ": true
+      }
+    },
+    "sample": {
+      "frequencyOfContext": {
+        "\"0\"": 6,
+        "\"1\"": 4
+      },
+      "frequency": {
+        "x\"0\"": 3,
+        "y\"0\"": 3,
+        "x\"1\"": 1,
+        "y\"1\"": 3
+      },
+      "classes": [
+        "x",
+        "y"
+      ],
+      "elements": [
+        {
+          "a": "x",
+          "b": {
+            "data": "0",
+            "key": "\"0\""
+          },
+          "key": "x\"0\""
+        },
+        {
+          "a": "x",
+          "b": {
+            "data": "0",
+            "key": "\"0\""
+          },
+          "key": "x\"0\""
+        },
+        {
+          "a": "x",
+          "b": {
+            "data": "0",
+            "key": "\"0\""
+          },
+          "key": "x\"0\""
+        },
+        {
+          "a": "y",
+          "b": {
+            "data": "0",
+            "key": "\"0\""
+          },
+          "key": "y\"0\""
+        },
+        {
+          "a": "y",
+          "b": {
+            "data": "0",
+            "key": "\"0\""
+          },
+          "key": "y\"0\""
+        },
+        {
+          "a": "y",
+          "b": {
+            "data": "0",
+            "key": "\"0\""
+          },
+          "key": "y\"0\""
+        },
+        {
+          "a": "x",
+          "b": {
+            "data": "1",
+            "key": "\"1\""
+          },
+          "key": "x\"1\""
+        },
+        {
+          "a": "y",
+          "b": {
+            "data": "1",
+            "key": "\"1\""
+          },
+          "key": "y\"1\""
+        },
+        {
+          "a": "y",
+          "b": {
+            "data": "1",
+            "key": "\"1\""
+          },
+          "key": "y\"1\""
+        },
+        {
+          "a": "y",
+          "b": {
+            "data": "1",
+            "key": "\"1\""
+          },
+          "key": "y\"1\""
+        }
+      ]
+    },
+    "aPriorisBeforeNormalisation": {
+      "x\"0\"": 0.8442857142857142,
+      "y\"0\"": 0.777505117061545,
+      "x\"1\"": 0.777505117061545,
+      "y\"1\"": 1.8851785714285711
+    },
+    "aPrioriNormalisationConstant": 11.298413325389037,
+    "aPosterioriNormalisationConstants": {
+      "\"0\"": 1.6217908313472593,
+      "\"1\"": 2.662683688490116
+    }
+  }
+}
