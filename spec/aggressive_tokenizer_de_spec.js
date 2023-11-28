@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2011, Chris Umbel, Martijn de Boer
+Copyright (c) 2023, Hugo W.L. ter Doest
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,13 +22,15 @@ THE SOFTWARE.
 
 'use strict'
 
-const Tokenizer = require('./tokenizer')
+const Tokenizer = require('../lib/natural/tokenizers/aggressive_tokenizer_de')
+const tokenizer = new Tokenizer()
 
-class AggressiveTokenizer extends Tokenizer {
-  tokenize (text) {
-    // break a string up into an array of tokens by anything non-word
-    return this.trim(text.split(/[^a-zA-Z0-9ßäöü_'-]+/))
-  }
-}
-
-module.exports = AggressiveTokenizer
+describe('aggressive_tokenizer', function () {
+  it('should tokenize strings with diacritics ä, ö and ü, and esszet ß', function () {
+    expect(tokenizer.tokenize('Es werden nur Maßnahmen gefördert, die nicht aufgrund einer Rechtsvorschrift umgesetzt werden müssen.')).toEqual(
+      ['Es', 'werden', 'nur', 'Maßnahmen', 'gefördert', 'die', 'nicht', 'aufgrund', 'einer',
+        'Rechtsvorschrift', 'umgesetzt', 'werden', 'müssen'])
+    expect(tokenizer.tokenize('Anträge sind vor Beginn der jeweiligen Maßnahme zu stellen.')).toEqual(
+      ['Anträge', 'sind', 'vor', 'Beginn', 'der', 'jeweiligen', 'Maßnahme', 'zu', 'stellen'])
+  })
+})
