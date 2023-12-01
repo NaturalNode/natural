@@ -33,7 +33,7 @@
     "proxyquire": "^1.8.0",
     "rimraf": "^2.6.3",
     "sinon": "^1.12.2",
-    "standard": "^16.0.3",
+    "standard": "^16.0.4",
     "ts-standard": "^12.0.2",
     "typescript": "^4.9.3",
     "uubench": "^0.0.1",
