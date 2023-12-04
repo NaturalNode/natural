@@ -65,7 +65,6 @@ describe('logistic regression', function () {
     classifier.addDocument('write a book', 'literature')
     classifier.addDocument('read a book', 'literature')
     classifier.addDocument('study the books', 'literature')
-
     return classifier
   }
 
@@ -78,7 +77,6 @@ describe('logistic regression', function () {
 
   it('should serialize and deserialize a working classifier', function () {
     const classifier = createClassifier()
-
     const obj = JSON.stringify(classifier)
     const newClassifier = natural.LogisticRegressionClassifier.restore(JSON.parse(obj))
 

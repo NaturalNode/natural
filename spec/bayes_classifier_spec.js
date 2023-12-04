@@ -66,7 +66,7 @@ describe('bayes classifier', function () {
       const classifier = setupClassifier()
       if (classifier.trainParallelBatches) {
         // Check for parallel method
-        classifier.events.on('doneTraining', function () {
+        classifier.on('doneTraining', function () {
           expect(classifier.classify(['bug', 'code'])).toBe('computing')
           expect(classifier.classify(['read', 'thing'])).toBe('literature')
           // asyncSpecDone();
