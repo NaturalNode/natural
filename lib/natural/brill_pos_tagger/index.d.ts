@@ -25,7 +25,7 @@ THE SOFTWARE.
 
 import { Feature } from '../classifiers'
 
-interface RuleTemplatesItem {
+declare interface RuleTemplatesItem {
   function: (sentence: Sentence, i: number, parameter1?: string, parameter2?: string) => boolean
   window: number[]
   nrParameters: number
