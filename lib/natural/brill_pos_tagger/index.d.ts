@@ -23,9 +23,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-// import { Feature } from '../classifiers'
+import { Feature } from '../classifiers'
 
-declare interface RuleTemplatesItem {
+interface RuleTemplatesItem {
   function: (sentence: Sentence, i: number, parameter1?: string, parameter2?: string) => boolean
   window: number[]
   nrParameters: number
@@ -109,7 +109,7 @@ export class Corpus {
   tag (lexicon: Lexicon): void
   nrSentences (): number
   nrWords (): number
-  // generateFeatures (): Feature[]
+  private generateFeatures (): Feature[]
   // Incomplete method:
   // prettyPrint
 }
