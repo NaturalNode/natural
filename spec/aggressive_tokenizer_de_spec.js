@@ -1,6 +1,5 @@
 /*
-Corpus class specific for MaxEnt modeling
-Copyright (C) 2018 Hugo W.L. ter Doest
+Copyright (c) 2023, Hugo W.L. ter Doest
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -23,35 +22,15 @@ THE SOFTWARE.
 
 'use strict'
 
-const Sample = require('../Sample')
-const Corpus = require('../../../brill_pos_tagger/lib/Corpus')
+const Tokenizer = require('../lib/natural/tokenizers/aggressive_tokenizer_de')
+const tokenizer = new Tokenizer()
 
-class MECorpus extends Corpus {
-  generateSample () {
-    const sample = new Sample([])
-    this.sentences.forEach(function (sentence) {
-      sentence.generateSampleElements(sample)
-    })
-    return sample
-  }
-
-  // Splits the corpus in a training and testing set.
-  // percentageTrain is the size of the training corpus in percent
-  // Returns an array with two elements: training corpus, testing corpus
-  splitInTrainAndTest (percentageTrain) {
-    const corpusTrain = new MECorpus()
-    const corpusTest = new MECorpus()
-
-    const p = percentageTrain / 100
-    this.sentences.forEach(function (sentence, i) {
-      if (Math.random() < p) {
-        corpusTrain.sentences.push(sentence)
-      } else {
-        corpusTest.sentences.push(sentence)
-      }
-    })
-    return [corpusTrain, corpusTest]
-  }
-}
-
-module.exports = MECorpus
+describe('aggressive_tokenizer', function () {
+  it('should tokenize strings with diacritics ä, ö and ü, and esszet ß', function () {
+    expect(tokenizer.tokenize('Es werden nur Maßnahmen gefördert, die nicht aufgrund einer Rechtsvorschrift umgesetzt werden müssen.')).toEqual(
+      ['Es', 'werden', 'nur', 'Maßnahmen', 'gefördert', 'die', 'nicht', 'aufgrund', 'einer',
+        'Rechtsvorschrift', 'umgesetzt', 'werden', 'müssen'])
+    expect(tokenizer.tokenize('Anträge sind vor Beginn der jeweiligen Maßnahme zu stellen.')).toEqual(
+      ['Anträge', 'sind', 'vor', 'Beginn', 'der', 'jeweiligen', 'Maßnahme', 'zu', 'stellen'])
+  })
+})

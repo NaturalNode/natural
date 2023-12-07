@@ -158,4 +158,32 @@ describe('sentence_tokenizer', function () {
       'Test: Test (test) test “Test.”'
     ])
   })
+
+  it('Should handle text with the ellipsis symbol … (issue #648)', function () {
+    expect(
+      tokenizer.tokenize('We’re heading for a catastrophic global temperature rise… Fires are blazing from the Amazon to the Arctic.')
+    ).toEqual([
+      'We’re heading for a catastrophic global temperature rise…',
+      'Fires are blazing from the Amazon to the Arctic.'
+    ])
+  })
+  it('It should handle last sentence without punctuation (issue #648)', function () {
+    expect(
+      tokenizer.tokenize('We’re heading for a catastrophic global temperature rise. Fires are blazing from the Amazon to the Arctic')
+    ).toEqual([
+      'We’re heading for a catastrophic global temperature rise.',
+      'Fires are blazing from the Amazon to the Arctic'
+    ])
+  })
+  it('It should handle the example from issue #689 correctly', function () {
+    const testInput = `
+      This is some test content.
+
+      We're trying to figure out variations in versions of the package.
+    `.trim()
+    expect(tokenizer.tokenize(testInput)).toEqual([
+      'This is some test content.',
+      'We\'re trying to figure out variations in versions of the package.'
+    ])
+  })
 })

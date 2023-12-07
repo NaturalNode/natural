@@ -73,4 +73,7 @@ describe('jaro-winkler', function () {
     expect(approxEql(jaroWinklerDistance('MARTHA', 'MARHTA', { ignoreCase: true }), 0.96111)).toBeTruthy()
     expect(jaroWinklerDistance('abcd', 'ABCD', { ignoreCase: true })).toBe(1)
   })
+  it('should not fail while passing no options', function () {
+    expect(approxEql(jaroWinklerDistance('check', 'chakk'), 0.78666)).toBeTruthy()
+  })
 })

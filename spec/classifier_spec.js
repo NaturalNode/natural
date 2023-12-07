@@ -77,8 +77,8 @@ describe('classifier', function () {
         classifier.events.removeListener('doneTraining', assertEventResults)
       }
 
-      classifier.events.on('trainedWithDocument', eventRegister)
-      classifier.events.on('doneTraining', assertEventResults)
+      classifier.on('trainedWithDocument', eventRegister)
+      classifier.on('doneTraining', assertEventResults)
     })
 
     it('should emit events only on an instance of Classifier', function () {
@@ -100,13 +100,13 @@ describe('classifier', function () {
       }
 
       function teardown () {
-        classifier.events.removeListener('trainedWithDocument', eventRegister)
-        classifier.events.removeListener('doneTraining', assertEventResults)
+        classifier.removeListener('trainedWithDocument', eventRegister)
+        classifier.removeListener('doneTraining', assertEventResults)
       }
 
       const classifier2 = new natural.BayesClassifier()
-      classifier2.events.on('trainedWithDocument', eventRegister)
-      classifier.events.on('doneTraining', assertEventResults)
+      classifier2.on('trainedWithDocument', eventRegister)
+      classifier.on('doneTraining', assertEventResults)
       classifier.train()
     })
   })
