@@ -25,7 +25,7 @@ THE SOFTWARE.
 
 import { Feature } from '../classifiers'
 
- declare interface RuleTemplatesItem {
+declare interface RuleTemplatesItem {
   function: (sentence: Sentence, i: number, parameter1?: string, parameter2?: string) => boolean
   window: number[]
   nrParameters: number
@@ -97,10 +97,10 @@ export class Lexicon {
 
 declare class Corpus {
   constructor (data: string | Corpus, typeOfCorpus: number, SentenceClass: typeof Sentence)
-  private wordCount: number
-  private sentences: Sentence[]
-  private tagFrequencies: { [key: string]: string[] | undefined }
-  private posTags: { [key: string]: string[] | undefined }
+  private readonly wordCount: number
+  private readonly sentences: Sentence[]
+  private readonly tagFrequencies: { [key: string]: string[] | undefined }
+  private readonly posTags: { [key: string]: string[] | undefined }
   parseBrownCorpus (data: string, SentenceClass: typeof Sentence): void
   getTags (): string[]
   splitInTrainAndTest (percentageTrain: number): [Corpus, Corpus]
@@ -128,8 +128,8 @@ export class Sentence {
 
 export class BrillPOSTagger {
   constructor (lexicon: Lexicon, ruleSet: RuleSet)
-  private lexicon: Lexicon
-  private ruleSet: RuleSet
+  private readonly lexicon: Lexicon
+  private readonly ruleSet: RuleSet
   tag (sentence: string[]): Sentence
   tagWithLexicon (sentence: string[]): Sentence
   applyRules (sentence: Sentence): Sentence
@@ -137,19 +137,19 @@ export class BrillPOSTagger {
 
 export class BrillPOSTester {
   constructor (lexicon: Lexicon, ruleSet: RuleSet)
-  private lexicon: Lexicon
-  private ruleSet: RuleSet
+  private readonly lexicon: Lexicon
+  private readonly ruleSet: RuleSet
   test (corpus: Corpus, tagger: BrillPOSTagger): [number, number]
 }
 
 export class BrillPOSTrainer {
   constructor (ruleScoreThreshold: number)
-  private ruleScoreThreshold: number
-  private corpus: Corpus
-  private templates: RuleTemplates
-  private positiveRules: RuleSet
-  private mapRuleToSites: { [key: string]: { [key: number ]: { [key: number ]: boolean | undefined } | undefined } | undefined }
-  private mapSiteToRules: { [key: number]: { [key: number ]: { [key: string ]: TransformationRule | undefined } | undefined } | undefined }
+  private readonly ruleScoreThreshold: number
+  private readonly corpus: Corpus
+  private readonly templates: RuleTemplates
+  private readonly positiveRules: RuleSet
+  private readonly mapRuleToSites: { [key: string]: { [key: number ]: { [key: number ]: boolean | undefined } | undefined } | undefined }
+  private readonly mapSiteToRules: { [key: number]: { [key: number ]: { [key: string ]: TransformationRule | undefined } | undefined } | undefined }
   private selectHighRule (): TransformationRule
   private mapRuleToSite (rule: TransformationRule, i: number, j: number): void
   private mapSiteToRule (i: number, j: number, rule: TransformationRule): void
