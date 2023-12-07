@@ -25,7 +25,7 @@ THE SOFTWARE.
 
 import { Feature } from '../classifiers'
 
-declare interface RuleTemplatesItem {
+ declare interface RuleTemplatesItem {
   function: (sentence: Sentence, i: number, parameter1?: string, parameter2?: string) => boolean
   window: number[]
   nrParameters: number
@@ -95,7 +95,7 @@ export class Lexicon {
   setDefaultCategories (category: string, categoryCapitalised: string): void
 }
 
-export class Corpus {
+declare class Corpus {
   constructor (data: string | Corpus, typeOfCorpus: number, SentenceClass: typeof Sentence)
   private wordCount: number
   private sentences: Sentence[]
