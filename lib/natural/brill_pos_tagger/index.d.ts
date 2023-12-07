@@ -23,6 +23,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import { Feature } from '../classifiers'
+
 declare interface RuleTemplatesItem {
   function: (sentence: Sentence, i: number, parameter1?: string, parameter2?: string) => boolean
   window: number[]
@@ -93,8 +95,12 @@ export class Lexicon {
   setDefaultCategories (category: string, categoryCapitalised: string): void
 }
 
-export class Corpus {
+declare class Corpus {
   constructor (data: string | Corpus, typeOfCorpus: number, SentenceClass: typeof Sentence)
+  private readonly wordCount: number
+  private readonly sentences: Sentence[]
+  private readonly tagFrequencies: { [key: string]: string[] | undefined }
+  private readonly posTags: { [key: string]: string[] | undefined }
   parseBrownCorpus (data: string, SentenceClass: typeof Sentence): void
   getTags (): string[]
   splitInTrainAndTest (percentageTrain: number): [Corpus, Corpus]
@@ -103,8 +109,8 @@ export class Corpus {
   tag (lexicon: Lexicon): void
   nrSentences (): number
   nrWords (): number
-  // Incomplete methods
-  // generateFeatures
+  private generateFeatures (): Feature[]
+  // Incomplete method:
   // prettyPrint
 }
 
@@ -122,8 +128,8 @@ export class Sentence {
 
 export class BrillPOSTagger {
   constructor (lexicon: Lexicon, ruleSet: RuleSet)
-  lexicon: Lexicon
-  ruleSet: RuleSet
+  private readonly lexicon: Lexicon
+  private readonly ruleSet: RuleSet
   tag (sentence: string[]): Sentence
   tagWithLexicon (sentence: string[]): Sentence
   applyRules (sentence: Sentence): Sentence
@@ -131,32 +137,32 @@ export class BrillPOSTagger {
 
 export class BrillPOSTester {
   constructor (lexicon: Lexicon, ruleSet: RuleSet)
-  lexicon: Lexicon
-  ruleSet: RuleSet
+  private readonly lexicon: Lexicon
+  private readonly ruleSet: RuleSet
   test (corpus: Corpus, tagger: BrillPOSTagger): [number, number]
 }
 
 export class BrillPOSTrainer {
   constructor (ruleScoreThreshold: number)
-  ruleScoreThreshold: number
-  corpus: Corpus
-  templates: RuleTemplates
-  positiveRules: RuleSet
-  mapRuleToSites: { [key: string]: { [key: number ]: { [key: number ]: boolean | undefined } | undefined } | undefined }
-  mapSiteToRules: { [key: number]: { [key: number ]: { [key: string ]: TransformationRule | undefined } | undefined } | undefined }
-  selectHighRule (): TransformationRule
-  mapRuleToSite (rule: TransformationRule, i: number, j: number): void
-  mapSiteToRule (i: number, j: number, rule: TransformationRule): void
-  associateSiteWithRule (i: number, j: number, rule: TransformationRule): void
-  siteIsAssociatedWithRule (i: number, j: number, rule: TransformationRule): boolean
-  getSites (rule: TransformationRule): Array<[number, number]>
-  getRules (i: number, j: number): TransformationRule[]
-  disconnectSiteFromRule (i: number, j: number, rule: TransformationRule): void
-  scoreRule (rule: TransformationRule, i: number, j: number): void
-  generatePositiveRules (i: number, j: number): RuleSet
-  scanForPositiveRules (): void
-  scanForSites (): void
-  neighbourhood (i: number, j: number): Array<[number, number]>
+  private readonly ruleScoreThreshold: number
+  private readonly corpus: Corpus
+  private readonly templates: RuleTemplates
+  private readonly positiveRules: RuleSet
+  private readonly mapRuleToSites: { [key: string]: { [key: number ]: { [key: number ]: boolean | undefined } | undefined } | undefined }
+  private readonly mapSiteToRules: { [key: number]: { [key: number ]: { [key: string ]: TransformationRule | undefined } | undefined } | undefined }
+  private selectHighRule (): TransformationRule
+  private mapRuleToSite (rule: TransformationRule, i: number, j: number): void
+  private mapSiteToRule (i: number, j: number, rule: TransformationRule): void
+  private associateSiteWithRule (i: number, j: number, rule: TransformationRule): void
+  private siteIsAssociatedWithRule (i: number, j: number, rule: TransformationRule): boolean
+  private getSites (rule: TransformationRule): Array<[number, number]>
+  private getRules (i: number, j: number): TransformationRule[]
+  private disconnectSiteFromRule (i: number, j: number, rule: TransformationRule): void
+  private scoreRule (rule: TransformationRule, i: number, j: number): void
+  private generatePositiveRules (i: number, j: number): RuleSet
+  private scanForPositiveRules (): void
+  private scanForSites (): void
+  private neighbourhood (i: number, j: number): Array<[number, number]>
   train (corpus: Corpus, templates: RuleTemplates, lexicon: Lexicon): RuleSet
   printRulesWithScores (): string
 }
