@@ -22,7 +22,7 @@ THE SOFTWARE.
 
 'use strict'
 
-const natural = require('lib/natural')
+const natural = require('natural')
 const stemmer = natural.PorterStemmer
 
 console.log(stemmer.tokenizeAndStem('i stemmed words.'))
