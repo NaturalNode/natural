@@ -18,7 +18,7 @@ means fork away!
 
 Each part of the library has its own `index.js` file. You only have to include the module you are actually using. For instance, if you are using one of the tokenizers:
 ```javascript
-const tokenenizers = require('natural/lib/natural/tokenizers')
+const tokenizers = require('natural/lib/natural/tokenizers')
 const tokenizer = new tokenizers.SentenceTokenizer()
 ```
 
