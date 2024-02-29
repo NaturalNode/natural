@@ -88,7 +88,7 @@ declare class ClassifierBase extends events.EventEmitter {
   getClassifications (observation: string | string[]): ApparatusClassification[]
   classify (observation: string | string[]): string
   setOptions (options: ClassifierOptions): void
-  save (filename: string, callback: ClassifierCallback): void
+  save (filename: string, callback?: ClassifierCallback): void
 }
 
 declare type BayesClassifierCallback = (err: NodeJS.ErrnoException | null, classifier?: BayesClassifier) => void
