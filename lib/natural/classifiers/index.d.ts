@@ -72,13 +72,12 @@ declare interface ClassifierOptions {
 
 declare type ClassifierCallback = (err: NodeJS.ErrnoException | null, classifier?: ClassifierBase) => void
 
-declare class ClassifierBase {
+declare class ClassifierBase extends events.EventEmitter {
   classifier: ApparatusClassifier
   docs: ClassifierDoc[]
   features: { [key: string]: number | undefined }
   stemmer: Stemmer
   lastAdded: number
-  events: events.EventEmitter
 
   constructor (classifier: ApparatusClassifier, stemmer?: Stemmer)
   addDocument (text: string | string[], classification: string): void
@@ -89,7 +88,7 @@ declare class ClassifierBase {
   getClassifications (observation: string | string[]): ApparatusClassification[]
   classify (observation: string | string[]): string
   setOptions (options: ClassifierOptions): void
-  save (filename: string, callback: ClassifierCallback): void
+  save (filename: string, callback?: ClassifierCallback): void
 }
 
 declare type BayesClassifierCallback = (err: NodeJS.ErrnoException | null, classifier?: BayesClassifier) => void
