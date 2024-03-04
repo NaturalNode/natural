@@ -1,6 +1,6 @@
 const storage = require('../lib/natural/util/StorageBackend.js')
 
-const STORAGESERVERS = false 
+const STORAGESERVERS = false
 
 describe('StorageBackend', () => {
   let storageBackend = null
@@ -10,16 +10,6 @@ describe('StorageBackend', () => {
   })
 
   if (STORAGESERVERS) {
-    it('should store data in and retrieve data from Postgres', async () => {
-      storageBackend.setStorageType(storage.STORAGE_TYPES.POSTGRES)
-      const object = { key: 'value' }
-      const options = { key: '1' }
-      const result1 = await storageBackend.store(object, options)
-      expect(result1).toEqual(true)
-      const result2 = await storageBackend.retrieve('1', {})
-      expect(result2.key).toEqual('value')
-    })
-
     it('should store data in and retrieve data from file', async () => {
       const object = { key: 'value' }
       const options = { filename: 'example.txt' }
