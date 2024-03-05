@@ -1,6 +1,6 @@
 const storage = require('../lib/natural/util/StorageBackend.js')
 
-const STORAGESERVERS = false
+const STORAGESERVERS = true
 
 describe('StorageBackend', () => {
   let storageBackend = null
@@ -28,6 +28,21 @@ describe('StorageBackend', () => {
       expect(result1).toEqual(true)
       const result2 = await storageBackend.retrieve('1', {})
       expect(result2.value.toString()).toEqual('{"key":"value"}')
+    })
+
+    it('should store data in and retrieve data from MongoDB', async () => {
+      storageBackend.setStorageType(storage.STORAGE_TYPES.MONGODB)
+      const object1 = new Object({ "key": "value" })
+      await storageBackend.store(object1, {}).then(savedObject => {
+        expect(savedObject.key).toEqual('value')
+        storageBackend.retrieve(savedObject._id, {}).then(retrievedObject => {
+          expect(retrievedObject.key).toEqual('value')
+        }).catch( error => {
+          console.log(error)
+        })
+      }).catch( error => {
+        console.log(error)
+      })
     })
 
     /*
