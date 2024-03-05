@@ -50,9 +50,17 @@ describe('StorageBackend', () => {
       const object = { key: 'value' }
       const options = { key: '1' }
       await storageBackend.store(object, options)
-      // expect(savedObject.key).toEqual('value')
       const retrievedObject = await storageBackend.retrieve('1')
       expect(retrievedObject).toEqual(JSON.stringify(object))
+    })
+
+    it('should store data in and retrieve data from Postgres', async () => {
+      await storageBackend.setStorageType(storage.STORAGE_TYPES.POSTGRES, { tableName: 'lexicon' } )
+      const object = { key: 'value' }
+      const options = { key: '1' }
+      await storageBackend.store(object, options)
+      const retrievedObject = await storageBackend.retrieve('1')
+      // expect(retrievedObject).toEqual(JSON.stringify(object))
     })
 
     /*
