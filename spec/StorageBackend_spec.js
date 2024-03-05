@@ -32,17 +32,26 @@ describe('StorageBackend', () => {
 
     it('should store data in and retrieve data from MongoDB', async () => {
       storageBackend.setStorageType(storage.STORAGE_TYPES.MONGODB)
-      const object1 = new Object({ "key": "value" })
-      await storageBackend.store(object1, {}).then(savedObject => {
+      const object = { key: 'value' }
+      await storageBackend.store(object, {}).then(savedObject => {
         expect(savedObject.key).toEqual('value')
         storageBackend.retrieve(savedObject._id, {}).then(retrievedObject => {
           expect(retrievedObject.key).toEqual('value')
-        }).catch( error => {
+        }).catch(error => {
           console.log(error)
         })
-      }).catch( error => {
+      }).catch(error => {
         console.log(error)
       })
+    })
+
+    it('should store data in and retrieve data from Redis', async () => {
+      await storageBackend.setStorageType(storage.STORAGE_TYPES.REDIS)
+      const object = { key: 'value' }
+      await storageBackend.store(object, { key: '1' })
+      // expect(savedObject.key).toEqual('value')
+      const retrievedObject = await storageBackend.retrieve('1')
+      expect(retrievedObject).toEqual(JSON.stringify(object))
     })
 
     /*
