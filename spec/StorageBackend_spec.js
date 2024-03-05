@@ -9,7 +9,7 @@ describe('StorageBackend', () => {
     storageBackend = new storage.StorageBackend()
   })
 
-  if (STORAGESERVERS) {
+  if (STORAGESERVERS) { // Test storage servers
     it('should store data in and retrieve data from file', async () => {
       const object = { key: 'value' }
       const options = { filename: 'example.txt' }
@@ -48,7 +48,8 @@ describe('StorageBackend', () => {
     it('should store data in and retrieve data from Redis', async () => {
       await storageBackend.setStorageType(storage.STORAGE_TYPES.REDIS)
       const object = { key: 'value' }
-      await storageBackend.store(object, { key: '1' })
+      const options = { key: '1' }
+      await storageBackend.store(object, options)
       // expect(savedObject.key).toEqual('value')
       const retrievedObject = await storageBackend.retrieve('1')
       expect(retrievedObject).toEqual(JSON.stringify(object))
