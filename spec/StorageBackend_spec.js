@@ -55,7 +55,7 @@ describe('StorageBackend', () => {
     })
 
     it('should store data in and retrieve data from Postgres', async () => {
-      await storageBackend.setStorageType(storage.STORAGE_TYPES.POSTGRES, { tableName: 'lexicon' })
+      await storageBackend.setStorageType(storage.STORAGE_TYPES.POSTGRES, { tableName: 'lexicon5' })
       const object = { key: 'value' }
       const options = { key: '1' }
       await storageBackend.store(object, options)
