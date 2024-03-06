@@ -17,7 +17,7 @@ describe('StorageBackend', () => {
     // Javascript object in and out, filename is returned
     it('should store data in and retrieve data from file', async () => {
       const options = { filename: 'example.txt' }
-      storageBackend.setStorageType(storage.STORAGE_TYPES.FILE)
+      await storageBackend.setStorageType(storage.STORAGE_TYPES.FILE)
       const result1 = await storageBackend.store(object, options)
       expect(result1).toEqual('example.txt')
       const result2 = await storageBackend.retrieve(null, options)
@@ -26,7 +26,7 @@ describe('StorageBackend', () => {
 
     // Javascript object in and out, key is set by the client in options and returned
     it('should store data in and retrieve data from Memcached', async () => {
-      storageBackend.setStorageType(storage.STORAGE_TYPES.MEMCACHED)
+      await storageBackend.setStorageType(storage.STORAGE_TYPES.MEMCACHED)
       const options = { key: '1' }
       const returnKey = await storageBackend.store(object, options)
       expect(returnKey).not.toEqual(null)
@@ -36,7 +36,7 @@ describe('StorageBackend', () => {
 
     // Javascript object in and out, MongoDB key object returned
     it('should store data in and retrieve data from MongoDB', async () => {
-      storageBackend.setStorageType(storage.STORAGE_TYPES.MONGODB)
+      await storageBackend.setStorageType(storage.STORAGE_TYPES.MONGODB)
       await storageBackend.store(object, {}).then(id => {
         expect(typeof id).toEqual('object')
         storageBackend.retrieve(id, {}).then(retrievedObject => {
