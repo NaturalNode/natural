@@ -1,6 +1,6 @@
 const storage = require('../lib/natural/util/storage/StorageBackend.js')
 
-const STORAGESERVERS = false
+const STORAGESERVERS = true
 
 describe('StorageBackend', () => {
   let storageBackend = null
@@ -10,9 +10,12 @@ describe('StorageBackend', () => {
   })
 
   if (STORAGESERVERS) { // Test storage servers
+    const object = {
+      attr1: 'val1',
+      attr2: 'val2'
+    }
     // Javascript object in and out, filename is returned
     it('should store data in and retrieve data from file', async () => {
-      const object = { key: 'value' }
       const options = { filename: 'example.txt' }
       storageBackend.setStorageType(storage.STORAGE_TYPES.FILE)
       const result1 = await storageBackend.store(object, options)
@@ -24,7 +27,6 @@ describe('StorageBackend', () => {
     // Javascript object in and out, key is set by the client in options and returned
     it('should store data in and retrieve data from Memcached', async () => {
       storageBackend.setStorageType(storage.STORAGE_TYPES.MEMCACHED)
-      const object = { key: 'value' }
       const options = { key: '1' }
       const returnKey = await storageBackend.store(object, options)
       expect(returnKey).not.toEqual(null)
@@ -35,7 +37,6 @@ describe('StorageBackend', () => {
     // Javascript object in and out, MongoDB key object returned
     it('should store data in and retrieve data from MongoDB', async () => {
       storageBackend.setStorageType(storage.STORAGE_TYPES.MONGODB)
-      const object = { key: 'value' }
       await storageBackend.store(object, {}).then(id => {
         expect(typeof id).toEqual('object')
         storageBackend.retrieve(id, {}).then(retrievedObject => {
@@ -51,7 +52,6 @@ describe('StorageBackend', () => {
     // Javascript object in and out, key is set by the client in options and returned
     it('should store data in and retrieve data from Redis', async () => {
       await storageBackend.setStorageType(storage.STORAGE_TYPES.REDIS)
-      const object = { key: 'value' }
       const options = { key: '1' }
       const returnedKey = await storageBackend.store(object, options)
       expect(returnedKey).not.toEqual(null)
@@ -62,7 +62,6 @@ describe('StorageBackend', () => {
     // Javascript object in and out, key is set by Postgres and returned
     it('should store data in and retrieve data from Postgres', async () => {
       await storageBackend.setStorageType(storage.STORAGE_TYPES.POSTGRES, { tableName: 'lexicon6' })
-      const object = { key: 'value' }
       const id = await storageBackend.store(object, {})
       const retrievedObject = await storageBackend.retrieve(id)
       expect(retrievedObject).toEqual(object)
