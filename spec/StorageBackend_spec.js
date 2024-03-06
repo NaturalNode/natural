@@ -1,4 +1,4 @@
-const storage = require('../lib/natural/util/StorageBackend.js')
+const storage = require('../lib/natural/util/storage/StorageBackend.js')
 
 const STORAGESERVERS = false
 
