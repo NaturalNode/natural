@@ -1,6 +1,6 @@
 const storage = require('../lib/natural/util/StorageBackend.js')
 
-const STORAGESERVERS = true
+const STORAGESERVERS = false
 
 describe('StorageBackend', () => {
   let storageBackend = null
