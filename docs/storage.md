@@ -5,7 +5,7 @@ nav_order: 25
 ---
 
 # Storage backend
-The storage backend provides several possibilities for storing entities created with Natural. Some are meant to be persistent, some are temporary. Currently, the following storage methods are supported:
+The storage backend provides several possibilities for storing entities created with Natural. Some are meant for persistent storage, some are for temporary storage. Currently, the following storage methods are supported:
 * File
 * MongoDB
 * Postgres
