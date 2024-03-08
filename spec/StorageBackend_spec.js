@@ -1,6 +1,6 @@
 const storage = require('../lib/natural/util/storage/StorageBackend.js')
 
-const STORAGESERVERS = false
+const STORAGESERVERS = true
 
 describe('StorageBackend', () => {
   let storageBackend = null
@@ -27,10 +27,9 @@ describe('StorageBackend', () => {
     // Javascript object in and out, key is set by the client in options and returned
     it('should store data in and retrieve data from Memcached', async () => {
       await storageBackend.setStorageType(storage.STORAGE_TYPES.MEMCACHED)
-      const options = { key: '1' }
-      const returnKey = await storageBackend.store(object, options)
+      const returnKey = await storageBackend.store(object, {})
       expect(returnKey).not.toEqual(null)
-      const result2 = await storageBackend.retrieve('1', {})
+      const result2 = await storageBackend.retrieve(returnKey, {})
       expect(result2).toEqual(object)
     })
 
@@ -52,10 +51,9 @@ describe('StorageBackend', () => {
     // Javascript object in and out, key is set by the client in options and returned
     it('should store data in and retrieve data from Redis', async () => {
       await storageBackend.setStorageType(storage.STORAGE_TYPES.REDIS)
-      const options = { key: '1' }
-      const returnedKey = await storageBackend.store(object, options)
+      const returnedKey = await storageBackend.store(object, {})
       expect(returnedKey).not.toEqual(null)
-      const retrievedObject = await storageBackend.retrieve('1')
+      const retrievedObject = await storageBackend.retrieve(returnedKey, {})
       expect(retrievedObject).toEqual(JSON.stringify(object))
     })
 

@@ -23,6 +23,7 @@
     "stopwords-iso": "^1.1.0",
     "sylvester": "^0.0.12",
     "underscore": "^1.9.1",
+    "uuid": "^9.0.1",
     "wordnet-db": "^3.1.11"
   },
   "devDependencies": {
