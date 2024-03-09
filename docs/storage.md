@@ -51,11 +51,11 @@ console.log(result2) // { attr1: 'val1', attr2: 'val2' }
 Besides the storage backend itself, a docker compose file is included that runs the following containers: Postgres, MongoDB, Memcached and Redis. After starting the containers, the storage backend is ready to use with all storage methods. Also, the tests can be run.
 
 ## Environment variables
-The following environment variables are used:
+The following environment variables are supported:
 
-| Environment variable | Description |
-| --- | --- |
-| `NATURAL_STORAGE_TYPE` | Storage type to use in Natural |
+Environment variable | Description
+--- | ---
+`NATURAL_STORAGE_TYPE` | Storage type to use in Natural
 `FILE_PATH` | Path to the directory where the files are stored
 `PG_USER` | Postgres user
 `PG_PASSWORD` | Postgres password
