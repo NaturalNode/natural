@@ -52,9 +52,9 @@ Besides the storage backend itself, a docker compose file is included that runs 
 
 ## Environment variables
 The following environment variables are used:
-Environment variable | Description
---- | ---
-`NATURAL_STORAGE_TYPE` | Storage type to use in Natural
+| Environment variable | Description |
+| --- | --- |
+| `NATURAL_STORAGE_TYPE` | Storage type to use in Natural |
 `FILE_PATH` | Path to the directory where the files are stored
 `PG_USER` | Postgres user
 `PG_PASSWORD` | Postgres password
