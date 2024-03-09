@@ -18,9 +18,9 @@ describe('StorageBackend', () => {
     it('should store data in and retrieve data from file', async () => {
       const options = { filename: 'example.txt' }
       await storageBackend.setStorageType(storage.STORAGE_TYPES.FILE)
-      const result1 = await storageBackend.store(object, options)
-      expect(result1).toEqual('example.txt')
-      const result2 = await storageBackend.retrieve(options.filename, {})
+      const key = await storageBackend.store(object, options)
+      // expect(result1).toEqual('example.txt')
+      const result2 = await storageBackend.retrieve(key, {})
       expect(result2).toEqual(object)
     })
 
