@@ -41,10 +41,10 @@ const options = { filename: 'example.txt' }
 
 storageBackend = new storage.StorageBackend(storage.STORAGE_TYPES.FILE)
 
-const result1 = await storageBackend.store(object, options)
-console.log(result1) // example.txt
-const result2 = await storageBackend.retrieve(null, options)
-console.log(result2) // { attr1: 'val1', attr2: 'val2' }
+const key = await storageBackend.store(object)
+console.log(key) // UUID
+const result = await storageBackend.retrieve(key)
+console.log(result) // { attr1: 'val1', attr2: 'val2' }
 ```
 
 ## Docker compose
