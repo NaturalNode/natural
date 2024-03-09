@@ -54,7 +54,7 @@ describe('StorageBackend', () => {
       const returnedKey = await storageBackend.store(object, {})
       expect(returnedKey).not.toEqual(null)
       const retrievedObject = await storageBackend.retrieve(returnedKey, {})
-      expect(retrievedObject).toEqual(JSON.stringify(object))
+      expect(retrievedObject).toEqual(object)
     })
 
     // Javascript object in and out, key is set by Postgres and returned
