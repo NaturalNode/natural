@@ -20,9 +20,12 @@ The storage backend is a class that has the following methods:
 * retrieve: retrieves an entity using the configured storage method
 
 Standard behaviour of the backend with regard to storing and retrieving data:
-* It stores and retrieves Javascript objects, so `JSON.stringify` and `JSON.parse` is done here. A key is returned after storing an object.
-* The key is determined by the storage method, if possible: MongoDB and Postgres can do this. If not, a key  must be passed in `options.key`. This holds for Redis and Memcached
-* File-based storage is different: the filename is passed by the client in `options.filename`. It is returned after storing (like a key).
+* It stores and retrieves Javascript objects, so `JSON.stringify` and `JSON.parse` is done here. 
+- A key is returned after storing an object.
+* With Postgres and MongoDB the key is determined by the storage method. 
+- With the other storage methods the the backend generates a UUID.
+* File-based storage is a bit different: path and filename are constructed from environment variable `FILE_PATH,` UUID and extension `.json`.
+
 
 So the handling of keys is a bit different depending on the storage method.
 
@@ -46,3 +49,28 @@ console.log(result2) // { attr1: 'val1', attr2: 'val2' }
 
 ## Docker compose
 Besides the storage backend itself, a docker compose file is included that runs the following containers: Postgres, MongoDB, Memcached and Redis. After starting the containers, the storage backend is ready to use with all storage methods. Also, the tests can be run.
+
+## Environment variables
+The following environment variables are used:
+Environment variable | Description
+--- | ---
+`NATURAL_STORAGE_TYPE` | Storage type to use in Natural
+`FILE_PATH` | Path to the directory where the files are stored
+`PG_USER` | Postgres user
+`PG_PASSWORD` | Postgres password
+`PG_HOST` | Postgres host
+`PG_PORT` | Postgres port
+`PG_DATABASE` | Postgres database
+`PG_TABLE`  | Postgres table
+`MONGO_HOST` | MongoDB host
+`MONGO_PORT` | MongoDB port
+`MONGO_DATABASE` | MongoDB database
+`REDIS_HOST` | Redis host
+`REDIS_PORT` | Redis port
+`MEMCACHED_HOST` | Memcached host
+`MEMCACHED_PORT` | Memcached port
+`FS_PATH` | Path to the directory where the files are stored
+
+
+
+
