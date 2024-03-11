@@ -22,9 +22,11 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_USER: user
-          POSTGRES_PASSWORD: password
-          POSTGRES_DB: database
+          PPOSTGRES_USER=user
+          POSTGRES_PASSWORD=password
+          POSTGRES_DB=naturaldb
+          POSTGRES_HOST=localhost
+          POSTGRES_PORT=5432
       memcached:
         image: memcached:latest
         ports:
