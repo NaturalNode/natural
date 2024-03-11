@@ -20,14 +20,26 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Build and run Docker Compose
+      run: docker-compose up -d
+
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
+
     - run: npm ci
-    - run: npm run build --if-present
+
+    - run: npm run test
+
     - run: npm run coverage
+
     # Save coverage report in Coveralls
     - name: Coveralls
       uses: coverallsapp/github-action@master
