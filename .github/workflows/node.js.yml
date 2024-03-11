@@ -15,10 +15,24 @@ jobs:
     runs-on: ubuntu-latest
 
     services:
-      postgres:
-        image: storage_postgres_1
+      redis:
+        image: redis:latest
         ports:
-          - 5432:5432
+          - 6379:6379
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: user
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: database
+      memcached:
+        image: memcached:latest
+        ports:
+          - 11211:11211
+      mongodb:
+        image: mongo:latest
+        ports:
+          - 27017:27017
 
     strategy:
       matrix:
@@ -28,12 +42,6 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1
-
-    - name: Build and run Docker Compose
-      run: docker-compose -f ./lib/natural/util/storage/docker-compose.yml up -d
 
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
