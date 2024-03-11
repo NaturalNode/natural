@@ -40,9 +40,7 @@ jobs:
       run: npm run test
 
     - name: Run IO tests
-      run: nmp run test_io
-
-    - run: npm run coverage
+      run: npm run test_io
 
     # Save coverage report in Coveralls
     - name: Coveralls
