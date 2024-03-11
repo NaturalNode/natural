@@ -27,7 +27,7 @@ jobs:
       uses: docker/setup-buildx-action@v1
 
     - name: Build and run Docker Compose
-      run: docker-compose up -d
+      run: docker-compose up -d -f ./lib/natural/util/storage/docker-compose.yml
 
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
@@ -36,7 +36,11 @@ jobs:
 
     - run: npm ci
 
-    - run: npm run test
+    - name: Run tests
+      run: npm run test
+
+    - name: Run IO tests
+      run: nmp run test_io
 
     - run: npm run coverage
 
