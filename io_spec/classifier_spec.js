@@ -22,7 +22,6 @@ THE SOFTWARE.
 
 'use strict'
 
-const { ClassificationType } = require('typescript')
 const natural = require('../lib/natural')
 const Classifier = require('../lib/natural/classifiers/classifier.js')
 const storage = require('../lib/natural/util/storage/StorageBackend.js')

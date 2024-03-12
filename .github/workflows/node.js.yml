@@ -3,14 +3,14 @@
 # For more information see: 
 # https://help.github.com/actions/language-and-framework-guides/
 # using-nodejs-with-github-actions
-
+---
 name: Node.js CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
@@ -45,31 +45,32 @@ jobs:
     strategy:
       matrix:
         node-version: [16.x, 18.x, 20.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+        # See supported Node.js release schedule at 
+        #https://nodejs.org/en/about/releases/
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    - name: Clean install
-      run: npm ci
+      - name: Clean install
+        run: npm ci
 
-    - name: Run tests
-      run: npm run test
+      - name: Run tests
+        run: npm run test
 
-    - name: Run IO tests
-      run: npm run test_io
+      - name: Run IO tests
+        run: npm run test_io
 
-    - name: Run Istanbul coverage
-      run: npm run coverage
+      - name: Run Istanbul coverage
+        run: npm run coverage
 
-    # Save coverage report in Coveralls
-    - name: Coveralls
-      uses: coverallsapp/github-action@master
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+      # Save coverage report in Coveralls
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
