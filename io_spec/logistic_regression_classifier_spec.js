@@ -52,7 +52,7 @@ describe('logistic regression', function () {
         expect(newClassifier.classify('read all the books')).toBe('literature')
         expect(newClassifier.classify('kick butt')).toBe('sports')
 
-        done()
+        // done()
       })
     })
   })
