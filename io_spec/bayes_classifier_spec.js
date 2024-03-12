@@ -93,8 +93,8 @@ describe('Bayes classifier file I/O', function () {
         cb(new Error('An error occurred'))
       })
       natural.BayesClassifier.load('/spec/test_data/tfidf_document1.txt', null, function (err, newClassifier) {
-        expect(err).toBe.ok
-        expect(newClassifier).not.toBe.ok
+        expect(err).toBeTruthy()
+        expect(newClassifier).not.toBeTruthy()
       })
     })
   })
