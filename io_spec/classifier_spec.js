@@ -23,7 +23,8 @@ THE SOFTWARE.
 'use strict'
 
 const natural = require('../lib/natural')
-const baseClassifier = require('../lib/natural/classifiers/classifier.js')
+const Classifier = require('../lib/natural/classifiers/classifier.js')
+const storage = require('../lib/natural/util/storage/StorageBackend.js')
 const fs = require('fs')
 
 describe('classifier file IO', function () {
@@ -61,7 +62,7 @@ describe('classifier file IO', function () {
     it('does nothing if called without a callback', function () {
       let result
       try {
-        result = baseClassifier.load('io_spec/test_data/tfidf/tfidf_document1.txt')
+        result = Classifier.load('io_spec/test_data/tfidf/tfidf_document1.txt')
       } catch (err) {
         console.log(err)
       }
@@ -69,9 +70,22 @@ describe('classifier file IO', function () {
     })
 
     it('does nothing if called with a nonexistent filename', function () {
-      baseClassifier.load('./nonexistentFilename', function (err, newClassifier) {
+      Classifier.load('./nonexistentFilename', function (err, newClassifier) {
         expect(err.code).toEqual('ENOENT')
         expect(newClassifier).toEqual(null)
+      })
+    })
+  })
+
+  describe('Storing and retrieving Logistic Regression classifiers using the storage backend', function () {
+    const classifier = new Classifier()
+    Object.keys(storage.STORAGE_TYPES).forEach(storageType => {
+      it('should be able to save and load a classifier to ' + storageType, async function () {
+        const store = await new storage.StorageBackend(storageType)
+        const key = await classifier.saveTo(store)
+        expect(key).toBeDefined()
+        const classifierLoaded = await Classifier.loadFrom(key, store)
+        expect(Object.getPrototypeOf(classifierLoaded)).toEqual(Object.getPrototypeOf(classifier))
       })
     })
   })

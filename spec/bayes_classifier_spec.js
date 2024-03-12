@@ -23,8 +23,6 @@ THE SOFTWARE.
 'use strict'
 
 const natural = require('../lib/natural')
-// var sinon = require('sinon');
-// var baseClassifier = require('../lib/natural/classifiers/classifier.js');
 
 function setupClassifier () {
   const classifier = new natural.BayesClassifier()
@@ -154,45 +152,6 @@ describe('bayes classifier', function () {
       expect(newClassifier.classify('kick butt')).toBe('sports')
     })
 
-    /*
-        it('should save and load a working classifier', function(done) {
-            var classifier = new natural.BayesClassifier();
-            classifier.addDocument('i fixed the box', 'computing');
-            classifier.addDocument('i write code', 'computing');
-            classifier.addDocument('nasty script code', 'computing');
-            classifier.addDocument('write a book', 'literature');
-            classifier.addDocument('read a book', 'literature');
-            classifier.addDocument('study the books', 'literature');
-
-            classifier.train();
-
-            classifier.save('bayes_classifier.json', function(err) {
-            natural.BayesClassifier.load('bayes_classifier.json', null, function(err, newClassifier){
-              newClassifier.addDocument('kick a ball', 'sports');
-              newClassifier.addDocument('hit some balls', 'sports');
-              newClassifier.addDocument('kick and punch', 'sports');
-
-              newClassifier.train();
-
-              expect(newClassifier.classify('a bug in the code')).toBe('computing');
-              expect(newClassifier.classify('read all the books')).toBe('literature');
-              expect(newClassifier.classify('kick butt')).toBe('sports');
-              done();
-            });
-          });
-        });
-        */
-
-    /*
-        it('should only execute the callback once when failing to load a classifier', function(done) {
-            natural.BayesClassifier.load('nonexistant_bayes_classifier.json', null, function(err, newClassifier){
-              expect(err.code).toBe('ENOENT');
-              expect(newClassifier).toBe(undefined);
-              done();
-            });
-        });
-        */
-
     it('should accept an optional smoothing parameter for the Bayesian estimates', function () {
       const defaultClassifier = new natural.BayesClassifier()
       const PorterStemmer = require('../lib/natural/stemmers/porter_stemmer')
@@ -204,27 +163,4 @@ describe('bayes classifier', function () {
       expect(newClassifier2.classifier.smoothing).toBe(0.1)
     })
   })
-
-  /*
-    describe('load', function () {
-        var sandbox;
-
-        beforeEach(function () {
-            sandbox = sinon.sandbox.create();
-        });
-
-        afterEach(function () {
-            sandbox.restore();
-        });
-        it('should pass an error to the callback function', function () {
-            sandbox.stub(baseClassifier, 'load', function (filename, cb) {
-                cb(new Error('An error occurred'));
-            });
-            natural.BayesClassifier.load('/spec/test_data/tfidf_document1.txt', null, function (err, newClassifier) {
-                expect(err).toBe.ok;
-                expect(newClassifier).not.toBe.ok;
-            });
-        });
-    });
-    */
 })

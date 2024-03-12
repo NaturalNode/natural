@@ -90,44 +90,4 @@ describe('logistic regression', function () {
     expect(newClassifier.classify('read all the books')).toBe('literature')
     expect(newClassifier.classify('kick butt')).toBe('sports')
   })
-
-  /*
-    it('should save and load a working classifier', function() {
-        var classifier = new natural.LogisticRegressionClassifier();
-        classifier.addDocument('i fixed the box', 'computing');
-        classifier.addDocument('i write code', 'computing');
-        classifier.addDocument('nasty script code', 'computing');
-        classifier.addDocument('write a book', 'literature');
-        classifier.addDocument('read a book', 'literature');
-        classifier.addDocument('study the books', 'literature');
-        classifier.train();
-
-        classifier.save('lr_classifier.json', function(err) {
-          natural.LogisticRegressionClassifier.load('lr_classifier.json', null, function(err, newClassifier) {
-            newClassifier.addDocument('hit some balls', 'sports');
-            newClassifier.addDocument('kick a ball', 'sports');
-            newClassifier.addDocument('kick and punch things', 'sports');
-            newClassifier.train();
-
-            expect(newClassifier.classify('a bug in the code')).toBe('computing');
-            expect(newClassifier.classify('read all the books')).toBe('literature');
-            expect(newClassifier.classify('kick butt')).toBe('sports');
-
-            done();
-          });
-
-        });
-
-    });
-    */
-
-  /*
-    it('should only execute the callback once when failing to load a classifier', function() {
-        natural.LogisticRegressionClassifier.load('nonexistant_lr_classifier.json', null, function(err, newClassifier){
-          expect(err.code).toBe('ENOENT');
-          expect(newClassifier).toBe(undefined);
-          //asyncSpecDone();
-        });
-    });
-    */
 })
