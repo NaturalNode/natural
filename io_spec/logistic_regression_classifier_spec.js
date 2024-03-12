@@ -23,17 +23,23 @@ THE SOFTWARE.
 'use strict'
 
 const LogisticRegressionClassifier = require('../lib/natural').LogisticRegressionClassifier
+const storage = require('../lib/natural/util/storage/StorageBackend')
 
-describe('logistic regression', function () {
+function setupClassifier () {
+  const classifier = new LogisticRegressionClassifier()
+  classifier.addDocument('i fixed the box', 'computing')
+  classifier.addDocument('i write code', 'computing')
+  classifier.addDocument('nasty script code', 'computing')
+  classifier.addDocument('write a book', 'literature')
+  classifier.addDocument('read a book', 'literature')
+  classifier.addDocument('study the books', 'literature')
+  classifier.train()
+  return classifier
+}
+
+describe('Saving and loading logistic regression classifiers to/from file', function () {
   it('should save and load a working classifier', function () {
-    const classifier = new LogisticRegressionClassifier()
-    classifier.addDocument('i fixed the box', 'computing')
-    classifier.addDocument('i write code', 'computing')
-    classifier.addDocument('nasty script code', 'computing')
-    classifier.addDocument('write a book', 'literature')
-    classifier.addDocument('read a book', 'literature')
-    classifier.addDocument('study the books', 'literature')
-    classifier.train()
+    const classifier = setupClassifier()
 
     classifier.save('lr_classifier.json', function (err) {
       if (err) {
@@ -52,7 +58,7 @@ describe('logistic regression', function () {
         expect(newClassifier.classify('read all the books')).toBe('literature')
         expect(newClassifier.classify('kick butt')).toBe('sports')
 
-        // done()
+        expect(Object.getPrototypeOf(newClassifier)).toEqual(Object.getPrototypeOf(classifier))
       })
     })
   })
@@ -63,6 +69,19 @@ describe('logistic regression', function () {
         expect(err.code).toBe('ENOENT')
         expect(newClassifier).toBe(undefined)
       }
+    })
+  })
+
+  describe('Storing and retrieving Logistic Regression classifiers using the storage backend', function () {
+    const classifier = setupClassifier()
+    Object.keys(storage.STORAGE_TYPES).forEach(storageType => {
+      it('should be able to save and load a classifier to ' + storageType, async function () {
+        const store = await new storage.StorageBackend(storageType)
+        const key = await classifier.saveTo(store)
+        expect(key).toBeDefined()
+        const classifierLoaded = await LogisticRegressionClassifier.loadFrom(key, undefined, store)
+        expect(Object.getPrototypeOf(classifierLoaded)).toEqual(Object.getPrototypeOf(classifier))
+      })
     })
   })
 })

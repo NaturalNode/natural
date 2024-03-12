@@ -40,14 +40,7 @@ function setupClassifier () {
 
 describe('Bayes classifier file I/O', function () {
   it('should save and load a working classifier', function (done) {
-    const classifier = new natural.BayesClassifier()
-    classifier.addDocument('i fixed the box', 'computing')
-    classifier.addDocument('i write code', 'computing')
-    classifier.addDocument('nasty script code', 'computing')
-    classifier.addDocument('write a book', 'literature')
-    classifier.addDocument('read a book', 'literature')
-    classifier.addDocument('study the books', 'literature')
-
+    const classifier = setupClassifier()
     classifier.train()
 
     classifier.save('bayes_classifier.json', function (err) {
@@ -99,13 +92,18 @@ describe('Bayes classifier file I/O', function () {
     })
   })
 
-  it('should be able to save a classifier to a file-based storage backend and load it back ', async function () {
+  describe('Storing and retrieving Bayesian classifiers using the storage backend', function () {
     const classifier = setupClassifier()
     classifier.train()
-    const store = await new storage.StorageBackend(storage.STORAGE_TYPES.FILE)
-    const key = await classifier.saveTo(store)
-    expect(key).toBeDefined()
-    const classifierLoaded = await natural.BayesClassifier.loadFrom(key, undefined, store)
-    expect(Object.getPrototypeOf(classifierLoaded)).toEqual(Object.getPrototypeOf(classifier))
+
+    Object.keys(storage.STORAGE_TYPES).forEach(storageType => {
+      it('should be able to save and load a classifier to ' + storageType, async function () {
+        const store = await new storage.StorageBackend(storageType)
+        const key = await classifier.saveTo(store)
+        expect(key).toBeDefined()
+        const classifierLoaded = await natural.BayesClassifier.loadFrom(key, undefined, store)
+        expect(Object.getPrototypeOf(classifierLoaded)).toEqual(Object.getPrototypeOf(classifier))
+      })
+    })
   })
 })
