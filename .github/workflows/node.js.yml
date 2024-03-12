@@ -62,6 +62,9 @@ jobs:
     - name: Run IO tests
       run: npm run test_io
 
+    - name: Run Istanbul coverage
+      run: npm run coverage
+
     # Save coverage report in Coveralls
     - name: Coveralls
       uses: coverallsapp/github-action@master
