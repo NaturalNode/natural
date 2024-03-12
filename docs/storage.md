@@ -48,7 +48,7 @@ console.log(result) // { attr1: 'val1', attr2: 'val2' }
 ```
 
 ## Docker compose
-Besides the storage backend itself, a docker compose file is included that runs the following containers: Postgres, MongoDB, Memcached and Redis. After starting the containers, the storage backend is ready to use with all storage methods. Also, the tests can be run.
+Besides the storage backend itself, a docker compose file is included that runs the following containers: Postgres, MongoDB, Memcached and Redis. After starting the containers, the storage backend is ready to use with all storage methods. Also, the tests in `io_spec` can be run against these containers.
 
 ## Environment variables
 The following environment variables are supported:
@@ -56,20 +56,21 @@ The following environment variables are supported:
 Environment variable | Description
 --- | ---
 `NATURAL_STORAGE_TYPE` | Storage type to use in Natural
-`FILE_PATH` | Path to the directory where the files are stored
-`PG_USER` | Postgres user
-`PG_PASSWORD` | Postgres password
-`PG_HOST` | Postgres host
-`PG_PORT` | Postgres port
-`PG_DATABASE` | Postgres database
-`PG_TABLE`  | Postgres table
+`POSTGRES_USER` | Postgres user
+`POSTGRES_PASSWORD` | Postgres password
+`POSTGRES_HOST` | Postgres host
+`POSTGRES_PORT` | Postgres port
+`POSTGRES_DATABASE` | Postgres database
+`POSTGRES_TABLE`  | Postgres table
 `MONGO_HOST` | MongoDB host
 `MONGO_PORT` | MongoDB port
 `MONGO_DATABASE` | MongoDB database
+`MONGO_OBJECTMODEL` | MongoDB object model
 `REDIS_HOST` | Redis host
 `REDIS_PORT` | Redis port
-`MEMCACHED_HOST` | Memcached host
-`MEMCACHED_PORT` | Memcached port
+`MEM_HOST` | Memcached host
+`MEM_PORT` | Memcached port
+`MEM_EXPIRES` | Expiration time in seconds of items in the cache
 `FS_PATH` | Path to the directory where the files are stored
 
 
