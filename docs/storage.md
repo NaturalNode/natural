@@ -33,8 +33,8 @@ So the handling of keys is a bit different depending on the storage method.
 var Natural = require('natural');
 
 const object = {
-      attr1: 'val1',
-      attr2: 'val2'
+  attr1: 'val1',
+  attr2: 'val2'
 }
 const options = { filename: 'example.txt' }
 
