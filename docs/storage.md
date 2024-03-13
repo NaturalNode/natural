@@ -28,7 +28,7 @@ Standard behaviour of the backend with regard to storing and retrieving data:
 
 So the handling of keys is a bit different depending on the storage method.
 
-## Example
+## Example with file-based storage
 ```javascript	
 var Natural = require('natural');
 
