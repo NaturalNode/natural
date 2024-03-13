@@ -9,7 +9,7 @@ The storage backend provides several possibilities for storing entities created 
 * File: based on `fs`
 * [MongoDB](https://www.npmjs.com/package/mongodb) and [mongoose](https://www.npmjs.com/package/mongoose)
 * [Postgres](https://www.npmjs.com/package/postgres) and [pg](https://www.npmjs.com/package/pg)
-* [Memcached](https://www.memcached.org/) and [memjs]
+* [Memcached](https://www.memcached.org/) and [memjs](https://www.npmjs.com/package/memjs)
 * [Redis](https://redis.io/) and [node-redis](https://www.npmjs.com/package/redis/)
 
 ## Behaviour of the storage backend
