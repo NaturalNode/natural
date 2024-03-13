@@ -30,13 +30,12 @@ So the handling of keys is a bit different depending on the storage method.
 
 ## Example with file-based storage
 ```javascript	
-var Natural = require('natural');
+let storage = require('natural').StorageBackend;
 
 const object = {
   attr1: 'val1',
   attr2: 'val2'
 }
-const options = { filename: 'example.txt' }
 
 storageBackend = new storage.StorageBackend(storage.STORAGE_TYPES.FILE)
 
