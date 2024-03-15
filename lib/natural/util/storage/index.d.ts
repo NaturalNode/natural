@@ -21,6 +21,7 @@ THE SOFTWARE.
 */
 
 export class StorageBackend {
+  constructor (type: STORAGE_TYPES)
   static save (key: string, value: any): void
   static load (key: string): any
 }
