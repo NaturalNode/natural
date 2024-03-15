@@ -22,18 +22,18 @@ THE SOFTWARE.
 
 'use strict'
 
-const natural = require('../lib/natural')
+import { BayesClassifier } from '../lib/natural'
 
 describe('classifier', function () {
   describe('addDocument', function () {
     it('should ignore an empty document', function () {
-      const classifier = new natural.BayesClassifier()
+      const classifier = new BayesClassifier()
       classifier.addDocument('', 'philosophy')
       expect(classifier.docs.length).toBe(0)
     })
 
     it('should increment features', function () {
-      const classifier = new natural.BayesClassifier()
+      const classifier = new BayesClassifier()
       classifier.addDocument('foo', '')
       classifier.addDocument('foo', '')
       classifier.addDocument('bar', '')
@@ -60,7 +60,7 @@ describe('classifier', function () {
     }
 
     it('should emit events when documents are added or training is finished', function () {
-      const classifier = new natural.BayesClassifier()
+      const classifier = new BayesClassifier()
       classifier.on('trainedWithDocument', eventRegister)
       classifier.on('doneTraining', assertEventResults)
 
@@ -78,9 +78,9 @@ describe('classifier', function () {
   })
 
   describe('Classifier', function () {
-    let classifier = null
+    let classifier: BayesClassifier
     beforeEach(function () {
-      classifier = new natural.BayesClassifier()
+      classifier = new BayesClassifier()
       classifier.addDocument('i fixed the box', 'computing')
       classifier.addDocument('i write code', 'computing')
       classifier.addDocument('write a book', 'literature')

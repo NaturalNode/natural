@@ -72,6 +72,7 @@ declare interface ClassifierOptions {
 }
 
 declare type ClassifierCallback = (err: NodeJS.ErrnoException | null, classifier?: ClassifierBase) => void
+declare type ParallelTrainerCallback = (err: NodeJS.ErrnoException | null) => void
 
 declare class ClassifierBase extends events.EventEmitter {
   classifier: ApparatusClassifier
@@ -93,6 +94,10 @@ declare class ClassifierBase extends events.EventEmitter {
   static load (filename: string, stemmer: Stemmer | null | undefined, callback: ClassifierCallback): void
   saveTo (storage: StorageBackend): String
   static loadFrom (storage: StorageBackend): ClassifierBase
+
+  trainParallel (numThreads: number, callback: ParallelTrainerCallback)
+  trainParallelBatches (options: {numThreads: number, batchSize: number} )
+  retrainParallel (numThreads: number, callback: ParallelTrainerCallback)
 }
 
 declare type BayesClassifierCallback = (err: NodeJS.ErrnoException | null, classifier?: BayesClassifier) => void
