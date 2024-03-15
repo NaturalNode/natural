@@ -29,12 +29,11 @@ export declare enum STORAGE_TYPES {
 }
 
 export class StorageBackend {
-  private storageType: STORAGE_TYPES
-  private client: any
-  
+  private readonly storageType: STORAGE_TYPES
+  private readonly client: any
+
   constructor (type: STORAGE_TYPES)
   setStorageType (storageType)
   async store (key: string, value: any): void
   async retrieve (key: string): any
 }
-
