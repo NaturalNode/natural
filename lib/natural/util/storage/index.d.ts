@@ -20,12 +20,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export class StorageBackend {
-  constructor (type: STORAGE_TYPES)
-  static save (key: string, value: any): void
-  static load (key: string): any
-}
-
 export declare enum STORAGE_TYPES {
   POSTGRES = 'POSTGRES',
   REDIS = 'REDIS',
@@ -33,3 +27,14 @@ export declare enum STORAGE_TYPES {
   MEMCACHED = 'MEMCACHED',
   FILE = 'FILE'
 }
+
+export class StorageBackend {
+  private storageType: STORAGE_TYPES
+  private client: any
+  
+  constructor (type: STORAGE_TYPES)
+  setStorageType (storageType)
+  async store (key: string, value: any): void
+  async retrieve (key: string): any
+}
+
