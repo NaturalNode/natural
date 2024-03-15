@@ -11,6 +11,7 @@
     "node": ">=0.4.10"
   },
   "dependencies": {
+    "@types/jasmine": "^5.1.4",
     "afinn-165": "^1.0.2",
     "afinn-165-financialmarketnews": "^3.0.0",
     "apparatus": "^0.0.10",
@@ -63,6 +64,7 @@
   },
   "scripts": {
     "benchmark": "node benchmarks",
+    "build": "tsc",
     "clean": "rimraf *~ #* *classifier.json",
     "test": "NODE_PATH=. node ./node_modules/jasmine/bin/jasmine.js --random=false spec/*_spec.js",
     "coverage": "nyc --reporter=lcov npm run test && nyc npm run test_io",

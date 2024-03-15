@@ -1,6 +1,7 @@
 import events from 'events'
 import { Corpus, Sentence } from '../brill_pos_tagger'
 import { Stemmer } from '../stemmers'
+import { StorageBackend } from '../util'
 
 // Start apparatus declarations
 
@@ -89,6 +90,9 @@ declare class ClassifierBase extends events.EventEmitter {
   classify (observation: string | string[]): string
   setOptions (options: ClassifierOptions): void
   save (filename: string, callback?: ClassifierCallback): void
+  static load (filename: string, stemmer: Stemmer | null | undefined, callback: ClassifierCallback): void
+  saveTo (storage: StorageBackend): String
+  static loadFrom (storage: StorageBackend): ClassifierBase
 }
 
 declare type BayesClassifierCallback = (err: NodeJS.ErrnoException | null, classifier?: BayesClassifier) => void
@@ -97,6 +101,8 @@ export class BayesClassifier extends ClassifierBase {
   constructor (stemmer?: Stemmer, smoothing?: number)
   static load (filename: string, stemmer: Stemmer | null | undefined, callback: BayesClassifierCallback): void
   static restore (classifier: BayesClassifier, stemmer?: Stemmer): BayesClassifier
+  saveTo (storage: StorageBackend): String
+  static loadFrom (storage: StorageBackend): ClassifierBase
 }
 
 declare type LogisticRegressionClassifierCallback = (err: NodeJS.ErrnoException | null, classifier?: LogisticRegressionClassifier) => void
@@ -105,6 +111,8 @@ export class LogisticRegressionClassifier extends ClassifierBase {
   constructor (stemmer?: Stemmer)
   static load (filename: string, stemmer: Stemmer | null | undefined, callback: LogisticRegressionClassifierCallback): void
   static restore (classifier: LogisticRegressionClassifier, stemmer?: Stemmer): LogisticRegressionClassifier
+  saveTo (storage: StorageBackend): String
+  static loadFrom (storage: StorageBackend): ClassifierBase
 }
 
 declare type MaxEntClassifierCallback = (err: NodeJS.ErrnoException | null, classifier?: MaxEntClassifier | null) => void

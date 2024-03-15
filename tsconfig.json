@@ -16,8 +16,8 @@
   },
   "include": [
     "lib/natural/**/*",
-    "spec/*"
-, "io_spec/StorageBackend_spec.js"  ],
+    "spec/*",
+    "io_spec/StorageBackend_spec.js"  ],
   "exclude": [
     "./node_modules"
   ]

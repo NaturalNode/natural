@@ -70,3 +70,5 @@ export class LongestPathTree {
   hasPathTo (vertex: number): boolean
   pathTo (vertex: number): number[]
 }
+
+export * from './storage'
