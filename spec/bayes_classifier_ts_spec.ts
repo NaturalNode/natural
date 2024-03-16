@@ -101,8 +101,7 @@ describe('bayes classifier', function () {
 
     it('should classify and re-classify after document-removal', function () {
       const classifier = new BayesClassifier()
-      let item
-      const classifications = {}
+      const classifications = new Map<string, number>()
 
       // Add some good/bad docs and train
       classifier.addDocument('foo bar baz', 'good')
@@ -121,11 +120,12 @@ describe('bayes classifier', function () {
       // ratio for each side is equal -- have to compare actual values in
       // the classifications, should be equal since qux is unclassified
       const arr = classifier.getClassifications('qux')
+      let item: { label: string, value: number }
       for (let i = 0, ii = arr.length; i < ii; i++) {
         item = arr[i]
-        classifications[item.label] = item.value
+        classifications.set(item.label, item.value)
       }
-      expect(classifications['good']).toEqual(classifications['bad'])
+      expect(classifications.get('good')).toEqual(classifications.get('bad'))
 
       // Re-classify as good, retrain
       classifier.addDocument('qux zooby', 'good')

@@ -47,13 +47,13 @@ describe('classifier', function () {
     })
   })
 
-  describe('Classifer', function () {
-    const pushedEvents = []
-    function eventRegister (obj) {
+  describe('Classifier', function () {
+    const pushedEvents: any[] = []
+    function eventRegister (obj: any): void {
       pushedEvents.push(obj)
     }
 
-    function assertEventResults () {
+    function assertEventResults (): void {
       expect(pushedEvents[0].index).toBe(0)
       expect(pushedEvents[0].total).toBe(6)
       expect(pushedEvents.length).toBe(6)

@@ -95,14 +95,16 @@ declare class ClassifierBase extends events.EventEmitter {
   saveTo (storage: StorageBackend): String
   static loadFrom (storage: StorageBackend): ClassifierBase
 
-  trainParallel (numThreads: number, callback: ParallelTrainerCallback)
-  trainParallelBatches (options: {numThreads: number, batchSize: number} )
-  retrainParallel (numThreads: number, callback: ParallelTrainerCallback)
+  trainParallel (numThreads: number, callback: ParallelTrainerCallback): void
+  trainParallelBatches (options: {numThreads: number, batchSize: number} ): void
+  retrainParallel (numThreads: number, callback: ParallelTrainerCallback): void
 }
 
 declare type BayesClassifierCallback = (err: NodeJS.ErrnoException | null, classifier?: BayesClassifier) => void
 
 export class BayesClassifier extends ClassifierBase {
+  classifier: ApparatusBayesClassifier
+  
   constructor (stemmer?: Stemmer, smoothing?: number)
   static load (filename: string, stemmer: Stemmer | null | undefined, callback: BayesClassifierCallback): void
   static restore (classifier: BayesClassifier, stemmer?: Stemmer): BayesClassifier

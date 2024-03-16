@@ -33,7 +33,7 @@ export class StorageBackend {
   private readonly client: any
 
   constructor (type: STORAGE_TYPES)
-  setStorageType (storageType)
+  setStorageType (storageType: STORAGE_TYPES): void
   store (key: string, value: any): Promise<String>
   retrieve (key: string): Promise<any>
 }
