@@ -104,7 +104,7 @@ declare type BayesClassifierCallback = (err: NodeJS.ErrnoException | null, class
 
 export class BayesClassifier extends ClassifierBase {
   classifier: ApparatusBayesClassifier
-  
+
   constructor (stemmer?: Stemmer, smoothing?: number)
   static load (filename: string, stemmer: Stemmer | null | undefined, callback: BayesClassifierCallback): void
   static restore (classifier: BayesClassifier, stemmer?: Stemmer): BayesClassifier
