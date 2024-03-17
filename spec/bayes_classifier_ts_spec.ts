@@ -22,9 +22,7 @@ THE SOFTWARE.
 
 'use strict'
 
-import { BayesClassifier } from '../lib/natural'
-import { PorterStemmer } from '../lib/natural/'
-
+import { BayesClassifier, PorterStemmer } from '../lib/natural'
 
 function setupClassifier (): BayesClassifier {
   const classifier = new BayesClassifier()
@@ -50,7 +48,7 @@ describe('bayes classifier', function () {
       const classifier = setupClassifier()
       // Check for parallel method
       classifier.trainParallel(2, function (err) {
-        if (err) {
+        if (err !== null) {
           console.log(err)
           return
         }
@@ -154,9 +152,9 @@ describe('bayes classifier', function () {
       const newClassifier1 = new BayesClassifier(PorterStemmer)
       const newClassifier2 = new BayesClassifier(PorterStemmer, 0.1)
 
-      expect(defaultClassifier.classifier['smoothing']).toBe(1.0)
-      expect(newClassifier1.classifier['smoothing']).toBe(1.0)
-      expect(newClassifier2.classifier['smoothing']).toBe(0.1)
+      expect(defaultClassifier.classifier.smoothing.toBe(1.0)
+      expect(newClassifier1.classifier.smoothing.toBe(1.0)
+      expect(newClassifier2.classifier.smoothing.toBe(0.1)
     })
   })
 })
