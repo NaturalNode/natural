@@ -56,7 +56,7 @@ describe('logistic regression', function () {
     expect(classifier.getClassifications('i write code')[1].label).toBe('literature')
   })
 
-  function createClassifier () {
+  function createClassifier (): LogisticRegressionClassifier {
     const classifier = new LogisticRegressionClassifier()
     classifier.addDocument('i fixed the box', 'computing')
     classifier.addDocument('i write code', 'computing')
