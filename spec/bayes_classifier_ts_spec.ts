@@ -23,6 +23,8 @@ THE SOFTWARE.
 'use strict'
 
 import { BayesClassifier } from '../lib/natural'
+import { PorterStemmer } from '../lib/natural/'
+
 
 function setupClassifier (): BayesClassifier {
   const classifier = new BayesClassifier()
@@ -47,14 +49,13 @@ describe('bayes classifier', function () {
     it('should classify with parallel training', function () {
       const classifier = setupClassifier()
       // Check for parallel method
-      classifier['trainParallel'](2, function (err) {
+      classifier.trainParallel(2, function (err) {
         if (err) {
           console.log(err)
           return
         }
         expect(classifier.classify(['bug', 'code'])).toBe('computing')
         expect(classifier.classify(['read', 'thing'])).toBe('literature')
-        // asyncSpecDone();
       })
     })
 
@@ -77,7 +78,7 @@ describe('bayes classifier', function () {
       expect(classifier.getClassifications('i write code')[1].label).toBe('literature')
     })
 
-    function setupClassifierWithSentences () {
+    function setupClassifierWithSentences (): BayesClassifier {
       const classifier = new BayesClassifier()
       classifier.addDocument('i fixed the box', 'computing')
       classifier.addDocument('i write code', 'computing')
@@ -150,7 +151,6 @@ describe('bayes classifier', function () {
 
     it('should accept an optional smoothing parameter for the Bayesian estimates', function () {
       const defaultClassifier = new BayesClassifier()
-      const PorterStemmer = require('../lib/natural/stemmers/porter_stemmer')
       const newClassifier1 = new BayesClassifier(PorterStemmer)
       const newClassifier2 = new BayesClassifier(PorterStemmer, 0.1)
 
