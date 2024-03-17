@@ -22,9 +22,9 @@ THE SOFTWARE.
 
 'use strict'
 
-import { BayesClassifier } from "../lib/natural"
+import { BayesClassifier } from '../lib/natural'
 
-function setupClassifier () {
+function setupClassifier (): BayesClassifier {
   const classifier = new BayesClassifier()
   classifier.addDocument(['fix', 'box'], 'computing')
   classifier.addDocument(['write', 'code'], 'computing')
@@ -47,30 +47,26 @@ describe('bayes classifier', function () {
     it('should classify with parallel training', function () {
       const classifier = setupClassifier()
       // Check for parallel method
-      if (classifier.trainParallel) {
-        classifier.trainParallel(2, function (err) {
-          if (err) {
-            console.log(err)
-            return
-          }
-          expect(classifier.classify(['bug', 'code'])).toBe('computing')
-          expect(classifier.classify(['read', 'thing'])).toBe('literature')
-          // asyncSpecDone();
-        })
-      }
+      classifier['trainParallel'](2, function (err) {
+        if (err) {
+          console.log(err)
+          return
+        }
+        expect(classifier.classify(['bug', 'code'])).toBe('computing')
+        expect(classifier.classify(['read', 'thing'])).toBe('literature')
+        // asyncSpecDone();
+      })
     })
 
     it('should classify with parallel batched training', function () {
       const classifier = setupClassifier()
-      if (classifier.trainParallelBatches) {
-        // Check for parallel method
-        classifier.on('doneTraining', function () {
-          expect(classifier.classify(['bug', 'code'])).toBe('computing')
-          expect(classifier.classify(['read', 'thing'])).toBe('literature')
-          // asyncSpecDone();
-        })
-        classifier.trainParallelBatches({ numThreads: 2, batchSize: 2 })
-      }
+      // Check for parallel method
+      classifier.on('doneTraining', function () {
+        expect(classifier.classify(['bug', 'code'])).toBe('computing')
+        expect(classifier.classify(['read', 'thing'])).toBe('literature')
+        // asyncSpecDone();
+      })
+      classifier.trainParallelBatches({ numThreads: 2, batchSize: 2 })
     })
 
     it('should provide all classification scores', function () {
