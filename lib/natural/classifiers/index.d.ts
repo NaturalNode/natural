@@ -96,7 +96,7 @@ declare class ClassifierBase extends events.EventEmitter {
   static loadFrom (storage: StorageBackend): ClassifierBase
 
   trainParallel (numThreads: number, callback: ParallelTrainerCallback): void
-  trainParallelBatches (options: {numThreads: number, batchSize: number} ): void
+  trainParallelBatches (options: { numThreads: number, batchSize: number }): void
   retrainParallel (numThreads: number, callback: ParallelTrainerCallback): void
 }
 
