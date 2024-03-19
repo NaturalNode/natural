@@ -34,6 +34,6 @@ export class StorageBackend {
 
   constructor (type: STORAGE_TYPES)
   setStorageType (storageType: STORAGE_TYPES): void
-  store (key: string, value: any): Promise<String>
+  store (key: string, value: any): Promise<string>
   retrieve (key: string): Promise<any>
 }

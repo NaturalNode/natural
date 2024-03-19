@@ -23,7 +23,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import { Tokenizer } from '../tokenizers'
+import type { Tokenizer } from '../tokenizers'
 
 declare type TfIdfCallback = (i: number, measure: number, key?: string) => void
 
@@ -34,11 +34,11 @@ declare interface TfIdfTerm {
   tfidf: number
 }
 
-declare type TfIdfDocument = { __key: string | undefined } | { [key: string]: number | undefined }
+declare type TfIdfDocument = Record<string, number>
 
 export class TfIdf {
-  documents: TfIdfDocument | undefined
-  _idfCache: { [key: string]: number } | undefined
+  documents: TfIdfDocument[]
+  _idfCache: Record<string, number>
 
   constructor (deserialized?: { documents: TfIdfDocument[] })
   idf (term: string, force?: boolean): number

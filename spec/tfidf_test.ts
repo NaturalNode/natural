@@ -46,4 +46,5 @@ const s = JSON.stringify(tfidf)
 // save "s" to disk, database or otherwise
 
 // assuming you pulled "s" back out of storage.
-tfidf = new TfIdf(JSON.parse(s))
+const obj: Record<string, unknown> = JSON.parse(s)
+tfidf = new TfIdf(obj)

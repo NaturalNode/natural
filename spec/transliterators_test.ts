@@ -1,4 +1,3 @@
-
 import { TransliterateJa } from '../lib/natural/transliterators'
 
 console.log(TransliterateJa('あいうえお かきくけこ'))

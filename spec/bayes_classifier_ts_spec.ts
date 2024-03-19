@@ -133,8 +133,9 @@ describe('bayes classifier', function () {
 
     it('should serialize and deserialize a working classifier', function () {
       const classifier = setupClassifierWithSentences()
-      const obj = JSON.stringify(classifier)
-      const newClassifier = BayesClassifier.restore(JSON.parse(obj))
+      const objAsString = JSON.stringify(classifier)
+      const obj: Record<string, unknown> = JSON.parse(objAsString)
+      const newClassifier = BayesClassifier.restore(obj)
 
       newClassifier.addDocument('kick a ball', 'sports')
       newClassifier.addDocument('hit some balls', 'sports')

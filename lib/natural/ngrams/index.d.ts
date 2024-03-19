@@ -22,12 +22,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import { Tokenizer } from '../tokenizers'
+import type { Tokenizer } from '../tokenizers'
 
 declare interface NGramsStats {
   ngrams: string[][]
-  frequencies: { [key: string]: number | undefined }
-  Nr: { [key: number]: number | undefined }
+  frequencies: Record<string, number>
+  Nr: Record<number, number>
   numberOfNgrams: number
 }
 

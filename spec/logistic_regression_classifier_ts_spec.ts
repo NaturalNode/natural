@@ -76,8 +76,9 @@ describe('logistic regression', function () {
 
   it('should serialize and deserialize a working classifier', function () {
     const classifier = createClassifier()
-    const obj = JSON.stringify(classifier)
-    const newClassifier = LogisticRegressionClassifier.restore(JSON.parse(obj))
+    const objString = JSON.stringify(classifier)
+    const obj: Record<string, unknown> = JSON.parse(objString)
+    const newClassifier = LogisticRegressionClassifier.restore(obj)
 
     newClassifier.addDocument('kick a ball', 'sports')
     newClassifier.addDocument('hit some balls', 'sports')

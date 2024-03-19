@@ -23,7 +23,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import { Feature } from '../classifiers'
+import type { Feature } from '../classifiers'
 
 declare interface RuleTemplatesItem {
   function: (sentence: Sentence, i: number, parameter1?: string, parameter2?: string) => boolean
@@ -33,9 +33,7 @@ declare interface RuleTemplatesItem {
   parameter2Values?: (sentence: Sentence, i: number) => string[]
 }
 
-export interface RuleTemplates {
-  [key: string]: RuleTemplatesItem | undefined
-}
+export type RuleTemplates = Record<string, RuleTemplatesItem | undefined>
 
 export class RuleTemplate {
   constructor (templateName: string, metadata: RuleTemplatesItem)
@@ -82,7 +80,7 @@ export class RuleSet {
 
 export class Lexicon {
   constructor (language: string, defaultCategory: string, defaultCategoryCapitalised?: string)
-  lexicon: { [key: string]: string[] | undefined }
+  lexicon: Record<string, string[] | undefined>
   defaultCategory: string
   defaultCategoryCapitalised: string | undefined
   parseLexicon (data: string): void
@@ -99,8 +97,8 @@ declare class Corpus {
   constructor (data: string | Corpus, typeOfCorpus: number, SentenceClass: typeof Sentence)
   private readonly wordCount: number
   private readonly sentences: Sentence[]
-  private readonly tagFrequencies: { [key: string]: string[] | undefined }
-  private readonly posTags: { [key: string]: string[] | undefined }
+  private readonly tagFrequencies: Record<string, Record<string, number> | undefined>
+  private readonly posTags: Record<string, boolean | undefined>
   parseBrownCorpus (data: string, SentenceClass: typeof Sentence): void
   getTags (): string[]
   splitInTrainAndTest (percentageTrain: number): [Corpus, Corpus]
@@ -148,8 +146,8 @@ export class BrillPOSTrainer {
   private readonly corpus: Corpus
   private readonly templates: RuleTemplates
   private readonly positiveRules: RuleSet
-  private readonly mapRuleToSites: { [key: string]: { [key: number ]: { [key: number ]: boolean | undefined } | undefined } | undefined }
-  private readonly mapSiteToRules: { [key: number]: { [key: number ]: { [key: string ]: TransformationRule | undefined } | undefined } | undefined }
+  private readonly mapRuleToSites: Record<string, Record<number, Record< number, boolean | undefined> | undefined> | undefined>
+  private readonly mapSiteToRules: Record<number, Record<number, Record<string, boolean | undefined> | undefined> | undefined>
   private selectHighRule (): TransformationRule
   private mapRuleToSite (rule: TransformationRule, i: number, j: number): void
   private mapSiteToRule (i: number, j: number, rule: TransformationRule): void
