@@ -72,10 +72,10 @@
   "scripts": {
     "benchmark": "node benchmarks",
     "build": "tsc",
-    "clean": "rimraf *~ #* *classifier.json",
-    "test": "NODE_PATH=. node ./node_modules/jasmine/bin/jasmine.js --random=false spec/*_spec.js",
+    "clean": "rimraf *~ #* *classifier.json dist",
+    "test": "node spec/support/jasmine_bootstrap.js",
     "coverage": "nyc --reporter=lcov npm run test && nyc npm run test_io",
-    "test_io": "NODE_PATH=. node ./node_modules/jasmine/bin/jasmine.js --random=false io_spec/*_spec.js",
+    "test_io": "node ./node_modules/jasmine/bin/jasmine.js --random=false io_spec/*_spec.js",
     "test_browser": "NODE_PATH=. node ./node_modules/gulp/bin/gulp.js",
     "lint": "eslint . --ext .ts"
   },

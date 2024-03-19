@@ -108,7 +108,7 @@ export class BayesClassifier extends ClassifierBase {
 
   constructor (stemmer?: Stemmer, smoothing?: number)
   static load (filename: string, stemmer: Stemmer | null | undefined, callback: BayesClassifierCallback): void
-  static restore (classifier: BayesClassifier, stemmer?: Stemmer): BayesClassifier
+  static restore (classifier: Record<string, unknown>, stemmer?: Stemmer): BayesClassifier
   saveTo (storage: StorageBackend): string
   static loadFrom (storage: StorageBackend): ClassifierBase
 }
@@ -118,7 +118,7 @@ declare type LogisticRegressionClassifierCallback = (err: NodeJS.ErrnoException 
 export class LogisticRegressionClassifier extends ClassifierBase {
   constructor (stemmer?: Stemmer)
   static load (filename: string, stemmer: Stemmer | null | undefined, callback: LogisticRegressionClassifierCallback): void
-  static restore (classifier: LogisticRegressionClassifier, stemmer?: Stemmer): LogisticRegressionClassifier
+  static restore (classifier: Record<string, unknown>, stemmer?: Stemmer): LogisticRegressionClassifier
   saveTo (storage: StorageBackend): string
   static loadFrom (storage: StorageBackend): ClassifierBase
 }

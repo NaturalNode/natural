@@ -25,7 +25,7 @@ const SentenceClass = natural.Sentence
 const DEBUG = false
 const JSON_FLAG = 2
 
-const brownCorpus = require('spec/test_data/browntag_nolines_excerpt.json')
+const brownCorpus = require('./test_data/browntag_nolines_excerpt.json')
 
 function selectRuleTemplates (templateNames) {
   const templates = []

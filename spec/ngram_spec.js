@@ -24,7 +24,7 @@ THE SOFTWARE.
 
 const NGrams = require('../lib/natural/ngrams/ngrams')
 
-const text = require('spec/test_data/NYT-20150205-picassos-granddaughter-plans-to-sell-art-worrying-the-market.json')
+const text = require('./test_data/NYT-20150205-picassos-granddaughter-plans-to-sell-art-worrying-the-market.json')
 
 describe('ngrams', function () {
   it('should bigram a string via ngrams', function () {

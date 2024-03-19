@@ -27,7 +27,7 @@ const IndexFile = require('../lib/natural/wordnet/index_file')
 describe('indexFile', function () {
   describe('getFileSize', function () {
     it('should look up a word if the file exists', function () {
-      const indexFile = new IndexFile('spec/test_data/', 'document1.txt')
+      const indexFile = new IndexFile('./test_data/', 'document1.txt')
       indexFile.lookupFromFile('node', function (indexRecord) {
       })
     })

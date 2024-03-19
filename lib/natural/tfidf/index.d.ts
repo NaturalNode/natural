@@ -40,7 +40,7 @@ export class TfIdf {
   documents: TfIdfDocument[]
   _idfCache: Record<string, number>
 
-  constructor (deserialized?: { documents: TfIdfDocument[] })
+  constructor (deserialized?: Record<string, unknown>)
   idf (term: string, force?: boolean): number
   addDocument (document: string | string[], key?: string, restoreCache?: boolean): void
   addFileSync (path: string, encoding?: string, key?: string, restoreCache?: boolean): void

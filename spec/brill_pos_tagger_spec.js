@@ -20,10 +20,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 const natural = require('../lib/natural')
 
-const englishSentences = require('spec/test_data/NYT-20150205-picassos-granddaughter-plans-to-sell-art-worrying-the-market.json').sentences
-const englishTagResults = require('spec/test_data/NYT-20150205-picassos-granddaughter-plans_expected_tag_results.json').results
+const englishSentences = require('./test_data/NYT-20150205-picassos-granddaughter-plans-to-sell-art-worrying-the-market.json').sentences
+const englishTagResults = require('./test_data/NYT-20150205-picassos-granddaughter-plans_expected_tag_results.json').results
 
-const dutchSentences = require('spec/test_data/Volkskrant-20150205-Knot-geldpers-aanzetten-is-paardenmiddel-voor-half-procent-inflatie.json').sentences
+const dutchSentences = require('./test_data/Volkskrant-20150205-Knot-geldpers-aanzetten-is-paardenmiddel-voor-half-procent-inflatie.json').sentences
 
 const DEBUG = false
 
