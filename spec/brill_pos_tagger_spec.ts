@@ -24,18 +24,17 @@ import * as englishSentences from './test_data/NYT-20150205-picassos-granddaught
 
 import jsonData from './test_data/NYT-20150205-picassos-granddaughter-plans_expected_tag_results.json'
 
-const englishTagResults: TagResults = jsonData as TagResults
-
 import * as dutchSentences from './test_data/Volkskrant-20150205-Knot-geldpers-aanzetten-is-paardenmiddel-voor-half-procent-inflatie.json'
 
+const englishTagResults: TagResults = jsonData as TagResults
 const DEBUG = false
 
 // Compares two tagged sentences. First one is in the old POSJS format, i.e.
 // an array of two position arrays. The second one is a Sentence object
 // that holds an array of objects for each position {token: "string", tag: "string"}
-function compareTaggedSentences (sentenceInOldFormat: [string, string][], sentenceInNewFormat: Sentence) {
+function compareTaggedSentences (sentenceInOldFormat: [string, string][], sentenceInNewFormat: Sentence): boolean {
   let equal = true
-  sentenceInOldFormat.forEach(function (wordPlusTag: [string, string], index: number) {
+  sentenceInOldFormat.forEach(function (wordPlusTag: Array<string>, index: number) {
     equal = equal &&
       (wordPlusTag[1] === sentenceInNewFormat.taggedWords[index].tag)
     DEBUG && console.log(wordPlusTag[1] + ' ' + sentenceInNewFormat.taggedWords[index].tag)
