@@ -24,7 +24,7 @@ import * as englishSentences from './test_data/NYT-20150205-picassos-granddaught
 
 import jsonData from './test_data/NYT-20150205-picassos-granddaughter-plans_expected_tag_results.json'
 interface TagResults {
-  results: [string, string][][]
+  results: Array<Array<[string, string]>>
 }
 const englishTagResults: TagResults = jsonData as TagResults
 
