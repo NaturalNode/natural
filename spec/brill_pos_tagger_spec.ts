@@ -32,7 +32,7 @@ const DEBUG = false
 // Compares two tagged sentences. First one is in the old POSJS format, i.e.
 // an array of two position arrays. The second one is a Sentence object
 // that holds an array of objects for each position {token: "string", tag: "string"}
-function compareTaggedSentences (sentenceInOldFormat: [string, string][], sentenceInNewFormat: Sentence): boolean {
+function compareTaggedSentences (sentenceInOldFormat: Array<Array<string>>, sentenceInNewFormat: Sentence): boolean {
   let equal = true
   sentenceInOldFormat.forEach(function (wordPlusTag: Array<string>, index: number) {
     equal = equal &&
