@@ -47,7 +47,7 @@ describe('bayes classifier', function () {
     it('should classify with parallel training', function () {
       const classifier = setupClassifier()
       // Check for parallel method
-      if (classifier.Threads) {
+      if (classifier.Threads !== undefined) {
         classifier.trainParallel(2, function (err) {
           if (err !== null) {
             console.log(err)
@@ -62,7 +62,7 @@ describe('bayes classifier', function () {
     it('should classify with parallel batched training', function () {
       const classifier = setupClassifier()
       // Check for parallel method
-      if (classifier.Threads) {
+      if (classifier.Threads !== undefined) {
         classifier.on('doneTraining', function () {
           expect(classifier.classify(['bug', 'code'])).toBe('computing')
           expect(classifier.classify(['read', 'thing'])).toBe('literature')
