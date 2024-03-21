@@ -22,7 +22,7 @@ THE SOFTWARE.
 
 'use strict'
 
-import { BayesClassifier, PorterStemmer } from '../lib/natural'
+import { BayesClassifier, PorterStemmer } from 'lib/natural'
 
 function setupClassifier (): BayesClassifier {
   const classifier = new BayesClassifier()
@@ -47,25 +47,29 @@ describe('bayes classifier', function () {
     it('should classify with parallel training', function () {
       const classifier = setupClassifier()
       // Check for parallel method
-      classifier.trainParallel(2, function (err) {
-        if (err !== null) {
-          console.log(err)
-          return
-        }
-        expect(classifier.classify(['bug', 'code'])).toBe('computing')
-        expect(classifier.classify(['read', 'thing'])).toBe('literature')
-      })
+      if (classifier.Threads) {
+        classifier.trainParallel(2, function (err) {
+          if (err !== null) {
+            console.log(err)
+            return
+          }
+          expect(classifier.classify(['bug', 'code'])).toBe('computing')
+          expect(classifier.classify(['read', 'thing'])).toBe('literature')
+        })
+      }
     })
 
     it('should classify with parallel batched training', function () {
       const classifier = setupClassifier()
       // Check for parallel method
-      classifier.on('doneTraining', function () {
-        expect(classifier.classify(['bug', 'code'])).toBe('computing')
-        expect(classifier.classify(['read', 'thing'])).toBe('literature')
-        // asyncSpecDone();
-      })
-      classifier.trainParallelBatches({ numThreads: 2, batchSize: 2 })
+      if (classifier.Threads) {
+        classifier.on('doneTraining', function () {
+          expect(classifier.classify(['bug', 'code'])).toBe('computing')
+          expect(classifier.classify(['read', 'thing'])).toBe('literature')
+          // asyncSpecDone();
+        })
+        classifier.trainParallelBatches({ numThreads: 2, batchSize: 2 })
+      }
     })
 
     it('should provide all classification scores', function () {

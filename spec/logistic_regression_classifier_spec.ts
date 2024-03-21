@@ -22,7 +22,7 @@ THE SOFTWARE.
 
 'use strict'
 
-import { LogisticRegressionClassifier } from '../lib/natural'
+import { LogisticRegressionClassifier } from 'lib/natural'
 
 describe('logistic regression', function () {
   it('should classify with individually trained documents', function () {

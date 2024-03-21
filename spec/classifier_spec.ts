@@ -22,7 +22,7 @@ THE SOFTWARE.
 
 'use strict'
 
-import { BayesClassifier } from '../lib/natural'
+import { BayesClassifier } from 'lib/natural'
 
 describe('classifier', function () {
   describe('addDocument', function () {

@@ -7,6 +7,7 @@
     ],
     "module": "commonjs",
     "rootDir": "./",
+    "baseUrl": "./",
     "moduleResolution": "node",
     "allowJs": true,
     "outDir": "./dist",
@@ -15,9 +16,10 @@
     "strict": true
   },
   "include": [
-    "lib/natural/**/*",
-    "spec/*",
-    "io_spec/*", "spec/support/jasmine_bootstrap.js"  ],
+    "lib/natural/**/*.ts",
+    "spec/*.ts",
+    "io_spec/*.ts"
+  ],
   "exclude": [
     "./node_modules"
   ]
