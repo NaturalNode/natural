@@ -18,7 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 'use strict'
 
-import { WordTokenizer, Lexicon, RuleSet, BrillPOSTagger, Sentence, TagResults } from 'lib/natural'
+import { WordTokenizer, Lexicon, RuleSet, BrillPOSTagger } from 'lib/natural'
+import type { Sentence, TagResults } from 'lib/natural'
 
 import * as englishSentences from './test_data/NYT-20150205-picassos-granddaughter-plans-to-sell-art-worrying-the-market.json'
 
@@ -32,9 +33,9 @@ const DEBUG = false
 // Compares two tagged sentences. First one is in the old POSJS format, i.e.
 // an array of two position arrays. The second one is a Sentence object
 // that holds an array of objects for each position {token: "string", tag: "string"}
-function compareTaggedSentences (sentenceInOldFormat: Array<Array<string>>, sentenceInNewFormat: Sentence): boolean {
+function compareTaggedSentences (sentenceInOldFormat: string[][], sentenceInNewFormat: Sentence): boolean {
   let equal = true
-  sentenceInOldFormat.forEach(function (wordPlusTag: Array<string>, index: number) {
+  sentenceInOldFormat.forEach(function (wordPlusTag: string[], index: number) {
     equal = equal &&
       (wordPlusTag[1] === sentenceInNewFormat.taggedWords[index].tag)
     DEBUG && console.log(wordPlusTag[1] + ' ' + sentenceInNewFormat.taggedWords[index].tag)

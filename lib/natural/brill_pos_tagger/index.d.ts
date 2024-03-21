@@ -166,5 +166,5 @@ export class BrillPOSTrainer {
 }
 
 export interface TagResults {
-  results: Array<Array<Array<string>>>
+  results: string[][][]
 }
