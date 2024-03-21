@@ -73,7 +73,7 @@
   },
   "scripts": {
     "benchmark": "node benchmarks",
-    "build": "tsc && ncp spec/test_data/* dist",
+    "build": "tsc && ncp spec/test_data dist",
     "clean": "rimraf *~ #* *classifier.json dist io_spec/tmp/*.json",
     "test": "cross-env NODE_PATH=. jasmine --random=false spec/*_spec.js",
     "test_io": "jasmine --random=false io_spec/*_spec.js",
