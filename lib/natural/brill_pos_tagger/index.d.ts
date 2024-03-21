@@ -164,3 +164,7 @@ export class BrillPOSTrainer {
   train (corpus: Corpus, templates: RuleTemplates, lexicon: Lexicon): RuleSet
   printRulesWithScores (): string
 }
+
+export interface TagResults {
+  results: Array<Array<[string, string]>>
+}

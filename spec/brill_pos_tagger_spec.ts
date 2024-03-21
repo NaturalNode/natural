@@ -18,14 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 'use strict'
 
-import { WordTokenizer, Lexicon, RuleSet, BrillPOSTagger, Sentence } from 'lib/natural'
+import { WordTokenizer, Lexicon, RuleSet, BrillPOSTagger, Sentence, TagResults } from 'lib/natural'
 
 import * as englishSentences from './test_data/NYT-20150205-picassos-granddaughter-plans-to-sell-art-worrying-the-market.json'
 
 import jsonData from './test_data/NYT-20150205-picassos-granddaughter-plans_expected_tag_results.json'
-interface TagResults {
-  results: Array<Array<[string, string]>>
-}
+
 const englishTagResults: TagResults = jsonData as TagResults
 
 import * as dutchSentences from './test_data/Volkskrant-20150205-Knot-geldpers-aanzetten-is-paardenmiddel-voor-half-procent-inflatie.json'
