@@ -21,11 +21,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import { WordTokenizer, Lexicon, RuleSet, BrillPOSTagger } from 'lib/natural'
 import type { Sentence, TagResults } from 'lib/natural'
 
-import * as englishSentences from './test_data/NYT-20150205-picassos-granddaughter-plans-to-sell-art-worrying-the-market.json'
+import * as englishSentences from '../spec/test_data/NYT-20150205-picassos-granddaughter-plans-to-sell-art-worrying-the-market.json'
 
-import jsonData from './test_data/NYT-20150205-picassos-granddaughter-plans_expected_tag_results.json'
+import jsonData from '../spec/test_data/NYT-20150205-picassos-granddaughter-plans_expected_tag_results.json'
 
-import * as dutchSentences from './test_data/Volkskrant-20150205-Knot-geldpers-aanzetten-is-paardenmiddel-voor-half-procent-inflatie.json'
+import * as dutchSentences from '../spec/test_data/Volkskrant-20150205-Knot-geldpers-aanzetten-is-paardenmiddel-voor-half-procent-inflatie.json'
 
 const englishTagResults: TagResults = jsonData as TagResults
 const DEBUG = false

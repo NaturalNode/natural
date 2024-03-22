@@ -25,7 +25,7 @@ THE SOFTWARE.
 
 import type { Tokenizer } from '../tokenizers'
 
-declare type TfIdfCallback = (i: number, measure: number, key?: string) => void
+declare type TfIdfCallback = (i: number, measure: number, key?: string | Record<string, any>) => void
 
 declare interface TfIdfTerm {
   term: string
@@ -42,7 +42,7 @@ export class TfIdf {
 
   constructor (deserialized?: Record<string, unknown>)
   idf (term: string, force?: boolean): number
-  addDocument (document: string | string[], key?: string, restoreCache?: boolean): void
+  addDocument (document: string | string[] | Record<string, string>, key?: Record<string, any> | any, restoreCache?: boolean): void
   addFileSync (path: string, encoding?: string, key?: string, restoreCache?: boolean): void
   tfidf (terms: string | string[], d: number): number
   tfidfs (terms: string | string[], callback?: TfIdfCallback): number[]
