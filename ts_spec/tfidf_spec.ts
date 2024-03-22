@@ -171,8 +171,7 @@ describe('tfidf', function () {
       tfidf.tfidfs('node', (i: number, measure: number, k: string | Record<string, any> | undefined): void => {
         if (typeof k === 'object') {
           expect(measure).toBe(correctCalculations[k.node])
-        }
-        else {
+        } else {
           console.log('Key was undefined')
         }
       })
@@ -180,8 +179,7 @@ describe('tfidf', function () {
       tfidf.tfidfs('ruby', (i: number, measure: number, k: string | Record<string, any> | undefined): void => {
         if (typeof k === 'object') {
           expect(measure).toBe(correctCalculations[k.ruby])
-        }
-        else {
+        } else {
           console.log('Key was undefined')
         }
       })
