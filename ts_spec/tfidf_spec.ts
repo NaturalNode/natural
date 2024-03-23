@@ -244,9 +244,9 @@ describe('tfidf', function () {
     it('should require a valid tokenizer when using setTokenizer', function () {
       tfidf = new TfIdf()
 
-      // @ts-expect-error
+      // @ts-expect-error Behaviour with wrong parameters is tested
       expect(function () { tfidf.setTokenizer(1) }).toThrow(new Error('Expected a valid Tokenizer'))
-      // @ts-expect-error
+      // @ts-expect-error Behaviour with wrong parameters is tested
       expect(function () { tfidf.setTokenizer({}) }).toThrow(new Error('Expected a valid Tokenizer'))
     })
   })
@@ -263,12 +263,12 @@ describe('tfidf', function () {
     })
     it('should detect an incorrect stopwords list (not an array)', function () {
       const stopwords = {}
-      // @ts-expect-error
+      // @ts-expect-error Test for behaviour with wrong parameters
       expect(tfidf.setStopwords(stopwords)).toEqual(false)
     })
     it('should detect an incorrect stopwords list (one of the elements is not a string)', function () {
       const stopwords = [function f () {}]
-      // @ts-expect-error
+      // @ts-expect-error Test for behaviour with wrong parameters
       expect(tfidf.setStopwords(stopwords)).toEqual(false)
     })
   })

@@ -28,7 +28,7 @@ declare interface JaroWinklerOptions {
   ignoreCase?: boolean
 }
 
-export function JaroWinklerDistance (s1: string, s2: string, options: JaroWinklerOptions): number
+export function JaroWinklerDistance (s1: string, s2: string, options?: JaroWinklerOptions): number
 
 declare interface DamerauLevenshteinDistanceOptions {
   /** @default 1 */
