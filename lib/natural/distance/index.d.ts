@@ -40,10 +40,7 @@ declare interface DamerauLevenshteinDistanceOptions {
   /** @default 1 */
   transposition_cost?: number
   /** @default false */
-  search?: boolean
-  /** @default false */
   restricted?: boolean
-  damerau?: boolean
 }
 
 declare interface SubstringDistanceResult {
@@ -66,23 +63,23 @@ export function LevenshteinDistance (
  * Valid edit operations are:
  *  - transposition, insertion, deletion, and substitution
  */
-export function DamerauLevenshteinDistance (
+export function LevenshteinDistanceSearch (
   source: string,
   target: string,
-  options: DamerauLevenshteinDistanceOptions & { search: true }
+  options?: DamerauLevenshteinDistanceOptions
 ): SubstringDistanceResult
 
 export function DamerauLevenshteinDistance (
   source: string,
   target: string,
-  options?: DamerauLevenshteinDistanceOptions & { search?: false }
+  options?: DamerauLevenshteinDistanceOptions
 ): number
 
-export function DamerauLevenshteinDistance (
+export function DamerauLevenshteinDistanceSearch (
   source: string,
   target: string,
-  options: DamerauLevenshteinDistanceOptions & { search: boolean }
-): number | SubstringDistanceResult
+  options?: DamerauLevenshteinDistanceOptions
+): SubstringDistanceResult
 
 export function DiceCoefficient (str1: string, str2: string): number
 
