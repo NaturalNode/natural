@@ -20,7 +20,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export class NounInflector {
+export class SingularPluralInflector {
+  singularize (token: string): string
+  pluralize (token: string): string
+  addSingular (pattern: RegExp, replacement: string): void
+  addPlural (pattern: RegExp, replacement: string): void
+}
+
+export class NounInflector extends SingularPluralInflector {
   pluralize (token: string): string
   singularize (token: string): string
 }
