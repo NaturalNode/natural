@@ -35,9 +35,11 @@ export class NounInflector extends SingularPluralInflector {
 export class NounInflectorFr extends NounInflector {}
 export class NounInflectorJa extends NounInflector {}
 
-export let CountInflector: {
-  nth: (i: number) => string
+export class CountInflector {
+  nth: (i: number | string) => string
 }
+
+export class CountInflectorFr extends CountInflector {}
 
 export class PresentVerbInflector {
   pluralize (token: string): string

@@ -22,7 +22,7 @@ THE SOFTWARE.
 
 'use strict'
 
-const CountInflector = (require('../lib/natural/inflectors/count_inflector'))
+import { CountInflector } from 'lib/natural'
 const inflector = new CountInflector()
 
 describe('count_inflector', function () {

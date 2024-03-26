@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2011, Chris Umbel
+Copyright (c) 2012, Guillaume Marty
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,11 +22,26 @@ THE SOFTWARE.
 
 'use strict'
 
-exports.NounInflector = require('./noun_inflector')
-exports.NounInflectorFr = require('./fr/noun_inflector')
-exports.NounInflectorJa = require('./ja/noun_inflector')
+import { CountInflectorFr } from 'lib/natural'
+const inflector = new CountInflectorFr()
 
-exports.PresentVerbInflector = require('./present_verb_inflector')
+describe('count_inflector', function () {
+  it('should handle 1er cases', function () {
+    expect(inflector.nth(1)).toBe('1er')
+  })
 
-exports.CountInflector = require('./count_inflector')
-exports.CountInflectorFr = require('./fr/count_inflector')
+  it('should handle the 2e cases', function () {
+    expect(inflector.nth(0)).toBe('0e')
+    expect(inflector.nth(2)).toBe('2e')
+    expect(inflector.nth(3)).toBe('3e')
+    expect(inflector.nth(5)).toBe('5e')
+    expect(inflector.nth(11)).toBe('11e')
+    expect(inflector.nth(100)).toBe('100e')
+    expect(inflector.nth(999)).toBe('999e')
+  })
+
+  it('should handle roman numerals', function () {
+    expect(inflector.nth('I')).toBe('Ier')
+    expect(inflector.nth('XX')).toBe('XXe')
+  })
+})
