@@ -33,7 +33,8 @@ declare interface RuleTemplatesItem {
   parameter2Values?: (sentence: Sentence, i: number) => string[]
 }
 
-export type RuleTemplates = Record<string, RuleTemplatesItem | undefined>
+export type RuleTemplates = Record<string, RuleTemplatesItem>
+export let ruleTemplates: RuleTemplates
 
 export class RuleTemplate {
   constructor (templateName: string, metadata: RuleTemplatesItem)
@@ -94,7 +95,7 @@ export class Lexicon {
 }
 
 declare class Corpus {
-  constructor (data: string | Corpus, typeOfCorpus: number, SentenceClass: typeof Sentence)
+  constructor (data: string | TaggedCorpus, typeOfCorpus: number, SentenceClass: typeof Sentence)
   private readonly wordCount: number
   private readonly sentences: Sentence[]
   private readonly tagFrequencies: Record<string, Record<string, number> | undefined>
@@ -117,6 +118,15 @@ declare interface BrillPOSTaggedWord {
   tag: string
 }
 
+declare interface BrillPOSTaggedSentence {
+  taggedWords: BrillPOSTaggedWord[]
+}
+
+declare interface TaggedCorpus {
+  wordCount: number
+  sentences: BrillPOSTaggedSentence[]
+}
+
 export class Sentence {
   constructor (data?: string[])
   taggedWords: BrillPOSTaggedWord[]
@@ -134,9 +144,6 @@ export class BrillPOSTagger {
 }
 
 export class BrillPOSTester {
-  constructor (lexicon: Lexicon, ruleSet: RuleSet)
-  private readonly lexicon: Lexicon
-  private readonly ruleSet: RuleSet
   test (corpus: Corpus, tagger: BrillPOSTagger): [number, number]
 }
 
@@ -161,7 +168,7 @@ export class BrillPOSTrainer {
   private scanForPositiveRules (): void
   private scanForSites (): void
   private neighbourhood (i: number, j: number): Array<[number, number]>
-  train (corpus: Corpus, templates: RuleTemplates, lexicon: Lexicon): RuleSet
+  train (corpus: Corpus, templates: RuleTemplate[], lexicon: Lexicon): RuleSet
   printRulesWithScores (): string
 }
 

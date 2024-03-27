@@ -22,12 +22,31 @@ THE SOFTWARE.
 
 'use strict'
 
-exports.BrillPOSTagger = require('./lib/Brill_POS_Tagger')
-exports.BrillPOSTrainer = require('./lib/Brill_POS_Trainer')
-exports.BrillPOSTester = require('./lib/Brill_POS_Tester')
-exports.Lexicon = require('./lib/Lexicon')
-exports.RuleSet = require('./lib/RuleSet')
-exports.ruleTemplates = require('./lib/RuleTemplates')
-exports.RuleTemplate = require('./lib/RuleTemplate')
-exports.Corpus = require('./lib/Corpus')
-exports.Sentence = require('./lib/Sentence')
+import { AggressiveTokenizerSv } from 'lib/natural'
+const tokenizer = new AggressiveTokenizerSv()
+
+describe('aggressive_tokenizer_sv', function () {
+  it('should tokenize strings', function () {
+    expect(tokenizer.tokenize('Ett tu tre')).toEqual(['Ett', 'tu', 'tre'])
+  })
+
+  it('should swallow punctuation', function () {
+    expect(tokenizer.tokenize('Ett, tu, tre')).toEqual(['Ett', 'tu', 'tre'])
+  })
+
+  it('should swallow final punctuation', function () {
+    expect(tokenizer.tokenize('Ett, tu, tre?')).toEqual(['Ett', 'tu', 'tre'])
+  })
+
+  it('should swallow initial punctuation', function () {
+    expect(tokenizer.tokenize('.Ett, tu, tre')).toEqual(['Ett', 'tu', 'tre'])
+  })
+
+  it('should swallow duplicate punctuation', function () {
+    expect(tokenizer.tokenize('Ett, tu... tre')).toEqual(['Ett', 'tu', 'tre'])
+  })
+
+  it('should not split on hyphen or Swedish letters', function () {
+    expect(tokenizer.tokenize('It-bolaget ägs av en 30-åring')).toEqual(['It-bolaget', 'ägs', 'av', 'en', '30-åring'])
+  })
+})

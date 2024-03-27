@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2011, Chris Umbel
+Copyright (c) 2023, Hugo W.L. ter Doest
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,12 +22,15 @@ THE SOFTWARE.
 
 'use strict'
 
-exports.BrillPOSTagger = require('./lib/Brill_POS_Tagger')
-exports.BrillPOSTrainer = require('./lib/Brill_POS_Trainer')
-exports.BrillPOSTester = require('./lib/Brill_POS_Tester')
-exports.Lexicon = require('./lib/Lexicon')
-exports.RuleSet = require('./lib/RuleSet')
-exports.ruleTemplates = require('./lib/RuleTemplates')
-exports.RuleTemplate = require('./lib/RuleTemplate')
-exports.Corpus = require('./lib/Corpus')
-exports.Sentence = require('./lib/Sentence')
+import { AggressiveTokenizerDe } from 'lib/natural'
+const tokenizer = new AggressiveTokenizerDe()
+
+describe('aggressive_tokenizer', function () {
+  it('should tokenize strings with diacritics ä, ö and ü, and esszet ß', function () {
+    expect(tokenizer.tokenize('Es werden nur Maßnahmen gefördert, die nicht aufgrund einer Rechtsvorschrift umgesetzt werden müssen.')).toEqual(
+      ['Es', 'werden', 'nur', 'Maßnahmen', 'gefördert', 'die', 'nicht', 'aufgrund', 'einer',
+        'Rechtsvorschrift', 'umgesetzt', 'werden', 'müssen'])
+    expect(tokenizer.tokenize('Anträge sind vor Beginn der jeweiligen Maßnahme zu stellen.')).toEqual(
+      ['Anträge', 'sind', 'vor', 'Beginn', 'der', 'jeweiligen', 'Maßnahme', 'zu', 'stellen'])
+  })
+})
