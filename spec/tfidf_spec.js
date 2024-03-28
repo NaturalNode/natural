@@ -243,7 +243,7 @@ describe('tfidf', function () {
   describe('Stopwords', function () {
     it('should load a custom set of stopwords', function () {
       tfidf = new TfIdf()
-      const stopwords = require('lib/natural/util/stopwords').words
+      const stopwords = require('../lib/natural/util/stopwords').words
       expect(tfidf.setStopwords(stopwords)).toEqual(true)
       tfidf.addDocument('this document is about node.', 0)
       const terms = tfidf.listTerms(0)

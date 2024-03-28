@@ -22,12 +22,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import { Tokenizer } from '../tokenizers'
+import type { Tokenizer } from '../tokenizers'
 
 declare interface NGramsStats {
   ngrams: string[][]
-  frequencies: { [key: string]: number | undefined }
-  Nr: { [key: number]: number | undefined }
+  frequencies: Record<string, number>
+  Nr: Record<number, number>
   numberOfNgrams: number
 }
 
@@ -36,8 +36,8 @@ declare interface NGramsFunctions {
   // value, method signatures are necessary. Key collisions occur with property signatures.
   /* eslint-disable @typescript-eslint/method-signature-style */
   setTokenizer (t: Tokenizer): void
-  ngrams (sequence: string | string[], n: number, startSymbol: string | undefined, endSymbol: string | undefined, stats: true): NGramsStats
-  ngrams (sequence: string | string[], n: number, startSymbol?: string, endSymbol?: string, stats?: boolean): string[][]
+  ngrams (sequence: string | string[], n: number, startSymbol: string | undefined | null, endSymbol: string | undefined | null, stats: true): NGramsStats
+  ngrams (sequence: string | string[], n: number, startSymbol?: string | undefined | null, endSymbol?: string, stats?: boolean): string[][]
   bigrams (sequence: string | string[], startSymbol: string | undefined, endSymbol: string | undefined, stats: true): NGramsStats
   bigrams (sequence: string | string[], startSymbol?: string, endSymbol?: string, stats?: boolean): string[][]
   trigrams (sequence: string | string[], startSymbol: string | undefined, endSymbol: string | undefined, stats: true): NGramsStats

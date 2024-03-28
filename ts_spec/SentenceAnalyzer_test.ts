@@ -1,7 +1,5 @@
-import {
-  TaggedSentence,
-  SentenceAnalyzer
-} from '../lib/natural/analyzers'
+import type { TaggedSentence } from '../lib/natural/analyzers'
+import { SentenceAnalyzer } from '../lib/natural/analyzers'
 
 const sentenceTags: TaggedSentence = {
   tags: [

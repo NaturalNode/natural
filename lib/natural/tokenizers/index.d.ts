@@ -103,7 +103,7 @@ declare interface RegexTokenizerOptions {
 
 export class RegexpTokenizer extends Tokenizer {
   constructor (opts?: RegexTokenizerOptions)
-  tokenize (text: string): string[] | null
+  tokenize (text: string): string[]
 }
 
 declare interface OrthographyTokenizerOptions extends RegexTokenizerOptions {

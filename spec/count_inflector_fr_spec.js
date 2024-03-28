@@ -23,24 +23,25 @@ THE SOFTWARE.
 'use strict'
 
 const CountInflector = (require('../lib/natural/inflectors/fr/count_inflector'))
+const inflector = new CountInflector()
 
 describe('count_inflector', function () {
   it('should handle 1er cases', function () {
-    expect(CountInflector.nth(1)).toBe('1er')
+    expect(inflector.nth(1)).toBe('1er')
   })
 
   it('should handle the 2e cases', function () {
-    expect(CountInflector.nth(0)).toBe('0e')
-    expect(CountInflector.nth(2)).toBe('2e')
-    expect(CountInflector.nth(3)).toBe('3e')
-    expect(CountInflector.nth(5)).toBe('5e')
-    expect(CountInflector.nth(11)).toBe('11e')
-    expect(CountInflector.nth(100)).toBe('100e')
-    expect(CountInflector.nth(999)).toBe('999e')
+    expect(inflector.nth(0)).toBe('0e')
+    expect(inflector.nth(2)).toBe('2e')
+    expect(inflector.nth(3)).toBe('3e')
+    expect(inflector.nth(5)).toBe('5e')
+    expect(inflector.nth(11)).toBe('11e')
+    expect(inflector.nth(100)).toBe('100e')
+    expect(inflector.nth(999)).toBe('999e')
   })
 
   it('should handle roman numerals', function () {
-    expect(CountInflector.nth('I')).toBe('Ier')
-    expect(CountInflector.nth('XX')).toBe('XXe')
+    expect(inflector.nth('I')).toBe('Ier')
+    expect(inflector.nth('XX')).toBe('XXe')
   })
 })

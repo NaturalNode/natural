@@ -27,11 +27,11 @@ THE SOFTWARE.
 const fs = require('fs')
 const _ = require('underscore')
 
-const Sample = require('lib/natural/classifiers/maxent/Sample')
-const Element = require('lib/natural/classifiers/maxent/SimpleExample/SE_Element')
-const Context = require('lib/natural/classifiers/maxent/Context')
-const FeatureSet = require('lib/natural/classifiers/maxent/FeatureSet')
-const Classifier = require('lib/natural/classifiers/maxent/Classifier')
+const Sample = require('../lib/natural/classifiers/maxent/Sample')
+const Element = require('../lib/natural/classifiers/maxent/SimpleExample/SE_Element')
+const Context = require('../lib/natural/classifiers/maxent/Context')
+const FeatureSet = require('../lib/natural/classifiers/maxent/FeatureSet')
+const Classifier = require('../lib/natural/classifiers/maxent/Classifier')
 
 const classifierFile = 'io_spec/test_data/classifier.json'
 const nrIterations = 50

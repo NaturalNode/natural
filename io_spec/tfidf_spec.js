@@ -22,7 +22,7 @@ THE SOFTWARE.
 
 'use strict'
 
-const TfIdf = require('lib/natural/tfidf/tfidf')
+const TfIdf = require('../lib/natural/tfidf/tfidf')
 let tfidf
 
 describe('tfidf io', function () {

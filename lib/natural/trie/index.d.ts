@@ -27,7 +27,7 @@ export class Trie {
   addString (string: string): boolean
   addStrings (list: string[]): void
   contains (string: string): boolean
-  findPrefix (search: string): string[]
+  findPrefix (search: string): Array<string | null>
   findMatchesOnPath (search: string): string[]
   keysWithPrefix (prefix: string): string[]
   getSize (): number

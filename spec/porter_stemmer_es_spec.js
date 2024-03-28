@@ -24,7 +24,7 @@ THE SOFTWARE.
 
 const PorterStemmer = require('../lib/natural/stemmers/porter_stemmer_es')
 
-const snowBallDict = require('spec/test_data/snowball_es.json')
+const snowBallDict = require('./test_data/snowball_es.json')
 
 describe('porter_stemmer_es', function () {
   it('should perform stemming on a lot of words', function () {

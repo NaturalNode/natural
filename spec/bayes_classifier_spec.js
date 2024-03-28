@@ -47,7 +47,7 @@ describe('bayes classifier', function () {
     it('should classify with parallel training', function () {
       const classifier = setupClassifier()
       // Check for parallel method
-      if (classifier.trainParallel) {
+      if (classifier.Threads) {
         classifier.trainParallel(2, function (err) {
           if (err) {
             console.log(err)
@@ -62,7 +62,7 @@ describe('bayes classifier', function () {
 
     it('should classify with parallel batched training', function () {
       const classifier = setupClassifier()
-      if (classifier.trainParallelBatches) {
+      if (classifier.Threads) {
         // Check for parallel method
         classifier.on('doneTraining', function () {
           expect(classifier.classify(['bug', 'code'])).toBe('computing')

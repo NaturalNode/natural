@@ -82,7 +82,7 @@ describe('Bayes classifier file I/O', function () {
       sandbox.restore()
     })
     it('should pass an error to the callback function', function () {
-      sandbox.stub(baseClassifier, 'load', function (filename, cb) {
+      sandbox.stub(baseClassifier, 'load', function (filename, stemmer, cb) {
         cb(new Error('An error occurred'))
       })
       natural.BayesClassifier.load('/spec/test_data/tfidf_document1.txt', null, function (err, newClassifier) {

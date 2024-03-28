@@ -24,7 +24,7 @@ THE SOFTWARE.
 // const fs = require('fs')
 
 // const base_folder_test_data = 'spec/test_data/'
-const brownCorpus = require('spec/test_data/browntag_nolines_excerpt_maxent.json')
+const brownCorpus = require('./test_data/browntag_nolines_excerpt_maxent.json')
 // const classifierFile = base_folder_test_data + 'classifier.json'
 
 const natural = require('../lib/natural')

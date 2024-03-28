@@ -47,9 +47,23 @@ describe('classifier', function () {
     })
   })
 
-  describe('events emitters', function () {
-    it('should be emitted when a document is classified', function () {
+  describe('Classifer', function () {
+    const pushedEvents = []
+    function eventRegister (obj) {
+      pushedEvents.push(obj)
+    }
+
+    function assertEventResults () {
+      expect(pushedEvents[0].index).toBe(0)
+      expect(pushedEvents[0].total).toBe(6)
+      expect(pushedEvents.length).toBe(6)
+    }
+
+    it('should emit events when documents are added or training is finished', function () {
       const classifier = new natural.BayesClassifier()
+      classifier.on('trainedWithDocument', eventRegister)
+      classifier.on('doneTraining', assertEventResults)
+
       classifier.addDocument('i fixed the box', 'computing')
       classifier.addDocument('i write code', 'computing')
       classifier.addDocument('nasty script code', 'computing')
@@ -58,61 +72,13 @@ describe('classifier', function () {
       classifier.addDocument('study the books', 'literature')
 
       classifier.train()
-
-      const pushedEvents = []
-
-      function eventRegister (obj) {
-        pushedEvents.push(obj)
-      };
-
-      function assertEventResults () {
-        teardown()
-        expect(pushedEvents[0].index).toBe(0)
-        expect(pushedEvents[0].total).toBe(6)
-        expect(pushedEvents.length).toBe(6)
-      }
-
-      function teardown () {
-        classifier.events.removeListener('trainedWithDocument', eventRegister)
-        classifier.events.removeListener('doneTraining', assertEventResults)
-      }
-
-      classifier.on('trainedWithDocument', eventRegister)
-      classifier.on('doneTraining', assertEventResults)
-    })
-
-    it('should emit events only on an instance of Classifier', function () {
-      const classifier = new natural.BayesClassifier()
-      classifier.addDocument('i fixed the box', 'computing')
-      classifier.addDocument('i write code', 'computing')
-      classifier.addDocument('write a book', 'literature')
-      classifier.addDocument('study the books', 'literature')
-
-      const pushedEvents = []
-
-      function eventRegister (obj) {
-        pushedEvents.push(obj)
-      };
-
-      function assertEventResults () {
-        teardown()
-        expect(pushedEvents.length).toBe(0)
-      }
-
-      function teardown () {
-        classifier.removeListener('trainedWithDocument', eventRegister)
-        classifier.removeListener('doneTraining', assertEventResults)
-      }
-
-      const classifier2 = new natural.BayesClassifier()
-      classifier2.on('trainedWithDocument', eventRegister)
-      classifier.on('doneTraining', assertEventResults)
-      classifier.train()
+      classifier.removeListener('trainedWithDocument', eventRegister)
+      classifier.removeListener('doneTraining', assertEventResults)
     })
   })
 
-  describe('removeDocument', function () {
-    let classifier
+  describe('Classifier', function () {
+    let classifier = null
     beforeEach(function () {
       classifier = new natural.BayesClassifier()
       classifier.addDocument('i fixed the box', 'computing')

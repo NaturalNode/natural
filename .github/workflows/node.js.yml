@@ -60,8 +60,14 @@ jobs:
       - name: Clean install
         run: npm ci
 
-      - name: Run tests
+      - name: Run Nodejs tests
         run: npm run test
+
+      - name: Build
+        run: npm run build
+    
+      - name: Run Typescript tests
+        run: npm run test_ts      
 
       - name: Run IO tests
         run: npm run test_io
