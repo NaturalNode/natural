@@ -22,7 +22,6 @@ import {
   Corpus,
   ruleTemplates,
   RuleTemplate,
-  RuleTemplatesItem,
   Sentence,
   BrillPOSTrainer,
   BrillPOSTagger,
