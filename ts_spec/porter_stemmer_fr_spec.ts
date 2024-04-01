@@ -1,0 +1,103 @@
+/*
+Copyright (c) 2019, Ismaël Héry, Hugo W.L. ter Doest
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+*/
+
+'use strict'
+
+import { PorterStemmerFr as stemmer } from 'lib/natural'
+import rawJson from '../spec/test_data/snowball_fr.json'
+const snowBallDict = rawJson as Record<string, string>
+
+describe('porter_stemmer', function () {
+  it('should prelude', function () {
+    expect(stemmer.prelude('JOUER')).toBe('joUer')
+    expect(stemmer.prelude('ennuie')).toBe('ennuIe')
+    expect(stemmer.prelude('yeux')).toBe('Yeux')
+    expect(stemmer.prelude('quand')).toBe('qUand')
+  })
+
+  it('should compute regions', function () {
+    expect(stemmer.regions('fameusement').r1).toBe(3)
+    expect(stemmer.regions('fameusement').r2).toBe(6)
+
+    expect(stemmer.regions('taii').r1).toBe(4)
+    expect(stemmer.regions('taii').r2).toBe(4)
+
+    expect(stemmer.regions('parade').rv).toBe(3)
+    expect(stemmer.regions('colet').rv).toBe(3)
+    expect(stemmer.regions('tapis').rv).toBe(3)
+    expect(stemmer.regions('aimer').rv).toBe(3)
+    expect(stemmer.regions('adorer').rv).toBe(3)
+    expect(stemmer.regions('voler').rv).toBe(2)
+    expect(stemmer.regions('tue').rv).toBe(2)
+  })
+
+  it('should compute longest suffix ends in Arr', function () {
+    expect(stemmer.endsinArr('voudriez', ['ez', 'iez', 'z'])).toBe('iez')
+  })
+
+  it('should stem some word', function () {
+    expect(stemmer.stem('volera')).toBe('vol')
+    expect(stemmer.stem('volerait')).toBe('vol')
+    expect(stemmer.stem('subitement')).toBe('subit')
+    expect(stemmer.stem('tempérament')).toBe('temper')
+    expect(stemmer.stem('voudriez')).toBe('voudr')
+    expect(stemmer.stem('vengeait')).toBe('veng')
+    expect(stemmer.stem('saisissement')).toBe('sais')
+    expect(stemmer.stem('transatlantique')).toBe('transatlant')
+    expect(stemmer.stem('premièrement')).toBe('premi')
+    expect(stemmer.stem('instruments')).toBe('instrument')
+    expect(stemmer.stem('trouverions')).toBe('trouv')
+    expect(stemmer.stem('voyiez')).toBe('voi')
+    expect(stemmer.stem('publicité')).toBe('publiqu')
+    expect(stemmer.stem('pitoyable')).toBe('pitoi')
+  })
+
+  it('should perform stemming on a lot of words', function () {
+    const ok = []
+    const ko = []
+
+    Object.keys(snowBallDict).forEach(word => {
+      const stemmed = stemmer.stem(word)
+      const expectedStem = snowBallDict[word]
+
+      const regs = stemmer.regions(word)
+      const txtRegions = {
+        r1: word.substring(regs.r1),
+        r2: word.substring(regs.r2),
+        rv: word.substring(regs.rv)
+      }
+
+      if (stemmed === expectedStem) {
+        ok.push(word)
+      } else {
+        ko.push({
+          word,
+          expected: expectedStem,
+          actual: stemmed,
+          regions: txtRegions
+        })
+      }
+    })
+
+    expect(ko.length).toBe(0)
+  })
+})

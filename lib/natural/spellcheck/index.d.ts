@@ -27,4 +27,6 @@ export declare class Spellcheck {
   constructor (wordlist: string[])
   isCorrect (word: string): boolean
   getCorrections (word: string, maxDistance?: number): string[]
+  edits (word: string): string[]
+  editsWithMaxDistance (word: string, maxDistance: number): string[]
 }

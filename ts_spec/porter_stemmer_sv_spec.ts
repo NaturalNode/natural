@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2011, Chris Umbel
+Copyright (c) 2017, Dogan Yazar
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,10 +22,20 @@ THE SOFTWARE.
 
 'use strict'
 
-exports.stopwords = require('./stopwords').words
-exports.ShortestPathTree = require('./shortest_path_tree')
-exports.LongestPathTree = require('./longest_path_tree')
-exports.DirectedEdge = require('./directed_edge')
-exports.EdgeWeightedDigraph = require('./edge_weighted_digraph')
-exports.Topological = require('./topological')
-exports.StorageBackend = require('./storage')
+import { PorterStemmerSv as stemmer } from 'lib/natural'
+import { words, stemmedWords } from '../spec/test_data/sv_stemmer_sample.js'
+
+describe('porter_stemmer_sv', function () {
+  it('Stem whole sample data', function () {
+    const res = words.map(w => stemmer.stem(w))
+    expect(res).toEqual(stemmedWords)
+  })
+
+  /*
+  it('should tokenize and stem attached', function() {
+    stemmer.attach();
+    expect('björks jaktbössa'.tokenizeAndStem()).toEqual(['björk', 'jaktböss'])
+    expect('bJöRks JaKtböSsa'.tokenizeAndStem()).toEqual(['björk', 'jaktböss'])
+  })
+  */
+})

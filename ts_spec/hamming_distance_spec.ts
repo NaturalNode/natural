@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2011, Chris Umbel
+Copyright (c) 2018, Hugo ter Doest
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,10 +22,45 @@ THE SOFTWARE.
 
 'use strict'
 
-exports.stopwords = require('./stopwords').words
-exports.ShortestPathTree = require('./shortest_path_tree')
-exports.LongestPathTree = require('./longest_path_tree')
-exports.DirectedEdge = require('./directed_edge')
-exports.EdgeWeightedDigraph = require('./edge_weighted_digraph')
-exports.Topological = require('./topological')
-exports.StorageBackend = require('./storage')
+import { HammingDistance as hammingDistance } from 'lib/natural'
+
+// Convert the following to a Javascript object
+const stringsToCompare = [{
+  string1: 'karolin',
+  string2: 'kathrin',
+  ignoreCase: false,
+  expected: 3
+}, {
+  string1: 'karolin',
+  string2: 'kerstin',
+  ignoreCase: false,
+  expected: 3
+}, {
+  string1: '1011101',
+  string2: '1001001',
+  ignoreCase: false,
+  expected: 2
+}, {
+  string1: '2173896',
+  string2: '2233796',
+  ignoreCase: false,
+  expected: 3
+}, {
+  string1: 'different',
+  string2: 'length',
+  ignoreCase: false,
+  expected: -1
+}, {
+  string1: 'ignorecase',
+  string2: 'IgnoreCase',
+  ignoreCase: true,
+  expected: 0
+}]
+
+describe('The Hamming distance function compares strings of equal length', function () {
+  stringsToCompare.forEach(function (record) {
+    it('should calculate the difference between two strings correctly', function () {
+      expect(hammingDistance(record.string1, record.string2, record.ignoreCase)).toEqual(record.expected)
+    })
+  })
+})

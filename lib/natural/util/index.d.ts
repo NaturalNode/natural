@@ -71,4 +71,10 @@ export class LongestPathTree {
   pathTo (vertex: number): number[]
 }
 
+export class Topological {
+  constructor (digraph: EdgeWeightedDigraph)
+  isDAG (): boolean
+  order (): number[]
+}
+
 export * from './storage'

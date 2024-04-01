@@ -20,24 +20,33 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export interface Phonetic<T> {
-  compare: (stringA: string, stringB: string) => boolean
-  tokenizeAndPhoneticize: (str: string, phoneticsProcessor: Phonetic<T>, keepStops: boolean) => T
+export class Phonetic<T> {
+  compare (stringA: string, stringB: string): boolean
+  tokenizeAndPhoneticize (str: string, phoneticsProcessor: Phonetic<T>, keepStops: boolean): T
 }
 
-export let Metaphone: Phonetic<string> & {
-  process: (token: string, maxLength?: number) => string
+export class Metaphone extends Phonetic<string> {
+  process (token: string, maxLength?: number): string
 }
 
-export let SoundEx: Phonetic<string> & {
-  process: (token: string, maxLength?: number) => string
+export class SoundEx extends Phonetic<string> {
+  process (token: string, maxLength?: number): string
+  transformLipps (token: string): string
+  transformThroats (token: string): string
+  transformToungue (token: string): string
+  transformL (token: string): string
+  transformHum (token: string): string
+  transformR (token: string): string
+  condense (token: string): string
+  padRight0 (token: string): string
+  transform (token: string): string
 }
 
-export let DoubleMetaphone: Phonetic<string[]> & {
-  process: (token: string, maxLength?: number) => string[]
-  isVowel: (c: string) => string | RegExpMatchArray | null
+export class DoubleMetaphone extends Phonetic<string[]> {
+  process (token: string, maxLength?: number): string[]
+  isVowel (c: string): string | RegExpMatchArray | null
 }
 
-export let SoundExDM: Phonetic<string> & {
-  process: (word: string, codeLength?: number) => string
+export class SoundExDM extends Phonetic<string> {
+  process (word: string, codeLength?: number): string
 }

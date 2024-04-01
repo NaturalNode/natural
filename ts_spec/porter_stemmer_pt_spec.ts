@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2011, Chris Umbel
+Copyright (c) 2019, Luís Rodrigues, Hugo W.L. ter Doest
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,10 +22,29 @@ THE SOFTWARE.
 
 'use strict'
 
-exports.stopwords = require('./stopwords').words
-exports.ShortestPathTree = require('./shortest_path_tree')
-exports.LongestPathTree = require('./longest_path_tree')
-exports.DirectedEdge = require('./directed_edge')
-exports.EdgeWeightedDigraph = require('./edge_weighted_digraph')
-exports.Topological = require('./topological')
-exports.StorageBackend = require('./storage')
+import { PorterStemmerPt as stemmer } from 'lib/natural'
+import rawObj from '../spec/test_data/snowball_pt.json'
+const snowBallDict = rawObj as Record<string, string>
+
+const DEBUG = false
+
+describe('porter_stemmer_pt', function () {
+  it('should perform stemming on a lot of words', function () {
+    const errors = []
+
+    Object.keys(snowBallDict).forEach(word => {
+      const stemmed = stemmer.stem(word)
+      const expectedStem = snowBallDict[word]
+      if (stemmed !== snowBallDict[word]) {
+        DEBUG && console.log('Error:', word, 'Expected:', expectedStem, 'Got:', stemmed)
+        errors.push({
+          word,
+          expected: expectedStem,
+          actual: stemmed
+        })
+      }
+    })
+
+    expect(errors.length).toEqual(0)
+  })
+})

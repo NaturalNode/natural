@@ -28,7 +28,10 @@ import {
   BrillPOSTester
 } from 'lib/natural'
 
-import type { Lexicon, RuleSet } from 'lib/natural'
+import type {
+  Lexicon,
+  RuleSet
+} from 'lib/natural'
 
 // Import a JSON file with the brown corpus
 import brownCorpus from '../spec/test_data/browntag_nolines_excerpt.json'

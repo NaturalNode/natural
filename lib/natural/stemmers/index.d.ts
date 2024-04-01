@@ -20,13 +20,35 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-declare interface Stemmer {
+declare interface RegionsType {
+  r1: number
+  r2: number
+  rv: number
+}
+
+export declare interface Stemmer {
   stem: (token: string) => string
   addStopWord: (stopWord: string) => void
   addStopWords: (moreStopWords: string[]) => void
   removeStopWord: (stopWord: string) => void
   removeStopWords: (moreStopWords: string[]) => void
   tokenizeAndStem: (text: string, keepStops?: boolean) => string[]
+  regions: (word: string) => RegionsType
+  prelude: (token: string) => string
+  endsinArr: (token: string, suffixes: string[]) => string
+  categorizeGroups: (token: string) => string
+  measure: (token: string) => number
+
+  // Exposed for testing purposes:
+  step1: (token: string) => string
+  step1a: (token: string) => string
+  step1b: (token: string) => string
+  step1c: (token: string) => string
+  step2: (token: string) => string
+  step3: (token: string) => string
+  step4: (token: string) => string
+  step5a: (token: string) => string
+  step5b: (token: string) => string
 }
 
 export let CarryStemmerFr: Stemmer
