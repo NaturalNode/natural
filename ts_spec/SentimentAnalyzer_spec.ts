@@ -222,7 +222,9 @@ describe('The sentiment analyzer analyzes the sentiment of sentences in multiple
         const score = analyzer.getSentiment(words)
         expect(score).toEqual(sentencePlusScore.score)
         if (score !== sentencePlusScore.score) {
-          console.log(sentencePlusScore.sentence + '\t' + score)
+          console.log(`Wrong score for sentence ${sentencePlusScore.sentence}: \
+            expected ${sentencePlusScore.score} but got \
+            ${score}.Sentence: sentencePlusScore.sentence`)
         }
       })
     })
