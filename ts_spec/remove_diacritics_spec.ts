@@ -1,6 +1,5 @@
 /*
-Copyright (c) 2022,
-Hugo W.L. ter Doest <https://github.com/Hugo-ter-Doest>
+Copyright (c) 2013, Ken Koch
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,37 +20,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import { SenType } from './SenType.js'
+import { removeDiacritics } from 'lib/natural'
 
-declare interface TaggedWord {
-  token: string
-  pos: string
-  pp?: boolean
-  spos?: string
-  added?: boolean
-  [key: string]: any
-}
-
-declare type PunctuationMapping = Array<Record<string, string>> | ''
-declare type PunctuationFunction = () => PunctuationMapping
-
-declare interface TaggedSentence {
-  tags: TaggedWord[]
-  punct: PunctuationFunction
-}
-
-declare type CallbackFunction = (obj: SentenceAnalyzer) => void
-
-export class SentenceAnalyzer {
-  posObj: TaggedSentence
-  senType: SenType | null
-
-  constructor (pos: TaggedSentence, cbf: CallbackFunction)
-  part (cbf: CallbackFunction): void
-  prepositionPhrases (): void
-  subjectToString (): string
-  predicateToString (): string
-  implicitYou (): boolean
-  toString (): string
-  type (cbf: CallbackFunction): string
-}
+describe('remove_diacritics', function () {
+  it('should correctly remove diacritics', function () {
+    const originalPhrase = 'piñon ça va über résumé œdipe'
+    expect(removeDiacritics(originalPhrase)).toEqual('pinon ca va uber resume oedipe')
+  })
+})
