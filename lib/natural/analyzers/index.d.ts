@@ -21,7 +21,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import { SenType } from './SenType.js'
+import type { SenType } from './SenType.js'
 
 declare interface TaggedWord {
   token: string
