@@ -29,7 +29,7 @@ const fs = require('fs')
 
 describe('classifier file IO', function () {
   describe('save', function () {
-    const tmpFilename = '/spec/test_data/deleteMe'
+    const tmpFilename = './test_data/deleteMe'
     const nonExistentFilename = '/nonExistentDir/deleteMe'
     let classifier
 
@@ -62,7 +62,7 @@ describe('classifier file IO', function () {
     it('does nothing if called without a callback', function () {
       let result
       try {
-        result = Classifier.load('io_spec/test_data/tfidf/tfidf_document1.txt')
+        result = Classifier.load('./test_data/tfidf/tfidf_document1.txt')
       } catch (err) {
         console.log(err)
       }

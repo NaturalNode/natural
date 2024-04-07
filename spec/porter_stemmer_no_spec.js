@@ -23,7 +23,7 @@ THE SOFTWARE.
 'use strict'
 
 const stemmer = require('../lib/natural/stemmers/porter_stemmer_no')
-const snowBallDict = require('spec/test_data/snowball_no.json')
+const snowBallDict = require('./test_data/snowball_no.json')
 
 describe('porter_stemmer_no', function () {
   it('should perform step 1a', function () {

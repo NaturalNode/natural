@@ -20,13 +20,35 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-declare interface Stemmer {
+declare interface RegionsType {
+  r1: number
+  r2: number
+  rv: number
+}
+
+export declare interface Stemmer {
   stem: (token: string) => string
   addStopWord: (stopWord: string) => void
   addStopWords: (moreStopWords: string[]) => void
   removeStopWord: (stopWord: string) => void
   removeStopWords: (moreStopWords: string[]) => void
   tokenizeAndStem: (text: string, keepStops?: boolean) => string[]
+  regions: (word: string) => RegionsType
+  prelude: (token: string) => string
+  endsinArr: (token: string, suffixes: string[]) => string
+  categorizeGroups: (token: string) => string
+  measure: (token: string) => number
+
+  // Exposed for testing purposes:
+  step1: (token: string) => string
+  step1a: (token: string) => string
+  step1b: (token: string) => string
+  step1c: (token: string) => string
+  step2: (token: string) => string
+  step3: (token: string) => string
+  step4: (token: string) => string
+  step5a: (token: string) => string
+  step5b: (token: string) => string
 }
 
 export let CarryStemmerFr: Stemmer
@@ -45,3 +67,23 @@ export let PorterStemmerRu: Stemmer
 export let PorterStemmerSv: Stemmer
 export let StemmerId: Stemmer
 export let StemmerJa: Stemmer
+
+export declare type TokenCallback = (...args: number[]) => number[] | number
+
+export declare class Token {
+  vowels: string[] | string
+  regions: Record<string, number>
+  string: string
+  original: string
+
+  constructor (s: string)
+  usingVowels (vowels: string | string[]): Token
+  markRegion (region: string, args: number[] | number | null, callback?: TokenCallback, context?: unknown): Token
+  replaceAll (find: string, replace: string): Token
+  replaceSuffixInRegion (suffix: string, replace: string, region: string): Token
+  hasVowelAtIndex (index: number): boolean
+  nextVowelIndex (index: number): number
+  nextConsonantIndex (index: number): number
+  hasSuffix (suffix: string): number
+  hasSuffixInRegion (suffix: string, region: string): boolean
+}

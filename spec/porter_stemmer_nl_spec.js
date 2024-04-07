@@ -23,7 +23,7 @@ THE SOFTWARE.
 'use strict'
 
 const stemmer = require('../lib/natural/stemmers/porter_stemmer_nl')
-const snowBallDict = require('spec/test_data/snowball_nl.json')
+const snowBallDict = require('./test_data/snowball_nl.json')
 // const dutchSentences = require('spec/test_data/Volkskrant-20150205-Knot-geldpers-aanzetten-is-paardenmiddel-voor-half-procent-inflatie.json')
 // const dutchStemResults = require('spec/test_data/dutchStemResults.json')
 

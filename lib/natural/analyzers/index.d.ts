@@ -21,15 +21,19 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import type { SenType } from './SenType.js'
+
 declare interface TaggedWord {
   token: string
   pos: string
   pp?: boolean
   spos?: string
   added?: boolean
+  [key: string]: any
 }
 
-declare type PunctuationFunction = () => string[] | ''
+declare type PunctuationMapping = Array<Record<string, string>> | ''
+declare type PunctuationFunction = () => PunctuationMapping
 
 declare interface TaggedSentence {
   tags: TaggedWord[]
@@ -37,14 +41,6 @@ declare interface TaggedSentence {
 }
 
 declare type CallbackFunction = (obj: SentenceAnalyzer) => void
-
-declare enum SenType {
-  Unknown = 'UNKNOWN',
-  Command = 'COMMAND',
-  Interrogative = 'INTERROGATIVE',
-  Exclamatory = 'EXCLAMATORY',
-  Declarative = 'DECLARATIVE',
-}
 
 export class SentenceAnalyzer {
   posObj: TaggedSentence
@@ -57,5 +53,5 @@ export class SentenceAnalyzer {
   predicateToString (): string
   implicitYou (): boolean
   toString (): string
-  type (cbf: CallbackFunction): SenType
+  type (cbf: CallbackFunction): string
 }

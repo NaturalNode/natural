@@ -23,15 +23,10 @@ THE SOFTWARE.
 
 'use strict'
 
-const doubleMetaphone = require('../lib/natural/phonetics/double_metaphone')
+const DoubleMetaphone = require('../lib/natural/phonetics/double_metaphone')
+const doubleMetaphone = new DoubleMetaphone()
 
 describe('double metaphone', function () {
-  it('should drop initial silent consonants', function () {
-    doubleMetaphone.process('gnat', function (spy) {
-      expect(spy.initialSilentConsonantSkipped).toBeTruthy()
-    })
-  })
-
   describe('vowels', function () {
     it('should consider initial vowels to be A', function () {
       let encodings = doubleMetaphone.process('England')

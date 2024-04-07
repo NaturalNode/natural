@@ -1,6 +1,7 @@
 import events from 'events'
-import { Corpus, Sentence } from '../brill_pos_tagger'
-import { Stemmer } from '../stemmers'
+import type { Corpus, Sentence } from '../brill_pos_tagger'
+import type { Stemmer } from '../stemmers'
+import type { StorageBackend } from '../util'
 
 // Start apparatus declarations
 
@@ -19,7 +20,8 @@ declare interface ApparatusClassification {
   value: number
 }
 
-declare type ApparatusObservation = number[] | { [key: string]: number | string | boolean | undefined }
+// Observations are either array of numbers or a sparse vector in the form of a map
+declare type ApparatusObservation = number[] | Record<string, number | string | boolean>
 
 declare class ApparatusClassifier {
   addExample (observation: ApparatusObservation, label: string): void
@@ -31,8 +33,8 @@ declare class ApparatusClassifier {
 // TODO: Not needed for natural repository, but could be moved to
 // aparatus repository. Temporarily leaving here for copypasta.
 declare class ApparatusBayesClassifier extends ApparatusClassifier {
-  classFeatures: { [key: string]: { [key: number]: number | undefined } | undefined }
-  classTotals: { [key: string]: number | undefined }
+  classFeatures: Record<string, Record<number, number>>
+  classTotals: Record<string, number>
   totalExamples: number
   smoothing: number
 
@@ -45,8 +47,8 @@ declare class ApparatusBayesClassifier extends ApparatusClassifier {
 // TODO: Not needed for natural repository, but could be moved to
 // aparatus repository. Temporarily leaving here for copypasta.
 declare class ApparatusLogisticRegressionClassifier extends ApparatusClassifier {
-  examples: { [key: string]: number[] | undefined }
-  // TODO: These appear used
+  examples: Record<string, ApparatusObservation>
+  // TODO: These appear unused
   // features: any[]
   // featurePositions: { [key: string]: any | undefined }
   maxFeaturePosition: number
@@ -71,11 +73,12 @@ declare interface ClassifierOptions {
 }
 
 declare type ClassifierCallback = (err: NodeJS.ErrnoException | null, classifier?: ClassifierBase) => void
+declare type ParallelTrainerCallback = (err: NodeJS.ErrnoException | null) => void
 
 declare class ClassifierBase extends events.EventEmitter {
   classifier: ApparatusClassifier
   docs: ClassifierDoc[]
-  features: { [key: string]: number | undefined }
+  features: Record<string, number>
   stemmer: Stemmer
   lastAdded: number
 
@@ -89,14 +92,26 @@ declare class ClassifierBase extends events.EventEmitter {
   classify (observation: string | string[]): string
   setOptions (options: ClassifierOptions): void
   save (filename: string, callback?: ClassifierCallback): void
+  static load (filename: string, stemmer: Stemmer | null | undefined, callback: ClassifierCallback): void
+  saveTo (storage: StorageBackend): string
+  static loadFrom (storage: StorageBackend): ClassifierBase
+
+  Threads: any
+  trainParallel (numThreads: number, callback: ParallelTrainerCallback): void
+  trainParallelBatches (options: { numThreads: number, batchSize: number }): void
+  retrainParallel (numThreads: number, callback: ParallelTrainerCallback): void
 }
 
 declare type BayesClassifierCallback = (err: NodeJS.ErrnoException | null, classifier?: BayesClassifier) => void
 
 export class BayesClassifier extends ClassifierBase {
+  classifier: ApparatusBayesClassifier
+
   constructor (stemmer?: Stemmer, smoothing?: number)
   static load (filename: string, stemmer: Stemmer | null | undefined, callback: BayesClassifierCallback): void
-  static restore (classifier: BayesClassifier, stemmer?: Stemmer): BayesClassifier
+  static restore (classifier: Record<string, unknown>, stemmer?: Stemmer): BayesClassifier
+  saveTo (storage: StorageBackend): string
+  static loadFrom (storage: StorageBackend): ClassifierBase
 }
 
 declare type LogisticRegressionClassifierCallback = (err: NodeJS.ErrnoException | null, classifier?: LogisticRegressionClassifier) => void
@@ -104,19 +119,22 @@ declare type LogisticRegressionClassifierCallback = (err: NodeJS.ErrnoException 
 export class LogisticRegressionClassifier extends ClassifierBase {
   constructor (stemmer?: Stemmer)
   static load (filename: string, stemmer: Stemmer | null | undefined, callback: LogisticRegressionClassifierCallback): void
-  static restore (classifier: LogisticRegressionClassifier, stemmer?: Stemmer): LogisticRegressionClassifier
+  static restore (classifier: Record<string, unknown>, stemmer?: Stemmer): LogisticRegressionClassifier
+  saveTo (storage: StorageBackend): string
+  static loadFrom (storage: StorageBackend): ClassifierBase
 }
 
-declare type MaxEntClassifierCallback = (err: NodeJS.ErrnoException | null, classifier?: MaxEntClassifier | null) => void
+declare type MaxEntClassifierCallback = (err: NodeJS.ErrnoException | null, classifier?: MaxEntClassifier) => void
 
 export class MaxEntClassifier {
   sample: Sample
   features: FeatureSet
+  scaler: GISScaler
 
   constructor (features: FeatureSet, sample: Sample)
   addElement (x: Element): void
   addDocument (context: Context, classification: string, elementClass: Element): void
-  train (maxIterations: number, minImprovement: number, unused: any): void
+  train (maxIterations: number, minImprovement: number): void
   getClassifications (b: Context): ApparatusClassification[]
   classify (b: Context): string
   // These are not static like in other Classifier classes
@@ -160,7 +178,7 @@ export class Feature {
 
 export class FeatureSet {
   features: Feature[]
-  map: { [key: string]: boolean | undefined }
+  map: Record<string, boolean>
 
   addFeature (feature: Feature): boolean
   featureExists (feature: Feature): boolean
@@ -172,8 +190,8 @@ export class FeatureSet {
 declare type SampleCallback = (err: NodeJS.ErrnoException | null, sample?: Sample | null) => void
 
 export class Sample {
-  frequencyOfContext: { [key: string]: number | undefined }
-  frequency: { [key: string]: number | undefined }
+  frequencyOfContext: Record<string, number>
+  frequency: Record<string, number>
   classes: string[]
 
   constructor (elements?: Element[])
@@ -215,6 +233,9 @@ export class POSElement extends Element {
 }
 
 export class GISScaler {
+  iteration: number
+  improvement: number
+
   constructor (featureSet: FeatureSet, sample: Sample)
   calculateMaxSumOfFeatures (): boolean
   addCorrectionFeature (): void

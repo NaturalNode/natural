@@ -7,6 +7,7 @@
     ],
     "module": "commonjs",
     "rootDir": "./",
+    "baseUrl": "./",
     "moduleResolution": "node",
     "allowJs": true,
     "outDir": "./dist",
@@ -15,9 +16,10 @@
     "strict": true
   },
   "include": [
-    "lib/natural/**/*",
-    "spec/*"
-, "io_spec/StorageBackend_spec.js"  ],
+    "lib/natural/**/*.ts",
+    "ts_spec/*.ts",
+    "io_spec/*.ts"
+, "lib/natural/analyzers/SenType.ts"  ],
   "exclude": [
     "./node_modules"
   ]

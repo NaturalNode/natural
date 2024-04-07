@@ -22,7 +22,8 @@ THE SOFTWARE.
 
 'use strict'
 
-const soundex = require('../lib/natural/phonetics/soundex')
+const Soundex = require('../lib/natural/phonetics/soundex')
+const soundex = new Soundex()
 
 describe('soundex', function () {
   describe('transformLipps', function () {

@@ -22,7 +22,8 @@ THE SOFTWARE.
 
 'use strict'
 
-const metaphone = require('../lib/natural/phonetics/metaphone')
+const Metaphone = require('../lib/natural/phonetics/metaphone')
+const metaphone = new Metaphone()
 
 describe('metaphone', function () {
   it('should drop duplicate adjacent letters, except C', function () {

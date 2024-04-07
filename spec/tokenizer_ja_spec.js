@@ -49,12 +49,13 @@ describe('TokenizerJa', function () {
   })
 
   it('should normalize input', function () {
-    const converters = require('../lib/natural/normalizers/normalizer_ja').converters
+    const Converters = require('../lib/natural/normalizers/normalizer_ja').Converters
+    const converters = new Converters()
     const tokens = tokenizer.tokenize(
-      converters.halfwidthToFullwidth.alphabet(
-        converters.halfwidthToFullwidth.numbers(
-          converters.fullwidthToHalfwidth.punctuation(
-            converters.fullwidthToHalfwidth.katakana(text)))))
+      converters.alphabetHF(
+        converters.numbersHF(
+          converters.punctuationFH(
+            converters.katakanaFH(text)))))
     expect(tokens).toEqual(result)
   })
 })

@@ -24,12 +24,12 @@ THE SOFTWARE.
 
 const fs = require('fs')
 
-const Sample = require('lib/natural/classifiers/maxent/Sample')
-const Element = require('lib/natural/classifiers/maxent/Element')
-const Context = require('lib/natural/classifiers/maxent/Context')
+const Sample = require('../lib/natural/classifiers/maxent/Sample')
+const Element = require('../lib/natural/classifiers/maxent/Element')
+const Context = require('../lib/natural/classifiers/maxent/Context')
 
 const DEBUG = false
-const sampleFile = 'io_spec/test_data/sample.json'
+const sampleFile = './io_spec/test_data/sample.json'
 
 describe('Sample class', function () {
   // Create sample

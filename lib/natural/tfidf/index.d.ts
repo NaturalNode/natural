@@ -23,9 +23,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import { Tokenizer } from '../tokenizers'
+import type { Tokenizer } from '../tokenizers'
 
-declare type TfIdfCallback = (i: number, measure: number, key?: string) => void
+declare type TfIdfCallback = (i: number, measure: number, key?: string | Record<string, any>) => void
 
 declare interface TfIdfTerm {
   term: string
@@ -34,15 +34,15 @@ declare interface TfIdfTerm {
   tfidf: number
 }
 
-declare type TfIdfDocument = { __key: string | undefined } | { [key: string]: number | undefined }
+declare type TfIdfDocument = Record<string, number>
 
 export class TfIdf {
-  documents: TfIdfDocument | undefined
-  _idfCache: { [key: string]: number } | undefined
+  documents: TfIdfDocument[]
+  _idfCache: Record<string, number>
 
-  constructor (deserialized?: { documents: TfIdfDocument[] })
+  constructor (deserialized?: Record<string, unknown>)
   idf (term: string, force?: boolean): number
-  addDocument (document: string | string[], key?: string, restoreCache?: boolean): void
+  addDocument (document: string | string[] | Record<string, string>, key?: Record<string, any> | any, restoreCache?: boolean): void
   addFileSync (path: string, encoding?: string, key?: string, restoreCache?: boolean): void
   tfidf (terms: string | string[], d: number): number
   tfidfs (terms: string | string[], callback?: TfIdfCallback): number[]
