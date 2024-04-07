@@ -24,7 +24,9 @@ THE SOFTWARE.
 
 export function normalize (tokens: string | string[]): string[]
 // eslint-disable-next-line @typescript-eslint/naming-convention
-export function normalize_ja (str: string): string
+export function normalizeJa (str: string): string
+export function normalizeNo (str: string): string
+export function normalizeSv (str: string): string
 export function removeDiacritics (str: string): string
 
 export class Converters {
@@ -42,8 +44,8 @@ export class Converters {
   katakanaHF: (str: string) => string
   static fixFullwidthKana: (str: string) => string
   static normalize: (str: string) => string
+  hiraganaToKatakana (str: string): string
+  katakanaToHiragana (str: string): string
 }
 
 type FixCompositeSymbolsTable = Record<string, string>
-
-type NormalizeJa = (str: string) => string

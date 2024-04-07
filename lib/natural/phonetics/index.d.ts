@@ -26,6 +26,27 @@ export class Phonetic<T> {
 }
 
 export class Metaphone extends Phonetic<string> {
+  dedup (token: string): string
+  dropInitialLetters (token: string): string
+  dropBafterMAtEnd (token: string): string
+  cTransform (token: string): string
+  dTransform (token: string): string
+  dropG (token: string): string
+  transformG (token: string): string
+  dropH (token: string): string
+  transformCK (token: string): string
+  transformPH (token: string): string
+  transformQ (token: string): string
+  transformS (token: string): string
+  transformT (token: string): string
+  dropT (token: string): string
+  transformV (token: string): string
+  transformWH (token: string): string
+  dropW (token: string): string
+  transformX (token: string): string
+  dropY (token: string): string
+  transformZ (token: string): string
+  dropVowels (token: string): string
   process (token: string, maxLength?: number): string
 }
 

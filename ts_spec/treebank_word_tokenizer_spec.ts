@@ -22,9 +22,17 @@ THE SOFTWARE.
 
 'use strict'
 
-exports.normalize = require('./normalizer').normalizeTokens
-exports.normalizeJa = require('./normalizer_ja').normalizeJa
-exports.normalizeNo = require('./normalizer_no').removeDiacritics
-exports.normalizeSv = require('./normalizer_sv')
-exports.Converters = require('./normalizer_ja').Converters
-exports.removeDiacritics = require('./remove_diacritics')
+import { TreebankWordTokenizer as Tokenizer } from 'lib/natural'
+const tokenizer = new Tokenizer()
+
+describe('treebank', function () {
+  it('should tokenize', function () {
+    let tokens = tokenizer.tokenize("If we 'all' can't go. I'll stay home.")
+    expect(tokens).toEqual(['If', 'we', "'all", "'", 'ca', "n't", 'go.',
+      'I', "'ll", 'stay', 'home', '.'])
+
+    tokens = tokenizer.tokenize("If we 'all' can't go. I'll stay home. If we 'all' can't go. I'll stay home.")
+    expect(tokens).toEqual(['If', 'we', "'all", "'", 'ca', "n't", 'go.',
+      'I', "'ll", 'stay', 'home.', 'If', 'we', "'all", "'", 'ca', "n't", 'go.', 'I', "'ll", 'stay', 'home', '.'])
+  })
+})

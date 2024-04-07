@@ -124,16 +124,17 @@ export class LogisticRegressionClassifier extends ClassifierBase {
   static loadFrom (storage: StorageBackend): ClassifierBase
 }
 
-declare type MaxEntClassifierCallback = (err: NodeJS.ErrnoException | null, classifier?: MaxEntClassifier | null) => void
+declare type MaxEntClassifierCallback = (err: NodeJS.ErrnoException | null, classifier?: MaxEntClassifier) => void
 
 export class MaxEntClassifier {
   sample: Sample
   features: FeatureSet
+  scaler: GISScaler
 
   constructor (features: FeatureSet, sample: Sample)
   addElement (x: Element): void
   addDocument (context: Context, classification: string, elementClass: Element): void
-  train (maxIterations: number, minImprovement: number, unused: any): void
+  train (maxIterations: number, minImprovement: number): void
   getClassifications (b: Context): ApparatusClassification[]
   classify (b: Context): string
   // These are not static like in other Classifier classes
@@ -232,6 +233,9 @@ export class POSElement extends Element {
 }
 
 export class GISScaler {
+  iteration: number
+  improvement: number
+
   constructor (featureSet: FeatureSet, sample: Sample)
   calculateMaxSumOfFeatures (): boolean
   addCorrectionFeature (): void
