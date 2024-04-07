@@ -92,7 +92,7 @@ export class AggressiveTokenizer extends Tokenizer {
 }
 
 export class CaseTokenizer extends Tokenizer {
-  tokenize (text: string): string[]
+  tokenize (text: string, preserveApostrophe?: boolean): string[]
 }
 
 declare interface RegexTokenizerOptions {

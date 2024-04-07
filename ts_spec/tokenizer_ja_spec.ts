@@ -22,8 +22,12 @@ THE SOFTWARE.
 
 'use strict'
 
-const Tokenizer = require('../lib/natural/tokenizers/tokenizer_ja')
-const tokenizer = new Tokenizer()
+import {
+  Converters,
+  TokenizerJa
+} from 'lib/natural'
+const tokenizer = new TokenizerJa()
+const converters = new Converters()
 
 const text = '計算機科学における字句解析 (じくかいせき、英: Lexical Analysis) とは、ソースコードを構成する文字の並びを、トークン (token) の並びに変換することをいう。\n' +
     'ここでいう「トークン」とは、意味を持つコードの最小単位のこと。字句解析を行うプログラムは、字句解析器 (lexical analyzer, 略称：lexer) と呼ばれる。\n' +
@@ -49,8 +53,6 @@ describe('TokenizerJa', function () {
   })
 
   it('should normalize input', function () {
-    const Converters = require('../lib/natural/normalizers/normalizer_ja').Converters
-    const converters = new Converters()
     const tokens = tokenizer.tokenize(
       converters.alphabetHF(
         converters.numbersHF(

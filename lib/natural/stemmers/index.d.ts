@@ -67,3 +67,23 @@ export let PorterStemmerRu: Stemmer
 export let PorterStemmerSv: Stemmer
 export let StemmerId: Stemmer
 export let StemmerJa: Stemmer
+
+export declare type TokenCallback = (...args: number[]) => number[] | number
+
+export declare class Token {
+  vowels: string[] | string
+  regions: Record<string, number>
+  string: string
+  original: string
+
+  constructor (s: string)
+  usingVowels (vowels: string | string[]): Token
+  markRegion (region: string, args: number[] | number | null, callback?: TokenCallback, context?: unknown): Token
+  replaceAll (find: string, replace: string): Token
+  replaceSuffixInRegion (suffix: string, replace: string, region: string): Token
+  hasVowelAtIndex (index: number): boolean
+  nextVowelIndex (index: number): number
+  nextConsonantIndex (index: number): number
+  hasSuffix (suffix: string): number
+  hasSuffixInRegion (suffix: string, region: string): boolean
+}
