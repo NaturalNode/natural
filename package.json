@@ -49,7 +49,9 @@
     "proxyquire": "^1.8.0",
     "rimraf": "^2.6.3",
     "sinon": "^1.12.2",
+    "source-map-support": "^0.5.21",
     "standard": "^16.0.4",
+    "ts-node": "^10.9.2",
     "ts-standard": "^12.0.2",
     "typescript": "^5.4.2",
     "uubench": "^0.0.1",
@@ -74,7 +76,7 @@
   "scripts": {
     "benchmark": "node benchmarks",
     "build": "tsc && ncp spec/test_data dist",
-    "clean": "rimraf *~ #* *classifier.json dist io_spec/tmp/*.json",
+    "clean": "rimraf *~ #* *classifier.json dist io_spec/tmp/*.json coverage",
     "test": "cross-env NODE_PATH=. jasmine --random=false spec/*_spec.js",
     "test_io": "jasmine --random=false io_spec/*_spec.js",
     "test_ts": "cross-env NODE_PATH=.:./dist jasmine --random=false dist/ts_spec/*_spec.js",
