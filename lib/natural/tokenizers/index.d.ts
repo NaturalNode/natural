@@ -87,6 +87,10 @@ export class AggressiveTokenizerHi extends Tokenizer {
   tokenize (text: string): string[]
 }
 
+export class AggressiveTokenizerUk extends Tokenizer {
+  tokenize (text: string): string[]
+}
+
 export class AggressiveTokenizer extends Tokenizer {
   tokenize (text: string): string[]
 }
