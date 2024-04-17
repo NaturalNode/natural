@@ -79,7 +79,7 @@
     "clean": "rimraf *~ #* *classifier.json dist io_spec/tmp/*.json coverage",
     "test_io": "jasmine --random=false io_spec/*_spec.js",
     "test": "cross-env NODE_PATH=.:./dist jasmine --random=false dist/spec/*_spec.js",
-    "coverage": "nyc --reporter=lcov npm run test && nyc --reporter=lcov npm run test_io",
+    "coverage": "nyc --reporter=lcov --include=dist/spec/*_spec.js npm run test && nyc --reporter=lcov npm run test_io",
     "test_browser": "cross-env NODE_PATH=. node ./node_modules/gulp/bin/gulp.js",
     "lint": "eslint . --ext .ts"
   },
