@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 
-function countTests(filePath) {
+function countTests (filePath) {
   const fileContent = fs.readFileSync(filePath, 'utf8')
   // const itRegex = /it\((.*?)\)/g
   // const describeRegex = /describe\((.*?)\)/g
