@@ -17,7 +17,7 @@
   },
   "include": [
     "lib/natural/**/*.ts",
-    "ts_spec/*.ts",
+    "spec/*.ts",
     "io_spec/*.ts"
 , "lib/natural/analyzers/SenType.ts"  ],
   "exclude": [
