@@ -27,6 +27,9 @@
     "wordnet-db": "^3.1.11"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.8",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^15.2.3",
     "@types/jasmine": "^5.1.4",
     "@types/node": "^18.11.18",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
@@ -48,6 +51,7 @@
     "pegjs": "^0.10.0",
     "proxyquire": "^1.8.0",
     "rimraf": "^2.6.3",
+    "rollup": "^4.18.0",
     "sinon": "^1.12.2",
     "source-map-support": "^0.5.21",
     "standard": "^16.0.4",
@@ -81,7 +85,8 @@
     "test": "cross-env NODE_PATH=.:./dist jasmine --random=false dist/spec/*_spec.js",
     "coverage": "nyc --no-clean npm run test && nyc --no-clean npm run test_io",
     "test_browser": "cross-env NODE_PATH=. node ./node_modules/gulp/bin/gulp.js",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --ext .ts",
+    "build_esm": "rollup -c"
   },
   "license": "MIT",
   "author": "Chris Umbel <chris@chrisumbel.com>",
