@@ -79,14 +79,15 @@
   },
   "scripts": {
     "benchmark": "node benchmarks",
-    "build": "tsc && ncp spec/test_data dist",
+    "build": "npm run build:tests & npm run build:esm",
+    "build:esm": "rollup -c",
+    "build:tests": "tsc",
     "clean": "rimraf *~ #* *classifier.json dist io_spec/tmp/*.json coverage",
     "test_io": "jasmine --random=false io_spec/*_spec.js",
-    "test": "cross-env NODE_PATH=.:./dist jasmine --random=false dist/spec/*_spec.js",
+    "test": "cross-env NODE_PATH=. jasmine --random=false dist/cjs/spec/*_spec.js",
     "coverage": "nyc --no-clean npm run test && nyc --no-clean npm run test_io",
     "test_browser": "cross-env NODE_PATH=. node ./node_modules/gulp/bin/gulp.js",
-    "lint": "eslint . --ext .ts",
-    "build_esm": "rollup -c"
+    "lint": "eslint . --ext .ts"
   },
   "license": "MIT",
   "author": "Chris Umbel <chris@chrisumbel.com>",
