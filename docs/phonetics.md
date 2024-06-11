@@ -9,12 +9,12 @@ Phonetic matching (sounds-like) matching can be done with the [SoundEx](http://e
 [Metaphone](http://en.wikipedia.org/wiki/Metaphone) or [DoubleMetaphone](http://en.wikipedia.org/wiki/Metaphone#Double_Metaphone) algorithms
 
 ```javascript
-var natural = require('natural');
-var metaphone = natural.Metaphone;
-var soundEx = natural.SoundEx;
+const natural = require('natural');
+const metaphone = new natural.Metaphone();
+const soundEx = new natural.SoundEx();
 
-var wordA = 'phonetics';
-var wordB = 'fonetix';
+const wordA = 'phonetics';
+const wordB = 'fonetix';
 ```
 
 To test the two words to see if they sound alike:
@@ -40,10 +40,10 @@ console.log(metaphone.process('phonetics', 3));
 feature is experimental and subject to change:
 
 ```javascript
-var natural = require('natural');
-var dm = natural.DoubleMetaphone;
+const natural = require('natural');
+const dm = natural.DoubleMetaphone();
 
-var encodings = dm.process('Matrix');
+const encodings = dm.process('Matrix');
 console.log(encodings[0]);
 console.log(encodings[1]);
 ```
