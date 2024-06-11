@@ -1,17 +1,19 @@
+const libPath = 'dist/esm/index.js'
+
 describe('Module tests', () => {
-  let myModule;
+  let myLib
 
   beforeAll(() => {
     // Assuming the module is named 'myModule' and is located in the 'src' directory
-    myModule = require('./src/myModule');
-  });
+    import * as myLib from libPath
+  })
 
   // List of functions and classes expected to be exported by the module
-  const expectedExports = ['function1', 'function2', 'Class1', 'Class2'];
+  const expectedExports = ['Metaphone']
 
   expectedExports.forEach((exportName) => {
     it(`should have an export named ${exportName}`, () => {
-      expect(myModule[exportName]).toBeDefined();
-    });
-  });
-});
+      expect(myLib[exportName]).toBeDefined()
+    })
+  })
+})
