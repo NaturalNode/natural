@@ -15,6 +15,7 @@
     "afinn-165-financialmarketnews": "^3.0.0",
     "apparatus": "^0.0.10",
     "dotenv": "^16.4.5",
+    "http-server": "^14.1.1",
     "memjs": "^1.3.2",
     "mongoose": "^8.2.0",
     "pg": "^8.11.3",
@@ -27,6 +28,9 @@
     "wordnet-db": "^3.1.11"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.8",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^15.2.3",
     "@types/jasmine": "^5.1.4",
     "@types/node": "^18.11.18",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
@@ -48,6 +52,7 @@
     "pegjs": "^0.10.0",
     "proxyquire": "^1.8.0",
     "rimraf": "^2.6.3",
+    "rollup": "^4.18.0",
     "sinon": "^1.12.2",
     "source-map-support": "^0.5.21",
     "standard": "^16.0.4",
@@ -75,10 +80,12 @@
   },
   "scripts": {
     "benchmark": "node benchmarks",
-    "build": "tsc && ncp spec/test_data dist",
+    "build": "npm run build:tests & npm run build:esm",
+    "build:esm": "rollup -c",
+    "build:tests": "tsc",
     "clean": "rimraf *~ #* *classifier.json dist io_spec/tmp/*.json coverage",
     "test_io": "jasmine --random=false io_spec/*_spec.js",
-    "test": "cross-env NODE_PATH=.:./dist jasmine --random=false dist/spec/*_spec.js",
+    "test": "cross-env NODE_PATH=. jasmine --random=false dist/cjs/spec/*_spec.js",
     "coverage": "nyc --no-clean npm run test && nyc --no-clean npm run test_io",
     "test_browser": "cross-env NODE_PATH=. node ./node_modules/gulp/bin/gulp.js",
     "lint": "eslint . --ext .ts"
