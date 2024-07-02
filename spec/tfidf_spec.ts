@@ -95,6 +95,17 @@ describe('tfidf', function () {
     })
   })
 
+  // Issue #634 - prevent tfidf to apply a tokenizer to terms that are already tokenized
+  describe('tfidf with tokenized terms', function () {
+    tfidf = new TfIdf()
+    tfidf.addDocument(['domain', 'google.com'])
+    const terms: TfIdfTerm[] = tfidf.listTerms(0)
+    it ('should list important terms correctly without tokenizing again', function () {
+      expect(terms[0].tfidf).toBeGreaterThan(0)
+      expect(terms[1].tfidf).toBeGreaterThan(0)
+    })
+  })
+
   describe('special cases', function () {
     // In response to
     it('should handle reserved function names correctly in documents', function () {
