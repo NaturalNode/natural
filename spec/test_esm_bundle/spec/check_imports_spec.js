@@ -5,7 +5,7 @@ describe('Module tests', () => {
 
   beforeAll(() => {
     // Assuming the module is named 'myModule' and is located in the 'src' directory
-    import * as myLib from libPath
+    // import * as myLib from libPath
   })
 
   // List of functions and classes expected to be exported by the module
