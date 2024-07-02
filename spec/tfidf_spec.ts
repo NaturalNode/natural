@@ -100,7 +100,7 @@ describe('tfidf', function () {
     tfidf = new TfIdf()
     tfidf.addDocument(['domain', 'google.com'])
     const terms: TfIdfTerm[] = tfidf.listTerms(0)
-    it ('should list important terms correctly without tokenizing again', function () {
+    it('should list important terms correctly without tokenizing again', function () {
       expect(terms[0].tfidf).toBeGreaterThan(0)
       expect(terms[1].tfidf).toBeGreaterThan(0)
     })
