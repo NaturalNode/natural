@@ -260,4 +260,18 @@ describe('tfidf', function () {
       expect(tfidf.setStopwords(stopwords)).toEqual(false)
     })
   })
+
+  describe('Remove documents', function () {
+    it('should remove a document', function () {
+      tfidf = new TfIdf()
+
+      tfidf.addDocument('this document is about node.', 0)
+      tfidf.addDocument('this document isn\'t about node.', 1)
+
+      const result1 = tfidf.removeDocument(0)
+      expect(result1).toEqual(true)
+      const result2 = tfidf.removeDocument(0)
+      expect(result2).toEqual(true)
+    })
+  })
 })
