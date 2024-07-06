@@ -87,12 +87,16 @@ export class AggressiveTokenizerHi extends Tokenizer {
   tokenize (text: string): string[]
 }
 
+export class AggressiveTokenizerUk extends Tokenizer {
+  tokenize (text: string): string[]
+}
+
 export class AggressiveTokenizer extends Tokenizer {
   tokenize (text: string): string[]
 }
 
 export class CaseTokenizer extends Tokenizer {
-  tokenize (text: string): string[]
+  tokenize (text: string, preserveApostrophe?: boolean): string[]
 }
 
 declare interface RegexTokenizerOptions {
@@ -103,7 +107,7 @@ declare interface RegexTokenizerOptions {
 
 export class RegexpTokenizer extends Tokenizer {
   constructor (opts?: RegexTokenizerOptions)
-  tokenize (text: string): string[] | null
+  tokenize (text: string): string[]
 }
 
 declare interface OrthographyTokenizerOptions extends RegexTokenizerOptions {

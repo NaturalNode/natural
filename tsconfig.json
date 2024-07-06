@@ -7,16 +7,19 @@
     ],
     "module": "commonjs",
     "rootDir": "./",
+    "baseUrl": "./",
     "moduleResolution": "node",
     "allowJs": true,
-    "outDir": "./dist",
+    "outDir": "./dist/cjs",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true
   },
   "include": [
-    "lib/natural/**/*",
-    "spec/*"
+    "lib/natural/**/*.ts",
+    "spec/*.ts",
+    "io_spec/*.ts",
+    "lib/natural/analyzers/SenType.ts"
   ],
   "exclude": [
     "./node_modules"

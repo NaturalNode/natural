@@ -1,35 +1,73 @@
-# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
+# This workflow will do a clean install of node dependencies, 
+# build the source code and run tests across different versions of node
+# For more information see: 
+# https://help.github.com/actions/language-and-framework-guides/
+# using-nodejs-with-github-actions
+---
 name: Node.js CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
 
+    services:
+      redis:
+        image: redis:latest
+        ports:
+          - 6379:6379
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: user
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: naturaldb
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: 5432
+          POSTGRES_TABLE: naturaltable
+        ports:
+          - 5432:5432  
+      memcached:
+        image: memcached:latest
+        ports:
+          - 11211:11211
+      mongodb:
+        image: mongo:latest
+        ports:
+          - 27017:27017
+
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+        node-version: [16.x, 18.x, 20.x]
+        # See supported Node.js release schedule at 
+        #https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm run coverage
-    # Save coverage report in Coveralls
-    - name: Coveralls
-      uses: coverallsapp/github-action@master
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Clean install
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+    
+      - name: Run Istanbul coverage
+        run: npm run coverage
+
+      # Save coverage report in Coveralls
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}

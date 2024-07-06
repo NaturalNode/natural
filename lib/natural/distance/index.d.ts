@@ -1,6 +1,8 @@
-
 /*
-Copyright (c) 2022, Dylan R. E. Moonfire <https://github.com/dmoonfire>, Emily Marigold Klassen <https://github.com/forivall>, Hugo W.L. ter Doest
+Copyright (c) 2023,
+  Dylan R. E. Moonfire <https://github.com/dmoonfire>,
+  Emily Marigold Klassen <https://github.com/forivall>,
+  Hugo W.L. ter Doest
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,15 +23,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-// Based on type definitions on Definitely Typed
-
 declare interface JaroWinklerOptions {
   dj?: number
   /** @default false */
   ignoreCase?: boolean
 }
 
-export function JaroWinklerDistance (s1: string, s2: string, options: JaroWinklerOptions): number
+export function JaroWinklerDistance (s1: string, s2: string, options?: JaroWinklerOptions): number
 
 declare interface DamerauLevenshteinDistanceOptions {
   /** @default 1 */
@@ -41,10 +41,7 @@ declare interface DamerauLevenshteinDistanceOptions {
   /** @default 1 */
   transposition_cost?: number
   /** @default false */
-  search?: boolean
-  /** @default false */
   restricted?: boolean
-  damerau?: boolean
 }
 
 declare interface SubstringDistanceResult {
@@ -67,23 +64,23 @@ export function LevenshteinDistance (
  * Valid edit operations are:
  *  - transposition, insertion, deletion, and substitution
  */
-export function DamerauLevenshteinDistance (
+export function LevenshteinDistanceSearch (
   source: string,
   target: string,
-  options: DamerauLevenshteinDistanceOptions & { search: true }
+  options?: DamerauLevenshteinDistanceOptions
 ): SubstringDistanceResult
 
 export function DamerauLevenshteinDistance (
   source: string,
   target: string,
-  options?: DamerauLevenshteinDistanceOptions & { search?: false }
+  options?: DamerauLevenshteinDistanceOptions
 ): number
 
-export function DamerauLevenshteinDistance (
+export function DamerauLevenshteinDistanceSearch (
   source: string,
   target: string,
-  options: DamerauLevenshteinDistanceOptions & { search: boolean }
-): number | SubstringDistanceResult
+  options?: DamerauLevenshteinDistanceOptions
+): SubstringDistanceResult
 
 export function DiceCoefficient (str1: string, str2: string): number
 

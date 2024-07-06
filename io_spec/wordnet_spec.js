@@ -22,7 +22,7 @@ THE SOFTWARE.
 
 'use strict'
 
-const WordNet = require('lib/natural/wordnet/wordnet')
+const WordNet = require('../lib/natural/wordnet/wordnet')
 
 describe('wordnet', function () {
   it('should lookup synonyms', function (done) {
