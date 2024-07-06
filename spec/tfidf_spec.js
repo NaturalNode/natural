@@ -271,7 +271,7 @@ describe('tfidf', function () {
       const result1 = tfidf.removeDocument(0)
       expect(result1).toEqual(true)
       const result2 = tfidf.removeDocument(0)
-      expect(result2).toEqual(true)
+      expect(result2).toEqual(false)
     })
   })
 })
