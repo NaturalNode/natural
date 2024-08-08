@@ -211,7 +211,7 @@ describe('sentence_tokenizer', function () {
 
   beforeAll(function () {
     tokenizer = new Tokenizer(['i.e.', 'etc.', 'vs.', 'Inc.', 'A.S.A.P.'],
-      ['.', '!', '?', '\n', '\r', '...', '\…'])
+      ['.', '!', '?', '\n', '\r', '...', '…'])
   })
 
   testData.forEach(({ it: description, input, output }) => {
