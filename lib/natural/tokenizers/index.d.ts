@@ -136,9 +136,6 @@ export class TokenizerJa extends Tokenizer {
 }
 
 export class SentenceTokenizer extends Tokenizer {
-  tokenize (text: string): string[]
-}
-
-export class SentenceTokenizerNew extends Tokenizer {
+  constructor(abbreviations: string[], sentenceDemarkers?: string[])
   tokenize (text: string): string[]
 }
