@@ -43,6 +43,7 @@ export class TfIdf {
   constructor (deserialized?: Record<string, unknown>)
   idf (term: string, force?: boolean): number
   addDocument (document: string | string[] | Record<string, string>, key?: Record<string, any> | any, restoreCache?: boolean): void
+  removeDocument (key: any): boolean
   addFileSync (path: string, encoding?: string, key?: string, restoreCache?: boolean): void
   tfidf (terms: string | string[], d: number): number
   tfidfs (terms: string | string[], callback?: TfIdfCallback): number[]
