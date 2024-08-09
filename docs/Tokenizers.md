@@ -37,6 +37,7 @@ console.log(tokenizer.tokenize("Mikä sinun nimesi on?"));
 ```
 
 The sentence tokenizer splits a text in sentences based on punctuation. It used the following four characters: period, question mark, exclamation mark, and ellipsis. Furthermore:
+- Multiple punctuation characters are treated as one; these may be mixed with space.
 - It recognizes abbreviations. It accepts an array of abbreviations as an argument. Case is ignored when matching abbreviations. 
 - It handles decimal points in values, periods in URI's and mail addresses gracefully.
 - Quotation marks are left in place. Opening mark at the beginning of the sentence, closing mark at the end of the last sentence of the quotation.
