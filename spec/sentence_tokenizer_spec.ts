@@ -220,3 +220,16 @@ describe('sentence_tokenizer', function () {
     })
   })
 })
+
+// describe('sentence_tokenizer with trimSentences set to false', function () {
+//   let tokenizer: Tokenizer
+
+//   beforeAll(function () {
+//     tokenizer = new Tokenizer(['i.e.', 'etc.', 'vs.', 'Inc.', 'A.S.A.P.'],
+//       ['.', '!', '?', '\n', '\r', '...', '…'], false)
+//   })
+
+//   it('should tokenize strings but not trim whitespace if trimSentences is false', function () {
+//     expect(tokenizer.tokenize('This is a sentence. This is another sentence.')).toEqual(['This is a sentence. ', 'This is another sentence.'])
+//   })
+// })
