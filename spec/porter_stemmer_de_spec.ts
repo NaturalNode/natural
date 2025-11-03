@@ -50,4 +50,10 @@ describe('porter_stemmer_de', function () {
 
     expect(ko.length).toBe(0)
   })
+
+  it('should preserve umlauts when the option is set', function () {
+    const word = 'fröhlich'
+    const stemmed = stemmer.stem(word, { preserveUmlauts: true })
+    expect(stemmed).toBe('fröhlich')
+  })
 })
