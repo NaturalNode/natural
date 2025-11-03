@@ -26,7 +26,7 @@ THE SOFTWARE.
 export let stopwords: string[]
 
 export let abbreviations: string[]
-export let abbreviations_es: string[]
+export let abbreviationsEs: string[]
 
 declare class Bag<T> {
   add (element: T): Bag<T>
