@@ -25,7 +25,7 @@ THE SOFTWARE.
 import { NounInflectorJa } from 'lib/natural'
 const inflector = new NounInflectorJa()
 
-describe('NounInflector', function () {
+describe('NounInflector (ja)', function () {
   describe('.pluralize()', function () {
     it('should pluralize nouns', function () {
       expect(inflector.pluralize('ひと')).toBe('ひとたち')

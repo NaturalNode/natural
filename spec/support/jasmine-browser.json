@@ -1,0 +1,12 @@
+{
+  "srcDir": ".",
+  "srcFiles": [],
+  "specDir": ".",
+  "specFiles": ["spec.js"],
+  "helpers": [],
+  "random": false,
+  "browser": {
+    "name": "headlessChrome"
+  },
+  "port": 8888
+}

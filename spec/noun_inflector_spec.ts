@@ -358,7 +358,7 @@ describe('noun inflector', function () {
       expect(myInflector.singularize('handkerchieves')).toBe('handkerchief')
     })
 
-    it('should handle words ending in rf', function () {
+    it('should handle words ending in rf (ves case)', function () {
       const myInflector = new NounInflector()
       expect(myInflector.singularize('expenses')).toBe('expense')
       expect(myInflector.singularize('defenses')).toBe('defense')

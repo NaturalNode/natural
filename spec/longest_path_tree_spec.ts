@@ -28,7 +28,7 @@ import {
   EdgeWeightedDigraph
 } from 'lib/natural'
 
-describe('shortest path tree', function () {
+describe('shortest path tree (longest)', function () {
   const digraph = new EdgeWeightedDigraph()
   digraph.add(5, 4, 0.35)
   digraph.add(4, 7, 0.37)

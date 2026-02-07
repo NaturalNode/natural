@@ -256,7 +256,7 @@ describe('double metaphone', function () {
       expect(encodings[1]).toMatch('K$')
     })
 
-    it('should ignore G a few letters after D, H, B', function () {
+    it('should ignore G a few letters after D, H, B (case 2)', function () {
       const encodings = doubleMetaphone.process('hugh')
       expect(encodings[0]).toBe('H')
       expect(encodings[1]).toBe('H')

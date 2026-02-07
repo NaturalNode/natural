@@ -47,7 +47,7 @@ describe('classifier', function () {
     })
   })
 
-  describe('Classifier', function () {
+  describe('Classifier (events)', function () {
     const pushedEvents: any[] = []
     function eventRegister (obj: any): void {
       pushedEvents.push(obj)
@@ -77,7 +77,7 @@ describe('classifier', function () {
     })
   })
 
-  describe('Classifier', function () {
+  describe('Classifier (training)', function () {
     let classifier: BayesClassifier
     beforeEach(function () {
       classifier = new BayesClassifier()

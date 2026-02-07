@@ -34,7 +34,7 @@ describe('aggressive_tokenizer_vi', function () {
     expect(tokenizer.tokenize('Làm ơn đợi một lát!')).toEqual(['Làm', 'ơn', 'đợi', 'một', 'lát'])
   })
 
-  it('should swallow final punctuation', function () {
+  it('should swallow final punctuation (period)', function () {
     expect(tokenizer.tokenize('Tôi đang tìm John.')).toEqual(['Tôi', 'đang', 'tìm', 'John'])
   })
 

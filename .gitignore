@@ -14,3 +14,4 @@ npm-debug.log
 .vscode
 .nyc_output/*
 dist
+spec.js

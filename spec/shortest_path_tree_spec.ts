@@ -124,7 +124,7 @@ describe('shortest path tree', function () {
       const path = spt.pathTo(6)
       expect(path).toEqual([1, 6])
     })
-    it('should find the lightest weight path', function () {
+    it('should find the lightest weight path (second test)', function () {
       const digraph = new EdgeWeightedDigraph()
 
       digraph.add(1, 3, -1)

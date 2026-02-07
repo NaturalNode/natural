@@ -25,7 +25,7 @@ THE SOFTWARE.
 import { NounInflectorFr } from 'lib/natural'
 const inflector = new NounInflectorFr()
 
-describe('NounInflector', function () {
+describe('NounInflector (fr)', function () {
   describe('.pluralize()', function () {
     it('should pluralize exception nouns ending by -al', function () {
       expect(inflector.pluralize('carnaval')).toBe('carnavals')
@@ -141,7 +141,7 @@ describe('NounInflector', function () {
       expect(inflector.singularize('émaux')).toBe('émail')
     })
 
-    it('should singularize regular nouns ending by -aux', function () {
+    it('should singularize regular nouns ending by -aux (vowels)', function () {
       expect(inflector.singularize('cadeaux')).toBe('cadeau')
       expect(inflector.singularize('beaux')).toBe('beau')
       expect(inflector.singularize('étaux')).toBe('étau')
@@ -359,7 +359,7 @@ describe('NounInflector', function () {
     })
   })
 
-  describe('.singularize()', function () {
+  describe('.singularize() (second set)', function () {
     it('should singularize regular nouns ending by -aux', function () {
       expect(inflector.singularize('amiral')).toBe('amiral')
       expect(inflector.singularize('cheval')).toBe('cheval')
@@ -372,7 +372,7 @@ describe('NounInflector', function () {
       expect(inflector.singularize('émail')).toBe('émail')
     })
 
-    it('should singularize regular nouns ending by -aux', function () {
+    it('should singularize regular nouns ending by -aux (plural case)', function () {
       expect(inflector.singularize('cadeau')).toBe('cadeau')
       expect(inflector.singularize('beau')).toBe('beau')
       expect(inflector.singularize('étau')).toBe('étau')

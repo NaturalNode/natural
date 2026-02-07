@@ -88,7 +88,7 @@ describe('soundex', function () {
     expect(soundex.process('a')).toBe('A000')
   })
 
-  it('should pad right with zeros', function () {
+  it('should pad right with zeros (second case)', function () {
     expect(soundex.process('but')).toBe('B300')
   })
 

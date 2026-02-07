@@ -223,7 +223,7 @@ describe('case_tokenizer_pl', function () {
   })
 })
 
-describe('case_tokenizer_pt', function () {
+describe('case_tokenizer_pt (additional tests)', function () {
   it('should tokenize strings', function () {
     expect(tokenizer.tokenize('Siga em frente, depois vire à esquerda/direita!')).toEqual(['Siga', 'em', 'frente', 'depois', 'vire', 'à', 'esquerda', 'direita'])
   })
