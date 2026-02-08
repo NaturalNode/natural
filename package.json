@@ -78,7 +78,8 @@
     "build:browser": "webpack --config webpack.config.js",
     "test_browser": "npm run build:browser && jasmine-browser-runner runSpecs",
     "test_browser:serve": "npm run build:browser && jasmine-browser-runner serve",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --ext .ts",
+    "fix": "eslint . --ext .ts --fix"
   },
   "license": "MIT",
   "author": "Chris Umbel <chris@chrisumbel.com>",

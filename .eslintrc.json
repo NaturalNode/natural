@@ -6,7 +6,8 @@
     },
     "extends": "standard-with-typescript",
     "parserOptions": {
-        "ecmaVersion": "latest"
+        "ecmaVersion": "latest",
+        "project": "./tsconfig.json"
     },
     "rules": {
     }

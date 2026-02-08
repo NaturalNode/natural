@@ -210,8 +210,7 @@ function detStemmer (st: string): Stemmer | undefined {
 
 describe('The sentiment analyzer analyzes the sentiment of sentences in multiple languages using different types of vocabularies', function () {
   testConfigurations.forEach((config, index) => {
-    it('Should analyze a set of sentences with each configuration ' +
-      '(' + config.language + ', ' + config.vocabularyType + ', ' + (config.stemmer ?? 'without stemmer') + ') [' + index + ']', function () {
+    it(`Should analyze a set of sentences with each configuration (${config.language}, ${config.vocabularyType}, ${config.stemmer ?? 'without stemmer'}) [${index}]`, function () {
       // Create the stemmer
       const stemmer = detStemmer(config.stemmer)
       // Create analyzer
