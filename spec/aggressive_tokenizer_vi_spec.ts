@@ -25,16 +25,13 @@ THE SOFTWARE.
 import { AggressiveTokenizerVi } from 'lib/natural'
 const tokenizer = new AggressiveTokenizerVi()
 
-describe('aggressive_tokenizer_vi', function () {
+describe('aggressive_tokenizer (vi)', function () {
   it('should tokenize strings', function () {
     expect(tokenizer.tokenize('Tôi bị lạc')).toEqual(['Tôi', 'bị', 'lạc'])
   })
 
   it('should swallow final punctuation', function () {
     expect(tokenizer.tokenize('Làm ơn đợi một lát!')).toEqual(['Làm', 'ơn', 'đợi', 'một', 'lát'])
-  })
-
-  it('should swallow final punctuation', function () {
     expect(tokenizer.tokenize('Tôi đang tìm John.')).toEqual(['Tôi', 'đang', 'tìm', 'John'])
   })
 

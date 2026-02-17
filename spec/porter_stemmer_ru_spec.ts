@@ -52,7 +52,7 @@ const testResult = [
   'падш', 'падш', 'падш', 'падш', 'падш', 'паек', 'пазух', 'пазух', 'па', 'пакет', 'пакет', 'пакет', 'пакост',
   'пакостн', 'пал']
 
-describe('porter_stemmer', function () {
+describe('porter_stemmer (ru)', function () {
   it('should permof stem', function () {
     for (let i = 0; i < test.length; i++) {
       expect(stemmer.stem(test[i])).toBe(testResult[i])
