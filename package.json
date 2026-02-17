@@ -40,9 +40,6 @@
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-n": "^15.7.0",
     "eslint-plugin-promise": "^6.1.1",
-    "gulp": "^4.0.2",
-    "gulp-jasmine": "^4.0.0",
-    "gulp-jasmine-browser": "^4.1.0",
     "jasmine": "^5.13.0",
     "jasmine-core": "^5.13.0",
     "lint": "^0.8.19",
@@ -86,7 +83,6 @@
     "test_io": "jasmine --random=false io_spec/*_spec.js",
     "test": "cross-env NODE_PATH=. jasmine --random=false dist/cjs/spec/*_spec.js",
     "coverage": "nyc --no-clean npm run test && nyc --no-clean npm run test_io",
-    "test_browser": "cross-env NODE_PATH=. node ./node_modules/gulp/bin/gulp.js",
     "lint": "eslint . --ext .ts"
   },
   "license": "MIT",
