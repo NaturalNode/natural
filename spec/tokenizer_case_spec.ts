@@ -141,7 +141,6 @@ describe('case_tokenizer_pt', function () {
     expect(tokenizer.tokenize('Siga em frente, depois vire à esquerda/direita!')).toEqual(['Siga', 'em', 'frente', 'depois', 'vire', 'à', 'esquerda', 'direita'])
   })
 
-
   /*
   it('should tokenize strings via attached string method', function() {
     tokenizer.attach();
