@@ -62,6 +62,9 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: ESM smoke test
+        run: npm run smoke:esm
     
       - name: Run Istanbul coverage
         run: npm run coverage

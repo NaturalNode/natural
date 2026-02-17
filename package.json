@@ -82,6 +82,7 @@
     "clean": "rimraf *~ #* *classifier.json dist io_spec/tmp/*.json coverage",
     "test_io": "jasmine --random=false io_spec/*_spec.js",
     "test": "cross-env NODE_PATH=. jasmine --random=false dist/cjs/spec/*_spec.js",
+    "smoke:esm": "node spec/esm/smoke.mjs",
     "coverage": "nyc --no-clean npm run test && nyc --no-clean npm run test_io",
     "lint": "eslint . --ext .ts"
   },
