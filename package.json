@@ -30,8 +30,8 @@
     "@rollup/plugin-commonjs": "^25.0.8",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
-    "@types/jasmine": "^5.1.4",
-    "@types/node": "^18.11.18",
+    "@types/jasmine": "^6.0.0",
+    "@types/node": "^25.2.3",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "browserfs": "^1.4.3",
     "cross-env": "^7.0.3",
@@ -54,7 +54,7 @@
     "standard": "^16.0.4",
     "ts-node": "^10.9.2",
     "ts-standard": "^12.0.2",
-    "typescript": "^5.4.2",
+    "typescript": "^5.9.3",
     "uubench": "^0.0.1"
   },
   "standard": {
