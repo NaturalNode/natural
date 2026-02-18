@@ -25,7 +25,7 @@ THE SOFTWARE.
 import { AggressiveTokenizerDe } from 'lib/natural'
 const tokenizer = new AggressiveTokenizerDe()
 
-describe('aggressive_tokenizer', function () {
+describe('aggressive_tokenizer (de)', function () {
   it('should tokenize strings with diacritics ä, ö and ü, and esszet ß', function () {
     expect(tokenizer.tokenize('Es werden nur Maßnahmen gefördert, die nicht aufgrund einer Rechtsvorschrift umgesetzt werden müssen.')).toEqual(
       ['Es', 'werden', 'nur', 'Maßnahmen', 'gefördert', 'die', 'nicht', 'aufgrund', 'einer',

@@ -30,7 +30,7 @@ DEALINGS IN THE SOFTWARE.
 import { AggressiveTokenizerHi } from 'lib/natural'
 const tokenizer = new AggressiveTokenizerHi()
 
-describe('aggressive_tokenizer_hi', function () {
+describe('aggressive_tokenizer (hi)', function () {
   it('should tokenize strings', function () {
     const string = 'स्वतंत्रता दिवस की हार्दिक शुभकामनाएं'
     const expectedArray = ['स्वतंत्रता', 'दिवस', 'की', 'हार्दिक', 'शुभकामनाएं']
