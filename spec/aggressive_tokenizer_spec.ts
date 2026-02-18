@@ -25,7 +25,7 @@ THE SOFTWARE.
 import { AggressiveTokenizer } from 'lib/natural'
 const tokenizer = new AggressiveTokenizer()
 
-describe('aggressive_tokenizer', function () {
+describe('aggressive_tokenizer (en)', function () {
   it('should tokenize strings', function () {
     expect(tokenizer.tokenize('these are things')).toEqual(['these', 'are', 'things'])
   })

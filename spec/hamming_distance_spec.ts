@@ -58,8 +58,8 @@ const stringsToCompare = [{
 }]
 
 describe('The Hamming distance function compares strings of equal length', function () {
-  stringsToCompare.forEach(function (record) {
-    it('should calculate the difference between two strings correctly', function () {
+  stringsToCompare.forEach(function (record, index) {
+    it(`should calculate the difference between two strings correctly ${index}`, function () {
       expect(hammingDistance(record.string1, record.string2, record.ignoreCase)).toEqual(record.expected)
     })
   })

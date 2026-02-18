@@ -90,7 +90,7 @@ const tokenized = ['Affectueusement',
   'd',
   'exemplaires']
 
-describe('aggressive_tokenizer_fr', function () {
+describe('aggressive_tokenizer (fr)', function () {
   it('should tokenize strings', function () {
     expect(tokenizer.tokenize(text)).toEqual(tokenized)
   })

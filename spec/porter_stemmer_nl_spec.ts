@@ -30,7 +30,7 @@ const snowBallDict = rawObj as Record<string, string>
 
 const DEBUG = false
 
-describe('porter_stemmer_nl', function () {
+describe('porter_stemmer (nl)', function () {
   it('should perform stemming on a lot of words', function () {
     const errors = []
 

@@ -25,7 +25,7 @@ THE SOFTWARE.
 import { NounInflectorFr } from 'lib/natural'
 const inflector = new NounInflectorFr()
 
-describe('NounInflector', function () {
+describe('NounInflector (fr)', function () {
   describe('.pluralize()', function () {
     it('should pluralize exception nouns ending by -al', function () {
       expect(inflector.pluralize('carnaval')).toBe('carnavals')
@@ -128,20 +128,14 @@ describe('NounInflector', function () {
     })
   })
 
-  describe('.singularize()', function () {
+  describe('.singularize() - part 1', function () {
     it('should singularize regular nouns ending by -aux', function () {
       expect(inflector.singularize('amiraux')).toBe('amiral')
       expect(inflector.singularize('chevaux')).toBe('cheval')
       expect(inflector.singularize('généraux')).toBe('général')
-    })
-
-    it('should singularize exception nouns ending by -aux', function () {
       expect(inflector.singularize('baux')).toBe('bail')
       expect(inflector.singularize('vitraux')).toBe('vitrail')
       expect(inflector.singularize('émaux')).toBe('émail')
-    })
-
-    it('should singularize regular nouns ending by -aux', function () {
       expect(inflector.singularize('cadeaux')).toBe('cadeau')
       expect(inflector.singularize('beaux')).toBe('beau')
       expect(inflector.singularize('étaux')).toBe('étau')
@@ -359,20 +353,14 @@ describe('NounInflector', function () {
     })
   })
 
-  describe('.singularize()', function () {
+  describe('.singularize() - part 2', function () {
     it('should singularize regular nouns ending by -aux', function () {
       expect(inflector.singularize('amiral')).toBe('amiral')
       expect(inflector.singularize('cheval')).toBe('cheval')
       expect(inflector.singularize('général')).toBe('général')
-    })
-
-    it('should singularize exception nouns ending by -aux', function () {
       expect(inflector.singularize('bail')).toBe('bail')
       expect(inflector.singularize('vitrail')).toBe('vitrail')
       expect(inflector.singularize('émail')).toBe('émail')
-    })
-
-    it('should singularize regular nouns ending by -aux', function () {
       expect(inflector.singularize('cadeau')).toBe('cadeau')
       expect(inflector.singularize('beau')).toBe('beau')
       expect(inflector.singularize('étau')).toBe('étau')

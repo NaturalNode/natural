@@ -86,9 +86,6 @@ describe('soundex', function () {
     expect(soundex.process('super')).toBe('S160')
     expect(soundex.process('butt')).toBe('B300')
     expect(soundex.process('a')).toBe('A000')
-  })
-
-  it('should pad right with zeros', function () {
     expect(soundex.process('but')).toBe('B300')
   })
 

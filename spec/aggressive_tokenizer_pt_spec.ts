@@ -25,7 +25,7 @@ THE SOFTWé.
 import { AggressiveTokenizerPt } from 'lib/natural'
 const tokenizer = new AggressiveTokenizerPt()
 
-describe('aggressive_tokenizer_pt', function () {
+describe('aggressive_tokenizer (pt)', function () {
   it('should tokenize strings', function () {
     expect(tokenizer.tokenize('isso é coração')).toEqual(['isso', 'é', 'coração'])
   })

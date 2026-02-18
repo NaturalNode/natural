@@ -25,7 +25,7 @@ THE SOFTWARE.
 import { CountInflector } from 'lib/natural'
 const inflector = new CountInflector()
 
-describe('count_inflector', function () {
+describe('count_inflector (en)', function () {
   it('should handle 1st cases', function () {
     expect(inflector.nth(1)).toBe('1st')
     expect(inflector.nth(101)).toBe('101st')
