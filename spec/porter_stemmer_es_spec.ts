@@ -27,7 +27,7 @@ import rawJson from '../spec/test_data/snowball_es.json'
 const snowBallDict = rawJson as Record<string, string>
 const DEBUG = false
 
-describe('porter_stemmer_es', function () {
+describe('porter_stemmer (es)', function () {
   it('should perform stemming on a lot of words', function () {
     const errors = []
 

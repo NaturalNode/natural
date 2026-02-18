@@ -28,7 +28,7 @@ import {
   EdgeWeightedDigraph
 } from 'lib/natural'
 
-describe('shortest path tree', function () {
+describe('shortest path tree (1)', function () {
   const digraph = new EdgeWeightedDigraph()
   digraph.add(5, 4, 0.35)
   digraph.add(4, 7, 0.37)
@@ -113,7 +113,7 @@ describe('shortest path tree', function () {
      * Check the issue #150
      **/
   describe('lightest weight path', function () {
-    it('should find the lightest weight path', function () {
+    it('should find the lightest weight path - part 1', function () {
       const digraph = new EdgeWeightedDigraph()
 
       digraph.add(1, 3, 0.29)
@@ -124,7 +124,7 @@ describe('shortest path tree', function () {
       const path = spt.pathTo(6)
       expect(path).toEqual([1, 6])
     })
-    it('should find the lightest weight path', function () {
+    it('should find the lightest weight path - part 2', function () {
       const digraph = new EdgeWeightedDigraph()
 
       digraph.add(1, 3, -1)

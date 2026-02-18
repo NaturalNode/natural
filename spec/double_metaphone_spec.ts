@@ -254,12 +254,9 @@ describe('double metaphone', function () {
       const encodings = doubleMetaphone.process('fig')
       expect(encodings[0]).toMatch('K$')
       expect(encodings[1]).toMatch('K$')
-    })
-
-    it('should ignore G a few letters after D, H, B', function () {
-      const encodings = doubleMetaphone.process('hugh')
-      expect(encodings[0]).toBe('H')
-      expect(encodings[1]).toBe('H')
+      const encodings2 = doubleMetaphone.process('hugh')
+      expect(encodings2[0]).toBe('H')
+      expect(encodings2[1]).toBe('H')
     })
 
     it('should encode G to J when staring a word whose 3rd legger is I', function () {

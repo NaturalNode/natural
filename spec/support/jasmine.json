@@ -5,5 +5,6 @@
   ],
   "helpers": [],
   "stopSpecOnExpectationFailure": false,
-  "random": false
+  "random": false,
+  "forbidDuplicateNames": false
 }

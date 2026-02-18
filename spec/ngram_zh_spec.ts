@@ -24,7 +24,7 @@ THE SOFTWARE.
 
 import { NGramsZH } from 'lib/natural'
 
-describe('ngrams', function () {
+describe('ngrams (zh)', function () {
   it('should bigram a string via ngrams', function () {
     expect(NGramsZH.ngrams('中文文本测试', 2)).toEqual([['中', '文'],
       ['文', '文'], ['文', '本'], ['本', '测'], ['测', '试']])

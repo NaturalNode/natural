@@ -138,6 +138,7 @@ describe('case_tokenizer_nl', function () {
 describe('case_tokenizer_pt', function () {
   it('should tokenize strings', function () {
     expect(tokenizer.tokenize('isso é coração')).toEqual(['isso', 'é', 'coração'])
+    expect(tokenizer.tokenize('Siga em frente, depois vire à esquerda/direita!')).toEqual(['Siga', 'em', 'frente', 'depois', 'vire', 'à', 'esquerda', 'direita'])
   })
 
   /*
@@ -220,12 +221,6 @@ describe('case_tokenizer_no', function () {
 describe('case_tokenizer_pl', function () {
   it('should tokenize strings', function () {
     expect(tokenizer.tokenize('Bardzo za tobą tęskniłem/tęskniłam!')).toEqual(['Bardzo', 'za', 'tobą', 'tęskniłem', 'tęskniłam'])
-  })
-})
-
-describe('case_tokenizer_pt', function () {
-  it('should tokenize strings', function () {
-    expect(tokenizer.tokenize('Siga em frente, depois vire à esquerda/direita!')).toEqual(['Siga', 'em', 'frente', 'depois', 'vire', 'à', 'esquerda', 'direita'])
   })
 })
 

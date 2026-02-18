@@ -25,7 +25,7 @@ THE SOFTWARE.
 import { AggressiveTokenizerSv } from 'lib/natural'
 const tokenizer = new AggressiveTokenizerSv()
 
-describe('aggressive_tokenizer_sv', function () {
+describe('aggressive_tokenizer (sv)', function () {
   it('should tokenize strings', function () {
     expect(tokenizer.tokenize('Ett tu tre')).toEqual(['Ett', 'tu', 'tre'])
   })

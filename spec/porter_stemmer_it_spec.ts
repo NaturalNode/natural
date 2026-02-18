@@ -26,7 +26,7 @@ import { PorterStemmerIt as stemmer } from 'lib/natural'
 import rawJson from '../spec/test_data/snowball_it.json'
 const snowBallDict = rawJson as Record<string, string>
 
-describe('porter_stemmer_it', function () {
+describe('porter_stemmer (it)', function () {
   it('should perform stem', function () {
     const errors = []
     Object.keys(snowBallDict).forEach(word => {
