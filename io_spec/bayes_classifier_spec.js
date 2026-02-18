@@ -75,7 +75,7 @@ describe('Bayes classifier file I/O', function () {
     let sandbox = null
 
     beforeEach(function () {
-      sandbox = sinon.sandbox.create()
+      sandbox = sinon.createSandbox()
     })
 
     afterEach(function () {

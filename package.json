@@ -22,7 +22,7 @@
     "safe-stable-stringify": "^2.2.0",
     "stopwords-iso": "^1.1.0",
     "sylvester": "^0.0.12",
-    "underscore": "^1.9.1",
+    "underscore": "^1.13.0",
     "uuid": "^9.0.1",
     "wordnet-db": "^3.1.11"
   },
@@ -45,22 +45,12 @@
     "nyc": "^15.1.0",
     "pegjs": "^0.10.0",
     "proxyquire": "^1.8.0",
-    "rimraf": "^2.6.3",
+    "rimraf": "^5.0.0",
     "rollup": "^4.18.0",
-    "sinon": "^1.12.2",
+    "sinon": "^17.0.0",
     "source-map-support": "^0.5.21",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.3",
-    "uubench": "^0.0.1"
-  },
-  "standard": {
-    "ignore": [
-      "/lib/natural/brill_pos_tagger/lib/TF_Parser.js",
-      "/lib/natural/tokenizers/parser_sentence_tokenizer.js"
-    ],
-    "env": {
-      "jasmine": true
-    }
+    "typescript": "^5.9.3"
   },
   "jscpd": {
     "ignore": [
