@@ -25,7 +25,12 @@ import { DocumentClusterer } from 'lib/natural'
 describe('DocumentClusterer', function () {
   describe('basic document clustering', function () {
     it('should cluster similar documents together', function () {
-      const clusterer = new DocumentClusterer(2)
+      const clusterer = new DocumentClusterer(2, {
+        kmeans: {
+          seed: 42,
+          restarts: 5
+        }
+      })
 
       // Add documents about two different topics with distinct vocabularies
       clusterer.addDocument('feline kitten meow purr whiskers cat kitty')

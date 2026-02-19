@@ -60,6 +60,8 @@ const clusterer = new DocumentClusterer(3, {
   kmeans: {
     maxIterations: 500,  // Allow more iterations for convergence
     tolerance: 0.00001,  // Stricter convergence criteria
+    seed: 42,            // Deterministic results across runs
+    restarts: 10,        // Pick the best run for better clusters
     initialization: 'kmeans++' // Better initialization for better results
   }
 })

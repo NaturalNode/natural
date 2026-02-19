@@ -24,6 +24,8 @@ export interface KMeansOptions {
   maxIterations?: number
   tolerance?: number
   initialization?: 'random' | 'kmeans++'
+  seed?: number
+  restarts?: number
 }
 
 export class KMeans {
@@ -31,6 +33,8 @@ export class KMeans {
   maxIterations: number
   tolerance: number
   initialization: string
+  seed: number | undefined
+  restarts: number
   centroids: number[][] | null
   clusters: number[][] | null
   assignments: number[] | null

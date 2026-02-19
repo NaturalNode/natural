@@ -193,6 +193,25 @@ describe('KMeans', function () {
     })
   })
 
+  describe('determinism', function () {
+    it('should produce the same assignments with the same seed', function () {
+      const data = [
+        [0, 0],
+        [1, 1],
+        [10, 10],
+        [11, 11]
+      ]
+
+      const kmeans1 = new KMeans(2, { seed: 7, restarts: 1 })
+      kmeans1.fit(data)
+
+      const kmeans2 = new KMeans(2, { seed: 7, restarts: 1 })
+      kmeans2.fit(data)
+
+      expect(kmeans2.getAssignments()).toEqual(kmeans1.getAssignments())
+    })
+  })
+
   describe('error handling', function () {
     it('should throw error for empty data', function () {
       const kmeans = new KMeans(2)
