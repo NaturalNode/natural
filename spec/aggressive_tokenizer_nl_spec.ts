@@ -25,7 +25,7 @@ THE SOFTWé.
 import { AggressiveTokenizerNl } from 'lib/natural'
 const tokenizer = new AggressiveTokenizerNl()
 
-describe('aggressive_tokenizer_nl', function () {
+describe('aggressive_tokenizer (nl)', function () {
   it('should tokenize strings', function () {
     expect(tokenizer.tokenize('\'s Morgens is het nog erg koud, vertelde de weerman over een van de radio\'s')).toEqual(['\'s', 'Morgens', 'is', 'het', 'nog', 'erg', 'koud', 'vertelde', 'de', 'weerman', 'over', 'een', 'van', 'de', 'radio\'s'])
   })

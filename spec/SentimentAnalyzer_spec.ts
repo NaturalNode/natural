@@ -105,14 +105,7 @@ const testConfigurations = [
       { sentence: "Sadly, stereotypes are this film’s stock in trade. Is Melinda a victim or a warrior or just batshit crazy? The movie can't or won’t decide. Taraji will rise again, she always does. But enduing a full 120 minutes of this shitstorm takes its toll. Bitterness, anger, malice, bad blood – that’s acrimony, baby. And that's what you'll feel if you blow the price of ticket on this hack job.", score: -0.010144927536231883 },
       { sentence: "But as soon as Vic decides to hit the road to Knoxville, his birthplace, sentiment infects the film like a virus. Writer-director Adam Rifkin clearly has affection for his star, but he's put him in a leaky vehicle that sinks way before the journey ends. Sam Elliott handled a similar role with more style, emotion and dramatic heft in last year's The Hero. But Reynolds, let's not forget, really is a movie star. And a great one. The pleasure of his company is still an exuberant gift. He deserves more than an opportunity missed.", score: -0.026595744680851064 },
       { sentence: "Sadly, stereotypes are this film’s stock in trade. Is Melinda a victim or a warrior or just batshit crazy? The movie can't or won’t decide. Taraji will rise again, she always does. But enduing a full 120 minutes of this shitstorm takes its toll. Bitterness, anger, malice, bad blood – that’s acrimony, baby. And that's what you'll feel if you blow the price of ticket on this hack job.", score: -0.010144927536231883 },
-      { sentence: 'G-Eazy released his expansive third album, The Beautiful & Damned, in December with hit singles "No Limit" and "Him & I." The album featured guest appearances from Cardi B, A$AP Rocky, Charlie Puth and Halsey, and debuted at Number Three on the Billboard 200.', score: 0.022727272727272728 }
-    ]
-  },
-  {
-    language: 'English',
-    stemmer: 'PorterStemmer',
-    vocabularyType: 'pattern',
-    testSentences: [
+      { sentence: 'G-Eazy released his expansive third album, The Beautiful & Damned, in December with hit singles "No Limit" and "Him & I." The album featured guest appearances from Cardi B, A$AP Rocky, Charlie Puth and Halsey, and debuted at Number Three on the Billboard 200.', score: 0.022727272727272728 },
       { sentence: 'constructor hasOwnProperty toString setPrototypeOf', score: 0 }
     ]
   },
@@ -209,7 +202,7 @@ function detStemmer (st: string): Stemmer | undefined {
 }
 
 describe('The sentiment analyzer analyzes the sentiment of sentences in multiple languages using different types of vocabularies', function () {
-  testConfigurations.forEach(config => {
+  testConfigurations.forEach((config, index) => {
     it('Should analyze a set of sentences with each configuration ' +
       '(' + config.language + ', ' + config.vocabularyType + ', ' + (config.stemmer ?? 'without stemmer') + ')', function () {
       // Create the stemmer

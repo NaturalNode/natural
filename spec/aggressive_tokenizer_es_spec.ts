@@ -25,7 +25,7 @@ THE SOFTWé.
 import { AggressiveTokenizerEs } from 'lib/natural'
 const tokenizer = new AggressiveTokenizerEs()
 
-describe('aggressive_tokenizer_es', function () {
+describe('aggressive_tokenizer (es)', function () {
   it('should tokenize strings', function () {
     expect(tokenizer.tokenize('hola yo me llamo eduardo y esudié ingeniería')).toEqual(['hola', 'yo', 'me', 'llamo', 'eduardo', 'y', 'esudié', 'ingeniería'])
   })

@@ -26,7 +26,7 @@ import { PorterStemmerNo as stemmer } from 'lib/natural'
 import rawObj from '../spec/test_data/snowball_no.json'
 const snowBallDict = rawObj as Record<string, string>
 
-describe('porter_stemmer_no', function () {
+describe('porter_stemmer (no)', function () {
   it('should perform step 1a', function () {
     expect(stemmer.step1a('forenkla')).toBe('forenkl')
     expect(stemmer.step1a('aase')).toBe('aas')

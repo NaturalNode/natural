@@ -44,7 +44,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x, 18.x, 20.x]
+        node-version: [20.x, 22.x, 24.x]
         # See supported Node.js release schedule at 
         #https://nodejs.org/en/about/releases/
 
@@ -60,8 +60,14 @@ jobs:
       - name: Clean install
         run: npm ci
 
+      - name: Lint
+        run: npm run lint
+
       - name: Build
         run: npm run build
+
+      - name: ESM smoke test
+        run: npm run smoke:esm
     
       - name: Run Istanbul coverage
         run: npm run coverage

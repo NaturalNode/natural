@@ -25,6 +25,9 @@ THE SOFTWARE.
 
 export let stopwords: string[]
 
+export let abbreviations: string[]
+export let abbreviationsEs: string[]
+
 declare class Bag<T> {
   add (element: T): Bag<T>
   isEmpty (): boolean

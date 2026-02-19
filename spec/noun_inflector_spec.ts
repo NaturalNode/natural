@@ -25,7 +25,7 @@ THE SOFTWARE.
 import { NounInflector } from 'lib/natural'
 const inflector = new NounInflector()
 
-describe('noun inflector', function () {
+describe('noun inflector (en)', function () {
   describe('singularization', function () {
     it('should drop an S by default', function () {
       expect(inflector.singularize('rrrs')).toBe('rrr')
@@ -356,10 +356,6 @@ describe('noun inflector', function () {
       expect(myInflector.singularize('dwarves')).toBe('dwarf')
       expect(myInflector.singularize('wharves')).toBe('wharf')
       expect(myInflector.singularize('handkerchieves')).toBe('handkerchief')
-    })
-
-    it('should handle words ending in rf', function () {
-      const myInflector = new NounInflector()
       expect(myInflector.singularize('expenses')).toBe('expense')
       expect(myInflector.singularize('defenses')).toBe('defense')
       expect(myInflector.pluralize('expense')).toBe('expenses')

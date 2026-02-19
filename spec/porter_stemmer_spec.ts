@@ -27,7 +27,7 @@ import {
   stopwords
 } from 'lib/natural'
 
-describe('porter_stemmer', function () {
+describe('porter_stemmer (en)', function () {
   it('should categorizeGroups', function () {
     expect(stemmer.categorizeGroups('syllog')).toBe('CVCVC')
     expect(stemmer.categorizeGroups('gypsy')).toBe('CVCV')

@@ -27,7 +27,7 @@ declare interface RegionsType {
 }
 
 export declare interface Stemmer {
-  stem: (token: string) => string
+  stem: (token: string, options?: any) => string
   addStopWord: (stopWord: string) => void
   addStopWords: (moreStopWords: string[]) => void
   removeStopWord: (stopWord: string) => void

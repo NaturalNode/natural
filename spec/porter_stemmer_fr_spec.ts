@@ -26,7 +26,7 @@ import { PorterStemmerFr as stemmer } from 'lib/natural'
 import rawJson from '../spec/test_data/snowball_fr.json'
 const snowBallDict = rawJson as Record<string, string>
 
-describe('porter_stemmer', function () {
+describe('porter_stemmer (fr)', function () {
   it('should prelude', function () {
     expect(stemmer.prelude('JOUER')).toBe('joUer')
     expect(stemmer.prelude('ennuie')).toBe('ennuIe')
