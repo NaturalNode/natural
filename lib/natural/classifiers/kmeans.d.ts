@@ -20,22 +20,31 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-'use strict'
+export interface KMeansOptions {
+  maxIterations?: number
+  tolerance?: number
+  initialization?: 'random' | 'kmeans++'
+  seed?: number
+  restarts?: number
+}
 
-exports.BayesClassifier = require('./bayes_classifier')
-exports.LogisticRegressionClassifier = require('./logistic_regression_classifier')
+export class KMeans {
+  k: number
+  maxIterations: number
+  tolerance: number
+  initialization: string
+  seed: number | undefined
+  restarts: number
+  centroids: number[][] | null
+  clusters: number[][] | null
+  assignments: number[] | null
+  iterations: number
 
-exports.MaxEntClassifier = require('./maxent/Classifier')
-exports.Context = require('./maxent/Context')
-exports.Feature = require('./maxent/Feature')
-exports.FeatureSet = require('./maxent/FeatureSet')
-exports.Sample = require('./maxent/Sample')
-exports.Element = require('./maxent/Element')
-exports.SEElement = require('./maxent/SimpleExample/SE_Element')
-exports.GISScaler = require('./maxent/GISScaler')
-exports.POSElement = require('./maxent/POS/POS_Element')
-exports.MESentence = require('./maxent/POS/ME_Sentence')
-exports.MECorpus = require('./maxent/POS/ME_Corpus')
-
-exports.KMeans = require('./kmeans')
-exports.DocumentClusterer = require('./document_clusterer')
+  constructor (k: number, options?: KMeansOptions)
+  
+  fit (data: number[][]): KMeans
+  predict (data: number[][] | number[]): number[]
+  getCentroids (): number[][]
+  getAssignments (): number[]
+  getClusters (): number[][]
+}
