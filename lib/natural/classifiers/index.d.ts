@@ -252,3 +252,12 @@ export class MECorpus {
   generateSample (): Sample
   splitInTrainAndTest (percentageTrain: number): [MECorpus, MECorpus]
 }
+
+export { KMeans, KMeansOptions } from './kmeans'
+export { 
+  DocumentClusterer, 
+  DocumentClustererOptions, 
+  ClusteredDocument, 
+  ClusterTerm, 
+  ClusteringStatistics 
+} from './document_clusterer'
