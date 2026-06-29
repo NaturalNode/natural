@@ -25,6 +25,11 @@ describe('DamerauLevenshtein', function () {
       expect(DamerauLevenshteinDistance('CA', 'ABC')).toBe(2)
       expect(DamerauLevenshteinDistance('a cat', 'a abct')).toBe(2)
     })
+
+    it('should stay symmetric for strings with repeated characters (issue #757)', function () {
+      expect(DamerauLevenshteinDistance('0,1,10,11', '0,11,110,111')).toBe(3)
+      expect(DamerauLevenshteinDistance('0,11,110,111', '0,1,10,11')).toBe(3)
+    })
   })
 
   describe('options.restricted = true', function () {
