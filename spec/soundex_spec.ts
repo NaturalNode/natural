@@ -78,6 +78,27 @@ describe('soundex', function () {
     })
   })
 
+  describe('literal initial character', function () {
+    const cases = [
+      ['[foo]', '[100'],
+      ['(foo)', '(100'],
+      ['*foo', '*100'],
+      ['.foo', '.100']
+    ]
+
+    cases.forEach(([token, expected]) => {
+      it(`should treat the first character of ${token} literally`, function () {
+        expect(soundex.process(token)).toBe(expected)
+      })
+    })
+
+    it('should preserve empty input and duplicate initial consonant handling', function () {
+      expect(soundex.process('')).toBe('000')
+      expect(soundex.process('Pfister')).toBe('P236')
+      expect(soundex.process('`[foo]`')).toBe('`100')
+    })
+  })
+
   it('should not code the first character', function () {
     expect(soundex.process('render').charAt(0)).toBe('R')
   })
