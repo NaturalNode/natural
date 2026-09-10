@@ -478,10 +478,45 @@ describe('double metaphone', function () {
   })
 
   describe('S', function () {
+    const pronounced: Array<[string, string[]]> = [
+      ['is', ['AS', 'AS']],
+      ['as', ['AS', 'AS']],
+      ['asleep', ['ASLP', 'ASLP']],
+      ['leslie', ['LSL', 'LSL']]
+    ]
+
+    pronounced.forEach(([word, expected]) => {
+      it(`should retain the pronounced S in ${word}`, function () {
+        expect(doubleMetaphone.process(word)).toEqual(expected)
+      })
+    })
+
     it('should skip S between I and L', function () {
       const encodings = doubleMetaphone.process('isle')
       expect(encodings[0]).toMatch(/^AL/)
       expect(encodings[1]).toMatch(/^AL/)
+    })
+
+    it('should skip S between Y and L', function () {
+      expect(doubleMetaphone.process('lysle')).toEqual(['LL', 'LL'])
+    })
+
+    it('should preserve the alternate initial SL encoding', function () {
+      expect(doubleMetaphone.process('slip')).toEqual(['SLP', 'XLP'])
+    })
+
+    it('should preserve alternate final French S encodings', function () {
+      expect(doubleMetaphone.process('palais')).toEqual(['PL', 'PLS'])
+      expect(doubleMetaphone.process('artois')).toEqual(['ART', 'ARTS'])
+    })
+
+    it('should distinguish words with a pronounced S when comparing', function () {
+      expect(doubleMetaphone.compare('is', 'a')).toBeFalsy()
+      expect(doubleMetaphone.compare('is', 'as')).toBeTruthy()
+    })
+
+    it('should retain a pronounced S before truncating the code', function () {
+      expect(doubleMetaphone.process('asleep', 2)).toEqual(['AS', 'AS'])
     })
 
     it("should encode sugar's S to X", function () {
