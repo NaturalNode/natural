@@ -22,6 +22,9 @@ THE SOFTWARE.
 
 'use strict'
 
+import * as fs from 'fs'
+import * as os from 'os'
+import * as path from 'path'
 import { TfIdf, TreebankWordTokenizer, stopwords } from 'lib/natural'
 import type { TfIdfTerm } from 'lib/natural'
 
@@ -123,6 +126,86 @@ describe('tfidf', function () {
 
       reservedWords.forEach((word: string) => {
         expect(tfidf.tfidf(word, 0)).toBe(1 * (1 + Math.log(1 / 2)))
+      })
+    })
+
+    describe('terms that are also property names of Object', function () {
+      const reservedWords = [
+        'toString',
+        'toLocaleString',
+        'valueOf',
+        'hasOwnProperty',
+        'isPrototypeOf',
+        'propertyIsEnumerable',
+        'constructor',
+        '__proto__'
+      ]
+
+      it('should have a tf of 0 for a term that is absent from the document', function () {
+        reservedWords.forEach((word: string) => {
+          expect(TfIdf.tf(word, { document: 1 })).toBe(0)
+        })
+      })
+
+      it('should have a tfidf of 0 (not NaN) for a term that is absent from the document', function () {
+        tfidf = new TfIdf()
+        tfidf.addDocument('this document is about node')
+        tfidf.addDocument('the constructor is a special method')
+
+        expect(tfidf.tfidf('constructor', 0)).toBe(0)
+        expect(tfidf.tfidfs('constructor')[0]).toBe(0)
+        reservedWords.forEach((word: string) => {
+          expect(tfidf.tfidf([word], 0)).toBe(0)
+        })
+      })
+
+      it('should still compute the tfidf of a term that is present in the document', function () {
+        tfidf = new TfIdf()
+        tfidf.addDocument('this document is about node')
+        tfidf.addDocument('the constructor is a special method')
+
+        expect(tfidf.tfidf('constructor', 1)).toBe(1 + Math.log(2 / 2))
+        expect(tfidf.idf('constructor')).toBe(1 + Math.log(2 / 2))
+      })
+
+      it('should not list NaN values in listTerms()', function () {
+        tfidf = new TfIdf()
+        tfidf.addDocument('this document is about node')
+        tfidf.addDocument('the constructor is a special method')
+
+        tfidf.listTerms(0).forEach((term: TfIdfTerm) => {
+          expect(Number.isNaN(term.tfidf)).toBe(false)
+        })
+      })
+
+      it('should not read the idf from the prototype of the cache of a deserialized instance', function () {
+        tfidf = new TfIdf({
+          documents: [
+            { __key: 'un', document: 1, one: 1 },
+            { __key: 'deux', document: 1, constructor: 1 }
+          ]
+        })
+
+        expect(tfidf.idf('constructor')).toBe(1 + Math.log(2 / 2))
+        expect(tfidf.tfidf('constructor', 0)).toBe(0)
+        expect(tfidf.tfidf('constructor', 1)).toBe(1)
+      })
+
+      it('should not read the idf from the prototype of the cache after addFileSync()', function () {
+        const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'natural-tfidf-'))
+        const file = path.join(directory, 'document.txt')
+        fs.writeFileSync(file, 'a file about the constructor')
+        try {
+          tfidf = new TfIdf()
+          tfidf.addDocument('this document is about node')
+          tfidf.addFileSync(file)
+
+          expect(tfidf.idf('constructor')).toBe(1 + Math.log(2 / 2))
+          expect(tfidf.tfidf('constructor', 0)).toBe(0)
+          expect(tfidf.tfidf('constructor', 1)).toBe(1)
+        } finally {
+          fs.rmSync(directory, { recursive: true, force: true })
+        }
       })
     })
 
