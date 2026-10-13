@@ -221,6 +221,68 @@ describe('sentence_tokenizer', function () {
   })
 })
 
+describe('sentence_tokenizer abbreviations that end other words', function () {
+  let tokenizer: Tokenizer
+
+  beforeAll(function () {
+    tokenizer = new Tokenizer(['Mr.', 'Dr.', 'St.', 'e.g.', 'Inc.'])
+  })
+
+  const testData = [
+    {
+      it: 'should not treat the end of "best." as the abbreviation "St."',
+      input: 'This is the best. Next one starts here.',
+      output: ['This is the best.', 'Next one starts here.']
+    },
+    {
+      it: 'should not treat the end of "zinc." as the abbreviation "Inc."',
+      input: 'We love zinc. It is a metal.',
+      output: ['We love zinc.', 'It is a metal.']
+    },
+    {
+      it: 'should not treat the end of "list." as the abbreviation "St."',
+      input: 'See the list. Then go.',
+      output: ['See the list.', 'Then go.']
+    },
+    {
+      it: 'should not treat the end of a word with a non-ASCII letter as an abbreviation',
+      input: 'Hon har en fin röst. Han sjunger.',
+      output: ['Hon har en fin röst.', 'Han sjunger.']
+    },
+    {
+      it: 'should still treat "Mr." as an abbreviation',
+      input: 'Mr. Smith went to Washington. He liked it.',
+      output: ['Mr. Smith went to Washington.', 'He liked it.']
+    },
+    {
+      it: 'should still treat "Dr." as an abbreviation',
+      input: 'We met Dr. Who. He was nice.',
+      output: ['We met Dr. Who.', 'He was nice.']
+    },
+    {
+      it: 'should still treat an abbreviation as such regardless of case',
+      input: 'MR. SMITH came. He left.',
+      output: ['MR. SMITH came.', 'He left.']
+    },
+    {
+      it: 'should still treat "e.g." as an abbreviation after a comma or an opening bracket',
+      input: 'Use fruit, e.g. apples (e.g. pears). They are tasty.',
+      output: ['Use fruit, e.g. apples (e.g. pears).', 'They are tasty.']
+    },
+    {
+      it: 'should still treat a standalone "St." as an abbreviation',
+      input: 'He lives on Main St. Nobody knows it.',
+      output: ['He lives on Main St. Nobody knows it.']
+    }
+  ]
+
+  testData.forEach(({ it: description, input, output }) => {
+    it(description, function () {
+      expect(tokenizer.tokenize(input)).toEqual(output)
+    })
+  })
+})
+
 // describe('sentence_tokenizer with trimSentences set to false', function () {
 //   let tokenizer: Tokenizer
 
