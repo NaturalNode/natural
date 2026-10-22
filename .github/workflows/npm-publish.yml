@@ -30,7 +30,6 @@ jobs:
         with:
           node-version: 22.22.2
           registry-url: https://registry.npmjs.org/
-      - run: npm install --global npm@12.2.1
       - run: npm ci
       - run: git config user.name "$GITHUB_ACTOR"
       - run: npm stage publish
