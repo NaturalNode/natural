@@ -30,6 +30,13 @@ jobs:
         with:
           node-version: 22.22.2
           registry-url: https://registry.npmjs.org/
+      - name: Install npm with stage support
+        run: npm install -g npm@^11.15.0
+      - name: Verify Node/npm support for stage
+        run: |
+          node -v
+          npm -v
+          npm help stage
       - run: npm ci
       - run: git config user.name "$GITHUB_ACTOR"
       - run: npm stage publish
