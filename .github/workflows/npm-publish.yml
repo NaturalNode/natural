@@ -31,6 +31,6 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - run: npm ci
       - run: git config user.name "$GITHUB_ACTOR"
-      - run: npm publish
+      - run: npm stage publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_SECRET}}
