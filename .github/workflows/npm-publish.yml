@@ -6,6 +6,7 @@ name: Node.js Package
 on:
   release:
     types: [created]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -27,10 +28,17 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           registry-url: https://registry.npmjs.org/
+      - name: Install npm with stage support
+        run: npm install -g npm@^11.15.0
+      - name: Verify Node/npm support for stage
+        run: |
+          node -v
+          npm -v
+          npm help stage
       - run: npm ci
       - run: git config user.name "$GITHUB_ACTOR"
-      - run: npm publish
+      - run: npm stage publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_SECRET}}

@@ -194,4 +194,65 @@ describe('trie', function () {
       expect(results[1]).toBe('re')
     })
   })
+
+  describe('iterative traversal regressions', function () {
+    it('should add and find a very long string without overflowing the call stack', function () {
+      const trie = new Trie()
+      const value = 'a'.repeat(50000)
+      trie.addString(value)
+      expect(trie.contains(value)).toBe(true)
+    })
+
+    it('should preserve shared prefix results and order', function () {
+      const trie = new Trie()
+      trie.addStrings(['app', 'apple', 'application', 'apply'])
+      expect(trie.keysWithPrefix('app')).toEqual(['app', 'apple', 'application', 'apply'])
+    })
+
+    it('should preserve repeated insertion return values', function () {
+      const trie = new Trie()
+      expect(trie.addString('repeat')).toBe(false)
+      expect(trie.addString('repeat')).toBe(true)
+      expect(trie.contains('repeat')).toBe(true)
+      expect(trie.getSize()).toBe(7)
+    })
+
+    it('should preserve hit and miss search results', function () {
+      const trie = new Trie()
+      trie.addStrings(['their', 'there'])
+      expect(trie.contains('their')).toBe(true)
+      expect(trie.contains('theirs')).toBe(false)
+      expect(trie.contains('the')).toBe(false)
+    })
+
+    it('should preserve case-insensitive normalization in search results', function () {
+      const trie = new Trie(false)
+      trie.addStrings(['App', 'Apple', 'application', 'apply'])
+      expect(trie.contains('APPLICATION')).toBe(true)
+      expect(trie.findPrefix('ApPLICATIONS')).toEqual(['application', 's'])
+      expect(trie.findMatchesOnPath('ApPLICATIONS')).toEqual(['app', 'application'])
+    })
+
+    it('should preserve empty string behavior', function () {
+      const trie = new Trie()
+      expect(trie.addString('')).toBe(false)
+      expect(trie.addString('')).toBe(true)
+      expect(trie.contains('')).toBe(true)
+      expect(trie.findPrefix('missing')).toEqual(['', 'missing'])
+      expect(trie.findMatchesOnPath('missing')).toEqual([''])
+    })
+
+    it('should preserve exact findPrefix results', function () {
+      const trie = new Trie()
+      trie.addStrings(['their', 'and', 'they'])
+      expect(trie.findPrefix('theyre')).toEqual(['they', 're'])
+      expect(trie.findPrefix('theme')).toEqual([null, 'me'])
+    })
+
+    it('should preserve exact findMatchesOnPath order', function () {
+      const trie = new Trie()
+      trie.addStrings(['a', 'ab', 'bc', 'cd', 'abc'])
+      expect(trie.findMatchesOnPath('abcd')).toEqual(['a', 'ab', 'abc'])
+    })
+  })
 })
