@@ -74,6 +74,7 @@ jobs:
 
       # Save coverage report in Coveralls
       - name: Coveralls
-        uses: coverallsapp/github-action@master
+        if: matrix.node-version == '22.x'
+        uses: coverallsapp/github-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
