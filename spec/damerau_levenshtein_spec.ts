@@ -25,6 +25,11 @@ describe('DamerauLevenshtein', function () {
       expect(DamerauLevenshteinDistance('CA', 'ABC')).toBe(2)
       expect(DamerauLevenshteinDistance('a cat', 'a abct')).toBe(2)
     })
+
+    it('should calculate 1 for 1 insertion of repeated symbol', function () {
+      expect(DamerauLevenshteinDistance('ax', 'axx')).toBe(1)
+      expect(DamerauLevenshteinDistance('axx', 'ax')).toBe(1)
+    })
   })
 
   describe('options.restricted = true', function () {
