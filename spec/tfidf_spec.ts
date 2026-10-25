@@ -179,20 +179,20 @@ describe('tfidf', function () {
       tfidf.addDocument('this document is about ruby and node.', { node: 0, ruby: 3 })
       tfidf.addDocument('this document is about node. it has node examples', { node: 2, ruby: 1 })
 
-      tfidf.tfidfs('node', (i: number, measure: number, k: string | Record<string, any> | undefined): void => {
-        if (typeof k === 'object') {
-          expect(measure).toBe(correctCalculations[k.node])
+      const expectTfidf = (measure: number, key: string | Record<string, any> | undefined, term: 'node' | 'ruby'): void => {
+        if (typeof key === 'object') {
+          expect(measure).toBe(correctCalculations[key[term]])
         } else {
           console.log('Key was undefined')
         }
+      }
+
+      tfidf.tfidfs('node', (i: number, measure: number, k: string | Record<string, any> | undefined): void => {
+        expectTfidf(measure, k, 'node')
       })
 
       tfidf.tfidfs('ruby', (i: number, measure: number, k: string | Record<string, any> | undefined): void => {
-        if (typeof k === 'object') {
-          expect(measure).toBe(correctCalculations[k.ruby])
-        } else {
-          console.log('Key was undefined')
-        }
+        expectTfidf(measure, k, 'ruby')
       })
     })
 
