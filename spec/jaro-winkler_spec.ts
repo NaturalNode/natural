@@ -73,6 +73,20 @@ describe('jaro-winkler', function () {
     expect(approxEql(JaroWinklerDistance('MARTHA', 'MARHTA', { ignoreCase: true }), 0.96111)).toBeTruthy()
     expect(JaroWinklerDistance('abcd', 'ABCD', { ignoreCase: true })).toBe(1)
   })
+
+  it('should handle strings of length 1', function () {
+    expect(JaroWinklerDistance('a', 'a', {})).toBe(1)
+    expect(JaroWinklerDistance('a', 'b', {})).toBe(0)
+    expect(JaroWinklerDistance('A', 'a', {})).toBe(0)
+    expect(JaroWinklerDistance('A', 'a', { ignoreCase: true })).toBe(1)
+    expect(JaroWinklerDistance('a', 'A', { ignoreCase: true })).toBe(1)
+    expect(JaroWinklerDistance('A', 'b', { ignoreCase: true })).toBe(0)
+  })
+
+  it('should not count a matching prefix longer than the strings', function () {
+    // Both strings are 2 characters long, so the matching prefix is at most 2: 0.5 + 2 * 0.1 * (1 - 0.5)
+    expect(approxEql(JaroWinklerDistance('Ab', 'aB', { ignoreCase: true, dj: 0.5 }), 0.6)).toBeTruthy()
+  })
   it('should not fail while passing no options', function () {
     expect(approxEql(JaroWinklerDistance('check', 'chakk'), 0.78666)).toBeTruthy()
   })
