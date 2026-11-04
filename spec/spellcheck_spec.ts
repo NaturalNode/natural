@@ -28,6 +28,10 @@ describe('spellcheck', function () {
   describe('distance 1 corrections', function () {
     const spellcheck = new Spellcheck(['something'])
 
+    it('returns equal-frequency corrections in edit order', function () {
+      expect(new Spellcheck(['cat', 'bat', 'rat']).getCorrections('at')).toEqual(['bat', 'cat', 'rat'])
+    })
+
     it('should fix deletions', function () {
       expect(spellcheck.getCorrections('smething')).toContain('something')
     })
@@ -53,6 +57,11 @@ describe('spellcheck', function () {
   describe('edits', function () {
     const spellcheck = new Spellcheck([])
     const edits = spellcheck.edits('ab')
+
+    it('keeps the first occurrence of each edit in order', function () {
+      expect(spellcheck.edits('a').slice(0, 5)).toEqual(['aa', 'ba', 'ca', 'da', 'ea'])
+      expect(spellcheck.edits('a').filter(edit => edit === 'aa')).toEqual(['aa'])
+    })
 
     it('should compute insertions', function () {
       const insertions = ['xab', 'axb', 'abx']
@@ -82,6 +91,14 @@ describe('spellcheck', function () {
 
   describe('edits up to distance', function () {
     const spellcheck = new Spellcheck([])
+
+    it('keeps depth and word order while retaining duplicates between parents', function () {
+      const edits = spellcheck.editsWithMaxDistance('a', 2) as unknown as string[][]
+      expect(edits[0]).toEqual(['a'])
+      expect(edits[1].slice(0, 3)).toEqual(['aa', 'ba', 'ca'])
+      expect(edits[2].slice(0, 3)).toEqual(spellcheck.edits('aa').slice(0, 3))
+      expect(edits[2].filter(edit => edit === 'a').length).toBeGreaterThan(1)
+    })
 
     it('should correctly compute edits at distance', function () {
       const edits = spellcheck.editsWithMaxDistance('abc', 2)

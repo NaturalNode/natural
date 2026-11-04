@@ -27,6 +27,23 @@ import {
   LevenshteinDistanceSearch as levenshteinDistanceSearch
 } from 'lib/natural/distance/levenshtein_distance'
 
+function referenceDistance (source: string, target: string, insertion: number, deletion: number, substitution: number): number {
+  const matrix: number[][] = [[0]]
+  for (let row = 1; row <= source.length; row++) matrix[row] = [matrix[row - 1][0] + deletion]
+  for (let column = 1; column <= target.length; column++) matrix[0][column] = matrix[0][column - 1] + insertion
+  for (let row = 1; row <= source.length; row++) {
+    for (let column = 1; column <= target.length; column++) {
+      const insert = matrix[row][column - 1] + insertion
+      const remove = matrix[row - 1][column] + deletion
+      const replace = source[row - 1] === target[column - 1]
+        ? matrix[row - 1][column - 1]
+        : matrix[row - 1][column - 1] + substitution
+      matrix[row][column] = Math.min(insert, remove, replace)
+    }
+  }
+  return matrix[source.length][target.length]
+}
+
 describe('levenshtein_distance', function () {
   describe('options.search = true', function () {
     it('should find cheapest substring', function () {
@@ -63,6 +80,42 @@ describe('levenshtein_distance', function () {
   })
 
   describe('default / options.search = false', function () {
+    it('matches a full matrix for randomized strings and costs', function () {
+      let seed = 123456789
+      const random = (): number => {
+        seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0
+        return seed / 0x100000000
+      }
+      const costs = [-2, -0.5, 0, 0.25, 1, 2, 4]
+      const alphabet = 'abc😀'
+      for (let trial = 0; trial < 600; trial++) {
+        let source = ''
+        let target = ''
+        for (let i = 0, length = Math.floor(random() * 9); i < length; i++) source += alphabet[Math.floor(random() * alphabet.length)]
+        for (let i = 0, length = Math.floor(random() * 9); i < length; i++) target += alphabet[Math.floor(random() * alphabet.length)]
+        const insertion = costs[Math.floor(random() * costs.length)]
+        const deletion = costs[Math.floor(random() * costs.length)]
+        const substitution = costs[Math.floor(random() * costs.length)]
+        expect(levenshteinDistance(source, target, {
+          insertion_cost: insertion,
+          deletion_cost: deletion,
+          substitution_cost: substitution
+        })).toBe(referenceDistance(source, target, insertion, deletion, substitution))
+      }
+    })
+
+    it('handles empty and identical strings and surrogate code units', function () {
+      expect(levenshteinDistance('', '')).toBe(0)
+      expect(levenshteinDistance('', '😀')).toBe(2)
+      expect(levenshteinDistance('😀', '')).toBe(2)
+      expect(levenshteinDistance('😀', '😀')).toBe(0)
+      expect(levenshteinDistance('😀', '😃')).toBe(1)
+    })
+
+    it('keeps array input on the original path', function () {
+      expect(levenshteinDistance(['a', 'b'] as any, 'a')).toBe(1)
+    })
+
     it('should replace 2', function () {
       expect(levenshteinDistance('doctor', 'doktor')).toBe(1)
     })
