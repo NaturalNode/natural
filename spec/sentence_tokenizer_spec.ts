@@ -74,6 +74,11 @@ const testData = [
     output: ['My twitter feed can be found at https://twitter.com/user1.']
   },
   {
+    it: 'should keep dollar signs in web addresses unchanged',
+    input: 'See https://example.com/?a=$&b=$1 now. Next one.',
+    output: ['See https://example.com/?a=$&b=$1 now.', 'Next one.']
+  },
+  {
     it: 'should handle an ellipsis followed by punctuation',
     input: 'Is this the end for our heroes...?',
     output: ['Is this the end for our heroes...?']
