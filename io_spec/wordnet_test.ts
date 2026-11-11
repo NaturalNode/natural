@@ -13,6 +13,10 @@ wordnet.lookup('node', function (results) {
   })
   wordnet = new WordNet()
   wordnet.get(4424418, 'n', function (result) {
+    if (result === null) {
+      console.log('No entry at offset 4424418')
+      return
+    }
     console.log('------------------------------------')
     console.log('Looking up an entry by id 4424418')
     console.log(result.lemma)

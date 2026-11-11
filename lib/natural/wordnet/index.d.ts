@@ -44,7 +44,7 @@ declare interface DataRecord {
   exp: string[]
 }
 
-declare type DataRecordCallback = (results: DataRecord) => void
+declare type DataRecordCallback = (results: DataRecord | null) => void
 declare type DataRecordsCallback = (results: DataRecord[]) => void
 
 declare class DataFile {
