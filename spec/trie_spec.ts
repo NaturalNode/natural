@@ -193,6 +193,20 @@ describe('trie', function () {
       expect(results[0]).toBe('they')
       expect(results[1]).toBe('re')
     })
+
+    it('should have keysWithPrefix in case-insensitive mode', function () {
+      const trie = new Trie(false)
+      trie.addStrings(['thEIr', 'And', 'theY'])
+      expect(trie.keysWithPrefix('TH')).toEqual(['their', 'they'])
+      expect(trie.keysWithPrefix('th')).toEqual(['their', 'they'])
+    })
+
+    it('should keep keysWithPrefix case sensitive by default', function () {
+      const trie = new Trie()
+      trie.addStrings(['their', 'And', 'they'])
+      expect(trie.keysWithPrefix('TH')).toEqual([])
+      expect(trie.keysWithPrefix('th')).toEqual(['their', 'they'])
+    })
   })
 
   describe('iterative traversal regressions', function () {
