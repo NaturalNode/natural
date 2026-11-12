@@ -108,4 +108,48 @@ describe('shortest path tree', function () {
       expect(lpt.getDistTo(7)).toBe(2.43)
     })
   })
+
+  describe('vertices the start cannot reach', function () {
+    // No path leads from 0 to 2, so the edges that leave 2 are on no path from 0.
+    const digraph = new EdgeWeightedDigraph()
+    digraph.add(0, 1, 1)
+    digraph.add(2, 1, 5)
+    digraph.add(2, 3, 1)
+    const lpt = new LPT(digraph, 0)
+
+    it('should not lengthen a path with an edge that leaves such a vertex', function () {
+      expect(lpt.getDistTo(1)).toBe(1)
+      expect(lpt.pathTo(1)).toEqual([0, 1])
+    })
+    it('should have no path to them', function () {
+      expect(lpt.hasPathTo(2)).toBe(false)
+      expect(lpt.pathTo(2)).toEqual([])
+      expect(lpt.getDistTo(2)).toBeUndefined()
+    })
+    it('should have no path to a vertex that is only reached through them', function () {
+      expect(lpt.hasPathTo(3)).toBe(false)
+      expect(lpt.pathTo(3)).toEqual([])
+      expect(lpt.getDistTo(3)).toBeUndefined()
+    })
+  })
+
+  describe('paths of zero or negative length', function () {
+    const digraph = new EdgeWeightedDigraph()
+    digraph.add(1, 3, -1)
+    digraph.add(1, 6, 0)
+    digraph.add(3, 6, 0.5)
+    const lpt = new LPT(digraph, 1)
+
+    it('should find a path of negative length', function () {
+      expect(lpt.hasPathTo(3)).toBe(true)
+      expect(lpt.pathTo(3)).toEqual([1, 3])
+      expect(lpt.getDistTo(3)).toBe(-1)
+    })
+    it('should find a path of length zero', function () {
+      // 1 -> 6 is 0 long and 1 -> 3 -> 6 is -0.5 long.
+      expect(lpt.hasPathTo(6)).toBe(true)
+      expect(lpt.pathTo(6)).toEqual([1, 6])
+      expect(lpt.getDistTo(6)).toBe(0)
+    })
+  })
 })

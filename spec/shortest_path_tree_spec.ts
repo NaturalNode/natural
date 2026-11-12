@@ -138,4 +138,28 @@ describe('shortest path tree (1)', function () {
       expect(path).toEqual([1, 3, 6])
     })
   })
+
+  describe('vertices the start cannot reach', function () {
+    // No path leads from 0 to 2, so the edges that leave 2 are on no path from 0.
+    const digraph = new EdgeWeightedDigraph()
+    digraph.add(0, 1, 5)
+    digraph.add(2, 1, 1)
+    digraph.add(2, 3, 1)
+    const spt = new SPT(digraph, 0)
+
+    it('should not shorten a path with an edge that leaves such a vertex', function () {
+      expect(spt.getDistTo(1)).toBe(5)
+      expect(spt.pathTo(1)).toEqual([0, 1])
+    })
+    it('should have no path to them', function () {
+      expect(spt.hasPathTo(2)).toBe(false)
+      expect(spt.pathTo(2)).toEqual([])
+      expect(spt.getDistTo(2)).toBeUndefined()
+    })
+    it('should have no path to a vertex that is only reached through them', function () {
+      expect(spt.hasPathTo(3)).toBe(false)
+      expect(spt.pathTo(3)).toEqual([])
+      expect(spt.getDistTo(3)).toBeUndefined()
+    })
+  })
 })
