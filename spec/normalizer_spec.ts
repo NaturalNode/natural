@@ -137,5 +137,12 @@ describe('normalizer', function () {
       expect(JSON.stringify(normalizer(['i', 'would']))).toBe(JSON.stringify(['i', 'would']))
       expect(JSON.stringify(normalizer(['I', 'woulD']))).toBe(JSON.stringify(['I', 'woulD']))
     })
+
+    it('should leave a token alone that is the name of an inherited object property', function () {
+      expect(normalizer(['the', 'constructor', "isn't", 'called'])).toEqual(['the', 'constructor', 'is', 'not', 'called'])
+      expect(normalizer(['Constructor'])).toEqual(['Constructor'])
+      expect(normalizer(['__proto__'])).toEqual(['__proto__'])
+      expect(normalizer('constructor')).toEqual(['constructor'])
+    })
   })
 })
