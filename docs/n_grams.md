@@ -80,6 +80,35 @@ Will output:
   [ 'you', '[end]', '[end]', '[end]' ] ]
 ```
 
+### Short and empty sequences
+
+Each requested boundary is padded with `n - 1` copies of its symbol before
+the n-grams are generated. Every returned n-gram has exactly `n` elements,
+including when the input contains fewer than `n` tokens. A window can contain
+both start and end symbols:
+
+```javascript
+console.log(NGrams.trigrams('hello', '[start]', '[end]'));
+// [ [ '[start]', '[start]', 'hello' ],
+//   [ '[start]', 'hello', '[end]' ],
+//   [ 'hello', '[end]', '[end]' ] ]
+
+console.log(NGrams.ngrams(['hello'], 4, '[start]'));
+// [ [ '[start]', '[start]', '[start]', 'hello' ] ]
+```
+
+Only complete windows are returned. An empty input with padding on just one
+side produces no n-grams; with both sides padded, it can produce windows made
+entirely of boundary symbols:
+
+```javascript
+console.log(NGrams.trigrams([], '[start]', '[end]'));
+// [ [ '[start]', '[start]', '[end]' ],
+//   [ '[start]', '[end]', '[end]' ] ]
+```
+
+The same padding rules apply to `NGramsZH`.
+
 ## NGramsZH
 
 For Chinese like languages, you can use NGramsZH to do a n-gram, and all apis are the same:
