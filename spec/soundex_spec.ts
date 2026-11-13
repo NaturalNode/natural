@@ -130,6 +130,46 @@ describe('soundex', function () {
     expect(soundex.compare('band', 'gand')).toBeFalsy()
   })
 
+  describe('H and W between consonants', function () {
+    it('should code Ashcraft and Ashcroft according to the Soundex separator rule', function () {
+      expect(soundex.process('Ashcraft')).toBe('A261')
+      expect(soundex.process('Ashcroft')).toBe('A261')
+      expect(soundex.process('ASHCRAFT')).toBe('A261')
+      expect(soundex.process('Aswcraft')).toBe('A261')
+      expect(soundex.compare('Ashcraft', 'Ascraft')).toBe(true)
+    })
+
+    const consonantGroups = [
+      ['B', 'f'], ['C', 's'], ['D', 't'], ['L', 'l'], ['M', 'n'], ['R', 'r']
+    ]
+    consonantGroups.forEach(([first, second]) => {
+      it(`should ignore H and W within the initial ${first} consonant group`, function () {
+        expect(soundex.process(first + 'h' + second)).toBe(first + '000')
+        expect(soundex.process(first + 'w' + second)).toBe(first + '000')
+        expect(soundex.process(first + 'hwh' + second)).toBe(first + '000')
+      })
+    })
+
+    it('should keep vowels as separators even when adjacent to H or W', function () {
+      for (const vowel of 'aeiouy') {
+        expect(soundex.process('B' + vowel + 'hb')).toBe('B100')
+        expect(soundex.process('Bhw' + vowel + 'b')).toBe('B100')
+      }
+      expect(soundex.process('Tymczak')).toBe('T522')
+    })
+
+    it('should preserve H and W as the first letter', function () {
+      expect(soundex.process('H')).toBe('H000')
+      expect(soundex.process('W')).toBe('W000')
+      expect(soundex.process('Heilbronn')).toBe('H416')
+      expect(soundex.process('Washington')).toBe('W252')
+    })
+
+    it('should retain extended codes after ignoring H and W', function () {
+      expect(soundex.process('Ashcraft', 8)).toBe('A2613')
+    })
+  })
+
   /*
     it('should perform soundex via attached soundsLike String patch', function() {
         soundex.attach();
