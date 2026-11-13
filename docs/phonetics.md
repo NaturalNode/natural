@@ -66,3 +66,16 @@ Same module operations applied with `SoundEx`:
 if(soundEx.compare(wordA, wordB))
     console.log('they sound alike!');
 ```
+
+## SoundEx consonant separators
+
+SoundEx preserves the first letter and collapses consecutive consonants with the same code.
+H and W do not separate those consonants, while vowels (including Y) do. This follows the
+[Soundex rules](https://www.archives.gov/research/census/soundex) illustrated by Ashcraft:
+the S and C share a code and the intervening H does not cause it to be repeated.
+
+```javascript
+console.log(soundEx.process('Ashcraft')); // A261
+console.log(soundEx.process('Ashcroft')); // A261
+console.log(soundEx.process('Tymczak')); // T522: A separates the Z and K codes
+```
