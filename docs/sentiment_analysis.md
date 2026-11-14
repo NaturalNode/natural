@@ -14,6 +14,16 @@ var analyzer = new Analyzer("English", stemmer, "afinn");
 console.log(analyzer.getSentiment(["I", "like", "cherries"]));
 // 0.6666666666666666
 ```
+
+An empty array has a neutral sentiment score of `0`. This also applies when a
+tokenizer produces no words, for example when `WordTokenizer` receives only
+whitespace or punctuation.
+
+```javascript
+console.log(analyzer.getSentiment([]));
+// 0
+```
+
 The constructor has three parameters:
 * Language: see below for supported languages.
 * Stemmer: to increase the coverage of the sentiment analyzer a stemmer may be provided. May be `null`.
