@@ -7,6 +7,10 @@ nav_order: 10
 
 # Inflectors
 
+For noun inflectors (`NounInflector`, `NounInflectorFr`, and `NounInflectorJa`)
+and `PresentVerbInflector`, both `singularize('')` and `pluralize('')` return
+an empty string unchanged.
+
 ## Nouns
 
 Nouns can be pluralized/singularized with a `NounInflector`:
@@ -26,6 +30,13 @@ To singularize a word (outputs "beer"):
 
 ```javascript
 console.log(nounInflector.singularize('beers'));
+```
+
+Empty input is preserved:
+
+```javascript
+console.log(nounInflector.pluralize('')); // ''
+console.log(nounInflector.singularize('')); // ''
 ```
 
 ## Numbers
