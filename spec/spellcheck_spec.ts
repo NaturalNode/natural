@@ -109,4 +109,29 @@ describe('spellcheck', function () {
       expect(spellcheck.getCorrections('cat').indexOf('cat')).toBe(0)
     })
   })
+
+  describe('corpus frequency ordering', function () {
+    const cases = [
+      { frequent: 'constructor', rare: 'construct', input: 'constructo' },
+      { frequent: 'toString', rare: 'toStrinf', input: 'toStrin' },
+      { frequent: 'valueOf', rare: 'valueOa', input: 'valueO' },
+      { frequent: 'hasOwnProperty', rare: 'hasOwnProperts', input: 'hasOwnPropert' },
+      { frequent: '__proto__', rare: '__proto_x', input: '__proto__x' }
+    ]
+
+    cases.forEach(({ frequent, rare, input }) => {
+      it('counts occurrences of ' + frequent + ' when ranking corrections', function () {
+        const spellcheck = new Spellcheck([frequent, frequent, rare])
+
+        expect(spellcheck.isCorrect(frequent)).toBe(true)
+        expect(spellcheck.getCorrections(input)).toEqual([frequent, rare])
+      })
+    })
+
+    it('ranks ordinary words by corpus frequency', function () {
+      const spellcheck = new Spellcheck(['bat', 'cat', 'cat', 'cat', 'rat', 'rat'])
+
+      expect(spellcheck.getCorrections('at')).toEqual(['cat', 'rat', 'bat'])
+    })
+  })
 })
