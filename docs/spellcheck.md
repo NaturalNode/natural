@@ -27,3 +27,12 @@ It suggests corrections (sorted by probability in descending order) that are up 
 spellcheck.getCorrections('soemthing', 1); // ['something']
 spellcheck.getCorrections('soemthing', 2); // ['something', 'soothing']
 ```
+
+Among candidates at the same edit distance, words that occur more often in the
+corpus are ranked first. Each occurrence is counted, including words that are
+also JavaScript object property names, such as `constructor` or `__proto__`.
+
+```javascript
+var spellcheck = new natural.Spellcheck(['constructor', 'constructor', 'construct']);
+spellcheck.getCorrections('constructo'); // ['constructor', 'construct']
+```
