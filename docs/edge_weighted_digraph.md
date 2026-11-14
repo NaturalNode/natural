@@ -27,7 +27,18 @@ get the number of vertexes:
 ```javascript
 console.log(digraph.v());
 ```
-you will get 7.
+you will get 6, for vertices 1, 2, 3, 4, 5, and 6.
+
+`v()` counts the distinct endpoints of added edges, including vertices with
+only incoming edges. Vertex identifiers do not need to be consecutive:
+
+```javascript
+var sparseDigraph = new EdgeWeightedDigraph();
+sparseDigraph.add(10, 20, 1);
+console.log(sparseDigraph.v()); // 2
+```
+
+Parallel edges and self-loops do not count an existing vertex again.
 
 get the number of edges:
 
