@@ -46,6 +46,7 @@ declare class DirectedEdge {
 export class EdgeWeightedDigraph {
   edgesNum: number
   adj: Array<Bag<DirectedEdge>>
+  vertices: Set<number>
 
   add (start: number, end: number, weight: number): void
   addEdge (e: DirectedEdge): void
