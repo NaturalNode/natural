@@ -24,6 +24,7 @@ THE SOFTWARE.
 
 import {
   SentimentAnalyzer as Analyzer,
+  WordTokenizer,
   PorterStemmer,
   PorterStemmerPt,
   PorterStemmerNl,
@@ -222,4 +223,30 @@ describe('The sentiment analyzer analyzes the sentiment of sentences in multiple
       })
     })
   })
+})
+
+describe('The sentiment analyzer handles empty input', function () {
+  for (const vocabularyType of ['afinn', 'afinnFinancialMarketNews', 'senticon', 'pattern']) {
+    it('returns a neutral score for an empty array with ' + vocabularyType, function () {
+      const analyzer = new Analyzer('English', undefined, vocabularyType)
+
+      expect(analyzer.getSentiment([])).toBe(0)
+    })
+  }
+
+  it('returns a neutral score for an empty array when a stemmer is supplied', function () {
+    const analyzer = new Analyzer('English', PorterStemmer, 'afinn')
+
+    expect(analyzer.getSentiment([])).toBe(0)
+  })
+
+  for (const text of ['', ' \t\n ', '...!?']) {
+    it('returns a neutral score for tokenized text ' + JSON.stringify(text), function () {
+      const analyzer = new Analyzer('English', PorterStemmer, 'afinn')
+      const tokens = new WordTokenizer().tokenize(text)
+
+      expect(tokens).toEqual([])
+      expect(analyzer.getSentiment(tokens)).toBe(0)
+    })
+  }
 })
