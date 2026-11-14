@@ -36,6 +36,18 @@ console.log(tokenizer.tokenize("Mikä sinun nimesi on?"));
 // [ 'Mikä', 'sinun', 'nimesi', 'on' ]
 ```
 
+By default, `RegexpTokenizer` splits on the pattern. Set `gaps: false` to use
+the pattern to match tokens instead. Use the `g` flag to collect all matches.
+If the pattern has no matches, `tokenize()` returns an empty array.
+
+```javascript
+tokenizer = new natural.RegexpTokenizer({pattern: /\d+/g, gaps: false});
+console.log(tokenizer.tokenize("items 12 and 34"));
+// [ '12', '34' ]
+console.log(tokenizer.tokenize("no numbers"));
+// []
+```
+
 The sentence tokenizer splits a text in sentences based on punctuation. It used the following four characters: period, question mark, exclamation mark, and ellipsis. Furthermore:
 - Multiple punctuation characters are treated as one; these may be mixed with space.
 - It recognizes abbreviations. It accepts an array of abbreviations as an argument. Case is ignored when matching abbreviations. 
