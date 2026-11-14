@@ -141,6 +141,59 @@ describe('tfidf', function () {
         '__proto__'
       ]
 
+      it('should count __proto__ in string documents', function () {
+        tfidf = new TfIdf()
+        tfidf.addDocument('__proto__ __proto__ ordinary', 'first')
+        tfidf.addDocument('ordinary', 'second')
+
+        expect(TfIdf.tf('__proto__', tfidf.documents[0])).toBe(2)
+        expect(tfidf.idf('__proto__')).toBe(1)
+        expect(tfidf.tfidfs('__proto__')).toEqual([2, 0])
+        expect(tfidf.listTerms(0)).toContain({ term: '__proto__', tf: 2, idf: 1, tfidf: 2 })
+      })
+
+      it('should count repeated Object property names in token arrays', function () {
+        tfidf = new TfIdf()
+        tfidf.addDocument(reservedWords.concat(reservedWords))
+        tfidf.addDocument(['ordinary'])
+
+        reservedWords.forEach((word: string) => {
+          expect(TfIdf.tf(word, tfidf.documents[0])).toBe(2)
+          expect(tfidf.tfidfs([word])).toEqual([2, 0])
+        })
+        expect(tfidf.listTerms(0).map(item => item.term).sort()).toEqual(reservedWords.slice().sort())
+      })
+
+      it('should retain __proto__ counts and document keys after serialization', function () {
+        tfidf = new TfIdf()
+        tfidf.addDocument(['__proto__', '__proto__'], 'first')
+        tfidf.addDocument(['ordinary'], 'second')
+        const restored = new TfIdf(JSON.parse(JSON.stringify(tfidf)) as Record<string, unknown>)
+
+        expect(TfIdf.tf('__proto__', restored.documents[0])).toBe(2)
+        expect(restored.tfidfs(['__proto__'])).toEqual([2, 0])
+        const keys: unknown[] = []
+        restored.tfidfs(['__proto__'], (i, measure, key) => { keys.push(key) })
+        expect(keys).toEqual(['first', 'second'])
+        expect(restored.removeDocument('first')).toBe(true)
+        expect(restored.tfidfs(['__proto__'])).toEqual([0])
+      })
+
+      it('should update cached __proto__ scores when documents change', function () {
+        tfidf = new TfIdf()
+        tfidf.addDocument(['__proto__', '__proto__'], 'first')
+        expect(tfidf.idf('__proto__')).toBe(1 + Math.log(1 / 2))
+
+        tfidf.addDocument(['__proto__'], 'second', true)
+        expect(tfidf.idf('__proto__')).toBe(1 + Math.log(2 / 3))
+        expect(tfidf.tfidf(['__proto__'], 0)).toBe(2 * (1 + Math.log(2 / 3)))
+
+        expect(tfidf.removeDocument('second')).toBe(true)
+        expect(tfidf.idf('__proto__')).toBe(1 + Math.log(1 / 2))
+        tfidf.addDocument(['ordinary'], 'third')
+        expect(tfidf.tfidfs(['__proto__'])).toEqual([2, 0])
+      })
+
       it('should have a tf of 0 for a term that is absent from the document', function () {
         reservedWords.forEach((word: string) => {
           expect(TfIdf.tf(word, { document: 1 })).toBe(0)
