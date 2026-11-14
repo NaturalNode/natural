@@ -196,6 +196,45 @@ describe('trie', function () {
   })
 
   describe('iterative traversal regressions', function () {
+    it('should count a very deep trie without overflowing the call stack', function () {
+      const trie = new Trie()
+      const value = 'a'.repeat(50000)
+      trie.addString(value)
+      expect(trie.getSize()).toBe(value.length + 1)
+    })
+
+    it('should collect keys from a very deep subtree without overflowing the call stack', function () {
+      const trie = new Trie()
+      const value = 'a'.repeat(50000)
+      trie.addString(value)
+      expect(trie.keysWithPrefix('')).toEqual([value])
+      expect(trie.keysWithPrefix('a')).toEqual([value])
+      expect(trie.keysWithPrefix(value)).toEqual([value])
+    })
+
+    it('should preserve depth-first order with numeric and letter branches', function () {
+      const trie = new Trie()
+      trie.addStrings(['app2z', 'app1z', 'app', 'apple', 'apple2', 'apple1', 'application', 'apply'])
+      expect(trie.keysWithPrefix('app')).toEqual([
+        'app', 'app1z', 'app2z', 'apple', 'apple1', 'apple2', 'application', 'apply'
+      ])
+    })
+
+    it('should preserve insertion order and the empty key when collecting all keys', function () {
+      const trie = new Trie()
+      trie.addStrings(['b', 'aa', 'a', ''])
+      expect(trie.keysWithPrefix('')).toEqual(['', 'b', 'a', 'aa'])
+      expect(trie.getSize()).toBe(4)
+      expect(trie.keysWithPrefix('missing')).toEqual([])
+    })
+
+    it('should return no keys when collecting an empty trie', function () {
+      const trie = new Trie()
+      expect(trie.keysWithPrefix('')).toEqual([])
+      expect(trie.keysWithPrefix('missing')).toEqual([])
+      expect(trie.getSize()).toBe(1)
+    })
+
     it('should add and find a very long string without overflowing the call stack', function () {
       const trie = new Trie()
       const value = 'a'.repeat(50000)
