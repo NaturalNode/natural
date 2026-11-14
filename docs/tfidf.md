@@ -123,6 +123,19 @@ tfidf.listTerms(0 /*document index*/).forEach(function(item) {
 });
 ```
 
+Terms such as `__proto__` and `constructor` are counted like other words.
+Frequency maps built from strings or token arrays have no prototype, so those
+names do not conflict with inherited Object properties. The maps can still be
+serialized to JSON.
+
+```javascript
+var tfidf = new TfIdf();
+tfidf.addDocument(['__proto__', '__proto__', 'ordinary']);
+tfidf.addDocument(['ordinary']);
+console.log(TfIdf.tf('__proto__', tfidf.documents[0])); // 2
+console.log(tfidf.tfidfs(['__proto__'])); // [2, 0]
+```
+
 A TfIdf instance can also be serialized and deserialized for save and recall.
 
 ```javascript
