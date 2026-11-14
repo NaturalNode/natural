@@ -67,6 +67,23 @@ This search will return all of the words in the Trie with the given prefix, or [
 console.log(trie.keysWithPrefix("string")); // ["string1", "string2", "string3"]
 ```
 
+Passing an empty prefix returns all stored keys. Keys are collected in depth-first
+order, with a stored prefix before its descendants.
+
+### Size and Deep Tries
+
+`getSize()` counts all nodes, including the root and nodes that are not complete
+words. An empty trie has size 1. Both `getSize()` and `keysWithPrefix()` traverse
+subtrees iteratively, so long keys do not exhaust the JavaScript call stack.
+
+```javascript
+var deepTrie = new Trie();
+var key = 'a'.repeat(50000);
+deepTrie.addString(key);
+console.log(deepTrie.getSize()); // 50001
+console.log(deepTrie.keysWithPrefix('')[0] === key); // true
+```
+
 ### Case-Sensitivity
 
 By default the trie is case-sensitive, you can use it in case-_in_sensitive mode by passing `false`
