@@ -48,6 +48,19 @@ Outputs "111th":
 console.log(countInflector.nth(111));
 ```
 
+### French ordinals
+
+`CountInflectorFr` accepts numbers, numeric strings, and uppercase Roman numerals. The first ordinal uses `er`; other ordinals use `e`, including numbers ending in 1 such as 21.
+
+```javascript
+var frenchCountInflector = new natural.CountInflectorFr();
+console.log(frenchCountInflector.nth(1)); // "1er"
+console.log(frenchCountInflector.nth('1')); // "1er"
+console.log(frenchCountInflector.nth('21')); // "21e"
+console.log(frenchCountInflector.nth('I')); // "Ier"
+console.log(frenchCountInflector.nth('XX')); // "XXe"
+```
+
 ## Present Tense Verbs
 
 Present Tense Verbs can be pluralized/singularized with a PresentVerbInflector.
