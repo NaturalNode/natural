@@ -132,6 +132,24 @@ Output:
 0
 ```
 
+Empty and whitespace-only strings are treated as an exact match with each other and return `1`. If only one input is empty after whitespace normalization, the coefficient is `0`.
+
+```javascript
+console.log(natural.DiceCoefficient('', ''));
+console.log(natural.DiceCoefficient(' \t\n', '\r\n'));
+console.log(natural.DiceCoefficient('', ' '));
+console.log(natural.DiceCoefficient('', 'word'));
+```
+
+Output:
+
+```javascript
+1
+1
+1
+0
+```
+
 ## Approximate String Matching
 Currently matching is supported via the Levenshtein algorithm.
 
