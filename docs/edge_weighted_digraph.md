@@ -35,3 +35,17 @@ get the number of edges:
 console.log(digraph.e());
 ```
 you will get 6.
+
+## Outgoing edges
+
+Each existing entry in `digraph.adj` is a bag of outgoing edges. Its `isEmpty()` method returns `true` when the bag contains no edges and `false` when it contains one or more edges.
+
+Use `getAdj(vertex)` to retrieve the outgoing edges as an array. It returns an empty array when the vertex has no adjacency bag, so there is no need to access a missing entry in `adj`.
+
+For the graph above:
+
+```javascript
+console.log(digraph.adj[5].isEmpty()); // false
+console.log(digraph.getAdj(5).length); // 2
+console.log(digraph.getAdj(2)); // []
+```
