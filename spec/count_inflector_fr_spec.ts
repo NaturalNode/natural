@@ -30,6 +30,18 @@ describe('count_inflector (fr)', function () {
     expect(inflector.nth(1)).toBe('1er')
   })
 
+  it('should handle the first ordinal passed as a numeric string', function () {
+    expect(inflector.nth('1')).toBe('1er')
+  })
+
+  it('should use e for other numeric strings, including those ending in 1', function () {
+    expect(inflector.nth('0')).toBe('0e')
+    expect(inflector.nth('2')).toBe('2e')
+    expect(inflector.nth('11')).toBe('11e')
+    expect(inflector.nth('21')).toBe('21e')
+    expect(inflector.nth('101')).toBe('101e')
+  })
+
   it('should handle the 2e cases', function () {
     expect(inflector.nth(0)).toBe('0e')
     expect(inflector.nth(2)).toBe('2e')
