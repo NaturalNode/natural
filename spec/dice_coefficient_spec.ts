@@ -9,6 +9,29 @@ describe('dice', function () {
     expect(dice('john', 'john')).toBe(1)
   })
 
+  it('should treat two empty strings as an exact match', function () {
+    expect(dice('', '')).toBe(1)
+  })
+
+  it('should treat whitespace-only strings as an exact match', function () {
+    expect(dice(' \t\n', '\r\n')).toBe(1)
+  })
+
+  it('should match an empty string with a whitespace-only string', function () {
+    expect(dice('', ' \t\n')).toBe(1)
+    expect(dice(' \t\n', '')).toBe(1)
+  })
+
+  it('should not match empty input with a single character', function () {
+    expect(dice('', 'a')).toBe(0)
+    expect(dice('a', '')).toBe(0)
+  })
+
+  it('should not match whitespace-only input with a word', function () {
+    expect(dice(' \t\n', 'word')).toBe(0)
+    expect(dice('word', ' \t\n')).toBe(0)
+  })
+
   it('should match single character words', function () {
     expect(dice('a', 'a')).toBe(1)
     expect(dice('a', 'b')).toBe(0)
