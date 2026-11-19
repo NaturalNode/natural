@@ -45,6 +45,22 @@ describe('porter_stemmer (it)', function () {
     expect(errors.length).toEqual(0)
   })
 
+  it('should test the region of the longest step 1 suffix only', function () {
+    // "atrice" is the longest suffix but it is not in R2, so "ice" must not be removed
+    expect(stemmer.stem('giocatrici')).toEqual('giocatric')
+    expect(stemmer.stem('pagatrice')).toEqual('pagatric')
+    expect(stemmer.stem('portatrici')).toEqual('portatric')
+  })
+
+  it('should mark i and u between accented vowels', function () {
+    expect(stemmer.stem('gioià')).toEqual('gioi')
+    expect(stemmer.stem('sdraiò')).toEqual('sdrai')
+  })
+
+  it('should not return the internal U marker for short words', function () {
+    expect(stemmer.stem('qu')).toEqual('qu')
+  })
+
   /*
   it('should tokenize and stem attached', function() {
     stemmer.attach();
