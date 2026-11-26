@@ -52,6 +52,11 @@ describe('porter_stemmer (es)', function () {
       ['pues', 'en', 'efect', 'es', 'sol', 'el', 'plan', 'y', 'lo', 'que', 'muestr', 'aquell', 'que', 'interes', 'a', 'zemeckis'])
   })
 
+  it('should remove every acute accent, not only the first one', function () {
+    // Snowball: méxicoquerétaro -> mexicoqueretar (issue #831)
+    expect(PorterStemmer.stem('méxicoquerétaro')).toBe('mexicoqueretar')
+  })
+
 /*
     it('should work with the attached notation', function() {
       PorterStemmer.attach();
