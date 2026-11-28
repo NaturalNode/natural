@@ -31,6 +31,19 @@ const snowBallDict = rawObj as Record<string, string>
 const DEBUG = false
 
 describe('porter_stemmer (nl)', function () {
+  it('should find R2 before adjusting the start of R1', function () {
+    expect(stemmer.stem('aderige')).toBe('ader')
+  })
+
+  it('should keep the lijk exposed by removing ing', function () {
+    expect(stemmer.stem('kostenvergelijking')).toBe('kostenvergelijk')
+  })
+
+  it('should remove bar only when the current word loses its final e', function () {
+    expect(stemmer.stem('herkenbare')).toBe('herken')
+    expect(stemmer.stem('saladebar')).toBe('saladebar')
+  })
+
   it('should perform stemming on a lot of words', function () {
     const errors = []
 
@@ -47,8 +60,8 @@ describe('porter_stemmer (nl)', function () {
       }
     })
 
-    // The stemmer has an error count of 237 against the snowball list for nl that has 45669 entries
-    expect(errors.length).toEqual(237)
+    // Compare against the 45669 entries in the Dutch Snowball list.
+    expect(errors.length).toEqual(190)
   })
 
   // Commented out because hyphens are not processed correctly in the expected results
